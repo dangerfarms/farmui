@@ -1,0 +1,52 @@
+@layer farmui.components {
+  .fui-Skeleton-root {
+    position: relative;
+    display: block;
+    inline-size: var(--_w, 100%);
+    block-size: var(--_h, 1rem);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    overflow: hidden;
+    /* Hide any real children placed inside while the skeleton is visible. */
+    color: transparent;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  /* Base tint + moving shimmer highlight */
+  .fui-Skeleton-root::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklch, var(--fui-bg-subtle) 100%, transparent) 0%,
+      color-mix(in oklch, var(--fui-surface) 60%, var(--fui-bg-subtle)) 50%,
+      color-mix(in oklch, var(--fui-bg-subtle) 100%, transparent) 100%
+    );
+    background-color: var(--fui-bg-subtle);
+    background-size: 200% 100%;
+    animation: fui-Skeleton-skeleton-shimmer 1.4s ease-in-out infinite;
+  }
+
+  @keyframes fui-Skeleton-skeleton-shimmer {
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fui-Skeleton-root::after {
+      animation: fui-Skeleton-skeleton-pulse 1.6s ease-in-out infinite;
+      background: var(--fui-bg-subtle);
+    }
+  }
+
+  @keyframes fui-Skeleton-skeleton-pulse {
+    50% {
+      opacity: 0.55;
+    }
+  }
+}

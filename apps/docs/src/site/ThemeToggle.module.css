@@ -1,0 +1,20 @@
+.btn {
+  display: grid;
+  place-items: center;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  color: var(--fui-text-muted);
+  background: transparent;
+  border: 1px solid var(--fui-border);
+  border-radius: var(--fui-radius-md);
+  cursor: pointer;
+  transition:
+    color var(--fui-transition),
+    border-color var(--fui-transition),
+    background var(--fui-transition);
+}
+.btn:hover {
+  color: var(--fui-text);
+  border-color: var(--fui-border-strong);
+  background: var(--fui-surface-hover);
+}

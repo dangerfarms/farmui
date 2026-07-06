@@ -1,0 +1,38 @@
+@layer farmui.components {
+  .fui-Card-root {
+    display: block;
+    border: 1px solid transparent;
+    border-radius: var(--_radius, var(--fui-radius-lg));
+    padding: var(--_p, var(--fui-space-lg));
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    box-shadow: var(--_shadow, none);
+    transition:
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+
+  /* Padding */
+  .fui-Card-root[data-padding="sm"] {
+    --_p: var(--fui-space-md);
+  }
+  .fui-Card-root[data-padding="lg"] {
+    --_p: var(--fui-space-xl);
+  }
+
+  /* Border */
+  .fui-Card-root[data-border] {
+    border-color: var(--fui-border);
+  }
+
+  /* Shadow */
+  .fui-Card-root[data-shadow="sm"] {
+    --_shadow: var(--fui-shadow-sm);
+  }
+  .fui-Card-root[data-shadow="md"] {
+    --_shadow: var(--fui-shadow-md);
+  }
+  .fui-Card-root[data-shadow="lg"] {
+    --_shadow: var(--fui-shadow-lg);
+  }
+}

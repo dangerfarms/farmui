@@ -1,0 +1,106 @@
+@layer farmui.components {
+  .fui-Select-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    inline-size: var(--_w, 100%);
+    font-family: var(--fui-font);
+  }
+
+  .fui-Select-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 550;
+    color: var(--fui-text);
+  }
+  .fui-Select-required {
+    color: var(--fui-danger);
+    margin-inline-start: 0.15em;
+  }
+
+  .fui-Select-description {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Select-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+    block-size: var(--_h, var(--fui-control-height-md));
+    border: 1px solid var(--fui-border-strong);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    transition:
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+  .fui-Select-field:focus-within {
+    border-color: var(--fui-primary);
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Select-field[data-invalid] {
+    border-color: var(--fui-danger);
+  }
+  .fui-Select-field[data-invalid]:focus-within {
+    box-shadow: 0 0 0 3px
+      color-mix(in oklch, var(--fui-danger) 40%, transparent);
+  }
+  .fui-Select-field[data-disabled] {
+    background: var(--fui-bg-subtle);
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .fui-Select-field[data-size="sm"] {
+    --_h: var(--fui-control-height-sm);
+    --_px: 0.625rem;
+  }
+  .fui-Select-field[data-size="lg"] {
+    --_h: var(--fui-control-height-lg);
+    --_px: 0.875rem;
+  }
+
+  .fui-Select-select {
+    flex: 1;
+    min-inline-size: 0;
+    block-size: 100%;
+    /* Leave room for the chevron on the trailing side. */
+    padding-inline: var(--_px, 0.75rem) 2.25rem;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: var(--_fz, var(--fui-text-sm));
+    cursor: pointer;
+    /* Strip the native arrow so our chevron is the only one. */
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .fui-Select-select:disabled {
+    cursor: not-allowed;
+  }
+  /* Empty placeholder value renders dimmed like a real placeholder. */
+  .fui-Select-select:has(option[value=""]:checked) {
+    color: var(--fui-text-dim);
+  }
+  .fui-Select-field[data-size="lg"] .fui-Select-select {
+    --_fz: var(--fui-text-md);
+  }
+
+  .fui-Select-chevron {
+    position: absolute;
+    inset-inline-end: 0.75rem;
+    inset-block-start: 50%;
+    translate: 0 -50%;
+    color: var(--fui-text-muted);
+    pointer-events: none;
+    flex-shrink: 0;
+  }
+
+  .fui-Select-error {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-danger);
+  }
+}

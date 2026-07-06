@@ -1,0 +1,46 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  padding-block: 2rem;
+  padding-inline-end: 1rem;
+}
+
+.group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.groupTitle {
+  font-size: var(--fui-text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--fui-text-dim);
+  margin-block-end: 0.6rem;
+}
+
+.link {
+  display: block;
+  padding: 0.35rem 0.6rem;
+  font-size: var(--fui-text-sm);
+  color: var(--fui-text-muted);
+  border-radius: var(--fui-radius-sm);
+  border-inline-start: 2px solid transparent;
+  transition:
+    color var(--fui-transition),
+    background var(--fui-transition);
+}
+.link:hover {
+  color: var(--fui-text);
+  background: var(--fui-surface-hover);
+}
+.link[data-active] {
+  color: var(--fui-primary);
+  font-weight: 600;
+  background: var(--fui-primary-soft);
+}

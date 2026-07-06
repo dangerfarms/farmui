@@ -1,0 +1,42 @@
+.wrap {
+  position: relative;
+  border-radius: var(--fui-radius-md);
+  border: 1px solid var(--fui-border);
+  background: var(--fui-bg-subtle);
+  overflow: hidden;
+}
+
+.pre {
+  margin: 0;
+  padding: 1rem 1.125rem;
+  overflow-x: auto;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  background: transparent !important;
+}
+
+.line {
+  display: block;
+}
+
+.copy {
+  position: absolute;
+  inset-block-start: 0.5rem;
+  inset-inline-end: 0.5rem;
+  z-index: 1;
+  padding: 0.25rem 0.6rem;
+  font-size: var(--fui-text-xs);
+  font-weight: 600;
+  color: var(--fui-text-muted);
+  background: var(--fui-surface);
+  border: 1px solid var(--fui-border);
+  border-radius: var(--fui-radius-sm);
+  cursor: pointer;
+  transition:
+    color var(--fui-transition),
+    border-color var(--fui-transition);
+}
+.copy:hover {
+  color: var(--fui-text);
+  border-color: var(--fui-border-strong);
+}

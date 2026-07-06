@@ -1,0 +1,112 @@
+@layer farmui.components {
+  .fui-Loader-root {
+    --_size: 1.5rem;
+    --_color: var(--fui-primary);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--_size);
+    block-size: var(--_size);
+    color: var(--_color);
+    vertical-align: middle;
+  }
+
+  .fui-Loader-srOnly {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    padding: 0;
+    margin: -1px;
+    border: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* Spinner — rotating ring */
+  .fui-Loader-spinner {
+    inline-size: 100%;
+    block-size: 100%;
+    border: max(2px, calc(var(--_size) * 0.12)) solid
+      color-mix(in oklch, currentColor 25%, transparent);
+    border-block-start-color: currentColor;
+    border-radius: var(--fui-radius-full);
+    animation: fui-Loader-loader-spin 0.65s linear infinite;
+  }
+  @keyframes fui-Loader-loader-spin {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+  /* Dots — three pulsing dots */
+  .fui-Loader-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--_size) * 0.18);
+    inline-size: 100%;
+    block-size: 100%;
+    justify-content: center;
+  }
+  .fui-Loader-dot {
+    inline-size: calc(var(--_size) * 0.26);
+    block-size: calc(var(--_size) * 0.26);
+    border-radius: var(--fui-radius-full);
+    background: currentColor;
+    animation: fui-Loader-loader-dot 1.2s ease-in-out infinite;
+  }
+  .fui-Loader-dot:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  .fui-Loader-dot:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  @keyframes fui-Loader-loader-dot {
+    0%,
+    80%,
+    100% {
+      opacity: 0.3;
+      transform: scale(0.75);
+    }
+    40% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Bars — three scaling bars */
+  .fui-Loader-bars {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--_size) * 0.16);
+    inline-size: 100%;
+    block-size: 100%;
+    justify-content: center;
+  }
+  .fui-Loader-bar {
+    inline-size: calc(var(--_size) * 0.18);
+    block-size: 100%;
+    border-radius: var(--fui-radius-sm);
+    background: currentColor;
+    transform-origin: center;
+    animation: fui-Loader-loader-bar 1s ease-in-out infinite;
+  }
+  .fui-Loader-bar:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  .fui-Loader-bar:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  @keyframes fui-Loader-loader-bar {
+    0%,
+    100% {
+      transform: scaleY(0.4);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+  }
+}

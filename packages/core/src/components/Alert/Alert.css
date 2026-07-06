@@ -1,0 +1,93 @@
+@layer farmui.components {
+  .fui-Alert-root {
+    /* Per-color channels — remapped by [data-color] below */
+    --_accent: var(--fui-info);
+    --_soft: var(--fui-info-soft);
+
+    display: flex;
+    align-items: flex-start;
+    gap: var(--fui-space-md);
+    padding-block: var(--fui-space-md);
+    padding-inline: var(--fui-space-lg);
+    border: 1px solid transparent;
+    border-inline-start: 3px solid var(--_accent);
+    border-radius: var(--fui-radius-md);
+    background: var(--_soft);
+    color: var(--fui-text);
+    font-family: var(--fui-font);
+    font-size: var(--fui-text-sm);
+    line-height: 1.5;
+  }
+
+  /* Colors */
+  .fui-Alert-root[data-color="info"] {
+    --_accent: var(--fui-info);
+    --_soft: var(--fui-info-soft);
+  }
+  .fui-Alert-root[data-color="success"] {
+    --_accent: var(--fui-success);
+    --_soft: var(--fui-success-soft);
+  }
+  .fui-Alert-root[data-color="warning"] {
+    --_accent: var(--fui-warning);
+    --_soft: var(--fui-warning-soft);
+  }
+  .fui-Alert-root[data-color="danger"] {
+    --_accent: var(--fui-danger);
+    --_soft: var(--fui-danger-soft);
+  }
+
+  /* Variant: outline — no fill, full border in the accent color */
+  .fui-Alert-root[data-variant="outline"] {
+    background: transparent;
+    border-color: var(--_accent);
+    border-inline-start-width: 3px;
+  }
+
+  /* Variant: filled — solid accent background, contrasting text */
+  .fui-Alert-root[data-variant="filled"] {
+    background: var(--_accent);
+    border-color: transparent;
+    color: var(--fui-primary-contrast);
+  }
+
+  .fui-Alert-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    inline-size: 1.25em;
+    block-size: 1.25em;
+    margin-block-start: 0.05em;
+    color: var(--_accent);
+    font-size: var(--fui-text-md);
+  }
+  .fui-Alert-root[data-variant="filled"] .fui-Alert-icon {
+    color: inherit;
+  }
+
+  .fui-Alert-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    min-inline-size: 0;
+  }
+
+  .fui-Alert-title {
+    font-weight: 600;
+    font-size: var(--fui-text-sm);
+    line-height: 1.4;
+  }
+
+  .fui-Alert-message {
+    color: inherit;
+  }
+  .fui-Alert-root[data-variant="light"] .fui-Alert-message,
+  .fui-Alert-root[data-variant="outline"] .fui-Alert-message {
+    color: var(--fui-text-muted);
+  }
+  /* When there's no title, the message carries full-strength text */
+  .fui-Alert-root:not(:has(.fui-Alert-title)) .fui-Alert-message {
+    color: inherit;
+  }
+}

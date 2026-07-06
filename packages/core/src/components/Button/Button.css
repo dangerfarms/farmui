@@ -1,0 +1,158 @@
+@layer farmui.components {
+  .fui-Button-root {
+    --_bg: var(--fui-primary);
+    --_bg-hover: var(--fui-primary-hover);
+    --_bg-active: var(--fui-primary-active);
+    --_fg: var(--fui-primary-contrast);
+    --_border: transparent;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--fui-space-sm);
+    inline-size: var(--_w, auto);
+    block-size: var(--_h, var(--fui-control-height-md));
+    padding-inline: var(--_px, 1.125rem);
+    border: 1px solid var(--_border);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    background: var(--_bg);
+    color: var(--_fg);
+    font-family: var(--fui-font);
+    font-size: var(--_fz, var(--fui-text-sm));
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    user-select: none;
+    transition:
+      background var(--fui-transition),
+      border-color var(--fui-transition),
+      color var(--fui-transition),
+      box-shadow var(--fui-transition),
+      transform var(--fui-transition);
+  }
+
+  .fui-Button-root:hover:not(:disabled, [data-loading]) {
+    background: var(--_bg-hover);
+  }
+  .fui-Button-root:active:not(:disabled, [data-loading]) {
+    background: var(--_bg-active);
+    transform: translateY(0.5px);
+  }
+  .fui-Button-root:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Button-root:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+  .fui-Button-root[data-loading] {
+    cursor: progress;
+  }
+
+  /* Sizes */
+  .fui-Button-root[data-size="sm"] {
+    --_h: var(--fui-control-height-sm);
+    --_px: 0.875rem;
+    --_fz: var(--fui-text-xs);
+  }
+  .fui-Button-root[data-size="lg"] {
+    --_h: var(--fui-control-height-lg);
+    --_px: 1.5rem;
+    --_fz: var(--fui-text-md);
+  }
+
+  .fui-Button-root[data-full] {
+    --_w: 100%;
+  }
+
+  /* Color = danger */
+  .fui-Button-root[data-color="danger"] {
+    --_bg: var(--fui-danger);
+    --_bg-hover: color-mix(in oklch, var(--fui-danger) 88%, black);
+    --_bg-active: color-mix(in oklch, var(--fui-danger) 78%, black);
+    --_fg: var(--fui-primary-contrast);
+  }
+
+  /* Variants */
+  .fui-Button-root[data-variant="light"] {
+    --_bg: var(--fui-primary-soft);
+    --_bg-hover: color-mix(
+      in oklch,
+      var(--fui-primary-soft) 80%,
+      var(--fui-primary)
+    );
+    --_bg-active: color-mix(
+      in oklch,
+      var(--fui-primary-soft) 65%,
+      var(--fui-primary)
+    );
+    --_fg: var(--fui-primary-hover);
+  }
+  .fui-Button-root[data-variant="light"][data-color="danger"] {
+    --_bg: var(--fui-danger-soft);
+    --_bg-hover: color-mix(
+      in oklch,
+      var(--fui-danger-soft) 80%,
+      var(--fui-danger)
+    );
+    --_bg-active: color-mix(
+      in oklch,
+      var(--fui-danger-soft) 65%,
+      var(--fui-danger)
+    );
+    --_fg: var(--fui-danger);
+  }
+
+  .fui-Button-root[data-variant="outline"] {
+    --_bg: transparent;
+    --_bg-hover: var(--fui-primary-soft);
+    --_bg-active: color-mix(
+      in oklch,
+      var(--fui-primary-soft) 70%,
+      var(--fui-primary)
+    );
+    --_fg: var(--fui-primary);
+    --_border: currentColor;
+  }
+  .fui-Button-root[data-variant="outline"][data-color="danger"] {
+    --_fg: var(--fui-danger);
+    --_bg-hover: var(--fui-danger-soft);
+  }
+
+  .fui-Button-root[data-variant="subtle"] {
+    --_bg: transparent;
+    --_bg-hover: var(--fui-primary-soft);
+    --_bg-active: color-mix(
+      in oklch,
+      var(--fui-primary-soft) 70%,
+      var(--fui-primary)
+    );
+    --_fg: var(--fui-primary);
+  }
+  .fui-Button-root[data-variant="subtle"][data-color="danger"] {
+    --_fg: var(--fui-danger);
+    --_bg-hover: var(--fui-danger-soft);
+  }
+
+  /* Loading spinner */
+  .fui-Button-spinner {
+    inline-size: 1em;
+    block-size: 1em;
+    border: 2px solid color-mix(in oklch, currentColor 30%, transparent);
+    border-block-start-color: currentColor;
+    border-radius: var(--fui-radius-full);
+    animation: fui-Button-btn-spin 0.6s linear infinite;
+  }
+  @keyframes fui-Button-btn-spin {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+  .fui-Button-section {
+    display: inline-flex;
+    align-items: center;
+  }
+}

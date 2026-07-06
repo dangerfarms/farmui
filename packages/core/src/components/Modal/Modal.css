@@ -1,0 +1,110 @@
+@layer farmui.components {
+  .fui-Modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--fui-space-lg);
+    background: color-mix(in oklch, var(--fui-text) 45%, transparent);
+    opacity: 0;
+    animation: fui-Modal-modal-overlay-in var(--fui-transition) forwards;
+  }
+  .fui-Modal-overlay[data-open] {
+    opacity: 1;
+  }
+
+  .fui-Modal-panel {
+    inline-size: 100%;
+    max-inline-size: var(--_max, 32rem);
+    max-block-size: calc(100dvh - 2 * var(--fui-space-xl));
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: var(--fui-radius-lg);
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    font-family: var(--fui-font);
+    box-shadow: var(--fui-shadow-lg);
+    outline: none;
+    transform: translateY(8px) scale(0.98);
+    opacity: 0;
+    animation: fui-Modal-modal-panel-in var(--fui-transition) forwards;
+  }
+
+  .fui-Modal-panel[data-size="sm"] {
+    --_max: 24rem;
+  }
+  .fui-Modal-panel[data-size="md"] {
+    --_max: 32rem;
+  }
+  .fui-Modal-panel[data-size="lg"] {
+    --_max: 44rem;
+  }
+
+  .fui-Modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--fui-space-md);
+    padding-block: var(--fui-space-md);
+    padding-inline: var(--fui-space-xl);
+    border-block-end: 1px solid var(--fui-border);
+  }
+
+  .fui-Modal-title {
+    margin: 0;
+    font-size: var(--fui-text-lg);
+    font-weight: 600;
+    color: var(--fui-text);
+  }
+
+  .fui-Modal-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 2rem;
+    block-size: 2rem;
+    padding: 0;
+    border: none;
+    border-radius: var(--fui-radius-sm);
+    background: transparent;
+    color: var(--fui-text-muted);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      background var(--fui-transition),
+      color var(--fui-transition);
+  }
+  .fui-Modal-close:hover {
+    background: var(--fui-surface-hover);
+    color: var(--fui-text);
+  }
+  .fui-Modal-close:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+
+  .fui-Modal-body {
+    padding-block: var(--fui-space-lg);
+    padding-inline: var(--fui-space-xl);
+    overflow-y: auto;
+    font-size: var(--fui-text-sm);
+    line-height: 1.6;
+    color: var(--fui-text);
+  }
+
+  @keyframes fui-Modal-modal-overlay-in {
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes fui-Modal-modal-panel-in {
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+}

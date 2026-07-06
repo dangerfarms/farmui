@@ -1,0 +1,90 @@
+@layer farmui.components {
+  .fui-Avatar-root {
+    --_bg: var(--fui-primary);
+    --_fg: var(--fui-primary-contrast);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--_size, 2.5rem);
+    block-size: var(--_size, 2.5rem);
+    border-radius: var(--_radius, var(--fui-radius-full));
+    background: var(--_bg);
+    color: var(--_fg);
+    font-family: var(--fui-font);
+    font-weight: 600;
+    line-height: 1;
+    overflow: hidden;
+    user-select: none;
+    flex: none;
+  }
+
+  /* Sizes */
+  .fui-Avatar-root[data-size="sm"] {
+    --_size: 2rem;
+    font-size: var(--fui-text-xs);
+  }
+  .fui-Avatar-root[data-size="md"] {
+    --_size: 2.5rem;
+    font-size: var(--fui-text-sm);
+  }
+  .fui-Avatar-root[data-size="lg"] {
+    --_size: 3.25rem;
+    font-size: var(--fui-text-lg);
+  }
+
+  /* Colors — used for initials / glyph background */
+  .fui-Avatar-root[data-color="gray"] {
+    --_bg: var(--fui-bg-subtle);
+    --_fg: var(--fui-text-muted);
+  }
+  .fui-Avatar-root[data-color="danger"] {
+    --_bg: var(--fui-danger);
+    --_fg: var(--fui-primary-contrast);
+  }
+  .fui-Avatar-root[data-color="warning"] {
+    --_bg: var(--fui-warning);
+    --_fg: oklch(0.24 0.02 80);
+  }
+  .fui-Avatar-root[data-color="info"] {
+    --_bg: var(--fui-info);
+    --_fg: var(--fui-primary-contrast);
+  }
+
+  .fui-Avatar-img {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .fui-Avatar-initials {
+    font-size: 0.85em;
+    letter-spacing: 0.02em;
+  }
+
+  .fui-Avatar-glyph {
+    inline-size: 65%;
+    block-size: 65%;
+    opacity: 0.9;
+  }
+
+  /* Group — overlap children with a surface ring */
+  .fui-Avatar-group {
+    display: inline-flex;
+    align-items: center;
+  }
+  .fui-Avatar-group > * {
+    border: 2px solid var(--fui-surface);
+    box-sizing: content-box;
+    margin-inline-start: calc(-1 * var(--_overlap, 0.5rem));
+    transition: transform var(--fui-transition);
+  }
+  .fui-Avatar-group > *:first-child {
+    margin-inline-start: 0;
+  }
+  .fui-Avatar-group > *:hover {
+    transform: translateY(-2px);
+    z-index: 1;
+  }
+}

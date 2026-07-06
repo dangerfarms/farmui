@@ -1,0 +1,68 @@
+.prose {
+  max-inline-size: 46rem;
+  padding-block-start: 0.5rem;
+}
+.prose h1 {
+  font-size: clamp(2rem, 5vw, 2.6rem);
+  font-weight: 800;
+  margin-block-end: 0.75rem;
+}
+.prose .lead {
+  font-size: var(--fui-text-lg);
+  color: var(--fui-text-muted);
+  margin-block-end: 2rem;
+}
+.prose h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-block: 2.5rem 1rem;
+  scroll-margin-block-start: 5rem;
+}
+.prose h3 {
+  font-size: 1.1rem;
+  font-weight: 650;
+  margin-block: 1.75rem 0.6rem;
+}
+.prose p {
+  margin-block-end: 1rem;
+  color: var(--fui-text);
+}
+.prose a {
+  color: var(--fui-primary);
+  font-weight: 550;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prose ul {
+  margin-block-end: 1rem;
+  padding-inline-start: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.prose li {
+  color: var(--fui-text);
+}
+.prose code {
+  font-family: var(--fui-font-mono);
+  font-size: 0.85em;
+  background: var(--fui-bg-subtle);
+  border: 1px solid var(--fui-border);
+  padding: 0.1rem 0.35rem;
+  border-radius: var(--fui-radius-sm);
+}
+.prose .block {
+  margin-block: 1.25rem 1.75rem;
+}
+.callout {
+  margin-block: 1.5rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--fui-border);
+  border-inline-start: 3px solid var(--fui-primary);
+  border-radius: var(--fui-radius-md);
+  background: var(--fui-primary-soft);
+  font-size: var(--fui-text-sm);
+}
+.callout code {
+  background: color-mix(in oklch, var(--fui-bg) 60%, transparent);
+}

@@ -1,0 +1,49 @@
+@layer farmui.components {
+  .fui-Popover-root {
+    position: relative;
+    display: inline-block;
+  }
+
+  .fui-Popover-dropdown {
+    position: absolute;
+    z-index: 50;
+    inset-inline-start: 0;
+    inline-size: var(--_w, max-content);
+    min-inline-size: 12rem;
+    max-inline-size: min(20rem, 90vw);
+    padding: var(--fui-space-md);
+    border: 1px solid var(--fui-border);
+    border-radius: var(--fui-radius-md);
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    font-family: var(--fui-font);
+    font-size: var(--fui-text-sm);
+    box-shadow: var(--fui-shadow-lg);
+    transform-origin: top;
+    animation: fui-Popover-popover-in var(--fui-transition);
+  }
+
+  .fui-Popover-dropdown[data-position="bottom"] {
+    inset-block-start: calc(100% + var(--fui-space-xs));
+  }
+  .fui-Popover-dropdown[data-position="top"] {
+    inset-block-end: calc(100% + var(--fui-space-xs));
+    transform-origin: bottom;
+  }
+
+  @keyframes fui-Popover-popover-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px) scale(0.98);
+    }
+  }
+  .fui-Popover-dropdown[data-position="top"] {
+    animation-name: fui-Popover-popover-in-top;
+  }
+  @keyframes fui-Popover-popover-in-top {
+    from {
+      opacity: 0;
+      transform: translateY(4px) scale(0.98);
+    }
+  }
+}

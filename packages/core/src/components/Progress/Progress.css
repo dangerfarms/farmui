@@ -1,0 +1,81 @@
+@layer farmui.components {
+  .fui-Progress-root {
+    --_fill: var(--fui-primary);
+    --_h: 0.625rem;
+
+    display: block;
+    inline-size: 100%;
+    block-size: var(--_h);
+    border-radius: var(--_radius, var(--fui-radius-full));
+    background: var(--fui-bg-subtle);
+    overflow: hidden;
+  }
+
+  /* Sizes */
+  .fui-Progress-root[data-size="sm"] {
+    --_h: 0.375rem;
+  }
+  .fui-Progress-root[data-size="lg"] {
+    --_h: 1rem;
+  }
+
+  /* Colors */
+  .fui-Progress-root[data-color="info"] {
+    --_fill: var(--fui-info);
+  }
+  .fui-Progress-root[data-color="success"] {
+    --_fill: var(--fui-success);
+  }
+  .fui-Progress-root[data-color="warning"] {
+    --_fill: var(--fui-warning);
+  }
+  .fui-Progress-root[data-color="danger"] {
+    --_fill: var(--fui-danger);
+  }
+
+  .fui-Progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    block-size: 100%;
+    inline-size: 0;
+    border-radius: inherit;
+    background: var(--_fill);
+    color: var(--fui-primary-contrast);
+    transition: inline-size var(--fui-transition);
+  }
+
+  .fui-Progress-label {
+    padding-inline: var(--fui-space-sm);
+    font-family: var(--fui-font);
+    font-size: var(--fui-text-xs);
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  /* Stripes */
+  .fui-Progress-bar[data-striped] {
+    background-image: repeating-linear-gradient(
+      45deg,
+      color-mix(in oklch, var(--fui-primary-contrast) 22%, transparent) 0,
+      color-mix(in oklch, var(--fui-primary-contrast) 22%, transparent) 0.5rem,
+      transparent 0.5rem,
+      transparent 1rem
+    );
+    background-size: 1.414rem 1.414rem;
+  }
+
+  .fui-Progress-bar[data-animated] {
+    animation: fui-Progress-progress-stripes 1s linear infinite;
+  }
+
+  @keyframes fui-Progress-progress-stripes {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 1.414rem 0;
+    }
+  }
+}

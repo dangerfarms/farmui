@@ -1,0 +1,96 @@
+@layer farmui.components {
+  .fui-Input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    inline-size: var(--_w, 100%);
+    font-family: var(--fui-font);
+  }
+
+  .fui-Input-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 550;
+    color: var(--fui-text);
+  }
+  .fui-Input-required {
+    color: var(--fui-danger);
+    margin-inline-start: 0.15em;
+  }
+
+  .fui-Input-description {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Input-field {
+    display: flex;
+    align-items: center;
+    gap: var(--fui-space-sm);
+    block-size: var(--_h, var(--fui-control-height-md));
+    padding-inline: var(--_px, 0.75rem);
+    border: 1px solid var(--fui-border-strong);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    transition:
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+  .fui-Input-field:focus-within {
+    border-color: var(--fui-primary);
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Input-field[data-invalid] {
+    border-color: var(--fui-danger);
+  }
+  .fui-Input-field[data-invalid]:focus-within {
+    box-shadow: 0 0 0 3px
+      color-mix(in oklch, var(--fui-danger) 40%, transparent);
+  }
+  .fui-Input-field[data-disabled] {
+    background: var(--fui-bg-subtle);
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .fui-Input-field[data-size="sm"] {
+    --_h: var(--fui-control-height-sm);
+    --_px: 0.625rem;
+  }
+  .fui-Input-field[data-size="lg"] {
+    --_h: var(--fui-control-height-lg);
+    --_px: 0.875rem;
+  }
+
+  .fui-Input-input {
+    flex: 1;
+    min-inline-size: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: var(--_fz, var(--fui-text-sm));
+  }
+  .fui-Input-input::placeholder {
+    color: var(--fui-text-dim);
+  }
+  .fui-Input-input:disabled {
+    cursor: not-allowed;
+  }
+  .fui-Input-field[data-size="lg"] .fui-Input-input {
+    --_fz: var(--fui-text-md);
+  }
+
+  .fui-Input-section {
+    display: inline-flex;
+    align-items: center;
+    color: var(--fui-text-muted);
+    flex-shrink: 0;
+  }
+
+  .fui-Input-error {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-danger);
+  }
+}

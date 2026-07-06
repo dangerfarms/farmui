@@ -1,0 +1,110 @@
+@layer farmui.components {
+  .fui-Badge-root {
+    /* Per-color palette knobs (defaults = primary) */
+    --_color: var(--fui-primary);
+    --_soft: var(--fui-primary-soft);
+    --_on-soft: var(--fui-primary-hover);
+    --_contrast: var(--fui-primary-contrast);
+
+    /* Resolved by variant */
+    --_bg: var(--_color);
+    --_fg: var(--_contrast);
+    --_border: transparent;
+
+    display: inline-flex;
+    align-items: center;
+    gap: var(--_gap, var(--fui-space-xs));
+    inline-size: fit-content;
+    block-size: var(--_h, 1.375rem);
+    padding-inline: var(--_px, 0.625rem);
+    border: 1px solid var(--_border);
+    border-radius: var(--_radius, var(--fui-radius-full));
+    background: var(--_bg);
+    color: var(--_fg);
+    font-family: var(--fui-font);
+    font-size: var(--_fz, var(--fui-text-xs));
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    user-select: none;
+    transition:
+      background var(--fui-transition),
+      border-color var(--fui-transition),
+      color var(--fui-transition);
+  }
+
+  /* Sizes */
+  .fui-Badge-root[data-size="sm"] {
+    --_h: 1.125rem;
+    --_px: 0.5rem;
+    --_fz: 0.6875rem;
+  }
+  .fui-Badge-root[data-size="lg"] {
+    --_h: 1.625rem;
+    --_px: 0.8125rem;
+    --_fz: var(--fui-text-sm);
+    --_gap: var(--fui-space-sm);
+  }
+
+  /* Colors — remap the palette knobs */
+  .fui-Badge-root[data-color="danger"] {
+    --_color: var(--fui-danger);
+    --_soft: var(--fui-danger-soft);
+    --_on-soft: var(--fui-danger);
+    --_contrast: var(--fui-primary-contrast);
+  }
+  .fui-Badge-root[data-color="warning"] {
+    --_color: var(--fui-warning);
+    --_soft: var(--fui-warning-soft);
+    --_on-soft: color-mix(in oklch, var(--fui-warning) 70%, black);
+    --_contrast: oklch(0.24 0.02 80);
+  }
+  .fui-Badge-root[data-color="info"] {
+    --_color: var(--fui-info);
+    --_soft: var(--fui-info-soft);
+    --_on-soft: var(--fui-info);
+    --_contrast: var(--fui-primary-contrast);
+  }
+  .fui-Badge-root[data-color="gray"] {
+    --_color: var(--fui-text-muted);
+    --_soft: var(--fui-bg-subtle);
+    --_on-soft: var(--fui-text);
+    --_contrast: var(--fui-primary-contrast);
+  }
+
+  /* Variants */
+  .fui-Badge-root[data-variant="light"] {
+    --_bg: var(--_soft);
+    --_fg: var(--_on-soft);
+  }
+
+  .fui-Badge-root[data-variant="outline"] {
+    --_bg: transparent;
+    --_fg: var(--_on-soft);
+    --_border: color-mix(in oklch, var(--_color) 45%, transparent);
+  }
+  .fui-Badge-root[data-color="gray"][data-variant="outline"] {
+    --_border: var(--fui-border-strong);
+  }
+
+  /* Dot variant reads like a subtle, bordered label with a status dot */
+  .fui-Badge-root[data-variant="dot"] {
+    --_bg: var(--fui-surface);
+    --_fg: var(--fui-text);
+    --_border: var(--fui-border);
+  }
+
+  .fui-Badge-dot {
+    inline-size: 0.5em;
+    block-size: 0.5em;
+    border-radius: var(--fui-radius-full);
+    background: var(--_color);
+    flex: none;
+  }
+
+  .fui-Badge-section {
+    display: inline-flex;
+    align-items: center;
+  }
+}

@@ -1,0 +1,144 @@
+/**
+ * FarmUI — design tokens & base layer.
+ *
+ * Import once at your app root:
+ *   import "@farmui/react/styles.css";
+ *
+ * Everything is a CSS custom property, so you theme FarmUI by overriding
+ * `--fui-*` variables on :root (or any scope) — no providers, no JS.
+ * Light/dark is native via `light-dark()`; toggle by setting
+ * `color-scheme` (we wire it to [data-theme] below).
+ */
+
+@layer farmui.reset, farmui.tokens, farmui.components;
+
+@layer farmui.tokens {
+  :root {
+    color-scheme: light dark;
+
+    /* Typography */
+    --fui-font:
+      var(--fui-font-sans, ui-sans-serif), system-ui, -apple-system, "Segoe UI",
+      Roboto, Helvetica, Arial, sans-serif;
+    --fui-font-mono:
+      ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+
+    /* Fluid type scale */
+    --fui-text-xs: 0.75rem;
+    --fui-text-sm: 0.875rem;
+    --fui-text-md: 1rem;
+    --fui-text-lg: 1.125rem;
+    --fui-text-xl: 1.25rem;
+
+    /* Brand scale — green, in OKLCH for perceptual evenness */
+    --fui-green-50: oklch(0.97 0.03 152);
+    --fui-green-100: oklch(0.94 0.06 152);
+    --fui-green-200: oklch(0.89 0.1 152);
+    --fui-green-300: oklch(0.83 0.14 151);
+    --fui-green-400: oklch(0.76 0.16 150);
+    --fui-green-500: oklch(0.68 0.16 149);
+    --fui-green-600: oklch(0.6 0.15 148);
+    --fui-green-700: oklch(0.5 0.12 148);
+    --fui-green-800: oklch(0.42 0.1 149);
+    --fui-green-900: oklch(0.35 0.08 150);
+
+    /* Primary (brand) — remap this one line to rebrand the whole library */
+    --fui-primary: var(--fui-green-600);
+    --fui-primary-hover: var(--fui-green-700);
+    --fui-primary-active: var(--fui-green-800);
+    --fui-primary-soft: light-dark(var(--fui-green-50), oklch(0.3 0.06 150));
+    --fui-primary-contrast: oklch(0.99 0 0);
+    --fui-primary-ring: color-mix(
+      in oklch,
+      var(--fui-primary) 45%,
+      transparent
+    );
+
+    /* Status colors */
+    --fui-danger: light-dark(oklch(0.58 0.2 25), oklch(0.66 0.19 25));
+    --fui-danger-soft: light-dark(oklch(0.96 0.03 25), oklch(0.32 0.09 25));
+    --fui-warning: light-dark(oklch(0.72 0.16 75), oklch(0.79 0.15 80));
+    --fui-warning-soft: light-dark(oklch(0.96 0.05 85), oklch(0.34 0.07 75));
+    --fui-info: light-dark(oklch(0.58 0.16 245), oklch(0.68 0.15 245));
+    --fui-info-soft: light-dark(oklch(0.96 0.03 245), oklch(0.32 0.08 250));
+    --fui-success: var(--fui-primary);
+    --fui-success-soft: var(--fui-primary-soft);
+
+    /* Surfaces & text — theme-aware via light-dark() */
+    --fui-bg: light-dark(oklch(1 0 0), oklch(0.17 0.008 160));
+    --fui-bg-subtle: light-dark(oklch(0.98 0.004 160), oklch(0.21 0.008 160));
+    --fui-surface: light-dark(oklch(1 0 0), oklch(0.23 0.008 160));
+    --fui-surface-hover: light-dark(
+      oklch(0.97 0.005 160),
+      oklch(0.27 0.01 160)
+    );
+    --fui-text: light-dark(oklch(0.24 0.02 160), oklch(0.96 0.006 160));
+    --fui-text-muted: light-dark(oklch(0.52 0.02 160), oklch(0.72 0.015 160));
+    --fui-text-dim: light-dark(oklch(0.64 0.015 160), oklch(0.58 0.012 160));
+    --fui-border: light-dark(oklch(0.91 0.006 160), oklch(0.32 0.01 160));
+    --fui-border-strong: light-dark(
+      oklch(0.82 0.01 160),
+      oklch(0.42 0.012 160)
+    );
+
+    /* Radius */
+    --fui-radius-sm: 0.375rem;
+    --fui-radius-md: 0.5rem;
+    --fui-radius-lg: 0.75rem;
+    --fui-radius-xl: 1rem;
+    --fui-radius-full: 9999px;
+
+    /* Spacing scale */
+    --fui-space-xs: 0.25rem;
+    --fui-space-sm: 0.5rem;
+    --fui-space-md: 0.75rem;
+    --fui-space-lg: 1rem;
+    --fui-space-xl: 1.5rem;
+
+    /* Elevation — softer & tinted in dark */
+    --fui-shadow-sm: 0 1px 2px
+      light-dark(oklch(0.2 0.02 160 / 0.08), oklch(0 0 0 / 0.4));
+    --fui-shadow-md:
+      0 4px 6px -1px light-dark(oklch(0.2 0.02 160 / 0.1), oklch(0 0 0 / 0.45)),
+      0 2px 4px -2px light-dark(oklch(0.2 0.02 160 / 0.08), oklch(0 0 0 / 0.4));
+    --fui-shadow-lg:
+      0 12px 20px -6px
+        light-dark(oklch(0.2 0.02 160 / 0.14), oklch(0 0 0 / 0.55)),
+      0 4px 8px -4px light-dark(oklch(0.2 0.02 160 / 0.1), oklch(0 0 0 / 0.45));
+
+    /* Motion */
+    --fui-transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Control sizing (shared across inputs/buttons for alignment) */
+    --fui-control-height-sm: 2rem;
+    --fui-control-height-md: 2.5rem;
+    --fui-control-height-lg: 3rem;
+  }
+
+  /* Manual theme override — light-dark() follows the computed color-scheme */
+  :root[data-theme="light"] {
+    color-scheme: light;
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+  }
+}
+
+@layer farmui.reset {
+  /* Scoped, minimal reset — only touches elements FarmUI renders. */
+  :where([class*="fui-"]),
+  :where([class*="fui-"] *) {
+    box-sizing: border-box;
+  }
+  :where(button[class*="fui-"]) {
+    font-family: inherit;
+    cursor: pointer;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :where([class*="fui-"]),
+    :where([class*="fui-"] *) {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+}

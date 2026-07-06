@@ -1,0 +1,68 @@
+{
+  "name": "@farmui/core",
+  "version": "1.0.0",
+  "description": "Beautiful React components, fast & accessible — zero-runtime, built on native modern CSS.",
+  "license": "MIT",
+  "author": "Danger Farms",
+  "homepage": "https://farmui.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dangerfarms/farmui.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/dangerfarms/farmui/issues"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "component-library",
+    "ui",
+    "design-system",
+    "css",
+    "zero-runtime",
+    "accessible",
+    "a11y",
+    "modern-css",
+    "dark-mode"
+  ],
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup && node scripts/build-css.mjs",
+    "dev": "tsup --watch",
+    "check-types": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tsup": "^8.5.0",
+    "typescript": "5.9.2"
+  }
+}

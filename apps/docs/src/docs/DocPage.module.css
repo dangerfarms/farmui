@@ -1,0 +1,63 @@
+.page {
+  max-inline-size: 48rem;
+}
+
+.header {
+  padding-block-end: 1.5rem;
+  margin-block-end: 2rem;
+  border-block-end: 1px solid var(--fui-border);
+}
+.category {
+  font-size: var(--fui-text-sm);
+  font-weight: 600;
+  color: var(--fui-primary);
+}
+.title {
+  font-size: clamp(1.9rem, 5vw, 2.5rem);
+  font-weight: 800;
+  margin-block: 0.25rem;
+}
+.lead {
+  font-size: var(--fui-text-lg);
+  color: var(--fui-text-muted);
+}
+
+.section {
+  margin-block-end: 3rem;
+  scroll-margin-block-start: 5rem;
+}
+.h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-block-end: 1rem;
+  scroll-margin-block-start: 5rem;
+}
+.h3 {
+  font-size: 1.05rem;
+  font-weight: 650;
+  margin-block-end: 0.35rem;
+}
+
+.usageNote {
+  margin-block-end: 1.5rem;
+  padding: 0.75rem 1rem;
+  font-size: var(--fui-text-sm);
+  color: var(--fui-text-muted);
+  background: var(--fui-primary-soft);
+  border-inline-start: 3px solid var(--fui-primary);
+  border-radius: var(--fui-radius-md);
+}
+
+.demos {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+.demo {
+  scroll-margin-block-start: 5rem;
+}
+.demoDesc {
+  color: var(--fui-text-muted);
+  font-size: var(--fui-text-sm);
+  margin-block-end: 0.75rem;
+}

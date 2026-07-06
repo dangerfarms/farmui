@@ -1,0 +1,34 @@
+.shell {
+  display: grid;
+  grid-template-columns: 16rem minmax(0, 1fr);
+  gap: 2.5rem;
+  inline-size: min(100% - 2.5rem, 82rem);
+  margin-inline: auto;
+  align-items: start;
+}
+
+.aside {
+  position: sticky;
+  inset-block-start: var(--site-nav-h);
+  block-size: calc(100dvh - var(--site-nav-h));
+  overflow: hidden;
+}
+.asideInner {
+  block-size: 100%;
+  overflow-y: auto;
+  border-inline-end: 1px solid var(--fui-border);
+}
+
+.content {
+  min-inline-size: 0;
+  padding-block: 2.5rem 4rem;
+}
+
+@media (max-width: 60rem) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+  .aside {
+    display: none;
+  }
+}

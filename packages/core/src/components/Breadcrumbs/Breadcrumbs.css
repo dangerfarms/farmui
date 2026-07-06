@@ -1,0 +1,52 @@
+@layer farmui.components {
+  .fui-Breadcrumbs-root {
+    font-family: var(--fui-font);
+    font-size: var(--fui-text-sm);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Breadcrumbs-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--fui-space-sm);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .fui-Breadcrumbs-item {
+    display: inline-flex;
+    align-items: center;
+    min-inline-size: 0;
+  }
+
+  /* Links inside a breadcrumb */
+  .fui-Breadcrumbs-item :where(a) {
+    color: var(--fui-text-muted);
+    text-decoration: none;
+    border-radius: var(--fui-radius-sm);
+    padding-inline: 2px;
+    transition: color var(--fui-transition);
+  }
+  .fui-Breadcrumbs-item :where(a):hover {
+    color: var(--fui-primary);
+    text-decoration: underline;
+  }
+  .fui-Breadcrumbs-item :where(a):focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+
+  .fui-Breadcrumbs-item[data-current] {
+    color: var(--fui-text);
+    font-weight: 600;
+  }
+
+  .fui-Breadcrumbs-separator {
+    display: inline-flex;
+    align-items: center;
+    color: var(--fui-text-dim);
+    user-select: none;
+  }
+}

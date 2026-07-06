@@ -1,0 +1,26 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: -0.03em;
+}
+
+.mark {
+  display: grid;
+  place-items: center;
+  inline-size: 2rem;
+  block-size: 2rem;
+  border-radius: var(--fui-radius-md);
+  background: var(--site-gradient);
+  color: white;
+  box-shadow: var(--fui-shadow-sm);
+}
+
+.word {
+  color: var(--fui-text);
+}
+.ui {
+  color: var(--fui-primary);
+}

@@ -1,0 +1,69 @@
+@layer farmui.components {
+  .fui-Table-scroll {
+    inline-size: 100%;
+    overflow-x: auto;
+    border-radius: var(--fui-radius-md);
+  }
+
+  .fui-Table-root {
+    inline-size: 100%;
+    border-collapse: collapse;
+    font-family: var(--fui-font);
+    font-size: var(--fui-text-sm);
+    color: var(--fui-text);
+  }
+
+  .fui-Table-root[data-caption-side="top"] {
+    caption-side: top;
+  }
+  .fui-Table-root[data-caption-side="bottom"] {
+    caption-side: bottom;
+  }
+
+  .fui-Table-root caption {
+    padding-block: var(--fui-space-sm);
+    color: var(--fui-text-muted);
+    font-size: var(--fui-text-xs);
+    text-align: start;
+  }
+
+  .fui-Table-root :where(th, td) {
+    padding-block: var(--fui-space-md);
+    padding-inline: var(--fui-space-lg);
+    text-align: start;
+    vertical-align: middle;
+    border-block-end: 1px solid var(--fui-border);
+  }
+
+  .fui-Table-root :where(thead th) {
+    color: var(--fui-text-muted);
+    font-weight: 600;
+    font-size: var(--fui-text-xs);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    border-block-end: 1px solid var(--fui-border-strong);
+    white-space: nowrap;
+  }
+
+  .fui-Table-root :where(tbody tr:last-child) :where(td) {
+    border-block-end: none;
+  }
+
+  /* Column borders */
+  .fui-Table-root[data-col-borders] :where(th, td):not(:last-child) {
+    border-inline-end: 1px solid var(--fui-border);
+  }
+
+  /* Striped body rows */
+  .fui-Table-root[data-striped] :where(tbody tr:nth-child(even)) {
+    background: var(--fui-bg-subtle);
+  }
+
+  /* Highlight on hover */
+  .fui-Table-root[data-hover] :where(tbody tr) {
+    transition: background var(--fui-transition);
+  }
+  .fui-Table-root[data-hover] :where(tbody tr:hover) {
+    background: var(--fui-surface-hover);
+  }
+}

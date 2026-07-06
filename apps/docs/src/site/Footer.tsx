@@ -1,0 +1,77 @@
+import Link from "next/link";
+import { Logo } from "./Logo";
+import { GitHubIcon } from "./Icons";
+import classes from "./Footer.module.css";
+
+const COLUMNS = [
+  {
+    title: "Docs",
+    links: [
+      { label: "Introduction", href: "/docs" },
+      { label: "Installation", href: "/docs/installation" },
+      { label: "Theming", href: "/docs/theming" },
+      { label: "Components", href: "/docs/components/button" },
+    ],
+  },
+  {
+    title: "Components",
+    links: [
+      { label: "Button", href: "/docs/components/button" },
+      { label: "Input", href: "/docs/components/input" },
+      { label: "Modal", href: "/docs/components/modal" },
+      { label: "Tabs", href: "/docs/components/tabs" },
+    ],
+  },
+  {
+    title: "Community",
+    links: [
+      { label: "GitHub", href: "https://github.com/dangerfarms/farmui" },
+      { label: "Discord", href: "#" },
+      { label: "X / Twitter", href: "#" },
+      { label: "Changelog", href: "#" },
+    ],
+  },
+];
+
+export function Footer() {
+  return (
+    <footer className={classes.footer}>
+      <div className={`container ${classes.inner}`}>
+        <div className={classes.brand}>
+          <Logo />
+          <p className={classes.tagline}>
+            Accessible, high-performance React components. Open source and
+            MIT-licensed.
+          </p>
+          <a
+            className={classes.gh}
+            href="https://github.com/dangerfarms/farmui"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <GitHubIcon width={16} height={16} /> Star on GitHub
+          </a>
+        </div>
+
+        <div className={classes.cols}>
+          {COLUMNS.map((col) => (
+            <div key={col.title} className={classes.col}>
+              <h3 className={classes.colTitle}>{col.title}</h3>
+              <ul>
+                {col.links.map((l) => (
+                  <li key={l.label}>
+                    <Link href={l.href}>{l.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className={`container ${classes.bottom}`}>
+        <span>© {new Date().getFullYear()} FarmUI. Built by Danger Farms.</span>
+        <span>Built with modern CSS.</span>
+      </div>
+    </footer>
+  );
+}
