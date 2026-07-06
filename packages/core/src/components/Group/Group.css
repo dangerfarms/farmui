@@ -1,0 +1,13 @@
+@layer farmui.components {
+  .fui-Group-root {
+    display: flex;
+    flex-direction: row;
+    gap: var(--_gap, var(--fui-space-md));
+    align-items: var(--_align, center);
+    justify-content: var(--_justify, flex-start);
+    flex-wrap: var(--_wrap, wrap);
+  }
+  .fui-Group-root[data-grow] > * {
+    flex: 1;
+  }
+}

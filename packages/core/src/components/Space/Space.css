@@ -1,0 +1,8 @@
+@layer farmui.components {
+  .fui-Space-root {
+    display: block;
+    block-size: var(--_h, 0);
+    inline-size: var(--_w, 0);
+    flex: none;
+  }
+}

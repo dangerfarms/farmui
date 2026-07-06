@@ -1,0 +1,10 @@
+@layer farmui.components {
+  .fui-Flex-root {
+    display: flex;
+    flex-direction: var(--_dir, row);
+    gap: var(--_gap, 0);
+    align-items: var(--_align, stretch);
+    justify-content: var(--_justify, flex-start);
+    flex-wrap: var(--_wrap, nowrap);
+  }
+}

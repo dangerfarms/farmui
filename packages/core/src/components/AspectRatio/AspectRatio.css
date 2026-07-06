@@ -1,0 +1,15 @@
+@layer farmui.components {
+  .fui-AspectRatio-root {
+    position: relative;
+    inline-size: 100%;
+    aspect-ratio: var(--_ratio, 1);
+    overflow: hidden;
+  }
+  /* Make a single media/child fill the box. */
+  .fui-AspectRatio-root > :where(img, video, iframe, picture, canvas, svg) {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}

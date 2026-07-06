@@ -1,0 +1,14 @@
+@layer farmui.components {
+  .fui-SimpleGrid-root {
+    display: grid;
+    gap: var(--_gap, var(--fui-space-md));
+    grid-template-columns: repeat(var(--_cols, 3), minmax(0, 1fr));
+  }
+  /* Intrinsically responsive: columns wrap based on available width. */
+  .fui-SimpleGrid-root[data-responsive] {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(min(var(--_min, 16rem), 100%), 1fr)
+    );
+  }
+}

@@ -32,7 +32,7 @@ export interface ComponentDoc {
 }
 
 export type Category =
-  "Inputs" | "Data display" | "Feedback" | "Overlays" | "Navigation";
+  "Inputs" | "Data display" | "Feedback" | "Overlays" | "Navigation" | "Layout";
 
 /** Sidebar ordering for categories. */
 export const CATEGORY_ORDER: Category[] = [
@@ -41,4 +41,5 @@ export const CATEGORY_ORDER: Category[] = [
   "Feedback",
   "Overlays",
   "Navigation",
+  "Layout",
 ];

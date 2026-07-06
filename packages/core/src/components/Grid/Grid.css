@@ -1,0 +1,42 @@
+@layer farmui.components {
+  .fui-Grid-root {
+    display: grid;
+    grid-template-columns: repeat(var(--_columns, 12), minmax(0, 1fr));
+    gap: var(--_gap, var(--fui-space-md));
+    align-items: var(--_align, stretch);
+    justify-content: var(--_justify, stretch);
+    /* Columns respond to the Grid's own width, not the viewport. */
+    container-type: inline-size;
+    container-name: fui-grid;
+  }
+
+  .fui-Grid-col {
+    grid-column: span var(--_span, var(--_columns, 12));
+    min-inline-size: 0;
+  }
+  .fui-Grid-col[data-auto] {
+    grid-column: auto;
+  }
+
+  /* Responsive spans (only apply to columns that declare the matching var). */
+  @container fui-grid (min-width: 36rem) {
+    .fui-Grid-col[style*="--_span-sm"] {
+      grid-column: span var(--_span-sm);
+    }
+  }
+  @container fui-grid (min-width: 48rem) {
+    .fui-Grid-col[style*="--_span-md"] {
+      grid-column: span var(--_span-md);
+    }
+  }
+  @container fui-grid (min-width: 62rem) {
+    .fui-Grid-col[style*="--_span-lg"] {
+      grid-column: span var(--_span-lg);
+    }
+  }
+  @container fui-grid (min-width: 75rem) {
+    .fui-Grid-col[style*="--_span-xl"] {
+      grid-column: span var(--_span-xl);
+    }
+  }
+}
