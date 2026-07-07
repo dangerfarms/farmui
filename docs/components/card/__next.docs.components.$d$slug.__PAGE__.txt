@@ -1,0 +1,137 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+5:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Card"]
+6:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Button"]
+10:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+11:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:T40b,/* The complete stylesheet for <Card /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Card-root {
+    display: block;
+    border: 1px solid transparent;
+    border-radius: var(--_radius, var(--fui-radius-lg));
+    padding: var(--_p, var(--fui-space-lg));
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    box-shadow: var(--_shadow, none);
+    transition:
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+
+  /* Padding */
+  .fui-Card-root[data-padding="sm"] {
+    --_p: var(--fui-space-md);
+  }
+  .fui-Card-root[data-padding="lg"] {
+    --_p: var(--fui-space-xl);
+  }
+
+  /* Border */
+  .fui-Card-root[data-border] {
+    border-color: var(--fui-border);
+  }
+
+  /* Shadow */
+  .fui-Card-root[data-shadow="sm"] {
+    --_shadow: var(--fui-shadow-sm);
+  }
+  .fui-Card-root[data-shadow="md"] {
+    --_shadow: var(--fui-shadow-md);
+  }
+  .fui-Card-root[data-shadow="lg"] {
+    --_shadow: var(--fui-shadow-lg);
+  }
+}7:T40b,/* The complete stylesheet for <Card /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Card-root {
+    display: block;
+    border: 1px solid transparent;
+    border-radius: var(--_radius, var(--fui-radius-lg));
+    padding: var(--_p, var(--fui-space-lg));
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    box-shadow: var(--_shadow, none);
+    transition:
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+
+  /* Padding */
+  .fui-Card-root[data-padding="sm"] {
+    --_p: var(--fui-space-md);
+  }
+  .fui-Card-root[data-padding="lg"] {
+    --_p: var(--fui-space-xl);
+  }
+
+  /* Border */
+  .fui-Card-root[data-border] {
+    border-color: var(--fui-border);
+  }
+
+  /* Shadow */
+  .fui-Card-root[data-shadow="sm"] {
+    --_shadow: var(--fui-shadow-sm);
+  }
+  .fui-Card-root[data-shadow="md"] {
+    --_shadow: var(--fui-shadow-md);
+  }
+  .fui-Card-root[data-shadow="lg"] {
+    --_shadow: var(--fui-shadow-lg);
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Data display"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"Card"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"A surface container that groups related content."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { Card } from \"@farmui/core\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Basic card",{"id":"basic-card","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Basic card"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"A padded surface holding a heading, text, and an action."}],["$","$L3",null,{"code":"<Card withBorder>\n  <h3 style={{ margin: \"0 0 0.5rem\" }}>Weekly summary</h3>\n  <p style={{ margin: \"0 0 1rem\", color: \"var(--fui-text-muted)\" }}>\n    Your team shipped 12 tasks this week. Review activity and plan the next sprint.\n  </p>\n  <Button size=\"sm\">View report</Button>\n</Card>","css":"$4","children":["$","div",null,{"style":{"maxInlineSize":"22rem","inlineSize":"100%"},"children":["$","$L5",null,{"withBorder":true,"children":[["$","h3",null,{"style":{"margin":"0 0 0.5rem"},"children":"Weekly summary"}],["$","p",null,{"style":{"margin":"0 0 1rem","color":"var(--fui-text-muted)","fontSize":"0.875rem"},"children":"Your team shipped 12 tasks this week. Review activity and plan the next sprint."}],["$","$L6",null,{"size":"sm","children":"View report"}]]}]}]}]]}],["$","div","With border",{"id":"with-border","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"With border"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Set withBorder for a subtle outline instead of a shadow."}],["$","$L3",null,{"code":"<Card withBorder>Bordered surface</Card>","css":"$7","children":"$L8"}]]}],"$L9"]}]]}],"$La"]}],["$Lb","$Lc","$Ld"],"$Le"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+8:["$","div",null,{"style":{"maxInlineSize":"22rem","inlineSize":"100%"},"children":["$","$L5",null,{"withBorder":true,"children":"Bordered surface"}]}]
+f:T40b,/* The complete stylesheet for <Card /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Card-root {
+    display: block;
+    border: 1px solid transparent;
+    border-radius: var(--_radius, var(--fui-radius-lg));
+    padding: var(--_p, var(--fui-space-lg));
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    box-shadow: var(--_shadow, none);
+    transition:
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+
+  /* Padding */
+  .fui-Card-root[data-padding="sm"] {
+    --_p: var(--fui-space-md);
+  }
+  .fui-Card-root[data-padding="lg"] {
+    --_p: var(--fui-space-xl);
+  }
+
+  /* Border */
+  .fui-Card-root[data-border] {
+    border-color: var(--fui-border);
+  }
+
+  /* Shadow */
+  .fui-Card-root[data-shadow="sm"] {
+    --_shadow: var(--fui-shadow-sm);
+  }
+  .fui-Card-root[data-shadow="md"] {
+    --_shadow: var(--fui-shadow-md);
+  }
+  .fui-Card-root[data-shadow="lg"] {
+    --_shadow: var(--fui-shadow-lg);
+  }
+}9:["$","div","Shadows",{"id":"shadows","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Shadows"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Four elevation levels, theme-aware via tokens."}],["$","$L3",null,{"code":"<Card shadow=\"sm\">Small shadow</Card>\n<Card shadow=\"md\">Medium shadow</Card>\n<Card shadow=\"lg\">Large shadow</Card>","css":"$f","children":["$","div",null,{"style":{"display":"grid","gap":"1rem","maxInlineSize":"22rem","inlineSize":"100%"},"children":[["$","$L5",null,{"shadow":"sm","children":"Small shadow"}],["$","$L5",null,{"shadow":"md","children":"Medium shadow"}],["$","$L5",null,{"shadow":"lg","children":"Large shadow"}]]}]}]]}]
+a:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","padding",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"padding"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"sm\" | \"md\" | \"lg\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"md\""}]}],["$","td",null,{"children":"Inner padding."}]]}],["$","tr","radius",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"radius"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"sm\" | \"md\" | \"lg\" | \"xl\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"lg\""}]}],["$","td",null,{"children":"Border radius token."}]]}],["$","tr","withBorder",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"withBorder"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"boolean"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Draw a border around the card."}]]}],["$","tr","shadow",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"shadow"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"none\" | \"sm\" | \"md\" | \"lg\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"none\""}]}],["$","td",null,{"children":"Drop shadow depth."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"DivHTMLAttributes"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <div> props are forwarded."}]]}]]}]]}]}]]}]
+b:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+c:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+d:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+e:["$","$L10",null,{"children":["$","$11",null,{"name":"Next.MetadataOutlet","children":"$@12"}]}]
+12:null

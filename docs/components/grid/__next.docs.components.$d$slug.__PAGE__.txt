@@ -1,0 +1,198 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+5:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Grid"]
+6:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"GridCol"]
+16:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+17:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:T51f,/* The complete stylesheet for <Grid /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Grid-root {
+    display: grid;
+    grid-template-columns: repeat(var(--_columns, 12), minmax(0, 1fr));
+    gap: var(--_gap, var(--fui-space-md));
+    align-items: var(--_align, stretch);
+    justify-content: var(--_justify, stretch);
+    /* Columns respond to the Grid's own width, not the viewport. */
+    container-type: inline-size;
+    container-name: fui-grid;
+  }
+
+  .fui-Grid-col {
+    grid-column: span var(--_span, var(--_columns, 12));
+    min-inline-size: 0;
+  }
+  .fui-Grid-col[data-auto] {
+    grid-column: auto;
+  }
+
+  /* Responsive spans (only apply to columns that declare the matching var). */
+  @container fui-grid (min-width: 36rem) {
+    .fui-Grid-col[style*="--_span-sm"] {
+      grid-column: span var(--_span-sm);
+    }
+  }
+  @container fui-grid (min-width: 48rem) {
+    .fui-Grid-col[style*="--_span-md"] {
+      grid-column: span var(--_span-md);
+    }
+  }
+  @container fui-grid (min-width: 62rem) {
+    .fui-Grid-col[style*="--_span-lg"] {
+      grid-column: span var(--_span-lg);
+    }
+  }
+  @container fui-grid (min-width: 75rem) {
+    .fui-Grid-col[style*="--_span-xl"] {
+      grid-column: span var(--_span-xl);
+    }
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Layout"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"Grid"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"A responsive 12-column layout whose spans adapt to the Grid's own width."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { Grid, GridCol } from \"@farmui/core\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Basic columns",{"id":"basic-columns","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Basic columns"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Each GridCol spans a number of the 12 columns."}],["$","$L3",null,{"code":"<Grid>\n  <GridCol span={4}><div>span 4</div></GridCol>\n  <GridCol span={4}><div>span 4</div></GridCol>\n  <GridCol span={4}><div>span 4</div></GridCol>\n</Grid>","css":"$4","children":["$","$L5",null,{"children":[["$","$L6",null,{"span":4,"children":["$","div",null,{"style":{"background":"var(--fui-primary-soft)","color":"var(--fui-primary-hover)","padding":"1rem","borderRadius":"var(--fui-radius-md)","textAlign":"center"},"children":"span 4"}]}],["$","$L6",null,{"span":4,"children":["$","div",null,{"style":{"background":"var(--fui-primary-soft)","color":"var(--fui-primary-hover)","padding":"1rem","borderRadius":"var(--fui-radius-md)","textAlign":"center"},"children":"span 4"}]}],["$","$L6",null,{"span":4,"children":["$","div",null,{"style":{"background":"var(--fui-primary-soft)","color":"var(--fui-primary-hover)","padding":"1rem","borderRadius":"var(--fui-radius-md)","textAlign":"center"},"children":"span 4"}]}]]}]}]]}],["$","div","Responsive spans",{"id":"responsive-spans","className":"DocPage-module__ziV6iq__demo","children":["$L7","$L8","$L9"]}],"$La","$Lb"]}]]}],"$Lc"]}],["$Ld","$Le","$Lf"],"$L10"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+7:["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Responsive spans"}]
+8:["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Columns adapt to the Grid's width via container queries — full width by default, half at md, a third at lg."}]
+11:T51f,/* The complete stylesheet for <Grid /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Grid-root {
+    display: grid;
+    grid-template-columns: repeat(var(--_columns, 12), minmax(0, 1fr));
+    gap: var(--_gap, var(--fui-space-md));
+    align-items: var(--_align, stretch);
+    justify-content: var(--_justify, stretch);
+    /* Columns respond to the Grid's own width, not the viewport. */
+    container-type: inline-size;
+    container-name: fui-grid;
+  }
+
+  .fui-Grid-col {
+    grid-column: span var(--_span, var(--_columns, 12));
+    min-inline-size: 0;
+  }
+  .fui-Grid-col[data-auto] {
+    grid-column: auto;
+  }
+
+  /* Responsive spans (only apply to columns that declare the matching var). */
+  @container fui-grid (min-width: 36rem) {
+    .fui-Grid-col[style*="--_span-sm"] {
+      grid-column: span var(--_span-sm);
+    }
+  }
+  @container fui-grid (min-width: 48rem) {
+    .fui-Grid-col[style*="--_span-md"] {
+      grid-column: span var(--_span-md);
+    }
+  }
+  @container fui-grid (min-width: 62rem) {
+    .fui-Grid-col[style*="--_span-lg"] {
+      grid-column: span var(--_span-lg);
+    }
+  }
+  @container fui-grid (min-width: 75rem) {
+    .fui-Grid-col[style*="--_span-xl"] {
+      grid-column: span var(--_span-xl);
+    }
+  }
+}9:["$","$L3",null,{"code":"<Grid>\n  <GridCol span={12} md={6} lg={4}><div>1</div></GridCol>\n  <GridCol span={12} md={6} lg={4}><div>2</div></GridCol>\n  <GridCol span={12} md={6} lg={4}><div>3</div></GridCol>\n</Grid>","css":"$11","children":["$","$L5",null,{"children":[["$","$L6",null,{"span":12,"md":6,"lg":4,"children":["$","div",null,{"style":{"background":"var(--fui-primary-soft)","color":"var(--fui-primary-hover)","padding":"1rem","borderRadius":"var(--fui-radius-md)","textAlign":"center"},"children":"span 12 · md 6 · lg 4"}]}],["$","$L6",null,{"span":12,"md":6,"lg":4,"children":["$","div",null,{"style":{"background":"var(--fui-primary-soft)","color":"var(--fui-primary-hover)","padding":"1rem","borderRadius":"var(--fui-radius-md)","textAlign":"center"},"children":"span 12 · md 6 · lg 4"}]}],["$","$L6",null,{"span":12,"md":6,"lg":4,"children":["$","div",null,{"style":{"background":"var(--fui-primary-soft)","color":"var(--fui-primary-hover)","padding":"1rem","borderRadius":"var(--fui-radius-md)","textAlign":"center"},"children":"span 12 · md 6 · lg 4"}]}]]}]}]
+12:T51f,/* The complete stylesheet for <Grid /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Grid-root {
+    display: grid;
+    grid-template-columns: repeat(var(--_columns, 12), minmax(0, 1fr));
+    gap: var(--_gap, var(--fui-space-md));
+    align-items: var(--_align, stretch);
+    justify-content: var(--_justify, stretch);
+    /* Columns respond to the Grid's own width, not the viewport. */
+    container-type: inline-size;
+    container-name: fui-grid;
+  }
+
+  .fui-Grid-col {
+    grid-column: span var(--_span, var(--_columns, 12));
+    min-inline-size: 0;
+  }
+  .fui-Grid-col[data-auto] {
+    grid-column: auto;
+  }
+
+  /* Responsive spans (only apply to columns that declare the matching var). */
+  @container fui-grid (min-width: 36rem) {
+    .fui-Grid-col[style*="--_span-sm"] {
+      grid-column: span var(--_span-sm);
+    }
+  }
+  @container fui-grid (min-width: 48rem) {
+    .fui-Grid-col[style*="--_span-md"] {
+      grid-column: span var(--_span-md);
+    }
+  }
+  @container fui-grid (min-width: 62rem) {
+    .fui-Grid-col[style*="--_span-lg"] {
+      grid-column: span var(--_span-lg);
+    }
+  }
+  @container fui-grid (min-width: 75rem) {
+    .fui-Grid-col[style*="--_span-xl"] {
+      grid-column: span var(--_span-xl);
+    }
+  }
+}a:["$","div","Auto columns",{"id":"auto-columns","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Auto columns"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Use span=\"auto\" to size a column to its content while siblings fill the rest."}],["$","$L3",null,{"code":"<Grid>\n  <GridCol span=\"auto\"><div>auto</div></GridCol>\n  <GridCol span={6}><div>span 6</div></GridCol>\n  <GridCol span=\"auto\"><div>auto</div></GridCol>\n</Grid>","css":"$12","children":["$","$L5",null,{"children":[["$","$L6",null,{"span":"auto","children":["$","div",null,{"style":{"background":"var(--fui-primary-soft)","color":"var(--fui-primary-hover)","padding":"1rem","borderRadius":"var(--fui-radius-md)","textAlign":"center"},"children":"auto"}]}],["$","$L6",null,{"span":6,"children":["$","div",null,{"style":{"background":"var(--fui-primary-soft)","color":"var(--fui-primary-hover)","padding":"1rem","borderRadius":"var(--fui-radius-md)","textAlign":"center"},"children":"span 6"}]}],["$","$L6",null,{"span":"auto","children":["$","div",null,{"style":{"background":"var(--fui-primary-soft)","color":"var(--fui-primary-hover)","padding":"1rem","borderRadius":"var(--fui-radius-md)","textAlign":"center"},"children":"auto"}]}]]}]}]]}]
+13:T51f,/* The complete stylesheet for <Grid /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Grid-root {
+    display: grid;
+    grid-template-columns: repeat(var(--_columns, 12), minmax(0, 1fr));
+    gap: var(--_gap, var(--fui-space-md));
+    align-items: var(--_align, stretch);
+    justify-content: var(--_justify, stretch);
+    /* Columns respond to the Grid's own width, not the viewport. */
+    container-type: inline-size;
+    container-name: fui-grid;
+  }
+
+  .fui-Grid-col {
+    grid-column: span var(--_span, var(--_columns, 12));
+    min-inline-size: 0;
+  }
+  .fui-Grid-col[data-auto] {
+    grid-column: auto;
+  }
+
+  /* Responsive spans (only apply to columns that declare the matching var). */
+  @container fui-grid (min-width: 36rem) {
+    .fui-Grid-col[style*="--_span-sm"] {
+      grid-column: span var(--_span-sm);
+    }
+  }
+  @container fui-grid (min-width: 48rem) {
+    .fui-Grid-col[style*="--_span-md"] {
+      grid-column: span var(--_span-md);
+    }
+  }
+  @container fui-grid (min-width: 62rem) {
+    .fui-Grid-col[style*="--_span-lg"] {
+      grid-column: span var(--_span-lg);
+    }
+  }
+  @container fui-grid (min-width: 75rem) {
+    .fui-Grid-col[style*="--_span-xl"] {
+      grid-column: span var(--_span-xl);
+    }
+  }
+}b:["$","div","Gutter",{"id":"gutter","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Gutter"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Control the gap between columns and rows."}],["$","$L3",null,{"code":"<Grid gutter=\"xl\">\n  <GridCol span={6}><div>span 6</div></GridCol>\n  <GridCol span={6}><div>span 6</div></GridCol>\n</Grid>","css":"$13","children":["$","$L5",null,{"gutter":"xl","children":[["$","$L6",null,{"span":6,"children":["$","div",null,{"style":{"background":"var(--fui-primary-soft)","color":"var(--fui-primary-hover)","padding":"1rem","borderRadius":"var(--fui-radius-md)","textAlign":"center"},"children":"span 6"}]}],["$","$L6",null,{"span":6,"children":["$","div",null,{"style":{"background":"var(--fui-primary-soft)","color":"var(--fui-primary-hover)","padding":"1rem","borderRadius":"var(--fui-radius-md)","textAlign":"center"},"children":"span 6"}]}]]}]}]]}]
+c:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","columns",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"columns"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"number"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"12"}]}],["$","td",null,{"children":"Total number of columns."}]]}],["$","tr","gutter",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"gutter"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | number | string"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"md\""}]}],["$","td",null,{"children":"Gap between columns and rows."}]]}],["$","tr","align",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"align"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"start\" | \"center\" | \"end\" | \"stretch\" | \"baseline\""}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"align-items for the grid rows."}]]}],["$","tr","justify",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"justify"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"start\" | \"center\" | \"end\" | \"between\" | \"around\" | \"evenly\""}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"justify-content for the grid."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"HTMLAttributes<HTMLDivElement>"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <div> props are forwarded."}]]}],["$","tr","GridCol span",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"GridCol span"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"number | \"auto\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"full width"}]}],["$","td",null,{"children":"Columns to span, or \"auto\" to size to content."}]]}],["$","tr","GridCol sm",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"GridCol sm"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"number"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Span once the Grid is ≥ 36rem wide (container query)."}]]}],["$","tr","GridCol md",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"GridCol md"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"number"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Span once the Grid is ≥ 48rem wide."}]]}],["$","tr","GridCol lg",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"GridCol lg"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"number"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],"$L14"]}],"$L15"]}]]}]}]]}]
+d:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+e:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+f:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+10:["$","$L16",null,{"children":["$","$17",null,{"name":"Next.MetadataOutlet","children":"$@18"}]}]
+14:["$","td",null,{"children":"Span once the Grid is ≥ 62rem wide."}]
+15:["$","tr","GridCol xl",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"GridCol xl"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"number"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Span once the Grid is ≥ 75rem wide."}]]}]
+18:null

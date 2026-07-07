@@ -1,0 +1,454 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+e:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Select"]
+16:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+17:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:Tb13,/* The complete stylesheet for <Select /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Select-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    inline-size: var(--_w, 100%);
+    font-family: var(--fui-font);
+  }
+
+  .fui-Select-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 550;
+    color: var(--fui-text);
+  }
+  .fui-Select-required {
+    color: var(--fui-danger);
+    margin-inline-start: 0.15em;
+  }
+
+  .fui-Select-description {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Select-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+    block-size: var(--_h, var(--fui-control-height-md));
+    border: 1px solid var(--fui-border-strong);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    transition:
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+  .fui-Select-field:focus-within {
+    border-color: var(--fui-primary);
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Select-field[data-invalid] {
+    border-color: var(--fui-danger);
+  }
+  .fui-Select-field[data-invalid]:focus-within {
+    box-shadow: 0 0 0 3px
+      color-mix(in oklch, var(--fui-danger) 40%, transparent);
+  }
+  .fui-Select-field[data-disabled] {
+    background: var(--fui-bg-subtle);
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .fui-Select-field[data-size="sm"] {
+    --_h: var(--fui-control-height-sm);
+    --_px: 0.625rem;
+  }
+  .fui-Select-field[data-size="lg"] {
+    --_h: var(--fui-control-height-lg);
+    --_px: 0.875rem;
+  }
+
+  .fui-Select-select {
+    flex: 1;
+    min-inline-size: 0;
+    block-size: 100%;
+    /* Leave room for the chevron on the trailing side. */
+    padding-inline: var(--_px, 0.75rem) 2.25rem;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: var(--_fz, var(--fui-text-sm));
+    cursor: pointer;
+    /* Strip the native arrow so our chevron is the only one. */
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .fui-Select-select:disabled {
+    cursor: not-allowed;
+  }
+  /* Empty placeholder value renders dimmed like a real placeholder. */
+  .fui-Select-select:has(option[value=""]:checked) {
+    color: var(--fui-text-dim);
+  }
+  .fui-Select-field[data-size="lg"] .fui-Select-select {
+    --_fz: var(--fui-text-md);
+  }
+
+  .fui-Select-chevron {
+    position: absolute;
+    inset-inline-end: 0.75rem;
+    inset-block-start: 50%;
+    translate: 0 -50%;
+    color: var(--fui-text-muted);
+    pointer-events: none;
+    flex-shrink: 0;
+  }
+
+  .fui-Select-error {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-danger);
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Inputs"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"Select"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"A styled wrapper around a native select — accessible and zero-JS."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { Select } from \"@farmui/core\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Basic usage",{"id":"basic-usage","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Basic usage"}],"$undefined",["$","$L3",null,{"code":"<Select\n  label=\"Country\"\n  data={[\"United States\", \"Canada\", \"United Kingdom\", \"Germany\", \"Japan\"]}\n/>","css":"$4","children":"$L5"}]]}],"$L6","$L7","$L8"]}]]}],"$L9"]}],["$La","$Lb","$Lc"],"$Ld"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+5:["$","div",null,{"style":{"maxInlineSize":"20rem","inlineSize":"100%"},"children":["$","$Le",null,{"label":"Country","data":["United States","Canada","United Kingdom","Germany","Japan"]}]}]
+f:Tb13,/* The complete stylesheet for <Select /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Select-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    inline-size: var(--_w, 100%);
+    font-family: var(--fui-font);
+  }
+
+  .fui-Select-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 550;
+    color: var(--fui-text);
+  }
+  .fui-Select-required {
+    color: var(--fui-danger);
+    margin-inline-start: 0.15em;
+  }
+
+  .fui-Select-description {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Select-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+    block-size: var(--_h, var(--fui-control-height-md));
+    border: 1px solid var(--fui-border-strong);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    transition:
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+  .fui-Select-field:focus-within {
+    border-color: var(--fui-primary);
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Select-field[data-invalid] {
+    border-color: var(--fui-danger);
+  }
+  .fui-Select-field[data-invalid]:focus-within {
+    box-shadow: 0 0 0 3px
+      color-mix(in oklch, var(--fui-danger) 40%, transparent);
+  }
+  .fui-Select-field[data-disabled] {
+    background: var(--fui-bg-subtle);
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .fui-Select-field[data-size="sm"] {
+    --_h: var(--fui-control-height-sm);
+    --_px: 0.625rem;
+  }
+  .fui-Select-field[data-size="lg"] {
+    --_h: var(--fui-control-height-lg);
+    --_px: 0.875rem;
+  }
+
+  .fui-Select-select {
+    flex: 1;
+    min-inline-size: 0;
+    block-size: 100%;
+    /* Leave room for the chevron on the trailing side. */
+    padding-inline: var(--_px, 0.75rem) 2.25rem;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: var(--_fz, var(--fui-text-sm));
+    cursor: pointer;
+    /* Strip the native arrow so our chevron is the only one. */
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .fui-Select-select:disabled {
+    cursor: not-allowed;
+  }
+  /* Empty placeholder value renders dimmed like a real placeholder. */
+  .fui-Select-select:has(option[value=""]:checked) {
+    color: var(--fui-text-dim);
+  }
+  .fui-Select-field[data-size="lg"] .fui-Select-select {
+    --_fz: var(--fui-text-md);
+  }
+
+  .fui-Select-chevron {
+    position: absolute;
+    inset-inline-end: 0.75rem;
+    inset-block-start: 50%;
+    translate: 0 -50%;
+    color: var(--fui-text-muted);
+    pointer-events: none;
+    flex-shrink: 0;
+  }
+
+  .fui-Select-error {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-danger);
+  }
+}6:["$","div","With placeholder",{"id":"with-placeholder","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"With placeholder"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Pass a placeholder to render an empty prompt option first."}],["$","$L3",null,{"code":"<Select\n  label=\"Country\"\n  placeholder=\"Pick a country\"\n  data={[\n    { value: \"us\", label: \"United States\" },\n    { value: \"ca\", label: \"Canada\" },\n    { value: \"uk\", label: \"United Kingdom\" },\n  ]}\n/>","css":"$f","children":"$L10"}]]}]
+11:Tb13,/* The complete stylesheet for <Select /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Select-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    inline-size: var(--_w, 100%);
+    font-family: var(--fui-font);
+  }
+
+  .fui-Select-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 550;
+    color: var(--fui-text);
+  }
+  .fui-Select-required {
+    color: var(--fui-danger);
+    margin-inline-start: 0.15em;
+  }
+
+  .fui-Select-description {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Select-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+    block-size: var(--_h, var(--fui-control-height-md));
+    border: 1px solid var(--fui-border-strong);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    transition:
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+  .fui-Select-field:focus-within {
+    border-color: var(--fui-primary);
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Select-field[data-invalid] {
+    border-color: var(--fui-danger);
+  }
+  .fui-Select-field[data-invalid]:focus-within {
+    box-shadow: 0 0 0 3px
+      color-mix(in oklch, var(--fui-danger) 40%, transparent);
+  }
+  .fui-Select-field[data-disabled] {
+    background: var(--fui-bg-subtle);
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .fui-Select-field[data-size="sm"] {
+    --_h: var(--fui-control-height-sm);
+    --_px: 0.625rem;
+  }
+  .fui-Select-field[data-size="lg"] {
+    --_h: var(--fui-control-height-lg);
+    --_px: 0.875rem;
+  }
+
+  .fui-Select-select {
+    flex: 1;
+    min-inline-size: 0;
+    block-size: 100%;
+    /* Leave room for the chevron on the trailing side. */
+    padding-inline: var(--_px, 0.75rem) 2.25rem;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: var(--_fz, var(--fui-text-sm));
+    cursor: pointer;
+    /* Strip the native arrow so our chevron is the only one. */
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .fui-Select-select:disabled {
+    cursor: not-allowed;
+  }
+  /* Empty placeholder value renders dimmed like a real placeholder. */
+  .fui-Select-select:has(option[value=""]:checked) {
+    color: var(--fui-text-dim);
+  }
+  .fui-Select-field[data-size="lg"] .fui-Select-select {
+    --_fz: var(--fui-text-md);
+  }
+
+  .fui-Select-chevron {
+    position: absolute;
+    inset-inline-end: 0.75rem;
+    inset-block-start: 50%;
+    translate: 0 -50%;
+    color: var(--fui-text-muted);
+    pointer-events: none;
+    flex-shrink: 0;
+  }
+
+  .fui-Select-error {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-danger);
+  }
+}7:["$","div","Error state",{"id":"error-state","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Error state"}],"$undefined",["$","$L3",null,{"code":"<Select\n  label=\"Country\"\n  placeholder=\"Pick a country\"\n  data={[\"United States\", \"Canada\", \"United Kingdom\"]}\n  error=\"Please choose a country.\"\n/>","css":"$11","children":["$","div",null,{"style":{"maxInlineSize":"20rem","inlineSize":"100%"},"children":["$","$Le",null,{"label":"Country","placeholder":"Pick a country","data":["United States","Canada","United Kingdom"],"error":"Please choose a country."}]}]}]]}]
+12:Tb13,/* The complete stylesheet for <Select /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Select-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    inline-size: var(--_w, 100%);
+    font-family: var(--fui-font);
+  }
+
+  .fui-Select-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 550;
+    color: var(--fui-text);
+  }
+  .fui-Select-required {
+    color: var(--fui-danger);
+    margin-inline-start: 0.15em;
+  }
+
+  .fui-Select-description {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Select-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+    block-size: var(--_h, var(--fui-control-height-md));
+    border: 1px solid var(--fui-border-strong);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    transition:
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+  .fui-Select-field:focus-within {
+    border-color: var(--fui-primary);
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Select-field[data-invalid] {
+    border-color: var(--fui-danger);
+  }
+  .fui-Select-field[data-invalid]:focus-within {
+    box-shadow: 0 0 0 3px
+      color-mix(in oklch, var(--fui-danger) 40%, transparent);
+  }
+  .fui-Select-field[data-disabled] {
+    background: var(--fui-bg-subtle);
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .fui-Select-field[data-size="sm"] {
+    --_h: var(--fui-control-height-sm);
+    --_px: 0.625rem;
+  }
+  .fui-Select-field[data-size="lg"] {
+    --_h: var(--fui-control-height-lg);
+    --_px: 0.875rem;
+  }
+
+  .fui-Select-select {
+    flex: 1;
+    min-inline-size: 0;
+    block-size: 100%;
+    /* Leave room for the chevron on the trailing side. */
+    padding-inline: var(--_px, 0.75rem) 2.25rem;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: var(--_fz, var(--fui-text-sm));
+    cursor: pointer;
+    /* Strip the native arrow so our chevron is the only one. */
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .fui-Select-select:disabled {
+    cursor: not-allowed;
+  }
+  /* Empty placeholder value renders dimmed like a real placeholder. */
+  .fui-Select-select:has(option[value=""]:checked) {
+    color: var(--fui-text-dim);
+  }
+  .fui-Select-field[data-size="lg"] .fui-Select-select {
+    --_fz: var(--fui-text-md);
+  }
+
+  .fui-Select-chevron {
+    position: absolute;
+    inset-inline-end: 0.75rem;
+    inset-block-start: 50%;
+    translate: 0 -50%;
+    color: var(--fui-text-muted);
+    pointer-events: none;
+    flex-shrink: 0;
+  }
+
+  .fui-Select-error {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-danger);
+  }
+}8:["$","div","Sizes",{"id":"sizes","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Sizes"}],"$undefined",["$","$L3",null,{"code":"<Select size=\"sm\" data={[\"United States\", \"Canada\"]} />\n<Select size=\"md\" data={[\"United States\", \"Canada\"]} />\n<Select size=\"lg\" data={[\"United States\", \"Canada\"]} />","css":"$12","children":["$","div",null,{"style":{"display":"grid","gap":"0.75rem","maxInlineSize":"20rem","inlineSize":"100%"},"children":["$L13","$L14","$L15"]}]}]]}]
+9:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","label",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"label"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Field label rendered above the select."}]]}],["$","tr","description",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"description"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Helper text rendered below the label."}]]}],["$","tr","error",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"error"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Error message; puts the field in an invalid state."}]]}],["$","tr","size",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"size"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"sm\" | \"md\" | \"lg\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"md\""}]}],["$","td",null,{"children":"Control size (height, padding, font size)."}]]}],["$","tr","radius",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"radius"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"sm\" | \"md\" | \"lg\" | \"xl\" | \"full\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"md\""}]}],["$","td",null,{"children":"Border radius token."}]]}],["$","tr","withAsterisk",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"withAsterisk"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"boolean"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Show a required asterisk next to the label."}]]}],["$","tr","placeholder",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"placeholder"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Non-selectable prompt shown as the first, empty option."}]]}],["$","tr","data",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"data"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"Array<string | { value: string; label: string }>"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"The options to render."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"SelectHTMLAttributes"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <select> props are forwarded."}]]}]]}]]}]}]]}]
+a:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+b:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+c:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+d:["$","$L16",null,{"children":["$","$17",null,{"name":"Next.MetadataOutlet","children":"$@18"}]}]
+10:["$","div",null,{"style":{"maxInlineSize":"20rem","inlineSize":"100%"},"children":["$","$Le",null,{"label":"Country","placeholder":"Pick a country","data":[{"value":"us","label":"United States"},{"value":"ca","label":"Canada"},{"value":"uk","label":"United Kingdom"}]}]}]
+13:["$","$Le",null,{"size":"sm","data":["United States","Canada"]}]
+14:["$","$Le",null,{"size":"md","data":["United States","Canada"]}]
+15:["$","$Le",null,{"size":"lg","data":["United States","Canada"]}]
+18:null

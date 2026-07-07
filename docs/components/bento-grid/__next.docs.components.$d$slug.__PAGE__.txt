@@ -1,0 +1,171 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+c:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Container"]
+11:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+12:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:T7c0,/* The complete stylesheet for <BentoGrid /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.blocks {
+  .fui-BentoGrid-root {
+    padding-block: clamp(3rem, 7vw, 5rem);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+  }
+  .fui-BentoGrid-grid {
+    container-type: inline-size;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .fui-BentoGrid-item {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    background: var(--fui-surface);
+    border: 1px solid var(--fui-border);
+    border-radius: var(--fui-radius-lg);
+    transition:
+      border-color var(--fui-transition),
+      transform var(--fui-transition);
+  }
+  .fui-BentoGrid-item[data-span="2"] {
+    grid-column: span 2;
+  }
+  .fui-BentoGrid-item:hover {
+    border-color: var(--fui-border-strong);
+    transform: translateY(-2px);
+  }
+  .fui-BentoGrid-icon {
+    display: grid;
+    place-items: center;
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+    margin-block-end: 1rem;
+    font-size: 1.4rem;
+    color: var(--fui-primary);
+    background: var(--fui-primary-soft);
+    border-radius: var(--fui-radius-md);
+  }
+  .fui-BentoGrid-title {
+    margin: 0 0 0.4rem;
+    font-size: var(--fui-text-lg);
+    font-weight: 700;
+    text-wrap: balance;
+  }
+  .fui-BentoGrid-desc {
+    margin: 0;
+    font-size: var(--fui-text-sm);
+    line-height: 1.6;
+    color: var(--fui-text-muted);
+    text-wrap: pretty;
+  }
+
+  /* Two columns at medium widths. */
+  @container (max-width: 56rem) {
+    .fui-BentoGrid-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  /* Single column on narrow: span-2 items drop back to one. */
+  @container (max-width: 34rem) {
+    .fui-BentoGrid-grid {
+      grid-template-columns: 1fr;
+    }
+    .fui-BentoGrid-item[data-span="2"] {
+      grid-column: auto;
+    }
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Blocks"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"BentoGrid"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"An asymmetric grid of feature cards where span-2 items stretch across two columns."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { BentoGrid } from \"@farmui/blocks\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Mixed spans",{"id":"mixed-spans","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Mixed spans"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Give a standout card `span: 2` to make it twice as wide as the rest."}],["$","$L3",null,{"code":"<BentoGrid\n  eyebrow=\"Platform\"\n  title=\"One toolkit, every surface\"\n  items={[\n    { icon: \"🧩\", title: \"Composable blocks\", description: \"Assemble pages from typed sections.\", span: 2 },\n    { icon: \"🎨\", title: \"Brand tokens\", description: \"Restyle everything from one place.\" },\n    { icon: \"⚡\", title: \"Zero client JS\", description: \"Ships as static HTML + CSS.\" },\n    { icon: \"📱\", title: \"Responsive\", description: \"Fluid from mobile to widescreen.\", span: 2 },\n  ]}\n/>","css":"$4","children":"$L5"}]]}],"$L6"]}]]}],"$L7"]}],["$L8","$L9","$La"],"$Lb"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+5:["$","section",null,{"className":"fui-BentoGrid-root","children":["$","$Lc",null,{"children":[["$","div",null,{"className":"fui-SectionHeader","children":[["$","p",null,{"className":"fui-SectionHeader-eyebrow","children":"Platform"}],["$","h2",null,{"className":"fui-SectionHeader-title","children":"One toolkit, every surface"}],false]}],["$","ul",null,{"className":"fui-BentoGrid-grid","children":[["$","li","0",{"className":"fui-BentoGrid-item","data-span":2,"children":[["$","div",null,{"className":"fui-BentoGrid-icon","aria-hidden":true,"children":"🧩"}],["$","h3",null,{"className":"fui-BentoGrid-title","children":"Composable blocks"}],["$","p",null,{"className":"fui-BentoGrid-desc","children":"Assemble pages from typed sections."}]]}],["$","li","1",{"className":"fui-BentoGrid-item","children":[["$","div",null,{"className":"fui-BentoGrid-icon","aria-hidden":true,"children":"🎨"}],["$","h3",null,{"className":"fui-BentoGrid-title","children":"Brand tokens"}],["$","p",null,{"className":"fui-BentoGrid-desc","children":"Restyle everything from one place."}]]}],["$","li","2",{"className":"fui-BentoGrid-item","children":[["$","div",null,{"className":"fui-BentoGrid-icon","aria-hidden":true,"children":"⚡"}],["$","h3",null,{"className":"fui-BentoGrid-title","children":"Zero client JS"}],["$","p",null,{"className":"fui-BentoGrid-desc","children":"Ships as static HTML + CSS."}]]}],["$","li","3",{"className":"fui-BentoGrid-item","data-span":2,"children":[["$","div",null,{"className":"fui-BentoGrid-icon","aria-hidden":true,"children":"📱"}],["$","h3",null,{"className":"fui-BentoGrid-title","children":"Responsive"}],["$","p",null,{"className":"fui-BentoGrid-desc","children":"Fluid from mobile to widescreen."}]]}]]}]]}]}]
+d:T7c0,/* The complete stylesheet for <BentoGrid /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.blocks {
+  .fui-BentoGrid-root {
+    padding-block: clamp(3rem, 7vw, 5rem);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+  }
+  .fui-BentoGrid-grid {
+    container-type: inline-size;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .fui-BentoGrid-item {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    background: var(--fui-surface);
+    border: 1px solid var(--fui-border);
+    border-radius: var(--fui-radius-lg);
+    transition:
+      border-color var(--fui-transition),
+      transform var(--fui-transition);
+  }
+  .fui-BentoGrid-item[data-span="2"] {
+    grid-column: span 2;
+  }
+  .fui-BentoGrid-item:hover {
+    border-color: var(--fui-border-strong);
+    transform: translateY(-2px);
+  }
+  .fui-BentoGrid-icon {
+    display: grid;
+    place-items: center;
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+    margin-block-end: 1rem;
+    font-size: 1.4rem;
+    color: var(--fui-primary);
+    background: var(--fui-primary-soft);
+    border-radius: var(--fui-radius-md);
+  }
+  .fui-BentoGrid-title {
+    margin: 0 0 0.4rem;
+    font-size: var(--fui-text-lg);
+    font-weight: 700;
+    text-wrap: balance;
+  }
+  .fui-BentoGrid-desc {
+    margin: 0;
+    font-size: var(--fui-text-sm);
+    line-height: 1.6;
+    color: var(--fui-text-muted);
+    text-wrap: pretty;
+  }
+
+  /* Two columns at medium widths. */
+  @container (max-width: 56rem) {
+    .fui-BentoGrid-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  /* Single column on narrow: span-2 items drop back to one. */
+  @container (max-width: 34rem) {
+    .fui-BentoGrid-grid {
+      grid-template-columns: 1fr;
+    }
+    .fui-BentoGrid-item[data-span="2"] {
+      grid-column: auto;
+    }
+  }
+}6:["$","div","Uniform cards",{"id":"uniform-cards","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Uniform cards"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Leave `span` off entirely for an even grid."}],["$","$L3",null,{"code":"<BentoGrid\n  title=\"Built for teams\"\n  description=\"Everything scoped, audited, and ready to ship.\"\n  items={[\n    { icon: \"🔐\", title: \"SSO & SCIM\", description: \"Enterprise auth on every plan.\" },\n    { icon: \"📈\", title: \"Usage analytics\", description: \"See adoption across your org.\" },\n    { icon: \"🧾\", title: \"Audit logs\", description: \"Every change, attributable.\" },\n  ]}\n/>","css":"$d","children":["$","section",null,{"className":"fui-BentoGrid-root","children":["$","$Lc",null,{"children":[["$","div",null,{"className":"fui-SectionHeader","children":[false,["$","h2",null,{"className":"fui-SectionHeader-title","children":"Built for teams"}],["$","p",null,{"className":"fui-SectionHeader-description","children":"Everything scoped, audited, and ready to ship."}]]}],["$","ul",null,{"className":"fui-BentoGrid-grid","children":[["$","li","0",{"className":"fui-BentoGrid-item","children":[["$","div",null,{"className":"fui-BentoGrid-icon","aria-hidden":true,"children":"🔐"}],["$","h3",null,{"className":"fui-BentoGrid-title","children":"SSO & SCIM"}],["$","p",null,{"className":"fui-BentoGrid-desc","children":"Enterprise auth on every plan."}]]}],["$","li","1",{"className":"fui-BentoGrid-item","children":[["$","div",null,{"className":"fui-BentoGrid-icon","aria-hidden":true,"children":"📈"}],"$Le","$Lf"]}],"$L10"]}]]}]}]}]]}]
+7:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","items",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"items"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"BentoItem[]"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"The cards to render, where BentoItem = { title: ReactNode; description?: ReactNode; icon?: ReactNode; span?: 1 | 2 }. Required."}]]}],["$","tr","eyebrow",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"eyebrow"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Small overline above the section title."}]]}],["$","tr","title",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"title"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Section heading."}]]}],["$","tr","description",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"description"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Supporting paragraph under the section title."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"HTMLAttributes<HTMLElement>"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <section> props are forwarded."}]]}]]}]]}]}]]}]
+8:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+9:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+a:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+b:["$","$L11",null,{"children":["$","$12",null,{"name":"Next.MetadataOutlet","children":"$@13"}]}]
+e:["$","h3",null,{"className":"fui-BentoGrid-title","children":"Usage analytics"}]
+f:["$","p",null,{"className":"fui-BentoGrid-desc","children":"See adoption across your org."}]
+10:["$","li","2",{"className":"fui-BentoGrid-item","children":[["$","div",null,{"className":"fui-BentoGrid-icon","aria-hidden":true,"children":"🧾"}],["$","h3",null,{"className":"fui-BentoGrid-title","children":"Audit logs"}],["$","p",null,{"className":"fui-BentoGrid-desc","children":"Every change, attributable."}]]}]
+13:null

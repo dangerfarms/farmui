@@ -1,0 +1,823 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+f:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Button"]
+18:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+19:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:T10b1,/* The complete stylesheet for <Button /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Button-root {
+    --_bg: var(--fui-primary);
+    --_bg-hover: var(--fui-primary-hover);
+    --_bg-active: var(--fui-primary-active);
+    --_fg: var(--fui-primary-contrast);
+    --_border: transparent;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--fui-space-sm);
+    inline-size: var(--_w, auto);
+    block-size: var(--_h, var(--fui-control-height-md));
+    padding-inline: var(--_px, 1.125rem);
+    border: 1px solid var(--_border);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    background: var(--_bg);
+    color: var(--_fg);
+    font-family: var(--fui-font);
+    font-size: var(--_fz, var(--fui-text-sm));
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    user-select: none;
+    transition:
+      background var(--fui-transition),
+      border-color var(--fui-transition),
+      color var(--fui-transition),
+      box-shadow var(--fui-transition),
+      transform var(--fui-transition);
+  }
+
+  .fui-Button-root:hover:not(:disabled, [data-loading]) {
+    background: var(--_bg-hover);
+  }
+  .fui-Button-root:active:not(:disabled, [data-loading]) {
+    background: var(--_bg-active);
+    transform: translateY(0.5px);
+  }
+  .fui-Button-root:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Button-root:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+  .fui-Button-root[data-loading] {
+    cursor: progress;
+  }
+
+  /* Sizes */
+  .fui-Button-root[data-size="sm"] {
+    --_h: var(--fui-control-height-sm);
+    --_px: 0.875rem;
+    --_fz: var(--fui-text-xs);
+  }
+  .fui-Button-root[data-size="lg"] {
+    --_h: var(--fui-control-height-lg);
+    --_px: 1.5rem;
+    --_fz: var(--fui-text-md);
+  }
+
+  .fui-Button-root[data-full] {
+    --_w: 100%;
+  }
+
+  /* Color = danger */
+  .fui-Button-root[data-color="danger"] {
+    --_bg: var(--fui-danger);
+    --_bg-hover: color-mix(in oklch, var(--fui-danger) 88%, black);
+    --_bg-active: color-mix(in oklch, var(--fui-danger) 78%, black);
+    --_fg: var(--fui-primary-contrast);
+  }
+
+  /* Variants */
+  .fui-Button-root[data-variant="light"] {
+    --_bg: var(--fui-primary-soft);
+    --_bg-hover: color-mix(
+      in oklch,
+      var(--fui-primary-soft) 80%,
+      var(--fui-primary)
+    );
+    --_bg-active: color-mix(
+      in oklch,
+      var(--fui-primary-soft) 65%,
+      var(--fui-primary)
+    );
+    --_fg: var(--fui-primary-hover);
+  }
+  .fui-Button-root[data-variant="light"][data-color="danger"] {
+    --_bg: var(--fui-danger-soft);
+    --_bg-hover: color-mix(
+      in oklch,
+      var(--fui-danger-soft) 80%,
+      var(--fui-danger)
+    );
+    --_bg-active: color-mix(
+      in oklch,
+      var(--fui-danger-soft) 65%,
+      var(--fui-danger)
+    );
+    --_fg: var(--fui-danger);
+  }
+
+  .fui-Button-root[data-variant="outline"] {
+    --_bg: transparent;
+    --_bg-hover: var(--fui-primary-soft);
+    --_bg-active: color-mix(
+      in oklch,
+      var(--fui-primary-soft) 70%,
+      var(--fui-primary)
+    );
+    --_fg: var(--fui-primary);
+    --_border: currentColor;
+  }
+  .fui-Button-root[data-variant="outline"][data-color="danger"] {
+    --_fg: var(--fui-danger);
+    --_bg-hover: var(--fui-danger-soft);
+  }
+
+  .fui-Button-root[data-variant="subtle"] {
+    --_bg: transparent;
+    --_bg-hover: var(--fui-primary-soft);
+    --_bg-active: color-mix(
+      in oklch,
+      var(--fui-primary-soft) 70%,
+      var(--fui-primary)
+    );
+    --_fg: var(--fui-primary);
+  }
+  .fui-Button-root[data-variant="subtle"][data-color="danger"] {
+    --_fg: var(--fui-danger);
+    --_bg-hover: var(--fui-danger-soft);
+  }
+
+  /* Loading spinner */
+  .fui-Button-spinner {
+    inline-size: 1em;
+    block-size: 1em;
+    border: 2px solid color-mix(in oklch, currentColor 30%, transparent);
+    border-block-start-color: currentColor;
+    border-radius: var(--fui-radius-full);
+    animation: fui-Button-btn-spin 0.6s linear infinite;
+  }
+  @keyframes fui-Button-btn-spin {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+  .fui-Button-section {
+    display: inline-flex;
+    align-items: center;
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Inputs"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"Button"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"Trigger an action or event with a single click."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { Button } from \"@farmui/core\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Variants",{"id":"variants","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Variants"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Four visual styles for different emphasis levels."}],["$","$L3",null,{"code":"<Button>Filled</Button>\n<Button variant=\"light\">Light</Button>\n<Button variant=\"outline\">Outline</Button>\n<Button variant=\"subtle\">Subtle</Button>","css":"$4","children":"$L5"}]]}],"$L6","$L7","$L8","$L9"]}]]}],"$La"]}],["$Lb","$Lc","$Ld"],"$Le"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+5:[["$","$Lf",null,{"children":"Filled"}],["$","$Lf",null,{"variant":"light","children":"Light"}],["$","$Lf",null,{"variant":"outline","children":"Outline"}],["$","$Lf",null,{"variant":"subtle","children":"Subtle"}]]
+10:T10b1,/* The complete stylesheet for <Button /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Button-root {
+    --_bg: var(--fui-primary);
+    --_bg-hover: var(--fui-primary-hover);
+    --_bg-active: var(--fui-primary-active);
+    --_fg: var(--fui-primary-contrast);
+    --_border: transparent;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--fui-space-sm);
+    inline-size: var(--_w, auto);
+    block-size: var(--_h, var(--fui-control-height-md));
+    padding-inline: var(--_px, 1.125rem);
+    border: 1px solid var(--_border);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    background: var(--_bg);
+    color: var(--_fg);
+    font-family: var(--fui-font);
+    font-size: var(--_fz, var(--fui-text-sm));
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    user-select: none;
+    transition:
+      background var(--fui-transition),
+      border-color var(--fui-transition),
+      color var(--fui-transition),
+      box-shadow var(--fui-transition),
+      transform var(--fui-transition);
+  }
+
+  .fui-Button-root:hover:not(:disabled, [data-loading]) {
+    background: var(--_bg-hover);
+  }
+  .fui-Button-root:active:not(:disabled, [data-loading]) {
+    background: var(--_bg-active);
+    transform: translateY(0.5px);
+  }
+  .fui-Button-root:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Button-root:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+  .fui-Button-root[data-loading] {
+    cursor: progress;
+  }
+
+  /* Sizes */
+  .fui-Button-root[data-size="sm"] {
+    --_h: var(--fui-control-height-sm);
+    --_px: 0.875rem;
+    --_fz: var(--fui-text-xs);
+  }
+  .fui-Button-root[data-size="lg"] {
+    --_h: var(--fui-control-height-lg);
+    --_px: 1.5rem;
+    --_fz: var(--fui-text-md);
+  }
+
+  .fui-Button-root[data-full] {
+    --_w: 100%;
+  }
+
+  /* Color = danger */
+  .fui-Button-root[data-color="danger"] {
+    --_bg: var(--fui-danger);
+    --_bg-hover: color-mix(in oklch, var(--fui-danger) 88%, black);
+    --_bg-active: color-mix(in oklch, var(--fui-danger) 78%, black);
+    --_fg: var(--fui-primary-contrast);
+  }
+
+  /* Variants */
+  .fui-Button-root[data-variant="light"] {
+    --_bg: var(--fui-primary-soft);
+    --_bg-hover: color-mix(
+      in oklch,
+      var(--fui-primary-soft) 80%,
+      var(--fui-primary)
+    );
+    --_bg-active: color-mix(
+      in oklch,
+      var(--fui-primary-soft) 65%,
+      var(--fui-primary)
+    );
+    --_fg: var(--fui-primary-hover);
+  }
+  .fui-Button-root[data-variant="light"][data-color="danger"] {
+    --_bg: var(--fui-danger-soft);
+    --_bg-hover: color-mix(
+      in oklch,
+      var(--fui-danger-soft) 80%,
+      var(--fui-danger)
+    );
+    --_bg-active: color-mix(
+      in oklch,
+      var(--fui-danger-soft) 65%,
+      var(--fui-danger)
+    );
+    --_fg: var(--fui-danger);
+  }
+
+  .fui-Button-root[data-variant="outline"] {
+    --_bg: transparent;
+    --_bg-hover: var(--fui-primary-soft);
+    --_bg-active: color-mix(
+      in oklch,
+      var(--fui-primary-soft) 70%,
+      var(--fui-primary)
+    );
+    --_fg: var(--fui-primary);
+    --_border: currentColor;
+  }
+  .fui-Button-root[data-variant="outline"][data-color="danger"] {
+    --_fg: var(--fui-danger);
+    --_bg-hover: var(--fui-danger-soft);
+  }
+
+  .fui-Button-root[data-variant="subtle"] {
+    --_bg: transparent;
+    --_bg-hover: var(--fui-primary-soft);
+    --_bg-active: color-mix(
+      in oklch,
+      var(--fui-primary-soft) 70%,
+      var(--fui-primary)
+    );
+    --_fg: var(--fui-primary);
+  }
+  .fui-Button-root[data-variant="subtle"][data-color="danger"] {
+    --_fg: var(--fui-danger);
+    --_bg-hover: var(--fui-danger-soft);
+  }
+
+  /* Loading spinner */
+  .fui-Button-spinner {
+    inline-size: 1em;
+    block-size: 1em;
+    border: 2px solid color-mix(in oklch, currentColor 30%, transparent);
+    border-block-start-color: currentColor;
+    border-radius: var(--fui-radius-full);
+    animation: fui-Button-btn-spin 0.6s linear infinite;
+  }
+  @keyframes fui-Button-btn-spin {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+  .fui-Button-section {
+    display: inline-flex;
+    align-items: center;
+  }
+}6:["$","div","Sizes",{"id":"sizes","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Sizes"}],"$undefined",["$","$L3",null,{"code":"<Button size=\"sm\">Small</Button>\n<Button size=\"md\">Medium</Button>\n<Button size=\"lg\">Large</Button>","css":"$10","children":"$L11"}]]}]
+12:T10b1,/* The complete stylesheet for <Button /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Button-root {
+    --_bg: var(--fui-primary);
+    --_bg-hover: var(--fui-primary-hover);
+    --_bg-active: var(--fui-primary-active);
+    --_fg: var(--fui-primary-contrast);
+    --_border: transparent;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--fui-space-sm);
+    inline-size: var(--_w, auto);
+    block-size: var(--_h, var(--fui-control-height-md));
+    padding-inline: var(--_px, 1.125rem);
+    border: 1px solid var(--_border);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    background: var(--_bg);
+    color: var(--_fg);
+    font-family: var(--fui-font);
+    font-size: var(--_fz, var(--fui-text-sm));
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    user-select: none;
+    transition:
+      background var(--fui-transition),
+      border-color var(--fui-transition),
+      color var(--fui-transition),
+      box-shadow var(--fui-transition),
+      transform var(--fui-transition);
+  }
+
+  .fui-Button-root:hover:not(:disabled, [data-loading]) {
+    background: var(--_bg-hover);
+  }
+  .fui-Button-root:active:not(:disabled, [data-loading]) {
+    background: var(--_bg-active);
+    transform: translateY(0.5px);
+  }
+  .fui-Button-root:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Button-root:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+  .fui-Button-root[data-loading] {
+    cursor: progress;
+  }
+
+  /* Sizes */
+  .fui-Button-root[data-size="sm"] {
+    --_h: var(--fui-control-height-sm);
+    --_px: 0.875rem;
+    --_fz: var(--fui-text-xs);
+  }
+  .fui-Button-root[data-size="lg"] {
+    --_h: var(--fui-control-height-lg);
+    --_px: 1.5rem;
+    --_fz: var(--fui-text-md);
+  }
+
+  .fui-Button-root[data-full] {
+    --_w: 100%;
+  }
+
+  /* Color = danger */
+  .fui-Button-root[data-color="danger"] {
+    --_bg: var(--fui-danger);
+    --_bg-hover: color-mix(in oklch, var(--fui-danger) 88%, black);
+    --_bg-active: color-mix(in oklch, var(--fui-danger) 78%, black);
+    --_fg: var(--fui-primary-contrast);
+  }
+
+  /* Variants */
+  .fui-Button-root[data-variant="light"] {
+    --_bg: var(--fui-primary-soft);
+    --_bg-hover: color-mix(
+      in oklch,
+      var(--fui-primary-soft) 80%,
+      var(--fui-primary)
+    );
+    --_bg-active: color-mix(
+      in oklch,
+      var(--fui-primary-soft) 65%,
+      var(--fui-primary)
+    );
+    --_fg: var(--fui-primary-hover);
+  }
+  .fui-Button-root[data-variant="light"][data-color="danger"] {
+    --_bg: var(--fui-danger-soft);
+    --_bg-hover: color-mix(
+      in oklch,
+      var(--fui-danger-soft) 80%,
+      var(--fui-danger)
+    );
+    --_bg-active: color-mix(
+      in oklch,
+      var(--fui-danger-soft) 65%,
+      var(--fui-danger)
+    );
+    --_fg: var(--fui-danger);
+  }
+
+  .fui-Button-root[data-variant="outline"] {
+    --_bg: transparent;
+    --_bg-hover: var(--fui-primary-soft);
+    --_bg-active: color-mix(
+      in oklch,
+      var(--fui-primary-soft) 70%,
+      var(--fui-primary)
+    );
+    --_fg: var(--fui-primary);
+    --_border: currentColor;
+  }
+  .fui-Button-root[data-variant="outline"][data-color="danger"] {
+    --_fg: var(--fui-danger);
+    --_bg-hover: var(--fui-danger-soft);
+  }
+
+  .fui-Button-root[data-variant="subtle"] {
+    --_bg: transparent;
+    --_bg-hover: var(--fui-primary-soft);
+    --_bg-active: color-mix(
+      in oklch,
+      var(--fui-primary-soft) 70%,
+      var(--fui-primary)
+    );
+    --_fg: var(--fui-primary);
+  }
+  .fui-Button-root[data-variant="subtle"][data-color="danger"] {
+    --_fg: var(--fui-danger);
+    --_bg-hover: var(--fui-danger-soft);
+  }
+
+  /* Loading spinner */
+  .fui-Button-spinner {
+    inline-size: 1em;
+    block-size: 1em;
+    border: 2px solid color-mix(in oklch, currentColor 30%, transparent);
+    border-block-start-color: currentColor;
+    border-radius: var(--fui-radius-full);
+    animation: fui-Button-btn-spin 0.6s linear infinite;
+  }
+  @keyframes fui-Button-btn-spin {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+  .fui-Button-section {
+    display: inline-flex;
+    align-items: center;
+  }
+}7:["$","div","Colors",{"id":"colors","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Colors"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Use the danger color for destructive actions."}],["$","$L3",null,{"code":"<Button color=\"danger\">Delete</Button>\n<Button color=\"danger\" variant=\"light\">Delete</Button>\n<Button color=\"danger\" variant=\"outline\">Delete</Button>","css":"$12","children":"$L13"}]]}]
+14:T10b1,/* The complete stylesheet for <Button /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Button-root {
+    --_bg: var(--fui-primary);
+    --_bg-hover: var(--fui-primary-hover);
+    --_bg-active: var(--fui-primary-active);
+    --_fg: var(--fui-primary-contrast);
+    --_border: transparent;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--fui-space-sm);
+    inline-size: var(--_w, auto);
+    block-size: var(--_h, var(--fui-control-height-md));
+    padding-inline: var(--_px, 1.125rem);
+    border: 1px solid var(--_border);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    background: var(--_bg);
+    color: var(--_fg);
+    font-family: var(--fui-font);
+    font-size: var(--_fz, var(--fui-text-sm));
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    user-select: none;
+    transition:
+      background var(--fui-transition),
+      border-color var(--fui-transition),
+      color var(--fui-transition),
+      box-shadow var(--fui-transition),
+      transform var(--fui-transition);
+  }
+
+  .fui-Button-root:hover:not(:disabled, [data-loading]) {
+    background: var(--_bg-hover);
+  }
+  .fui-Button-root:active:not(:disabled, [data-loading]) {
+    background: var(--_bg-active);
+    transform: translateY(0.5px);
+  }
+  .fui-Button-root:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Button-root:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+  .fui-Button-root[data-loading] {
+    cursor: progress;
+  }
+
+  /* Sizes */
+  .fui-Button-root[data-size="sm"] {
+    --_h: var(--fui-control-height-sm);
+    --_px: 0.875rem;
+    --_fz: var(--fui-text-xs);
+  }
+  .fui-Button-root[data-size="lg"] {
+    --_h: var(--fui-control-height-lg);
+    --_px: 1.5rem;
+    --_fz: var(--fui-text-md);
+  }
+
+  .fui-Button-root[data-full] {
+    --_w: 100%;
+  }
+
+  /* Color = danger */
+  .fui-Button-root[data-color="danger"] {
+    --_bg: var(--fui-danger);
+    --_bg-hover: color-mix(in oklch, var(--fui-danger) 88%, black);
+    --_bg-active: color-mix(in oklch, var(--fui-danger) 78%, black);
+    --_fg: var(--fui-primary-contrast);
+  }
+
+  /* Variants */
+  .fui-Button-root[data-variant="light"] {
+    --_bg: var(--fui-primary-soft);
+    --_bg-hover: color-mix(
+      in oklch,
+      var(--fui-primary-soft) 80%,
+      var(--fui-primary)
+    );
+    --_bg-active: color-mix(
+      in oklch,
+      var(--fui-primary-soft) 65%,
+      var(--fui-primary)
+    );
+    --_fg: var(--fui-primary-hover);
+  }
+  .fui-Button-root[data-variant="light"][data-color="danger"] {
+    --_bg: var(--fui-danger-soft);
+    --_bg-hover: color-mix(
+      in oklch,
+      var(--fui-danger-soft) 80%,
+      var(--fui-danger)
+    );
+    --_bg-active: color-mix(
+      in oklch,
+      var(--fui-danger-soft) 65%,
+      var(--fui-danger)
+    );
+    --_fg: var(--fui-danger);
+  }
+
+  .fui-Button-root[data-variant="outline"] {
+    --_bg: transparent;
+    --_bg-hover: var(--fui-primary-soft);
+    --_bg-active: color-mix(
+      in oklch,
+      var(--fui-primary-soft) 70%,
+      var(--fui-primary)
+    );
+    --_fg: var(--fui-primary);
+    --_border: currentColor;
+  }
+  .fui-Button-root[data-variant="outline"][data-color="danger"] {
+    --_fg: var(--fui-danger);
+    --_bg-hover: var(--fui-danger-soft);
+  }
+
+  .fui-Button-root[data-variant="subtle"] {
+    --_bg: transparent;
+    --_bg-hover: var(--fui-primary-soft);
+    --_bg-active: color-mix(
+      in oklch,
+      var(--fui-primary-soft) 70%,
+      var(--fui-primary)
+    );
+    --_fg: var(--fui-primary);
+  }
+  .fui-Button-root[data-variant="subtle"][data-color="danger"] {
+    --_fg: var(--fui-danger);
+    --_bg-hover: var(--fui-danger-soft);
+  }
+
+  /* Loading spinner */
+  .fui-Button-spinner {
+    inline-size: 1em;
+    block-size: 1em;
+    border: 2px solid color-mix(in oklch, currentColor 30%, transparent);
+    border-block-start-color: currentColor;
+    border-radius: var(--fui-radius-full);
+    animation: fui-Button-btn-spin 0.6s linear infinite;
+  }
+  @keyframes fui-Button-btn-spin {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+  .fui-Button-section {
+    display: inline-flex;
+    align-items: center;
+  }
+}8:["$","div","With sections & loading",{"id":"with-sections-loading","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"With sections & loading"}],"$undefined",["$","$L3",null,{"code":"<Button leftSection={<span>↓</span>}>Download</Button>\n<Button rightSection={<span>→</span>} variant=\"light\">Next</Button>\n<Button loading>Saving</Button>","css":"$14","children":"$L15"}]]}]
+16:T10b1,/* The complete stylesheet for <Button /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Button-root {
+    --_bg: var(--fui-primary);
+    --_bg-hover: var(--fui-primary-hover);
+    --_bg-active: var(--fui-primary-active);
+    --_fg: var(--fui-primary-contrast);
+    --_border: transparent;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--fui-space-sm);
+    inline-size: var(--_w, auto);
+    block-size: var(--_h, var(--fui-control-height-md));
+    padding-inline: var(--_px, 1.125rem);
+    border: 1px solid var(--_border);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    background: var(--_bg);
+    color: var(--_fg);
+    font-family: var(--fui-font);
+    font-size: var(--_fz, var(--fui-text-sm));
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    user-select: none;
+    transition:
+      background var(--fui-transition),
+      border-color var(--fui-transition),
+      color var(--fui-transition),
+      box-shadow var(--fui-transition),
+      transform var(--fui-transition);
+  }
+
+  .fui-Button-root:hover:not(:disabled, [data-loading]) {
+    background: var(--_bg-hover);
+  }
+  .fui-Button-root:active:not(:disabled, [data-loading]) {
+    background: var(--_bg-active);
+    transform: translateY(0.5px);
+  }
+  .fui-Button-root:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Button-root:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+  .fui-Button-root[data-loading] {
+    cursor: progress;
+  }
+
+  /* Sizes */
+  .fui-Button-root[data-size="sm"] {
+    --_h: var(--fui-control-height-sm);
+    --_px: 0.875rem;
+    --_fz: var(--fui-text-xs);
+  }
+  .fui-Button-root[data-size="lg"] {
+    --_h: var(--fui-control-height-lg);
+    --_px: 1.5rem;
+    --_fz: var(--fui-text-md);
+  }
+
+  .fui-Button-root[data-full] {
+    --_w: 100%;
+  }
+
+  /* Color = danger */
+  .fui-Button-root[data-color="danger"] {
+    --_bg: var(--fui-danger);
+    --_bg-hover: color-mix(in oklch, var(--fui-danger) 88%, black);
+    --_bg-active: color-mix(in oklch, var(--fui-danger) 78%, black);
+    --_fg: var(--fui-primary-contrast);
+  }
+
+  /* Variants */
+  .fui-Button-root[data-variant="light"] {
+    --_bg: var(--fui-primary-soft);
+    --_bg-hover: color-mix(
+      in oklch,
+      var(--fui-primary-soft) 80%,
+      var(--fui-primary)
+    );
+    --_bg-active: color-mix(
+      in oklch,
+      var(--fui-primary-soft) 65%,
+      var(--fui-primary)
+    );
+    --_fg: var(--fui-primary-hover);
+  }
+  .fui-Button-root[data-variant="light"][data-color="danger"] {
+    --_bg: var(--fui-danger-soft);
+    --_bg-hover: color-mix(
+      in oklch,
+      var(--fui-danger-soft) 80%,
+      var(--fui-danger)
+    );
+    --_bg-active: color-mix(
+      in oklch,
+      var(--fui-danger-soft) 65%,
+      var(--fui-danger)
+    );
+    --_fg: var(--fui-danger);
+  }
+
+  .fui-Button-root[data-variant="outline"] {
+    --_bg: transparent;
+    --_bg-hover: var(--fui-primary-soft);
+    --_bg-active: color-mix(
+      in oklch,
+      var(--fui-primary-soft) 70%,
+      var(--fui-primary)
+    );
+    --_fg: var(--fui-primary);
+    --_border: currentColor;
+  }
+  .fui-Button-root[data-variant="outline"][data-color="danger"] {
+    --_fg: var(--fui-danger);
+    --_bg-hover: var(--fui-danger-soft);
+  }
+
+  .fui-Button-root[data-variant="subtle"] {
+    --_bg: transparent;
+    --_bg-hover: var(--fui-primary-soft);
+    --_bg-active: color-mix(
+      in oklch,
+      var(--fui-primary-soft) 70%,
+      var(--fui-primary)
+    );
+    --_fg: var(--fui-primary);
+  }
+  .fui-Button-root[data-variant="subtle"][data-color="danger"] {
+    --_fg: var(--fui-danger);
+    --_bg-hover: var(--fui-danger-soft);
+  }
+
+  /* Loading spinner */
+  .fui-Button-spinner {
+    inline-size: 1em;
+    block-size: 1em;
+    border: 2px solid color-mix(in oklch, currentColor 30%, transparent);
+    border-block-start-color: currentColor;
+    border-radius: var(--fui-radius-full);
+    animation: fui-Button-btn-spin 0.6s linear infinite;
+  }
+  @keyframes fui-Button-btn-spin {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+  .fui-Button-section {
+    display: inline-flex;
+    align-items: center;
+  }
+}9:["$","div","Full width & radius",{"id":"full-width-radius","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Full width & radius"}],"$undefined",["$","$L3",null,{"code":"<Button fullWidth>Full width</Button>\n<Button radius=\"full\">Pill</Button>","css":"$16","children":"$L17"}]]}]
+a:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","variant",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"variant"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"filled\" | \"light\" | \"outline\" | \"subtle\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"filled\""}]}],["$","td",null,{"children":"Visual style of the button."}]]}],["$","tr","size",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"size"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"sm\" | \"md\" | \"lg\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"md\""}]}],["$","td",null,{"children":"Control size (height, padding, font size)."}]]}],["$","tr","color",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"color"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"primary\" | \"danger\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"primary\""}]}],["$","td",null,{"children":"Semantic color."}]]}],["$","tr","radius",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"radius"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"sm\" | \"md\" | \"lg\" | \"xl\" | \"full\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"md\""}]}],["$","td",null,{"children":"Border radius token."}]]}],["$","tr","fullWidth",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"fullWidth"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"boolean"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Stretch the button to fill its container."}]]}],["$","tr","loading",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"loading"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"boolean"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Show a spinner and disable interaction."}]]}],["$","tr","leftSection",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"leftSection"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Content rendered before the label."}]]}],["$","tr","rightSection",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"rightSection"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Content rendered after the label."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ButtonHTMLAttributes"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <button> props are forwarded."}]]}]]}]]}]}]]}]
+b:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+c:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+d:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+e:["$","$L18",null,{"children":["$","$19",null,{"name":"Next.MetadataOutlet","children":"$@1a"}]}]
+11:[["$","$Lf",null,{"size":"sm","children":"Small"}],["$","$Lf",null,{"size":"md","children":"Medium"}],["$","$Lf",null,{"size":"lg","children":"Large"}]]
+13:[["$","$Lf",null,{"color":"danger","children":"Delete"}],["$","$Lf",null,{"color":"danger","variant":"light","children":"Delete"}],["$","$Lf",null,{"color":"danger","variant":"outline","children":"Delete"}]]
+15:[["$","$Lf",null,{"leftSection":["$","span",null,{"aria-hidden":true,"children":"↓"}],"children":"Download"}],["$","$Lf",null,{"rightSection":["$","span",null,{"aria-hidden":true,"children":"→"}],"variant":"light","children":"Next"}],["$","$Lf",null,{"loading":true,"children":"Saving"}]]
+17:["$","div",null,{"style":{"inlineSize":"100%","display":"grid","gap":"0.75rem"},"children":[["$","$Lf",null,{"fullWidth":true,"children":"Full width"}],["$","$Lf",null,{"radius":"full","children":"Pill"}]]}]
+1a:null

@@ -1,0 +1,509 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+f:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Input"]
+14:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+15:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:T975,/* The complete stylesheet for <Input /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    inline-size: var(--_w, 100%);
+    font-family: var(--fui-font);
+  }
+
+  .fui-Input-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 550;
+    color: var(--fui-text);
+  }
+  .fui-Input-required {
+    color: var(--fui-danger);
+    margin-inline-start: 0.15em;
+  }
+
+  .fui-Input-description {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Input-field {
+    display: flex;
+    align-items: center;
+    gap: var(--fui-space-sm);
+    block-size: var(--_h, var(--fui-control-height-md));
+    padding-inline: var(--_px, 0.75rem);
+    border: 1px solid var(--fui-border-strong);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    transition:
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+  .fui-Input-field:focus-within {
+    border-color: var(--fui-primary);
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Input-field[data-invalid] {
+    border-color: var(--fui-danger);
+  }
+  .fui-Input-field[data-invalid]:focus-within {
+    box-shadow: 0 0 0 3px
+      color-mix(in oklch, var(--fui-danger) 40%, transparent);
+  }
+  .fui-Input-field[data-disabled] {
+    background: var(--fui-bg-subtle);
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .fui-Input-field[data-size="sm"] {
+    --_h: var(--fui-control-height-sm);
+    --_px: 0.625rem;
+  }
+  .fui-Input-field[data-size="lg"] {
+    --_h: var(--fui-control-height-lg);
+    --_px: 0.875rem;
+  }
+
+  .fui-Input-input {
+    flex: 1;
+    min-inline-size: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: var(--_fz, var(--fui-text-sm));
+  }
+  .fui-Input-input::placeholder {
+    color: var(--fui-text-dim);
+  }
+  .fui-Input-input:disabled {
+    cursor: not-allowed;
+  }
+  .fui-Input-field[data-size="lg"] .fui-Input-input {
+    --_fz: var(--fui-text-md);
+  }
+
+  .fui-Input-section {
+    display: inline-flex;
+    align-items: center;
+    color: var(--fui-text-muted);
+    flex-shrink: 0;
+  }
+
+  .fui-Input-error {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-danger);
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Inputs"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"Input"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"A labelled text field with description and error states."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { Input } from \"@farmui/core\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Basic usage",{"id":"basic-usage","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Basic usage"}],"$undefined",["$","$L3",null,{"code":"<Input label=\"Email\" placeholder=\"you@example.com\" />","css":"$4","children":"$L5"}]]}],"$L6","$L7","$L8","$L9"]}]]}],"$La"]}],["$Lb","$Lc","$Ld"],"$Le"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+5:["$","div",null,{"style":{"maxInlineSize":"20rem","inlineSize":"100%"},"children":["$","$Lf",null,{"label":"Email","placeholder":"you@example.com"}]}]
+10:T975,/* The complete stylesheet for <Input /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    inline-size: var(--_w, 100%);
+    font-family: var(--fui-font);
+  }
+
+  .fui-Input-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 550;
+    color: var(--fui-text);
+  }
+  .fui-Input-required {
+    color: var(--fui-danger);
+    margin-inline-start: 0.15em;
+  }
+
+  .fui-Input-description {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Input-field {
+    display: flex;
+    align-items: center;
+    gap: var(--fui-space-sm);
+    block-size: var(--_h, var(--fui-control-height-md));
+    padding-inline: var(--_px, 0.75rem);
+    border: 1px solid var(--fui-border-strong);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    transition:
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+  .fui-Input-field:focus-within {
+    border-color: var(--fui-primary);
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Input-field[data-invalid] {
+    border-color: var(--fui-danger);
+  }
+  .fui-Input-field[data-invalid]:focus-within {
+    box-shadow: 0 0 0 3px
+      color-mix(in oklch, var(--fui-danger) 40%, transparent);
+  }
+  .fui-Input-field[data-disabled] {
+    background: var(--fui-bg-subtle);
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .fui-Input-field[data-size="sm"] {
+    --_h: var(--fui-control-height-sm);
+    --_px: 0.625rem;
+  }
+  .fui-Input-field[data-size="lg"] {
+    --_h: var(--fui-control-height-lg);
+    --_px: 0.875rem;
+  }
+
+  .fui-Input-input {
+    flex: 1;
+    min-inline-size: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: var(--_fz, var(--fui-text-sm));
+  }
+  .fui-Input-input::placeholder {
+    color: var(--fui-text-dim);
+  }
+  .fui-Input-input:disabled {
+    cursor: not-allowed;
+  }
+  .fui-Input-field[data-size="lg"] .fui-Input-input {
+    --_fz: var(--fui-text-md);
+  }
+
+  .fui-Input-section {
+    display: inline-flex;
+    align-items: center;
+    color: var(--fui-text-muted);
+    flex-shrink: 0;
+  }
+
+  .fui-Input-error {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-danger);
+  }
+}6:["$","div","Description & required",{"id":"description-required","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Description & required"}],"$undefined",["$","$L3",null,{"code":"<Input\n  label=\"Username\"\n  description=\"This will be your public handle.\"\n  placeholder=\"ada_lovelace\"\n  withAsterisk\n/>","css":"$10","children":["$","div",null,{"style":{"maxInlineSize":"20rem","inlineSize":"100%"},"children":["$","$Lf",null,{"label":"Username","description":"This will be your public handle.","placeholder":"ada_lovelace","withAsterisk":true}]}]}]]}]
+11:T975,/* The complete stylesheet for <Input /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    inline-size: var(--_w, 100%);
+    font-family: var(--fui-font);
+  }
+
+  .fui-Input-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 550;
+    color: var(--fui-text);
+  }
+  .fui-Input-required {
+    color: var(--fui-danger);
+    margin-inline-start: 0.15em;
+  }
+
+  .fui-Input-description {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Input-field {
+    display: flex;
+    align-items: center;
+    gap: var(--fui-space-sm);
+    block-size: var(--_h, var(--fui-control-height-md));
+    padding-inline: var(--_px, 0.75rem);
+    border: 1px solid var(--fui-border-strong);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    transition:
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+  .fui-Input-field:focus-within {
+    border-color: var(--fui-primary);
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Input-field[data-invalid] {
+    border-color: var(--fui-danger);
+  }
+  .fui-Input-field[data-invalid]:focus-within {
+    box-shadow: 0 0 0 3px
+      color-mix(in oklch, var(--fui-danger) 40%, transparent);
+  }
+  .fui-Input-field[data-disabled] {
+    background: var(--fui-bg-subtle);
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .fui-Input-field[data-size="sm"] {
+    --_h: var(--fui-control-height-sm);
+    --_px: 0.625rem;
+  }
+  .fui-Input-field[data-size="lg"] {
+    --_h: var(--fui-control-height-lg);
+    --_px: 0.875rem;
+  }
+
+  .fui-Input-input {
+    flex: 1;
+    min-inline-size: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: var(--_fz, var(--fui-text-sm));
+  }
+  .fui-Input-input::placeholder {
+    color: var(--fui-text-dim);
+  }
+  .fui-Input-input:disabled {
+    cursor: not-allowed;
+  }
+  .fui-Input-field[data-size="lg"] .fui-Input-input {
+    --_fz: var(--fui-text-md);
+  }
+
+  .fui-Input-section {
+    display: inline-flex;
+    align-items: center;
+    color: var(--fui-text-muted);
+    flex-shrink: 0;
+  }
+
+  .fui-Input-error {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-danger);
+  }
+}7:["$","div","Error state",{"id":"error-state","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Error state"}],"$undefined",["$","$L3",null,{"code":"<Input\n  label=\"Email\"\n  defaultValue=\"not-an-email\"\n  error=\"Please enter a valid email address.\"\n/>","css":"$11","children":["$","div",null,{"style":{"maxInlineSize":"20rem","inlineSize":"100%"},"children":["$","$Lf",null,{"label":"Email","defaultValue":"not-an-email","error":"Please enter a valid email address."}]}]}]]}]
+12:T975,/* The complete stylesheet for <Input /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    inline-size: var(--_w, 100%);
+    font-family: var(--fui-font);
+  }
+
+  .fui-Input-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 550;
+    color: var(--fui-text);
+  }
+  .fui-Input-required {
+    color: var(--fui-danger);
+    margin-inline-start: 0.15em;
+  }
+
+  .fui-Input-description {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Input-field {
+    display: flex;
+    align-items: center;
+    gap: var(--fui-space-sm);
+    block-size: var(--_h, var(--fui-control-height-md));
+    padding-inline: var(--_px, 0.75rem);
+    border: 1px solid var(--fui-border-strong);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    transition:
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+  .fui-Input-field:focus-within {
+    border-color: var(--fui-primary);
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Input-field[data-invalid] {
+    border-color: var(--fui-danger);
+  }
+  .fui-Input-field[data-invalid]:focus-within {
+    box-shadow: 0 0 0 3px
+      color-mix(in oklch, var(--fui-danger) 40%, transparent);
+  }
+  .fui-Input-field[data-disabled] {
+    background: var(--fui-bg-subtle);
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .fui-Input-field[data-size="sm"] {
+    --_h: var(--fui-control-height-sm);
+    --_px: 0.625rem;
+  }
+  .fui-Input-field[data-size="lg"] {
+    --_h: var(--fui-control-height-lg);
+    --_px: 0.875rem;
+  }
+
+  .fui-Input-input {
+    flex: 1;
+    min-inline-size: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: var(--_fz, var(--fui-text-sm));
+  }
+  .fui-Input-input::placeholder {
+    color: var(--fui-text-dim);
+  }
+  .fui-Input-input:disabled {
+    cursor: not-allowed;
+  }
+  .fui-Input-field[data-size="lg"] .fui-Input-input {
+    --_fz: var(--fui-text-md);
+  }
+
+  .fui-Input-section {
+    display: inline-flex;
+    align-items: center;
+    color: var(--fui-text-muted);
+    flex-shrink: 0;
+  }
+
+  .fui-Input-error {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-danger);
+  }
+}8:["$","div","Sizes",{"id":"sizes","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Sizes"}],"$undefined",["$","$L3",null,{"code":"<Input size=\"sm\" placeholder=\"Small\" />\n<Input size=\"md\" placeholder=\"Medium\" />\n<Input size=\"lg\" placeholder=\"Large\" />","css":"$12","children":["$","div",null,{"style":{"display":"grid","gap":"0.75rem","maxInlineSize":"20rem","inlineSize":"100%"},"children":[["$","$Lf",null,{"size":"sm","placeholder":"Small"}],["$","$Lf",null,{"size":"md","placeholder":"Medium"}],["$","$Lf",null,{"size":"lg","placeholder":"Large"}]]}]}]]}]
+13:T975,/* The complete stylesheet for <Input /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    inline-size: var(--_w, 100%);
+    font-family: var(--fui-font);
+  }
+
+  .fui-Input-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 550;
+    color: var(--fui-text);
+  }
+  .fui-Input-required {
+    color: var(--fui-danger);
+    margin-inline-start: 0.15em;
+  }
+
+  .fui-Input-description {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Input-field {
+    display: flex;
+    align-items: center;
+    gap: var(--fui-space-sm);
+    block-size: var(--_h, var(--fui-control-height-md));
+    padding-inline: var(--_px, 0.75rem);
+    border: 1px solid var(--fui-border-strong);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    transition:
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+  .fui-Input-field:focus-within {
+    border-color: var(--fui-primary);
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Input-field[data-invalid] {
+    border-color: var(--fui-danger);
+  }
+  .fui-Input-field[data-invalid]:focus-within {
+    box-shadow: 0 0 0 3px
+      color-mix(in oklch, var(--fui-danger) 40%, transparent);
+  }
+  .fui-Input-field[data-disabled] {
+    background: var(--fui-bg-subtle);
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .fui-Input-field[data-size="sm"] {
+    --_h: var(--fui-control-height-sm);
+    --_px: 0.625rem;
+  }
+  .fui-Input-field[data-size="lg"] {
+    --_h: var(--fui-control-height-lg);
+    --_px: 0.875rem;
+  }
+
+  .fui-Input-input {
+    flex: 1;
+    min-inline-size: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: var(--_fz, var(--fui-text-sm));
+  }
+  .fui-Input-input::placeholder {
+    color: var(--fui-text-dim);
+  }
+  .fui-Input-input:disabled {
+    cursor: not-allowed;
+  }
+  .fui-Input-field[data-size="lg"] .fui-Input-input {
+    --_fz: var(--fui-text-md);
+  }
+
+  .fui-Input-section {
+    display: inline-flex;
+    align-items: center;
+    color: var(--fui-text-muted);
+    flex-shrink: 0;
+  }
+
+  .fui-Input-error {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-danger);
+  }
+}9:["$","div","With sections",{"id":"with-sections","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"With sections"}],"$undefined",["$","$L3",null,{"code":"<Input leftSection=\"@\" placeholder=\"handle\" />\n<Input rightSection=\".dev\" placeholder=\"yoursite\" />","css":"$13","children":["$","div",null,{"style":{"display":"grid","gap":"0.75rem","maxInlineSize":"20rem","inlineSize":"100%"},"children":[["$","$Lf",null,{"leftSection":"@","placeholder":"handle"}],["$","$Lf",null,{"rightSection":".dev","placeholder":"yoursite"}]]}]}]]}]
+a:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","label",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"label"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Field label rendered above the input."}]]}],["$","tr","description",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"description"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Helper text rendered below the label."}]]}],["$","tr","error",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"error"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Error message; puts the field in an invalid state."}]]}],["$","tr","size",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"size"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"sm\" | \"md\" | \"lg\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"md\""}]}],["$","td",null,{"children":"Control size."}]]}],["$","tr","radius",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"radius"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"sm\" | \"md\" | \"lg\" | \"xl\" | \"full\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"md\""}]}],["$","td",null,{"children":"Border radius token."}]]}],["$","tr","leftSection",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"leftSection"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Content inside the field, before the input."}]]}],["$","tr","rightSection",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"rightSection"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Content inside the field, after the input."}]]}],["$","tr","withAsterisk",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"withAsterisk"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"boolean"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Show a required asterisk next to the label."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"InputHTMLAttributes"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <input> props are forwarded."}]]}]]}]]}]}]]}]
+b:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+c:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+d:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+e:["$","$L14",null,{"children":["$","$15",null,{"name":"Next.MetadataOutlet","children":"$@16"}]}]
+16:null

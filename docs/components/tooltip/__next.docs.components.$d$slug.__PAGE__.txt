@@ -1,0 +1,345 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+d:I[44837,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"TooltipPositions"]
+12:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+13:"$Sreact.suspense"
+15:I[44837,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"TooltipArrow"]
+16:I[44837,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"TooltipOnText"]
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:Tcf2,/* The complete stylesheet for <Tooltip /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Tooltip-root {
+    position: relative;
+    display: inline-block;
+  }
+
+  .fui-Tooltip-bubble {
+    --_gap: 0.5rem;
+    --_arrow: 5px;
+
+    position: absolute;
+    z-index: 40;
+    inline-size: max-content;
+    max-inline-size: 16rem;
+    padding-block: var(--fui-space-xs);
+    padding-inline: var(--fui-space-sm);
+    border-radius: var(--fui-radius-sm);
+    background: var(--fui-text);
+    color: var(--fui-bg);
+    font-family: var(--fui-font);
+    font-size: var(--fui-text-xs);
+    font-weight: 500;
+    line-height: 1.35;
+    text-align: center;
+    white-space: normal;
+    box-shadow: var(--fui-shadow-md);
+    pointer-events: none;
+    opacity: 0;
+    transition:
+      opacity var(--fui-transition),
+      transform var(--fui-transition);
+  }
+
+  /* Placement — position + hidden-state offset for the scale/slide in. */
+  .fui-Tooltip-bubble[data-position="top"] {
+    inset-block-end: calc(100% + var(--_gap));
+    inset-inline-start: 50%;
+    transform: translateX(-50%) translateY(4px) scale(0.96);
+  }
+  .fui-Tooltip-bubble[data-position="bottom"] {
+    inset-block-start: calc(100% + var(--_gap));
+    inset-inline-start: 50%;
+    transform: translateX(-50%) translateY(-4px) scale(0.96);
+  }
+  .fui-Tooltip-bubble[data-position="left"] {
+    inset-inline-end: calc(100% + var(--_gap));
+    inset-block-start: 50%;
+    transform: translateY(-50%) translateX(4px) scale(0.96);
+  }
+  .fui-Tooltip-bubble[data-position="right"] {
+    inset-inline-start: calc(100% + var(--_gap));
+    inset-block-start: 50%;
+    transform: translateY(-50%) translateX(-4px) scale(0.96);
+  }
+
+  /* Revealed */
+  .fui-Tooltip-bubble[data-open][data-position="top"] {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+  .fui-Tooltip-bubble[data-open][data-position="bottom"] {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+  .fui-Tooltip-bubble[data-open][data-position="left"] {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0) scale(1);
+  }
+  .fui-Tooltip-bubble[data-open][data-position="right"] {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0) scale(1);
+  }
+
+  /* Arrow */
+  .fui-Tooltip-bubble[data-arrow]::after {
+    content: "";
+    position: absolute;
+    inline-size: 0;
+    block-size: 0;
+    border: var(--_arrow) solid transparent;
+  }
+  .fui-Tooltip-bubble[data-arrow][data-position="top"]::after {
+    inset-block-start: 100%;
+    inset-inline-start: 50%;
+    transform: translateX(-50%);
+    border-block-start-color: var(--fui-text);
+  }
+  .fui-Tooltip-bubble[data-arrow][data-position="bottom"]::after {
+    inset-block-end: 100%;
+    inset-inline-start: 50%;
+    transform: translateX(-50%);
+    border-block-end-color: var(--fui-text);
+  }
+  .fui-Tooltip-bubble[data-arrow][data-position="left"]::after {
+    inset-inline-start: 100%;
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+    border-inline-start-color: var(--fui-text);
+  }
+  .fui-Tooltip-bubble[data-arrow][data-position="right"]::after {
+    inset-inline-end: 100%;
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+    border-inline-end-color: var(--fui-text);
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Overlays"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"Tooltip"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"A small floating label revealed on hover and keyboard focus."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { Tooltip } from \"@farmui/core\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Positions",{"id":"positions","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Positions"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Place the tooltip on any side of its target with the position prop."}],["$","$L3",null,{"code":"<Tooltip label=\"Above the button\" position=\"top\">\n  <Button variant=\"light\">Top</Button>\n</Tooltip>\n<Tooltip label=\"Below the button\" position=\"bottom\">\n  <Button variant=\"light\">Bottom</Button>\n</Tooltip>\n<Tooltip label=\"Left of the button\" position=\"left\">\n  <Button variant=\"light\">Left</Button>\n</Tooltip>\n<Tooltip label=\"Right of the button\" position=\"right\">\n  <Button variant=\"light\">Right</Button>\n</Tooltip>","css":"$4","children":"$L5"}]]}],"$L6","$L7"]}]]}],"$L8"]}],["$L9","$La","$Lb"],"$Lc"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+5:["$","$Ld",null,{}]
+e:Tcf2,/* The complete stylesheet for <Tooltip /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Tooltip-root {
+    position: relative;
+    display: inline-block;
+  }
+
+  .fui-Tooltip-bubble {
+    --_gap: 0.5rem;
+    --_arrow: 5px;
+
+    position: absolute;
+    z-index: 40;
+    inline-size: max-content;
+    max-inline-size: 16rem;
+    padding-block: var(--fui-space-xs);
+    padding-inline: var(--fui-space-sm);
+    border-radius: var(--fui-radius-sm);
+    background: var(--fui-text);
+    color: var(--fui-bg);
+    font-family: var(--fui-font);
+    font-size: var(--fui-text-xs);
+    font-weight: 500;
+    line-height: 1.35;
+    text-align: center;
+    white-space: normal;
+    box-shadow: var(--fui-shadow-md);
+    pointer-events: none;
+    opacity: 0;
+    transition:
+      opacity var(--fui-transition),
+      transform var(--fui-transition);
+  }
+
+  /* Placement — position + hidden-state offset for the scale/slide in. */
+  .fui-Tooltip-bubble[data-position="top"] {
+    inset-block-end: calc(100% + var(--_gap));
+    inset-inline-start: 50%;
+    transform: translateX(-50%) translateY(4px) scale(0.96);
+  }
+  .fui-Tooltip-bubble[data-position="bottom"] {
+    inset-block-start: calc(100% + var(--_gap));
+    inset-inline-start: 50%;
+    transform: translateX(-50%) translateY(-4px) scale(0.96);
+  }
+  .fui-Tooltip-bubble[data-position="left"] {
+    inset-inline-end: calc(100% + var(--_gap));
+    inset-block-start: 50%;
+    transform: translateY(-50%) translateX(4px) scale(0.96);
+  }
+  .fui-Tooltip-bubble[data-position="right"] {
+    inset-inline-start: calc(100% + var(--_gap));
+    inset-block-start: 50%;
+    transform: translateY(-50%) translateX(-4px) scale(0.96);
+  }
+
+  /* Revealed */
+  .fui-Tooltip-bubble[data-open][data-position="top"] {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+  .fui-Tooltip-bubble[data-open][data-position="bottom"] {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+  .fui-Tooltip-bubble[data-open][data-position="left"] {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0) scale(1);
+  }
+  .fui-Tooltip-bubble[data-open][data-position="right"] {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0) scale(1);
+  }
+
+  /* Arrow */
+  .fui-Tooltip-bubble[data-arrow]::after {
+    content: "";
+    position: absolute;
+    inline-size: 0;
+    block-size: 0;
+    border: var(--_arrow) solid transparent;
+  }
+  .fui-Tooltip-bubble[data-arrow][data-position="top"]::after {
+    inset-block-start: 100%;
+    inset-inline-start: 50%;
+    transform: translateX(-50%);
+    border-block-start-color: var(--fui-text);
+  }
+  .fui-Tooltip-bubble[data-arrow][data-position="bottom"]::after {
+    inset-block-end: 100%;
+    inset-inline-start: 50%;
+    transform: translateX(-50%);
+    border-block-end-color: var(--fui-text);
+  }
+  .fui-Tooltip-bubble[data-arrow][data-position="left"]::after {
+    inset-inline-start: 100%;
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+    border-inline-start-color: var(--fui-text);
+  }
+  .fui-Tooltip-bubble[data-arrow][data-position="right"]::after {
+    inset-inline-end: 100%;
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+    border-inline-end-color: var(--fui-text);
+  }
+}6:["$","div","With arrow",{"id":"with-arrow","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"With arrow"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Add a pointer arrow toward the target with withArrow."}],["$","$L3",null,{"code":"<Tooltip label=\"Saved just now\" withArrow>\n  <Button>Hover or focus me</Button>\n</Tooltip>","css":"$e","children":"$Lf"}]]}]
+10:Tcf2,/* The complete stylesheet for <Tooltip /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Tooltip-root {
+    position: relative;
+    display: inline-block;
+  }
+
+  .fui-Tooltip-bubble {
+    --_gap: 0.5rem;
+    --_arrow: 5px;
+
+    position: absolute;
+    z-index: 40;
+    inline-size: max-content;
+    max-inline-size: 16rem;
+    padding-block: var(--fui-space-xs);
+    padding-inline: var(--fui-space-sm);
+    border-radius: var(--fui-radius-sm);
+    background: var(--fui-text);
+    color: var(--fui-bg);
+    font-family: var(--fui-font);
+    font-size: var(--fui-text-xs);
+    font-weight: 500;
+    line-height: 1.35;
+    text-align: center;
+    white-space: normal;
+    box-shadow: var(--fui-shadow-md);
+    pointer-events: none;
+    opacity: 0;
+    transition:
+      opacity var(--fui-transition),
+      transform var(--fui-transition);
+  }
+
+  /* Placement — position + hidden-state offset for the scale/slide in. */
+  .fui-Tooltip-bubble[data-position="top"] {
+    inset-block-end: calc(100% + var(--_gap));
+    inset-inline-start: 50%;
+    transform: translateX(-50%) translateY(4px) scale(0.96);
+  }
+  .fui-Tooltip-bubble[data-position="bottom"] {
+    inset-block-start: calc(100% + var(--_gap));
+    inset-inline-start: 50%;
+    transform: translateX(-50%) translateY(-4px) scale(0.96);
+  }
+  .fui-Tooltip-bubble[data-position="left"] {
+    inset-inline-end: calc(100% + var(--_gap));
+    inset-block-start: 50%;
+    transform: translateY(-50%) translateX(4px) scale(0.96);
+  }
+  .fui-Tooltip-bubble[data-position="right"] {
+    inset-inline-start: calc(100% + var(--_gap));
+    inset-block-start: 50%;
+    transform: translateY(-50%) translateX(-4px) scale(0.96);
+  }
+
+  /* Revealed */
+  .fui-Tooltip-bubble[data-open][data-position="top"] {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+  .fui-Tooltip-bubble[data-open][data-position="bottom"] {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+  .fui-Tooltip-bubble[data-open][data-position="left"] {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0) scale(1);
+  }
+  .fui-Tooltip-bubble[data-open][data-position="right"] {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0) scale(1);
+  }
+
+  /* Arrow */
+  .fui-Tooltip-bubble[data-arrow]::after {
+    content: "";
+    position: absolute;
+    inline-size: 0;
+    block-size: 0;
+    border: var(--_arrow) solid transparent;
+  }
+  .fui-Tooltip-bubble[data-arrow][data-position="top"]::after {
+    inset-block-start: 100%;
+    inset-inline-start: 50%;
+    transform: translateX(-50%);
+    border-block-start-color: var(--fui-text);
+  }
+  .fui-Tooltip-bubble[data-arrow][data-position="bottom"]::after {
+    inset-block-end: 100%;
+    inset-inline-start: 50%;
+    transform: translateX(-50%);
+    border-block-end-color: var(--fui-text);
+  }
+  .fui-Tooltip-bubble[data-arrow][data-position="left"]::after {
+    inset-inline-start: 100%;
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+    border-inline-start-color: var(--fui-text);
+  }
+  .fui-Tooltip-bubble[data-arrow][data-position="right"]::after {
+    inset-inline-end: 100%;
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+    border-inline-end-color: var(--fui-text);
+  }
+}7:["$","div","On inline text",{"id":"on-inline-text","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"On inline text"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Wrap a focusable inline element to explain a term in place."}],["$","$L3",null,{"code":"<p>\n  Every component is fully{\" \"}\n  <Tooltip label=\"Meets WCAG 2.1 AA out of the box\" withArrow>\n    <button type=\"button\" className=\"term\">accessible</button>\n  </Tooltip>{\" \"}\n  right out of the box.\n</p>","css":"$10","children":"$L11"}]]}]
+8:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","label",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"label"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"The floating label shown on hover and focus."}]]}],["$","tr","position",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"position"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"top\" | \"bottom\" | \"left\" | \"right\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"top\""}]}],["$","td",null,{"children":"Which side of the target the tooltip appears on."}]]}],["$","tr","withArrow",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"withArrow"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"boolean"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Render a small pointer arrow toward the target."}]]}],["$","tr","children",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"children"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactElement"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"The single element the tooltip describes (receives aria-describedby)."}]]}]]}]]}]}]]}]
+9:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+a:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+b:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+c:["$","$L12",null,{"children":["$","$13",null,{"name":"Next.MetadataOutlet","children":"$@14"}]}]
+f:["$","$L15",null,{}]
+11:["$","$L16",null,{}]
+14:null

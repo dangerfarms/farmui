@@ -1,0 +1,174 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+c:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Container"]
+e:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+f:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:T805,/* The complete stylesheet for <Newsletter /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.blocks {
+  .fui-Newsletter-root {
+    padding-block: clamp(3rem, 7vw, 5rem);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+  }
+  .fui-Newsletter-inner {
+    max-inline-size: 40rem;
+    margin-inline: auto;
+    text-align: center;
+  }
+  /* SectionHeader owns its own bottom margin; tighten it before the form. */
+  .fui-Newsletter-inner .fui-SectionHeader {
+    margin-block-end: 1.75rem;
+  }
+
+  .fui-Newsletter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    max-inline-size: 30rem;
+    margin-inline: auto;
+  }
+
+  .fui-Newsletter-input {
+    flex: 1 1 16rem;
+    min-inline-size: 0;
+    block-size: var(--fui-control-height-md);
+    padding-inline: 0.9rem;
+    color: var(--fui-text);
+    font-family: var(--fui-font);
+    font-size: var(--fui-text-sm);
+    background: var(--fui-surface);
+    border: 1px solid var(--fui-border);
+    border-radius: var(--fui-radius-md);
+    transition:
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+  .fui-Newsletter-input::placeholder {
+    color: var(--fui-text-dim);
+  }
+  .fui-Newsletter-input:hover {
+    border-color: var(--fui-border-strong);
+  }
+  .fui-Newsletter-input:focus-visible {
+    outline: none;
+    border-color: var(--fui-primary);
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Newsletter-input:user-invalid {
+    border-color: var(--fui-danger);
+  }
+
+  /* Visually-hidden label — accessible to screen readers, off-screen visually. */
+  .fui-Newsletter-srOnly {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @container (max-width: 30rem) {
+    .fui-Newsletter-input {
+      flex-basis: 100%;
+    }
+    .fui-Newsletter-form .fui-Button-root {
+      inline-size: 100%;
+    }
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Blocks"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"Newsletter"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"A centered email sign-up section — a server-safe native form with no JS."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { Newsletter } from \"@farmui/blocks\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Sign-up form",{"id":"sign-up-form","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Sign-up form"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"A heading, a native email field, and a submit button. Submission POSTs to the action endpoint you provide."}],["$","$L3",null,{"code":"<Newsletter\n  eyebrow=\"Newsletter\"\n  title=\"Field notes, every fortnight\"\n  description=\"Seasonal tips, product updates, and the occasional harvest recipe. No spam — unsubscribe any time.\"\n  placeholder=\"you@yourfarm.com\"\n  buttonLabel=\"Subscribe\"\n  action=\"/api/subscribe\"\n/>","css":"$4","children":"$L5"}]]}],"$L6"]}]]}],"$L7"]}],["$L8","$L9","$La"],"$Lb"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+5:["$","section",null,{"className":"fui-Newsletter-root","children":["$","$Lc",null,{"children":["$","div",null,{"className":"fui-Newsletter-inner","children":[["$","div",null,{"className":"fui-SectionHeader","children":[["$","p",null,{"className":"fui-SectionHeader-eyebrow","children":"Newsletter"}],["$","h2",null,{"className":"fui-SectionHeader-title","children":"Field notes, every fortnight"}],["$","p",null,{"className":"fui-SectionHeader-description","children":"Seasonal tips, product updates, and the occasional harvest recipe. No spam — unsubscribe any time."}]]}],["$","form",null,{"className":"fui-Newsletter-form","action":"/api/subscribe","method":"post","children":[["$","input",null,{"className":"fui-Newsletter-input","type":"email","name":"email","aria-label":"Email address","placeholder":"you@yourfarm.com","autoComplete":"email","required":true}],["$","button",null,{"type":"submit","className":"fui-Button-root","data-variant":"filled","data-size":"md","children":"Subscribe"}]]}]]}]}]}]
+d:T805,/* The complete stylesheet for <Newsletter /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.blocks {
+  .fui-Newsletter-root {
+    padding-block: clamp(3rem, 7vw, 5rem);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+  }
+  .fui-Newsletter-inner {
+    max-inline-size: 40rem;
+    margin-inline: auto;
+    text-align: center;
+  }
+  /* SectionHeader owns its own bottom margin; tighten it before the form. */
+  .fui-Newsletter-inner .fui-SectionHeader {
+    margin-block-end: 1.75rem;
+  }
+
+  .fui-Newsletter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    max-inline-size: 30rem;
+    margin-inline: auto;
+  }
+
+  .fui-Newsletter-input {
+    flex: 1 1 16rem;
+    min-inline-size: 0;
+    block-size: var(--fui-control-height-md);
+    padding-inline: 0.9rem;
+    color: var(--fui-text);
+    font-family: var(--fui-font);
+    font-size: var(--fui-text-sm);
+    background: var(--fui-surface);
+    border: 1px solid var(--fui-border);
+    border-radius: var(--fui-radius-md);
+    transition:
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+  .fui-Newsletter-input::placeholder {
+    color: var(--fui-text-dim);
+  }
+  .fui-Newsletter-input:hover {
+    border-color: var(--fui-border-strong);
+  }
+  .fui-Newsletter-input:focus-visible {
+    outline: none;
+    border-color: var(--fui-primary);
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Newsletter-input:user-invalid {
+    border-color: var(--fui-danger);
+  }
+
+  /* Visually-hidden label — accessible to screen readers, off-screen visually. */
+  .fui-Newsletter-srOnly {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @container (max-width: 30rem) {
+    .fui-Newsletter-input {
+      flex-basis: 100%;
+    }
+    .fui-Newsletter-form .fui-Button-root {
+      inline-size: 100%;
+    }
+  }
+}6:["$","div","Minimal, custom label",{"id":"minimal-custom-label","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Minimal, custom label"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Drop the eyebrow and description for a compact band, and tailor the button label to the offer."}],["$","$L3",null,{"code":"<Newsletter\n  title=\"Get early access\"\n  buttonLabel=\"Join the waitlist\"\n  action=\"/api/waitlist\"\n/>","css":"$d","children":["$","section",null,{"className":"fui-Newsletter-root","children":["$","$Lc",null,{"children":["$","div",null,{"className":"fui-Newsletter-inner","children":[["$","div",null,{"className":"fui-SectionHeader","children":[false,["$","h2",null,{"className":"fui-SectionHeader-title","children":"Get early access"}],false]}],["$","form",null,{"className":"fui-Newsletter-form","action":"/api/waitlist","method":"post","children":[["$","input",null,{"className":"fui-Newsletter-input","type":"email","name":"email","aria-label":"Email address","placeholder":"you@example.com","autoComplete":"email","required":true}],["$","button",null,{"type":"submit","className":"fui-Button-root","data-variant":"filled","data-size":"md","children":"Join the waitlist"}]]}]]}]}]}]}]]}]
+7:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","eyebrow",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"eyebrow"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Small label shown above the title."}]]}],["$","tr","title",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"title"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Section heading."}]]}],["$","tr","description",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"description"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Supporting paragraph shown under the title."}]]}],["$","tr","placeholder",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"placeholder"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"string"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"you@example.com\""}]}],["$","td",null,{"children":"Placeholder for the email field."}]]}],["$","tr","buttonLabel",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"buttonLabel"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"string"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"Subscribe\""}]}],["$","td",null,{"children":"Submit button text."}]]}],["$","tr","action",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"action"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"The form's action URL (where the POST is sent)."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"HTMLAttributes<HTMLElement>"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <section> props are forwarded (except title)."}]]}]]}]]}]}]]}]
+8:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+9:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+a:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+b:["$","$Le",null,{"children":["$","$f",null,{"name":"Next.MetadataOutlet","children":"$@10"}]}]
+10:null

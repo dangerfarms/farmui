@@ -1,0 +1,178 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+5:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Breadcrumbs"]
+f:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+10:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:T50f,/* The complete stylesheet for <Breadcrumbs /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Breadcrumbs-root {
+    font-family: var(--fui-font);
+    font-size: var(--fui-text-sm);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Breadcrumbs-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--fui-space-sm);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .fui-Breadcrumbs-item {
+    display: inline-flex;
+    align-items: center;
+    min-inline-size: 0;
+  }
+
+  /* Links inside a breadcrumb */
+  .fui-Breadcrumbs-item :where(a) {
+    color: var(--fui-text-muted);
+    text-decoration: none;
+    border-radius: var(--fui-radius-sm);
+    padding-inline: 2px;
+    transition: color var(--fui-transition);
+  }
+  .fui-Breadcrumbs-item :where(a):hover {
+    color: var(--fui-primary);
+    text-decoration: underline;
+  }
+  .fui-Breadcrumbs-item :where(a):focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+
+  .fui-Breadcrumbs-item[data-current] {
+    color: var(--fui-text);
+    font-weight: 600;
+  }
+
+  .fui-Breadcrumbs-separator {
+    display: inline-flex;
+    align-items: center;
+    color: var(--fui-text-dim);
+    user-select: none;
+  }
+}6:T50f,/* The complete stylesheet for <Breadcrumbs /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Breadcrumbs-root {
+    font-family: var(--fui-font);
+    font-size: var(--fui-text-sm);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Breadcrumbs-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--fui-space-sm);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .fui-Breadcrumbs-item {
+    display: inline-flex;
+    align-items: center;
+    min-inline-size: 0;
+  }
+
+  /* Links inside a breadcrumb */
+  .fui-Breadcrumbs-item :where(a) {
+    color: var(--fui-text-muted);
+    text-decoration: none;
+    border-radius: var(--fui-radius-sm);
+    padding-inline: 2px;
+    transition: color var(--fui-transition);
+  }
+  .fui-Breadcrumbs-item :where(a):hover {
+    color: var(--fui-primary);
+    text-decoration: underline;
+  }
+  .fui-Breadcrumbs-item :where(a):focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+
+  .fui-Breadcrumbs-item[data-current] {
+    color: var(--fui-text);
+    font-weight: 600;
+  }
+
+  .fui-Breadcrumbs-separator {
+    display: inline-flex;
+    align-items: center;
+    color: var(--fui-text-dim);
+    user-select: none;
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Navigation"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"Breadcrumbs"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"Show the path to the current page and let users step back up it."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { Breadcrumbs } from \"@farmui/core\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Basic",{"id":"basic","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Basic"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"The last item is marked as the current page."}],["$","$L3",null,{"code":"<Breadcrumbs>\n  <a href=\"/\">Home</a>\n  <a href=\"/settings\">Settings</a>\n  <span>Billing</span>\n</Breadcrumbs>","css":"$4","children":["$","$L5",null,{"children":[["$","a",null,{"href":"/","children":"Home"}],["$","a",null,{"href":"/settings","children":"Settings"}],["$","span",null,{"children":"Billing"}]]}]}]]}],["$","div","Custom separator",{"id":"custom-separator","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Custom separator"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Pass any node as the separator between items."}],["$","$L3",null,{"code":"<Breadcrumbs separator=\"→\">\n  <a href=\"/\">Home</a>\n  <a href=\"/projects\">Projects</a>\n  <span>Website Redesign</span>\n</Breadcrumbs>","css":"$6","children":"$L7"}]]}],"$L8"]}]]}],"$L9"]}],["$La","$Lb","$Lc"],"$Ld"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+7:["$","$L5",null,{"separator":"→","children":[["$","a",null,{"href":"/","children":"Home"}],["$","a",null,{"href":"/projects","children":"Projects"}],["$","span",null,{"children":"Website Redesign"}]]}]
+e:T50f,/* The complete stylesheet for <Breadcrumbs /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Breadcrumbs-root {
+    font-family: var(--fui-font);
+    font-size: var(--fui-text-sm);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Breadcrumbs-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--fui-space-sm);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .fui-Breadcrumbs-item {
+    display: inline-flex;
+    align-items: center;
+    min-inline-size: 0;
+  }
+
+  /* Links inside a breadcrumb */
+  .fui-Breadcrumbs-item :where(a) {
+    color: var(--fui-text-muted);
+    text-decoration: none;
+    border-radius: var(--fui-radius-sm);
+    padding-inline: 2px;
+    transition: color var(--fui-transition);
+  }
+  .fui-Breadcrumbs-item :where(a):hover {
+    color: var(--fui-primary);
+    text-decoration: underline;
+  }
+  .fui-Breadcrumbs-item :where(a):focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+
+  .fui-Breadcrumbs-item[data-current] {
+    color: var(--fui-text);
+    font-weight: 600;
+  }
+
+  .fui-Breadcrumbs-separator {
+    display: inline-flex;
+    align-items: center;
+    color: var(--fui-text-dim);
+    user-select: none;
+  }
+}8:["$","div","Long path",{"id":"long-path","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Long path"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Items wrap onto multiple lines on narrow screens."}],["$","$L3",null,{"code":"<Breadcrumbs>\n  <a href=\"/\">Home</a>\n  <a href=\"/catalog\">Catalog</a>\n  <a href=\"/catalog/laptops\">Laptops</a>\n  <a href=\"/catalog/laptops/ultrabooks\">Ultrabooks</a>\n  <span>Aurora 14 Pro</span>\n</Breadcrumbs>","css":"$e","children":["$","$L5",null,{"children":[["$","a",null,{"href":"/","children":"Home"}],["$","a",null,{"href":"/catalog","children":"Catalog"}],["$","a",null,{"href":"/catalog/laptops","children":"Laptops"}],["$","a",null,{"href":"/catalog/laptops/ultrabooks","children":"Ultrabooks"}],["$","span",null,{"children":"Aurora 14 Pro"}]]}]}]]}]
+9:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","separator",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"separator"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"/\""}]}],["$","td",null,{"children":"Node inserted between each breadcrumb item."}]]}],["$","tr","children",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"children"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"The breadcrumb items — links or plain text nodes."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"HTMLAttributes"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <nav> props are forwarded."}]]}]]}]]}]}]]}]
+a:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+b:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+c:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+d:["$","$Lf",null,{"children":["$","$10",null,{"name":"Next.MetadataOutlet","children":"$@11"}]}]
+11:null

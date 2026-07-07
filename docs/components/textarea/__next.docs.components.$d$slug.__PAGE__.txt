@@ -1,0 +1,398 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+e:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Textarea"]
+12:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+13:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:T9be,/* The complete stylesheet for <Textarea /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Textarea-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    inline-size: var(--_w, 100%);
+    font-family: var(--fui-font);
+  }
+
+  .fui-Textarea-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 550;
+    color: var(--fui-text);
+  }
+  .fui-Textarea-required {
+    color: var(--fui-danger);
+    margin-inline-start: 0.15em;
+  }
+
+  .fui-Textarea-description {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Textarea-field {
+    display: flex;
+    padding-block: var(--_py, 0.5rem);
+    padding-inline: var(--_px, 0.75rem);
+    border: 1px solid var(--fui-border-strong);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    transition:
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+  .fui-Textarea-field:focus-within {
+    border-color: var(--fui-primary);
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Textarea-field[data-invalid] {
+    border-color: var(--fui-danger);
+  }
+  .fui-Textarea-field[data-invalid]:focus-within {
+    box-shadow: 0 0 0 3px
+      color-mix(in oklch, var(--fui-danger) 40%, transparent);
+  }
+  .fui-Textarea-field[data-disabled] {
+    background: var(--fui-bg-subtle);
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .fui-Textarea-field[data-size="sm"] {
+    --_py: 0.375rem;
+    --_px: 0.625rem;
+    --_min-h: calc(var(--fui-control-height-sm) * 1.5);
+  }
+  .fui-Textarea-field[data-size="lg"] {
+    --_py: 0.625rem;
+    --_px: 0.875rem;
+    --_min-h: calc(var(--fui-control-height-lg) * 1.5);
+  }
+
+  .fui-Textarea-textarea {
+    flex: 1;
+    min-inline-size: 0;
+    min-block-size: var(--_min-h, calc(var(--fui-control-height-md) * 1.5));
+    border: none;
+    outline: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: var(--_fz, var(--fui-text-sm));
+    line-height: 1.5;
+    resize: vertical;
+  }
+  .fui-Textarea-textarea::placeholder {
+    color: var(--fui-text-dim);
+  }
+  .fui-Textarea-textarea:disabled {
+    cursor: not-allowed;
+    resize: none;
+  }
+  .fui-Textarea-field[data-size="lg"] .fui-Textarea-textarea {
+    --_fz: var(--fui-text-md);
+  }
+
+  .fui-Textarea-error {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-danger);
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Inputs"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"Textarea"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"A labelled multi-line text field with description and error states."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { Textarea } from \"@farmui/core\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Basic usage",{"id":"basic-usage","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Basic usage"}],"$undefined",["$","$L3",null,{"code":"<Textarea label=\"Notes\" placeholder=\"Anything to add?\" />","css":"$4","children":"$L5"}]]}],"$L6","$L7","$L8"]}]]}],"$L9"]}],["$La","$Lb","$Lc"],"$Ld"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+5:["$","div",null,{"style":{"maxInlineSize":"24rem","inlineSize":"100%"},"children":["$","$Le",null,{"label":"Notes","placeholder":"Anything to add?"}]}]
+f:T9be,/* The complete stylesheet for <Textarea /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Textarea-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    inline-size: var(--_w, 100%);
+    font-family: var(--fui-font);
+  }
+
+  .fui-Textarea-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 550;
+    color: var(--fui-text);
+  }
+  .fui-Textarea-required {
+    color: var(--fui-danger);
+    margin-inline-start: 0.15em;
+  }
+
+  .fui-Textarea-description {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Textarea-field {
+    display: flex;
+    padding-block: var(--_py, 0.5rem);
+    padding-inline: var(--_px, 0.75rem);
+    border: 1px solid var(--fui-border-strong);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    transition:
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+  .fui-Textarea-field:focus-within {
+    border-color: var(--fui-primary);
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Textarea-field[data-invalid] {
+    border-color: var(--fui-danger);
+  }
+  .fui-Textarea-field[data-invalid]:focus-within {
+    box-shadow: 0 0 0 3px
+      color-mix(in oklch, var(--fui-danger) 40%, transparent);
+  }
+  .fui-Textarea-field[data-disabled] {
+    background: var(--fui-bg-subtle);
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .fui-Textarea-field[data-size="sm"] {
+    --_py: 0.375rem;
+    --_px: 0.625rem;
+    --_min-h: calc(var(--fui-control-height-sm) * 1.5);
+  }
+  .fui-Textarea-field[data-size="lg"] {
+    --_py: 0.625rem;
+    --_px: 0.875rem;
+    --_min-h: calc(var(--fui-control-height-lg) * 1.5);
+  }
+
+  .fui-Textarea-textarea {
+    flex: 1;
+    min-inline-size: 0;
+    min-block-size: var(--_min-h, calc(var(--fui-control-height-md) * 1.5));
+    border: none;
+    outline: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: var(--_fz, var(--fui-text-sm));
+    line-height: 1.5;
+    resize: vertical;
+  }
+  .fui-Textarea-textarea::placeholder {
+    color: var(--fui-text-dim);
+  }
+  .fui-Textarea-textarea:disabled {
+    cursor: not-allowed;
+    resize: none;
+  }
+  .fui-Textarea-field[data-size="lg"] .fui-Textarea-textarea {
+    --_fz: var(--fui-text-md);
+  }
+
+  .fui-Textarea-error {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-danger);
+  }
+}6:["$","div","With description",{"id":"with-description","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"With description"}],"$undefined",["$","$L3",null,{"code":"<Textarea\n  label=\"Bio\"\n  description=\"A short description for your public profile.\"\n  placeholder=\"Tell us about yourself…\"\n  withAsterisk\n/>","css":"$f","children":["$","div",null,{"style":{"maxInlineSize":"24rem","inlineSize":"100%"},"children":["$","$Le",null,{"label":"Bio","description":"A short description for your public profile.","placeholder":"Tell us about yourself…","withAsterisk":true}]}]}]]}]
+10:T9be,/* The complete stylesheet for <Textarea /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Textarea-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    inline-size: var(--_w, 100%);
+    font-family: var(--fui-font);
+  }
+
+  .fui-Textarea-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 550;
+    color: var(--fui-text);
+  }
+  .fui-Textarea-required {
+    color: var(--fui-danger);
+    margin-inline-start: 0.15em;
+  }
+
+  .fui-Textarea-description {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Textarea-field {
+    display: flex;
+    padding-block: var(--_py, 0.5rem);
+    padding-inline: var(--_px, 0.75rem);
+    border: 1px solid var(--fui-border-strong);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    transition:
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+  .fui-Textarea-field:focus-within {
+    border-color: var(--fui-primary);
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Textarea-field[data-invalid] {
+    border-color: var(--fui-danger);
+  }
+  .fui-Textarea-field[data-invalid]:focus-within {
+    box-shadow: 0 0 0 3px
+      color-mix(in oklch, var(--fui-danger) 40%, transparent);
+  }
+  .fui-Textarea-field[data-disabled] {
+    background: var(--fui-bg-subtle);
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .fui-Textarea-field[data-size="sm"] {
+    --_py: 0.375rem;
+    --_px: 0.625rem;
+    --_min-h: calc(var(--fui-control-height-sm) * 1.5);
+  }
+  .fui-Textarea-field[data-size="lg"] {
+    --_py: 0.625rem;
+    --_px: 0.875rem;
+    --_min-h: calc(var(--fui-control-height-lg) * 1.5);
+  }
+
+  .fui-Textarea-textarea {
+    flex: 1;
+    min-inline-size: 0;
+    min-block-size: var(--_min-h, calc(var(--fui-control-height-md) * 1.5));
+    border: none;
+    outline: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: var(--_fz, var(--fui-text-sm));
+    line-height: 1.5;
+    resize: vertical;
+  }
+  .fui-Textarea-textarea::placeholder {
+    color: var(--fui-text-dim);
+  }
+  .fui-Textarea-textarea:disabled {
+    cursor: not-allowed;
+    resize: none;
+  }
+  .fui-Textarea-field[data-size="lg"] .fui-Textarea-textarea {
+    --_fz: var(--fui-text-md);
+  }
+
+  .fui-Textarea-error {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-danger);
+  }
+}7:["$","div","Error state",{"id":"error-state","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Error state"}],"$undefined",["$","$L3",null,{"code":"<Textarea\n  label=\"Message\"\n  defaultValue=\"Too short\"\n  error=\"Please enter at least 20 characters.\"\n/>","css":"$10","children":["$","div",null,{"style":{"maxInlineSize":"24rem","inlineSize":"100%"},"children":["$","$Le",null,{"label":"Message","defaultValue":"Too short","error":"Please enter at least 20 characters."}]}]}]]}]
+11:T9be,/* The complete stylesheet for <Textarea /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Textarea-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    inline-size: var(--_w, 100%);
+    font-family: var(--fui-font);
+  }
+
+  .fui-Textarea-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 550;
+    color: var(--fui-text);
+  }
+  .fui-Textarea-required {
+    color: var(--fui-danger);
+    margin-inline-start: 0.15em;
+  }
+
+  .fui-Textarea-description {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Textarea-field {
+    display: flex;
+    padding-block: var(--_py, 0.5rem);
+    padding-inline: var(--_px, 0.75rem);
+    border: 1px solid var(--fui-border-strong);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    transition:
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+  .fui-Textarea-field:focus-within {
+    border-color: var(--fui-primary);
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Textarea-field[data-invalid] {
+    border-color: var(--fui-danger);
+  }
+  .fui-Textarea-field[data-invalid]:focus-within {
+    box-shadow: 0 0 0 3px
+      color-mix(in oklch, var(--fui-danger) 40%, transparent);
+  }
+  .fui-Textarea-field[data-disabled] {
+    background: var(--fui-bg-subtle);
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .fui-Textarea-field[data-size="sm"] {
+    --_py: 0.375rem;
+    --_px: 0.625rem;
+    --_min-h: calc(var(--fui-control-height-sm) * 1.5);
+  }
+  .fui-Textarea-field[data-size="lg"] {
+    --_py: 0.625rem;
+    --_px: 0.875rem;
+    --_min-h: calc(var(--fui-control-height-lg) * 1.5);
+  }
+
+  .fui-Textarea-textarea {
+    flex: 1;
+    min-inline-size: 0;
+    min-block-size: var(--_min-h, calc(var(--fui-control-height-md) * 1.5));
+    border: none;
+    outline: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: var(--_fz, var(--fui-text-sm));
+    line-height: 1.5;
+    resize: vertical;
+  }
+  .fui-Textarea-textarea::placeholder {
+    color: var(--fui-text-dim);
+  }
+  .fui-Textarea-textarea:disabled {
+    cursor: not-allowed;
+    resize: none;
+  }
+  .fui-Textarea-field[data-size="lg"] .fui-Textarea-textarea {
+    --_fz: var(--fui-text-md);
+  }
+
+  .fui-Textarea-error {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-danger);
+  }
+}8:["$","div","Sizes",{"id":"sizes","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Sizes"}],"$undefined",["$","$L3",null,{"code":"<Textarea size=\"sm\" placeholder=\"Small\" />\n<Textarea size=\"md\" placeholder=\"Medium\" />\n<Textarea size=\"lg\" placeholder=\"Large\" />","css":"$11","children":["$","div",null,{"style":{"display":"grid","gap":"0.75rem","maxInlineSize":"24rem","inlineSize":"100%"},"children":[["$","$Le",null,{"size":"sm","placeholder":"Small"}],["$","$Le",null,{"size":"md","placeholder":"Medium"}],["$","$Le",null,{"size":"lg","placeholder":"Large"}]]}]}]]}]
+9:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","label",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"label"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Field label rendered above the textarea."}]]}],["$","tr","description",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"description"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Helper text rendered below the label."}]]}],["$","tr","error",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"error"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Error message; puts the field in an invalid state."}]]}],["$","tr","size",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"size"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"sm\" | \"md\" | \"lg\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"md\""}]}],["$","td",null,{"children":"Control size (min height, padding, font size)."}]]}],["$","tr","radius",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"radius"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"sm\" | \"md\" | \"lg\" | \"xl\" | \"full\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"md\""}]}],["$","td",null,{"children":"Border radius token."}]]}],["$","tr","withAsterisk",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"withAsterisk"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"boolean"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Show a required asterisk next to the label."}]]}],["$","tr","rows",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"rows"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"number"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"3"}]}],["$","td",null,{"children":"Number of visible text rows."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"TextareaHTMLAttributes"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <textarea> props are forwarded."}]]}]]}]]}]}]]}]
+a:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+b:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+c:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+d:["$","$L12",null,{"children":["$","$13",null,{"name":"Next.MetadataOutlet","children":"$@14"}]}]
+14:null

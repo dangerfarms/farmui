@@ -1,0 +1,118 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+5:I[82871,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"PopoverDemo"]
+d:I[82871,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"PopoverFormDemo"]
+e:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+f:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:T586,/* The complete stylesheet for <Popover /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Popover-root {
+    position: relative;
+    display: inline-block;
+  }
+
+  .fui-Popover-dropdown {
+    position: absolute;
+    z-index: 50;
+    inset-inline-start: 0;
+    inline-size: var(--_w, max-content);
+    min-inline-size: 12rem;
+    max-inline-size: min(20rem, 90vw);
+    padding: var(--fui-space-md);
+    border: 1px solid var(--fui-border);
+    border-radius: var(--fui-radius-md);
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    font-family: var(--fui-font);
+    font-size: var(--fui-text-sm);
+    box-shadow: var(--fui-shadow-lg);
+    transform-origin: top;
+    animation: fui-Popover-popover-in var(--fui-transition);
+  }
+
+  .fui-Popover-dropdown[data-position="bottom"] {
+    inset-block-start: calc(100% + var(--fui-space-xs));
+  }
+  .fui-Popover-dropdown[data-position="top"] {
+    inset-block-end: calc(100% + var(--fui-space-xs));
+    transform-origin: bottom;
+  }
+
+  @keyframes fui-Popover-popover-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px) scale(0.98);
+    }
+  }
+  .fui-Popover-dropdown[data-position="top"] {
+    animation-name: fui-Popover-popover-in-top;
+  }
+  @keyframes fui-Popover-popover-in-top {
+    from {
+      opacity: 0;
+      transform: translateY(4px) scale(0.98);
+    }
+  }
+}6:T586,/* The complete stylesheet for <Popover /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Popover-root {
+    position: relative;
+    display: inline-block;
+  }
+
+  .fui-Popover-dropdown {
+    position: absolute;
+    z-index: 50;
+    inset-inline-start: 0;
+    inline-size: var(--_w, max-content);
+    min-inline-size: 12rem;
+    max-inline-size: min(20rem, 90vw);
+    padding: var(--fui-space-md);
+    border: 1px solid var(--fui-border);
+    border-radius: var(--fui-radius-md);
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    font-family: var(--fui-font);
+    font-size: var(--fui-text-sm);
+    box-shadow: var(--fui-shadow-lg);
+    transform-origin: top;
+    animation: fui-Popover-popover-in var(--fui-transition);
+  }
+
+  .fui-Popover-dropdown[data-position="bottom"] {
+    inset-block-start: calc(100% + var(--fui-space-xs));
+  }
+  .fui-Popover-dropdown[data-position="top"] {
+    inset-block-end: calc(100% + var(--fui-space-xs));
+    transform-origin: bottom;
+  }
+
+  @keyframes fui-Popover-popover-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px) scale(0.98);
+    }
+  }
+  .fui-Popover-dropdown[data-position="top"] {
+    animation-name: fui-Popover-popover-in-top;
+  }
+  @keyframes fui-Popover-popover-in-top {
+    from {
+      opacity: 0;
+      transform: translateY(4px) scale(0.98);
+    }
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Overlays"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"Popover"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"A click-triggered floating panel anchored to a trigger element."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { Popover } from \"@farmui/core\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Basic usage",{"id":"basic-usage","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Basic usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Click the trigger to toggle the panel; click outside or press Escape to close."}],["$","$L3",null,{"code":"<Popover trigger={<Button>Toggle</Button>}>\n  <p>This panel is anchored to the button.</p>\n</Popover>","css":"$4","children":["$","$L5",null,{}]}]]}],["$","div","With form content",{"id":"with-form-content","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"With form content"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Popovers can hold interactive content like inputs and buttons."}],["$","$L3",null,{"code":"<Popover trigger={<Button variant=\"light\">Add product</Button>} width={260}>\n  <form style={{ display: \"grid\", gap: \"0.75rem\" }}>\n    <Input label=\"Name\" placeholder=\"Wireless headphones\" size=\"sm\" />\n    <Input label=\"Price\" placeholder=\"49.00\" size=\"sm\" />\n    <Button type=\"submit\" size=\"sm\" fullWidth>Save</Button>\n  </form>\n</Popover>","css":"$6","children":"$L7"}]]}]]}]]}],"$L8"]}],["$L9","$La","$Lb"],"$Lc"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+7:["$","$Ld",null,{}]
+8:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","trigger",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"trigger"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactElement"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Element that toggles the panel (gets aria-expanded / aria-haspopup wired on)."}]]}],["$","tr","position",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"position"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"bottom\" | \"top\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"bottom\""}]}],["$","td",null,{"children":"Which side the panel opens toward."}]]}],["$","tr","width",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"width"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"string | number"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Fixed panel width (any CSS length). Defaults to fit-content."}]]}],["$","tr","children",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"children"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Content rendered inside the dropdown panel."}]]}]]}]]}]}]]}]
+9:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+a:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+b:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+c:["$","$Le",null,{"children":["$","$f",null,{"name":"Next.MetadataOutlet","children":"$@10"}]}]
+10:null

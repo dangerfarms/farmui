@@ -1,0 +1,227 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+d:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Container"]
+11:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+12:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:T458,<Footer
+  brand="FarmUI"
+  tagline="The operating system for the modern farm."
+  columns={[
+    {
+      title: "Product",
+      links: [
+        { label: "Features", href: "/features" },
+        { label: "Pricing", href: "/pricing" },
+        { label: "Integrations", href: "/integrations" },
+        { label: "Changelog", href: "/changelog" },
+      ],
+    },
+    {
+      title: "Company",
+      links: [
+        { label: "About", href: "/about" },
+        { label: "Careers", href: "/careers" },
+        { label: "Blog", href: "/blog" },
+        { label: "Contact", href: "/contact" },
+      ],
+    },
+    {
+      title: "Resources",
+      links: [
+        { label: "Docs", href: "/docs" },
+        { label: "Guides", href: "/guides" },
+        { label: "API reference", href: "/api" },
+        { label: "Status", href: "/status" },
+      ],
+    },
+    {
+      title: "Legal",
+      links: [
+        { label: "Privacy", href: "/privacy" },
+        { label: "Terms", href: "/terms" },
+        { label: "Security", href: "/security" },
+      ],
+    },
+  ]}
+  bottom="© 2026 FarmUI, Inc. All rights reserved."
+/>5:T810,/* The complete stylesheet for <Footer /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.blocks {
+  .fui-Footer-root {
+    padding-block: clamp(2.5rem, 6vw, 4rem);
+    font-family: var(--fui-font);
+    color: var(--fui-text-muted);
+    background: var(--fui-bg-subtle);
+    border-block-start: 1px solid var(--fui-border);
+  }
+
+  .fui-Footer-inner {
+    display: grid;
+    grid-template-columns: 1.4fr 2.6fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+  @container (max-width: 48rem) {
+    .fui-Footer-inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .fui-Footer-mark {
+    display: flex;
+    align-items: center;
+    color: var(--fui-text);
+    font-weight: 700;
+    font-size: var(--fui-text-lg);
+  }
+  .fui-Footer-tagline {
+    margin: 0.75rem 0 0;
+    max-inline-size: 22rem;
+    font-size: var(--fui-text-sm);
+    line-height: 1.6;
+    color: var(--fui-text-muted);
+    text-wrap: pretty;
+  }
+
+  .fui-Footer-nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .fui-Footer-heading {
+    margin: 0 0 0.9rem;
+    font-size: var(--fui-text-xs);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--fui-text);
+  }
+  .fui-Footer-links {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .fui-Footer-link {
+    color: var(--fui-text-muted);
+    font-size: var(--fui-text-sm);
+    text-decoration: none;
+    transition: color var(--fui-transition);
+  }
+  .fui-Footer-link:hover {
+    color: var(--fui-text);
+  }
+  .fui-Footer-link:focus-visible {
+    outline: 2px solid var(--fui-primary);
+    outline-offset: 2px;
+    border-radius: var(--fui-radius-sm);
+  }
+
+  .fui-Footer-bottom {
+    margin-block-start: clamp(2rem, 5vw, 3rem);
+    padding-block-start: 1.5rem;
+    border-block-start: 1px solid var(--fui-border);
+    font-size: var(--fui-text-sm);
+    color: var(--fui-text-muted);
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Blocks"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"Footer"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"A site footer with a brand area, grouped link columns, and a bottom bar."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { Footer } from \"@farmui/blocks\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Brand, columns & bottom bar",{"id":"brand-columns-bottom-bar","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Brand, columns & bottom bar"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"The lead column carries the brand mark and tagline; the nav holds grouped link columns; the bottom bar takes a copyright line."}],["$","$L3",null,{"code":"$4","css":"$5","children":"$L6"}]]}],"$L7"]}]]}],"$L8"]}],["$L9","$La","$Lb"],"$Lc"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+6:["$","footer",null,{"className":"fui-Footer-root","children":["$","$Ld",null,{"children":[["$","div",null,{"className":"fui-Footer-inner","children":[["$","div",null,{"className":"fui-Footer-brand","children":[["$","div",null,{"className":"fui-Footer-mark","children":"FarmUI"}],["$","p",null,{"className":"fui-Footer-tagline","children":"The operating system for the modern farm."}]]}],["$","nav",null,{"className":"fui-Footer-nav","aria-label":"Footer","children":[["$","div","0",{"className":"fui-Footer-column","children":[["$","h2",null,{"className":"fui-Footer-heading","children":"Product"}],["$","ul",null,{"className":"fui-Footer-links","children":[["$","li","0",{"className":"fui-Footer-item","children":["$","a",null,{"className":"fui-Footer-link","href":"/features","children":"Features"}]}],["$","li","1",{"className":"fui-Footer-item","children":["$","a",null,{"className":"fui-Footer-link","href":"/pricing","children":"Pricing"}]}],["$","li","2",{"className":"fui-Footer-item","children":["$","a",null,{"className":"fui-Footer-link","href":"/integrations","children":"Integrations"}]}],["$","li","3",{"className":"fui-Footer-item","children":["$","a",null,{"className":"fui-Footer-link","href":"/changelog","children":"Changelog"}]}]]}]]}],["$","div","1",{"className":"fui-Footer-column","children":[["$","h2",null,{"className":"fui-Footer-heading","children":"Company"}],["$","ul",null,{"className":"fui-Footer-links","children":[["$","li","0",{"className":"fui-Footer-item","children":["$","a",null,{"className":"fui-Footer-link","href":"/about","children":"About"}]}],["$","li","1",{"className":"fui-Footer-item","children":["$","a",null,{"className":"fui-Footer-link","href":"/careers","children":"Careers"}]}],["$","li","2",{"className":"fui-Footer-item","children":["$","a",null,{"className":"fui-Footer-link","href":"/blog","children":"Blog"}]}],["$","li","3",{"className":"fui-Footer-item","children":["$","a",null,{"className":"fui-Footer-link","href":"/contact","children":"Contact"}]}]]}]]}],["$","div","2",{"className":"fui-Footer-column","children":[["$","h2",null,{"className":"fui-Footer-heading","children":"Resources"}],["$","ul",null,{"className":"fui-Footer-links","children":[["$","li","0",{"className":"fui-Footer-item","children":["$","a",null,{"className":"fui-Footer-link","href":"/docs","children":"Docs"}]}],["$","li","1",{"className":"fui-Footer-item","children":["$","a",null,{"className":"fui-Footer-link","href":"/guides","children":"Guides"}]}],["$","li","2",{"className":"fui-Footer-item","children":["$","a",null,{"className":"fui-Footer-link","href":"/api","children":"API reference"}]}],["$","li","3",{"className":"fui-Footer-item","children":["$","a",null,{"className":"fui-Footer-link","href":"/status","children":"Status"}]}]]}]]}],["$","div","3",{"className":"fui-Footer-column","children":[["$","h2",null,{"className":"fui-Footer-heading","children":"Legal"}],["$","ul",null,{"className":"fui-Footer-links","children":[["$","li","0",{"className":"fui-Footer-item","children":["$","a",null,{"className":"fui-Footer-link","href":"/privacy","children":"Privacy"}]}],["$","li","1",{"className":"fui-Footer-item","children":["$","a",null,{"className":"fui-Footer-link","href":"/terms","children":"Terms"}]}],["$","li","2",{"className":"fui-Footer-item","children":["$","a",null,{"className":"fui-Footer-link","href":"/security","children":"Security"}]}]]}]]}]]}]]}],["$","div",null,{"className":"fui-Footer-bottom","children":"© 2026 FarmUI, Inc. All rights reserved."}]]}]}]
+e:T810,/* The complete stylesheet for <Footer /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.blocks {
+  .fui-Footer-root {
+    padding-block: clamp(2.5rem, 6vw, 4rem);
+    font-family: var(--fui-font);
+    color: var(--fui-text-muted);
+    background: var(--fui-bg-subtle);
+    border-block-start: 1px solid var(--fui-border);
+  }
+
+  .fui-Footer-inner {
+    display: grid;
+    grid-template-columns: 1.4fr 2.6fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+  @container (max-width: 48rem) {
+    .fui-Footer-inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .fui-Footer-mark {
+    display: flex;
+    align-items: center;
+    color: var(--fui-text);
+    font-weight: 700;
+    font-size: var(--fui-text-lg);
+  }
+  .fui-Footer-tagline {
+    margin: 0.75rem 0 0;
+    max-inline-size: 22rem;
+    font-size: var(--fui-text-sm);
+    line-height: 1.6;
+    color: var(--fui-text-muted);
+    text-wrap: pretty;
+  }
+
+  .fui-Footer-nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .fui-Footer-heading {
+    margin: 0 0 0.9rem;
+    font-size: var(--fui-text-xs);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--fui-text);
+  }
+  .fui-Footer-links {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .fui-Footer-link {
+    color: var(--fui-text-muted);
+    font-size: var(--fui-text-sm);
+    text-decoration: none;
+    transition: color var(--fui-transition);
+  }
+  .fui-Footer-link:hover {
+    color: var(--fui-text);
+  }
+  .fui-Footer-link:focus-visible {
+    outline: 2px solid var(--fui-primary);
+    outline-offset: 2px;
+    border-radius: var(--fui-radius-sm);
+  }
+
+  .fui-Footer-bottom {
+    margin-block-start: clamp(2rem, 5vw, 3rem);
+    padding-block-start: 1.5rem;
+    border-block-start: 1px solid var(--fui-border);
+    font-size: var(--fui-text-sm);
+    color: var(--fui-text-muted);
+  }
+}7:["$","div","Columns only",{"id":"columns-only","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Columns only"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Brand, tagline, and bottom bar are all optional — pass just columns for a lean link footer."}],["$","$L3",null,{"code":"<Footer\n  columns={[\n    {\n      title: \"Explore\",\n      links: [\n        { label: \"Home\", href: \"/\" },\n        { label: \"Features\", href: \"/features\" },\n        { label: \"Pricing\", href: \"/pricing\" },\n      ],\n    },\n    {\n      title: \"Support\",\n      links: [\n        { label: \"Help center\", href: \"/help\" },\n        { label: \"Contact us\", href: \"/contact\" },\n      ],\n    },\n  ]}\n/>","css":"$e","children":["$","footer",null,{"className":"fui-Footer-root","children":["$","$Ld",null,{"children":[["$","div",null,{"className":"fui-Footer-inner","children":[false,["$","nav",null,{"className":"fui-Footer-nav","aria-label":"Footer","children":[["$","div","0",{"className":"fui-Footer-column","children":[["$","h2",null,{"className":"fui-Footer-heading","children":"Explore"}],["$","ul",null,{"className":"fui-Footer-links","children":[["$","li","0",{"className":"fui-Footer-item","children":["$","a",null,{"className":"fui-Footer-link","href":"/","children":"Home"}]}],["$","li","1",{"className":"fui-Footer-item","children":["$","a",null,{"className":"fui-Footer-link","href":"/features","children":"Features"}]}],"$Lf"]}]]}],"$L10"]}]]}],false]}]}]}]]}]
+8:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","columns",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"columns"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"FooterColumn[]"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Grouped navigation link columns. FooterColumn = { title: ReactNode, links: { label: ReactNode, href: string }[] }."}]]}],["$","tr","brand",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"brand"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Brand mark or logo shown in the lead column."}]]}],["$","tr","tagline",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"tagline"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Short supporting line beneath the brand."}]]}],["$","tr","bottom",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"bottom"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"The bottom bar content (e.g. a copyright line)."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"HTMLAttributes<HTMLElement>"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <footer> props are forwarded."}]]}]]}]]}]}]]}]
+9:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+a:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+b:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+c:["$","$L11",null,{"children":["$","$12",null,{"name":"Next.MetadataOutlet","children":"$@13"}]}]
+f:["$","li","2",{"className":"fui-Footer-item","children":["$","a",null,{"className":"fui-Footer-link","href":"/pricing","children":"Pricing"}]}]
+10:["$","div","1",{"className":"fui-Footer-column","children":[["$","h2",null,{"className":"fui-Footer-heading","children":"Support"}],["$","ul",null,{"className":"fui-Footer-links","children":[["$","li","0",{"className":"fui-Footer-item","children":["$","a",null,{"className":"fui-Footer-link","href":"/help","children":"Help center"}]}],["$","li","1",{"className":"fui-Footer-item","children":["$","a",null,{"className":"fui-Footer-link","href":"/contact","children":"Contact us"}]}]]}]]}]
+13:null

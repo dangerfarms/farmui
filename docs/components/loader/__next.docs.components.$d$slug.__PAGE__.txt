@@ -1,0 +1,359 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+d:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Loader"]
+10:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+11:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:Ta73,/* The complete stylesheet for <Loader /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Loader-root {
+    --_size: 1.5rem;
+    --_color: var(--fui-primary);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--_size);
+    block-size: var(--_size);
+    color: var(--_color);
+    vertical-align: middle;
+  }
+
+  .fui-Loader-srOnly {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    padding: 0;
+    margin: -1px;
+    border: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* Spinner — rotating ring */
+  .fui-Loader-spinner {
+    inline-size: 100%;
+    block-size: 100%;
+    border: max(2px, calc(var(--_size) * 0.12)) solid
+      color-mix(in oklch, currentColor 25%, transparent);
+    border-block-start-color: currentColor;
+    border-radius: var(--fui-radius-full);
+    animation: fui-Loader-loader-spin 0.65s linear infinite;
+  }
+  @keyframes fui-Loader-loader-spin {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+  /* Dots — three pulsing dots */
+  .fui-Loader-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--_size) * 0.18);
+    inline-size: 100%;
+    block-size: 100%;
+    justify-content: center;
+  }
+  .fui-Loader-dot {
+    inline-size: calc(var(--_size) * 0.26);
+    block-size: calc(var(--_size) * 0.26);
+    border-radius: var(--fui-radius-full);
+    background: currentColor;
+    animation: fui-Loader-loader-dot 1.2s ease-in-out infinite;
+  }
+  .fui-Loader-dot:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  .fui-Loader-dot:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  @keyframes fui-Loader-loader-dot {
+    0%,
+    80%,
+    100% {
+      opacity: 0.3;
+      transform: scale(0.75);
+    }
+    40% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Bars — three scaling bars */
+  .fui-Loader-bars {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--_size) * 0.16);
+    inline-size: 100%;
+    block-size: 100%;
+    justify-content: center;
+  }
+  .fui-Loader-bar {
+    inline-size: calc(var(--_size) * 0.18);
+    block-size: 100%;
+    border-radius: var(--fui-radius-sm);
+    background: currentColor;
+    transform-origin: center;
+    animation: fui-Loader-loader-bar 1s ease-in-out infinite;
+  }
+  .fui-Loader-bar:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  .fui-Loader-bar:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  @keyframes fui-Loader-loader-bar {
+    0%,
+    100% {
+      transform: scaleY(0.4);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Feedback"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"Loader"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"An animated indicator for pending, indeterminate work."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { Loader } from \"@farmui/core\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Variants",{"id":"variants","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Variants"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Spinner, dots, or bars."}],["$","$L3",null,{"code":"<Loader variant=\"spinner\" />\n<Loader variant=\"dots\" />\n<Loader variant=\"bars\" />","css":"$4","children":"$L5"}]]}],"$L6","$L7"]}]]}],"$L8"]}],["$L9","$La","$Lb"],"$Lc"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+5:[["$","$Ld",null,{"variant":"spinner"}],["$","$Ld",null,{"variant":"dots"}],["$","$Ld",null,{"variant":"bars"}]]
+e:Ta73,/* The complete stylesheet for <Loader /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Loader-root {
+    --_size: 1.5rem;
+    --_color: var(--fui-primary);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--_size);
+    block-size: var(--_size);
+    color: var(--_color);
+    vertical-align: middle;
+  }
+
+  .fui-Loader-srOnly {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    padding: 0;
+    margin: -1px;
+    border: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* Spinner — rotating ring */
+  .fui-Loader-spinner {
+    inline-size: 100%;
+    block-size: 100%;
+    border: max(2px, calc(var(--_size) * 0.12)) solid
+      color-mix(in oklch, currentColor 25%, transparent);
+    border-block-start-color: currentColor;
+    border-radius: var(--fui-radius-full);
+    animation: fui-Loader-loader-spin 0.65s linear infinite;
+  }
+  @keyframes fui-Loader-loader-spin {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+  /* Dots — three pulsing dots */
+  .fui-Loader-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--_size) * 0.18);
+    inline-size: 100%;
+    block-size: 100%;
+    justify-content: center;
+  }
+  .fui-Loader-dot {
+    inline-size: calc(var(--_size) * 0.26);
+    block-size: calc(var(--_size) * 0.26);
+    border-radius: var(--fui-radius-full);
+    background: currentColor;
+    animation: fui-Loader-loader-dot 1.2s ease-in-out infinite;
+  }
+  .fui-Loader-dot:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  .fui-Loader-dot:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  @keyframes fui-Loader-loader-dot {
+    0%,
+    80%,
+    100% {
+      opacity: 0.3;
+      transform: scale(0.75);
+    }
+    40% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Bars — three scaling bars */
+  .fui-Loader-bars {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--_size) * 0.16);
+    inline-size: 100%;
+    block-size: 100%;
+    justify-content: center;
+  }
+  .fui-Loader-bar {
+    inline-size: calc(var(--_size) * 0.18);
+    block-size: 100%;
+    border-radius: var(--fui-radius-sm);
+    background: currentColor;
+    transform-origin: center;
+    animation: fui-Loader-loader-bar 1s ease-in-out infinite;
+  }
+  .fui-Loader-bar:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  .fui-Loader-bar:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  @keyframes fui-Loader-loader-bar {
+    0%,
+    100% {
+      transform: scaleY(0.4);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+  }
+}6:["$","div","Sizes",{"id":"sizes","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Sizes"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Use a token or pass a pixel number."}],["$","$L3",null,{"code":"<Loader size=\"sm\" />\n<Loader size=\"md\" />\n<Loader size=\"lg\" />\n<Loader size={48} />","css":"$e","children":[["$","$Ld",null,{"size":"sm"}],["$","$Ld",null,{"size":"md"}],["$","$Ld",null,{"size":"lg"}],["$","$Ld",null,{"size":48}]]}]]}]
+f:Ta73,/* The complete stylesheet for <Loader /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Loader-root {
+    --_size: 1.5rem;
+    --_color: var(--fui-primary);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--_size);
+    block-size: var(--_size);
+    color: var(--_color);
+    vertical-align: middle;
+  }
+
+  .fui-Loader-srOnly {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    padding: 0;
+    margin: -1px;
+    border: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* Spinner — rotating ring */
+  .fui-Loader-spinner {
+    inline-size: 100%;
+    block-size: 100%;
+    border: max(2px, calc(var(--_size) * 0.12)) solid
+      color-mix(in oklch, currentColor 25%, transparent);
+    border-block-start-color: currentColor;
+    border-radius: var(--fui-radius-full);
+    animation: fui-Loader-loader-spin 0.65s linear infinite;
+  }
+  @keyframes fui-Loader-loader-spin {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+  /* Dots — three pulsing dots */
+  .fui-Loader-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--_size) * 0.18);
+    inline-size: 100%;
+    block-size: 100%;
+    justify-content: center;
+  }
+  .fui-Loader-dot {
+    inline-size: calc(var(--_size) * 0.26);
+    block-size: calc(var(--_size) * 0.26);
+    border-radius: var(--fui-radius-full);
+    background: currentColor;
+    animation: fui-Loader-loader-dot 1.2s ease-in-out infinite;
+  }
+  .fui-Loader-dot:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  .fui-Loader-dot:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  @keyframes fui-Loader-loader-dot {
+    0%,
+    80%,
+    100% {
+      opacity: 0.3;
+      transform: scale(0.75);
+    }
+    40% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Bars — three scaling bars */
+  .fui-Loader-bars {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--_size) * 0.16);
+    inline-size: 100%;
+    block-size: 100%;
+    justify-content: center;
+  }
+  .fui-Loader-bar {
+    inline-size: calc(var(--_size) * 0.18);
+    block-size: 100%;
+    border-radius: var(--fui-radius-sm);
+    background: currentColor;
+    transform-origin: center;
+    animation: fui-Loader-loader-bar 1s ease-in-out infinite;
+  }
+  .fui-Loader-bar:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  .fui-Loader-bar:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  @keyframes fui-Loader-loader-bar {
+    0%,
+    100% {
+      transform: scaleY(0.4);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+  }
+}7:["$","div","Colors",{"id":"colors","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Colors"}],"$undefined",["$","$L3",null,{"code":"<Loader color=\"primary\" />\n<Loader color=\"info\" />\n<Loader color=\"success\" />\n<Loader color=\"warning\" />\n<Loader color=\"danger\" />","css":"$f","children":[["$","$Ld",null,{"color":"primary"}],["$","$Ld",null,{"color":"info"}],["$","$Ld",null,{"color":"success"}],["$","$Ld",null,{"color":"warning"}],["$","$Ld",null,{"color":"danger"}]]}]]}]
+8:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","size",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"size"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"sm\" | \"md\" | \"lg\" | number"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"md\""}]}],["$","td",null,{"children":"Overall size — a token or an explicit pixel number."}]]}],["$","tr","color",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"color"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"primary\" | \"info\" | \"success\" | \"warning\" | \"danger\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"primary\""}]}],["$","td",null,{"children":"Semantic color."}]]}],["$","tr","variant",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"variant"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"spinner\" | \"dots\" | \"bars\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"spinner\""}]}],["$","td",null,{"children":"Animation style."}]]}],["$","tr","label",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"label"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"string"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"Loading\""}]}],["$","td",null,{"children":"Accessible label announced to assistive tech."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"HTMLAttributes<HTMLSpanElement>"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <span> props are forwarded."}]]}]]}]]}]}]]}]
+9:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+a:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+b:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+c:["$","$L10",null,{"children":["$","$11",null,{"name":"Next.MetadataOutlet","children":"$@12"}]}]
+12:null

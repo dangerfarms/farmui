@@ -1,0 +1,469 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+e:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Badge"]
+15:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+16:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:Tc49,/* The complete stylesheet for <Badge /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Badge-root {
+    /* Per-color palette knobs (defaults = primary) */
+    --_color: var(--fui-primary);
+    --_soft: var(--fui-primary-soft);
+    --_on-soft: var(--fui-primary-hover);
+    --_contrast: var(--fui-primary-contrast);
+
+    /* Resolved by variant */
+    --_bg: var(--_color);
+    --_fg: var(--_contrast);
+    --_border: transparent;
+
+    display: inline-flex;
+    align-items: center;
+    gap: var(--_gap, var(--fui-space-xs));
+    inline-size: fit-content;
+    block-size: var(--_h, 1.375rem);
+    padding-inline: var(--_px, 0.625rem);
+    border: 1px solid var(--_border);
+    border-radius: var(--_radius, var(--fui-radius-full));
+    background: var(--_bg);
+    color: var(--_fg);
+    font-family: var(--fui-font);
+    font-size: var(--_fz, var(--fui-text-xs));
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    user-select: none;
+    transition:
+      background var(--fui-transition),
+      border-color var(--fui-transition),
+      color var(--fui-transition);
+  }
+
+  /* Sizes */
+  .fui-Badge-root[data-size="sm"] {
+    --_h: 1.125rem;
+    --_px: 0.5rem;
+    --_fz: 0.6875rem;
+  }
+  .fui-Badge-root[data-size="lg"] {
+    --_h: 1.625rem;
+    --_px: 0.8125rem;
+    --_fz: var(--fui-text-sm);
+    --_gap: var(--fui-space-sm);
+  }
+
+  /* Colors — remap the palette knobs */
+  .fui-Badge-root[data-color="danger"] {
+    --_color: var(--fui-danger);
+    --_soft: var(--fui-danger-soft);
+    --_on-soft: var(--fui-danger);
+    --_contrast: var(--fui-primary-contrast);
+  }
+  .fui-Badge-root[data-color="warning"] {
+    --_color: var(--fui-warning);
+    --_soft: var(--fui-warning-soft);
+    --_on-soft: color-mix(in oklch, var(--fui-warning) 70%, black);
+    --_contrast: oklch(0.24 0.02 80);
+  }
+  .fui-Badge-root[data-color="info"] {
+    --_color: var(--fui-info);
+    --_soft: var(--fui-info-soft);
+    --_on-soft: var(--fui-info);
+    --_contrast: var(--fui-primary-contrast);
+  }
+  .fui-Badge-root[data-color="gray"] {
+    --_color: var(--fui-text-muted);
+    --_soft: var(--fui-bg-subtle);
+    --_on-soft: var(--fui-text);
+    --_contrast: var(--fui-primary-contrast);
+  }
+
+  /* Variants */
+  .fui-Badge-root[data-variant="light"] {
+    --_bg: var(--_soft);
+    --_fg: var(--_on-soft);
+  }
+
+  .fui-Badge-root[data-variant="outline"] {
+    --_bg: transparent;
+    --_fg: var(--_on-soft);
+    --_border: color-mix(in oklch, var(--_color) 45%, transparent);
+  }
+  .fui-Badge-root[data-color="gray"][data-variant="outline"] {
+    --_border: var(--fui-border-strong);
+  }
+
+  /* Dot variant reads like a subtle, bordered label with a status dot */
+  .fui-Badge-root[data-variant="dot"] {
+    --_bg: var(--fui-surface);
+    --_fg: var(--fui-text);
+    --_border: var(--fui-border);
+  }
+
+  .fui-Badge-dot {
+    inline-size: 0.5em;
+    block-size: 0.5em;
+    border-radius: var(--fui-radius-full);
+    background: var(--_color);
+    flex: none;
+  }
+
+  .fui-Badge-section {
+    display: inline-flex;
+    align-items: center;
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Data display"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"Badge"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"A compact pill for statuses, counts, and labels."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { Badge } from \"@farmui/core\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Variants",{"id":"variants","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Variants"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Four visual styles for different emphasis levels."}],["$","$L3",null,{"code":"<Badge>Filled</Badge>\n<Badge variant=\"light\">Light</Badge>\n<Badge variant=\"outline\">Outline</Badge>\n<Badge variant=\"dot\">Dot</Badge>","css":"$4","children":"$L5"}]]}],"$L6","$L7","$L8"]}]]}],"$L9"]}],["$La","$Lb","$Lc"],"$Ld"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+5:[["$","$Le",null,{"children":"Filled"}],["$","$Le",null,{"variant":"light","children":"Light"}],["$","$Le",null,{"variant":"outline","children":"Outline"}],["$","$Le",null,{"variant":"dot","children":"Dot"}]]
+f:Tc49,/* The complete stylesheet for <Badge /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Badge-root {
+    /* Per-color palette knobs (defaults = primary) */
+    --_color: var(--fui-primary);
+    --_soft: var(--fui-primary-soft);
+    --_on-soft: var(--fui-primary-hover);
+    --_contrast: var(--fui-primary-contrast);
+
+    /* Resolved by variant */
+    --_bg: var(--_color);
+    --_fg: var(--_contrast);
+    --_border: transparent;
+
+    display: inline-flex;
+    align-items: center;
+    gap: var(--_gap, var(--fui-space-xs));
+    inline-size: fit-content;
+    block-size: var(--_h, 1.375rem);
+    padding-inline: var(--_px, 0.625rem);
+    border: 1px solid var(--_border);
+    border-radius: var(--_radius, var(--fui-radius-full));
+    background: var(--_bg);
+    color: var(--_fg);
+    font-family: var(--fui-font);
+    font-size: var(--_fz, var(--fui-text-xs));
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    user-select: none;
+    transition:
+      background var(--fui-transition),
+      border-color var(--fui-transition),
+      color var(--fui-transition);
+  }
+
+  /* Sizes */
+  .fui-Badge-root[data-size="sm"] {
+    --_h: 1.125rem;
+    --_px: 0.5rem;
+    --_fz: 0.6875rem;
+  }
+  .fui-Badge-root[data-size="lg"] {
+    --_h: 1.625rem;
+    --_px: 0.8125rem;
+    --_fz: var(--fui-text-sm);
+    --_gap: var(--fui-space-sm);
+  }
+
+  /* Colors — remap the palette knobs */
+  .fui-Badge-root[data-color="danger"] {
+    --_color: var(--fui-danger);
+    --_soft: var(--fui-danger-soft);
+    --_on-soft: var(--fui-danger);
+    --_contrast: var(--fui-primary-contrast);
+  }
+  .fui-Badge-root[data-color="warning"] {
+    --_color: var(--fui-warning);
+    --_soft: var(--fui-warning-soft);
+    --_on-soft: color-mix(in oklch, var(--fui-warning) 70%, black);
+    --_contrast: oklch(0.24 0.02 80);
+  }
+  .fui-Badge-root[data-color="info"] {
+    --_color: var(--fui-info);
+    --_soft: var(--fui-info-soft);
+    --_on-soft: var(--fui-info);
+    --_contrast: var(--fui-primary-contrast);
+  }
+  .fui-Badge-root[data-color="gray"] {
+    --_color: var(--fui-text-muted);
+    --_soft: var(--fui-bg-subtle);
+    --_on-soft: var(--fui-text);
+    --_contrast: var(--fui-primary-contrast);
+  }
+
+  /* Variants */
+  .fui-Badge-root[data-variant="light"] {
+    --_bg: var(--_soft);
+    --_fg: var(--_on-soft);
+  }
+
+  .fui-Badge-root[data-variant="outline"] {
+    --_bg: transparent;
+    --_fg: var(--_on-soft);
+    --_border: color-mix(in oklch, var(--_color) 45%, transparent);
+  }
+  .fui-Badge-root[data-color="gray"][data-variant="outline"] {
+    --_border: var(--fui-border-strong);
+  }
+
+  /* Dot variant reads like a subtle, bordered label with a status dot */
+  .fui-Badge-root[data-variant="dot"] {
+    --_bg: var(--fui-surface);
+    --_fg: var(--fui-text);
+    --_border: var(--fui-border);
+  }
+
+  .fui-Badge-dot {
+    inline-size: 0.5em;
+    block-size: 0.5em;
+    border-radius: var(--fui-radius-full);
+    background: var(--_color);
+    flex: none;
+  }
+
+  .fui-Badge-section {
+    display: inline-flex;
+    align-items: center;
+  }
+}6:["$","div","Colors",{"id":"colors","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Colors"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Semantic colors map to design tokens."}],["$","$L3",null,{"code":"<Badge color=\"primary\" variant=\"light\">Primary</Badge>\n<Badge color=\"gray\" variant=\"light\">Gray</Badge>\n<Badge color=\"danger\" variant=\"light\">Danger</Badge>\n<Badge color=\"warning\" variant=\"light\">Warning</Badge>\n<Badge color=\"info\" variant=\"light\">Info</Badge>","css":"$f","children":"$L10"}]]}]
+11:Tc49,/* The complete stylesheet for <Badge /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Badge-root {
+    /* Per-color palette knobs (defaults = primary) */
+    --_color: var(--fui-primary);
+    --_soft: var(--fui-primary-soft);
+    --_on-soft: var(--fui-primary-hover);
+    --_contrast: var(--fui-primary-contrast);
+
+    /* Resolved by variant */
+    --_bg: var(--_color);
+    --_fg: var(--_contrast);
+    --_border: transparent;
+
+    display: inline-flex;
+    align-items: center;
+    gap: var(--_gap, var(--fui-space-xs));
+    inline-size: fit-content;
+    block-size: var(--_h, 1.375rem);
+    padding-inline: var(--_px, 0.625rem);
+    border: 1px solid var(--_border);
+    border-radius: var(--_radius, var(--fui-radius-full));
+    background: var(--_bg);
+    color: var(--_fg);
+    font-family: var(--fui-font);
+    font-size: var(--_fz, var(--fui-text-xs));
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    user-select: none;
+    transition:
+      background var(--fui-transition),
+      border-color var(--fui-transition),
+      color var(--fui-transition);
+  }
+
+  /* Sizes */
+  .fui-Badge-root[data-size="sm"] {
+    --_h: 1.125rem;
+    --_px: 0.5rem;
+    --_fz: 0.6875rem;
+  }
+  .fui-Badge-root[data-size="lg"] {
+    --_h: 1.625rem;
+    --_px: 0.8125rem;
+    --_fz: var(--fui-text-sm);
+    --_gap: var(--fui-space-sm);
+  }
+
+  /* Colors — remap the palette knobs */
+  .fui-Badge-root[data-color="danger"] {
+    --_color: var(--fui-danger);
+    --_soft: var(--fui-danger-soft);
+    --_on-soft: var(--fui-danger);
+    --_contrast: var(--fui-primary-contrast);
+  }
+  .fui-Badge-root[data-color="warning"] {
+    --_color: var(--fui-warning);
+    --_soft: var(--fui-warning-soft);
+    --_on-soft: color-mix(in oklch, var(--fui-warning) 70%, black);
+    --_contrast: oklch(0.24 0.02 80);
+  }
+  .fui-Badge-root[data-color="info"] {
+    --_color: var(--fui-info);
+    --_soft: var(--fui-info-soft);
+    --_on-soft: var(--fui-info);
+    --_contrast: var(--fui-primary-contrast);
+  }
+  .fui-Badge-root[data-color="gray"] {
+    --_color: var(--fui-text-muted);
+    --_soft: var(--fui-bg-subtle);
+    --_on-soft: var(--fui-text);
+    --_contrast: var(--fui-primary-contrast);
+  }
+
+  /* Variants */
+  .fui-Badge-root[data-variant="light"] {
+    --_bg: var(--_soft);
+    --_fg: var(--_on-soft);
+  }
+
+  .fui-Badge-root[data-variant="outline"] {
+    --_bg: transparent;
+    --_fg: var(--_on-soft);
+    --_border: color-mix(in oklch, var(--_color) 45%, transparent);
+  }
+  .fui-Badge-root[data-color="gray"][data-variant="outline"] {
+    --_border: var(--fui-border-strong);
+  }
+
+  /* Dot variant reads like a subtle, bordered label with a status dot */
+  .fui-Badge-root[data-variant="dot"] {
+    --_bg: var(--fui-surface);
+    --_fg: var(--fui-text);
+    --_border: var(--fui-border);
+  }
+
+  .fui-Badge-dot {
+    inline-size: 0.5em;
+    block-size: 0.5em;
+    border-radius: var(--fui-radius-full);
+    background: var(--_color);
+    flex: none;
+  }
+
+  .fui-Badge-section {
+    display: inline-flex;
+    align-items: center;
+  }
+}7:["$","div","Sizes",{"id":"sizes","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Sizes"}],"$undefined",["$","$L3",null,{"code":"<Badge size=\"sm\">Small</Badge>\n<Badge size=\"md\">Medium</Badge>\n<Badge size=\"lg\">Large</Badge>","css":"$11","children":"$L12"}]]}]
+13:Tc49,/* The complete stylesheet for <Badge /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Badge-root {
+    /* Per-color palette knobs (defaults = primary) */
+    --_color: var(--fui-primary);
+    --_soft: var(--fui-primary-soft);
+    --_on-soft: var(--fui-primary-hover);
+    --_contrast: var(--fui-primary-contrast);
+
+    /* Resolved by variant */
+    --_bg: var(--_color);
+    --_fg: var(--_contrast);
+    --_border: transparent;
+
+    display: inline-flex;
+    align-items: center;
+    gap: var(--_gap, var(--fui-space-xs));
+    inline-size: fit-content;
+    block-size: var(--_h, 1.375rem);
+    padding-inline: var(--_px, 0.625rem);
+    border: 1px solid var(--_border);
+    border-radius: var(--_radius, var(--fui-radius-full));
+    background: var(--_bg);
+    color: var(--_fg);
+    font-family: var(--fui-font);
+    font-size: var(--_fz, var(--fui-text-xs));
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    user-select: none;
+    transition:
+      background var(--fui-transition),
+      border-color var(--fui-transition),
+      color var(--fui-transition);
+  }
+
+  /* Sizes */
+  .fui-Badge-root[data-size="sm"] {
+    --_h: 1.125rem;
+    --_px: 0.5rem;
+    --_fz: 0.6875rem;
+  }
+  .fui-Badge-root[data-size="lg"] {
+    --_h: 1.625rem;
+    --_px: 0.8125rem;
+    --_fz: var(--fui-text-sm);
+    --_gap: var(--fui-space-sm);
+  }
+
+  /* Colors — remap the palette knobs */
+  .fui-Badge-root[data-color="danger"] {
+    --_color: var(--fui-danger);
+    --_soft: var(--fui-danger-soft);
+    --_on-soft: var(--fui-danger);
+    --_contrast: var(--fui-primary-contrast);
+  }
+  .fui-Badge-root[data-color="warning"] {
+    --_color: var(--fui-warning);
+    --_soft: var(--fui-warning-soft);
+    --_on-soft: color-mix(in oklch, var(--fui-warning) 70%, black);
+    --_contrast: oklch(0.24 0.02 80);
+  }
+  .fui-Badge-root[data-color="info"] {
+    --_color: var(--fui-info);
+    --_soft: var(--fui-info-soft);
+    --_on-soft: var(--fui-info);
+    --_contrast: var(--fui-primary-contrast);
+  }
+  .fui-Badge-root[data-color="gray"] {
+    --_color: var(--fui-text-muted);
+    --_soft: var(--fui-bg-subtle);
+    --_on-soft: var(--fui-text);
+    --_contrast: var(--fui-primary-contrast);
+  }
+
+  /* Variants */
+  .fui-Badge-root[data-variant="light"] {
+    --_bg: var(--_soft);
+    --_fg: var(--_on-soft);
+  }
+
+  .fui-Badge-root[data-variant="outline"] {
+    --_bg: transparent;
+    --_fg: var(--_on-soft);
+    --_border: color-mix(in oklch, var(--_color) 45%, transparent);
+  }
+  .fui-Badge-root[data-color="gray"][data-variant="outline"] {
+    --_border: var(--fui-border-strong);
+  }
+
+  /* Dot variant reads like a subtle, bordered label with a status dot */
+  .fui-Badge-root[data-variant="dot"] {
+    --_bg: var(--fui-surface);
+    --_fg: var(--fui-text);
+    --_border: var(--fui-border);
+  }
+
+  .fui-Badge-dot {
+    inline-size: 0.5em;
+    block-size: 0.5em;
+    border-radius: var(--fui-radius-full);
+    background: var(--_color);
+    flex: none;
+  }
+
+  .fui-Badge-section {
+    display: inline-flex;
+    align-items: center;
+  }
+}8:["$","div","With dot",{"id":"with-dot","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"With dot"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"The dot variant shows a colored status dot before the label."}],["$","$L3",null,{"code":"<Badge variant=\"dot\" color=\"primary\">Live</Badge>\n<Badge variant=\"dot\" color=\"warning\">Pending</Badge>\n<Badge variant=\"dot\" color=\"danger\">Offline</Badge>\n<Badge variant=\"dot\" color=\"gray\">Draft</Badge>","css":"$13","children":"$L14"}]]}]
+9:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","variant",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"variant"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"filled\" | \"light\" | \"outline\" | \"dot\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"filled\""}]}],["$","td",null,{"children":"Visual style of the badge."}]]}],["$","tr","color",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"color"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"primary\" | \"gray\" | \"danger\" | \"warning\" | \"info\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"primary\""}]}],["$","td",null,{"children":"Semantic color."}]]}],["$","tr","size",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"size"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"sm\" | \"md\" | \"lg\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"md\""}]}],["$","td",null,{"children":"Control size (height, padding, font size)."}]]}],["$","tr","radius",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"radius"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"sm\" | \"md\" | \"lg\" | \"xl\" | \"full\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"full\""}]}],["$","td",null,{"children":"Border radius token."}]]}],["$","tr","leftSection",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"leftSection"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Content rendered before the label."}]]}],["$","tr","rightSection",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"rightSection"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Content rendered after the label."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"SpanHTMLAttributes"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <span> props are forwarded."}]]}]]}]]}]}]]}]
+a:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+b:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+c:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+d:["$","$L15",null,{"children":["$","$16",null,{"name":"Next.MetadataOutlet","children":"$@17"}]}]
+10:[["$","$Le",null,{"color":"primary","variant":"light","children":"Primary"}],["$","$Le",null,{"color":"gray","variant":"light","children":"Gray"}],["$","$Le",null,{"color":"danger","variant":"light","children":"Danger"}],["$","$Le",null,{"color":"warning","variant":"light","children":"Warning"}],["$","$Le",null,{"color":"info","variant":"light","children":"Info"}]]
+12:[["$","$Le",null,{"size":"sm","children":"Small"}],["$","$Le",null,{"size":"md","children":"Medium"}],["$","$Le",null,{"size":"lg","children":"Large"}]]
+14:[["$","$Le",null,{"variant":"dot","color":"primary","children":"Live"}],["$","$Le",null,{"variant":"dot","color":"warning","children":"Pending"}],["$","$Le",null,{"variant":"dot","color":"danger","children":"Offline"}],["$","$Le",null,{"variant":"dot","color":"gray","children":"Draft"}]]
+17:null

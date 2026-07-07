@@ -1,0 +1,265 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+d:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Container"]
+e:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"SimpleGrid"]
+16:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+17:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:T53c,<PricingTable
+  eyebrow="Pricing"
+  title="Plans that grow with your farm"
+  description="Start free, upgrade when you need more acreage and seats. No hidden fees."
+  plans={[
+    {
+      name: "Starter",
+      price: "$0",
+      period: "/mo",
+      description: "For hobby plots and getting a feel for the platform.",
+      features: ["Up to 5 fields", "1 team member", "Community support", "Weekly weather digest"],
+      action: { label: "Get started", href: "/signup" },
+    },
+    {
+      name: "Grower",
+      price: "$49",
+      period: "/mo",
+      description: "For working farms that need daily insights and collaboration.",
+      features: [
+        "Unlimited fields",
+        "10 team members",
+        "Real-time soil & weather alerts",
+        "Yield forecasting",
+        "Priority email support",
+      ],
+      action: { label: "Start free trial", href: "/signup?plan=grower" },
+      highlighted: true,
+    },
+    {
+      name: "Enterprise",
+      price: "Custom",
+      description: "For co-ops and multi-site operations with advanced needs.",
+      features: [
+        "Everything in Grower",
+        "Unlimited team members",
+        "SSO & audit logs",
+        "Dedicated agronomist",
+        "99.9% uptime SLA",
+      ],
+      action: { label: "Contact sales", href: "/contact", variant: "outline" },
+    },
+  ]}
+/>5:T99f,/* The complete stylesheet for <PricingTable /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.blocks {
+  .fui-PricingTable-root {
+    padding-block: clamp(3rem, 7vw, 5rem);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+  }
+
+  .fui-PricingTable-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    background: var(--fui-surface);
+    border: 1px solid var(--fui-border);
+    border-radius: var(--fui-radius-lg);
+    box-shadow: var(--fui-shadow-sm);
+  }
+  .fui-PricingTable-card[data-highlighted] {
+    border-color: var(--fui-primary);
+    border-width: 2px;
+    box-shadow: var(--fui-shadow-lg);
+  }
+
+  .fui-PricingTable-badge {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: clamp(1.5rem, 3vw, 2rem);
+    transform: translateY(-50%);
+    padding: 0.2rem 0.7rem;
+    font-size: var(--fui-text-xs);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--fui-primary-contrast);
+    background: var(--fui-primary);
+    border-radius: var(--fui-radius-full);
+  }
+
+  .fui-PricingTable-name {
+    margin: 0;
+    font-size: var(--fui-text-lg);
+    font-weight: 700;
+  }
+  .fui-PricingTable-priceRow {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    margin: 0.75rem 0 0;
+  }
+  .fui-PricingTable-price {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .fui-PricingTable-period {
+    font-size: var(--fui-text-sm);
+    color: var(--fui-text-muted);
+  }
+  .fui-PricingTable-desc {
+    margin: 0.75rem 0 0;
+    font-size: var(--fui-text-sm);
+    line-height: 1.6;
+    color: var(--fui-text-muted);
+    text-wrap: pretty;
+  }
+
+  .fui-PricingTable-features {
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+  .fui-PricingTable-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: var(--fui-text-sm);
+    line-height: 1.5;
+  }
+  .fui-PricingTable-check {
+    flex: none;
+    inline-size: 1.15rem;
+    block-size: 1.15rem;
+    margin-block-start: 0.05rem;
+    color: var(--fui-primary);
+  }
+
+  .fui-PricingTable-action {
+    margin-block-start: auto;
+    padding-block-start: 1.5rem;
+  }
+  .fui-PricingTable-action .fui-Button-root {
+    inline-size: 100%;
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Blocks"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"PricingTable"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"A responsive grid of pricing plan cards, with an optional highlighted plan."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { PricingTable } from \"@farmui/blocks\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Three tiers",{"id":"three-tiers","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Three tiers"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"A standard good/better/best layout. The middle plan is highlighted with a border and a “Popular” badge."}],["$","$L3",null,{"code":"$4","css":"$5","children":"$L6"}]]}],"$L7"]}]]}],"$L8"]}],["$L9","$La","$Lb"],"$Lc"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+6:["$","section",null,{"className":"fui-PricingTable-root","children":["$","$Ld",null,{"children":[["$","div",null,{"className":"fui-SectionHeader","children":[["$","p",null,{"className":"fui-SectionHeader-eyebrow","children":"Pricing"}],["$","h2",null,{"className":"fui-SectionHeader-title","children":"Plans that grow with your farm"}],["$","p",null,{"className":"fui-SectionHeader-description","children":"Start free, upgrade when you need more acreage and seats. No hidden fees."}]]}],["$","$Le",null,{"minChildWidth":"17rem","gap":"lg","children":[["$","div","0",{"className":"fui-PricingTable-card","children":["$undefined",["$","h3",null,{"className":"fui-PricingTable-name","children":"Starter"}],["$","p",null,{"className":"fui-PricingTable-priceRow","children":[["$","span",null,{"className":"fui-PricingTable-price","children":"$$0"}],["$","span",null,{"className":"fui-PricingTable-period","children":"/mo"}]]}],["$","p",null,{"className":"fui-PricingTable-desc","children":"For hobby plots and getting a feel for the platform."}],["$","ul",null,{"className":"fui-PricingTable-features","children":[["$","li","0",{"className":"fui-PricingTable-feature","children":[["$","svg",null,{"className":"fui-PricingTable-check","viewBox":"0 0 20 20","fill":"none","aria-hidden":true,"focusable":"false","children":["$","path",null,{"d":"m5 10.5 3.5 3.5L15 6","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}]}],["$","span",null,{"children":"Up to 5 fields"}]]}],["$","li","1",{"className":"fui-PricingTable-feature","children":[["$","svg",null,{"className":"fui-PricingTable-check","viewBox":"0 0 20 20","fill":"none","aria-hidden":true,"focusable":"false","children":["$","path",null,{"d":"m5 10.5 3.5 3.5L15 6","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}]}],["$","span",null,{"children":"1 team member"}]]}],["$","li","2",{"className":"fui-PricingTable-feature","children":[["$","svg",null,{"className":"fui-PricingTable-check","viewBox":"0 0 20 20","fill":"none","aria-hidden":true,"focusable":"false","children":["$","path",null,{"d":"m5 10.5 3.5 3.5L15 6","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}]}],["$","span",null,{"children":"Community support"}]]}],["$","li","3",{"className":"fui-PricingTable-feature","children":[["$","svg",null,{"className":"fui-PricingTable-check","viewBox":"0 0 20 20","fill":"none","aria-hidden":true,"focusable":"false","children":["$","path",null,{"d":"m5 10.5 3.5 3.5L15 6","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}]}],["$","span",null,{"children":"Weekly weather digest"}]]}]]}],["$","div",null,{"className":"fui-PricingTable-action","children":["$","a",null,{"className":"fui-Button-root","data-variant":"outline","data-size":"md","href":"/signup","children":"Get started"}]}]]}],["$","div","1",{"className":"fui-PricingTable-card","data-highlighted":true,"children":[["$","span",null,{"className":"fui-PricingTable-badge","children":"Popular"}],["$","h3",null,{"className":"fui-PricingTable-name","children":"Grower"}],["$","p",null,{"className":"fui-PricingTable-priceRow","children":[["$","span",null,{"className":"fui-PricingTable-price","children":"$$49"}],["$","span",null,{"className":"fui-PricingTable-period","children":"/mo"}]]}],["$","p",null,{"className":"fui-PricingTable-desc","children":"For working farms that need daily insights and collaboration."}],["$","ul",null,{"className":"fui-PricingTable-features","children":[["$","li","0",{"className":"fui-PricingTable-feature","children":[["$","svg",null,{"className":"fui-PricingTable-check","viewBox":"0 0 20 20","fill":"none","aria-hidden":true,"focusable":"false","children":["$","path",null,{"d":"m5 10.5 3.5 3.5L15 6","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}]}],["$","span",null,{"children":"Unlimited fields"}]]}],["$","li","1",{"className":"fui-PricingTable-feature","children":[["$","svg",null,{"className":"fui-PricingTable-check","viewBox":"0 0 20 20","fill":"none","aria-hidden":true,"focusable":"false","children":["$","path",null,{"d":"m5 10.5 3.5 3.5L15 6","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}]}],["$","span",null,{"children":"10 team members"}]]}],["$","li","2",{"className":"fui-PricingTable-feature","children":[["$","svg",null,{"className":"fui-PricingTable-check","viewBox":"0 0 20 20","fill":"none","aria-hidden":true,"focusable":"false","children":["$","path",null,{"d":"m5 10.5 3.5 3.5L15 6","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}]}],"$Lf"]}],"$L10","$L11"]}],"$L12"]}],"$L13"]}]]}]}]
+14:T99f,/* The complete stylesheet for <PricingTable /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.blocks {
+  .fui-PricingTable-root {
+    padding-block: clamp(3rem, 7vw, 5rem);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+  }
+
+  .fui-PricingTable-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    background: var(--fui-surface);
+    border: 1px solid var(--fui-border);
+    border-radius: var(--fui-radius-lg);
+    box-shadow: var(--fui-shadow-sm);
+  }
+  .fui-PricingTable-card[data-highlighted] {
+    border-color: var(--fui-primary);
+    border-width: 2px;
+    box-shadow: var(--fui-shadow-lg);
+  }
+
+  .fui-PricingTable-badge {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: clamp(1.5rem, 3vw, 2rem);
+    transform: translateY(-50%);
+    padding: 0.2rem 0.7rem;
+    font-size: var(--fui-text-xs);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--fui-primary-contrast);
+    background: var(--fui-primary);
+    border-radius: var(--fui-radius-full);
+  }
+
+  .fui-PricingTable-name {
+    margin: 0;
+    font-size: var(--fui-text-lg);
+    font-weight: 700;
+  }
+  .fui-PricingTable-priceRow {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    margin: 0.75rem 0 0;
+  }
+  .fui-PricingTable-price {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .fui-PricingTable-period {
+    font-size: var(--fui-text-sm);
+    color: var(--fui-text-muted);
+  }
+  .fui-PricingTable-desc {
+    margin: 0.75rem 0 0;
+    font-size: var(--fui-text-sm);
+    line-height: 1.6;
+    color: var(--fui-text-muted);
+    text-wrap: pretty;
+  }
+
+  .fui-PricingTable-features {
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+  .fui-PricingTable-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: var(--fui-text-sm);
+    line-height: 1.5;
+  }
+  .fui-PricingTable-check {
+    flex: none;
+    inline-size: 1.15rem;
+    block-size: 1.15rem;
+    margin-block-start: 0.05rem;
+    color: var(--fui-primary);
+  }
+
+  .fui-PricingTable-action {
+    margin-block-start: auto;
+    padding-block-start: 1.5rem;
+  }
+  .fui-PricingTable-action .fui-Button-root {
+    inline-size: 100%;
+  }
+}7:["$","div","Two plans, wider cards",{"id":"two-plans-wider-cards","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Two plans, wider cards"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Fewer plans read better as wider cards — bump minChildWidth so they don't stretch too thin."}],["$","$L3",null,{"code":"<PricingTable\n  title=\"Simple, honest pricing\"\n  minChildWidth=\"22rem\"\n  plans={[\n    {\n      name: \"Monthly\",\n      price: \"$29\",\n      period: \"/mo\",\n      description: \"Billed month to month. Cancel any time.\",\n      features: [\"All core features\", \"Up to 20 fields\", \"Email support\"],\n      action: { label: \"Choose monthly\", href: \"/signup?billing=monthly\" },\n    },\n    {\n      name: \"Annual\",\n      price: \"$290\",\n      period: \"/yr\",\n      description: \"Two months free when you pay yearly.\",\n      features: [\"All core features\", \"Up to 20 fields\", \"Email support\", \"Save $58 a year\"],\n      action: { label: \"Choose annual\", href: \"/signup?billing=annual\" },\n      highlighted: true,\n    },\n  ]}\n/>","css":"$14","children":"$L15"}]]}]
+8:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","plans",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"plans"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"PricingPlan[]"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"The plans to display. PricingPlan = { name, price, period?, description?, features: ReactNode[], action: BlockAction, highlighted? }, where BlockAction = { label, href?, variant? }."}]]}],["$","tr","eyebrow",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"eyebrow"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Small label shown above the title."}]]}],["$","tr","title",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"title"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Section heading."}]]}],["$","tr","description",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"description"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Supporting paragraph shown under the title."}]]}],["$","tr","minChildWidth",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"minChildWidth"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"string"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"17rem\""}]}],["$","td",null,{"children":"Minimum card width; the grid wraps responsively."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"HTMLAttributes<HTMLElement>"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <section> props are forwarded (except title)."}]]}]]}]]}]}]]}]
+9:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+a:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+b:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+c:["$","$L16",null,{"children":["$","$17",null,{"name":"Next.MetadataOutlet","children":"$@18"}]}]
+f:["$","span",null,{"children":"Real-time soil & weather alerts"}]
+10:["$","li","3",{"className":"fui-PricingTable-feature","children":[["$","svg",null,{"className":"fui-PricingTable-check","viewBox":"0 0 20 20","fill":"none","aria-hidden":true,"focusable":"false","children":["$","path",null,{"d":"m5 10.5 3.5 3.5L15 6","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}]}],["$","span",null,{"children":"Yield forecasting"}]]}]
+11:["$","li","4",{"className":"fui-PricingTable-feature","children":[["$","svg",null,{"className":"fui-PricingTable-check","viewBox":"0 0 20 20","fill":"none","aria-hidden":true,"focusable":"false","children":["$","path",null,{"d":"m5 10.5 3.5 3.5L15 6","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}]}],["$","span",null,{"children":"Priority email support"}]]}]
+12:["$","div",null,{"className":"fui-PricingTable-action","children":["$","a",null,{"className":"fui-Button-root","data-variant":"filled","data-size":"md","href":"/signup?plan=grower","children":"Start free trial"}]}]
+13:["$","div","2",{"className":"fui-PricingTable-card","children":["$undefined",["$","h3",null,{"className":"fui-PricingTable-name","children":"Enterprise"}],["$","p",null,{"className":"fui-PricingTable-priceRow","children":[["$","span",null,{"className":"fui-PricingTable-price","children":"Custom"}],false]}],["$","p",null,{"className":"fui-PricingTable-desc","children":"For co-ops and multi-site operations with advanced needs."}],["$","ul",null,{"className":"fui-PricingTable-features","children":[["$","li","0",{"className":"fui-PricingTable-feature","children":[["$","svg",null,{"className":"fui-PricingTable-check","viewBox":"0 0 20 20","fill":"none","aria-hidden":true,"focusable":"false","children":["$","path",null,{"d":"m5 10.5 3.5 3.5L15 6","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}]}],["$","span",null,{"children":"Everything in Grower"}]]}],["$","li","1",{"className":"fui-PricingTable-feature","children":[["$","svg",null,{"className":"fui-PricingTable-check","viewBox":"0 0 20 20","fill":"none","aria-hidden":true,"focusable":"false","children":["$","path",null,{"d":"m5 10.5 3.5 3.5L15 6","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}]}],["$","span",null,{"children":"Unlimited team members"}]]}],["$","li","2",{"className":"fui-PricingTable-feature","children":[["$","svg",null,{"className":"fui-PricingTable-check","viewBox":"0 0 20 20","fill":"none","aria-hidden":true,"focusable":"false","children":["$","path",null,{"d":"m5 10.5 3.5 3.5L15 6","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}]}],["$","span",null,{"children":"SSO & audit logs"}]]}],["$","li","3",{"className":"fui-PricingTable-feature","children":[["$","svg",null,{"className":"fui-PricingTable-check","viewBox":"0 0 20 20","fill":"none","aria-hidden":true,"focusable":"false","children":["$","path",null,{"d":"m5 10.5 3.5 3.5L15 6","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}]}],["$","span",null,{"children":"Dedicated agronomist"}]]}],["$","li","4",{"className":"fui-PricingTable-feature","children":[["$","svg",null,{"className":"fui-PricingTable-check","viewBox":"0 0 20 20","fill":"none","aria-hidden":true,"focusable":"false","children":["$","path",null,{"d":"m5 10.5 3.5 3.5L15 6","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}]}],["$","span",null,{"children":"99.9% uptime SLA"}]]}]]}],["$","div",null,{"className":"fui-PricingTable-action","children":["$","a",null,{"className":"fui-Button-root","data-variant":"outline","data-size":"md","href":"/contact","children":"Contact sales"}]}]]}]
+15:["$","section",null,{"className":"fui-PricingTable-root","children":["$","$Ld",null,{"children":[["$","div",null,{"className":"fui-SectionHeader","children":[false,["$","h2",null,{"className":"fui-SectionHeader-title","children":"Simple, honest pricing"}],false]}],["$","$Le",null,{"minChildWidth":"22rem","gap":"lg","children":[["$","div","0",{"className":"fui-PricingTable-card","children":["$undefined",["$","h3",null,{"className":"fui-PricingTable-name","children":"Monthly"}],["$","p",null,{"className":"fui-PricingTable-priceRow","children":[["$","span",null,{"className":"fui-PricingTable-price","children":"$$29"}],["$","span",null,{"className":"fui-PricingTable-period","children":"/mo"}]]}],["$","p",null,{"className":"fui-PricingTable-desc","children":"Billed month to month. Cancel any time."}],["$","ul",null,{"className":"fui-PricingTable-features","children":[["$","li","0",{"className":"fui-PricingTable-feature","children":[["$","svg",null,{"className":"fui-PricingTable-check","viewBox":"0 0 20 20","fill":"none","aria-hidden":true,"focusable":"false","children":["$","path",null,{"d":"m5 10.5 3.5 3.5L15 6","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}]}],["$","span",null,{"children":"All core features"}]]}],["$","li","1",{"className":"fui-PricingTable-feature","children":[["$","svg",null,{"className":"fui-PricingTable-check","viewBox":"0 0 20 20","fill":"none","aria-hidden":true,"focusable":"false","children":["$","path",null,{"d":"m5 10.5 3.5 3.5L15 6","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}]}],["$","span",null,{"children":"Up to 20 fields"}]]}],["$","li","2",{"className":"fui-PricingTable-feature","children":[["$","svg",null,{"className":"fui-PricingTable-check","viewBox":"0 0 20 20","fill":"none","aria-hidden":true,"focusable":"false","children":["$","path",null,{"d":"m5 10.5 3.5 3.5L15 6","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}]}],["$","span",null,{"children":"Email support"}]]}]]}],["$","div",null,{"className":"fui-PricingTable-action","children":["$","a",null,{"className":"fui-Button-root","data-variant":"outline","data-size":"md","href":"/signup?billing=monthly","children":"Choose monthly"}]}]]}],["$","div","1",{"className":"fui-PricingTable-card","data-highlighted":true,"children":[["$","span",null,{"className":"fui-PricingTable-badge","children":"Popular"}],["$","h3",null,{"className":"fui-PricingTable-name","children":"Annual"}],["$","p",null,{"className":"fui-PricingTable-priceRow","children":[["$","span",null,{"className":"fui-PricingTable-price","children":"$$290"}],["$","span",null,{"className":"fui-PricingTable-period","children":"/yr"}]]}],["$","p",null,{"className":"fui-PricingTable-desc","children":"Two months free when you pay yearly."}],["$","ul",null,{"className":"fui-PricingTable-features","children":[["$","li","0",{"className":"fui-PricingTable-feature","children":[["$","svg",null,{"className":"fui-PricingTable-check","viewBox":"0 0 20 20","fill":"none","aria-hidden":true,"focusable":"false","children":["$","path",null,{"d":"m5 10.5 3.5 3.5L15 6","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}]}],["$","span",null,{"children":"All core features"}]]}],["$","li","1",{"className":"fui-PricingTable-feature","children":[["$","svg",null,{"className":"fui-PricingTable-check","viewBox":"0 0 20 20","fill":"none","aria-hidden":true,"focusable":"false","children":["$","path",null,{"d":"m5 10.5 3.5 3.5L15 6","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}]}],["$","span",null,{"children":"Up to 20 fields"}]]}],["$","li","2",{"className":"fui-PricingTable-feature","children":[["$","svg",null,{"className":"fui-PricingTable-check","viewBox":"0 0 20 20","fill":"none","aria-hidden":true,"focusable":"false","children":["$","path",null,{"d":"m5 10.5 3.5 3.5L15 6","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}]}],["$","span",null,{"children":"Email support"}]]}],["$","li","3",{"className":"fui-PricingTable-feature","children":[["$","svg",null,{"className":"fui-PricingTable-check","viewBox":"0 0 20 20","fill":"none","aria-hidden":true,"focusable":"false","children":["$","path",null,{"d":"m5 10.5 3.5 3.5L15 6","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}]}],["$","span",null,{"children":"Save $58 a year"}]]}]]}],["$","div",null,{"className":"fui-PricingTable-action","children":["$","a",null,{"className":"fui-Button-root","data-variant":"filled","data-size":"md","href":"/signup?billing=annual","children":"Choose annual"}]}]]}]]}]]}]}]
+18:null

@@ -1,0 +1,178 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+5:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Skeleton"]
+f:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+10:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:T5ec,/* The complete stylesheet for <Skeleton /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Skeleton-root {
+    position: relative;
+    display: block;
+    inline-size: var(--_w, 100%);
+    block-size: var(--_h, 1rem);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    overflow: hidden;
+    /* Hide any real children placed inside while the skeleton is visible. */
+    color: transparent;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  /* Base tint + moving shimmer highlight */
+  .fui-Skeleton-root::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklch, var(--fui-bg-subtle) 100%, transparent) 0%,
+      color-mix(in oklch, var(--fui-surface) 60%, var(--fui-bg-subtle)) 50%,
+      color-mix(in oklch, var(--fui-bg-subtle) 100%, transparent) 100%
+    );
+    background-color: var(--fui-bg-subtle);
+    background-size: 200% 100%;
+    animation: fui-Skeleton-skeleton-shimmer 1.4s ease-in-out infinite;
+  }
+
+  @keyframes fui-Skeleton-skeleton-shimmer {
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fui-Skeleton-root::after {
+      animation: fui-Skeleton-skeleton-pulse 1.6s ease-in-out infinite;
+      background: var(--fui-bg-subtle);
+    }
+  }
+
+  @keyframes fui-Skeleton-skeleton-pulse {
+    50% {
+      opacity: 0.55;
+    }
+  }
+}6:T5ec,/* The complete stylesheet for <Skeleton /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Skeleton-root {
+    position: relative;
+    display: block;
+    inline-size: var(--_w, 100%);
+    block-size: var(--_h, 1rem);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    overflow: hidden;
+    /* Hide any real children placed inside while the skeleton is visible. */
+    color: transparent;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  /* Base tint + moving shimmer highlight */
+  .fui-Skeleton-root::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklch, var(--fui-bg-subtle) 100%, transparent) 0%,
+      color-mix(in oklch, var(--fui-surface) 60%, var(--fui-bg-subtle)) 50%,
+      color-mix(in oklch, var(--fui-bg-subtle) 100%, transparent) 100%
+    );
+    background-color: var(--fui-bg-subtle);
+    background-size: 200% 100%;
+    animation: fui-Skeleton-skeleton-shimmer 1.4s ease-in-out infinite;
+  }
+
+  @keyframes fui-Skeleton-skeleton-shimmer {
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fui-Skeleton-root::after {
+      animation: fui-Skeleton-skeleton-pulse 1.6s ease-in-out infinite;
+      background: var(--fui-bg-subtle);
+    }
+  }
+
+  @keyframes fui-Skeleton-skeleton-pulse {
+    50% {
+      opacity: 0.55;
+    }
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Feedback"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"Skeleton"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"An animated placeholder shown while content loads."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { Skeleton } from \"@farmui/core\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Basic lines",{"id":"basic-lines","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Basic lines"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Stack skeletons to stand in for text while it loads."}],["$","$L3",null,{"code":"<Skeleton height=\"1rem\" />\n<Skeleton height=\"1rem\" width=\"80%\" />\n<Skeleton height=\"1rem\" width=\"60%\" />","css":"$4","children":["$","div",null,{"style":{"display":"grid","gap":"0.5rem","inlineSize":"100%","maxInlineSize":"22rem"},"children":[["$","$L5",null,{"height":"1rem"}],["$","$L5",null,{"height":"1rem","width":"80%"}],["$","$L5",null,{"height":"1rem","width":"60%"}]]}]}]]}],["$","div","Circle + lines",{"id":"circle-lines","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Circle + lines"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"An avatar-and-text placeholder for a list item."}],["$","$L3",null,{"code":"<div style={{ display: \"flex\", gap: \"0.75rem\", alignItems: \"center\" }}>\n  <Skeleton circle width=\"2.5rem\" />\n  <div style={{ display: \"grid\", gap: \"0.4rem\", flex: 1 }}>\n    <Skeleton height=\"0.75rem\" width=\"40%\" />\n    <Skeleton height=\"0.75rem\" width=\"70%\" />\n  </div>\n</div>","css":"$6","children":"$L7"}]]}],"$L8"]}]]}],"$L9"]}],["$La","$Lb","$Lc"],"$Ld"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+7:["$","div",null,{"style":{"display":"flex","gap":"0.75rem","alignItems":"center","inlineSize":"100%","maxInlineSize":"22rem"},"children":[["$","$L5",null,{"circle":true,"width":"2.5rem"}],["$","div",null,{"style":{"display":"grid","gap":"0.4rem","flex":1},"children":[["$","$L5",null,{"height":"0.75rem","width":"40%"}],["$","$L5",null,{"height":"0.75rem","width":"70%"}]]}]]}]
+e:T5ec,/* The complete stylesheet for <Skeleton /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Skeleton-root {
+    position: relative;
+    display: block;
+    inline-size: var(--_w, 100%);
+    block-size: var(--_h, 1rem);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    overflow: hidden;
+    /* Hide any real children placed inside while the skeleton is visible. */
+    color: transparent;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  /* Base tint + moving shimmer highlight */
+  .fui-Skeleton-root::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklch, var(--fui-bg-subtle) 100%, transparent) 0%,
+      color-mix(in oklch, var(--fui-surface) 60%, var(--fui-bg-subtle)) 50%,
+      color-mix(in oklch, var(--fui-bg-subtle) 100%, transparent) 100%
+    );
+    background-color: var(--fui-bg-subtle);
+    background-size: 200% 100%;
+    animation: fui-Skeleton-skeleton-shimmer 1.4s ease-in-out infinite;
+  }
+
+  @keyframes fui-Skeleton-skeleton-shimmer {
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fui-Skeleton-root::after {
+      animation: fui-Skeleton-skeleton-pulse 1.6s ease-in-out infinite;
+      background: var(--fui-bg-subtle);
+    }
+  }
+
+  @keyframes fui-Skeleton-skeleton-pulse {
+    50% {
+      opacity: 0.55;
+    }
+  }
+}8:["$","div","Custom sizes",{"id":"custom-sizes","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Custom sizes"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Use width, height and radius for cards or thumbnails."}],["$","$L3",null,{"code":"<Skeleton width=\"8rem\" height=\"8rem\" radius=\"var(--fui-radius-lg)\" />\n<Skeleton width=\"8rem\" height=\"8rem\" circle />","css":"$e","children":[["$","$L5",null,{"width":"8rem","height":"8rem","radius":"var(--fui-radius-lg)"}],["$","$L5",null,{"width":"8rem","height":"8rem","circle":true}]]}]]}]
+9:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","width",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"width"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"number | string"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"100%\""}]}],["$","td",null,{"children":"Inline size (number → px, or any CSS length)."}]]}],["$","tr","height",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"height"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"number | string"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"1rem\""}]}],["$","td",null,{"children":"Block size (number → px, or any CSS length)."}]]}],["$","tr","radius",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"radius"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"number | string"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"var(--fui-radius-md)\""}]}],["$","td",null,{"children":"Border radius (number → px, or any CSS value)."}]]}],["$","tr","circle",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"circle"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"boolean"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Render as a circle (equal width/height, full radius)."}]]}],["$","tr","visible",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"visible"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"boolean"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"true"}]}],["$","td",null,{"children":"When false, render children instead of the placeholder."}]]}],["$","tr","children",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"children"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Real content, shown once visible is false."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"HTMLAttributes<HTMLDivElement>"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <div> props are forwarded."}]]}]]}]]}]}]]}]
+a:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+b:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+c:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+d:["$","$Lf",null,{"children":["$","$10",null,{"name":"Next.MetadataOutlet","children":"$@11"}]}]
+11:null

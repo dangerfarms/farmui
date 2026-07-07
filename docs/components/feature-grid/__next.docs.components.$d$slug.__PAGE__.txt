@@ -1,0 +1,154 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+5:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Container"]
+f:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"SimpleGrid"]
+12:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+13:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:T4ce,/* The complete stylesheet for <FeatureGrid /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.blocks {
+  .fui-FeatureGrid-root {
+    padding-block: clamp(3rem, 7vw, 5rem);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+  }
+  .fui-FeatureGrid-item {
+    padding: 1.5rem;
+    background: var(--fui-surface);
+    border: 1px solid var(--fui-border);
+    border-radius: var(--fui-radius-lg);
+    transition:
+      border-color var(--fui-transition),
+      transform var(--fui-transition);
+  }
+  .fui-FeatureGrid-item:hover {
+    border-color: var(--fui-border-strong);
+    transform: translateY(-2px);
+  }
+  .fui-FeatureGrid-icon {
+    display: grid;
+    place-items: center;
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+    margin-block-end: 1rem;
+    font-size: 1.4rem;
+    color: var(--fui-primary);
+    background: var(--fui-primary-soft);
+    border-radius: var(--fui-radius-md);
+  }
+  .fui-FeatureGrid-title {
+    margin: 0 0 0.4rem;
+    font-size: var(--fui-text-lg);
+    font-weight: 700;
+  }
+  .fui-FeatureGrid-desc {
+    margin: 0;
+    font-size: var(--fui-text-sm);
+    line-height: 1.6;
+    color: var(--fui-text-muted);
+    text-wrap: pretty;
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Blocks"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"FeatureGrid"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"A responsive grid of icon / title / description features under an optional section header."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { FeatureGrid } from \"@farmui/blocks\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","With icons",{"id":"with-icons","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"With icons"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"The classic three-up feature section with a header."}],["$","$L3",null,{"code":"<FeatureGrid\n  eyebrow=\"Why FarmUI\"\n  title=\"Everything you need to launch\"\n  description=\"Batteries-included sections that stay accessible and on-brand out of the box.\"\n  features={[\n    { icon: \"⚡\", title: \"Fast by default\", description: \"Server-rendered, zero client JS, and tuned for Core Web Vitals.\" },\n    { icon: \"🎨\", title: \"Themeable\", description: \"Every block reads your brand tokens — one variable set, whole site restyled.\" },\n    { icon: \"♿\", title: \"Accessible\", description: \"Semantic HTML and WCAG-AA contrast baked into every component.\" },\n  ]}\n/>","css":"$4","children":["$","section",null,{"className":"fui-FeatureGrid-root","children":["$","$L5",null,{"children":[["$","div",null,{"className":"fui-SectionHeader","children":[["$","p",null,{"className":"fui-SectionHeader-eyebrow","children":"Why FarmUI"}],["$","h2",null,{"className":"fui-SectionHeader-title","children":"Everything you need to launch"}],"$L6"]}],"$L7"]}]}]}]]}],"$L8","$L9"]}]]}],"$La"]}],["$Lb","$Lc","$Ld"],"$Le"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+6:["$","p",null,{"className":"fui-SectionHeader-description","children":"Batteries-included sections that stay accessible and on-brand out of the box."}]
+7:["$","$Lf",null,{"minChildWidth":"16rem","gap":"lg","children":[["$","div","0",{"className":"fui-FeatureGrid-item","children":[["$","div",null,{"className":"fui-FeatureGrid-icon","aria-hidden":true,"children":"⚡"}],["$","h3",null,{"className":"fui-FeatureGrid-title","children":"Fast by default"}],["$","p",null,{"className":"fui-FeatureGrid-desc","children":"Server-rendered, zero client JS, and tuned for Core Web Vitals."}]]}],["$","div","1",{"className":"fui-FeatureGrid-item","children":[["$","div",null,{"className":"fui-FeatureGrid-icon","aria-hidden":true,"children":"🎨"}],["$","h3",null,{"className":"fui-FeatureGrid-title","children":"Themeable"}],["$","p",null,{"className":"fui-FeatureGrid-desc","children":"Every block reads your brand tokens — one variable set, whole site restyled."}]]}],["$","div","2",{"className":"fui-FeatureGrid-item","children":[["$","div",null,{"className":"fui-FeatureGrid-icon","aria-hidden":true,"children":"♿"}],["$","h3",null,{"className":"fui-FeatureGrid-title","children":"Accessible"}],["$","p",null,{"className":"fui-FeatureGrid-desc","children":"Semantic HTML and WCAG-AA contrast baked into every component."}]]}]]}]
+10:T4ce,/* The complete stylesheet for <FeatureGrid /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.blocks {
+  .fui-FeatureGrid-root {
+    padding-block: clamp(3rem, 7vw, 5rem);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+  }
+  .fui-FeatureGrid-item {
+    padding: 1.5rem;
+    background: var(--fui-surface);
+    border: 1px solid var(--fui-border);
+    border-radius: var(--fui-radius-lg);
+    transition:
+      border-color var(--fui-transition),
+      transform var(--fui-transition);
+  }
+  .fui-FeatureGrid-item:hover {
+    border-color: var(--fui-border-strong);
+    transform: translateY(-2px);
+  }
+  .fui-FeatureGrid-icon {
+    display: grid;
+    place-items: center;
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+    margin-block-end: 1rem;
+    font-size: 1.4rem;
+    color: var(--fui-primary);
+    background: var(--fui-primary-soft);
+    border-radius: var(--fui-radius-md);
+  }
+  .fui-FeatureGrid-title {
+    margin: 0 0 0.4rem;
+    font-size: var(--fui-text-lg);
+    font-weight: 700;
+  }
+  .fui-FeatureGrid-desc {
+    margin: 0;
+    font-size: var(--fui-text-sm);
+    line-height: 1.6;
+    color: var(--fui-text-muted);
+    text-wrap: pretty;
+  }
+}8:["$","div","Without header, four columns",{"id":"without-header-four-columns","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Without header, four columns"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Omit the header and tighten `minChildWidth` to fit more per row."}],["$","$L3",null,{"code":"<FeatureGrid\n  minChildWidth=\"13rem\"\n  features={[\n    { icon: \"🌱\", title: \"Crop planning\", description: \"Plan rotations across every field.\" },\n    { icon: \"🚜\", title: \"Fleet tracking\", description: \"Know where every machine is.\" },\n    { icon: \"📦\", title: \"Inventory\", description: \"Track seed, feed, and fuel in one place.\" },\n    { icon: \"📊\", title: \"Yield reports\", description: \"Season-over-season, at a glance.\" },\n  ]}\n/>","css":"$10","children":["$","section",null,{"className":"fui-FeatureGrid-root","children":["$","$L5",null,{"children":[null,["$","$Lf",null,{"minChildWidth":"13rem","gap":"lg","children":[["$","div","0",{"className":"fui-FeatureGrid-item","children":[["$","div",null,{"className":"fui-FeatureGrid-icon","aria-hidden":true,"children":"🌱"}],["$","h3",null,{"className":"fui-FeatureGrid-title","children":"Crop planning"}],["$","p",null,{"className":"fui-FeatureGrid-desc","children":"Plan rotations across every field."}]]}],["$","div","1",{"className":"fui-FeatureGrid-item","children":[["$","div",null,{"className":"fui-FeatureGrid-icon","aria-hidden":true,"children":"🚜"}],["$","h3",null,{"className":"fui-FeatureGrid-title","children":"Fleet tracking"}],["$","p",null,{"className":"fui-FeatureGrid-desc","children":"Know where every machine is."}]]}],["$","div","2",{"className":"fui-FeatureGrid-item","children":[["$","div",null,{"className":"fui-FeatureGrid-icon","aria-hidden":true,"children":"📦"}],["$","h3",null,{"className":"fui-FeatureGrid-title","children":"Inventory"}],["$","p",null,{"className":"fui-FeatureGrid-desc","children":"Track seed, feed, and fuel in one place."}]]}],["$","div","3",{"className":"fui-FeatureGrid-item","children":[["$","div",null,{"className":"fui-FeatureGrid-icon","aria-hidden":true,"children":"📊"}],["$","h3",null,{"className":"fui-FeatureGrid-title","children":"Yield reports"}],["$","p",null,{"className":"fui-FeatureGrid-desc","children":"Season-over-season, at a glance."}]]}]]}]]}]}]}]]}]
+11:T4ce,/* The complete stylesheet for <FeatureGrid /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.blocks {
+  .fui-FeatureGrid-root {
+    padding-block: clamp(3rem, 7vw, 5rem);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+  }
+  .fui-FeatureGrid-item {
+    padding: 1.5rem;
+    background: var(--fui-surface);
+    border: 1px solid var(--fui-border);
+    border-radius: var(--fui-radius-lg);
+    transition:
+      border-color var(--fui-transition),
+      transform var(--fui-transition);
+  }
+  .fui-FeatureGrid-item:hover {
+    border-color: var(--fui-border-strong);
+    transform: translateY(-2px);
+  }
+  .fui-FeatureGrid-icon {
+    display: grid;
+    place-items: center;
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+    margin-block-end: 1rem;
+    font-size: 1.4rem;
+    color: var(--fui-primary);
+    background: var(--fui-primary-soft);
+    border-radius: var(--fui-radius-md);
+  }
+  .fui-FeatureGrid-title {
+    margin: 0 0 0.4rem;
+    font-size: var(--fui-text-lg);
+    font-weight: 700;
+  }
+  .fui-FeatureGrid-desc {
+    margin: 0;
+    font-size: var(--fui-text-sm);
+    line-height: 1.6;
+    color: var(--fui-text-muted);
+    text-wrap: pretty;
+  }
+}9:["$","div","Text only",{"id":"text-only","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Text only"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Icons are optional — a title alone still renders cleanly."}],["$","$L3",null,{"code":"<FeatureGrid\n  title=\"What's included\"\n  features={[\n    { title: \"Unlimited projects\", description: \"No per-seat caps.\" },\n    { title: \"Priority support\", description: \"Answers within one business day.\" },\n    { title: \"SOC 2 compliant\", description: \"Audited annually.\" },\n  ]}\n/>","css":"$11","children":["$","section",null,{"className":"fui-FeatureGrid-root","children":["$","$L5",null,{"children":[["$","div",null,{"className":"fui-SectionHeader","children":[false,["$","h2",null,{"className":"fui-SectionHeader-title","children":"What's included"}],false]}],["$","$Lf",null,{"minChildWidth":"16rem","gap":"lg","children":[["$","div","0",{"className":"fui-FeatureGrid-item","children":[false,["$","h3",null,{"className":"fui-FeatureGrid-title","children":"Unlimited projects"}],["$","p",null,{"className":"fui-FeatureGrid-desc","children":"No per-seat caps."}]]}],["$","div","1",{"className":"fui-FeatureGrid-item","children":[false,["$","h3",null,{"className":"fui-FeatureGrid-title","children":"Priority support"}],["$","p",null,{"className":"fui-FeatureGrid-desc","children":"Answers within one business day."}]]}],["$","div","2",{"className":"fui-FeatureGrid-item","children":[false,["$","h3",null,{"className":"fui-FeatureGrid-title","children":"SOC 2 compliant"}],["$","p",null,{"className":"fui-FeatureGrid-desc","children":"Audited annually."}]]}]]}]]}]}]}]]}]
+a:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","features",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"features"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"Feature[]"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"The features to render, where Feature = { icon?: ReactNode; title: ReactNode; description?: ReactNode }. Required."}]]}],["$","tr","eyebrow",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"eyebrow"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Small overline above the section title."}]]}],["$","tr","title",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"title"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Section heading."}]]}],["$","tr","description",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"description"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Supporting paragraph under the section title."}]]}],["$","tr","minChildWidth",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"minChildWidth"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"string"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"16rem\""}]}],["$","td",null,{"children":"Minimum card width; the grid wraps responsively."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"HTMLAttributes<HTMLElement>"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <section> props are forwarded."}]]}]]}]]}]}]]}]
+b:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+c:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+d:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+e:["$","$L12",null,{"children":["$","$13",null,{"name":"Next.MetadataOutlet","children":"$@14"}]}]
+14:null

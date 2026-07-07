@@ -1,0 +1,218 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+5:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Container"]
+10:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+11:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:T639,/* The complete stylesheet for <Hero /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.blocks {
+  .fui-Hero-root {
+    padding-block: clamp(3rem, 8vw, 6rem);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+  }
+
+  .fui-Hero-inner {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+  @container (max-width: 48rem) {
+    .fui-Hero-inner {
+      grid-template-columns: 1fr;
+    }
+  }
+  .fui-Hero-root[data-centered] .fui-Hero-inner {
+    grid-template-columns: 1fr;
+    max-inline-size: 46rem;
+    margin-inline: auto;
+    text-align: center;
+  }
+  .fui-Hero-root[data-centered] .fui-Hero-actions {
+    justify-content: center;
+  }
+
+  .fui-Hero-eyebrow {
+    margin: 0 0 0.75rem;
+    font-size: var(--fui-text-sm);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--fui-primary);
+  }
+  .fui-Hero-title {
+    margin: 0;
+    font-size: clamp(2.2rem, 6vw, 3.75rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+  .fui-Hero-description {
+    margin: 1.25rem 0 0;
+    max-inline-size: 34rem;
+    font-size: var(--fui-text-lg);
+    line-height: 1.6;
+    color: var(--fui-text-muted);
+    text-wrap: pretty;
+  }
+  .fui-Hero-root[data-centered] .fui-Hero-description {
+    margin-inline: auto;
+  }
+  .fui-Hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-block-start: 2rem;
+  }
+  .fui-Hero-media {
+    min-inline-size: 0;
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Blocks"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"Hero"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"A landing-page headline section with an eyebrow, title, CTAs, and optional media."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { Hero } from \"@farmui/blocks\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Centered",{"id":"centered","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Centered"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"The default when there's no media — copy and actions stack in the middle."}],["$","$L3",null,{"code":"<Hero\n  eyebrow=\"Now in public beta\"\n  title=\"Ship your marketing site in an afternoon\"\n  description=\"FarmUI blocks give you production-ready sections — no design system to build, no CSS to babysit.\"\n  actions={[\n    { label: \"Get started\" },\n    { label: \"Read the docs\", variant: \"outline\" },\n  ]}\n/>","css":"$4","children":["$","section",null,{"className":"fui-Hero-root","data-centered":true,"children":["$","$L5",null,{"children":["$","div",null,{"className":"fui-Hero-inner","children":["$L6",false]}]}]}]}]]}],"$L7","$L8"]}]]}],"$L9"]}],["$La","$Lb","$Lc"],"$Ld"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+6:["$","div",null,{"className":"fui-Hero-content","children":[["$","p",null,{"className":"fui-Hero-eyebrow","children":"Now in public beta"}],["$","h1",null,{"className":"fui-Hero-title","children":"Ship your marketing site in an afternoon"}],["$","p",null,{"className":"fui-Hero-description","children":"FarmUI blocks give you production-ready sections — no design system to build, no CSS to babysit."}],["$","div",null,{"className":"fui-Hero-actions","children":[["$","a","0",{"className":"fui-Button-root","data-variant":"filled","data-size":"lg","href":"#","children":"Get started"}],["$","a","1",{"className":"fui-Button-root","data-variant":"outline","data-size":"lg","href":"#","children":"Read the docs"}]]}]]}]
+e:T639,/* The complete stylesheet for <Hero /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.blocks {
+  .fui-Hero-root {
+    padding-block: clamp(3rem, 8vw, 6rem);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+  }
+
+  .fui-Hero-inner {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+  @container (max-width: 48rem) {
+    .fui-Hero-inner {
+      grid-template-columns: 1fr;
+    }
+  }
+  .fui-Hero-root[data-centered] .fui-Hero-inner {
+    grid-template-columns: 1fr;
+    max-inline-size: 46rem;
+    margin-inline: auto;
+    text-align: center;
+  }
+  .fui-Hero-root[data-centered] .fui-Hero-actions {
+    justify-content: center;
+  }
+
+  .fui-Hero-eyebrow {
+    margin: 0 0 0.75rem;
+    font-size: var(--fui-text-sm);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--fui-primary);
+  }
+  .fui-Hero-title {
+    margin: 0;
+    font-size: clamp(2.2rem, 6vw, 3.75rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+  .fui-Hero-description {
+    margin: 1.25rem 0 0;
+    max-inline-size: 34rem;
+    font-size: var(--fui-text-lg);
+    line-height: 1.6;
+    color: var(--fui-text-muted);
+    text-wrap: pretty;
+  }
+  .fui-Hero-root[data-centered] .fui-Hero-description {
+    margin-inline: auto;
+  }
+  .fui-Hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-block-start: 2rem;
+  }
+  .fui-Hero-media {
+    min-inline-size: 0;
+  }
+}7:["$","div","With media, left-aligned",{"id":"with-media-left-aligned","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"With media, left-aligned"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Pass `media` and `align=\"start\"` for a split layout with copy on the left."}],["$","$L3",null,{"code":"<Hero\n  align=\"start\"\n  eyebrow=\"Analytics\"\n  title=\"Understand your customers in real time\"\n  description=\"Every event, every session, every funnel — streamed to a dashboard your whole team can read.\"\n  actions={[{ label: \"Start free trial\" }, { label: \"Book a demo\", variant: \"light\" }]}\n  media={\n    <img\n      src=\"/preview.png\"\n      alt=\"Product dashboard showing a live traffic funnel\"\n      style={{ inlineSize: \"100%\", borderRadius: \"1rem\" }}\n    />\n  }\n/>","css":"$e","children":["$","section",null,{"className":"fui-Hero-root","children":["$","$L5",null,{"children":["$","div",null,{"className":"fui-Hero-inner","children":[["$","div",null,{"className":"fui-Hero-content","children":[["$","p",null,{"className":"fui-Hero-eyebrow","children":"Analytics"}],["$","h1",null,{"className":"fui-Hero-title","children":"Understand your customers in real time"}],["$","p",null,{"className":"fui-Hero-description","children":"Every event, every session, every funnel — streamed to a dashboard your whole team can read."}],["$","div",null,{"className":"fui-Hero-actions","children":[["$","a","0",{"className":"fui-Button-root","data-variant":"filled","data-size":"lg","href":"#","children":"Start free trial"}],["$","a","1",{"className":"fui-Button-root","data-variant":"light","data-size":"lg","href":"#","children":"Book a demo"}]]}]]}],["$","div",null,{"className":"fui-Hero-media","children":["$","img",null,{"src":"data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='480'%20height='320'%3E%3Crect%20width='480'%20height='320'%20rx='16'%20fill='%23e2e8f0'/%3E%3Crect%20x='32'%20y='40'%20width='240'%20height='20'%20rx='6'%20fill='%2394a3b8'/%3E%3Crect%20x='32'%20y='96'%20width='416'%20height='184'%20rx='12'%20fill='%23cbd5e1'/%3E%3C/svg%3E","alt":"Product dashboard showing a live traffic funnel","style":{"inlineSize":"100%","borderRadius":"1rem"}}]}]]}]}]}]}]]}]
+f:T639,/* The complete stylesheet for <Hero /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.blocks {
+  .fui-Hero-root {
+    padding-block: clamp(3rem, 8vw, 6rem);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+  }
+
+  .fui-Hero-inner {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+  @container (max-width: 48rem) {
+    .fui-Hero-inner {
+      grid-template-columns: 1fr;
+    }
+  }
+  .fui-Hero-root[data-centered] .fui-Hero-inner {
+    grid-template-columns: 1fr;
+    max-inline-size: 46rem;
+    margin-inline: auto;
+    text-align: center;
+  }
+  .fui-Hero-root[data-centered] .fui-Hero-actions {
+    justify-content: center;
+  }
+
+  .fui-Hero-eyebrow {
+    margin: 0 0 0.75rem;
+    font-size: var(--fui-text-sm);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--fui-primary);
+  }
+  .fui-Hero-title {
+    margin: 0;
+    font-size: clamp(2.2rem, 6vw, 3.75rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+  .fui-Hero-description {
+    margin: 1.25rem 0 0;
+    max-inline-size: 34rem;
+    font-size: var(--fui-text-lg);
+    line-height: 1.6;
+    color: var(--fui-text-muted);
+    text-wrap: pretty;
+  }
+  .fui-Hero-root[data-centered] .fui-Hero-description {
+    margin-inline: auto;
+  }
+  .fui-Hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-block-start: 2rem;
+  }
+  .fui-Hero-media {
+    min-inline-size: 0;
+  }
+}8:["$","div","Minimal",{"id":"minimal","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Minimal"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Just a title and a single call-to-action."}],["$","$L3",null,{"code":"<Hero\n  title=\"Your farm, one dashboard\"\n  actions={[{ label: \"Sign up free\" }]}\n/>","css":"$f","children":["$","section",null,{"className":"fui-Hero-root","data-centered":true,"children":["$","$L5",null,{"children":["$","div",null,{"className":"fui-Hero-inner","children":[["$","div",null,{"className":"fui-Hero-content","children":[false,["$","h1",null,{"className":"fui-Hero-title","children":"Your farm, one dashboard"}],false,["$","div",null,{"className":"fui-Hero-actions","children":[["$","a","0",{"className":"fui-Button-root","data-variant":"filled","data-size":"lg","href":"#","children":"Sign up free"}]]}]]}],false]}]}]}]}]]}]
+9:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","title",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"title"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Main headline, rendered as an <h1>. Required."}]]}],["$","tr","eyebrow",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"eyebrow"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Small overline shown above the title."}]]}],["$","tr","description",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"description"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Supporting paragraph under the title."}]]}],["$","tr","actions",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"actions"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"BlockAction[]"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Call-to-action buttons, where BlockAction = { label: string; href?: string; variant?: \"filled\" | \"light\" | \"outline\" | \"subtle\" }."}]]}],["$","tr","media",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"media"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Optional media beside the copy (image, illustration, a Card…)."}]]}],["$","tr","align",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"align"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"start\" | \"center\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"center\" (or \"start\" when media is present)"}]}],["$","td",null,{"children":"Layout alignment of the content."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"HTMLAttributes<HTMLElement>"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <section> props are forwarded."}]]}]]}]]}]}]]}]
+a:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+b:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+c:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+d:["$","$L10",null,{"children":["$","$11",null,{"name":"Next.MetadataOutlet","children":"$@12"}]}]
+12:null

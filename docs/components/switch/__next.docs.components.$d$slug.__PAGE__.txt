@@ -1,0 +1,509 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+f:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Switch"]
+14:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+15:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:Ta01,/* The complete stylesheet for <Switch /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Switch-wrapper {
+    --_track-w: 2.5rem;
+    --_track-h: 1.375rem;
+    --_gap: 0.1875rem;
+
+    display: inline-flex;
+    align-items: center;
+    gap: var(--fui-space-sm);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+    cursor: pointer;
+  }
+  .fui-Switch-wrapper[data-size="sm"] {
+    --_track-w: 2rem;
+    --_track-h: 1.125rem;
+    --_gap: 0.15rem;
+  }
+  .fui-Switch-wrapper[data-size="lg"] {
+    --_track-w: 3rem;
+    --_track-h: 1.625rem;
+    --_gap: 0.21875rem;
+  }
+  .fui-Switch-wrapper[data-label-position="start"] {
+    flex-direction: row-reverse;
+  }
+  .fui-Switch-wrapper[data-disabled] {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  /* Visually hide the native input but keep it accessible & focusable. */
+  .fui-Switch-input {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .fui-Switch-track {
+    position: relative;
+    flex-shrink: 0;
+    inline-size: var(--_track-w);
+    block-size: var(--_track-h);
+    padding: var(--_gap);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-border-strong);
+    transition:
+      background var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+
+  .fui-Switch-thumb {
+    display: block;
+    inline-size: calc(var(--_track-h) - 2 * var(--_gap));
+    block-size: calc(var(--_track-h) - 2 * var(--_gap));
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-primary-contrast);
+    box-shadow: var(--fui-shadow-sm);
+    transition: translate var(--fui-transition);
+  }
+
+  .fui-Switch-wrapper:hover
+    .fui-Switch-input:not(:disabled)
+    + .fui-Switch-track {
+    background: color-mix(
+      in oklch,
+      var(--fui-border-strong) 80%,
+      var(--fui-primary)
+    );
+  }
+  .fui-Switch-input:checked + .fui-Switch-track {
+    background: var(--fui-primary);
+  }
+  .fui-Switch-input:checked + .fui-Switch-track .fui-Switch-thumb {
+    translate: calc(var(--_track-w) - var(--_track-h)) 0;
+  }
+  .fui-Switch-input:focus-visible + .fui-Switch-track {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+
+  .fui-Switch-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 500;
+    line-height: 1.35;
+  }
+  .fui-Switch-wrapper[data-size="lg"] .fui-Switch-label {
+    font-size: var(--fui-text-md);
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Inputs"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"Switch"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"Toggle a single setting on or off."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { Switch } from \"@farmui/core\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Basic usage",{"id":"basic-usage","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Basic usage"}],"$undefined",["$","$L3",null,{"code":"<Switch />","css":"$4","children":"$L5"}]]}],"$L6","$L7","$L8","$L9"]}]]}],"$La"]}],["$Lb","$Lc","$Ld"],"$Le"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+5:["$","$Lf",null,{"aria-label":"Toggle"}]
+10:Ta01,/* The complete stylesheet for <Switch /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Switch-wrapper {
+    --_track-w: 2.5rem;
+    --_track-h: 1.375rem;
+    --_gap: 0.1875rem;
+
+    display: inline-flex;
+    align-items: center;
+    gap: var(--fui-space-sm);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+    cursor: pointer;
+  }
+  .fui-Switch-wrapper[data-size="sm"] {
+    --_track-w: 2rem;
+    --_track-h: 1.125rem;
+    --_gap: 0.15rem;
+  }
+  .fui-Switch-wrapper[data-size="lg"] {
+    --_track-w: 3rem;
+    --_track-h: 1.625rem;
+    --_gap: 0.21875rem;
+  }
+  .fui-Switch-wrapper[data-label-position="start"] {
+    flex-direction: row-reverse;
+  }
+  .fui-Switch-wrapper[data-disabled] {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  /* Visually hide the native input but keep it accessible & focusable. */
+  .fui-Switch-input {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .fui-Switch-track {
+    position: relative;
+    flex-shrink: 0;
+    inline-size: var(--_track-w);
+    block-size: var(--_track-h);
+    padding: var(--_gap);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-border-strong);
+    transition:
+      background var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+
+  .fui-Switch-thumb {
+    display: block;
+    inline-size: calc(var(--_track-h) - 2 * var(--_gap));
+    block-size: calc(var(--_track-h) - 2 * var(--_gap));
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-primary-contrast);
+    box-shadow: var(--fui-shadow-sm);
+    transition: translate var(--fui-transition);
+  }
+
+  .fui-Switch-wrapper:hover
+    .fui-Switch-input:not(:disabled)
+    + .fui-Switch-track {
+    background: color-mix(
+      in oklch,
+      var(--fui-border-strong) 80%,
+      var(--fui-primary)
+    );
+  }
+  .fui-Switch-input:checked + .fui-Switch-track {
+    background: var(--fui-primary);
+  }
+  .fui-Switch-input:checked + .fui-Switch-track .fui-Switch-thumb {
+    translate: calc(var(--_track-w) - var(--_track-h)) 0;
+  }
+  .fui-Switch-input:focus-visible + .fui-Switch-track {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+
+  .fui-Switch-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 500;
+    line-height: 1.35;
+  }
+  .fui-Switch-wrapper[data-size="lg"] .fui-Switch-label {
+    font-size: var(--fui-text-md);
+  }
+}6:["$","div","Checked",{"id":"checked","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Checked"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"The track fills with the primary color when on."}],["$","$L3",null,{"code":"<Switch defaultChecked />","css":"$10","children":["$","$Lf",null,{"defaultChecked":true,"aria-label":"Toggle on"}]}]]}]
+11:Ta01,/* The complete stylesheet for <Switch /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Switch-wrapper {
+    --_track-w: 2.5rem;
+    --_track-h: 1.375rem;
+    --_gap: 0.1875rem;
+
+    display: inline-flex;
+    align-items: center;
+    gap: var(--fui-space-sm);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+    cursor: pointer;
+  }
+  .fui-Switch-wrapper[data-size="sm"] {
+    --_track-w: 2rem;
+    --_track-h: 1.125rem;
+    --_gap: 0.15rem;
+  }
+  .fui-Switch-wrapper[data-size="lg"] {
+    --_track-w: 3rem;
+    --_track-h: 1.625rem;
+    --_gap: 0.21875rem;
+  }
+  .fui-Switch-wrapper[data-label-position="start"] {
+    flex-direction: row-reverse;
+  }
+  .fui-Switch-wrapper[data-disabled] {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  /* Visually hide the native input but keep it accessible & focusable. */
+  .fui-Switch-input {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .fui-Switch-track {
+    position: relative;
+    flex-shrink: 0;
+    inline-size: var(--_track-w);
+    block-size: var(--_track-h);
+    padding: var(--_gap);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-border-strong);
+    transition:
+      background var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+
+  .fui-Switch-thumb {
+    display: block;
+    inline-size: calc(var(--_track-h) - 2 * var(--_gap));
+    block-size: calc(var(--_track-h) - 2 * var(--_gap));
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-primary-contrast);
+    box-shadow: var(--fui-shadow-sm);
+    transition: translate var(--fui-transition);
+  }
+
+  .fui-Switch-wrapper:hover
+    .fui-Switch-input:not(:disabled)
+    + .fui-Switch-track {
+    background: color-mix(
+      in oklch,
+      var(--fui-border-strong) 80%,
+      var(--fui-primary)
+    );
+  }
+  .fui-Switch-input:checked + .fui-Switch-track {
+    background: var(--fui-primary);
+  }
+  .fui-Switch-input:checked + .fui-Switch-track .fui-Switch-thumb {
+    translate: calc(var(--_track-w) - var(--_track-h)) 0;
+  }
+  .fui-Switch-input:focus-visible + .fui-Switch-track {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+
+  .fui-Switch-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 500;
+    line-height: 1.35;
+  }
+  .fui-Switch-wrapper[data-size="lg"] .fui-Switch-label {
+    font-size: var(--fui-text-md);
+  }
+}7:["$","div","With label",{"id":"with-label","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"With label"}],"$undefined",["$","$L3",null,{"code":"<Switch label=\"Enable notifications\" defaultChecked />\n<Switch label=\"Label on the left\" labelPosition=\"start\" />","css":"$11","children":["$","div",null,{"style":{"display":"grid","gap":"0.75rem"},"children":[["$","$Lf",null,{"label":"Enable notifications","defaultChecked":true}],["$","$Lf",null,{"label":"Label on the left","labelPosition":"start"}]]}]}]]}]
+12:Ta01,/* The complete stylesheet for <Switch /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Switch-wrapper {
+    --_track-w: 2.5rem;
+    --_track-h: 1.375rem;
+    --_gap: 0.1875rem;
+
+    display: inline-flex;
+    align-items: center;
+    gap: var(--fui-space-sm);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+    cursor: pointer;
+  }
+  .fui-Switch-wrapper[data-size="sm"] {
+    --_track-w: 2rem;
+    --_track-h: 1.125rem;
+    --_gap: 0.15rem;
+  }
+  .fui-Switch-wrapper[data-size="lg"] {
+    --_track-w: 3rem;
+    --_track-h: 1.625rem;
+    --_gap: 0.21875rem;
+  }
+  .fui-Switch-wrapper[data-label-position="start"] {
+    flex-direction: row-reverse;
+  }
+  .fui-Switch-wrapper[data-disabled] {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  /* Visually hide the native input but keep it accessible & focusable. */
+  .fui-Switch-input {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .fui-Switch-track {
+    position: relative;
+    flex-shrink: 0;
+    inline-size: var(--_track-w);
+    block-size: var(--_track-h);
+    padding: var(--_gap);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-border-strong);
+    transition:
+      background var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+
+  .fui-Switch-thumb {
+    display: block;
+    inline-size: calc(var(--_track-h) - 2 * var(--_gap));
+    block-size: calc(var(--_track-h) - 2 * var(--_gap));
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-primary-contrast);
+    box-shadow: var(--fui-shadow-sm);
+    transition: translate var(--fui-transition);
+  }
+
+  .fui-Switch-wrapper:hover
+    .fui-Switch-input:not(:disabled)
+    + .fui-Switch-track {
+    background: color-mix(
+      in oklch,
+      var(--fui-border-strong) 80%,
+      var(--fui-primary)
+    );
+  }
+  .fui-Switch-input:checked + .fui-Switch-track {
+    background: var(--fui-primary);
+  }
+  .fui-Switch-input:checked + .fui-Switch-track .fui-Switch-thumb {
+    translate: calc(var(--_track-w) - var(--_track-h)) 0;
+  }
+  .fui-Switch-input:focus-visible + .fui-Switch-track {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+
+  .fui-Switch-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 500;
+    line-height: 1.35;
+  }
+  .fui-Switch-wrapper[data-size="lg"] .fui-Switch-label {
+    font-size: var(--fui-text-md);
+  }
+}8:["$","div","Disabled",{"id":"disabled","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Disabled"}],"$undefined",["$","$L3",null,{"code":"<Switch label=\"Off & disabled\" disabled />\n<Switch label=\"On & disabled\" defaultChecked disabled />","css":"$12","children":["$","div",null,{"style":{"display":"grid","gap":"0.75rem"},"children":[["$","$Lf",null,{"label":"Off & disabled","disabled":true}],["$","$Lf",null,{"label":"On & disabled","defaultChecked":true,"disabled":true}]]}]}]]}]
+13:Ta01,/* The complete stylesheet for <Switch /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Switch-wrapper {
+    --_track-w: 2.5rem;
+    --_track-h: 1.375rem;
+    --_gap: 0.1875rem;
+
+    display: inline-flex;
+    align-items: center;
+    gap: var(--fui-space-sm);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+    cursor: pointer;
+  }
+  .fui-Switch-wrapper[data-size="sm"] {
+    --_track-w: 2rem;
+    --_track-h: 1.125rem;
+    --_gap: 0.15rem;
+  }
+  .fui-Switch-wrapper[data-size="lg"] {
+    --_track-w: 3rem;
+    --_track-h: 1.625rem;
+    --_gap: 0.21875rem;
+  }
+  .fui-Switch-wrapper[data-label-position="start"] {
+    flex-direction: row-reverse;
+  }
+  .fui-Switch-wrapper[data-disabled] {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  /* Visually hide the native input but keep it accessible & focusable. */
+  .fui-Switch-input {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .fui-Switch-track {
+    position: relative;
+    flex-shrink: 0;
+    inline-size: var(--_track-w);
+    block-size: var(--_track-h);
+    padding: var(--_gap);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-border-strong);
+    transition:
+      background var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+
+  .fui-Switch-thumb {
+    display: block;
+    inline-size: calc(var(--_track-h) - 2 * var(--_gap));
+    block-size: calc(var(--_track-h) - 2 * var(--_gap));
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-primary-contrast);
+    box-shadow: var(--fui-shadow-sm);
+    transition: translate var(--fui-transition);
+  }
+
+  .fui-Switch-wrapper:hover
+    .fui-Switch-input:not(:disabled)
+    + .fui-Switch-track {
+    background: color-mix(
+      in oklch,
+      var(--fui-border-strong) 80%,
+      var(--fui-primary)
+    );
+  }
+  .fui-Switch-input:checked + .fui-Switch-track {
+    background: var(--fui-primary);
+  }
+  .fui-Switch-input:checked + .fui-Switch-track .fui-Switch-thumb {
+    translate: calc(var(--_track-w) - var(--_track-h)) 0;
+  }
+  .fui-Switch-input:focus-visible + .fui-Switch-track {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+
+  .fui-Switch-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 500;
+    line-height: 1.35;
+  }
+  .fui-Switch-wrapper[data-size="lg"] .fui-Switch-label {
+    font-size: var(--fui-text-md);
+  }
+}9:["$","div","Sizes",{"id":"sizes","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Sizes"}],"$undefined",["$","$L3",null,{"code":"<Switch size=\"sm\" label=\"Small\" defaultChecked />\n<Switch size=\"md\" label=\"Medium\" defaultChecked />\n<Switch size=\"lg\" label=\"Large\" defaultChecked />","css":"$13","children":["$","div",null,{"style":{"display":"grid","gap":"0.75rem"},"children":[["$","$Lf",null,{"size":"sm","label":"Small","defaultChecked":true}],["$","$Lf",null,{"size":"md","label":"Medium","defaultChecked":true}],["$","$Lf",null,{"size":"lg","label":"Large","defaultChecked":true}]]}]}]]}]
+a:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","label",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"label"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Label rendered beside the toggle."}]]}],["$","tr","size",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"size"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"sm\" | \"md\" | \"lg\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"md\""}]}],["$","td",null,{"children":"Control size."}]]}],["$","tr","labelPosition",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"labelPosition"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"start\" | \"end\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"end\""}]}],["$","td",null,{"children":"Which side of the toggle the label sits on."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"InputHTMLAttributes"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <input type=\"checkbox\"> props are forwarded."}]]}]]}]]}]}]]}]
+b:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+c:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+d:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+e:["$","$L14",null,{"children":["$","$15",null,{"name":"Next.MetadataOutlet","children":"$@16"}]}]
+16:null

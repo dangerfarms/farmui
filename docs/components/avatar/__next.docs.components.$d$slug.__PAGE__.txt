@@ -1,0 +1,387 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+e:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Avatar"]
+12:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"AvatarGroup"]
+13:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+14:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:T8c8,/* The complete stylesheet for <Avatar /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Avatar-root {
+    --_bg: var(--fui-primary);
+    --_fg: var(--fui-primary-contrast);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--_size, 2.5rem);
+    block-size: var(--_size, 2.5rem);
+    border-radius: var(--_radius, var(--fui-radius-full));
+    background: var(--_bg);
+    color: var(--_fg);
+    font-family: var(--fui-font);
+    font-weight: 600;
+    line-height: 1;
+    overflow: hidden;
+    user-select: none;
+    flex: none;
+  }
+
+  /* Sizes */
+  .fui-Avatar-root[data-size="sm"] {
+    --_size: 2rem;
+    font-size: var(--fui-text-xs);
+  }
+  .fui-Avatar-root[data-size="md"] {
+    --_size: 2.5rem;
+    font-size: var(--fui-text-sm);
+  }
+  .fui-Avatar-root[data-size="lg"] {
+    --_size: 3.25rem;
+    font-size: var(--fui-text-lg);
+  }
+
+  /* Colors — used for initials / glyph background */
+  .fui-Avatar-root[data-color="gray"] {
+    --_bg: var(--fui-bg-subtle);
+    --_fg: var(--fui-text-muted);
+  }
+  .fui-Avatar-root[data-color="danger"] {
+    --_bg: var(--fui-danger);
+    --_fg: var(--fui-primary-contrast);
+  }
+  .fui-Avatar-root[data-color="warning"] {
+    --_bg: var(--fui-warning);
+    --_fg: oklch(0.24 0.02 80);
+  }
+  .fui-Avatar-root[data-color="info"] {
+    --_bg: var(--fui-info);
+    --_fg: var(--fui-primary-contrast);
+  }
+
+  .fui-Avatar-img {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .fui-Avatar-initials {
+    font-size: 0.85em;
+    letter-spacing: 0.02em;
+  }
+
+  .fui-Avatar-glyph {
+    inline-size: 65%;
+    block-size: 65%;
+    opacity: 0.9;
+  }
+
+  /* Group — overlap children with a surface ring */
+  .fui-Avatar-group {
+    display: inline-flex;
+    align-items: center;
+  }
+  .fui-Avatar-group > * {
+    border: 2px solid var(--fui-surface);
+    box-sizing: content-box;
+    margin-inline-start: calc(-1 * var(--_overlap, 0.5rem));
+    transition: transform var(--fui-transition);
+  }
+  .fui-Avatar-group > *:first-child {
+    margin-inline-start: 0;
+  }
+  .fui-Avatar-group > *:hover {
+    transform: translateY(-2px);
+    z-index: 1;
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Data display"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"Avatar"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"An image, initials, or fallback glyph representing a user."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { Avatar, AvatarGroup } from \"@farmui/core\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Image",{"id":"image","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Image"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Pass a src to render a cover-fit image."}],["$","$L3",null,{"code":"<Avatar src=\"/user.jpg\" name=\"Ada Lovelace\" />","css":"$4","children":"$L5"}]]}],"$L6","$L7","$L8"]}]]}],"$L9"]}],["$La","$Lb","$Lc"],"$Ld"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+5:["$","$Le",null,{"src":"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=128&h=128&fit=crop&crop=faces","name":"Ada Lovelace"}]
+f:T8c8,/* The complete stylesheet for <Avatar /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Avatar-root {
+    --_bg: var(--fui-primary);
+    --_fg: var(--fui-primary-contrast);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--_size, 2.5rem);
+    block-size: var(--_size, 2.5rem);
+    border-radius: var(--_radius, var(--fui-radius-full));
+    background: var(--_bg);
+    color: var(--_fg);
+    font-family: var(--fui-font);
+    font-weight: 600;
+    line-height: 1;
+    overflow: hidden;
+    user-select: none;
+    flex: none;
+  }
+
+  /* Sizes */
+  .fui-Avatar-root[data-size="sm"] {
+    --_size: 2rem;
+    font-size: var(--fui-text-xs);
+  }
+  .fui-Avatar-root[data-size="md"] {
+    --_size: 2.5rem;
+    font-size: var(--fui-text-sm);
+  }
+  .fui-Avatar-root[data-size="lg"] {
+    --_size: 3.25rem;
+    font-size: var(--fui-text-lg);
+  }
+
+  /* Colors — used for initials / glyph background */
+  .fui-Avatar-root[data-color="gray"] {
+    --_bg: var(--fui-bg-subtle);
+    --_fg: var(--fui-text-muted);
+  }
+  .fui-Avatar-root[data-color="danger"] {
+    --_bg: var(--fui-danger);
+    --_fg: var(--fui-primary-contrast);
+  }
+  .fui-Avatar-root[data-color="warning"] {
+    --_bg: var(--fui-warning);
+    --_fg: oklch(0.24 0.02 80);
+  }
+  .fui-Avatar-root[data-color="info"] {
+    --_bg: var(--fui-info);
+    --_fg: var(--fui-primary-contrast);
+  }
+
+  .fui-Avatar-img {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .fui-Avatar-initials {
+    font-size: 0.85em;
+    letter-spacing: 0.02em;
+  }
+
+  .fui-Avatar-glyph {
+    inline-size: 65%;
+    block-size: 65%;
+    opacity: 0.9;
+  }
+
+  /* Group — overlap children with a surface ring */
+  .fui-Avatar-group {
+    display: inline-flex;
+    align-items: center;
+  }
+  .fui-Avatar-group > * {
+    border: 2px solid var(--fui-surface);
+    box-sizing: content-box;
+    margin-inline-start: calc(-1 * var(--_overlap, 0.5rem));
+    transition: transform var(--fui-transition);
+  }
+  .fui-Avatar-group > *:first-child {
+    margin-inline-start: 0;
+  }
+  .fui-Avatar-group > *:hover {
+    transform: translateY(-2px);
+    z-index: 1;
+  }
+}6:["$","div","Initials",{"id":"initials","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Initials"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"With no image, initials are derived from name. Colors map to tokens."}],["$","$L3",null,{"code":"<Avatar name=\"Jane Doe\" />\n<Avatar name=\"Sam Reed\" color=\"gray\" />\n<Avatar name=\"Amara Okafor\" color=\"info\" />\n<Avatar />","css":"$f","children":[["$","$Le",null,{"name":"Jane Doe"}],["$","$Le",null,{"name":"Sam Reed","color":"gray"}],["$","$Le",null,{"name":"Amara Okafor","color":"info"}],["$","$Le",null,{}]]}]]}]
+10:T8c8,/* The complete stylesheet for <Avatar /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Avatar-root {
+    --_bg: var(--fui-primary);
+    --_fg: var(--fui-primary-contrast);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--_size, 2.5rem);
+    block-size: var(--_size, 2.5rem);
+    border-radius: var(--_radius, var(--fui-radius-full));
+    background: var(--_bg);
+    color: var(--_fg);
+    font-family: var(--fui-font);
+    font-weight: 600;
+    line-height: 1;
+    overflow: hidden;
+    user-select: none;
+    flex: none;
+  }
+
+  /* Sizes */
+  .fui-Avatar-root[data-size="sm"] {
+    --_size: 2rem;
+    font-size: var(--fui-text-xs);
+  }
+  .fui-Avatar-root[data-size="md"] {
+    --_size: 2.5rem;
+    font-size: var(--fui-text-sm);
+  }
+  .fui-Avatar-root[data-size="lg"] {
+    --_size: 3.25rem;
+    font-size: var(--fui-text-lg);
+  }
+
+  /* Colors — used for initials / glyph background */
+  .fui-Avatar-root[data-color="gray"] {
+    --_bg: var(--fui-bg-subtle);
+    --_fg: var(--fui-text-muted);
+  }
+  .fui-Avatar-root[data-color="danger"] {
+    --_bg: var(--fui-danger);
+    --_fg: var(--fui-primary-contrast);
+  }
+  .fui-Avatar-root[data-color="warning"] {
+    --_bg: var(--fui-warning);
+    --_fg: oklch(0.24 0.02 80);
+  }
+  .fui-Avatar-root[data-color="info"] {
+    --_bg: var(--fui-info);
+    --_fg: var(--fui-primary-contrast);
+  }
+
+  .fui-Avatar-img {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .fui-Avatar-initials {
+    font-size: 0.85em;
+    letter-spacing: 0.02em;
+  }
+
+  .fui-Avatar-glyph {
+    inline-size: 65%;
+    block-size: 65%;
+    opacity: 0.9;
+  }
+
+  /* Group — overlap children with a surface ring */
+  .fui-Avatar-group {
+    display: inline-flex;
+    align-items: center;
+  }
+  .fui-Avatar-group > * {
+    border: 2px solid var(--fui-surface);
+    box-sizing: content-box;
+    margin-inline-start: calc(-1 * var(--_overlap, 0.5rem));
+    transition: transform var(--fui-transition);
+  }
+  .fui-Avatar-group > *:first-child {
+    margin-inline-start: 0;
+  }
+  .fui-Avatar-group > *:hover {
+    transform: translateY(-2px);
+    z-index: 1;
+  }
+}7:["$","div","Sizes",{"id":"sizes","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Sizes"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Use a token or an explicit pixel number."}],["$","$L3",null,{"code":"<Avatar name=\"Jane Doe\" size=\"sm\" />\n<Avatar name=\"Jane Doe\" size=\"md\" />\n<Avatar name=\"Jane Doe\" size=\"lg\" />\n<Avatar name=\"Jane Doe\" size={72} />","css":"$10","children":[["$","$Le",null,{"name":"Jane Doe","size":"sm"}],["$","$Le",null,{"name":"Jane Doe","size":"md"}],["$","$Le",null,{"name":"Jane Doe","size":"lg"}],["$","$Le",null,{"name":"Jane Doe","size":72}]]}]]}]
+11:T8c8,/* The complete stylesheet for <Avatar /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Avatar-root {
+    --_bg: var(--fui-primary);
+    --_fg: var(--fui-primary-contrast);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--_size, 2.5rem);
+    block-size: var(--_size, 2.5rem);
+    border-radius: var(--_radius, var(--fui-radius-full));
+    background: var(--_bg);
+    color: var(--_fg);
+    font-family: var(--fui-font);
+    font-weight: 600;
+    line-height: 1;
+    overflow: hidden;
+    user-select: none;
+    flex: none;
+  }
+
+  /* Sizes */
+  .fui-Avatar-root[data-size="sm"] {
+    --_size: 2rem;
+    font-size: var(--fui-text-xs);
+  }
+  .fui-Avatar-root[data-size="md"] {
+    --_size: 2.5rem;
+    font-size: var(--fui-text-sm);
+  }
+  .fui-Avatar-root[data-size="lg"] {
+    --_size: 3.25rem;
+    font-size: var(--fui-text-lg);
+  }
+
+  /* Colors — used for initials / glyph background */
+  .fui-Avatar-root[data-color="gray"] {
+    --_bg: var(--fui-bg-subtle);
+    --_fg: var(--fui-text-muted);
+  }
+  .fui-Avatar-root[data-color="danger"] {
+    --_bg: var(--fui-danger);
+    --_fg: var(--fui-primary-contrast);
+  }
+  .fui-Avatar-root[data-color="warning"] {
+    --_bg: var(--fui-warning);
+    --_fg: oklch(0.24 0.02 80);
+  }
+  .fui-Avatar-root[data-color="info"] {
+    --_bg: var(--fui-info);
+    --_fg: var(--fui-primary-contrast);
+  }
+
+  .fui-Avatar-img {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .fui-Avatar-initials {
+    font-size: 0.85em;
+    letter-spacing: 0.02em;
+  }
+
+  .fui-Avatar-glyph {
+    inline-size: 65%;
+    block-size: 65%;
+    opacity: 0.9;
+  }
+
+  /* Group — overlap children with a surface ring */
+  .fui-Avatar-group {
+    display: inline-flex;
+    align-items: center;
+  }
+  .fui-Avatar-group > * {
+    border: 2px solid var(--fui-surface);
+    box-sizing: content-box;
+    margin-inline-start: calc(-1 * var(--_overlap, 0.5rem));
+    transition: transform var(--fui-transition);
+  }
+  .fui-Avatar-group > *:first-child {
+    margin-inline-start: 0;
+  }
+  .fui-Avatar-group > *:hover {
+    transform: translateY(-2px);
+    z-index: 1;
+  }
+}8:["$","div","Group",{"id":"group","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Group"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"AvatarGroup overlaps children with a surface-colored ring."}],["$","$L3",null,{"code":"<AvatarGroup>\n  <Avatar name=\"Jane Doe\" />\n  <Avatar name=\"Sam Reed\" color=\"info\" />\n  <Avatar name=\"Amara Okafor\" color=\"warning\" />\n  <Avatar name=\"+5\" color=\"gray\" />\n</AvatarGroup>","css":"$11","children":["$","$L12",null,{"children":[["$","$Le",null,{"name":"Jane Doe"}],["$","$Le",null,{"name":"Sam Reed","color":"info"}],["$","$Le",null,{"name":"Amara Okafor","color":"warning"}],["$","$Le",null,{"name":"+5","color":"gray"}]]}]}]]}]
+9:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","src",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"src"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Image source. When set, renders an <img>."}]]}],["$","tr","alt",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"alt"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Alt text for the image (falls back to name)."}]]}],["$","tr","name",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"name"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Person's name; used for initials and as image alt."}]]}],["$","tr","size",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"size"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"sm\" | \"md\" | \"lg\" | number"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"md\""}]}],["$","td",null,{"children":"Size token or explicit pixel size."}]]}],["$","tr","radius",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"radius"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"sm\" | \"md\" | \"lg\" | \"xl\" | \"full\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"full\""}]}],["$","td",null,{"children":"Border radius token."}]]}],["$","tr","color",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"color"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"primary\" | \"gray\" | \"danger\" | \"warning\" | \"info\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"primary\""}]}],["$","td",null,{"children":"Background color for the initials/fallback state."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"SpanHTMLAttributes"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <span> props are forwarded."}]]}]]}]]}]}]]}]
+a:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+b:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+c:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+d:["$","$L13",null,{"children":["$","$14",null,{"name":"Next.MetadataOutlet","children":"$@15"}]}]
+15:null

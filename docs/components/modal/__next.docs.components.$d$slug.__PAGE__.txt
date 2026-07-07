@@ -1,0 +1,242 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+c:I[35995,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"ModalDemo"]
+f:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+10:"$Sreact.suspense"
+12:I[35995,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"ModalSizesDemo"]
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:Tab8,/* The complete stylesheet for <Modal /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--fui-space-lg);
+    background: color-mix(in oklch, var(--fui-text) 45%, transparent);
+    opacity: 0;
+    animation: fui-Modal-modal-overlay-in var(--fui-transition) forwards;
+  }
+  .fui-Modal-overlay[data-open] {
+    opacity: 1;
+  }
+
+  .fui-Modal-panel {
+    inline-size: 100%;
+    max-inline-size: var(--_max, 32rem);
+    max-block-size: calc(100dvh - 2 * var(--fui-space-xl));
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: var(--fui-radius-lg);
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    font-family: var(--fui-font);
+    box-shadow: var(--fui-shadow-lg);
+    outline: none;
+    transform: translateY(8px) scale(0.98);
+    opacity: 0;
+    animation: fui-Modal-modal-panel-in var(--fui-transition) forwards;
+  }
+
+  .fui-Modal-panel[data-size="sm"] {
+    --_max: 24rem;
+  }
+  .fui-Modal-panel[data-size="md"] {
+    --_max: 32rem;
+  }
+  .fui-Modal-panel[data-size="lg"] {
+    --_max: 44rem;
+  }
+
+  .fui-Modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--fui-space-md);
+    padding-block: var(--fui-space-md);
+    padding-inline: var(--fui-space-xl);
+    border-block-end: 1px solid var(--fui-border);
+  }
+
+  .fui-Modal-title {
+    margin: 0;
+    font-size: var(--fui-text-lg);
+    font-weight: 600;
+    color: var(--fui-text);
+  }
+
+  .fui-Modal-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 2rem;
+    block-size: 2rem;
+    padding: 0;
+    border: none;
+    border-radius: var(--fui-radius-sm);
+    background: transparent;
+    color: var(--fui-text-muted);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      background var(--fui-transition),
+      color var(--fui-transition);
+  }
+  .fui-Modal-close:hover {
+    background: var(--fui-surface-hover);
+    color: var(--fui-text);
+  }
+  .fui-Modal-close:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+
+  .fui-Modal-body {
+    padding-block: var(--fui-space-lg);
+    padding-inline: var(--fui-space-xl);
+    overflow-y: auto;
+    font-size: var(--fui-text-sm);
+    line-height: 1.6;
+    color: var(--fui-text);
+  }
+
+  @keyframes fui-Modal-modal-overlay-in {
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes fui-Modal-modal-panel-in {
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Overlays"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"Modal"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"A controlled, focus-trapping dialog rendered in a portal over the page."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { Modal } from \"@farmui/core\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Basic usage",{"id":"basic-usage","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Basic usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Control visibility with opened and onClose. Closes on overlay click and Escape."}],["$","$L3",null,{"code":"const [opened, setOpened] = useState(false);\n\n<Button onClick={() => setOpened(true)}>Open modal</Button>\n<Modal opened={opened} onClose={() => setOpened(false)} title=\"Order confirmed\">\n  <p>Your order is on its way.</p>\n  <Button onClick={() => setOpened(false)}>Got it</Button>\n</Modal>","css":"$4","children":"$L5"}]]}],"$L6"]}]]}],"$L7"]}],["$L8","$L9","$La"],"$Lb"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+5:["$","$Lc",null,{}]
+d:Tab8,/* The complete stylesheet for <Modal /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--fui-space-lg);
+    background: color-mix(in oklch, var(--fui-text) 45%, transparent);
+    opacity: 0;
+    animation: fui-Modal-modal-overlay-in var(--fui-transition) forwards;
+  }
+  .fui-Modal-overlay[data-open] {
+    opacity: 1;
+  }
+
+  .fui-Modal-panel {
+    inline-size: 100%;
+    max-inline-size: var(--_max, 32rem);
+    max-block-size: calc(100dvh - 2 * var(--fui-space-xl));
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: var(--fui-radius-lg);
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    font-family: var(--fui-font);
+    box-shadow: var(--fui-shadow-lg);
+    outline: none;
+    transform: translateY(8px) scale(0.98);
+    opacity: 0;
+    animation: fui-Modal-modal-panel-in var(--fui-transition) forwards;
+  }
+
+  .fui-Modal-panel[data-size="sm"] {
+    --_max: 24rem;
+  }
+  .fui-Modal-panel[data-size="md"] {
+    --_max: 32rem;
+  }
+  .fui-Modal-panel[data-size="lg"] {
+    --_max: 44rem;
+  }
+
+  .fui-Modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--fui-space-md);
+    padding-block: var(--fui-space-md);
+    padding-inline: var(--fui-space-xl);
+    border-block-end: 1px solid var(--fui-border);
+  }
+
+  .fui-Modal-title {
+    margin: 0;
+    font-size: var(--fui-text-lg);
+    font-weight: 600;
+    color: var(--fui-text);
+  }
+
+  .fui-Modal-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 2rem;
+    block-size: 2rem;
+    padding: 0;
+    border: none;
+    border-radius: var(--fui-radius-sm);
+    background: transparent;
+    color: var(--fui-text-muted);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      background var(--fui-transition),
+      color var(--fui-transition);
+  }
+  .fui-Modal-close:hover {
+    background: var(--fui-surface-hover);
+    color: var(--fui-text);
+  }
+  .fui-Modal-close:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+
+  .fui-Modal-body {
+    padding-block: var(--fui-space-lg);
+    padding-inline: var(--fui-space-xl);
+    overflow-y: auto;
+    font-size: var(--fui-text-sm);
+    line-height: 1.6;
+    color: var(--fui-text);
+  }
+
+  @keyframes fui-Modal-modal-overlay-in {
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes fui-Modal-modal-panel-in {
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+}6:["$","div","Sizes",{"id":"sizes","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Sizes"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Three panel widths via the size prop."}],["$","$L3",null,{"code":"<Modal opened={opened} onClose={close} title=\"Small modal\" size=\"sm\">…</Modal>\n<Modal opened={opened} onClose={close} title=\"Medium modal\" size=\"md\">…</Modal>\n<Modal opened={opened} onClose={close} title=\"Large modal\" size=\"lg\">…</Modal>","css":"$d","children":"$Le"}]]}]
+7:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","opened",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"opened"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"boolean"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Whether the modal is visible."}]]}],["$","tr","onClose",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"onClose"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"() => void"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Called when the user requests to close (overlay, Escape, close button)."}]]}],["$","tr","title",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"title"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Heading rendered in the modal header."}]]}],["$","tr","size",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"size"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"sm\" | \"md\" | \"lg\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"md\""}]}],["$","td",null,{"children":"Panel width."}]]}],["$","tr","withCloseButton",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"withCloseButton"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"boolean"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"true"}]}],["$","td",null,{"children":"Render the header close (×) button."}]]}],["$","tr","children",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"children"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Body content of the dialog."}]]}]]}]]}]}]]}]
+8:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+9:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+a:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+b:["$","$Lf",null,{"children":["$","$10",null,{"name":"Next.MetadataOutlet","children":"$@11"}]}]
+e:["$","$L12",null,{}]
+11:null

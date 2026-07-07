@@ -1,0 +1,276 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+d:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Tabs"]
+e:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"TabsList"]
+f:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"TabsTab"]
+10:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"TabsPanel"]
+14:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+15:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:T7ed,/* The complete stylesheet for <Tabs /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Tabs-root {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-lg);
+    inline-size: 100%;
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+  }
+
+  .fui-Tabs-list {
+    display: flex;
+    gap: var(--fui-space-xs);
+    border-block-end: 1px solid var(--fui-border);
+  }
+
+  .fui-Tabs-tab {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--fui-space-sm);
+    padding-block: var(--fui-space-md);
+    padding-inline: var(--fui-space-lg);
+    margin-block-end: -1px;
+    border: none;
+    border-block-end: 2px solid transparent;
+    background: transparent;
+    color: var(--fui-text-muted);
+    font-family: inherit;
+    font-size: var(--fui-text-sm);
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      color var(--fui-transition),
+      border-color var(--fui-transition),
+      background var(--fui-transition);
+  }
+
+  .fui-Tabs-tab:hover:not(:disabled) {
+    color: var(--fui-text);
+    background: color-mix(in oklch, var(--fui-primary-soft) 50%, transparent);
+  }
+
+  .fui-Tabs-tab:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+    border-radius: var(--fui-radius-sm) var(--fui-radius-sm) 0 0;
+  }
+
+  .fui-Tabs-tab:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .fui-Tabs-tab[data-active] {
+    color: var(--fui-primary);
+    border-block-end-color: var(--fui-primary);
+  }
+
+  .fui-Tabs-section {
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.1em;
+    line-height: 0;
+  }
+
+  .fui-Tabs-panel {
+    color: var(--fui-text);
+    font-size: var(--fui-text-md);
+    line-height: 1.55;
+  }
+
+  .fui-Tabs-panel:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+    border-radius: var(--fui-radius-sm);
+  }
+
+  .fui-Tabs-panel[hidden] {
+    display: none;
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Navigation"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"Tabs"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"Switch between related panels of content in the same view."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { Tabs } from \"@farmui/core\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Basic",{"id":"basic","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Basic"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Uncontrolled via defaultValue. Arrow keys move between tabs."}],["$","$L3",null,{"code":"<Tabs defaultValue=\"account\">\n  <TabsList>\n    <TabsTab value=\"account\">Account</TabsTab>\n    <TabsTab value=\"security\">Security</TabsTab>\n    <TabsTab value=\"notifications\">Notifications</TabsTab>\n  </TabsList>\n  <TabsPanel value=\"account\">Update your name and email address.</TabsPanel>\n  <TabsPanel value=\"security\">Change your password and enable 2FA.</TabsPanel>\n  <TabsPanel value=\"notifications\">Choose how you want to be notified.</TabsPanel>\n</Tabs>","css":"$4","children":"$L5"}]]}],"$L6","$L7"]}]]}],"$L8"]}],["$L9","$La","$Lb"],"$Lc"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+5:["$","div",null,{"style":{"inlineSize":"100%","maxInlineSize":"28rem"},"children":["$","$Ld",null,{"defaultValue":"account","children":[["$","$Le",null,{"children":[["$","$Lf",null,{"value":"account","children":"Account"}],["$","$Lf",null,{"value":"security","children":"Security"}],["$","$Lf",null,{"value":"notifications","children":"Notifications"}]]}],["$","$L10",null,{"value":"account","children":"Update your name and email address."}],["$","$L10",null,{"value":"security","children":"Change your password and enable 2FA."}],["$","$L10",null,{"value":"notifications","children":"Choose how you want to be notified."}]]}]}]
+11:T7ed,/* The complete stylesheet for <Tabs /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Tabs-root {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-lg);
+    inline-size: 100%;
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+  }
+
+  .fui-Tabs-list {
+    display: flex;
+    gap: var(--fui-space-xs);
+    border-block-end: 1px solid var(--fui-border);
+  }
+
+  .fui-Tabs-tab {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--fui-space-sm);
+    padding-block: var(--fui-space-md);
+    padding-inline: var(--fui-space-lg);
+    margin-block-end: -1px;
+    border: none;
+    border-block-end: 2px solid transparent;
+    background: transparent;
+    color: var(--fui-text-muted);
+    font-family: inherit;
+    font-size: var(--fui-text-sm);
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      color var(--fui-transition),
+      border-color var(--fui-transition),
+      background var(--fui-transition);
+  }
+
+  .fui-Tabs-tab:hover:not(:disabled) {
+    color: var(--fui-text);
+    background: color-mix(in oklch, var(--fui-primary-soft) 50%, transparent);
+  }
+
+  .fui-Tabs-tab:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+    border-radius: var(--fui-radius-sm) var(--fui-radius-sm) 0 0;
+  }
+
+  .fui-Tabs-tab:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .fui-Tabs-tab[data-active] {
+    color: var(--fui-primary);
+    border-block-end-color: var(--fui-primary);
+  }
+
+  .fui-Tabs-section {
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.1em;
+    line-height: 0;
+  }
+
+  .fui-Tabs-panel {
+    color: var(--fui-text);
+    font-size: var(--fui-text-md);
+    line-height: 1.55;
+  }
+
+  .fui-Tabs-panel:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+    border-radius: var(--fui-radius-sm);
+  }
+
+  .fui-Tabs-panel[hidden] {
+    display: none;
+  }
+}6:["$","div","With icons",{"id":"with-icons","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"With icons"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Use leftSection to place an icon or emoji before the label."}],["$","$L3",null,{"code":"<Tabs defaultValue=\"files\">\n  <TabsList>\n    <TabsTab value=\"files\" leftSection={<span aria-hidden>📄</span>}>Files</TabsTab>\n    <TabsTab value=\"team\" leftSection={<span aria-hidden>👥</span>}>Team</TabsTab>\n    <TabsTab value=\"settings\" leftSection={<span aria-hidden>⚙️</span>}>Settings</TabsTab>\n  </TabsList>\n  <TabsPanel value=\"files\">All your documents in one place.</TabsPanel>\n  <TabsPanel value=\"team\">Invite teammates and manage roles.</TabsPanel>\n  <TabsPanel value=\"settings\">Configure your workspace preferences.</TabsPanel>\n</Tabs>","css":"$11","children":["$","div",null,{"style":{"inlineSize":"100%","maxInlineSize":"28rem"},"children":["$","$Ld",null,{"defaultValue":"files","children":[["$","$Le",null,{"children":[["$","$Lf",null,{"value":"files","leftSection":["$","span",null,{"aria-hidden":true,"children":"📄"}],"children":"Files"}],["$","$Lf",null,{"value":"team","leftSection":["$","span",null,{"aria-hidden":true,"children":"👥"}],"children":"Team"}],["$","$Lf",null,{"value":"settings","leftSection":["$","span",null,{"aria-hidden":true,"children":"⚙️"}],"children":"Settings"}]]}],["$","$L10",null,{"value":"files","children":"All your documents in one place."}],["$","$L10",null,{"value":"team","children":"Invite teammates and manage roles."}],"$L12"]}]}]}]]}]
+13:T7ed,/* The complete stylesheet for <Tabs /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Tabs-root {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-lg);
+    inline-size: 100%;
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+  }
+
+  .fui-Tabs-list {
+    display: flex;
+    gap: var(--fui-space-xs);
+    border-block-end: 1px solid var(--fui-border);
+  }
+
+  .fui-Tabs-tab {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--fui-space-sm);
+    padding-block: var(--fui-space-md);
+    padding-inline: var(--fui-space-lg);
+    margin-block-end: -1px;
+    border: none;
+    border-block-end: 2px solid transparent;
+    background: transparent;
+    color: var(--fui-text-muted);
+    font-family: inherit;
+    font-size: var(--fui-text-sm);
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      color var(--fui-transition),
+      border-color var(--fui-transition),
+      background var(--fui-transition);
+  }
+
+  .fui-Tabs-tab:hover:not(:disabled) {
+    color: var(--fui-text);
+    background: color-mix(in oklch, var(--fui-primary-soft) 50%, transparent);
+  }
+
+  .fui-Tabs-tab:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+    border-radius: var(--fui-radius-sm) var(--fui-radius-sm) 0 0;
+  }
+
+  .fui-Tabs-tab:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .fui-Tabs-tab[data-active] {
+    color: var(--fui-primary);
+    border-block-end-color: var(--fui-primary);
+  }
+
+  .fui-Tabs-section {
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.1em;
+    line-height: 0;
+  }
+
+  .fui-Tabs-panel {
+    color: var(--fui-text);
+    font-size: var(--fui-text-md);
+    line-height: 1.55;
+  }
+
+  .fui-Tabs-panel:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+    border-radius: var(--fui-radius-sm);
+  }
+
+  .fui-Tabs-panel[hidden] {
+    display: none;
+  }
+}7:["$","div","Disabled tab",{"id":"disabled-tab","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Disabled tab"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"A disabled tab is skipped by keyboard navigation."}],["$","$L3",null,{"code":"<Tabs defaultValue=\"overview\">\n  <TabsList>\n    <TabsTab value=\"overview\">Overview</TabsTab>\n    <TabsTab value=\"reports\">Reports</TabsTab>\n    <TabsTab value=\"billing\" disabled>Billing</TabsTab>\n  </TabsList>\n  <TabsPanel value=\"overview\">Everything at a glance.</TabsPanel>\n  <TabsPanel value=\"reports\">Usage for the last month.</TabsPanel>\n  <TabsPanel value=\"billing\">Upgrade to unlock billing.</TabsPanel>\n</Tabs>","css":"$13","children":["$","div",null,{"style":{"inlineSize":"100%","maxInlineSize":"28rem"},"children":["$","$Ld",null,{"defaultValue":"overview","children":[["$","$Le",null,{"children":[["$","$Lf",null,{"value":"overview","children":"Overview"}],["$","$Lf",null,{"value":"reports","children":"Reports"}],["$","$Lf",null,{"value":"billing","disabled":true,"children":"Billing"}]]}],["$","$L10",null,{"value":"overview","children":"Everything at a glance."}],["$","$L10",null,{"value":"reports","children":"Usage for the last month."}],["$","$L10",null,{"value":"billing","children":"Upgrade to unlock billing."}]]}]}]}]]}]
+8:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","defaultValue",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"defaultValue"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Value of the tab active by default (uncontrolled)."}]]}],["$","tr","value",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"value"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Controlled active tab value."}]]}],["$","tr","onChange",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"onChange"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"(value: string) => void"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Called with the new value when the active tab changes."}]]}],["$","tr","TabsTab value",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"TabsTab value"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Unique value linking a tab to its panel (required)."}]]}],["$","tr","TabsTab leftSection",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"TabsTab leftSection"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Content (icon/emoji) rendered before the tab label."}]]}],["$","tr","TabsTab disabled",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"TabsTab disabled"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"boolean"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Disable the tab and skip it in keyboard navigation."}]]}],["$","tr","TabsPanel value",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"TabsPanel value"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Value of the tab this panel belongs to (required)."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"HTMLAttributes"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <div>/<button> props are forwarded."}]]}]]}]]}]}]]}]
+9:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+a:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+b:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+c:["$","$L14",null,{"children":["$","$15",null,{"name":"Next.MetadataOutlet","children":"$@16"}]}]
+12:["$","$L10",null,{"value":"settings","children":"Configure your workspace preferences."}]
+16:null

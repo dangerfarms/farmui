@@ -1,0 +1,262 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+d:I[29743,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"PaginationDemo"]
+f:I[29743,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"PaginationEdgesDemo"]
+11:I[29743,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"PaginationManyDemo"]
+12:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+13:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:T844,/* The complete stylesheet for <Pagination /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Pagination-root {
+    font-family: var(--fui-font);
+  }
+
+  .fui-Pagination-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--fui-space-xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .fui-Pagination-page,
+  .fui-Pagination-control {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-inline-size: var(--fui-control-height-md);
+    block-size: var(--fui-control-height-md);
+    padding-inline: var(--fui-space-sm);
+    border: 1px solid var(--fui-border);
+    border-radius: var(--fui-radius-md);
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    font-family: inherit;
+    font-size: var(--fui-text-sm);
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      background var(--fui-transition),
+      border-color var(--fui-transition),
+      color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+
+  .fui-Pagination-page:hover:not([data-active]),
+  .fui-Pagination-control:hover:not(:disabled) {
+    background: var(--fui-surface-hover);
+    border-color: var(--fui-border-strong);
+  }
+
+  .fui-Pagination-page:focus-visible,
+  .fui-Pagination-control:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+
+  .fui-Pagination-page[data-active] {
+    background: var(--fui-primary);
+    border-color: var(--fui-primary);
+    color: var(--fui-primary-contrast);
+    cursor: default;
+  }
+
+  .fui-Pagination-control:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+    color: var(--fui-text-dim);
+  }
+
+  .fui-Pagination-control :where(svg) {
+    inline-size: 1.125em;
+    block-size: 1.125em;
+  }
+
+  .fui-Pagination-dots {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-inline-size: var(--fui-control-height-md);
+    block-size: var(--fui-control-height-md);
+    color: var(--fui-text-dim);
+    user-select: none;
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Navigation"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"Pagination"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"Navigate through pages of content with a controlled page picker."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { Pagination } from \"@farmui/core\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Basic",{"id":"basic","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Basic"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Controlled — hold the current page in state."}],["$","$L3",null,{"code":"function Demo() {\n  const [page, setPage] = useState(1);\n  return <Pagination total={10} value={page} onChange={setPage} />;\n}","css":"$4","children":"$L5"}]]}],"$L6","$L7"]}]]}],"$L8"]}],["$L9","$La","$Lb"],"$Lc"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+5:["$","$Ld",null,{}]
+e:T844,/* The complete stylesheet for <Pagination /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Pagination-root {
+    font-family: var(--fui-font);
+  }
+
+  .fui-Pagination-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--fui-space-xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .fui-Pagination-page,
+  .fui-Pagination-control {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-inline-size: var(--fui-control-height-md);
+    block-size: var(--fui-control-height-md);
+    padding-inline: var(--fui-space-sm);
+    border: 1px solid var(--fui-border);
+    border-radius: var(--fui-radius-md);
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    font-family: inherit;
+    font-size: var(--fui-text-sm);
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      background var(--fui-transition),
+      border-color var(--fui-transition),
+      color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+
+  .fui-Pagination-page:hover:not([data-active]),
+  .fui-Pagination-control:hover:not(:disabled) {
+    background: var(--fui-surface-hover);
+    border-color: var(--fui-border-strong);
+  }
+
+  .fui-Pagination-page:focus-visible,
+  .fui-Pagination-control:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+
+  .fui-Pagination-page[data-active] {
+    background: var(--fui-primary);
+    border-color: var(--fui-primary);
+    color: var(--fui-primary-contrast);
+    cursor: default;
+  }
+
+  .fui-Pagination-control:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+    color: var(--fui-text-dim);
+  }
+
+  .fui-Pagination-control :where(svg) {
+    inline-size: 1.125em;
+    block-size: 1.125em;
+  }
+
+  .fui-Pagination-dots {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-inline-size: var(--fui-control-height-md);
+    block-size: var(--fui-control-height-md);
+    color: var(--fui-text-dim);
+    user-select: none;
+  }
+}6:["$","div","With edges",{"id":"with-edges","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"With edges"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Add first/last buttons with withEdges."}],["$","$L3",null,{"code":"function Demo() {\n  const [page, setPage] = useState(5);\n  return (\n    <Pagination total={10} value={page} onChange={setPage} withEdges />\n  );\n}","css":"$e","children":["$","$Lf",null,{}]}]]}]
+10:T844,/* The complete stylesheet for <Pagination /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Pagination-root {
+    font-family: var(--fui-font);
+  }
+
+  .fui-Pagination-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--fui-space-xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .fui-Pagination-page,
+  .fui-Pagination-control {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-inline-size: var(--fui-control-height-md);
+    block-size: var(--fui-control-height-md);
+    padding-inline: var(--fui-space-sm);
+    border: 1px solid var(--fui-border);
+    border-radius: var(--fui-radius-md);
+    background: var(--fui-surface);
+    color: var(--fui-text);
+    font-family: inherit;
+    font-size: var(--fui-text-sm);
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      background var(--fui-transition),
+      border-color var(--fui-transition),
+      color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+
+  .fui-Pagination-page:hover:not([data-active]),
+  .fui-Pagination-control:hover:not(:disabled) {
+    background: var(--fui-surface-hover);
+    border-color: var(--fui-border-strong);
+  }
+
+  .fui-Pagination-page:focus-visible,
+  .fui-Pagination-control:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+
+  .fui-Pagination-page[data-active] {
+    background: var(--fui-primary);
+    border-color: var(--fui-primary);
+    color: var(--fui-primary-contrast);
+    cursor: default;
+  }
+
+  .fui-Pagination-control:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+    color: var(--fui-text-dim);
+  }
+
+  .fui-Pagination-control :where(svg) {
+    inline-size: 1.125em;
+    block-size: 1.125em;
+  }
+
+  .fui-Pagination-dots {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-inline-size: var(--fui-control-height-md);
+    block-size: var(--fui-control-height-md);
+    color: var(--fui-text-dim);
+    user-select: none;
+  }
+}7:["$","div","Many pages",{"id":"many-pages","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Many pages"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Ellipsis gaps keep the control compact across 20 pages."}],["$","$L3",null,{"code":"function Demo() {\n  const [page, setPage] = useState(10);\n  return <Pagination total={20} value={page} onChange={setPage} withEdges />;\n}","css":"$10","children":["$","$L11",null,{}]}]]}]
+8:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","total",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"total"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"number"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Total number of pages."}]]}],["$","tr","value",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"value"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"number"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Currently active page (1-based)."}]]}],["$","tr","onChange",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"onChange"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"(page: number) => void"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Called with the new page when a control is activated."}]]}],["$","tr","siblings",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"siblings"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"number"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"1"}]}],["$","td",null,{"children":"Number of sibling pages shown on each side of the active page."}]]}],["$","tr","withEdges",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"withEdges"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"boolean"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"false"}]}],["$","td",null,{"children":"Show first/last page buttons at the edges."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"HTMLAttributes"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <nav> props are forwarded."}]]}]]}]]}]}]]}]
+9:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+a:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+b:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+c:["$","$L12",null,{"children":["$","$13",null,{"name":"Next.MetadataOutlet","children":"$@14"}]}]
+14:null

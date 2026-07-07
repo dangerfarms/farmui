@@ -1,0 +1,120 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+5:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Container"]
+10:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+11:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:T4f1,/* The complete stylesheet for <LogoWall /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.blocks {
+  .fui-LogoWall-root {
+    padding-block: clamp(2.5rem, 6vw, 4rem);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+  }
+  .fui-LogoWall-title {
+    margin: 0 0 clamp(1.25rem, 3vw, 2rem);
+    font-size: var(--fui-text-sm);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--fui-text-muted);
+  }
+  .fui-LogoWall-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1.5rem, 5vw, 3.5rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .fui-LogoWall-item {
+    display: inline-flex;
+  }
+  .fui-LogoWall-logo {
+    display: block;
+    block-size: clamp(1.5rem, 3vw, 2rem);
+    inline-size: auto;
+    max-inline-size: 100%;
+    filter: grayscale(1);
+    opacity: 0.6;
+    transition:
+      filter var(--fui-transition),
+      opacity var(--fui-transition);
+  }
+  .fui-LogoWall-item:hover .fui-LogoWall-logo {
+    filter: grayscale(0);
+    opacity: 1;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fui-LogoWall-logo {
+      transition: none;
+    }
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Blocks"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"LogoWall"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"A muted, wrapping row of customer logos that lift out of grayscale on hover."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { LogoWall } from \"@farmui/blocks\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","With caption",{"id":"with-caption","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"With caption"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Pass inline SVG via each logo's `node` prop for crisp, self-contained marks. Every logo still needs an `alt` label."}],["$","$L3",null,{"code":"<LogoWall\n  title=\"Trusted by leading teams\"\n  logos={[\n    { alt: \"Acme\", node: <AcmeMark /> },\n    { alt: \"Globex\", node: <GlobexMark /> },\n    { alt: \"Initech\", node: <InitechMark /> },\n    { alt: \"Umbrella\", node: <UmbrellaMark /> },\n  ]}\n/>","css":"$4","children":["$","section",null,{"className":"fui-LogoWall-root","children":["$","$L5",null,{"children":[["$","p",null,{"className":"fui-LogoWall-title","children":"Trusted by leading teams"}],["$","ul",null,{"className":"fui-LogoWall-list","children":[["$","li","0",{"className":"fui-LogoWall-item","children":["$","span",null,{"className":"fui-LogoWall-logo","role":"img","aria-label":"Acme","children":["$","svg",null,{"width":"96","height":"28","viewBox":"0 0 96 28","aria-hidden":true,"children":[["$","rect",null,{"width":"96","height":"28","rx":"6","fill":"none","stroke":"currentColor","strokeWidth":"1.5"}],["$","text",null,{"x":"48","y":"19","textAnchor":"middle","fontFamily":"sans-serif","fontWeight":"700","fontSize":"14","fill":"currentColor","children":"ACME"}]]}]}]}],"$L6","$L7","$L8"]}]]}]}]}]]}],"$L9"]}]]}],"$La"]}],["$Lb","$Lc","$Ld"],"$Le"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+6:["$","li","1",{"className":"fui-LogoWall-item","children":["$","span",null,{"className":"fui-LogoWall-logo","role":"img","aria-label":"Globex","children":["$","svg",null,{"width":"104","height":"28","viewBox":"0 0 104 28","aria-hidden":true,"children":[["$","circle",null,{"cx":"16","cy":"14","r":"9","fill":"currentColor"}],["$","text",null,{"x":"60","y":"19","textAnchor":"middle","fontFamily":"sans-serif","fontWeight":"600","fontSize":"14","fill":"currentColor","children":"Globex"}]]}]}]}]
+7:["$","li","2",{"className":"fui-LogoWall-item","children":["$","span",null,{"className":"fui-LogoWall-logo","role":"img","aria-label":"Initech","children":["$","svg",null,{"width":"100","height":"28","viewBox":"0 0 100 28","aria-hidden":true,"children":["$","text",null,{"x":"50","y":"19","textAnchor":"middle","fontFamily":"sans-serif","fontStyle":"italic","fontWeight":"700","fontSize":"15","fill":"currentColor","children":"Initech"}]}]}]}]
+8:["$","li","3",{"className":"fui-LogoWall-item","children":["$","span",null,{"className":"fui-LogoWall-logo","role":"img","aria-label":"Umbrella","children":["$","svg",null,{"width":"112","height":"28","viewBox":"0 0 112 28","aria-hidden":true,"children":[["$","path",null,{"d":"M6 20 L14 6 L22 20 Z","fill":"currentColor"}],["$","text",null,{"x":"68","y":"19","textAnchor":"middle","fontFamily":"sans-serif","fontWeight":"600","fontSize":"14","fill":"currentColor","children":"Umbrella"}]]}]}]}]
+f:T4f1,/* The complete stylesheet for <LogoWall /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.blocks {
+  .fui-LogoWall-root {
+    padding-block: clamp(2.5rem, 6vw, 4rem);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+  }
+  .fui-LogoWall-title {
+    margin: 0 0 clamp(1.25rem, 3vw, 2rem);
+    font-size: var(--fui-text-sm);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--fui-text-muted);
+  }
+  .fui-LogoWall-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1.5rem, 5vw, 3.5rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .fui-LogoWall-item {
+    display: inline-flex;
+  }
+  .fui-LogoWall-logo {
+    display: block;
+    block-size: clamp(1.5rem, 3vw, 2rem);
+    inline-size: auto;
+    max-inline-size: 100%;
+    filter: grayscale(1);
+    opacity: 0.6;
+    transition:
+      filter var(--fui-transition),
+      opacity var(--fui-transition);
+  }
+  .fui-LogoWall-item:hover .fui-LogoWall-logo {
+    filter: grayscale(0);
+    opacity: 1;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fui-LogoWall-logo {
+      transition: none;
+    }
+  }
+}9:["$","div","From image URLs",{"id":"from-image-urls","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"From image URLs"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"When you have hosted image files, pass `src` instead of `node`. `alt` is required either way."}],["$","$L3",null,{"code":"<LogoWall\n  logos={[\n    { src: \"/logos/northwind.svg\", alt: \"Northwind\" },\n    { src: \"/logos/contoso.svg\", alt: \"Contoso\" },\n    { src: \"/logos/fabrikam.svg\", alt: \"Fabrikam\" },\n  ]}\n/>","css":"$f","children":["$","section",null,{"className":"fui-LogoWall-root","children":["$","$L5",null,{"children":[false,["$","ul",null,{"className":"fui-LogoWall-list","children":[["$","li","0",{"className":"fui-LogoWall-item","children":["$","span",null,{"className":"fui-LogoWall-logo","role":"img","aria-label":"Northwind","children":["$","svg",null,{"width":"120","height":"28","viewBox":"0 0 120 28","aria-hidden":true,"children":["$","text",null,{"x":"60","y":"19","textAnchor":"middle","fontFamily":"serif","fontWeight":"700","fontSize":"15","fill":"currentColor","children":"Northwind"}]}]}]}],["$","li","1",{"className":"fui-LogoWall-item","children":["$","span",null,{"className":"fui-LogoWall-logo","role":"img","aria-label":"Contoso","children":["$","svg",null,{"width":"104","height":"28","viewBox":"0 0 104 28","aria-hidden":true,"children":[["$","rect",null,{"x":"4","y":"8","width":"12","height":"12","fill":"currentColor"}],["$","text",null,{"x":"60","y":"19","textAnchor":"middle","fontFamily":"sans-serif","fontWeight":"600","fontSize":"14","fill":"currentColor","children":"Contoso"}]]}]}]}],["$","li","2",{"className":"fui-LogoWall-item","children":["$","span",null,{"className":"fui-LogoWall-logo","role":"img","aria-label":"Fabrikam","children":["$","svg",null,{"width":"108","height":"28","viewBox":"0 0 108 28","aria-hidden":true,"children":["$","text",null,{"x":"54","y":"19","textAnchor":"middle","fontFamily":"sans-serif","fontWeight":"800","fontSize":"14","letterSpacing":"1","fill":"currentColor","children":"FABRIKAM"}]}]}]}]]}]]}]}]}]]}]
+a:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","logos",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"logos"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"Logo[]"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"The logos to render, where Logo = { alt: string; src?: string; node?: ReactNode }. Provide `src` for an <img>, or `node` for a custom mark (e.g. inline SVG); `alt` is always required. Required."}]]}],["$","tr","title",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"title"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Small centered caption above the logos, e.g. \"Trusted by leading teams\"."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"HTMLAttributes<HTMLElement>"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <section> props are forwarded."}]]}]]}]]}]}]]}]
+b:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+c:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+d:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+e:["$","$L10",null,{"children":["$","$11",null,{"name":"Next.MetadataOutlet","children":"$@12"}]}]
+12:null

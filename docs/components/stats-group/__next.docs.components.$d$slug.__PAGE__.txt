@@ -1,0 +1,117 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+5:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Container"]
+11:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+12:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:T4ac,/* The complete stylesheet for <StatsGroup /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.blocks {
+  .fui-StatsGroup-root {
+    padding-block: clamp(3rem, 7vw, 5rem);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+  }
+  .fui-StatsGroup-grid {
+    container-type: inline-size;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(1.5rem, 4vw, 2.5rem);
+    margin: 0;
+  }
+  .fui-StatsGroup-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    text-align: center;
+  }
+  .fui-StatsGroup-value {
+    margin: 0;
+    font-size: clamp(2.25rem, 5vw, 3rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--fui-primary);
+    font-variant-numeric: tabular-nums;
+  }
+  .fui-StatsGroup-label {
+    margin: 0;
+    font-size: var(--fui-text-sm);
+    line-height: 1.5;
+    color: var(--fui-text-muted);
+    text-wrap: pretty;
+  }
+
+  @container (max-width: 52rem) {
+    .fui-StatsGroup-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @container (max-width: 24rem) {
+    .fui-StatsGroup-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Blocks"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"StatsGroup"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"A responsive row of big-number stats with muted labels, rendered as a description list."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { StatsGroup } from \"@farmui/blocks\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","With header",{"id":"with-header","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"With header"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"A metrics band introduced by a section header."}],["$","$L3",null,{"code":"<StatsGroup\n  eyebrow=\"By the numbers\"\n  title=\"Trusted at scale\"\n  description=\"Teams of every size run their public sites on FarmUI.\"\n  stats={[\n    { value: \"12k+\", label: \"Sites launched\" },\n    { value: \"99.99%\", label: \"Uptime\" },\n    { value: \"48ms\", label: \"Median TTFB\" },\n    { value: \"4.9/5\", label: \"Customer rating\" },\n  ]}\n/>","css":"$4","children":["$","section",null,{"className":"fui-StatsGroup-root","children":["$","$L5",null,{"children":[["$","div",null,{"className":"fui-SectionHeader","children":[["$","p",null,{"className":"fui-SectionHeader-eyebrow","children":"By the numbers"}],["$","h2",null,{"className":"fui-SectionHeader-title","children":"Trusted at scale"}],["$","p",null,{"className":"fui-SectionHeader-description","children":"Teams of every size run their public sites on FarmUI."}]]}],["$","dl",null,{"className":"fui-StatsGroup-grid","children":[["$","div","0",{"className":"fui-StatsGroup-item","children":[["$","dt",null,{"className":"fui-StatsGroup-value","children":"12k+"}],"$L6"]}],"$L7","$L8","$L9"]}]]}]}]}]]}],"$La"]}]]}],"$Lb"]}],["$Lc","$Ld","$Le"],"$Lf"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+6:["$","dd",null,{"className":"fui-StatsGroup-label","children":"Sites launched"}]
+7:["$","div","1",{"className":"fui-StatsGroup-item","children":[["$","dt",null,{"className":"fui-StatsGroup-value","children":"99.99%"}],["$","dd",null,{"className":"fui-StatsGroup-label","children":"Uptime"}]]}]
+8:["$","div","2",{"className":"fui-StatsGroup-item","children":[["$","dt",null,{"className":"fui-StatsGroup-value","children":"48ms"}],["$","dd",null,{"className":"fui-StatsGroup-label","children":"Median TTFB"}]]}]
+9:["$","div","3",{"className":"fui-StatsGroup-item","children":[["$","dt",null,{"className":"fui-StatsGroup-value","children":"4.9/5"}],["$","dd",null,{"className":"fui-StatsGroup-label","children":"Customer rating"}]]}]
+10:T4ac,/* The complete stylesheet for <StatsGroup /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.blocks {
+  .fui-StatsGroup-root {
+    padding-block: clamp(3rem, 7vw, 5rem);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+  }
+  .fui-StatsGroup-grid {
+    container-type: inline-size;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(1.5rem, 4vw, 2.5rem);
+    margin: 0;
+  }
+  .fui-StatsGroup-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    text-align: center;
+  }
+  .fui-StatsGroup-value {
+    margin: 0;
+    font-size: clamp(2.25rem, 5vw, 3rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--fui-primary);
+    font-variant-numeric: tabular-nums;
+  }
+  .fui-StatsGroup-label {
+    margin: 0;
+    font-size: var(--fui-text-sm);
+    line-height: 1.5;
+    color: var(--fui-text-muted);
+    text-wrap: pretty;
+  }
+
+  @container (max-width: 52rem) {
+    .fui-StatsGroup-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @container (max-width: 24rem) {
+    .fui-StatsGroup-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}a:["$","div","Bare stats",{"id":"bare-stats","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Bare stats"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Drop the header for a compact three-up metric strip."}],["$","$L3",null,{"code":"<StatsGroup\n  stats={[\n    { value: \"2M+\", label: \"Acres managed\" },\n    { value: \"40%\", label: \"Less input waste\" },\n    { value: \"3×\", label: \"Faster planning\" },\n  ]}\n/>","css":"$10","children":["$","section",null,{"className":"fui-StatsGroup-root","children":["$","$L5",null,{"children":[null,["$","dl",null,{"className":"fui-StatsGroup-grid","children":[["$","div","0",{"className":"fui-StatsGroup-item","children":[["$","dt",null,{"className":"fui-StatsGroup-value","children":"2M+"}],["$","dd",null,{"className":"fui-StatsGroup-label","children":"Acres managed"}]]}],["$","div","1",{"className":"fui-StatsGroup-item","children":[["$","dt",null,{"className":"fui-StatsGroup-value","children":"40%"}],["$","dd",null,{"className":"fui-StatsGroup-label","children":"Less input waste"}]]}],["$","div","2",{"className":"fui-StatsGroup-item","children":[["$","dt",null,{"className":"fui-StatsGroup-value","children":"3×"}],["$","dd",null,{"className":"fui-StatsGroup-label","children":"Faster planning"}]]}]]}]]}]}]}]]}]
+b:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","stats",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"stats"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"Stat[]"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"The stats to render, where Stat = { value: ReactNode; label: ReactNode }. Required."}]]}],["$","tr","eyebrow",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"eyebrow"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Small overline above the section title."}]]}],["$","tr","title",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"title"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Section heading."}]]}],["$","tr","description",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"description"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Supporting paragraph under the section title."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"HTMLAttributes<HTMLElement>"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <section> props are forwarded."}]]}]]}]]}]}]]}]
+c:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+d:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+e:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+f:["$","$L11",null,{"children":["$","$12",null,{"name":"Next.MetadataOutlet","children":"$@13"}]}]
+13:null

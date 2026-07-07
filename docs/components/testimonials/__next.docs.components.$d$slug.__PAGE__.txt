@@ -1,0 +1,138 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+c:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Container"]
+d:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"SimpleGrid"]
+e:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Avatar"]
+10:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+11:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:T585,/* The complete stylesheet for <Testimonials /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.blocks {
+  .fui-Testimonials-root {
+    padding-block: clamp(3rem, 7vw, 5rem);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+  }
+
+  .fui-Testimonials-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 0;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    background: var(--fui-surface);
+    border: 1px solid var(--fui-border);
+    border-radius: var(--fui-radius-lg);
+    box-shadow: var(--fui-shadow-sm);
+  }
+
+  .fui-Testimonials-quote {
+    margin: 0;
+    flex: 1;
+    font-size: var(--fui-text-lg);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+  .fui-Testimonials-quote::before {
+    content: "\201C";
+    display: block;
+    margin-block-end: 0.25rem;
+    font-size: 2.5rem;
+    line-height: 0.5;
+    color: color-mix(in oklch, var(--fui-primary), transparent 55%);
+  }
+
+  .fui-Testimonials-person {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+  .fui-Testimonials-avatar {
+    flex: none;
+  }
+  .fui-Testimonials-meta {
+    display: flex;
+    flex-direction: column;
+    min-inline-size: 0;
+  }
+  .fui-Testimonials-author {
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .fui-Testimonials-role {
+    font-size: var(--fui-text-sm);
+    color: var(--fui-text-muted);
+    line-height: 1.3;
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Blocks"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"Testimonials"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"A responsive grid of customer quote cards with author avatars."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { Testimonials } from \"@farmui/blocks\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","With header",{"id":"with-header","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"With header"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Omit `avatar` and the author's initials are shown automatically — no image needed."}],["$","$L3",null,{"code":"<Testimonials\n  eyebrow=\"Loved by builders\"\n  title=\"What our customers say\"\n  items={[\n    {\n      quote: \"We replaced three separate tools with FarmUI and shipped our new site in a single sprint.\",\n      author: \"Priya Nair\",\n      role: \"Head of Growth, Meadowlark\",\n    },\n    {\n      quote: \"The blocks are genuinely accessible out of the box. Our audit came back clean on the first pass.\",\n      author: \"Diego Fernández\",\n      role: \"Engineering Lead, Tanager\",\n    },\n    {\n      quote: \"Re-theming for a new brand took an afternoon, not a rebuild. That's the whole pitch, delivered.\",\n      author: \"Sam Okafor\",\n      role: \"Design Systems, Harvest Co.\",\n    },\n  ]}\n/>","css":"$4","children":"$L5"}]]}],"$L6"]}]]}],"$L7"]}],["$L8","$L9","$La"],"$Lb"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+5:["$","section",null,{"className":"fui-Testimonials-root","children":["$","$Lc",null,{"children":[["$","div",null,{"className":"fui-SectionHeader","children":[["$","p",null,{"className":"fui-SectionHeader-eyebrow","children":"Loved by builders"}],["$","h2",null,{"className":"fui-SectionHeader-title","children":"What our customers say"}],false]}],["$","$Ld",null,{"minChildWidth":"20rem","gap":"lg","children":[["$","figure","0",{"className":"fui-Testimonials-card","children":[["$","blockquote",null,{"className":"fui-Testimonials-quote","children":"We replaced three separate tools with FarmUI and shipped our new site in a single sprint."}],["$","figcaption",null,{"className":"fui-Testimonials-person","children":[["$","$Le",null,{"className":"fui-Testimonials-avatar","name":"Priya Nair"}],["$","span",null,{"className":"fui-Testimonials-meta","children":[["$","span",null,{"className":"fui-Testimonials-author","children":"Priya Nair"}],["$","span",null,{"className":"fui-Testimonials-role","children":"Head of Growth, Meadowlark"}]]}]]}]]}],["$","figure","1",{"className":"fui-Testimonials-card","children":[["$","blockquote",null,{"className":"fui-Testimonials-quote","children":"The blocks are genuinely accessible out of the box. Our audit came back clean on the first pass."}],["$","figcaption",null,{"className":"fui-Testimonials-person","children":[["$","$Le",null,{"className":"fui-Testimonials-avatar","name":"Diego Fernández"}],["$","span",null,{"className":"fui-Testimonials-meta","children":[["$","span",null,{"className":"fui-Testimonials-author","children":"Diego Fernández"}],["$","span",null,{"className":"fui-Testimonials-role","children":"Engineering Lead, Tanager"}]]}]]}]]}],["$","figure","2",{"className":"fui-Testimonials-card","children":[["$","blockquote",null,{"className":"fui-Testimonials-quote","children":"Re-theming for a new brand took an afternoon, not a rebuild. That's the whole pitch, delivered."}],["$","figcaption",null,{"className":"fui-Testimonials-person","children":[["$","$Le",null,{"className":"fui-Testimonials-avatar","name":"Sam Okafor"}],["$","span",null,{"className":"fui-Testimonials-meta","children":[["$","span",null,{"className":"fui-Testimonials-author","children":"Sam Okafor"}],["$","span",null,{"className":"fui-Testimonials-role","children":"Design Systems, Harvest Co."}]]}]]}]]}]]}]]}]}]
+f:T585,/* The complete stylesheet for <Testimonials /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.blocks {
+  .fui-Testimonials-root {
+    padding-block: clamp(3rem, 7vw, 5rem);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+  }
+
+  .fui-Testimonials-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 0;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    background: var(--fui-surface);
+    border: 1px solid var(--fui-border);
+    border-radius: var(--fui-radius-lg);
+    box-shadow: var(--fui-shadow-sm);
+  }
+
+  .fui-Testimonials-quote {
+    margin: 0;
+    flex: 1;
+    font-size: var(--fui-text-lg);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+  .fui-Testimonials-quote::before {
+    content: "\201C";
+    display: block;
+    margin-block-end: 0.25rem;
+    font-size: 2.5rem;
+    line-height: 0.5;
+    color: color-mix(in oklch, var(--fui-primary), transparent 55%);
+  }
+
+  .fui-Testimonials-person {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+  .fui-Testimonials-avatar {
+    flex: none;
+  }
+  .fui-Testimonials-meta {
+    display: flex;
+    flex-direction: column;
+    min-inline-size: 0;
+  }
+  .fui-Testimonials-author {
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .fui-Testimonials-role {
+    font-size: var(--fui-text-sm);
+    color: var(--fui-text-muted);
+    line-height: 1.3;
+  }
+}6:["$","div","Two-up, no header",{"id":"two-up-no-header","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Two-up, no header"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Raise `minChildWidth` to keep cards wide and drop the section header for a focused pull-quote pair."}],["$","$L3",null,{"code":"<Testimonials\n  minChildWidth=\"24rem\"\n  items={[\n    {\n      quote: \"Onboarding our whole marketing team took an afternoon. They ship pages without filing a single ticket now.\",\n      author: \"Alex Rivera\",\n      role: \"VP Marketing, Fieldnote\",\n    },\n    {\n      quote: \"Support actually reads your setup before replying. First real answer came back the same day.\",\n      author: \"Mei Lin\",\n      role: \"Founder, Rootstock\",\n    },\n  ]}\n/>","css":"$f","children":["$","section",null,{"className":"fui-Testimonials-root","children":["$","$Lc",null,{"children":[null,["$","$Ld",null,{"minChildWidth":"24rem","gap":"lg","children":[["$","figure","0",{"className":"fui-Testimonials-card","children":[["$","blockquote",null,{"className":"fui-Testimonials-quote","children":"Onboarding our whole marketing team took an afternoon. They ship pages without filing a single ticket now."}],["$","figcaption",null,{"className":"fui-Testimonials-person","children":[["$","$Le",null,{"className":"fui-Testimonials-avatar","name":"Alex Rivera"}],["$","span",null,{"className":"fui-Testimonials-meta","children":[["$","span",null,{"className":"fui-Testimonials-author","children":"Alex Rivera"}],["$","span",null,{"className":"fui-Testimonials-role","children":"VP Marketing, Fieldnote"}]]}]]}]]}],["$","figure","1",{"className":"fui-Testimonials-card","children":[["$","blockquote",null,{"className":"fui-Testimonials-quote","children":"Support actually reads your setup before replying. First real answer came back the same day."}],["$","figcaption",null,{"className":"fui-Testimonials-person","children":[["$","$Le",null,{"className":"fui-Testimonials-avatar","name":"Mei Lin"}],["$","span",null,{"className":"fui-Testimonials-meta","children":[["$","span",null,{"className":"fui-Testimonials-author","children":"Mei Lin"}],["$","span",null,{"className":"fui-Testimonials-role","children":"Founder, Rootstock"}]]}]]}]]}]]}]]}]}]}]]}]
+7:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","items",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"items"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"Testimonial[]"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"The testimonials to display, where Testimonial = { quote: ReactNode; author: ReactNode; role?: ReactNode; avatar?: string }. When `avatar` is omitted the author's initials are shown. Required."}]]}],["$","tr","eyebrow",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"eyebrow"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Small overline above the section title."}]]}],["$","tr","title",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"title"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Section heading."}]]}],["$","tr","description",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"description"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Supporting paragraph under the section title."}]]}],["$","tr","minChildWidth",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"minChildWidth"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"string"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"20rem\""}]}],["$","td",null,{"children":"Minimum card width; the grid wraps responsively."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"HTMLAttributes<HTMLElement>"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <section> props are forwarded."}]]}]]}]]}]}]]}]
+8:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+9:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+a:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+b:["$","$L10",null,{"children":["$","$11",null,{"name":"Next.MetadataOutlet","children":"$@12"}]}]
+12:null

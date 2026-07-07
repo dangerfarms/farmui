@@ -1,0 +1,5 @@
+:HL["/farmui/_next/static/chunks/1j1a2871vy-he.css","style"]
+:HL["/farmui/_next/static/chunks/3mp25h68qwdx3.css","style"]
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+:HL["https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=60","image"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"docs","param":null,"prefetchHints":0,"slots":{"children":{"name":"components","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"aspect-ratio","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}

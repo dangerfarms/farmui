@@ -1,0 +1,563 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+f:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Slider"]
+18:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+19:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:Tc30,/* The complete stylesheet for <Slider /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Slider-wrapper {
+    --_track-h: 0.375rem;
+    --_thumb: 1.125rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    inline-size: 100%;
+    font-family: var(--fui-font);
+  }
+  .fui-Slider-wrapper[data-size="sm"] {
+    --_track-h: 0.25rem;
+    --_thumb: 0.875rem;
+  }
+  .fui-Slider-wrapper[data-size="lg"] {
+    --_track-h: 0.5rem;
+    --_thumb: 1.375rem;
+  }
+  .fui-Slider-wrapper[data-disabled] {
+    opacity: 0.6;
+  }
+
+  .fui-Slider-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 550;
+    color: var(--fui-text);
+  }
+
+  .fui-Slider-input {
+    inline-size: 100%;
+    margin: 0;
+    /* accent-color paints the filled portion + thumb robustly cross-browser. */
+    accent-color: var(--fui-primary);
+    background: transparent;
+    cursor: pointer;
+    /* Reset so custom thumb/track styling wins where supported. */
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .fui-Slider-input:disabled {
+    cursor: not-allowed;
+  }
+
+  /* ---- Track ---- */
+  .fui-Slider-input::-webkit-slider-runnable-track {
+    block-size: var(--_track-h);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-border-strong);
+  }
+  .fui-Slider-input::-moz-range-track {
+    block-size: var(--_track-h);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-border-strong);
+  }
+  /* Firefox paints the filled portion explicitly. */
+  .fui-Slider-input::-moz-range-progress {
+    block-size: var(--_track-h);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-primary);
+  }
+
+  /* ---- Thumb ---- */
+  .fui-Slider-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    inline-size: var(--_thumb);
+    block-size: var(--_thumb);
+    /* Center the thumb over the track. */
+    margin-block-start: calc((var(--_track-h) - var(--_thumb)) / 2);
+    border: 2px solid var(--fui-primary-contrast);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-primary);
+    box-shadow: var(--fui-shadow-sm);
+    transition:
+      transform var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+  .fui-Slider-input::-moz-range-thumb {
+    inline-size: var(--_thumb);
+    block-size: var(--_thumb);
+    border: 2px solid var(--fui-primary-contrast);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-primary);
+    box-shadow: var(--fui-shadow-sm);
+    transition:
+      transform var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+
+  .fui-Slider-input:hover:not(:disabled)::-webkit-slider-thumb {
+    transform: scale(1.08);
+  }
+  .fui-Slider-input:hover:not(:disabled)::-moz-range-thumb {
+    transform: scale(1.08);
+  }
+  .fui-Slider-input:focus-visible {
+    outline: none;
+  }
+  .fui-Slider-input:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Slider-input:focus-visible::-moz-range-thumb {
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Inputs"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"Slider"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"Pick a numeric value from a continuous range."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { Slider } from \"@farmui/core\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Basic usage",{"id":"basic-usage","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Basic usage"}],"$undefined",["$","$L3",null,{"code":"<Slider defaultValue={40} />","css":"$4","children":"$L5"}]]}],"$L6","$L7","$L8","$L9"]}]]}],"$La"]}],["$Lb","$Lc","$Ld"],"$Le"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+5:["$","div",null,{"style":{"maxInlineSize":"22rem","inlineSize":"100%"},"children":["$","$Lf",null,{"defaultValue":40,"aria-label":"Value"}]}]
+10:Tc30,/* The complete stylesheet for <Slider /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Slider-wrapper {
+    --_track-h: 0.375rem;
+    --_thumb: 1.125rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    inline-size: 100%;
+    font-family: var(--fui-font);
+  }
+  .fui-Slider-wrapper[data-size="sm"] {
+    --_track-h: 0.25rem;
+    --_thumb: 0.875rem;
+  }
+  .fui-Slider-wrapper[data-size="lg"] {
+    --_track-h: 0.5rem;
+    --_thumb: 1.375rem;
+  }
+  .fui-Slider-wrapper[data-disabled] {
+    opacity: 0.6;
+  }
+
+  .fui-Slider-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 550;
+    color: var(--fui-text);
+  }
+
+  .fui-Slider-input {
+    inline-size: 100%;
+    margin: 0;
+    /* accent-color paints the filled portion + thumb robustly cross-browser. */
+    accent-color: var(--fui-primary);
+    background: transparent;
+    cursor: pointer;
+    /* Reset so custom thumb/track styling wins where supported. */
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .fui-Slider-input:disabled {
+    cursor: not-allowed;
+  }
+
+  /* ---- Track ---- */
+  .fui-Slider-input::-webkit-slider-runnable-track {
+    block-size: var(--_track-h);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-border-strong);
+  }
+  .fui-Slider-input::-moz-range-track {
+    block-size: var(--_track-h);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-border-strong);
+  }
+  /* Firefox paints the filled portion explicitly. */
+  .fui-Slider-input::-moz-range-progress {
+    block-size: var(--_track-h);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-primary);
+  }
+
+  /* ---- Thumb ---- */
+  .fui-Slider-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    inline-size: var(--_thumb);
+    block-size: var(--_thumb);
+    /* Center the thumb over the track. */
+    margin-block-start: calc((var(--_track-h) - var(--_thumb)) / 2);
+    border: 2px solid var(--fui-primary-contrast);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-primary);
+    box-shadow: var(--fui-shadow-sm);
+    transition:
+      transform var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+  .fui-Slider-input::-moz-range-thumb {
+    inline-size: var(--_thumb);
+    block-size: var(--_thumb);
+    border: 2px solid var(--fui-primary-contrast);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-primary);
+    box-shadow: var(--fui-shadow-sm);
+    transition:
+      transform var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+
+  .fui-Slider-input:hover:not(:disabled)::-webkit-slider-thumb {
+    transform: scale(1.08);
+  }
+  .fui-Slider-input:hover:not(:disabled)::-moz-range-thumb {
+    transform: scale(1.08);
+  }
+  .fui-Slider-input:focus-visible {
+    outline: none;
+  }
+  .fui-Slider-input:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Slider-input:focus-visible::-moz-range-thumb {
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+}6:["$","div","With label",{"id":"with-label","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"With label"}],"$undefined",["$","$L3",null,{"code":"<Slider label=\"Water level\" defaultValue={65} />","css":"$10","children":"$L11"}]]}]
+12:Tc30,/* The complete stylesheet for <Slider /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Slider-wrapper {
+    --_track-h: 0.375rem;
+    --_thumb: 1.125rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    inline-size: 100%;
+    font-family: var(--fui-font);
+  }
+  .fui-Slider-wrapper[data-size="sm"] {
+    --_track-h: 0.25rem;
+    --_thumb: 0.875rem;
+  }
+  .fui-Slider-wrapper[data-size="lg"] {
+    --_track-h: 0.5rem;
+    --_thumb: 1.375rem;
+  }
+  .fui-Slider-wrapper[data-disabled] {
+    opacity: 0.6;
+  }
+
+  .fui-Slider-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 550;
+    color: var(--fui-text);
+  }
+
+  .fui-Slider-input {
+    inline-size: 100%;
+    margin: 0;
+    /* accent-color paints the filled portion + thumb robustly cross-browser. */
+    accent-color: var(--fui-primary);
+    background: transparent;
+    cursor: pointer;
+    /* Reset so custom thumb/track styling wins where supported. */
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .fui-Slider-input:disabled {
+    cursor: not-allowed;
+  }
+
+  /* ---- Track ---- */
+  .fui-Slider-input::-webkit-slider-runnable-track {
+    block-size: var(--_track-h);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-border-strong);
+  }
+  .fui-Slider-input::-moz-range-track {
+    block-size: var(--_track-h);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-border-strong);
+  }
+  /* Firefox paints the filled portion explicitly. */
+  .fui-Slider-input::-moz-range-progress {
+    block-size: var(--_track-h);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-primary);
+  }
+
+  /* ---- Thumb ---- */
+  .fui-Slider-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    inline-size: var(--_thumb);
+    block-size: var(--_thumb);
+    /* Center the thumb over the track. */
+    margin-block-start: calc((var(--_track-h) - var(--_thumb)) / 2);
+    border: 2px solid var(--fui-primary-contrast);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-primary);
+    box-shadow: var(--fui-shadow-sm);
+    transition:
+      transform var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+  .fui-Slider-input::-moz-range-thumb {
+    inline-size: var(--_thumb);
+    block-size: var(--_thumb);
+    border: 2px solid var(--fui-primary-contrast);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-primary);
+    box-shadow: var(--fui-shadow-sm);
+    transition:
+      transform var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+
+  .fui-Slider-input:hover:not(:disabled)::-webkit-slider-thumb {
+    transform: scale(1.08);
+  }
+  .fui-Slider-input:hover:not(:disabled)::-moz-range-thumb {
+    transform: scale(1.08);
+  }
+  .fui-Slider-input:focus-visible {
+    outline: none;
+  }
+  .fui-Slider-input:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Slider-input:focus-visible::-moz-range-thumb {
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+}7:["$","div","Steps",{"id":"steps","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Steps"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Snap to increments with the step prop."}],["$","$L3",null,{"code":"<Slider label=\"Fertiliser (kg)\" min={0} max={100} step={10} defaultValue={30} />","css":"$12","children":"$L13"}]]}]
+14:Tc30,/* The complete stylesheet for <Slider /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Slider-wrapper {
+    --_track-h: 0.375rem;
+    --_thumb: 1.125rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    inline-size: 100%;
+    font-family: var(--fui-font);
+  }
+  .fui-Slider-wrapper[data-size="sm"] {
+    --_track-h: 0.25rem;
+    --_thumb: 0.875rem;
+  }
+  .fui-Slider-wrapper[data-size="lg"] {
+    --_track-h: 0.5rem;
+    --_thumb: 1.375rem;
+  }
+  .fui-Slider-wrapper[data-disabled] {
+    opacity: 0.6;
+  }
+
+  .fui-Slider-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 550;
+    color: var(--fui-text);
+  }
+
+  .fui-Slider-input {
+    inline-size: 100%;
+    margin: 0;
+    /* accent-color paints the filled portion + thumb robustly cross-browser. */
+    accent-color: var(--fui-primary);
+    background: transparent;
+    cursor: pointer;
+    /* Reset so custom thumb/track styling wins where supported. */
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .fui-Slider-input:disabled {
+    cursor: not-allowed;
+  }
+
+  /* ---- Track ---- */
+  .fui-Slider-input::-webkit-slider-runnable-track {
+    block-size: var(--_track-h);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-border-strong);
+  }
+  .fui-Slider-input::-moz-range-track {
+    block-size: var(--_track-h);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-border-strong);
+  }
+  /* Firefox paints the filled portion explicitly. */
+  .fui-Slider-input::-moz-range-progress {
+    block-size: var(--_track-h);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-primary);
+  }
+
+  /* ---- Thumb ---- */
+  .fui-Slider-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    inline-size: var(--_thumb);
+    block-size: var(--_thumb);
+    /* Center the thumb over the track. */
+    margin-block-start: calc((var(--_track-h) - var(--_thumb)) / 2);
+    border: 2px solid var(--fui-primary-contrast);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-primary);
+    box-shadow: var(--fui-shadow-sm);
+    transition:
+      transform var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+  .fui-Slider-input::-moz-range-thumb {
+    inline-size: var(--_thumb);
+    block-size: var(--_thumb);
+    border: 2px solid var(--fui-primary-contrast);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-primary);
+    box-shadow: var(--fui-shadow-sm);
+    transition:
+      transform var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+
+  .fui-Slider-input:hover:not(:disabled)::-webkit-slider-thumb {
+    transform: scale(1.08);
+  }
+  .fui-Slider-input:hover:not(:disabled)::-moz-range-thumb {
+    transform: scale(1.08);
+  }
+  .fui-Slider-input:focus-visible {
+    outline: none;
+  }
+  .fui-Slider-input:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Slider-input:focus-visible::-moz-range-thumb {
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+}8:["$","div","Sizes",{"id":"sizes","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Sizes"}],"$undefined",["$","$L3",null,{"code":"<Slider size=\"sm\" defaultValue={30} />\n<Slider size=\"md\" defaultValue={50} />\n<Slider size=\"lg\" defaultValue={70} />","css":"$14","children":"$L15"}]]}]
+16:Tc30,/* The complete stylesheet for <Slider /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Slider-wrapper {
+    --_track-h: 0.375rem;
+    --_thumb: 1.125rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    inline-size: 100%;
+    font-family: var(--fui-font);
+  }
+  .fui-Slider-wrapper[data-size="sm"] {
+    --_track-h: 0.25rem;
+    --_thumb: 0.875rem;
+  }
+  .fui-Slider-wrapper[data-size="lg"] {
+    --_track-h: 0.5rem;
+    --_thumb: 1.375rem;
+  }
+  .fui-Slider-wrapper[data-disabled] {
+    opacity: 0.6;
+  }
+
+  .fui-Slider-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 550;
+    color: var(--fui-text);
+  }
+
+  .fui-Slider-input {
+    inline-size: 100%;
+    margin: 0;
+    /* accent-color paints the filled portion + thumb robustly cross-browser. */
+    accent-color: var(--fui-primary);
+    background: transparent;
+    cursor: pointer;
+    /* Reset so custom thumb/track styling wins where supported. */
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .fui-Slider-input:disabled {
+    cursor: not-allowed;
+  }
+
+  /* ---- Track ---- */
+  .fui-Slider-input::-webkit-slider-runnable-track {
+    block-size: var(--_track-h);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-border-strong);
+  }
+  .fui-Slider-input::-moz-range-track {
+    block-size: var(--_track-h);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-border-strong);
+  }
+  /* Firefox paints the filled portion explicitly. */
+  .fui-Slider-input::-moz-range-progress {
+    block-size: var(--_track-h);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-primary);
+  }
+
+  /* ---- Thumb ---- */
+  .fui-Slider-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    inline-size: var(--_thumb);
+    block-size: var(--_thumb);
+    /* Center the thumb over the track. */
+    margin-block-start: calc((var(--_track-h) - var(--_thumb)) / 2);
+    border: 2px solid var(--fui-primary-contrast);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-primary);
+    box-shadow: var(--fui-shadow-sm);
+    transition:
+      transform var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+  .fui-Slider-input::-moz-range-thumb {
+    inline-size: var(--_thumb);
+    block-size: var(--_thumb);
+    border: 2px solid var(--fui-primary-contrast);
+    border-radius: var(--fui-radius-full);
+    background: var(--fui-primary);
+    box-shadow: var(--fui-shadow-sm);
+    transition:
+      transform var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+
+  .fui-Slider-input:hover:not(:disabled)::-webkit-slider-thumb {
+    transform: scale(1.08);
+  }
+  .fui-Slider-input:hover:not(:disabled)::-moz-range-thumb {
+    transform: scale(1.08);
+  }
+  .fui-Slider-input:focus-visible {
+    outline: none;
+  }
+  .fui-Slider-input:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Slider-input:focus-visible::-moz-range-thumb {
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+}9:["$","div","Disabled",{"id":"disabled","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Disabled"}],"$undefined",["$","$L3",null,{"code":"<Slider label=\"Locked\" defaultValue={50} disabled />","css":"$16","children":"$L17"}]]}]
+a:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","label",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"label"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Field label rendered above the track."}]]}],["$","tr","size",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"size"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"sm\" | \"md\" | \"lg\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"md\""}]}],["$","td",null,{"children":"Control size (track height and thumb size)."}]]}],["$","tr","min",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"min"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"number"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"0"}]}],["$","td",null,{"children":"Minimum value."}]]}],["$","tr","max",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"max"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"number"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"100"}]}],["$","td",null,{"children":"Maximum value."}]]}],["$","tr","step",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"step"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"number"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"1"}]}],["$","td",null,{"children":"Increment between valid values."}]]}],["$","tr","defaultValue",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"defaultValue"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"number"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Initial value for uncontrolled usage."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"InputHTMLAttributes"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <input type=\"range\"> props are forwarded."}]]}]]}]]}]}]]}]
+b:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+c:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+d:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+e:["$","$L18",null,{"children":["$","$19",null,{"name":"Next.MetadataOutlet","children":"$@1a"}]}]
+11:["$","div",null,{"style":{"maxInlineSize":"22rem","inlineSize":"100%"},"children":["$","$Lf",null,{"label":"Water level","defaultValue":65}]}]
+13:["$","div",null,{"style":{"maxInlineSize":"22rem","inlineSize":"100%"},"children":["$","$Lf",null,{"label":"Fertiliser (kg)","min":0,"max":100,"step":10,"defaultValue":30}]}]
+15:["$","div",null,{"style":{"display":"grid","gap":"1rem","maxInlineSize":"22rem","inlineSize":"100%"},"children":[["$","$Lf",null,{"size":"sm","defaultValue":30,"aria-label":"Small"}],["$","$Lf",null,{"size":"md","defaultValue":50,"aria-label":"Medium"}],["$","$Lf",null,{"size":"lg","defaultValue":70,"aria-label":"Large"}]]}]
+17:["$","div",null,{"style":{"maxInlineSize":"22rem","inlineSize":"100%"},"children":["$","$Lf",null,{"label":"Locked","defaultValue":50,"disabled":true}]}]
+1a:null

@@ -1,0 +1,252 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+d:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Accordion"]
+e:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"AccordionItem"]
+11:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+12:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:T788,/* The complete stylesheet for <Accordion /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Accordion-root {
+    display: flex;
+    flex-direction: column;
+    inline-size: 100%;
+    border: 1px solid var(--fui-border);
+    border-radius: var(--fui-radius-md);
+    background: var(--fui-surface);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+    overflow: hidden;
+  }
+
+  .fui-Accordion-item {
+    border-block-end: 1px solid var(--fui-border);
+  }
+  .fui-Accordion-item:last-child {
+    border-block-end: none;
+  }
+
+  .fui-Accordion-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--fui-space-md);
+    padding-block: var(--fui-space-md);
+    padding-inline: var(--fui-space-lg);
+    font-size: var(--fui-text-md);
+    font-weight: 600;
+    line-height: 1.4;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    transition: background var(--fui-transition);
+  }
+
+  .fui-Accordion-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .fui-Accordion-summary:hover {
+    background: var(--fui-surface-hover);
+  }
+
+  .fui-Accordion-summary:focus-visible {
+    outline: none;
+    box-shadow: inset 0 0 0 3px var(--fui-primary-ring);
+  }
+
+  .fui-Accordion-item[open] > .fui-Accordion-summary {
+    color: var(--fui-primary);
+  }
+
+  .fui-Accordion-label {
+    min-inline-size: 0;
+  }
+
+  .fui-Accordion-chevron {
+    flex: none;
+    color: var(--fui-text-muted);
+    transition: transform var(--fui-transition);
+  }
+
+  .fui-Accordion-item[open] > .fui-Accordion-summary .fui-Accordion-chevron {
+    transform: rotate(180deg);
+    color: var(--fui-primary);
+  }
+
+  .fui-Accordion-content {
+    padding-block: 0 var(--fui-space-lg);
+    padding-inline: var(--fui-space-lg);
+    color: var(--fui-text-muted);
+    font-size: var(--fui-text-sm);
+    line-height: 1.55;
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Navigation"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"Accordion"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"Stacked, expandable sections built on native <details>."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { Accordion, AccordionItem } from \"@farmui/core\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Basic",{"id":"basic","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Basic"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Single-open mode — opening one item closes the others."}],["$","$L3",null,{"code":"<Accordion>\n  <AccordionItem label=\"What plans do you offer?\">\n    Free, Pro, and Enterprise tiers with monthly or annual billing.\n  </AccordionItem>\n  <AccordionItem label=\"Can I change plans later?\">\n    Yes — upgrade or downgrade at any time from your account settings.\n  </AccordionItem>\n  <AccordionItem label=\"Is there a free trial?\">\n    Every paid plan includes a 14-day free trial.\n  </AccordionItem>\n</Accordion>","css":"$4","children":"$L5"}]]}],"$L6","$L7"]}]]}],"$L8"]}],["$L9","$La","$Lb"],"$Lc"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+5:["$","div",null,{"style":{"inlineSize":"100%","maxInlineSize":"30rem"},"children":["$","$Ld",null,{"children":[["$","$Le",null,{"label":"What plans do you offer?","children":"Free, Pro, and Enterprise tiers with monthly or annual billing."}],["$","$Le",null,{"label":"Can I change plans later?","children":"Yes — upgrade or downgrade at any time from your account settings."}],["$","$Le",null,{"label":"Is there a free trial?","children":"Every paid plan includes a 14-day free trial."}]]}]}]
+f:T788,/* The complete stylesheet for <Accordion /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Accordion-root {
+    display: flex;
+    flex-direction: column;
+    inline-size: 100%;
+    border: 1px solid var(--fui-border);
+    border-radius: var(--fui-radius-md);
+    background: var(--fui-surface);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+    overflow: hidden;
+  }
+
+  .fui-Accordion-item {
+    border-block-end: 1px solid var(--fui-border);
+  }
+  .fui-Accordion-item:last-child {
+    border-block-end: none;
+  }
+
+  .fui-Accordion-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--fui-space-md);
+    padding-block: var(--fui-space-md);
+    padding-inline: var(--fui-space-lg);
+    font-size: var(--fui-text-md);
+    font-weight: 600;
+    line-height: 1.4;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    transition: background var(--fui-transition);
+  }
+
+  .fui-Accordion-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .fui-Accordion-summary:hover {
+    background: var(--fui-surface-hover);
+  }
+
+  .fui-Accordion-summary:focus-visible {
+    outline: none;
+    box-shadow: inset 0 0 0 3px var(--fui-primary-ring);
+  }
+
+  .fui-Accordion-item[open] > .fui-Accordion-summary {
+    color: var(--fui-primary);
+  }
+
+  .fui-Accordion-label {
+    min-inline-size: 0;
+  }
+
+  .fui-Accordion-chevron {
+    flex: none;
+    color: var(--fui-text-muted);
+    transition: transform var(--fui-transition);
+  }
+
+  .fui-Accordion-item[open] > .fui-Accordion-summary .fui-Accordion-chevron {
+    transform: rotate(180deg);
+    color: var(--fui-primary);
+  }
+
+  .fui-Accordion-content {
+    padding-block: 0 var(--fui-space-lg);
+    padding-inline: var(--fui-space-lg);
+    color: var(--fui-text-muted);
+    font-size: var(--fui-text-sm);
+    line-height: 1.55;
+  }
+}6:["$","div","Default open",{"id":"default-open","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Default open"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Use defaultOpen to expand an item on first render."}],["$","$L3",null,{"code":"<Accordion>\n  <AccordionItem label=\"Getting started\" defaultOpen>\n    Create your workspace and invite your first teammate.\n  </AccordionItem>\n  <AccordionItem label=\"Adding projects\">\n    Group related work into projects to stay organized.\n  </AccordionItem>\n  <AccordionItem label=\"Tracking progress\">\n    Log updates as tasks move toward completion.\n  </AccordionItem>\n</Accordion>","css":"$f","children":["$","div",null,{"style":{"inlineSize":"100%","maxInlineSize":"30rem"},"children":["$","$Ld",null,{"children":[["$","$Le",null,{"label":"Getting started","defaultOpen":true,"children":"Create your workspace and invite your first teammate."}],["$","$Le",null,{"label":"Adding projects","children":"Group related work into projects to stay organized."}],["$","$Le",null,{"label":"Tracking progress","children":"Log updates as tasks move toward completion."}]]}]}]}]]}]
+10:T788,/* The complete stylesheet for <Accordion /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Accordion-root {
+    display: flex;
+    flex-direction: column;
+    inline-size: 100%;
+    border: 1px solid var(--fui-border);
+    border-radius: var(--fui-radius-md);
+    background: var(--fui-surface);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+    overflow: hidden;
+  }
+
+  .fui-Accordion-item {
+    border-block-end: 1px solid var(--fui-border);
+  }
+  .fui-Accordion-item:last-child {
+    border-block-end: none;
+  }
+
+  .fui-Accordion-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--fui-space-md);
+    padding-block: var(--fui-space-md);
+    padding-inline: var(--fui-space-lg);
+    font-size: var(--fui-text-md);
+    font-weight: 600;
+    line-height: 1.4;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    transition: background var(--fui-transition);
+  }
+
+  .fui-Accordion-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .fui-Accordion-summary:hover {
+    background: var(--fui-surface-hover);
+  }
+
+  .fui-Accordion-summary:focus-visible {
+    outline: none;
+    box-shadow: inset 0 0 0 3px var(--fui-primary-ring);
+  }
+
+  .fui-Accordion-item[open] > .fui-Accordion-summary {
+    color: var(--fui-primary);
+  }
+
+  .fui-Accordion-label {
+    min-inline-size: 0;
+  }
+
+  .fui-Accordion-chevron {
+    flex: none;
+    color: var(--fui-text-muted);
+    transition: transform var(--fui-transition);
+  }
+
+  .fui-Accordion-item[open] > .fui-Accordion-summary .fui-Accordion-chevron {
+    transform: rotate(180deg);
+    color: var(--fui-primary);
+  }
+
+  .fui-Accordion-content {
+    padding-block: 0 var(--fui-space-lg);
+    padding-inline: var(--fui-space-lg);
+    color: var(--fui-text-muted);
+    font-size: var(--fui-text-sm);
+    line-height: 1.55;
+  }
+}7:["$","div","Multiple",{"id":"multiple","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Multiple"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"With multiple, any number of items can be open at once."}],["$","$L3",null,{"code":"<Accordion multiple>\n  <AccordionItem label=\"Performance\">\n    Lazy-load routes to cut initial bundle size by up to 40%.\n  </AccordionItem>\n  <AccordionItem label=\"Accessibility\">\n    Every component ships with keyboard and screen-reader support.\n  </AccordionItem>\n  <AccordionItem label=\"Theming\">\n    Override CSS variables to match your brand in minutes.\n  </AccordionItem>\n</Accordion>","css":"$10","children":["$","div",null,{"style":{"inlineSize":"100%","maxInlineSize":"30rem"},"children":["$","$Ld",null,{"multiple":true,"children":[["$","$Le",null,{"label":"Performance","children":"Lazy-load routes to cut initial bundle size by up to 40%."}],["$","$Le",null,{"label":"Accessibility","children":"Every component ships with keyboard and screen-reader support."}],["$","$Le",null,{"label":"Theming","children":"Override CSS variables to match your brand in minutes."}]]}]}]}]]}]
+8:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","multiple",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"multiple"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"boolean"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"false"}]}],["$","td",null,{"children":"Allow more than one item open at once. When false, items are mutually exclusive."}]]}],["$","tr","AccordionItem label",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"AccordionItem label"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"The summary label shown in the always-visible header."}]]}],["$","tr","AccordionItem defaultOpen",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"AccordionItem defaultOpen"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"boolean"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Open this item by default."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"HTMLAttributes"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Native <div> / <details> props are forwarded respectively."}]]}]]}]]}]}]]}]
+9:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+a:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+b:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+c:["$","$L11",null,{"children":["$","$12",null,{"name":"Next.MetadataOutlet","children":"$@13"}]}]
+13:null

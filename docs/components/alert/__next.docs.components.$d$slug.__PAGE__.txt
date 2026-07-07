@@ -1,0 +1,400 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+e:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Alert"]
+14:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+15:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:Ta34,/* The complete stylesheet for <Alert /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Alert-root {
+    /* Per-color channels — remapped by [data-color] below */
+    --_accent: var(--fui-info);
+    --_soft: var(--fui-info-soft);
+
+    display: flex;
+    align-items: flex-start;
+    gap: var(--fui-space-md);
+    padding-block: var(--fui-space-md);
+    padding-inline: var(--fui-space-lg);
+    border: 1px solid transparent;
+    border-inline-start: 3px solid var(--_accent);
+    border-radius: var(--fui-radius-md);
+    background: var(--_soft);
+    color: var(--fui-text);
+    font-family: var(--fui-font);
+    font-size: var(--fui-text-sm);
+    line-height: 1.5;
+  }
+
+  /* Colors */
+  .fui-Alert-root[data-color="info"] {
+    --_accent: var(--fui-info);
+    --_soft: var(--fui-info-soft);
+  }
+  .fui-Alert-root[data-color="success"] {
+    --_accent: var(--fui-success);
+    --_soft: var(--fui-success-soft);
+  }
+  .fui-Alert-root[data-color="warning"] {
+    --_accent: var(--fui-warning);
+    --_soft: var(--fui-warning-soft);
+  }
+  .fui-Alert-root[data-color="danger"] {
+    --_accent: var(--fui-danger);
+    --_soft: var(--fui-danger-soft);
+  }
+
+  /* Variant: outline — no fill, full border in the accent color */
+  .fui-Alert-root[data-variant="outline"] {
+    background: transparent;
+    border-color: var(--_accent);
+    border-inline-start-width: 3px;
+  }
+
+  /* Variant: filled — solid accent background, contrasting text */
+  .fui-Alert-root[data-variant="filled"] {
+    background: var(--_accent);
+    border-color: transparent;
+    color: var(--fui-primary-contrast);
+  }
+
+  .fui-Alert-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    inline-size: 1.25em;
+    block-size: 1.25em;
+    margin-block-start: 0.05em;
+    color: var(--_accent);
+    font-size: var(--fui-text-md);
+  }
+  .fui-Alert-root[data-variant="filled"] .fui-Alert-icon {
+    color: inherit;
+  }
+
+  .fui-Alert-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    min-inline-size: 0;
+  }
+
+  .fui-Alert-title {
+    font-weight: 600;
+    font-size: var(--fui-text-sm);
+    line-height: 1.4;
+  }
+
+  .fui-Alert-message {
+    color: inherit;
+  }
+  .fui-Alert-root[data-variant="light"] .fui-Alert-message,
+  .fui-Alert-root[data-variant="outline"] .fui-Alert-message {
+    color: var(--fui-text-muted);
+  }
+  /* When there's no title, the message carries full-strength text */
+  .fui-Alert-root:not(:has(.fui-Alert-title)) .fui-Alert-message {
+    color: inherit;
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Feedback"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"Alert"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"A prominent, colored box for conveying status or feedback."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { Alert } from \"@farmui/core\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Colors",{"id":"colors","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Colors"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Four semantic colors for different kinds of message."}],["$","$L3",null,{"code":"<Alert color=\"info\" title=\"Heads up\">A new version is available.</Alert>\n<Alert color=\"success\" title=\"Saved\">Your changes have been stored.</Alert>\n<Alert color=\"warning\" title=\"Low storage\">Only 5% of your quota remains.</Alert>\n<Alert color=\"danger\" title=\"Deploy failed\">Check the build logs.</Alert>","css":"$4","children":"$L5"}]]}],"$L6","$L7","$L8"]}]]}],"$L9"]}],["$La","$Lb","$Lc"],"$Ld"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+5:["$","div",null,{"style":{"display":"grid","gap":"0.75rem","inlineSize":"100%"},"children":[["$","$Le",null,{"color":"info","title":"Heads up","children":"A new version is available."}],["$","$Le",null,{"color":"success","title":"Saved","children":"Your changes have been stored."}],["$","$Le",null,{"color":"warning","title":"Low storage","children":"Only 5% of your quota remains."}],["$","$Le",null,{"color":"danger","title":"Deploy failed","children":"Check the build logs."}]]}]
+f:Ta34,/* The complete stylesheet for <Alert /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Alert-root {
+    /* Per-color channels — remapped by [data-color] below */
+    --_accent: var(--fui-info);
+    --_soft: var(--fui-info-soft);
+
+    display: flex;
+    align-items: flex-start;
+    gap: var(--fui-space-md);
+    padding-block: var(--fui-space-md);
+    padding-inline: var(--fui-space-lg);
+    border: 1px solid transparent;
+    border-inline-start: 3px solid var(--_accent);
+    border-radius: var(--fui-radius-md);
+    background: var(--_soft);
+    color: var(--fui-text);
+    font-family: var(--fui-font);
+    font-size: var(--fui-text-sm);
+    line-height: 1.5;
+  }
+
+  /* Colors */
+  .fui-Alert-root[data-color="info"] {
+    --_accent: var(--fui-info);
+    --_soft: var(--fui-info-soft);
+  }
+  .fui-Alert-root[data-color="success"] {
+    --_accent: var(--fui-success);
+    --_soft: var(--fui-success-soft);
+  }
+  .fui-Alert-root[data-color="warning"] {
+    --_accent: var(--fui-warning);
+    --_soft: var(--fui-warning-soft);
+  }
+  .fui-Alert-root[data-color="danger"] {
+    --_accent: var(--fui-danger);
+    --_soft: var(--fui-danger-soft);
+  }
+
+  /* Variant: outline — no fill, full border in the accent color */
+  .fui-Alert-root[data-variant="outline"] {
+    background: transparent;
+    border-color: var(--_accent);
+    border-inline-start-width: 3px;
+  }
+
+  /* Variant: filled — solid accent background, contrasting text */
+  .fui-Alert-root[data-variant="filled"] {
+    background: var(--_accent);
+    border-color: transparent;
+    color: var(--fui-primary-contrast);
+  }
+
+  .fui-Alert-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    inline-size: 1.25em;
+    block-size: 1.25em;
+    margin-block-start: 0.05em;
+    color: var(--_accent);
+    font-size: var(--fui-text-md);
+  }
+  .fui-Alert-root[data-variant="filled"] .fui-Alert-icon {
+    color: inherit;
+  }
+
+  .fui-Alert-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    min-inline-size: 0;
+  }
+
+  .fui-Alert-title {
+    font-weight: 600;
+    font-size: var(--fui-text-sm);
+    line-height: 1.4;
+  }
+
+  .fui-Alert-message {
+    color: inherit;
+  }
+  .fui-Alert-root[data-variant="light"] .fui-Alert-message,
+  .fui-Alert-root[data-variant="outline"] .fui-Alert-message {
+    color: var(--fui-text-muted);
+  }
+  /* When there's no title, the message carries full-strength text */
+  .fui-Alert-root:not(:has(.fui-Alert-title)) .fui-Alert-message {
+    color: inherit;
+  }
+}6:["$","div","Variants",{"id":"variants","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Variants"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Light (default), filled, and outline styles."}],["$","$L3",null,{"code":"<Alert variant=\"light\" color=\"success\" title=\"Light\">Tinted background.</Alert>\n<Alert variant=\"filled\" color=\"success\" title=\"Filled\">Solid accent.</Alert>\n<Alert variant=\"outline\" color=\"success\" title=\"Outline\">Bordered only.</Alert>","css":"$f","children":["$","div",null,{"style":{"display":"grid","gap":"0.75rem","inlineSize":"100%"},"children":[["$","$Le",null,{"variant":"light","color":"success","title":"Light","children":"Tinted background."}],"$L10","$L11"]}]}]]}]
+12:Ta34,/* The complete stylesheet for <Alert /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Alert-root {
+    /* Per-color channels — remapped by [data-color] below */
+    --_accent: var(--fui-info);
+    --_soft: var(--fui-info-soft);
+
+    display: flex;
+    align-items: flex-start;
+    gap: var(--fui-space-md);
+    padding-block: var(--fui-space-md);
+    padding-inline: var(--fui-space-lg);
+    border: 1px solid transparent;
+    border-inline-start: 3px solid var(--_accent);
+    border-radius: var(--fui-radius-md);
+    background: var(--_soft);
+    color: var(--fui-text);
+    font-family: var(--fui-font);
+    font-size: var(--fui-text-sm);
+    line-height: 1.5;
+  }
+
+  /* Colors */
+  .fui-Alert-root[data-color="info"] {
+    --_accent: var(--fui-info);
+    --_soft: var(--fui-info-soft);
+  }
+  .fui-Alert-root[data-color="success"] {
+    --_accent: var(--fui-success);
+    --_soft: var(--fui-success-soft);
+  }
+  .fui-Alert-root[data-color="warning"] {
+    --_accent: var(--fui-warning);
+    --_soft: var(--fui-warning-soft);
+  }
+  .fui-Alert-root[data-color="danger"] {
+    --_accent: var(--fui-danger);
+    --_soft: var(--fui-danger-soft);
+  }
+
+  /* Variant: outline — no fill, full border in the accent color */
+  .fui-Alert-root[data-variant="outline"] {
+    background: transparent;
+    border-color: var(--_accent);
+    border-inline-start-width: 3px;
+  }
+
+  /* Variant: filled — solid accent background, contrasting text */
+  .fui-Alert-root[data-variant="filled"] {
+    background: var(--_accent);
+    border-color: transparent;
+    color: var(--fui-primary-contrast);
+  }
+
+  .fui-Alert-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    inline-size: 1.25em;
+    block-size: 1.25em;
+    margin-block-start: 0.05em;
+    color: var(--_accent);
+    font-size: var(--fui-text-md);
+  }
+  .fui-Alert-root[data-variant="filled"] .fui-Alert-icon {
+    color: inherit;
+  }
+
+  .fui-Alert-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    min-inline-size: 0;
+  }
+
+  .fui-Alert-title {
+    font-weight: 600;
+    font-size: var(--fui-text-sm);
+    line-height: 1.4;
+  }
+
+  .fui-Alert-message {
+    color: inherit;
+  }
+  .fui-Alert-root[data-variant="light"] .fui-Alert-message,
+  .fui-Alert-root[data-variant="outline"] .fui-Alert-message {
+    color: var(--fui-text-muted);
+  }
+  /* When there's no title, the message carries full-strength text */
+  .fui-Alert-root:not(:has(.fui-Alert-title)) .fui-Alert-message {
+    color: inherit;
+  }
+}7:["$","div","With icon",{"id":"with-icon","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"With icon"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Pass any node as the leading icon."}],["$","$L3",null,{"code":"<Alert color=\"info\" icon={<span>ℹ</span>} title=\"Did you know?\">\n  You can theme every alert with a single CSS variable.\n</Alert>","css":"$12","children":["$","div",null,{"style":{"inlineSize":"100%"},"children":["$","$Le",null,{"color":"info","icon":["$","span",null,{"aria-hidden":true,"children":"ℹ"}],"title":"Did you know?","children":"You can theme every alert with a single CSS variable."}]}]}]]}]
+13:Ta34,/* The complete stylesheet for <Alert /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Alert-root {
+    /* Per-color channels — remapped by [data-color] below */
+    --_accent: var(--fui-info);
+    --_soft: var(--fui-info-soft);
+
+    display: flex;
+    align-items: flex-start;
+    gap: var(--fui-space-md);
+    padding-block: var(--fui-space-md);
+    padding-inline: var(--fui-space-lg);
+    border: 1px solid transparent;
+    border-inline-start: 3px solid var(--_accent);
+    border-radius: var(--fui-radius-md);
+    background: var(--_soft);
+    color: var(--fui-text);
+    font-family: var(--fui-font);
+    font-size: var(--fui-text-sm);
+    line-height: 1.5;
+  }
+
+  /* Colors */
+  .fui-Alert-root[data-color="info"] {
+    --_accent: var(--fui-info);
+    --_soft: var(--fui-info-soft);
+  }
+  .fui-Alert-root[data-color="success"] {
+    --_accent: var(--fui-success);
+    --_soft: var(--fui-success-soft);
+  }
+  .fui-Alert-root[data-color="warning"] {
+    --_accent: var(--fui-warning);
+    --_soft: var(--fui-warning-soft);
+  }
+  .fui-Alert-root[data-color="danger"] {
+    --_accent: var(--fui-danger);
+    --_soft: var(--fui-danger-soft);
+  }
+
+  /* Variant: outline — no fill, full border in the accent color */
+  .fui-Alert-root[data-variant="outline"] {
+    background: transparent;
+    border-color: var(--_accent);
+    border-inline-start-width: 3px;
+  }
+
+  /* Variant: filled — solid accent background, contrasting text */
+  .fui-Alert-root[data-variant="filled"] {
+    background: var(--_accent);
+    border-color: transparent;
+    color: var(--fui-primary-contrast);
+  }
+
+  .fui-Alert-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    inline-size: 1.25em;
+    block-size: 1.25em;
+    margin-block-start: 0.05em;
+    color: var(--_accent);
+    font-size: var(--fui-text-md);
+  }
+  .fui-Alert-root[data-variant="filled"] .fui-Alert-icon {
+    color: inherit;
+  }
+
+  .fui-Alert-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    min-inline-size: 0;
+  }
+
+  .fui-Alert-title {
+    font-weight: 600;
+    font-size: var(--fui-text-sm);
+    line-height: 1.4;
+  }
+
+  .fui-Alert-message {
+    color: inherit;
+  }
+  .fui-Alert-root[data-variant="light"] .fui-Alert-message,
+  .fui-Alert-root[data-variant="outline"] .fui-Alert-message {
+    color: var(--fui-text-muted);
+  }
+  /* When there's no title, the message carries full-strength text */
+  .fui-Alert-root:not(:has(.fui-Alert-title)) .fui-Alert-message {
+    color: inherit;
+  }
+}8:["$","div","Title only",{"id":"title-only","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Title only"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Body content is optional."}],["$","$L3",null,{"code":"<Alert color=\"warning\" title=\"Scheduled maintenance tonight.\" />","css":"$13","children":["$","div",null,{"style":{"inlineSize":"100%"},"children":["$","$Le",null,{"color":"warning","title":"Scheduled maintenance tonight."}]}]}]]}]
+9:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","title",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"title"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Bold heading rendered above the body."}]]}],["$","tr","color",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"color"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"info\" | \"success\" | \"warning\" | \"danger\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"info\""}]}],["$","td",null,{"children":"Semantic color of the accent and background."}]]}],["$","tr","variant",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"variant"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"light\" | \"filled\" | \"outline\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"light\""}]}],["$","td",null,{"children":"Visual style."}]]}],["$","tr","icon",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"icon"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Icon rendered to the inline-start of the content."}]]}],["$","tr","children",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"children"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Alert body content."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"HTMLAttributes<HTMLDivElement>"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <div> props are forwarded."}]]}]]}]]}]}]]}]
+a:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+b:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+c:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+d:["$","$L14",null,{"children":["$","$15",null,{"name":"Next.MetadataOutlet","children":"$@16"}]}]
+10:["$","$Le",null,{"variant":"filled","color":"success","title":"Filled","children":"Solid accent."}]
+11:["$","$Le",null,{"variant":"outline","color":"success","title":"Outline","children":"Bordered only."}]
+16:null

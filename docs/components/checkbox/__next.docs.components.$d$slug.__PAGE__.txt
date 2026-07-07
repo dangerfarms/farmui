@@ -1,0 +1,718 @@
+1:"$Sreact.fragment"
+2:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+3:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+f:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Checkbox"]
+18:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+19:"$Sreact.suspense"
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+4:Te78,/* The complete stylesheet for <Checkbox /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Checkbox-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    font-family: var(--fui-font);
+    --_box: 1.25rem;
+  }
+  .fui-Checkbox-wrapper[data-size="sm"] {
+    --_box: 1rem;
+  }
+  .fui-Checkbox-wrapper[data-size="lg"] {
+    --_box: 1.5rem;
+  }
+  .fui-Checkbox-wrapper[data-disabled] {
+    opacity: 0.7;
+  }
+
+  .fui-Checkbox-control {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--fui-space-sm);
+    cursor: pointer;
+  }
+  .fui-Checkbox-wrapper[data-disabled] .fui-Checkbox-control {
+    cursor: not-allowed;
+  }
+
+  .fui-Checkbox-box {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    flex-shrink: 0;
+    inline-size: var(--_box);
+    block-size: var(--_box);
+    /* Nudge to optically align with the first line of label text. */
+    margin-block-start: 0.1em;
+    border: 1px solid var(--fui-border-strong);
+    border-radius: var(--fui-radius-sm);
+    background: var(--fui-surface);
+    color: var(--fui-primary-contrast);
+    transition:
+      background var(--fui-transition),
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+
+  /* Visually hide the native control but keep it in the a11y tree & focusable. */
+  .fui-Checkbox-input {
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: inherit;
+  }
+
+  .fui-Checkbox-box:has(.fui-Checkbox-input:checked),
+  .fui-Checkbox-box:has(.fui-Checkbox-input:indeterminate) {
+    background: var(--fui-primary);
+    border-color: var(--fui-primary);
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:focus-visible) {
+    border-color: var(--fui-primary);
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Checkbox-box[data-invalid] {
+    border-color: var(--fui-danger);
+  }
+  .fui-Checkbox-box[data-invalid]:has(.fui-Checkbox-input:focus-visible) {
+    box-shadow: 0 0 0 3px
+      color-mix(in oklch, var(--fui-danger) 40%, transparent);
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:disabled) {
+    background: var(--fui-bg-subtle);
+    cursor: not-allowed;
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:checked:disabled),
+  .fui-Checkbox-box:has(.fui-Checkbox-input:indeterminate:disabled) {
+    background: color-mix(
+      in oklch,
+      var(--fui-primary) 55%,
+      var(--fui-bg-subtle)
+    );
+    border-color: transparent;
+  }
+
+  .fui-Checkbox-check {
+    inline-size: 80%;
+    block-size: 80%;
+    pointer-events: none;
+  }
+  .fui-Checkbox-tick,
+  .fui-Checkbox-dash {
+    opacity: 0;
+    transition: opacity var(--fui-transition);
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:checked:not(:indeterminate))
+    .fui-Checkbox-tick {
+    opacity: 1;
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:indeterminate) .fui-Checkbox-dash {
+    opacity: 1;
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:indeterminate) .fui-Checkbox-tick {
+    opacity: 0;
+  }
+
+  .fui-Checkbox-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+  .fui-Checkbox-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 550;
+    color: var(--fui-text);
+    line-height: 1.4;
+  }
+  .fui-Checkbox-wrapper[data-size="lg"] .fui-Checkbox-label {
+    font-size: var(--fui-text-md);
+  }
+  .fui-Checkbox-required {
+    color: var(--fui-danger);
+    margin-inline-start: 0.15em;
+  }
+  .fui-Checkbox-description {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Checkbox-error {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-danger);
+  }
+}0:{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Inputs"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"Checkbox"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"A styled checkbox with an adjacent label, description and error states."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L2",null,{"code":"import { Checkbox } from \"@farmui/core\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Basic usage",{"id":"basic-usage","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Basic usage"}],"$undefined",["$","$L3",null,{"code":"<Checkbox label=\"Subscribe to the newsletter\" />","css":"$4","children":"$L5"}]]}],"$L6","$L7","$L8","$L9"]}]]}],"$La"]}],["$Lb","$Lc","$Ld"],"$Le"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ITIuJT5y47q2hnFO8Ycyt"}
+5:["$","$Lf",null,{"label":"Subscribe to the newsletter"}]
+10:Te78,/* The complete stylesheet for <Checkbox /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Checkbox-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    font-family: var(--fui-font);
+    --_box: 1.25rem;
+  }
+  .fui-Checkbox-wrapper[data-size="sm"] {
+    --_box: 1rem;
+  }
+  .fui-Checkbox-wrapper[data-size="lg"] {
+    --_box: 1.5rem;
+  }
+  .fui-Checkbox-wrapper[data-disabled] {
+    opacity: 0.7;
+  }
+
+  .fui-Checkbox-control {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--fui-space-sm);
+    cursor: pointer;
+  }
+  .fui-Checkbox-wrapper[data-disabled] .fui-Checkbox-control {
+    cursor: not-allowed;
+  }
+
+  .fui-Checkbox-box {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    flex-shrink: 0;
+    inline-size: var(--_box);
+    block-size: var(--_box);
+    /* Nudge to optically align with the first line of label text. */
+    margin-block-start: 0.1em;
+    border: 1px solid var(--fui-border-strong);
+    border-radius: var(--fui-radius-sm);
+    background: var(--fui-surface);
+    color: var(--fui-primary-contrast);
+    transition:
+      background var(--fui-transition),
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+
+  /* Visually hide the native control but keep it in the a11y tree & focusable. */
+  .fui-Checkbox-input {
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: inherit;
+  }
+
+  .fui-Checkbox-box:has(.fui-Checkbox-input:checked),
+  .fui-Checkbox-box:has(.fui-Checkbox-input:indeterminate) {
+    background: var(--fui-primary);
+    border-color: var(--fui-primary);
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:focus-visible) {
+    border-color: var(--fui-primary);
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Checkbox-box[data-invalid] {
+    border-color: var(--fui-danger);
+  }
+  .fui-Checkbox-box[data-invalid]:has(.fui-Checkbox-input:focus-visible) {
+    box-shadow: 0 0 0 3px
+      color-mix(in oklch, var(--fui-danger) 40%, transparent);
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:disabled) {
+    background: var(--fui-bg-subtle);
+    cursor: not-allowed;
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:checked:disabled),
+  .fui-Checkbox-box:has(.fui-Checkbox-input:indeterminate:disabled) {
+    background: color-mix(
+      in oklch,
+      var(--fui-primary) 55%,
+      var(--fui-bg-subtle)
+    );
+    border-color: transparent;
+  }
+
+  .fui-Checkbox-check {
+    inline-size: 80%;
+    block-size: 80%;
+    pointer-events: none;
+  }
+  .fui-Checkbox-tick,
+  .fui-Checkbox-dash {
+    opacity: 0;
+    transition: opacity var(--fui-transition);
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:checked:not(:indeterminate))
+    .fui-Checkbox-tick {
+    opacity: 1;
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:indeterminate) .fui-Checkbox-dash {
+    opacity: 1;
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:indeterminate) .fui-Checkbox-tick {
+    opacity: 0;
+  }
+
+  .fui-Checkbox-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+  .fui-Checkbox-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 550;
+    color: var(--fui-text);
+    line-height: 1.4;
+  }
+  .fui-Checkbox-wrapper[data-size="lg"] .fui-Checkbox-label {
+    font-size: var(--fui-text-md);
+  }
+  .fui-Checkbox-required {
+    color: var(--fui-danger);
+    margin-inline-start: 0.15em;
+  }
+  .fui-Checkbox-description {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Checkbox-error {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-danger);
+  }
+}6:["$","div","Checked",{"id":"checked","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Checked"}],"$undefined",["$","$L3",null,{"code":"<Checkbox label=\"Enable email notifications\" defaultChecked />","css":"$10","children":"$L11"}]]}]
+12:Te78,/* The complete stylesheet for <Checkbox /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Checkbox-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    font-family: var(--fui-font);
+    --_box: 1.25rem;
+  }
+  .fui-Checkbox-wrapper[data-size="sm"] {
+    --_box: 1rem;
+  }
+  .fui-Checkbox-wrapper[data-size="lg"] {
+    --_box: 1.5rem;
+  }
+  .fui-Checkbox-wrapper[data-disabled] {
+    opacity: 0.7;
+  }
+
+  .fui-Checkbox-control {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--fui-space-sm);
+    cursor: pointer;
+  }
+  .fui-Checkbox-wrapper[data-disabled] .fui-Checkbox-control {
+    cursor: not-allowed;
+  }
+
+  .fui-Checkbox-box {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    flex-shrink: 0;
+    inline-size: var(--_box);
+    block-size: var(--_box);
+    /* Nudge to optically align with the first line of label text. */
+    margin-block-start: 0.1em;
+    border: 1px solid var(--fui-border-strong);
+    border-radius: var(--fui-radius-sm);
+    background: var(--fui-surface);
+    color: var(--fui-primary-contrast);
+    transition:
+      background var(--fui-transition),
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+
+  /* Visually hide the native control but keep it in the a11y tree & focusable. */
+  .fui-Checkbox-input {
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: inherit;
+  }
+
+  .fui-Checkbox-box:has(.fui-Checkbox-input:checked),
+  .fui-Checkbox-box:has(.fui-Checkbox-input:indeterminate) {
+    background: var(--fui-primary);
+    border-color: var(--fui-primary);
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:focus-visible) {
+    border-color: var(--fui-primary);
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Checkbox-box[data-invalid] {
+    border-color: var(--fui-danger);
+  }
+  .fui-Checkbox-box[data-invalid]:has(.fui-Checkbox-input:focus-visible) {
+    box-shadow: 0 0 0 3px
+      color-mix(in oklch, var(--fui-danger) 40%, transparent);
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:disabled) {
+    background: var(--fui-bg-subtle);
+    cursor: not-allowed;
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:checked:disabled),
+  .fui-Checkbox-box:has(.fui-Checkbox-input:indeterminate:disabled) {
+    background: color-mix(
+      in oklch,
+      var(--fui-primary) 55%,
+      var(--fui-bg-subtle)
+    );
+    border-color: transparent;
+  }
+
+  .fui-Checkbox-check {
+    inline-size: 80%;
+    block-size: 80%;
+    pointer-events: none;
+  }
+  .fui-Checkbox-tick,
+  .fui-Checkbox-dash {
+    opacity: 0;
+    transition: opacity var(--fui-transition);
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:checked:not(:indeterminate))
+    .fui-Checkbox-tick {
+    opacity: 1;
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:indeterminate) .fui-Checkbox-dash {
+    opacity: 1;
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:indeterminate) .fui-Checkbox-tick {
+    opacity: 0;
+  }
+
+  .fui-Checkbox-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+  .fui-Checkbox-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 550;
+    color: var(--fui-text);
+    line-height: 1.4;
+  }
+  .fui-Checkbox-wrapper[data-size="lg"] .fui-Checkbox-label {
+    font-size: var(--fui-text-md);
+  }
+  .fui-Checkbox-required {
+    color: var(--fui-danger);
+    margin-inline-start: 0.15em;
+  }
+  .fui-Checkbox-description {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Checkbox-error {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-danger);
+  }
+}7:["$","div","With description",{"id":"with-description","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"With description"}],"$undefined",["$","$L3",null,{"code":"<Checkbox\n  label=\"Share anonymised usage data\"\n  description=\"Helps us improve the product. You can opt out anytime.\"\n/>","css":"$12","children":"$L13"}]]}]
+14:Te78,/* The complete stylesheet for <Checkbox /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Checkbox-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    font-family: var(--fui-font);
+    --_box: 1.25rem;
+  }
+  .fui-Checkbox-wrapper[data-size="sm"] {
+    --_box: 1rem;
+  }
+  .fui-Checkbox-wrapper[data-size="lg"] {
+    --_box: 1.5rem;
+  }
+  .fui-Checkbox-wrapper[data-disabled] {
+    opacity: 0.7;
+  }
+
+  .fui-Checkbox-control {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--fui-space-sm);
+    cursor: pointer;
+  }
+  .fui-Checkbox-wrapper[data-disabled] .fui-Checkbox-control {
+    cursor: not-allowed;
+  }
+
+  .fui-Checkbox-box {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    flex-shrink: 0;
+    inline-size: var(--_box);
+    block-size: var(--_box);
+    /* Nudge to optically align with the first line of label text. */
+    margin-block-start: 0.1em;
+    border: 1px solid var(--fui-border-strong);
+    border-radius: var(--fui-radius-sm);
+    background: var(--fui-surface);
+    color: var(--fui-primary-contrast);
+    transition:
+      background var(--fui-transition),
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+
+  /* Visually hide the native control but keep it in the a11y tree & focusable. */
+  .fui-Checkbox-input {
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: inherit;
+  }
+
+  .fui-Checkbox-box:has(.fui-Checkbox-input:checked),
+  .fui-Checkbox-box:has(.fui-Checkbox-input:indeterminate) {
+    background: var(--fui-primary);
+    border-color: var(--fui-primary);
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:focus-visible) {
+    border-color: var(--fui-primary);
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Checkbox-box[data-invalid] {
+    border-color: var(--fui-danger);
+  }
+  .fui-Checkbox-box[data-invalid]:has(.fui-Checkbox-input:focus-visible) {
+    box-shadow: 0 0 0 3px
+      color-mix(in oklch, var(--fui-danger) 40%, transparent);
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:disabled) {
+    background: var(--fui-bg-subtle);
+    cursor: not-allowed;
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:checked:disabled),
+  .fui-Checkbox-box:has(.fui-Checkbox-input:indeterminate:disabled) {
+    background: color-mix(
+      in oklch,
+      var(--fui-primary) 55%,
+      var(--fui-bg-subtle)
+    );
+    border-color: transparent;
+  }
+
+  .fui-Checkbox-check {
+    inline-size: 80%;
+    block-size: 80%;
+    pointer-events: none;
+  }
+  .fui-Checkbox-tick,
+  .fui-Checkbox-dash {
+    opacity: 0;
+    transition: opacity var(--fui-transition);
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:checked:not(:indeterminate))
+    .fui-Checkbox-tick {
+    opacity: 1;
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:indeterminate) .fui-Checkbox-dash {
+    opacity: 1;
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:indeterminate) .fui-Checkbox-tick {
+    opacity: 0;
+  }
+
+  .fui-Checkbox-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+  .fui-Checkbox-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 550;
+    color: var(--fui-text);
+    line-height: 1.4;
+  }
+  .fui-Checkbox-wrapper[data-size="lg"] .fui-Checkbox-label {
+    font-size: var(--fui-text-md);
+  }
+  .fui-Checkbox-required {
+    color: var(--fui-danger);
+    margin-inline-start: 0.15em;
+  }
+  .fui-Checkbox-description {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Checkbox-error {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-danger);
+  }
+}8:["$","div","Disabled",{"id":"disabled","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Disabled"}],"$undefined",["$","$L3",null,{"code":"<Checkbox label=\"Unavailable option\" disabled />\n<Checkbox label=\"Locked in\" defaultChecked disabled />","css":"$14","children":"$L15"}]]}]
+16:Te78,/* The complete stylesheet for <Checkbox /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Checkbox-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    font-family: var(--fui-font);
+    --_box: 1.25rem;
+  }
+  .fui-Checkbox-wrapper[data-size="sm"] {
+    --_box: 1rem;
+  }
+  .fui-Checkbox-wrapper[data-size="lg"] {
+    --_box: 1.5rem;
+  }
+  .fui-Checkbox-wrapper[data-disabled] {
+    opacity: 0.7;
+  }
+
+  .fui-Checkbox-control {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--fui-space-sm);
+    cursor: pointer;
+  }
+  .fui-Checkbox-wrapper[data-disabled] .fui-Checkbox-control {
+    cursor: not-allowed;
+  }
+
+  .fui-Checkbox-box {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    flex-shrink: 0;
+    inline-size: var(--_box);
+    block-size: var(--_box);
+    /* Nudge to optically align with the first line of label text. */
+    margin-block-start: 0.1em;
+    border: 1px solid var(--fui-border-strong);
+    border-radius: var(--fui-radius-sm);
+    background: var(--fui-surface);
+    color: var(--fui-primary-contrast);
+    transition:
+      background var(--fui-transition),
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+
+  /* Visually hide the native control but keep it in the a11y tree & focusable. */
+  .fui-Checkbox-input {
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: inherit;
+  }
+
+  .fui-Checkbox-box:has(.fui-Checkbox-input:checked),
+  .fui-Checkbox-box:has(.fui-Checkbox-input:indeterminate) {
+    background: var(--fui-primary);
+    border-color: var(--fui-primary);
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:focus-visible) {
+    border-color: var(--fui-primary);
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Checkbox-box[data-invalid] {
+    border-color: var(--fui-danger);
+  }
+  .fui-Checkbox-box[data-invalid]:has(.fui-Checkbox-input:focus-visible) {
+    box-shadow: 0 0 0 3px
+      color-mix(in oklch, var(--fui-danger) 40%, transparent);
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:disabled) {
+    background: var(--fui-bg-subtle);
+    cursor: not-allowed;
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:checked:disabled),
+  .fui-Checkbox-box:has(.fui-Checkbox-input:indeterminate:disabled) {
+    background: color-mix(
+      in oklch,
+      var(--fui-primary) 55%,
+      var(--fui-bg-subtle)
+    );
+    border-color: transparent;
+  }
+
+  .fui-Checkbox-check {
+    inline-size: 80%;
+    block-size: 80%;
+    pointer-events: none;
+  }
+  .fui-Checkbox-tick,
+  .fui-Checkbox-dash {
+    opacity: 0;
+    transition: opacity var(--fui-transition);
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:checked:not(:indeterminate))
+    .fui-Checkbox-tick {
+    opacity: 1;
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:indeterminate) .fui-Checkbox-dash {
+    opacity: 1;
+  }
+  .fui-Checkbox-box:has(.fui-Checkbox-input:indeterminate) .fui-Checkbox-tick {
+    opacity: 0;
+  }
+
+  .fui-Checkbox-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+  .fui-Checkbox-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 550;
+    color: var(--fui-text);
+    line-height: 1.4;
+  }
+  .fui-Checkbox-wrapper[data-size="lg"] .fui-Checkbox-label {
+    font-size: var(--fui-text-md);
+  }
+  .fui-Checkbox-required {
+    color: var(--fui-danger);
+    margin-inline-start: 0.15em;
+  }
+  .fui-Checkbox-description {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Checkbox-error {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-danger);
+  }
+}9:["$","div","Sizes",{"id":"sizes","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Sizes"}],"$undefined",["$","$L3",null,{"code":"<Checkbox size=\"sm\" label=\"Small\" defaultChecked />\n<Checkbox size=\"md\" label=\"Medium\" defaultChecked />\n<Checkbox size=\"lg\" label=\"Large\" defaultChecked />","css":"$16","children":"$L17"}]]}]
+a:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","label",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"label"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Label rendered next to the checkbox."}]]}],["$","tr","description",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"description"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Helper text rendered below the label."}]]}],["$","tr","error",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"error"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"ReactNode"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Error message; puts the field in an invalid state."}]]}],["$","tr","size",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"size"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"sm\" | \"md\" | \"lg\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"md\""}]}],["$","td",null,{"children":"Control size (box and label size)."}]]}],["$","tr","indeterminate",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"indeterminate"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"boolean"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Render the partially-checked (dash) visual state."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"InputHTMLAttributes"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <input> props (except size/type) are forwarded."}]]}]]}]]}]}]]}]
+b:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next"}]
+c:["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true}]
+d:["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true}]
+e:["$","$L18",null,{"children":["$","$19",null,{"name":"Next.MetadataOutlet","children":"$@1a"}]}]
+11:["$","$Lf",null,{"label":"Enable email notifications","defaultChecked":true}]
+13:["$","div",null,{"style":{"maxInlineSize":"24rem"},"children":["$","$Lf",null,{"label":"Share anonymised usage data","description":"Helps us improve the product. You can opt out anytime."}]}]
+15:["$","div",null,{"style":{"display":"grid","gap":"0.75rem"},"children":[["$","$Lf",null,{"label":"Unavailable option","disabled":true}],["$","$Lf",null,{"label":"Locked in","defaultChecked":true,"disabled":true}]]}]
+17:["$","div",null,{"style":{"display":"grid","gap":"0.75rem"},"children":[["$","$Lf",null,{"size":"sm","label":"Small","defaultChecked":true}],["$","$Lf",null,{"size":"md","label":"Medium","defaultChecked":true}],["$","$Lf",null,{"size":"lg","label":"Large","defaultChecked":true}]]}]
+1a:null

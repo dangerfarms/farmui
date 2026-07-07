@@ -1,0 +1,251 @@
+1:"$Sreact.fragment"
+2:I[22632,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],""]
+3:I[99330,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"CommandMenu"]
+4:I[88134,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"ThemeToggle"]
+5:I[98950,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"default"]
+6:I[45304,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"default"]
+10:I[22325,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"default",1]
+:HL["/farmui/_next/static/chunks/1j1a2871vy-he.css","style"]
+:HL["/farmui/_next/static/chunks/3mp25h68qwdx3.css","style"]
+:HL["/farmui/_next/static/chunks/2irrof7tr_1l_.css","style"]
+0:{"P":null,"c":["","docs","components","table",""],"q":"","i":false,"f":[[["",{"children":["docs",{"children":["components",{"children":[["slug","table","d",null],{"children":["__PAGE__",{}]}]}]}]},"$undefined","$undefined",16],[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/1j1a2871vy-he.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/farmui/_next/static/chunks/0psf5n_gok7xo.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/farmui/_next/static/chunks/3v8bea15470cp.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"en","suppressHydrationWarning":true,"children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\n(function () {\n  try {\n    var t = localStorage.getItem(\"farmui-theme\");\n    if (t === \"light\" || t === \"dark\") {\n      document.documentElement.dataset.theme = t;\n    }\n  } catch (e) {}\n})();\n"}}]}],["$","body",null,{"children":[["$","header",null,{"className":"Header-module__7RdAaG__header","children":["$","div",null,{"className":"Header-module__7RdAaG__inner","children":[["$","div",null,{"className":"Header-module__7RdAaG__left","children":[["$","$L2",null,{"href":"/","className":"Logo-module__FqgpaG__logo","aria-label":"FarmUI home","children":[["$","span",null,{"className":"Logo-module__FqgpaG__mark","aria-hidden":true,"children":["$","svg",null,{"viewBox":"0 0 24 24","width":"22","height":"22","fill":"none","children":["$","path",null,{"d":"M13 2 4 13.5h6L11 22l9-11.5h-6L13 2z","fill":"currentColor"}]}]}],["$","span",null,{"className":"Logo-module__FqgpaG__word","children":["Farm",["$","span",null,{"className":"Logo-module__FqgpaG__ui","children":"UI"}]]}]]}],["$","nav",null,{"className":"Header-module__7RdAaG__nav","aria-label":"Primary","children":[["$","$L2",null,{"href":"/docs","children":"Docs"}],["$","$L2",null,{"href":"/docs/components/button","children":"Components"}],["$","$L2",null,{"href":"/docs/theming","children":"Theming"}]]}]]}],["$","div",null,{"className":"Header-module__7RdAaG__right","children":[["$","div",null,{"className":"Header-module__7RdAaG__search","children":["$","$L3",null,{}]}],["$","a",null,{"className":"Header-module__7RdAaG__stars","href":"https://github.com/dangerfarms/farmui","target":"_blank","rel":"noreferrer","aria-label":"Star FarmUI on GitHub","children":[["$","svg",null,{"width":16,"height":16,"viewBox":"0 0 24 24","fill":"currentColor","stroke":"currentColor","strokeWidth":0,"strokeLinecap":"round","strokeLinejoin":"round","children":["$","path",null,{"d":"M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.35 9.35 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.48-.01 2.82 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"}]}],["$","span",null,{"className":"Header-module__7RdAaG__starCount","children":[["$","svg",null,{"width":13,"height":13,"viewBox":"0 0 24 24","fill":"currentColor","stroke":"currentColor","strokeWidth":0,"strokeLinecap":"round","strokeLinejoin":"round","children":["$","path",null,{"d":"M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"}]}],"32.4k"]}]]}],["$","$L4",null,{}]]}]]}]}],["$","main",null,{"children":["$","$L5",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L6",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],"$L7","$L8"]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}],"$L9"]}]]}]]}],{"children":["$La",{"children":["$Lb",{"children":["$Lc",{"children":["$Ld",{},null,false,null]},null,false,"$@e"]},null,false,"$@e"]},null,false,null]},null,false,null],"$Lf",false]],"m":"$undefined","G":["$10",["$L11"]],"S":true,"h":null,"s":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"ITIuJT5y47q2hnFO8Ycyt"}
+12:I[41092,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js"],"Sidebar"]
+14:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"OutletBoundary"]
+15:"$Sreact.suspense"
+18:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"ViewportBoundary"]
+1a:I[35439,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js"],"MetadataBoundary"]
+7:["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}]
+8:["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]
+9:["$","footer",null,{"className":"Footer-module__OlIbZW__footer","children":[["$","div",null,{"className":"container Footer-module__OlIbZW__inner","children":[["$","div",null,{"className":"$undefined","children":[["$","$L2",null,{"href":"/","className":"Logo-module__FqgpaG__logo","aria-label":"FarmUI home","children":[["$","span",null,{"className":"Logo-module__FqgpaG__mark","aria-hidden":true,"children":["$","svg",null,{"viewBox":"0 0 24 24","width":"22","height":"22","fill":"none","children":["$","path",null,{"d":"M13 2 4 13.5h6L11 22l9-11.5h-6L13 2z","fill":"currentColor"}]}]}],["$","span",null,{"className":"Logo-module__FqgpaG__word","children":["Farm",["$","span",null,{"className":"Logo-module__FqgpaG__ui","children":"UI"}]]}]]}],["$","p",null,{"className":"Footer-module__OlIbZW__tagline","children":"Accessible, high-performance React components. Open source and MIT-licensed."}],["$","a",null,{"className":"Footer-module__OlIbZW__gh","href":"https://github.com/dangerfarms/farmui","target":"_blank","rel":"noreferrer","children":[["$","svg",null,{"width":16,"height":16,"viewBox":"0 0 24 24","fill":"currentColor","stroke":"currentColor","strokeWidth":0,"strokeLinecap":"round","strokeLinejoin":"round","children":["$","path",null,{"d":"M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.35 9.35 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.48-.01 2.82 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"}]}]," Star on GitHub"]}]]}],["$","div",null,{"className":"Footer-module__OlIbZW__cols","children":[["$","div","Docs",{"className":"Footer-module__OlIbZW__col","children":[["$","h3",null,{"className":"Footer-module__OlIbZW__colTitle","children":"Docs"}],["$","ul",null,{"children":[["$","li","Introduction",{"children":["$","$L2",null,{"href":"/docs","children":"Introduction"}]}],["$","li","Installation",{"children":["$","$L2",null,{"href":"/docs/installation","children":"Installation"}]}],["$","li","Theming",{"children":["$","$L2",null,{"href":"/docs/theming","children":"Theming"}]}],["$","li","Components",{"children":["$","$L2",null,{"href":"/docs/components/button","children":"Components"}]}]]}]]}],["$","div","Components",{"className":"Footer-module__OlIbZW__col","children":[["$","h3",null,{"className":"Footer-module__OlIbZW__colTitle","children":"Components"}],["$","ul",null,{"children":[["$","li","Button",{"children":["$","$L2",null,{"href":"/docs/components/button","children":"Button"}]}],["$","li","Input",{"children":["$","$L2",null,{"href":"/docs/components/input","children":"Input"}]}],["$","li","Modal",{"children":["$","$L2",null,{"href":"/docs/components/modal","children":"Modal"}]}],["$","li","Tabs",{"children":["$","$L2",null,{"href":"/docs/components/tabs","children":"Tabs"}]}]]}]]}],["$","div","Community",{"className":"Footer-module__OlIbZW__col","children":[["$","h3",null,{"className":"Footer-module__OlIbZW__colTitle","children":"Community"}],["$","ul",null,{"children":[["$","li","GitHub",{"children":["$","$L2",null,{"href":"https://github.com/dangerfarms/farmui","children":"GitHub"}]}],["$","li","Discord",{"children":["$","$L2",null,{"href":"#","children":"Discord"}]}],["$","li","X / Twitter",{"children":["$","$L2",null,{"href":"#","children":"X / Twitter"}]}],["$","li","Changelog",{"children":["$","$L2",null,{"href":"#","children":"Changelog"}]}]]}]]}]]}]]}],["$","div",null,{"className":"container Footer-module__OlIbZW__bottom","children":[["$","span",null,{"children":["© ",2026," FarmUI. Built by Danger Farms."]}],["$","span",null,{"children":"Built with modern CSS."}]]}]]}]
+a:["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/3mp25h68qwdx3.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/farmui/_next/static/chunks/1ya0c6mvtmosb.js","async":true,"nonce":"$undefined"}]],["$","div",null,{"className":"layout-module__R03O-W__shell","children":[["$","aside",null,{"className":"layout-module__R03O-W__aside","children":["$","div",null,{"className":"layout-module__R03O-W__asideInner","children":["$","$L12",null,{}]}]}],["$","div",null,{"className":"layout-module__R03O-W__content","children":["$","$L5",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L6",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]}]]}]]}]
+b:["$","$1","c",{"children":[null,["$","$L5",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L6",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
+c:["$","$1","c",{"children":[null,["$","$L5",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L6",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
+d:["$","$1","c",{"children":["$L13",[["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/2irrof7tr_1l_.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/farmui/_next/static/chunks/30w4n9vmn1dkb.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/farmui/_next/static/chunks/436wgdujsavtx.js","async":true,"nonce":"$undefined"}]],["$","$L14",null,{"children":["$","$15",null,{"name":"Next.MetadataOutlet","children":"$@16"}]}]]}]
+17:[]
+e:"$W17"
+f:["$","$1","h",{"children":[null,["$","$L18",null,{"children":"$L19"}],["$","div",null,{"hidden":true,"children":["$","$L1a",null,{"children":["$","$15",null,{"name":"Next.Metadata","children":"$L1b"}]}]}],null]}]
+11:["$","link","0",{"rel":"stylesheet","href":"/farmui/_next/static/chunks/1j1a2871vy-he.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]
+1c:I[75192,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"CodeBlock"]
+1d:I[58975,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Preview"]
+1e:T74a,/* The complete stylesheet for <Table /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Table-scroll {
+    inline-size: 100%;
+    overflow-x: auto;
+    border-radius: var(--fui-radius-md);
+  }
+
+  .fui-Table-root {
+    inline-size: 100%;
+    border-collapse: collapse;
+    font-family: var(--fui-font);
+    font-size: var(--fui-text-sm);
+    color: var(--fui-text);
+  }
+
+  .fui-Table-root[data-caption-side="top"] {
+    caption-side: top;
+  }
+  .fui-Table-root[data-caption-side="bottom"] {
+    caption-side: bottom;
+  }
+
+  .fui-Table-root caption {
+    padding-block: var(--fui-space-sm);
+    color: var(--fui-text-muted);
+    font-size: var(--fui-text-xs);
+    text-align: start;
+  }
+
+  .fui-Table-root :where(th, td) {
+    padding-block: var(--fui-space-md);
+    padding-inline: var(--fui-space-lg);
+    text-align: start;
+    vertical-align: middle;
+    border-block-end: 1px solid var(--fui-border);
+  }
+
+  .fui-Table-root :where(thead th) {
+    color: var(--fui-text-muted);
+    font-weight: 600;
+    font-size: var(--fui-text-xs);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    border-block-end: 1px solid var(--fui-border-strong);
+    white-space: nowrap;
+  }
+
+  .fui-Table-root :where(tbody tr:last-child) :where(td) {
+    border-block-end: none;
+  }
+
+  /* Column borders */
+  .fui-Table-root[data-col-borders] :where(th, td):not(:last-child) {
+    border-inline-end: 1px solid var(--fui-border);
+  }
+
+  /* Striped body rows */
+  .fui-Table-root[data-striped] :where(tbody tr:nth-child(even)) {
+    background: var(--fui-bg-subtle);
+  }
+
+  /* Highlight on hover */
+  .fui-Table-root[data-hover] :where(tbody tr) {
+    transition: background var(--fui-transition);
+  }
+  .fui-Table-root[data-hover] :where(tbody tr:hover) {
+    background: var(--fui-surface-hover);
+  }
+}13:["$","article",null,{"className":"DocPage-module__ziV6iq__page","children":[["$","header",null,{"className":"DocPage-module__ziV6iq__header","children":[["$","p",null,{"className":"DocPage-module__ziV6iq__category","children":"Data display"}],["$","h1",null,{"className":"DocPage-module__ziV6iq__title","children":"Table"}],["$","p",null,{"className":"DocPage-module__ziV6iq__lead","children":"A styled data table composed from native thead/tbody/tr/th/td markup."}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"import","className":"DocPage-module__ziV6iq__h2","children":"Import"}],["$","$L1c",null,{"code":"import { Table } from \"@farmui/core\";"}]]}],["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"usage","className":"DocPage-module__ziV6iq__h2","children":"Usage"}],["$","p",null,{"className":"DocPage-module__ziV6iq__usageNote","children":["Every example has a ",["$","strong",null,{"children":"CSS"}],"tab — that’s the real, complete stylesheet for the component. It’s plain, static CSS: nothing runs in the browser."]}],["$","div",null,{"className":"DocPage-module__ziV6iq__demos","children":[["$","div","Basic",{"id":"basic","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Basic"}],"$undefined",["$","$L1d",null,{"code":"<Table>\n  <thead>\n    <tr><th>Invoice</th><th>Status</th><th>Amount</th></tr>\n  </thead>\n  <tbody>\n    <tr><td>INV-1024</td><td>Paid</td><td>$1,240.00</td></tr>\n    <tr><td>INV-1025</td><td>Pending</td><td>$820.00</td></tr>\n    <tr><td>INV-1026</td><td>Paid</td><td>$2,010.00</td></tr>\n  </tbody>\n</Table>","css":"$1e","children":"$L1f"}]]}],"$L20","$L21"]}]]}],"$L22"]}]
+23:I[73585,["/farmui/_next/static/chunks/0psf5n_gok7xo.js","/farmui/_next/static/chunks/3v8bea15470cp.js","/farmui/_next/static/chunks/1ya0c6mvtmosb.js","/farmui/_next/static/chunks/30w4n9vmn1dkb.js","/farmui/_next/static/chunks/436wgdujsavtx.js"],"Table"]
+1f:["$","div",null,{"style":{"inlineSize":"100%","maxInlineSize":"32rem"},"children":["$","$L23",null,{"children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Invoice"}],["$","th",null,{"children":"Status"}],["$","th",null,{"children":"Amount"}]]}]}],["$","tbody",null,{"children":[["$","tr","INV-1024",{"children":[["$","td",null,{"children":"INV-1024"}],["$","td",null,{"children":"Paid"}],["$","td",null,{"children":"$$1,240.00"}]]}],["$","tr","INV-1025",{"children":[["$","td",null,{"children":"INV-1025"}],["$","td",null,{"children":"Pending"}],["$","td",null,{"children":"$$820.00"}]]}],["$","tr","INV-1026",{"children":[["$","td",null,{"children":"INV-1026"}],["$","td",null,{"children":"Paid"}],["$","td",null,{"children":"$$2,010.00"}]]}],["$","tr","INV-1027",{"children":[["$","td",null,{"children":"INV-1027"}],["$","td",null,{"children":"Overdue"}],["$","td",null,{"children":"$$640.00"}]]}]]}]]}]}]
+24:T74a,/* The complete stylesheet for <Table /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Table-scroll {
+    inline-size: 100%;
+    overflow-x: auto;
+    border-radius: var(--fui-radius-md);
+  }
+
+  .fui-Table-root {
+    inline-size: 100%;
+    border-collapse: collapse;
+    font-family: var(--fui-font);
+    font-size: var(--fui-text-sm);
+    color: var(--fui-text);
+  }
+
+  .fui-Table-root[data-caption-side="top"] {
+    caption-side: top;
+  }
+  .fui-Table-root[data-caption-side="bottom"] {
+    caption-side: bottom;
+  }
+
+  .fui-Table-root caption {
+    padding-block: var(--fui-space-sm);
+    color: var(--fui-text-muted);
+    font-size: var(--fui-text-xs);
+    text-align: start;
+  }
+
+  .fui-Table-root :where(th, td) {
+    padding-block: var(--fui-space-md);
+    padding-inline: var(--fui-space-lg);
+    text-align: start;
+    vertical-align: middle;
+    border-block-end: 1px solid var(--fui-border);
+  }
+
+  .fui-Table-root :where(thead th) {
+    color: var(--fui-text-muted);
+    font-weight: 600;
+    font-size: var(--fui-text-xs);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    border-block-end: 1px solid var(--fui-border-strong);
+    white-space: nowrap;
+  }
+
+  .fui-Table-root :where(tbody tr:last-child) :where(td) {
+    border-block-end: none;
+  }
+
+  /* Column borders */
+  .fui-Table-root[data-col-borders] :where(th, td):not(:last-child) {
+    border-inline-end: 1px solid var(--fui-border);
+  }
+
+  /* Striped body rows */
+  .fui-Table-root[data-striped] :where(tbody tr:nth-child(even)) {
+    background: var(--fui-bg-subtle);
+  }
+
+  /* Highlight on hover */
+  .fui-Table-root[data-hover] :where(tbody tr) {
+    transition: background var(--fui-transition);
+  }
+  .fui-Table-root[data-hover] :where(tbody tr:hover) {
+    background: var(--fui-surface-hover);
+  }
+}20:["$","div","Striped",{"id":"striped","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Striped"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Shade alternating body rows and add column borders."}],["$","$L1d",null,{"code":"<Table striped withColumnBorders>\n  {/* thead / tbody */}\n</Table>","css":"$24","children":["$","div",null,{"style":{"inlineSize":"100%","maxInlineSize":"32rem"},"children":["$","$L23",null,{"striped":true,"withColumnBorders":true,"children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Invoice"}],["$","th",null,{"children":"Status"}],["$","th",null,{"children":"Amount"}]]}]}],["$","tbody",null,{"children":[["$","tr","INV-1024",{"children":[["$","td",null,{"children":"INV-1024"}],["$","td",null,{"children":"Paid"}],["$","td",null,{"children":"$$1,240.00"}]]}],["$","tr","INV-1025",{"children":[["$","td",null,{"children":"INV-1025"}],["$","td",null,{"children":"Pending"}],["$","td",null,{"children":"$$820.00"}]]}],["$","tr","INV-1026",{"children":[["$","td",null,{"children":"INV-1026"}],["$","td",null,{"children":"Paid"}],["$","td",null,{"children":"$$2,010.00"}]]}],["$","tr","INV-1027",{"children":[["$","td",null,{"children":"INV-1027"}],["$","td",null,{"children":"Overdue"}],["$","td",null,{"children":"$$640.00"}]]}]]}]]}]}]}]]}]
+25:T74a,/* The complete stylesheet for <Table /> — plain, static CSS.
+   Nothing runs in the browser: no CSS-in-JS, no runtime. */
+
+@layer farmui.components {
+  .fui-Table-scroll {
+    inline-size: 100%;
+    overflow-x: auto;
+    border-radius: var(--fui-radius-md);
+  }
+
+  .fui-Table-root {
+    inline-size: 100%;
+    border-collapse: collapse;
+    font-family: var(--fui-font);
+    font-size: var(--fui-text-sm);
+    color: var(--fui-text);
+  }
+
+  .fui-Table-root[data-caption-side="top"] {
+    caption-side: top;
+  }
+  .fui-Table-root[data-caption-side="bottom"] {
+    caption-side: bottom;
+  }
+
+  .fui-Table-root caption {
+    padding-block: var(--fui-space-sm);
+    color: var(--fui-text-muted);
+    font-size: var(--fui-text-xs);
+    text-align: start;
+  }
+
+  .fui-Table-root :where(th, td) {
+    padding-block: var(--fui-space-md);
+    padding-inline: var(--fui-space-lg);
+    text-align: start;
+    vertical-align: middle;
+    border-block-end: 1px solid var(--fui-border);
+  }
+
+  .fui-Table-root :where(thead th) {
+    color: var(--fui-text-muted);
+    font-weight: 600;
+    font-size: var(--fui-text-xs);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    border-block-end: 1px solid var(--fui-border-strong);
+    white-space: nowrap;
+  }
+
+  .fui-Table-root :where(tbody tr:last-child) :where(td) {
+    border-block-end: none;
+  }
+
+  /* Column borders */
+  .fui-Table-root[data-col-borders] :where(th, td):not(:last-child) {
+    border-inline-end: 1px solid var(--fui-border);
+  }
+
+  /* Striped body rows */
+  .fui-Table-root[data-striped] :where(tbody tr:nth-child(even)) {
+    background: var(--fui-bg-subtle);
+  }
+
+  /* Highlight on hover */
+  .fui-Table-root[data-hover] :where(tbody tr) {
+    transition: background var(--fui-transition);
+  }
+  .fui-Table-root[data-hover] :where(tbody tr:hover) {
+    background: var(--fui-surface-hover);
+  }
+}21:["$","div","Highlight on hover",{"id":"highlight-on-hover","className":"DocPage-module__ziV6iq__demo","children":[["$","h3",null,{"className":"DocPage-module__ziV6iq__h3","children":"Highlight on hover"}],["$","p",null,{"className":"DocPage-module__ziV6iq__demoDesc","children":"Rows highlight under the pointer; a caption labels the table."}],["$","$L1d",null,{"code":"<Table highlightOnHover captionSide=\"bottom\">\n  <caption>Recent invoices by status</caption>\n  {/* thead / tbody */}\n</Table>","css":"$25","children":["$","div",null,{"style":{"inlineSize":"100%","maxInlineSize":"32rem"},"children":["$","$L23",null,{"highlightOnHover":true,"captionSide":"bottom","children":[["$","caption",null,{"children":"Recent invoices by status"}],["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Invoice"}],["$","th",null,{"children":"Status"}],["$","th",null,{"children":"Amount"}]]}]}],["$","tbody",null,{"children":[["$","tr","INV-1024",{"children":[["$","td",null,{"children":"INV-1024"}],["$","td",null,{"children":"Paid"}],["$","td",null,{"children":"$$1,240.00"}]]}],["$","tr","INV-1025",{"children":[["$","td",null,{"children":"INV-1025"}],["$","td",null,{"children":"Pending"}],["$","td",null,{"children":"$$820.00"}]]}],["$","tr","INV-1026",{"children":[["$","td",null,{"children":"INV-1026"}],["$","td",null,{"children":"Paid"}],["$","td",null,{"children":"$$2,010.00"}]]}],["$","tr","INV-1027",{"children":[["$","td",null,{"children":"INV-1027"}],["$","td",null,{"children":"Overdue"}],["$","td",null,{"children":"$$640.00"}]]}]]}]]}]}]}]]}]
+22:["$","section",null,{"className":"DocPage-module__ziV6iq__section","children":[["$","h2",null,{"id":"props","className":"DocPage-module__ziV6iq__h2","children":"Props"}],["$","div",null,{"className":"PropsTable-module__W46djW__scroll","children":["$","table",null,{"className":"PropsTable-module__W46djW__table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Prop"}],["$","th",null,{"children":"Type"}],["$","th",null,{"children":"Default"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","striped",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"striped"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"boolean"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Shade alternating body rows."}]]}],["$","tr","highlightOnHover",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"highlightOnHover"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"boolean"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Highlight the row under the pointer."}]]}],["$","tr","withColumnBorders",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"withColumnBorders"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"boolean"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"Draw vertical borders between columns."}]]}],["$","tr","captionSide",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"captionSide"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"\"top\" | \"bottom\""}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__default","children":"\"top\""}]}],["$","td",null,{"children":"Which side to place a <caption>."}]]}],["$","tr","...others",{"children":[["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__name","children":"...others"}]}],["$","td",null,{"children":["$","code",null,{"className":"PropsTable-module__W46djW__type","children":"TableHTMLAttributes"}]}],["$","td",null,{"children":["$","span",null,{"className":"PropsTable-module__W46djW__dim","children":"—"}]}],["$","td",null,{"children":"All native <table> props are forwarded."}]]}]]}]]}]}]]}]
+19:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+16:null
+1b:[["$","title","0",{"children":"Table · FarmUI"}],["$","meta","1",{"name":"description","content":"A styled data table composed from native thead/tbody/tr/th/td markup."}]]
