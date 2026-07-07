@@ -1,0 +1,77 @@
+@layer farmui.blocks {
+  .fui-Newsletter-root {
+    padding-block: clamp(3rem, 7vw, 5rem);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+  }
+  .fui-Newsletter-inner {
+    max-inline-size: 40rem;
+    margin-inline: auto;
+    text-align: center;
+  }
+  /* SectionHeader owns its own bottom margin; tighten it before the form. */
+  .fui-Newsletter-inner .fui-SectionHeader {
+    margin-block-end: 1.75rem;
+  }
+
+  .fui-Newsletter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    max-inline-size: 30rem;
+    margin-inline: auto;
+  }
+
+  .fui-Newsletter-input {
+    flex: 1 1 16rem;
+    min-inline-size: 0;
+    block-size: var(--fui-control-height-md);
+    padding-inline: 0.9rem;
+    color: var(--fui-text);
+    font-family: var(--fui-font);
+    font-size: var(--fui-text-sm);
+    background: var(--fui-surface);
+    border: 1px solid var(--fui-border);
+    border-radius: var(--fui-radius-md);
+    transition:
+      border-color var(--fui-transition),
+      box-shadow var(--fui-transition);
+  }
+  .fui-Newsletter-input::placeholder {
+    color: var(--fui-text-dim);
+  }
+  .fui-Newsletter-input:hover {
+    border-color: var(--fui-border-strong);
+  }
+  .fui-Newsletter-input:focus-visible {
+    outline: none;
+    border-color: var(--fui-primary);
+    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+  }
+  .fui-Newsletter-input:user-invalid {
+    border-color: var(--fui-danger);
+  }
+
+  /* Visually-hidden label — accessible to screen readers, off-screen visually. */
+  .fui-Newsletter-srOnly {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @container (max-width: 30rem) {
+    .fui-Newsletter-input {
+      flex-basis: 100%;
+    }
+    .fui-Newsletter-form .fui-Button-root {
+      inline-size: 100%;
+    }
+  }
+}

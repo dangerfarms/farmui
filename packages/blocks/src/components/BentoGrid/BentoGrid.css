@@ -1,0 +1,74 @@
+@layer farmui.blocks {
+  .fui-BentoGrid-root {
+    padding-block: clamp(3rem, 7vw, 5rem);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+  }
+  .fui-BentoGrid-grid {
+    container-type: inline-size;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .fui-BentoGrid-item {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    background: var(--fui-surface);
+    border: 1px solid var(--fui-border);
+    border-radius: var(--fui-radius-lg);
+    transition:
+      border-color var(--fui-transition),
+      transform var(--fui-transition);
+  }
+  .fui-BentoGrid-item[data-span="2"] {
+    grid-column: span 2;
+  }
+  .fui-BentoGrid-item:hover {
+    border-color: var(--fui-border-strong);
+    transform: translateY(-2px);
+  }
+  .fui-BentoGrid-icon {
+    display: grid;
+    place-items: center;
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+    margin-block-end: 1rem;
+    font-size: 1.4rem;
+    color: var(--fui-primary);
+    background: var(--fui-primary-soft);
+    border-radius: var(--fui-radius-md);
+  }
+  .fui-BentoGrid-title {
+    margin: 0 0 0.4rem;
+    font-size: var(--fui-text-lg);
+    font-weight: 700;
+    text-wrap: balance;
+  }
+  .fui-BentoGrid-desc {
+    margin: 0;
+    font-size: var(--fui-text-sm);
+    line-height: 1.6;
+    color: var(--fui-text-muted);
+    text-wrap: pretty;
+  }
+
+  /* Two columns at medium widths. */
+  @container (max-width: 56rem) {
+    .fui-BentoGrid-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  /* Single column on narrow: span-2 items drop back to one. */
+  @container (max-width: 34rem) {
+    .fui-BentoGrid-grid {
+      grid-template-columns: 1fr;
+    }
+    .fui-BentoGrid-item[data-span="2"] {
+      grid-column: auto;
+    }
+  }
+}

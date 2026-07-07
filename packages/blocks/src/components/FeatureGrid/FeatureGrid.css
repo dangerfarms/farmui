@@ -1,0 +1,43 @@
+@layer farmui.blocks {
+  .fui-FeatureGrid-root {
+    padding-block: clamp(3rem, 7vw, 5rem);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+  }
+  .fui-FeatureGrid-item {
+    padding: 1.5rem;
+    background: var(--fui-surface);
+    border: 1px solid var(--fui-border);
+    border-radius: var(--fui-radius-lg);
+    transition:
+      border-color var(--fui-transition),
+      transform var(--fui-transition);
+  }
+  .fui-FeatureGrid-item:hover {
+    border-color: var(--fui-border-strong);
+    transform: translateY(-2px);
+  }
+  .fui-FeatureGrid-icon {
+    display: grid;
+    place-items: center;
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+    margin-block-end: 1rem;
+    font-size: 1.4rem;
+    color: var(--fui-primary);
+    background: var(--fui-primary-soft);
+    border-radius: var(--fui-radius-md);
+  }
+  .fui-FeatureGrid-title {
+    margin: 0 0 0.4rem;
+    font-size: var(--fui-text-lg);
+    font-weight: 700;
+  }
+  .fui-FeatureGrid-desc {
+    margin: 0;
+    font-size: var(--fui-text-sm);
+    line-height: 1.6;
+    color: var(--fui-text-muted);
+    text-wrap: pretty;
+  }
+}

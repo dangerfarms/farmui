@@ -1,0 +1,8 @@
+/**
+ * FarmUI blocks — cascade-layer order.
+ *
+ * Blocks live in the `farmui.blocks` layer, which sits AFTER `farmui.components`
+ * so a block can adjust a primitive's defaults, and any unlayered CSS you write
+ * still beats everything here. Import this AFTER "@farmui/core/styles.css".
+ */
+@layer farmui.reset, farmui.tokens, farmui.components, farmui.blocks;

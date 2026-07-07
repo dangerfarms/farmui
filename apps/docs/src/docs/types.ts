@@ -29,10 +29,18 @@ export interface ComponentDoc {
   importLine: string;
   demos: Demo[];
   props: PropRow[];
+  /** Which package the component ships in (used by the CSS tab). @default "core" */
+  pkg?: "core" | "blocks";
 }
 
 export type Category =
-  "Inputs" | "Data display" | "Feedback" | "Overlays" | "Navigation" | "Layout";
+  | "Inputs"
+  | "Data display"
+  | "Feedback"
+  | "Overlays"
+  | "Navigation"
+  | "Layout"
+  | "Blocks";
 
 /** Sidebar ordering for categories. */
 export const CATEGORY_ORDER: Category[] = [
@@ -42,4 +50,5 @@ export const CATEGORY_ORDER: Category[] = [
   "Overlays",
   "Navigation",
   "Layout",
+  "Blocks",
 ];

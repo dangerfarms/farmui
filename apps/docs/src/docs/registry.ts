@@ -46,6 +46,19 @@ import center from "@/content/components/center";
 import space from "@/content/components/space";
 import aspectRatio from "@/content/components/aspect-ratio";
 
+// Blocks
+import hero from "@/content/components/hero";
+import featureGrid from "@/content/components/feature-grid";
+import bentoGrid from "@/content/components/bento-grid";
+import statsGroup from "@/content/components/stats-group";
+import logoWall from "@/content/components/logo-wall";
+import testimonials from "@/content/components/testimonials";
+import pricingTable from "@/content/components/pricing-table";
+import ctaSection from "@/content/components/cta-section";
+import faq from "@/content/components/faq";
+import newsletter from "@/content/components/newsletter";
+import footer from "@/content/components/footer";
+
 export const components: ComponentDoc[] = [
   button,
   input,
@@ -80,6 +93,17 @@ export const components: ComponentDoc[] = [
   center,
   space,
   aspectRatio,
+  hero,
+  featureGrid,
+  bentoGrid,
+  statsGroup,
+  logoWall,
+  testimonials,
+  pricingTable,
+  ctaSection,
+  faq,
+  newsletter,
+  footer,
 ];
 
 export function getComponent(slug: string): ComponentDoc | undefined {

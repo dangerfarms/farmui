@@ -21,6 +21,7 @@ export const CATEGORY_ORDER = [
   "Overlays",
   "Navigation",
   "Layout",
+  "Blocks",
 ] as const;
 
 export const COMPONENTS: NavItem[] = [
@@ -227,6 +228,73 @@ export const COMPONENTS: NavItem[] = [
     slug: "aspect-ratio",
     category: "Layout",
     description: "Constrain content to a fixed ratio.",
+  },
+  // Blocks
+  {
+    name: "Hero",
+    slug: "hero",
+    category: "Blocks",
+    description: "Headline section with actions and media.",
+  },
+  {
+    name: "FeatureGrid",
+    slug: "feature-grid",
+    category: "Blocks",
+    description: "A responsive grid of features.",
+  },
+  {
+    name: "BentoGrid",
+    slug: "bento-grid",
+    category: "Blocks",
+    description: "An asymmetric bento card layout.",
+  },
+  {
+    name: "StatsGroup",
+    slug: "stats-group",
+    category: "Blocks",
+    description: "A row of big-number stats.",
+  },
+  {
+    name: "LogoWall",
+    slug: "logo-wall",
+    category: "Blocks",
+    description: "A cloud of partner or customer logos.",
+  },
+  {
+    name: "Testimonials",
+    slug: "testimonials",
+    category: "Blocks",
+    description: "A grid of customer quotes.",
+  },
+  {
+    name: "PricingTable",
+    slug: "pricing-table",
+    category: "Blocks",
+    description: "Pricing tiers with a call-to-action.",
+  },
+  {
+    name: "CTASection",
+    slug: "cta-section",
+    category: "Blocks",
+    description: "A focused call-to-action band.",
+  },
+  {
+    name: "FAQ",
+    slug: "faq",
+    category: "Blocks",
+    description: "Frequently asked questions (accordion).",
+  },
+  {
+    name: "Newsletter",
+    slug: "newsletter",
+    category: "Blocks",
+    description: "An email signup section.",
+  },
+  {
+    name: "Footer",
+    slug: "footer",
+    category: "Blocks",
+    description: "A multi-column site footer.",
   },
 ];
 

@@ -17,14 +17,17 @@ function slugify(s: string) {
  * Read a component's real, complete stylesheet from disk at build time.
  * This is the actual CSS that ships — showing it is the whole point.
  */
-function readComponentCss(name: string): string | undefined {
+function readComponentCss(
+  name: string,
+  pkg: "core" | "blocks",
+): string | undefined {
   try {
     const file = join(
       process.cwd(),
       "..",
       "..",
       "packages",
-      "core",
+      pkg,
       "src",
       "components",
       name,
@@ -38,7 +41,7 @@ function readComponentCss(name: string): string | undefined {
 }
 
 export function DocPage({ doc }: { doc: ComponentDoc }) {
-  const css = readComponentCss(doc.name);
+  const css = readComponentCss(doc.name, doc.pkg ?? "core");
 
   return (
     <article className={classes.page}>

@@ -1,4 +1,5 @@
 @import "@farmui/core/styles.css";
+@import "@farmui/blocks/styles.css";
 
 @layer site.reset, site.base, site.util;
 

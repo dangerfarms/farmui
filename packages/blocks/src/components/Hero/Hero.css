@@ -1,0 +1,65 @@
+@layer farmui.blocks {
+  .fui-Hero-root {
+    padding-block: clamp(3rem, 8vw, 6rem);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+  }
+
+  .fui-Hero-inner {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+  @container (max-width: 48rem) {
+    .fui-Hero-inner {
+      grid-template-columns: 1fr;
+    }
+  }
+  .fui-Hero-root[data-centered] .fui-Hero-inner {
+    grid-template-columns: 1fr;
+    max-inline-size: 46rem;
+    margin-inline: auto;
+    text-align: center;
+  }
+  .fui-Hero-root[data-centered] .fui-Hero-actions {
+    justify-content: center;
+  }
+
+  .fui-Hero-eyebrow {
+    margin: 0 0 0.75rem;
+    font-size: var(--fui-text-sm);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--fui-primary);
+  }
+  .fui-Hero-title {
+    margin: 0;
+    font-size: clamp(2.2rem, 6vw, 3.75rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+  .fui-Hero-description {
+    margin: 1.25rem 0 0;
+    max-inline-size: 34rem;
+    font-size: var(--fui-text-lg);
+    line-height: 1.6;
+    color: var(--fui-text-muted);
+    text-wrap: pretty;
+  }
+  .fui-Hero-root[data-centered] .fui-Hero-description {
+    margin-inline: auto;
+  }
+  .fui-Hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-block-start: 2rem;
+  }
+  .fui-Hero-media {
+    min-inline-size: 0;
+  }
+}

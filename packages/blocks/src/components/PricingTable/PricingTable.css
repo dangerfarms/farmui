@@ -1,0 +1,98 @@
+@layer farmui.blocks {
+  .fui-PricingTable-root {
+    padding-block: clamp(3rem, 7vw, 5rem);
+    font-family: var(--fui-font);
+    color: var(--fui-text);
+  }
+
+  .fui-PricingTable-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    background: var(--fui-surface);
+    border: 1px solid var(--fui-border);
+    border-radius: var(--fui-radius-lg);
+    box-shadow: var(--fui-shadow-sm);
+  }
+  .fui-PricingTable-card[data-highlighted] {
+    border-color: var(--fui-primary);
+    border-width: 2px;
+    box-shadow: var(--fui-shadow-lg);
+  }
+
+  .fui-PricingTable-badge {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: clamp(1.5rem, 3vw, 2rem);
+    transform: translateY(-50%);
+    padding: 0.2rem 0.7rem;
+    font-size: var(--fui-text-xs);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--fui-primary-contrast);
+    background: var(--fui-primary);
+    border-radius: var(--fui-radius-full);
+  }
+
+  .fui-PricingTable-name {
+    margin: 0;
+    font-size: var(--fui-text-lg);
+    font-weight: 700;
+  }
+  .fui-PricingTable-priceRow {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    margin: 0.75rem 0 0;
+  }
+  .fui-PricingTable-price {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .fui-PricingTable-period {
+    font-size: var(--fui-text-sm);
+    color: var(--fui-text-muted);
+  }
+  .fui-PricingTable-desc {
+    margin: 0.75rem 0 0;
+    font-size: var(--fui-text-sm);
+    line-height: 1.6;
+    color: var(--fui-text-muted);
+    text-wrap: pretty;
+  }
+
+  .fui-PricingTable-features {
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+  .fui-PricingTable-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: var(--fui-text-sm);
+    line-height: 1.5;
+  }
+  .fui-PricingTable-check {
+    flex: none;
+    inline-size: 1.15rem;
+    block-size: 1.15rem;
+    margin-block-start: 0.05rem;
+    color: var(--fui-primary);
+  }
+
+  .fui-PricingTable-action {
+    margin-block-start: auto;
+    padding-block-start: 1.5rem;
+  }
+  .fui-PricingTable-action .fui-Button-root {
+    inline-size: 100%;
+  }
+}

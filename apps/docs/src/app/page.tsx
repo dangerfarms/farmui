@@ -365,6 +365,60 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Blocks */}
+      <section className={`container ${c.section}`}>
+        <div className={c.split}>
+          <div>
+            <span className="eyebrow">@farmui/blocks</span>
+            <h2 className={c.sectionTitle}>
+              Ship whole sections, not just parts.
+            </h2>
+            <p className={c.sectionSub}>
+              A companion package of ready-made, data-driven page sections —
+              hero, features, pricing, testimonials, FAQ and more. Pass your
+              content, get a polished, accessible section on the same tokens.
+            </p>
+            <ul className={c.shouts} style={{ justifyContent: "flex-start" }}>
+              {[
+                "Hero",
+                "FeatureGrid",
+                "BentoGrid",
+                "PricingTable",
+                "Testimonials",
+                "StatsGroup",
+                "LogoWall",
+                "FAQ",
+                "Newsletter",
+                "Footer",
+              ].map((b) => (
+                <li key={b} className={c.shout}>
+                  {b}
+                </li>
+              ))}
+            </ul>
+            <div style={{ marginBlockStart: "1.75rem" }}>
+              <Link
+                href="/docs/components/hero"
+                className={`${c.btnLink} ${c.btnLinkGhost}`}
+              >
+                Browse blocks <ArrowRightIcon width={16} height={16} />
+              </Link>
+            </div>
+          </div>
+          <CodeBlock
+            language="tsx"
+            code={`import "@farmui/blocks/styles.css";
+import { Hero, PricingTable } from "@farmui/blocks";
+
+<Hero
+  title="Ship your landing page today"
+  description="Composable sections built on modern CSS."
+  actions={[{ label: "Get started", href: "/docs" }]}
+/>;`}
+          />
+        </div>
+      </section>
+
       {/* Final CTA */}
       <section className="container">
         <div className={c.cta}>

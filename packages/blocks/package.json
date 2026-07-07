@@ -1,0 +1,76 @@
+{
+  "name": "@farmui/blocks",
+  "version": "1.0.0",
+  "description": "Ready-made, data-driven page sections (hero, features, pricing, testimonials…) built on @farmui/core.",
+  "license": "MIT",
+  "author": "Danger Farms",
+  "homepage": "https://farmui.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dangerfarms/farmui.git",
+    "directory": "packages/blocks"
+  },
+  "bugs": {
+    "url": "https://github.com/dangerfarms/farmui/issues"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "blocks",
+    "sections",
+    "marketing",
+    "landing-page",
+    "hero",
+    "pricing",
+    "ui",
+    "farmui"
+  ],
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup && node scripts/build-css.mjs",
+    "dev": "tsup --watch",
+    "check-types": "tsc --noEmit",
+    "test": "vitest run",
+    "clean": "rm -rf dist"
+  },
+  "peerDependencies": {
+    "@farmui/core": ">=1.0.0",
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "devDependencies": {
+    "@farmui/core": "workspace:*",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "@vitejs/plugin-react": "^4.3.4",
+    "jsdom": "^25.0.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tsup": "^8.5.0",
+    "typescript": "5.9.2",
+    "vitest": "^3.0.0",
+    "vitest-axe": "^0.1.0"
+  }
+}
