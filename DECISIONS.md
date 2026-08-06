@@ -224,6 +224,16 @@ pass"). Per Rich's direction that size adapts automatically to context:
   when the button is correctly labelled: the a11y requirement and the visual
   contract are one mechanism.
 
+## Blocks extracted (2026-08)
+
+- **`@farmui/blocks` removed from this repo.** Page sections (Hero,
+  PricingTable, …) are product compositions, not foundations — they belong
+  in the white-label CMS component library, built *on* FarmUI's primitives
+  the way any consumer would. The package's final state (fully @scope'd,
+  contextual action regions, fluid Newsletter anatomy) is preserved on the
+  `archive/blocks` branch for extraction into the CMS repo.
+  **[for Rich]** confirm the split.
+
 ## Open questions **[for Rich]**
 
 - Headless vs styled: the notes describe a styled library (Web Awesome

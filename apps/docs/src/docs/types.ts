@@ -36,7 +36,7 @@ export interface ComponentDoc {
   /** Accessibility notes and the reasoning behind them. */
   accessibility?: string[];
   /** Which package the component ships in (used by the CSS tab). @default "core" */
-  pkg?: "core" | "blocks";
+  pkg?: "core";
 }
 
 export type Category =

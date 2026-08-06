@@ -35,7 +35,6 @@ export default function RootLayout({
       <head>
         {/* Served statically (not bundler-parsed) — see scripts/sync-css.mjs */}
         <link rel="stylesheet" href={`${base}/farmui-core.css`} />
-        <link rel="stylesheet" href={`${base}/farmui-blocks.css`} />
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
       </head>
       <body>
