@@ -9,9 +9,9 @@
   border-radius: var(--fui-radius-md);
   cursor: pointer;
   transition:
-    color var(--fui-transition),
-    border-color var(--fui-transition),
-    background var(--fui-transition);
+    color var(--fui-duration-md) var(--fui-ease),
+    border-color var(--fui-duration-md) var(--fui-ease),
+    background var(--fui-duration-md) var(--fui-ease);
 }
 .btn:hover {
   color: var(--fui-text);

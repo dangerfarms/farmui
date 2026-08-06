@@ -1,0 +1,52 @@
+/*
+ * Field — authored the modern way: styles are encapsulated with @scope instead
+ * of BEM specificity games, and the parts are targeted from within that scope.
+ * The root still carries a `fui-` class so the scope root is unambiguous and
+ * app styles can find it.
+ */
+@scope (.fui-Field-root) {
+  :scope {
+    display: block flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    inline-size: 100%;
+  }
+
+  .fui-Field-label {
+    display: block flex;
+    gap: var(--fui-space-sm);
+    align-items: center;
+    font-size: var(--fui-text-sm);
+    font-weight: 500;
+  }
+
+  .fui-Field-optional {
+    font-weight: 400;
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Field-description {
+    margin: 0;
+    font-size: var(--fui-text-sm);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Field-error {
+    margin: 0;
+    font-size: var(--fui-text-sm);
+    color: var(--fui-danger);
+  }
+}
+
+/*
+ * Error state is detected, not declared: a field is invalid when it contains
+ * a rendered error message — or when the platform itself says so
+ * (:user-invalid from native constraint validation, e.g. `required` or
+ * `type="email"`, after the user has interacted). Tint the label to
+ * reinforce it.
+ */
+@scope (.fui-Field-root:has(.fui-Field-error, :user-invalid)) {
+  .fui-Field-label {
+    color: var(--fui-danger);
+  }
+}

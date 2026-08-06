@@ -23,8 +23,8 @@
   border-radius: var(--fui-radius-sm);
   cursor: pointer;
   transition:
-    background var(--fui-transition),
-    color var(--fui-transition);
+    background var(--fui-duration-md) var(--fui-ease),
+    color var(--fui-duration-md) var(--fui-ease);
 }
 .tab:hover {
   color: var(--fui-text);

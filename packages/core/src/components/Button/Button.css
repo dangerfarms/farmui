@@ -1,158 +1,153 @@
-@layer farmui.components {
-  .fui-Button-root {
-    --_bg: var(--fui-primary);
-    --_bg-hover: var(--fui-primary-hover);
-    --_bg-active: var(--fui-primary-active);
-    --_fg: var(--fui-primary-contrast);
-    --_border: transparent;
+/*
+ * Button — contextualism model (after Richard's demo).
+ *
+ * One colour channel (--_color); every look is DERIVED from it: the soft
+ * background and border via color-mix toward the page background, hover and
+ * active via relative-colour lightness shifts. Appearance is decided by
+ * context, not props:
+ *
+ *   - a `--fui-context: primary | danger` region re-answers the channel
+ *   - narrow containers (≤ 16rem) make the button full width
+ *   - an inline svg icon is detected with :has() — no slot props
+ *   - size is fluid (cqi tokens) — there are no size steps
+ *
+ * The one instance-level escape hatch is the public --fui-button-color
+ * property (registered in reset.css).
+ */
+@scope (.fui-Button-root) {
+  :scope {
+    --_color: var(--fui-button-color, var(--fui-text));
 
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--fui-space-sm);
-    inline-size: var(--_w, auto);
-    block-size: var(--_h, var(--fui-control-height-md));
-    padding-inline: var(--_px, 1.125rem);
-    border: 1px solid var(--_border);
+    display: inline flow-root;
+    padding-block: var(--fui-space-sm);
+    padding-inline: var(--fui-space-lg);
+
+    /* Tints mix in oklab (cartesian), not oklch: hue interpolation against the
+       near-achromatic page background rotates the channel's hue (the declared
+       hue of an achromatic colour still interpolates); cartesian mixing only
+       desaturates, so the channel's hue survives. */
+    border: 1px solid color-mix(in oklab, var(--_color), var(--fui-bg) 80%);
     border-radius: var(--_radius, var(--fui-radius-md));
-    background: var(--_bg);
-    color: var(--_fg);
-    font-family: var(--fui-font);
-    font-size: var(--_fz, var(--fui-text-sm));
+    background: light-dark(
+      color-mix(in oklab, var(--_color), var(--fui-bg) 90%),
+      color-mix(in oklab, var(--_color), var(--fui-bg) 75%)
+    );
+    color: var(--_color);
+    font-size: var(--fui-text-sm);
     font-weight: 600;
-    line-height: 1;
+    line-height: 1.2;
+    text-align: center;
     text-decoration: none;
     white-space: nowrap;
     user-select: none;
     transition:
-      background var(--fui-transition),
-      border-color var(--fui-transition),
-      color var(--fui-transition),
-      box-shadow var(--fui-transition),
-      transform var(--fui-transition);
+      background var(--fui-duration-md) var(--fui-ease),
+      border-color var(--fui-duration-md) var(--fui-ease),
+      color var(--fui-duration-md) var(--fui-ease),
+      box-shadow var(--fui-duration-md) var(--fui-ease),
+      transform var(--fui-duration-md) var(--fui-ease);
   }
 
-  .fui-Button-root:hover:not(:disabled, [data-loading]) {
-    background: var(--_bg-hover);
+  :scope:hover:not(:disabled, [data-loading]),
+  :scope:active:not(:disabled, [data-loading]) {
+    background: light-dark(
+      color-mix(in oklab, var(--_color), var(--fui-bg) 85%),
+      color-mix(in oklab, var(--_color), var(--fui-bg) 70%)
+    );
+    color: light-dark(
+      oklch(from var(--_color) calc(l - 0.2) c h),
+      oklch(from var(--_color) calc(l + 0.2) c h)
+    );
   }
-  .fui-Button-root:active:not(:disabled, [data-loading]) {
-    background: var(--_bg-active);
-    transform: translateY(0.5px);
+
+  :scope:active:not(:disabled, [data-loading]) {
+    box-shadow: var(--fui-shadow-sm);
+    transform: translateY(1px);
   }
-  .fui-Button-root:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+
+  :scope:disabled {
+    opacity: var(--fui-disabled-opacity);
   }
-  .fui-Button-root:disabled {
-    cursor: not-allowed;
-    opacity: 0.55;
-  }
-  .fui-Button-root[data-loading] {
+
+  :scope[data-loading] {
     cursor: progress;
   }
 
-  /* Sizes */
-  .fui-Button-root[data-size="sm"] {
-    --_h: var(--fui-control-height-sm);
-    --_px: 0.875rem;
-    --_fz: var(--fui-text-xs);
-  }
-  .fui-Button-root[data-size="lg"] {
-    --_h: var(--fui-control-height-lg);
-    --_px: 1.5rem;
-    --_fz: var(--fui-text-md);
-  }
-
-  .fui-Button-root[data-full] {
-    --_w: 100%;
-  }
-
-  /* Color = danger */
-  .fui-Button-root[data-color="danger"] {
-    --_bg: var(--fui-danger);
-    --_bg-hover: color-mix(in oklch, var(--fui-danger) 88%, black);
-    --_bg-active: color-mix(in oklch, var(--fui-danger) 78%, black);
-    --_fg: var(--fui-primary-contrast);
-  }
-
-  /* Variants */
-  .fui-Button-root[data-variant="light"] {
-    --_bg: var(--fui-primary-soft);
-    --_bg-hover: color-mix(
-      in oklch,
-      var(--fui-primary-soft) 80%,
-      var(--fui-primary)
-    );
-    --_bg-active: color-mix(
-      in oklch,
-      var(--fui-primary-soft) 65%,
-      var(--fui-primary)
-    );
-    --_fg: var(--fui-primary-hover);
-  }
-  .fui-Button-root[data-variant="light"][data-color="danger"] {
-    --_bg: var(--fui-danger-soft);
-    --_bg-hover: color-mix(
-      in oklch,
-      var(--fui-danger-soft) 80%,
-      var(--fui-danger)
-    );
-    --_bg-active: color-mix(
-      in oklch,
-      var(--fui-danger-soft) 65%,
-      var(--fui-danger)
-    );
-    --_fg: var(--fui-danger);
-  }
-
-  .fui-Button-root[data-variant="outline"] {
-    --_bg: transparent;
-    --_bg-hover: var(--fui-primary-soft);
-    --_bg-active: color-mix(
-      in oklch,
-      var(--fui-primary-soft) 70%,
-      var(--fui-primary)
-    );
-    --_fg: var(--fui-primary);
-    --_border: currentColor;
-  }
-  .fui-Button-root[data-variant="outline"][data-color="danger"] {
-    --_fg: var(--fui-danger);
-    --_bg-hover: var(--fui-danger-soft);
-  }
-
-  .fui-Button-root[data-variant="subtle"] {
-    --_bg: transparent;
-    --_bg-hover: var(--fui-primary-soft);
-    --_bg-active: color-mix(
-      in oklch,
-      var(--fui-primary-soft) 70%,
-      var(--fui-primary)
-    );
-    --_fg: var(--fui-primary);
-  }
-  .fui-Button-root[data-variant="subtle"][data-color="danger"] {
-    --_fg: var(--fui-danger);
-    --_bg-hover: var(--fui-danger-soft);
-  }
-
-  /* Loading spinner */
-  .fui-Button-spinner {
-    inline-size: 1em;
-    block-size: 1em;
-    border: 2px solid color-mix(in oklch, currentColor 30%, transparent);
-    border-block-start-color: currentColor;
-    border-radius: var(--fui-radius-full);
-    animation: fui-Button-btn-spin 0.6s linear infinite;
-  }
-  @keyframes fui-Button-btn-spin {
-    to {
-      transform: rotate(1turn);
+  /* Context: within a primary region — THE action of the area. */
+  @container (style(--fui-context: primary)) {
+    :scope {
+      --_color: var(--fui-primary);
     }
   }
 
-  .fui-Button-section {
-    display: inline-flex;
+  /* Context: within a danger region. (The region also re-answers the semantic
+     tokens for every other component — see the Contexts section of tokens.css;
+     this rule keys the button's own channel.) */
+  @container (style(--fui-context: danger)) {
+    :scope {
+      --_color: var(--fui-danger);
+    }
+  }
+
+  /* Context: a narrow container — the button takes the full width. */
+  @container (inline-size <= 16rem) {
+    :scope {
+      inline-size: 100%;
+    }
+  }
+
+  /* Context: contains an inline svg icon. */
+  :scope:has(svg) {
+    display: inline flex;
+    gap: var(--fui-space-sm);
     align-items: center;
+    justify-content: center;
+
+    svg {
+      inline-size: 1em;
+      block-size: auto;
+    }
+  }
+
+  /* Context: icon-only. Detected from the accessible name, not the DOM
+     shape — an icon-only button MUST carry an aria-label (a labelled text
+     button shouldn't), and `svg:only-child` can't tell "icon + bare text"
+     from "icon alone" because text nodes aren't elements. Square padding;
+     the compact look only appears once the button is correctly labelled. */
+  :scope[aria-label]:has(svg) {
+    padding-inline: var(--fui-space-sm);
+  }
+
+  /*
+   * Contextual full width — an explicit layout hint on a region
+   * (`data-fui-buttons="block"`), for when intent should not depend on
+   * container measurements. The region ancestor lives outside the scope; the
+   * subject (the button) stays in scope.
+   */
+  :scope:is([data-fui-buttons="block"] *) {
+    inline-size: 100%;
+  }
+
+  /* Loading spinner (compose as a child; uses currentcolor). */
+  .fui-Button-spinner {
+    display: inline flow-root;
+    inline-size: 1em;
+    block-size: 1em;
+    border: 2px solid color-mix(in oklch, currentcolor 30%, transparent);
+    border-block-start-color: currentcolor;
+    border-radius: var(--fui-radius-full);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .fui-Button-spinner {
+      animation: fui-Button-btn-spin 0.6s linear infinite;
+    }
+  }
+}
+
+/* Keyframes are not scope-able; they stay at the top level. */
+@keyframes fui-Button-btn-spin {
+  to {
+    transform: rotate(1turn);
   }
 }

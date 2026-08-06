@@ -99,10 +99,7 @@ export function PricingTable({
                 ))}
               </ul>
               <div className="fui-PricingTable-action">
-                <ActionButton
-                  variant={plan.highlighted ? "filled" : "outline"}
-                  {...plan.action}
-                />
+                <ActionButton {...plan.action} />
               </div>
             </div>
           ))}

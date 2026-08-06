@@ -74,26 +74,20 @@ const doc: ComponentDoc = {
         </div>
       ),
     },
-    {
-      title: "Sizes",
-      code: `<Select size="sm" data={["United States", "Canada"]} />
-<Select size="md" data={["United States", "Canada"]} />
-<Select size="lg" data={["United States", "Canada"]} />`,
-      render: () => (
-        <div
-          style={{
-            display: "grid",
-            gap: "0.75rem",
-            maxInlineSize: "20rem",
-            inlineSize: "100%",
-          }}
-        >
-          <Select size="sm" data={["United States", "Canada"]} />
-          <Select size="md" data={["United States", "Canada"]} />
-          <Select size="lg" data={["United States", "Canada"]} />
-        </div>
-      ),
-    },
+  ],
+  whenToUse: [
+    "For choosing one option from a longer list (roughly 5+) where showing them all would take too much space.",
+    "When the options are familiar and the user doesn't need to compare them side by side.",
+  ],
+  whenNotToUse: [
+    "For a small set of options the user should see at once — use Radio (GOV.UK: avoid selects where radios fit).",
+    "For yes/no or on/off — use Checkbox or Switch.",
+    "For free-form input — use Input.",
+  ],
+  accessibility: [
+    "Wraps a native <select>, so keyboard interaction, typeahead and the mobile picker come from the platform.",
+    'Composes the Field primitive: label, description and error are wired via id / aria-describedby / aria-invalid with the error as role="alert".',
+    "A placeholder renders as a disabled first option so it is never a selectable value.",
   ],
   props: [
     {
@@ -110,12 +104,6 @@ const doc: ComponentDoc = {
       name: "error",
       type: "ReactNode",
       description: "Error message; puts the field in an invalid state.",
-    },
-    {
-      name: "size",
-      type: `"sm" | "md" | "lg"`,
-      default: `"md"`,
-      description: "Control size (height, padding, font size).",
     },
     {
       name: "radius",

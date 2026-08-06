@@ -34,7 +34,7 @@ export function CTASection({
           {actions.length > 0 && (
             <div className="fui-CTASection-actions">
               {actions.map((action, i) => (
-                <ActionButton key={i} size="lg" {...action} />
+                <ActionButton key={i} {...action} />
               ))}
             </div>
           )}

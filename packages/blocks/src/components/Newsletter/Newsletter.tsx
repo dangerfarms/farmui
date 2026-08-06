@@ -57,8 +57,6 @@ export function Newsletter({
             <button
               type="submit"
               className="fui-Button-root"
-              data-variant="filled"
-              data-size="md"
             >
               {buttonLabel}
             </button>

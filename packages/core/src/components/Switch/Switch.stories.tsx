@@ -7,13 +7,11 @@ const meta = {
   tags: ["autodocs"],
   args: {
     label: "Enable irrigation",
-    size: "md",
     labelPosition: "end",
     defaultChecked: false,
     disabled: false,
   },
   argTypes: {
-    size: { control: "inline-radio", options: ["sm", "md", "lg"] },
     labelPosition: { control: "inline-radio", options: ["start", "end"] },
     defaultChecked: { control: "boolean" },
     disabled: { control: "boolean" },
@@ -25,16 +23,6 @@ type Story = StoryObj<typeof meta>;
 
 /** Live playground — tweak props in the Controls panel. */
 export const Playground: Story = {};
-
-export const Sizes: Story = {
-  render: (args) => (
-    <div style={{ display: "flex", gap: "1.5rem", alignItems: "center" }}>
-      <Switch {...args} size="sm" label="Small" />
-      <Switch {...args} size="md" label="Medium" />
-      <Switch {...args} size="lg" label="Large" />
-    </div>
-  ),
-};
 
 export const LabelPosition: Story = {
   render: (args) => (

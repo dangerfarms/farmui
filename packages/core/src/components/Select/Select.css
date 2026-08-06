@@ -1,106 +1,89 @@
-@layer farmui.components {
-  .fui-Select-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: var(--fui-space-xs);
-    inline-size: var(--_w, 100%);
-    font-family: var(--fui-font);
-  }
-
-  .fui-Select-label {
-    font-size: var(--fui-text-sm);
-    font-weight: 550;
-    color: var(--fui-text);
-  }
-  .fui-Select-required {
-    color: var(--fui-danger);
+/* Label, description and error are rendered by the Field primitive; the
+   Select styles below cover only the bare control that Field composes. The
+   required marker renders inside Field's label — outside the control box —
+   so it is scoped to itself. */
+@scope (.fui-Select-required) {
+  :scope {
     margin-inline-start: 0.15em;
+    color: var(--fui-danger);
   }
+}
 
-  .fui-Select-description {
-    font-size: var(--fui-text-xs);
-    color: var(--fui-text-muted);
-  }
-
-  .fui-Select-field {
+@scope (.fui-Select-field) {
+  :scope {
     position: relative;
-    display: flex;
+    display: block flex;
     align-items: center;
-    block-size: var(--_h, var(--fui-control-height-md));
+
+    /* Height is derived from the select's own padding + font (the Button
+       anatomy); the field contributes only the 1px border. */
+    font-size: var(--fui-text-sm);
+    line-height: 1.2;
     border: 1px solid var(--fui-border-strong);
     border-radius: var(--_radius, var(--fui-radius-md));
     background: var(--fui-surface);
-    color: var(--fui-text);
     transition:
-      border-color var(--fui-transition),
-      box-shadow var(--fui-transition);
-  }
-  .fui-Select-field:focus-within {
-    border-color: var(--fui-primary);
-    box-shadow: 0 0 0 3px var(--fui-primary-ring);
-  }
-  .fui-Select-field[data-invalid] {
-    border-color: var(--fui-danger);
-  }
-  .fui-Select-field[data-invalid]:focus-within {
-    box-shadow: 0 0 0 3px
-      color-mix(in oklch, var(--fui-danger) 40%, transparent);
-  }
-  .fui-Select-field[data-disabled] {
-    background: var(--fui-bg-subtle);
-    opacity: 0.7;
-    cursor: not-allowed;
+      border-color var(--fui-duration-md) var(--fui-ease),
+      box-shadow var(--fui-duration-md) var(--fui-ease);
   }
 
-  .fui-Select-field[data-size="sm"] {
-    --_h: var(--fui-control-height-sm);
-    --_px: 0.625rem;
+  :scope:focus-within {
+    border-color: var(--fui-primary);
+    box-shadow: 0 0 0 2px var(--fui-bg);
+    outline: var(--fui-ring-width) solid var(--fui-ring-color);
+    outline-offset: 2px;
   }
-  .fui-Select-field[data-size="lg"] {
-    --_h: var(--fui-control-height-lg);
-    --_px: 0.875rem;
+
+  /* Error state is detected from the select's own state: ARIA or native
+     constraint validation (:user-invalid). */
+  :scope:has(.fui-Select-select[aria-invalid="true"]),
+  :scope:has(.fui-Select-select:user-invalid) {
+    --fui-ring-color: var(--fui-danger-ring);
+
+    border-color: var(--fui-danger);
+  }
+
+  :scope[data-disabled] {
+    background: var(--fui-bg-subtle);
+    opacity: 0.7;
   }
 
   .fui-Select-select {
     flex: 1;
     min-inline-size: 0;
-    block-size: 100%;
+
+    /* Padding lives on the <select> so its whole face stays clickable. */
+    padding-block: var(--fui-space-sm);
+
     /* Leave room for the chevron on the trailing side. */
-    padding-inline: var(--_px, 0.75rem) 2.25rem;
+    padding-inline: var(--fui-space-md) 2.25rem;
     border: none;
     outline: none;
     background: transparent;
     color: inherit;
     font: inherit;
-    font-size: var(--_fz, var(--fui-text-sm));
     cursor: pointer;
+
     /* Strip the native arrow so our chevron is the only one. */
     appearance: none;
-    -webkit-appearance: none;
   }
-  .fui-Select-select:disabled {
-    cursor: not-allowed;
-  }
+
   /* Empty placeholder value renders dimmed like a real placeholder. */
   .fui-Select-select:has(option[value=""]:checked) {
     color: var(--fui-text-dim);
   }
-  .fui-Select-field[data-size="lg"] .fui-Select-select {
-    --_fz: var(--fui-text-md);
-  }
 
   .fui-Select-chevron {
     position: absolute;
-    inset-inline-end: 0.75rem;
+    inset-inline-end: var(--fui-space-md);
+
+    /* Fluid: overrides the SVG's 16px width/height attributes. */
+    inline-size: 1.125em;
+    block-size: 1.125em;
     inset-block-start: 50%;
-    translate: 0 -50%;
+    flex-shrink: 0;
     color: var(--fui-text-muted);
     pointer-events: none;
-    flex-shrink: 0;
-  }
-
-  .fui-Select-error {
-    font-size: var(--fui-text-xs);
-    color: var(--fui-danger);
+    translate: 0 -50%;
   }
 }

@@ -1,6 +1,9 @@
-import { forwardRef, useId } from "react";
+"use client";
+
+import { forwardRef } from "react";
 import type { TextareaHTMLAttributes, ReactNode } from "react";
-import { cx, type FarmUISize } from "../../utils";
+import { cx, resolveRadius, type FarmUIRadius } from "../../utils";
+import { Field } from "../Field/Field";
 
 export interface TextareaProps extends Omit<
   TextareaHTMLAttributes<HTMLTextAreaElement>,
@@ -10,30 +13,69 @@ export interface TextareaProps extends Omit<
   label?: ReactNode;
   /** Helper text rendered below the label. */
   description?: ReactNode;
-  /** Error message; also puts the field in an invalid state. */
+  /** Error message; its presence puts the field in an invalid state. */
   error?: ReactNode;
-  /** Control size. @default "md" */
-  size?: FarmUISize;
   /** Border radius token. @default "md" */
-  radius?: "sm" | "md" | "lg" | "xl" | "full";
-  /** Mark the field as required (adds a red asterisk). */
+  radius?: FarmUIRadius;
+  /** Mark the field as required (adds an asterisk to the label). */
   withAsterisk?: boolean;
   /** Number of visible text rows. @default 3 */
   rows?: number;
-  /** Root wrapper class. */
+  /** Root wrapper class (applied to the Field root in the labelled form). */
   wrapperClassName?: string;
 }
 
-const radiusVar: Record<NonNullable<TextareaProps["radius"]>, string> = {
-  sm: "var(--fui-radius-sm)",
-  md: "var(--fui-radius-md)",
-  lg: "var(--fui-radius-lg)",
-  xl: "var(--fui-radius-xl)",
-  full: "var(--fui-radius-full)",
-};
+/** Props for the bare textarea box (the part Field.Control composes). */
+type TextareaControlProps = Omit<
+  TextareaProps,
+  "label" | "description" | "error" | "withAsterisk" | "wrapperClassName"
+>;
 
 /**
- * Textarea — a labelled multi-line text field with description and error states.
+ * TextareaControl — the bare, composable multi-line field: the bordered box and
+ * the `<textarea>`. Forwards `id` / `aria-*` straight to the `<textarea>`.
+ */
+const TextareaControl = forwardRef<HTMLTextAreaElement, TextareaControlProps>(
+  function TextareaControl(
+    {
+      radius = "md",
+      rows = 3,
+      disabled,
+      className,
+      style,
+      ...rest
+    },
+    ref,
+  ) {
+    return (
+      <div
+        className="fui-Textarea-field"
+        data-disabled={disabled || undefined}
+        style={
+          {
+            "--_radius": resolveRadius(radius),
+            ...style,
+          } as React.CSSProperties
+        }
+      >
+        <textarea
+          ref={ref}
+          className={cx("fui-Textarea-textarea", className)}
+          rows={rows}
+          disabled={disabled}
+          {...rest}
+        />
+      </div>
+    );
+  },
+);
+
+/**
+ * Textarea — a labelled multi-line text field.
+ *
+ * With no `label`/`description`/`error` it renders just the bare control; with
+ * any of them it composes the accessible {@link Field} primitive, so the
+ * label/description/error wiring lives in one place.
  */
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   function Textarea(
@@ -41,67 +83,42 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       label,
       description,
       error,
-      size = "md",
-      radius = "md",
       withAsterisk,
-      rows = 3,
-      disabled,
-      required,
-      id,
-      className,
       wrapperClassName,
-      ...rest
+      id,
+      required,
+      ...control
     },
     ref,
   ) {
-    const autoId = useId();
-    const fieldId = id ?? autoId;
-    const descId = description ? `${fieldId}-desc` : undefined;
-    const errId = error ? `${fieldId}-err` : undefined;
-    const invalid = Boolean(error);
+    if (!label && !description && !error) {
+      return (
+        <TextareaControl ref={ref} id={id} required={required} {...control} />
+      );
+    }
 
     return (
-      <div className={cx("fui-Textarea-wrapper", wrapperClassName)}>
+      <Field.Root className={wrapperClassName} id={id}>
         {label && (
-          <label className={"fui-Textarea-label"} htmlFor={fieldId}>
+          <Field.Label>
             {label}
             {(withAsterisk || required) && (
-              <span className={"fui-Textarea-required"} aria-hidden>
+              <span className="fui-Textarea-required" aria-hidden>
                 *
               </span>
             )}
-          </label>
+          </Field.Label>
         )}
-        {description && (
-          <span className={"fui-Textarea-description"} id={descId}>
-            {description}
-          </span>
-        )}
-        <div
-          className={"fui-Textarea-field"}
-          data-size={size}
-          data-invalid={invalid || undefined}
-          data-disabled={disabled || undefined}
-          style={{ "--_radius": radiusVar[radius] } as React.CSSProperties}
-        >
-          <textarea
-            ref={ref}
-            id={fieldId}
-            className={cx("fui-Textarea-textarea", className)}
-            rows={rows}
-            disabled={disabled}
-            required={required}
-            aria-invalid={invalid || undefined}
-            aria-describedby={cx(descId, errId) || undefined}
-            {...rest}
-          />
-        </div>
-        {error && (
-          <span className={"fui-Textarea-error"} id={errId} role="alert">
-            {error}
-          </span>
-        )}
-      </div>
+        {description && <Field.Description>{description}</Field.Description>}
+        <Field.Control
+          render={
+            <TextareaControl ref={ref} required={required} {...control} />
+          }
+        />
+        {error && <Field.Error>{error}</Field.Error>}
+      </Field.Root>
     );
   },
 );
+
+export { TextareaControl };

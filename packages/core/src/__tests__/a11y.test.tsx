@@ -16,7 +16,6 @@ import {
   Card,
   Avatar,
   Table,
-  Kbd,
   Alert,
   Progress,
   Skeleton,
@@ -82,25 +81,43 @@ const cases: Array<[string, ReactElement]> = [
       </tbody>
     </Table>,
   ],
-  ["Kbd", <Kbd>K</Kbd>],
   [
     "Alert",
     <Alert color="info" title="Heads up">
       A new version is available.
     </Alert>,
   ],
+  [
+    "Alert (composed)",
+    <Alert.Root color="warning">
+      <Alert.Body>
+        <Alert.Title>Storage almost full</Alert.Title>
+        <Alert.Message>Free up space to keep syncing.</Alert.Message>
+      </Alert.Body>
+    </Alert.Root>,
+  ],
   ["Progress", <Progress value={40} aria-label="Upload progress" />],
   ["Skeleton", <Skeleton width={200} height={16} />],
   ["Loader", <Loader />],
   [
     "Tooltip",
-    <Tooltip label="More info">
-      <Button>Hover me</Button>
-    </Tooltip>,
+    <Tooltip.Root defaultOpen>
+      <Tooltip.Trigger>Hover me</Tooltip.Trigger>
+      <Tooltip.Popup>
+        More info <Tooltip.Arrow />
+      </Tooltip.Popup>
+    </Tooltip.Root>,
   ],
   [
     "Popover",
-    <Popover trigger={<Button>Open</Button>}>Popover content</Popover>,
+    <Popover.Root defaultOpen>
+      <Popover.Trigger>Open</Popover.Trigger>
+      <Popover.Popup>
+        <Popover.Title>Panel</Popover.Title>
+        <Popover.Description>Popover content</Popover.Description>
+        <Popover.Close>Close</Popover.Close>
+      </Popover.Popup>
+    </Popover.Root>,
   ],
   [
     "Tabs",
@@ -123,11 +140,11 @@ const cases: Array<[string, ReactElement]> = [
   ],
   [
     "Breadcrumbs",
-    <Breadcrumbs>
-      <a href="/">Home</a>
-      <a href="/settings">Settings</a>
-      <span>Billing</span>
-    </Breadcrumbs>,
+    <Breadcrumbs.Root>
+      <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
+      <Breadcrumbs.Item href="/settings">Settings</Breadcrumbs.Item>
+      <Breadcrumbs.Item current>Billing</Breadcrumbs.Item>
+    </Breadcrumbs.Root>,
   ],
   ["Pagination", <Pagination total={5} value={1} onChange={() => {}} />],
   ["Container", <Container>Content</Container>],
@@ -185,11 +202,16 @@ describe("accessibility (axe)", () => {
     expect(await axe(container, axeOptions)).toHaveNoViolations();
   });
 
-  it("Modal (portal) has no axe violations", async () => {
+  it("Modal (open dialog) has no axe violations", async () => {
     render(
-      <Modal opened onClose={() => {}} title="Order confirmed">
-        Your order is on its way.
-      </Modal>,
+      <Modal.Root defaultOpen>
+        <Modal.Trigger>Order</Modal.Trigger>
+        <Modal.Popup>
+          <Modal.Title>Order confirmed</Modal.Title>
+          <Modal.Description>Your order is on its way.</Modal.Description>
+          <Modal.Close>Close</Modal.Close>
+        </Modal.Popup>
+      </Modal.Root>,
     );
     expect(await axe(document.body, axeOptions)).toHaveNoViolations();
   });

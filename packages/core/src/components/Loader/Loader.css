@@ -1,9 +1,9 @@
-@layer farmui.components {
-  .fui-Loader-root {
+@scope (.fui-Loader-root) {
+  :scope {
     --_size: 1.5rem;
     --_color: var(--fui-primary);
 
-    display: inline-flex;
+    display: inline flex;
     align-items: center;
     justify-content: center;
     inline-size: var(--_size);
@@ -29,84 +29,99 @@
     inline-size: 100%;
     block-size: 100%;
     border: max(2px, calc(var(--_size) * 0.12)) solid
-      color-mix(in oklch, currentColor 25%, transparent);
-    border-block-start-color: currentColor;
+      color-mix(in oklch, currentcolor 25%, transparent);
+    border-block-start-color: currentcolor;
     border-radius: var(--fui-radius-full);
     animation: fui-Loader-loader-spin 0.65s linear infinite;
   }
-  @keyframes fui-Loader-loader-spin {
-    to {
-      transform: rotate(1turn);
-    }
-  }
+}
 
-  /* Dots — three pulsing dots */
+@keyframes fui-Loader-loader-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+/* Dots — three pulsing dots */
+@scope (.fui-Loader-root) {
   .fui-Loader-dots {
-    display: inline-flex;
+    display: inline flex;
     align-items: center;
     gap: calc(var(--_size) * 0.18);
     inline-size: 100%;
     block-size: 100%;
     justify-content: center;
   }
+
   .fui-Loader-dot {
     inline-size: calc(var(--_size) * 0.26);
     block-size: calc(var(--_size) * 0.26);
     border-radius: var(--fui-radius-full);
-    background: currentColor;
+    background: currentcolor;
     animation: fui-Loader-loader-dot 1.2s ease-in-out infinite;
   }
+
   .fui-Loader-dot:nth-child(2) {
     animation-delay: 0.15s;
   }
+
   .fui-Loader-dot:nth-child(3) {
     animation-delay: 0.3s;
   }
-  @keyframes fui-Loader-loader-dot {
-    0%,
-    80%,
-    100% {
-      opacity: 0.3;
-      transform: scale(0.75);
-    }
-    40% {
-      opacity: 1;
-      transform: scale(1);
-    }
+}
+
+@keyframes fui-Loader-loader-dot {
+  0%,
+  80%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.75);
   }
 
-  /* Bars — three scaling bars */
+  40% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Bars — three scaling bars */
+@scope (.fui-Loader-root) {
   .fui-Loader-bars {
-    display: inline-flex;
+    display: inline flex;
     align-items: center;
     gap: calc(var(--_size) * 0.16);
     inline-size: 100%;
     block-size: 100%;
     justify-content: center;
   }
+
   .fui-Loader-bar {
     inline-size: calc(var(--_size) * 0.18);
     block-size: 100%;
     border-radius: var(--fui-radius-sm);
-    background: currentColor;
+    background: currentcolor;
     transform-origin: center;
     animation: fui-Loader-loader-bar 1s ease-in-out infinite;
   }
+
   .fui-Loader-bar:nth-child(2) {
     animation-delay: 0.15s;
   }
+
   .fui-Loader-bar:nth-child(3) {
     animation-delay: 0.3s;
   }
-  @keyframes fui-Loader-loader-bar {
-    0%,
-    100% {
-      transform: scaleY(0.4);
-      opacity: 0.5;
-    }
-    50% {
-      transform: scaleY(1);
-      opacity: 1;
-    }
+}
+
+@keyframes fui-Loader-loader-bar {
+  0%,
+  100% {
+    transform: scaleY(0.4);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
   }
 }

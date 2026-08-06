@@ -1,4 +1,8 @@
-import { Breadcrumbs } from "@farmui/core";
+import {
+  BreadcrumbsBasicDemo,
+  BreadcrumbsRenderDemo,
+  BreadcrumbsSeparatorDemo,
+} from "./breadcrumbs.client";
 import type { ComponentDoc } from "@/docs/types";
 
 const doc: ComponentDoc = {
@@ -11,73 +15,64 @@ const doc: ComponentDoc = {
   demos: [
     {
       title: "Basic",
-      description: "The last item is marked as the current page.",
-      code: `<Breadcrumbs>
-  <a href="/">Home</a>
-  <a href="/settings">Settings</a>
-  <span>Billing</span>
-</Breadcrumbs>`,
-      render: () => (
-        <Breadcrumbs>
-          <a href="/">Home</a>
-          <a href="/settings">Settings</a>
-          <span>Billing</span>
-        </Breadcrumbs>
-      ),
+      description:
+        "Items are links via href; mark the current page explicitly with current. Separators are drawn by CSS, not the DOM.",
+      code: `<Breadcrumbs.Root>
+  <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
+  <Breadcrumbs.Item href="/settings">Settings</Breadcrumbs.Item>
+  <Breadcrumbs.Item current>Billing</Breadcrumbs.Item>
+</Breadcrumbs.Root>`,
+      render: () => <BreadcrumbsBasicDemo />,
     },
     {
       title: "Custom separator",
-      description: "Pass any node as the separator between items.",
-      code: `<Breadcrumbs separator="→">
-  <a href="/">Home</a>
-  <a href="/projects">Projects</a>
-  <span>Website Redesign</span>
-</Breadcrumbs>`,
-      render: () => (
-        <Breadcrumbs separator="→">
-          <a href="/">Home</a>
-          <a href="/projects">Projects</a>
-          <span>Website Redesign</span>
-        </Breadcrumbs>
-      ),
+      description: "Set any glyph once on the Root; CSS draws it between items.",
+      code: `<Breadcrumbs.Root separator="→">
+  <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
+  <Breadcrumbs.Item href="/projects">Projects</Breadcrumbs.Item>
+  <Breadcrumbs.Item current>Website Redesign</Breadcrumbs.Item>
+</Breadcrumbs.Root>`,
+      render: () => <BreadcrumbsSeparatorDemo />,
     },
     {
-      title: "Long path",
-      description: "Items wrap onto multiple lines on narrow screens.",
-      code: `<Breadcrumbs>
-  <a href="/">Home</a>
-  <a href="/catalog">Catalog</a>
-  <a href="/catalog/laptops">Laptops</a>
-  <a href="/catalog/laptops/ultrabooks">Ultrabooks</a>
-  <span>Aurora 14 Pro</span>
-</Breadcrumbs>`,
-      render: () => (
-        <Breadcrumbs>
-          <a href="/">Home</a>
-          <a href="/catalog">Catalog</a>
-          <a href="/catalog/laptops">Laptops</a>
-          <a href="/catalog/laptops/ultrabooks">Ultrabooks</a>
-          <span>Aurora 14 Pro</span>
-        </Breadcrumbs>
-      ),
+      title: "With a router link",
+      description:
+        "Substitute the built-in <a> with your framework's link via render — the item's wiring (aria-current) merges onto it.",
+      code: `import Link from "next/link";
+
+<Breadcrumbs.Root>
+  <Breadcrumbs.Item render={<Link href="/" />}>Home</Breadcrumbs.Item>
+  <Breadcrumbs.Item render={<Link href="/settings" />}>Settings</Breadcrumbs.Item>
+  <Breadcrumbs.Item current>Billing</Breadcrumbs.Item>
+</Breadcrumbs.Root>`,
+      render: () => <BreadcrumbsRenderDemo />,
     },
+  ],
+  whenToUse: [
+    "On pages more than two levels deep, so users can step back up the hierarchy.",
+    "When the URL structure reflects a real content hierarchy the user can navigate.",
+  ],
+  whenNotToUse: [
+    "As a substitute for primary navigation, or on shallow sites where every page is one step from home.",
+    "For linear multi-step flows — show progress instead (GOV.UK guidance).",
+  ],
+  accessibility: [
+    "Renders a <nav aria-label=\"Breadcrumbs\"> wrapping an ordered list, so assistive technology announces it as navigation with a known item count.",
+    "The current page is marked aria-current=\"page\" — explicitly by the consumer, so truncated paths stay correct.",
+    "Separators are CSS pseudo-content, invisible to screen readers — no aria-hidden bookkeeping in the DOM.",
   ],
   props: [
     {
-      name: "separator",
-      type: "ReactNode",
-      default: `"/"`,
-      description: "Node inserted between each breadcrumb item.",
+      name: "Root",
+      type: `separator?: string`,
+      description:
+        "The <nav> + list wrapper. separator sets the CSS-drawn glyph between items (default \"/\").",
     },
     {
-      name: "children",
-      type: "ReactNode",
-      description: "The breadcrumb items — links or plain text nodes.",
-    },
-    {
-      name: "...others",
-      type: "HTMLAttributes",
-      description: "All native <nav> props are forwarded.",
+      name: "Item",
+      type: "href?, current?, render?",
+      description:
+        "One crumb: an <a> when href is given, plain text otherwise. current marks the page (aria-current). render substitutes the element — e.g. render={<Link href=…/>}.",
     },
   ],
 };

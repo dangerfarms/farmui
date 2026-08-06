@@ -1,4 +1,4 @@
-import { Button } from "@farmui/core";
+import { Button, Checkbox } from "@farmui/core";
 import { CodeBlock } from "@/docs/CodeBlock";
 import prose from "../prose.module.css";
 
@@ -43,6 +43,7 @@ export default function Theming() {
               "--fui-primary-hover": "oklch(0.55 0.2 275)",
               "--fui-primary-active": "oklch(0.48 0.19 275)",
               "--fui-primary-soft": "oklch(0.95 0.03 275)",
+              "--fui-context": "primary",
               display: "flex",
               gap: "0.75rem",
               flexWrap: "wrap",
@@ -53,8 +54,7 @@ export default function Theming() {
           }
         >
           <Button>Violet primary</Button>
-          <Button variant="light">Light</Button>
-          <Button variant="outline">Outline</Button>
+          <Button>Another button</Button>
         </div>
       </div>
 
@@ -72,6 +72,64 @@ export default function Theming() {
 document.documentElement.dataset.theme = "dark";
 // or "light" — omit to follow the OS preference`}
         />
+      </div>
+
+      <h2>Contexts</h2>
+      <p>
+        A <strong>context</strong> declares what a region <em>means</em>, as a
+        custom property (<code>--fui-context</code>) read by container style
+        queries — and every FarmUI component inside adopts it. No component
+        contains context code; the cascade does the work (see the{" "}
+        <a href="/docs/contextualism">Contextualism guide</a>):
+      </p>
+      <div className={prose.block}>
+        <div
+          style={
+            {
+              "--fui-context": "danger",
+              display: "grid",
+              gap: "0.75rem",
+              padding: "1.25rem",
+              border: "1px solid var(--fui-border)",
+              borderRadius: "var(--fui-radius-lg)",
+              maxInlineSize: "26rem",
+            } as React.CSSProperties
+          }
+        >
+          <strong>Delete workspace</strong>
+          <Checkbox label="I understand this is permanent" defaultChecked />
+          <div style={{ display: "flex", gap: "0.75rem" }}>
+            <Button>Delete</Button>
+            <Button>Cancel</Button>
+          </div>
+        </div>
+      </div>
+      <div className={prose.block}>
+        <CodeBlock
+          language="tsx"
+          code={`<section style={{ "--fui-context": "danger" }}>
+  {/* everything inside adopts the danger accent: buttons, checked
+      states, carets, text selection — even focus rings */}
+  <Checkbox label="I understand this is permanent" />
+  <Button>Delete</Button>
+</section>`}
+        />
+      </div>
+      <p>
+        Contexts remap <em>semantic colour tokens only</em> — never spacing,
+        sizing, or layout. There is no per-component colour prop: a single
+        danger button is just a one-element region
+        (<code>{`<Button style={{ "--fui-context": "danger" }}>Delete</Button>`}</code>),
+        and because the property inherits, the nearest ancestor that sets it
+        wins. An inverted &ldquo;on-dark&rdquo; section needs no context at
+        all — set <code>color-scheme: dark</code> on the region and every{" "}
+        <code>light-dark()</code> token flips.
+      </p>
+      <div className={prose.callout}>
+        Theme, context, and instance are one mechanism at three scopes: remap
+        tokens on <code>:root</code> to theme a tenant, declare a context on a
+        region to give it meaning, set a property on an instance to override
+        one control.
       </div>
 
       <h2>Token reference</h2>
@@ -93,7 +151,38 @@ document.documentElement.dataset.theme = "dark";
         <li>
           <code>--fui-font-sans</code> — the UI font family
         </li>
+        <li>
+          <code>--fui-duration-sm/md/lg</code>, <code>--fui-ease</code> —
+          motion, by intent: micro feedback, defaults, overlay enter/exit
+        </li>
       </ul>
+
+      <h2>Fluid type &amp; spacing</h2>
+      <p>
+        The type (<code>--fui-text-xs</code>…<code>3xl</code>) and spacing (
+        <code>--fui-space-xs</code>…<code>xl</code>) scales are fluid{" "}
+        <code>clamp()</code> values in container units (<code>cqi</code>),
+        generated with{" "}
+        <a href="https://utopia.fyi">Utopia</a> — the calculator parameters are
+        committed as comments in <code>tokens.css</code>. Without a container
+        they respond to the viewport; declare one on any region to make its
+        FarmUI typography respond to <em>that region&rsquo;s</em> width
+        instead:
+      </p>
+      <div className={prose.block}>
+        <CodeBlock
+          language="css"
+          code={`.sidebar {
+  container-type: inline-size; /* FarmUI text in here now scales to the sidebar */
+}`}
+        />
+      </div>
+      <p>
+        Blocks declare their roots as containers already. Corner radii and
+        control heights are deliberately <em>not</em> fluid — rounding
+        shouldn&rsquo;t breathe, and shared control heights are the alignment
+        contract between inputs and buttons.
+      </p>
 
       <div className={prose.callout}>
         Because tokens cascade, you can even theme per-tenant or per-section by

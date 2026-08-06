@@ -4,28 +4,51 @@ import { Button, Input, Popover } from "@farmui/core";
 
 export function PopoverDemo() {
   return (
-    <Popover trigger={<Button>Toggle</Button>}>
-      <p style={{ margin: 0 }}>
-        This panel is anchored to the button and closes when you click outside
-        or press Escape.
-      </p>
-    </Popover>
+    <Popover.Root>
+      <Popover.Trigger>Toggle</Popover.Trigger>
+      <Popover.Popup>
+        <Popover.Title>Anchored panel</Popover.Title>
+        <Popover.Description>
+          Rendered in the browser&apos;s top layer — click outside or press
+          Escape to close.
+        </Popover.Description>
+      </Popover.Popup>
+    </Popover.Root>
+  );
+}
+
+export function PopoverLinkTriggerDemo() {
+  return (
+    <Popover.Root>
+      <Popover.Trigger render={<a href="#popover" />}>
+        A link as the trigger
+      </Popover.Trigger>
+      <Popover.Popup>
+        <Popover.Description>
+          The Trigger&apos;s wiring merged onto the anchor — it opens the
+          popover, and its own href still works for open-in-new-tab.
+        </Popover.Description>
+      </Popover.Popup>
+    </Popover.Root>
   );
 }
 
 export function PopoverFormDemo() {
   return (
-    <Popover trigger={<Button variant="light">Add product</Button>} width={260}>
-      <form
-        style={{ display: "grid", gap: "0.75rem" }}
-        onSubmit={(e) => e.preventDefault()}
-      >
-        <Input label="Name" placeholder="Wireless headphones" size="sm" />
-        <Input label="Price" placeholder="49.00" size="sm" />
-        <Button type="submit" size="sm" fullWidth>
-          Save
-        </Button>
-      </form>
-    </Popover>
+    <Popover.Root>
+      <Popover.Trigger>Add product</Popover.Trigger>
+      <Popover.Popup>
+        <form
+          style={{ display: "grid", gap: "0.75rem" }}
+          onSubmit={(e) => e.preventDefault()}
+        >
+          <Input label="Name" placeholder="Wireless headphones" />
+          <Input label="Price" placeholder="49.00" />
+          <Button type="submit">
+            Save
+          </Button>
+        </form>
+      </Popover.Popup>
+    </Popover.Root>
   );
 }

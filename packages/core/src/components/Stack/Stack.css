@@ -1,6 +1,6 @@
-@layer farmui.components {
-  .fui-Stack-root {
-    display: flex;
+@scope (.fui-Stack-root) {
+  :scope {
+    display: block flex;
     flex-direction: column;
     gap: var(--_gap, var(--fui-space-md));
     align-items: var(--_align, stretch);

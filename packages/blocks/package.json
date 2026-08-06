@@ -50,6 +50,8 @@
     "build": "tsup && node scripts/build-css.mjs",
     "dev": "tsup --watch",
     "check-types": "tsc --noEmit",
+    "lint": "oxlint --config ../../.oxlintrc.json src && stylelint \"src/**/*.css\"",
+    "lint:fix": "oxlint --config ../../.oxlintrc.json --fix src && stylelint \"src/**/*.css\" --fix",
     "test": "vitest run",
     "clean": "rm -rf dist"
   },

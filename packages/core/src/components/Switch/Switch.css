@@ -1,31 +1,41 @@
-@layer farmui.components {
-  .fui-Switch-wrapper {
-    --_track-w: 2.5rem;
-    --_track-h: 1.375rem;
-    --_gap: 0.1875rem;
-
-    display: inline-flex;
+@scope (.fui-Switch-wrapper) {
+  :scope {
+    display: inline flex;
     align-items: center;
     gap: var(--fui-space-sm);
-    font-family: var(--fui-font);
-    color: var(--fui-text);
     cursor: pointer;
   }
-  .fui-Switch-wrapper[data-size="sm"] {
-    --_track-w: 2rem;
-    --_track-h: 1.125rem;
-    --_gap: 0.15rem;
-  }
-  .fui-Switch-wrapper[data-size="lg"] {
-    --_track-w: 3rem;
-    --_track-h: 1.625rem;
-    --_gap: 0.21875rem;
-  }
-  .fui-Switch-wrapper[data-label-position="start"] {
+
+  :scope[data-label-position="start"] {
     flex-direction: row-reverse;
   }
-  .fui-Switch-wrapper[data-disabled] {
-    cursor: not-allowed;
+
+  /* Inside the labelled wrapper the wrapper does the disabled fade (the bare
+     control's :not guard, in the control scope, stops the two compounding). */
+  :scope[data-disabled] {
+    opacity: 0.6;
+  }
+}
+
+/* Size variables live on the control so the bare SwitchControl (composed
+   inside a Field) sizes itself without the labelled wrapper. */
+@scope (.fui-Switch-control) {
+  :scope {
+    /* Em-based track on the fluid label size (× 0.9rem at the clamp max =
+       the old 2.5 × 1.375rem md track). Thumb and travel stay derived. */
+    --_track-w: 2.7778em;
+    --_track-h: 1.5278em;
+    --_gap: 0.2083em;
+
+    font-size: var(--fui-text-sm);
+    display: inline flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  /* Bare control fades itself; inside the labelled wrapper the wrapper does
+     (the :not guard stops the two from compounding). */
+  :scope[data-disabled]:where(:not(.fui-Switch-wrapper *)) {
     opacity: 0.6;
   }
 
@@ -51,21 +61,23 @@
     border-radius: var(--fui-radius-full);
     background: var(--fui-border-strong);
     transition:
-      background var(--fui-transition),
-      box-shadow var(--fui-transition);
+      background var(--fui-duration-md) var(--fui-ease),
+      box-shadow var(--fui-duration-md) var(--fui-ease);
   }
 
   .fui-Switch-thumb {
-    display: block;
+    display: block flow;
     inline-size: calc(var(--_track-h) - 2 * var(--_gap));
     block-size: calc(var(--_track-h) - 2 * var(--_gap));
     border-radius: var(--fui-radius-full);
     background: var(--fui-primary-contrast);
     box-shadow: var(--fui-shadow-sm);
-    transition: translate var(--fui-transition);
+    transition: translate var(--fui-duration-md) var(--fui-ease);
   }
 
-  .fui-Switch-wrapper:hover
+  /* The wrapper ancestor sits outside the scope root; the subject (the
+     track) stays in scope. */
+  :is(.fui-Switch-wrapper, :scope):hover
     .fui-Switch-input:not(:disabled)
     + .fui-Switch-track {
     background: color-mix(
@@ -74,23 +86,32 @@
       var(--fui-primary)
     );
   }
+
   .fui-Switch-input:checked + .fui-Switch-track {
     background: var(--fui-primary);
   }
+
   .fui-Switch-input:checked + .fui-Switch-track .fui-Switch-thumb {
     translate: calc(var(--_track-w) - var(--_track-h)) 0;
   }
-  .fui-Switch-input:focus-visible + .fui-Switch-track {
+
+  /* The ring belongs on the track; the 1px hidden input would otherwise
+     paint the elements-layer outline as a stray dot. */
+  .fui-Switch-input:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px var(--fui-primary-ring);
   }
 
+  .fui-Switch-input:focus-visible + .fui-Switch-track {
+    box-shadow: 0 0 0 2px var(--fui-bg);
+    outline: var(--fui-ring-width) solid var(--fui-ring-color);
+    outline-offset: 2px;
+  }
+}
+
+@scope (.fui-Switch-wrapper) {
   .fui-Switch-label {
     font-size: var(--fui-text-sm);
     font-weight: 500;
     line-height: 1.35;
-  }
-  .fui-Switch-wrapper[data-size="lg"] .fui-Switch-label {
-    font-size: var(--fui-text-md);
   }
 }

@@ -61,7 +61,7 @@
 .col a {
   font-size: var(--fui-text-sm);
   color: var(--fui-text-muted);
-  transition: color var(--fui-transition);
+  transition: color var(--fui-duration-md) var(--fui-ease);
 }
 .col a:hover {
   color: var(--fui-primary);

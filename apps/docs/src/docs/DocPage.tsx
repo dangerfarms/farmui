@@ -58,6 +58,58 @@ export function DocPage({ doc }: { doc: ComponentDoc }) {
         <CodeBlock code={doc.importLine} />
       </section>
 
+      {(doc.whenToUse || doc.whenNotToUse || doc.accessibility) && (
+        <section className={classes.section}>
+          <h2 id="guidance" className={classes.h2}>
+            Guidance
+          </h2>
+          <div className={classes.guidance}>
+            {(doc.whenToUse || doc.whenNotToUse) && (
+              <div className={`${classes.guidance} ${classes.guidanceCols}`}>
+                {doc.whenToUse && (
+                  <div className={classes.guidanceCard}>
+                    <p
+                      className={`${classes.guidanceHeading} ${classes.guidanceYes}`}
+                    >
+                      When to use it
+                    </p>
+                    <ul className={classes.guidanceList}>
+                      {doc.whenToUse.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {doc.whenNotToUse && (
+                  <div className={classes.guidanceCard}>
+                    <p
+                      className={`${classes.guidanceHeading} ${classes.guidanceNo}`}
+                    >
+                      When not to
+                    </p>
+                    <ul className={classes.guidanceList}>
+                      {doc.whenNotToUse.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            )}
+            {doc.accessibility && (
+              <div className={classes.guidanceCard}>
+                <p className={classes.guidanceHeading}>Accessibility</p>
+                <ul className={classes.a11yList}>
+                  {doc.accessibility.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
       <section className={classes.section}>
         <h2 id="usage" className={classes.h2}>
           Usage

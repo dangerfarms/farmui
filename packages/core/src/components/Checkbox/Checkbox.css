@@ -1,38 +1,41 @@
-@layer farmui.components {
-  .fui-Checkbox-wrapper {
-    display: flex;
+/* The labelled form: wrapper, inline label row, description and error. The
+   bare control (box + input) has no wrapper, so it gets its own scope below. */
+@scope (.fui-Checkbox-wrapper) {
+  :scope {
+    display: block flex;
     flex-direction: column;
     gap: var(--fui-space-xs);
-    font-family: var(--fui-font);
-    --_box: 1.25rem;
   }
-  .fui-Checkbox-wrapper[data-size="sm"] {
-    --_box: 1rem;
-  }
-  .fui-Checkbox-wrapper[data-size="lg"] {
-    --_box: 1.5rem;
-  }
-  .fui-Checkbox-wrapper[data-disabled] {
+
+  :scope[data-disabled] {
     opacity: 0.7;
   }
 
   .fui-Checkbox-control {
-    display: flex;
+    display: block flex;
     align-items: flex-start;
     gap: var(--fui-space-sm);
     cursor: pointer;
   }
-  .fui-Checkbox-wrapper[data-disabled] .fui-Checkbox-control {
-    cursor: not-allowed;
-  }
+}
 
-  .fui-Checkbox-box {
+/* The bare control — rendered with or without the labelled wrapper, so the
+   box is the scope root for everything inside it. */
+@scope (.fui-Checkbox-box) {
+  :scope {
+    /* Glyph geometry is em-based on the fluid label size, so the box rides
+       the same container-relative scale as the text beside it (1.3889em ×
+       text-sm's 0.9rem max = the old 1.25rem md box). */
+    --_box: 1.3889em;
+
     position: relative;
-    display: inline-grid;
-    place-items: center;
+    display: inline grid;
     flex-shrink: 0;
+    place-items: center;
+    font-size: var(--fui-text-sm);
     inline-size: var(--_box);
     block-size: var(--_box);
+
     /* Nudge to optically align with the first line of label text. */
     margin-block-start: 0.1em;
     border: 1px solid var(--fui-border-strong);
@@ -40,44 +43,54 @@
     background: var(--fui-surface);
     color: var(--fui-primary-contrast);
     transition:
-      background var(--fui-transition),
-      border-color var(--fui-transition),
-      box-shadow var(--fui-transition);
+      background var(--fui-duration-md) var(--fui-ease),
+      border-color var(--fui-duration-md) var(--fui-ease),
+      box-shadow var(--fui-duration-md) var(--fui-ease);
   }
 
-  /* Visually hide the native control but keep it in the a11y tree & focusable. */
+  /* Visually hide the native control but keep it in the a11y tree &
+     focusable. The hit area is at least 24px (WCAG 2.5.8) even when the
+     visible box is smaller — centred, invisible, no layout impact. */
   .fui-Checkbox-input {
     position: absolute;
-    inset: 0;
-    inline-size: 100%;
-    block-size: 100%;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    translate: -50% -50%;
+    inline-size: max(100%, 24px);
+    block-size: max(100%, 24px);
     margin: 0;
     opacity: 0;
     cursor: inherit;
   }
 
-  .fui-Checkbox-box:has(.fui-Checkbox-input:checked),
-  .fui-Checkbox-box:has(.fui-Checkbox-input:indeterminate) {
+  :scope:has(.fui-Checkbox-input:checked),
+  :scope:has(.fui-Checkbox-input:indeterminate) {
     background: var(--fui-primary);
     border-color: var(--fui-primary);
   }
-  .fui-Checkbox-box:has(.fui-Checkbox-input:focus-visible) {
+
+  :scope:has(.fui-Checkbox-input:focus-visible) {
     border-color: var(--fui-primary);
-    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+    box-shadow: 0 0 0 2px var(--fui-bg);
+    outline: var(--fui-ring-width) solid var(--fui-ring-color);
+    outline-offset: 2px;
   }
-  .fui-Checkbox-box[data-invalid] {
+
+  /* Error state is detected from the input's own state: ARIA or native
+     constraint validation (:user-invalid). */
+  :scope:has(.fui-Checkbox-input[aria-invalid="true"]),
+  :scope:has(.fui-Checkbox-input:user-invalid) {
+    --fui-ring-color: var(--fui-danger-ring);
+
     border-color: var(--fui-danger);
   }
-  .fui-Checkbox-box[data-invalid]:has(.fui-Checkbox-input:focus-visible) {
-    box-shadow: 0 0 0 3px
-      color-mix(in oklch, var(--fui-danger) 40%, transparent);
-  }
-  .fui-Checkbox-box:has(.fui-Checkbox-input:disabled) {
+
+  :scope:has(.fui-Checkbox-input:disabled) {
     background: var(--fui-bg-subtle);
-    cursor: not-allowed;
   }
-  .fui-Checkbox-box:has(.fui-Checkbox-input:checked:disabled),
-  .fui-Checkbox-box:has(.fui-Checkbox-input:indeterminate:disabled) {
+
+  :scope:has(.fui-Checkbox-input:checked:disabled),
+  :scope:has(.fui-Checkbox-input:indeterminate:disabled) {
     background: color-mix(
       in oklch,
       var(--fui-primary) 55%,
@@ -91,40 +104,45 @@
     block-size: 80%;
     pointer-events: none;
   }
+
   .fui-Checkbox-tick,
   .fui-Checkbox-dash {
     opacity: 0;
-    transition: opacity var(--fui-transition);
+    transition: opacity var(--fui-duration-md) var(--fui-ease);
   }
-  .fui-Checkbox-box:has(.fui-Checkbox-input:checked:not(:indeterminate))
+
+  :scope:has(.fui-Checkbox-input:checked:not(:indeterminate))
     .fui-Checkbox-tick {
     opacity: 1;
   }
-  .fui-Checkbox-box:has(.fui-Checkbox-input:indeterminate) .fui-Checkbox-dash {
+
+  :scope:has(.fui-Checkbox-input:indeterminate) .fui-Checkbox-dash {
     opacity: 1;
   }
-  .fui-Checkbox-box:has(.fui-Checkbox-input:indeterminate) .fui-Checkbox-tick {
+
+  :scope:has(.fui-Checkbox-input:indeterminate) .fui-Checkbox-tick {
     opacity: 0;
   }
+}
 
+@scope (.fui-Checkbox-wrapper) {
   .fui-Checkbox-body {
-    display: flex;
+    display: block flex;
     flex-direction: column;
     gap: 0.1rem;
   }
+
   .fui-Checkbox-label {
     font-size: var(--fui-text-sm);
     font-weight: 550;
-    color: var(--fui-text);
     line-height: 1.4;
   }
-  .fui-Checkbox-wrapper[data-size="lg"] .fui-Checkbox-label {
-    font-size: var(--fui-text-md);
-  }
+
   .fui-Checkbox-required {
     color: var(--fui-danger);
     margin-inline-start: 0.15em;
   }
+
   .fui-Checkbox-description {
     font-size: var(--fui-text-xs);
     color: var(--fui-text-muted);

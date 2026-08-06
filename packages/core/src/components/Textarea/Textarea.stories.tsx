@@ -8,14 +8,12 @@ const meta = {
   args: {
     label: "Message",
     placeholder: "Write your message…",
-    size: "md",
     radius: "md",
     rows: 3,
     disabled: false,
     withAsterisk: false,
   },
   argTypes: {
-    size: { control: "inline-radio", options: ["sm", "md", "lg"] },
     radius: {
       control: "select",
       options: ["sm", "md", "lg", "xl", "full"],
@@ -29,16 +27,6 @@ type Story = StoryObj<typeof meta>;
 
 /** Live playground — tweak props in the Controls panel. */
 export const Playground: Story = {};
-
-export const Sizes: Story = {
-  render: (args) => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-      <Textarea {...args} size="sm" label="Small" />
-      <Textarea {...args} size="md" label="Medium" />
-      <Textarea {...args} size="lg" label="Large" />
-    </div>
-  ),
-};
 
 export const WithDescription: Story = {
   args: {

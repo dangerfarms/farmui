@@ -19,7 +19,7 @@ const doc: ComponentDoc = {
   description="Join 4,000+ farms already using FarmUI to plan, plant, and harvest with confidence."
   actions={[
     { label: "Start free trial", href: "/signup" },
-    { label: "Book a demo", href: "/demo", variant: "outline" },
+    { label: "Book a demo", href: "/demo" },
   ]}
 />`,
       render: () => (
@@ -28,7 +28,7 @@ const doc: ComponentDoc = {
           description="Join 4,000+ farms already using FarmUI to plan, plant, and harvest with confidence."
           actions={[
             { label: "Start free trial", href: "/signup" },
-            { label: "Book a demo", href: "/demo", variant: "outline" },
+            { label: "Book a demo", href: "/demo" },
           ]}
         />
       ),
@@ -58,7 +58,7 @@ const doc: ComponentDoc = {
       name: "actions",
       type: "BlockAction[]",
       description:
-        'Call-to-action buttons, rendered at size lg. BlockAction = { label, href?, variant? } where variant is "filled" | "light" | "outline" | "subtle".',
+        "Call-to-action buttons. BlockAction = { label, href? }. The action row is a primary context, so the buttons take the brand colour.",
     },
     {
       name: "description",

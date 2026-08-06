@@ -32,8 +32,8 @@
   border-radius: var(--fui-radius-sm);
   border-inline-start: 2px solid transparent;
   transition:
-    color var(--fui-transition),
-    background var(--fui-transition);
+    color var(--fui-duration-md) var(--fui-ease),
+    background var(--fui-duration-md) var(--fui-ease);
 }
 .link:hover {
   color: var(--fui-text);

@@ -33,8 +33,8 @@
   border-radius: var(--fui-radius-sm);
   cursor: pointer;
   transition:
-    color var(--fui-transition),
-    border-color var(--fui-transition);
+    color var(--fui-duration-md) var(--fui-ease),
+    border-color var(--fui-duration-md) var(--fui-ease);
 }
 .copy:hover {
   color: var(--fui-text);

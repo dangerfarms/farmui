@@ -1,5 +1,6 @@
-@import "@farmui/core/styles.css";
-@import "@farmui/blocks/styles.css";
+/* FarmUI's stylesheets are linked as static files in layout.tsx (see
+   scripts/sync-css.mjs) — they're finished build artifacts using
+   ahead-of-toolchain CSS the app bundler can't parse yet. */
 
 @layer site.reset, site.base, site.util;
 
@@ -45,6 +46,13 @@
 }
 
 @layer site.base {
+  /* FarmUI's fluid tokens use cqi — declaring the page main as a container
+     makes the docs' own typography container-relative, demonstrating the
+     opt-in documented in the theming guide. */
+  main {
+    container-type: inline-size;
+  }
+
   :root {
     /* FarmUI ships a clean system stack by default; the site pins a nicer one. */
     --fui-font-sans: "Inter var", "Inter";

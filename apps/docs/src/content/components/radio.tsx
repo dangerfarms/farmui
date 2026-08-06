@@ -105,19 +105,21 @@ const doc: ComponentDoc = {
         </RadioGroup>
       ),
     },
-    {
-      title: "Sizes",
-      code: `<Radio size="sm" label="Small" name="sizes" defaultChecked />
-<Radio size="md" label="Medium" name="sizes" />
-<Radio size="lg" label="Large" name="sizes" />`,
-      render: () => (
-        <div style={{ display: "grid", gap: "0.75rem" }}>
-          <Radio size="sm" label="Small" name="radio-sizes" defaultChecked />
-          <Radio size="md" label="Medium" name="radio-sizes" />
-          <Radio size="lg" label="Large" name="radio-sizes" />
-        </div>
-      ),
-    },
+  ],
+  whenToUse: [
+    "For choosing exactly one option from a small, visible set (roughly 2–5).",
+    "Always inside a RadioGroup, which shares a name and labels the set with a <fieldset>/<legend>.",
+  ],
+  whenNotToUse: [
+    "For many options — a Select is more compact.",
+    "For selecting several options — use Checkbox.",
+    "For a single on/off — use Checkbox or Switch.",
+  ],
+  accessibility: [
+    "RadioGroup renders a native <fieldset> with a <legend>, the accessible way to name a group — screen readers announce the legend when a radio is focused.",
+    "Radios share one name so the browser enforces single-selection and arrow-key navigation natively.",
+    "A group error sets aria-describedby and aria-invalid on the fieldset and reflects on the radios' invalid state.",
+    "GOV.UK: don't pre-select a radio unless there's a safe, sensible default — an empty group makes the user choose deliberately.",
   ],
   props: [
     {
@@ -129,12 +131,6 @@ const doc: ComponentDoc = {
       name: "description",
       type: "ReactNode",
       description: "Radio: helper text rendered under the label.",
-    },
-    {
-      name: "size",
-      type: `"sm" | "md" | "lg"`,
-      default: `"md"`,
-      description: "Radio / RadioGroup: control size.",
     },
     {
       name: "RadioGroup.label",

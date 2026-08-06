@@ -1,5 +1,6 @@
-// Concatenate the layer-order header with every block's CSS (and shared
-// internal CSS) into one importable dist/styles.css.
+// Build dist/styles.css: the layer-order header, then every block's CSS
+// (and shared internal CSS) wrapped into `farmui.blocks` here — block source
+// files contain no `@layer`.
 // Import AFTER "@farmui/core/styles.css".
 import { readFileSync, writeFileSync, readdirSync, mkdirSync } from "node:fs";
 import { join, dirname } from "node:path";
@@ -27,7 +28,13 @@ let out = header + readFileSync(join(src, "styles.css"), "utf8").trim() + "\n";
 const cssFiles = collect(src);
 for (const file of cssFiles) {
   const css = readFileSync(file, "utf8").trim();
-  if (css) out += `\n/* ${file.slice(src.length + 1)} */\n${css}\n`;
+  if (!css) continue;
+  if (css.includes("@layer")) {
+    throw new Error(
+      `${file} declares @layer — block CSS files must not; the layer is assigned at build time.`,
+    );
+  }
+  out += `\n/* ${file.slice(src.length + 1)} */\n@layer farmui.blocks {\n${css}\n}\n`;
 }
 
 mkdirSync(join(pkgRoot, "dist"), { recursive: true });

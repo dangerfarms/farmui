@@ -1,10 +1,11 @@
-@layer farmui.components {
-  .fui-Center-root {
-    display: flex;
+@scope (.fui-Center-root) {
+  :scope {
+    display: block flex;
     align-items: center;
     justify-content: center;
   }
-  .fui-Center-root[data-inline] {
-    display: inline-flex;
+
+  :scope[data-inline] {
+    display: inline flex;
   }
 }

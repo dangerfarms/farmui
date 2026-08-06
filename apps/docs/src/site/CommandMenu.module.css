@@ -10,7 +10,7 @@
   border-radius: var(--fui-radius-md);
   cursor: pointer;
   font-size: var(--fui-text-sm);
-  transition: border-color var(--fui-transition);
+  transition: border-color var(--fui-duration-md) var(--fui-ease);
 }
 .trigger:hover {
   border-color: var(--fui-border-strong);

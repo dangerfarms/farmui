@@ -16,12 +16,10 @@ const meta = {
     description: "Choose the primary crop for this field.",
     data,
     defaultValue: "wheat",
-    size: "md",
     orientation: "vertical",
     withAsterisk: false,
   },
   argTypes: {
-    size: { control: "inline-radio", options: ["sm", "md", "lg"] },
     orientation: {
       control: "inline-radio",
       options: ["vertical", "horizontal"],
@@ -46,16 +44,6 @@ export const WithError: Story = {
     withAsterisk: true,
     defaultValue: undefined,
   },
-};
-
-export const Sizes: Story = {
-  render: (args) => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-      <RadioGroup {...args} label="Small" size="sm" />
-      <RadioGroup {...args} label="Medium" size="md" />
-      <RadioGroup {...args} label="Large" size="lg" />
-    </div>
-  ),
 };
 
 /** Compose the group from `<Radio>` children instead of a `data` array. */

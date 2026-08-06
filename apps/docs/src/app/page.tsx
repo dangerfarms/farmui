@@ -86,7 +86,7 @@ const SHOUTS = [
 
 const FARMUI_CODE = `import { Button } from "@farmui/core";
 
-<Button variant="light">Save changes</Button>;`;
+<Button>Save changes</Button>;`;
 
 const TAILWIND_CODE = `// shadcn/ui + Tailwind — utilities inlined on every element
 <button
@@ -249,7 +249,7 @@ export default function HomePage() {
           <div className={c.compareCol} data-good>
             <div className={c.compareHead}>
               <span className={c.compareTag}>FarmUI</span>
-              <Button variant="light">Save changes</Button>
+              <Button>Save changes</Button>
             </div>
             <CodeBlock code={FARMUI_CODE} />
             <p className={c.compareNote}>

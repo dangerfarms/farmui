@@ -1,33 +1,37 @@
-@layer farmui.components {
-  .fui-Table-scroll {
+@scope (.fui-Table-scroll) {
+  :scope {
     inline-size: 100%;
-    overflow-x: auto;
+    overflow-inline: auto;
     border-radius: var(--fui-radius-md);
   }
+}
 
-  .fui-Table-root {
+@scope (.fui-Table-root) {
+  :scope {
     inline-size: 100%;
     border-collapse: collapse;
-    font-family: var(--fui-font);
     font-size: var(--fui-text-sm);
-    color: var(--fui-text);
+
+    &[data-caption-side="top"] {
+      /* caption-side has no logical equivalent; physical values are correct. */
+      /* stylelint-disable-next-line value-keyword-layout-mappings */
+      caption-side: top;
+    }
+
+    &[data-caption-side="bottom"] {
+      /* stylelint-disable-next-line value-keyword-layout-mappings */
+      caption-side: bottom;
+    }
   }
 
-  .fui-Table-root[data-caption-side="top"] {
-    caption-side: top;
-  }
-  .fui-Table-root[data-caption-side="bottom"] {
-    caption-side: bottom;
-  }
-
-  .fui-Table-root caption {
+  :scope caption {
     padding-block: var(--fui-space-sm);
     color: var(--fui-text-muted);
     font-size: var(--fui-text-xs);
     text-align: start;
   }
 
-  .fui-Table-root :where(th, td) {
+  :scope :where(th, td) {
     padding-block: var(--fui-space-md);
     padding-inline: var(--fui-space-lg);
     text-align: start;
@@ -35,7 +39,7 @@
     border-block-end: 1px solid var(--fui-border);
   }
 
-  .fui-Table-root :where(thead th) {
+  :scope :where(thead th) {
     color: var(--fui-text-muted);
     font-weight: 600;
     font-size: var(--fui-text-xs);
@@ -45,25 +49,26 @@
     white-space: nowrap;
   }
 
-  .fui-Table-root :where(tbody tr:last-child) :where(td) {
+  :scope :where(tbody tr:last-child) :where(td) {
     border-block-end: none;
   }
 
   /* Column borders */
-  .fui-Table-root[data-col-borders] :where(th, td):not(:last-child) {
+  :scope[data-col-borders] :where(th, td):not(:last-child) {
     border-inline-end: 1px solid var(--fui-border);
   }
 
   /* Striped body rows */
-  .fui-Table-root[data-striped] :where(tbody tr:nth-child(even)) {
+  :scope[data-striped] :where(tbody tr:nth-child(even)) {
     background: var(--fui-bg-subtle);
   }
 
   /* Highlight on hover */
-  .fui-Table-root[data-hover] :where(tbody tr) {
-    transition: background var(--fui-transition);
+  :scope[data-hover] :where(tbody tr) {
+    transition: background var(--fui-duration-md) var(--fui-ease);
   }
-  .fui-Table-root[data-hover] :where(tbody tr:hover) {
+
+  :scope[data-hover] :where(tbody tr:hover) {
     background: var(--fui-surface-hover);
   }
 }

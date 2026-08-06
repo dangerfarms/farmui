@@ -29,6 +29,12 @@ export interface ComponentDoc {
   importLine: string;
   demos: Demo[];
   props: PropRow[];
+  /** When this component is the right choice. */
+  whenToUse?: string[];
+  /** When to reach for something else instead. */
+  whenNotToUse?: string[];
+  /** Accessibility notes and the reasoning behind them. */
+  accessibility?: string[];
   /** Which package the component ships in (used by the CSS tab). @default "core" */
   pkg?: "core" | "blocks";
 }

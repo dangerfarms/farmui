@@ -16,13 +16,11 @@ const meta = {
     label: "Framework",
     placeholder: "Pick one",
     data: FRAMEWORKS,
-    size: "md",
     radius: "md",
     disabled: false,
     withAsterisk: false,
   },
   argTypes: {
-    size: { control: "inline-radio", options: ["sm", "md", "lg"] },
     radius: {
       control: "select",
       options: ["sm", "md", "lg", "xl", "full"],
@@ -35,16 +33,6 @@ type Story = StoryObj<typeof meta>;
 
 /** Live playground — tweak props in the Controls panel. */
 export const Playground: Story = {};
-
-export const Sizes: Story = {
-  render: (args) => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-      <Select {...args} size="sm" label="Small" />
-      <Select {...args} size="md" label="Medium" />
-      <Select {...args} size="lg" label="Large" />
-    </div>
-  ),
-};
 
 export const StringData: Story = {
   args: {

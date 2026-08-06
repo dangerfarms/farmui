@@ -1,9 +1,11 @@
 // FarmUI — public API barrel.
 
-export { cx } from "./utils";
-export type { FarmUISize } from "./utils";
+export { cx, resolveRadius } from "./utils";
+export type { FarmUISize, FarmUIRadius } from "./utils";
 
 // Inputs
+export * from "./components/Field/index";
+export * from "./components/Fieldset/index";
 export * from "./components/Button/index";
 export * from "./components/Input/index";
 export * from "./components/Textarea/index";
@@ -18,7 +20,6 @@ export * from "./components/Badge/index";
 export * from "./components/Card/index";
 export * from "./components/Avatar/index";
 export * from "./components/Table/index";
-export * from "./components/Kbd/index";
 
 // Feedback
 export * from "./components/Alert/index";

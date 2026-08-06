@@ -2,6 +2,8 @@ import type { ComponentDoc, Category } from "./types";
 import { CATEGORY_ORDER } from "./types";
 
 // Inputs
+import field from "@/content/components/field";
+import fieldset from "@/content/components/fieldset";
 import button from "@/content/components/button";
 import input from "@/content/components/input";
 import textarea from "@/content/components/textarea";
@@ -16,7 +18,6 @@ import badge from "@/content/components/badge";
 import card from "@/content/components/card";
 import avatar from "@/content/components/avatar";
 import table from "@/content/components/table";
-import kbd from "@/content/components/kbd";
 
 // Feedback
 import alert from "@/content/components/alert";
@@ -60,6 +61,8 @@ import newsletter from "@/content/components/newsletter";
 import footer from "@/content/components/footer";
 
 export const components: ComponentDoc[] = [
+  field,
+  fieldset,
   button,
   input,
   textarea,
@@ -72,7 +75,6 @@ export const components: ComponentDoc[] = [
   card,
   avatar,
   table,
-  kbd,
   alert,
   progress,
   skeleton,

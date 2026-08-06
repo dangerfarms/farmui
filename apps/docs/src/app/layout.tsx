@@ -29,9 +29,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const base = process.env.BASE_PATH || "";
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Served statically (not bundler-parsed) — see scripts/sync-css.mjs */}
+        <link rel="stylesheet" href={`${base}/farmui-core.css`} />
+        <link rel="stylesheet" href={`${base}/farmui-blocks.css`} />
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
       </head>
       <body>

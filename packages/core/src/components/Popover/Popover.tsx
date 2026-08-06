@@ -1,56 +1,299 @@
 "use client";
 
-import { cloneElement, useEffect, useId, useRef, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import type {
+  ButtonHTMLAttributes,
+  CSSProperties,
+  HTMLAttributes,
   MouseEvent as ReactMouseEvent,
-  ReactElement,
-  ReactNode,
+  Ref,
 } from "react";
 import { cx } from "../../utils";
-
-/** Props the Popover injects onto the trigger element. */
-interface TriggerProps {
-  onClick?: (e: ReactMouseEvent) => void;
-  "aria-haspopup"?: "dialog";
-  "aria-expanded"?: boolean;
-  "aria-controls"?: string;
-}
-
-export interface PopoverProps {
-  /** Element that toggles the panel; gets aria-expanded / aria-haspopup wired on. */
-  trigger: ReactElement<TriggerProps>;
-  /** Which side the panel opens toward. @default "bottom" */
-  position?: "bottom" | "top";
-  /** Fixed panel width (any CSS length). Defaults to fit-content. */
-  width?: string | number;
-  /** Extra class for the dropdown panel. */
-  className?: string;
-  /** Panel content. */
-  children: ReactNode;
-}
+import { renderWithProps } from "../../render";
+import type { RenderProp } from "../../render";
+import { Button } from "../Button/Button";
 
 /**
- * Popover — a click-triggered floating panel anchored to its trigger.
+ * Popover — a click-triggered floating panel, composed from parts.
  *
- * Toggles on trigger click, closes on outside click and Escape, and
- * anchors the panel with absolute positioning relative to the wrapper.
+ * The Popup renders with the native `popover` attribute, so the browser
+ * provides the top layer (no z-index, no clipping by ancestor overflow),
+ * light dismiss and Escape. Positioning uses CSS anchor positioning where
+ * supported. In browsers without both features the same parts fall back to
+ * a wrapper-anchored panel with JS dismiss handling — the enhanced and
+ * fallback paths share one React state.
+ *
+ * ```tsx
+ * <Popover.Root>
+ *   <Popover.Trigger>Open settings</Popover.Trigger>
+ *   <Popover.Popup>
+ *     <Popover.Title>Settings</Popover.Title>
+ *     <Popover.Description>Quick preferences.</Popover.Description>
+ *     <Popover.Close>Done</Popover.Close>
+ *   </Popover.Popup>
+ * </Popover.Root>
+ * ```
  */
-export function Popover({
-  trigger,
-  position = "bottom",
-  width,
+
+interface PopoverContextValue {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  /** The Trigger's element, for focus restoration on close. */
+  triggerRef: { current: HTMLButtonElement | null };
+  popupId: string;
+  titleId: string;
+  descriptionId: string;
+  hasTitle: boolean;
+  hasDescription: boolean;
+  registerTitle: () => () => void;
+  registerDescription: () => () => void;
+  /** Unique anchor-name shared by Trigger and Popup via a custom property. */
+  anchorName: string;
+  /** True once the native popover API + CSS anchor positioning are confirmed. */
+  enhanced: boolean;
+}
+
+const PopoverContext = createContext<PopoverContextValue | null>(null);
+
+function usePopoverContext(part: string): PopoverContextValue {
+  const ctx = useContext(PopoverContext);
+  if (!ctx) {
+    throw new Error(`${part} must be rendered inside <Popover.Root>.`);
+  }
+  return ctx;
+}
+
+/*
+ * The popover attribute and anchor positioning are adopted together: a popup
+ * in the top layer ignores its wrapper's positioning context, so promoting it
+ * without anchor positioning would leave it centred in the viewport. Browsers
+ * missing either feature get the wrapper-anchored fallback instead.
+ */
+function detectEnhanced(): boolean {
+  return (
+    typeof HTMLElement !== "undefined" &&
+    "showPopover" in HTMLElement.prototype &&
+    typeof CSS !== "undefined" &&
+    CSS.supports("anchor-name: --fui-probe")
+  );
+}
+
+export interface PopoverRootProps extends HTMLAttributes<HTMLSpanElement> {
+  /** Controlled open state. */
+  open?: boolean;
+  /** Initial open state when uncontrolled. */
+  defaultOpen?: boolean;
+  /** Called whenever the open state should change (either path). */
+  onOpenChange?: (open: boolean) => void;
+}
+
+function PopoverRoot({
+  open: openProp,
+  defaultOpen = false,
+  onOpenChange,
   className,
   children,
-}: PopoverProps) {
-  const [open, setOpen] = useState(false);
-  const rootRef = useRef<HTMLDivElement>(null);
-  const panelId = useId();
+  ...rest
+}: PopoverRootProps) {
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);
+  const open = openProp ?? uncontrolledOpen;
+  const [titleCount, setTitleCount] = useState(0);
+  const [descriptionCount, setDescriptionCount] = useState(0);
+  const [enhanced, setEnhanced] = useState(false);
+  useEffect(() => setEnhanced(detectEnhanced()), []);
 
-  // Outside click + Escape to close.
+  const autoId = useId();
+  const popupId = `${autoId.replace(/[^a-zA-Z0-9-]/g, "")}-popup`;
+  const anchorName = `--fui-anchor-${popupId}`;
+
+  const openRef = useRef(open);
+  openRef.current = open;
+  const controlledRef = useRef(false);
+  controlledRef.current = openProp !== undefined;
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const setOpen = useCallback(
+    (next: boolean) => {
+      if (next === openRef.current) return;
+      // In controlled mode the parent owns the state; we only propose.
+      if (!controlledRef.current) setUncontrolledOpen(next);
+      onOpenChange?.(next);
+    },
+    [onOpenChange],
+  );
+
+  const registerTitle = useCallback(() => {
+    setTitleCount((n) => n + 1);
+    return () => setTitleCount((n) => n - 1);
+  }, []);
+  const registerDescription = useCallback(() => {
+    setDescriptionCount((n) => n + 1);
+    return () => setDescriptionCount((n) => n - 1);
+  }, []);
+
+  const value = useMemo<PopoverContextValue>(
+    () => ({
+      open,
+      setOpen,
+      triggerRef,
+      popupId,
+      titleId: `${popupId}-title`,
+      descriptionId: `${popupId}-description`,
+      hasTitle: titleCount > 0,
+      hasDescription: descriptionCount > 0,
+      registerTitle,
+      registerDescription,
+      anchorName,
+      enhanced,
+    }),
+    [
+      open,
+      setOpen,
+      popupId,
+      titleCount,
+      descriptionCount,
+      registerTitle,
+      registerDescription,
+      anchorName,
+      enhanced,
+    ],
+  );
+
+  return (
+    <PopoverContext.Provider value={value}>
+      <span className={cx("fui-Popover-root", className)} {...rest}>
+        {children}
+      </span>
+    </PopoverContext.Provider>
+  );
+}
+
+/** Wiring the Trigger attaches to whatever it renders. */
+export interface PopoverTriggerRenderProps {
+  ref: Ref<HTMLButtonElement>;
+  type: "button";
+  popoverTarget: string | undefined;
+  "aria-haspopup": "dialog";
+  "aria-expanded": boolean;
+  "aria-controls": string | undefined;
+  /** Styling hook — present while the popup is open. */
+  "data-popup-open": "true" | undefined;
+  style: CSSProperties;
+  onClick: (e: ReactMouseEvent<Element>) => void;
+}
+
+export interface PopoverTriggerProps
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
+  /**
+   * Substitute your own element as the trigger
+   * (`render={<a href="…" />}`) or pass a function receiving the wiring
+   * props. Without it, the Trigger renders a FarmUI Button, which adapts
+   * to its context like any Button (see the Contextualism guide).
+   */
+  render?: RenderProp<PopoverTriggerRenderProps>;
+}
+
+function PopoverTrigger({ render, children, ...rest }: PopoverTriggerProps) {
+  const ctx = usePopoverContext("Popover.Trigger");
+
+  const triggerProps: PopoverTriggerRenderProps = {
+    ref: ctx.triggerRef,
+    type: "button",
+    // popovertarget makes the browser treat this button as the popup's
+    // invoker, so clicking it while open closes rather than light-dismisses
+    // and immediately reopens.
+    popoverTarget: ctx.enhanced ? ctx.popupId : undefined,
+    "aria-haspopup": "dialog",
+    "aria-expanded": ctx.open,
+    "aria-controls": ctx.open ? ctx.popupId : undefined,
+    "data-popup-open": ctx.open ? "true" : undefined,
+    style: { anchorName: ctx.anchorName } as CSSProperties,
+    onClick: () => {
+      // Native invocation handles the toggle when enhanced; the toggle
+      // event syncs it back into state.
+      if (!ctx.enhanced) ctx.setOpen(!ctx.open);
+    },
+  };
+
+  // Both paths share the same merge contract: the built-in form is just a
+  // render whose target defaults to a FarmUI Button.
+  const target = render ?? <Button {...rest}>{children}</Button>;
+  return <>{renderWithProps(target, triggerProps)}</>;
+}
+
+export interface PopoverPopupProps extends HTMLAttributes<HTMLDivElement> {
+  /** Which side of the trigger the panel opens toward. @default "bottom" */
+  position?: "bottom" | "top";
+}
+
+function PopoverPopup({
+  position = "bottom",
+  className,
+  children,
+  style,
+  ...rest
+}: PopoverPopupProps) {
+  const ctx = usePopoverContext("Popover.Popup");
+  const { open, setOpen, enhanced } = ctx;
+  const ref = useRef<HTMLDivElement>(null);
+
+  // Enhanced path: reconcile React state with the native popover state, and
+  // let native closes (light dismiss, Escape) flow back into state.
+  // Deliberately no dependency array: a controlled parent may reject a change
+  // reported by the toggle event, leaving `open` unchanged while the DOM
+  // popover moved — only an every-render reconcile converges that back.
   useEffect(() => {
-    if (!open) return;
+    const el = ref.current;
+    if (!el || !enhanced) return;
+    const nativeOpen = el.matches(":popover-open");
+    if (open && !nativeOpen) el.showPopover();
+    else if (!open && nativeOpen) el.hidePopover();
+  });
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || !enhanced) return;
+    const onToggle = (e: Event) => {
+      setOpen((e as ToggleEvent).newState === "open");
+    };
+    el.addEventListener("toggle", onToggle);
+    return () => el.removeEventListener("toggle", onToggle);
+  }, [enhanced, setOpen]);
+
+  // Dialog focus management: move focus into the panel on open; return it to
+  // the trigger on close when it would otherwise be lost (it was inside the
+  // panel, or the browser already reset it to <body>). Skipped when the popup
+  // mounts already open, so a defaultOpen popover doesn't steal page focus.
+  const prevOpenRef = useRef(open);
+  useEffect(() => {
+    const el = ref.current;
+    const was = prevOpenRef.current;
+    prevOpenRef.current = open;
+    if (!el || was === open) return;
+    if (open) {
+      el.focus({ preventScroll: true });
+    } else if (
+      el.contains(document.activeElement) ||
+      document.activeElement === document.body
+    ) {
+      ctx.triggerRef.current?.focus({ preventScroll: true });
+    }
+  }, [open, ctx.triggerRef]);
+
+  // Fallback path: outside click and Escape, only while open.
+  useEffect(() => {
+    if (enhanced || !open) return;
     const onPointer = (e: MouseEvent) => {
-      if (!rootRef.current?.contains(e.target as Node)) setOpen(false);
+      const root = ref.current?.closest(".fui-Popover-root");
+      if (root && !root.contains(e.target as Node)) setOpen(false);
     };
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
@@ -61,37 +304,93 @@ export function Popover({
       document.removeEventListener("mousedown", onPointer);
       document.removeEventListener("keydown", onKey);
     };
-  }, [open]);
-
-  const triggerEl = cloneElement(trigger, {
-    "aria-haspopup": "dialog",
-    "aria-expanded": open,
-    "aria-controls": open ? panelId : undefined,
-    onClick: (e: ReactMouseEvent) => {
-      trigger.props.onClick?.(e);
-      setOpen((v) => !v);
-    },
-  });
+  }, [enhanced, open, setOpen]);
 
   return (
-    <div ref={rootRef} className={"fui-Popover-root"}>
-      {triggerEl}
-      {open && (
-        <div
-          id={panelId}
-          className={cx("fui-Popover-dropdown", className)}
-          data-position={position}
-          style={
-            width !== undefined
-              ? ({
-                  "--_w": typeof width === "number" ? `${width}px` : width,
-                } as React.CSSProperties)
-              : undefined
-          }
-        >
-          {children}
-        </div>
-      )}
+    // `rest` is spread first: the wiring props below are load-bearing and
+    // must not be silently clobbered by consumer props.
+    <div
+      {...rest}
+      ref={ref}
+      id={ctx.popupId}
+      role="dialog"
+      tabIndex={-1}
+      popover={enhanced ? "auto" : undefined}
+      hidden={enhanced || open ? undefined : true}
+      aria-labelledby={ctx.hasTitle ? ctx.titleId : undefined}
+      aria-describedby={ctx.hasDescription ? ctx.descriptionId : undefined}
+      className={cx("fui-Popover-popup", className)}
+      data-position={position}
+      data-open={open || undefined}
+      style={{ ...style, positionAnchor: ctx.anchorName } as CSSProperties}
+    >
+      {children}
     </div>
   );
 }
+
+export interface PopoverTitleProps extends HTMLAttributes<HTMLHeadingElement> {}
+
+function PopoverTitle({ className, children, ...rest }: PopoverTitleProps) {
+  const ctx = usePopoverContext("Popover.Title");
+  const { registerTitle } = ctx;
+  useEffect(() => registerTitle(), [registerTitle]);
+  return (
+    <h2 className={cx("fui-Popover-title", className)} id={ctx.titleId} {...rest}>
+      {children}
+    </h2>
+  );
+}
+
+export interface PopoverDescriptionProps
+  extends HTMLAttributes<HTMLParagraphElement> {}
+
+function PopoverDescription({
+  className,
+  children,
+  ...rest
+}: PopoverDescriptionProps) {
+  const ctx = usePopoverContext("Popover.Description");
+  const { registerDescription } = ctx;
+  useEffect(() => registerDescription(), [registerDescription]);
+  return (
+    <p
+      className={cx("fui-Popover-description", className)}
+      id={ctx.descriptionId}
+      {...rest}
+    >
+      {children}
+    </p>
+  );
+}
+
+/** Wiring the Close part attaches to whatever it renders. */
+export interface PopoverCloseRenderProps {
+  type: "button";
+  onClick: (e: ReactMouseEvent<Element>) => void;
+}
+
+export interface PopoverCloseProps
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Substitute your own element; defaults to a FarmUI Button. */
+  render?: RenderProp<PopoverCloseRenderProps>;
+}
+
+function PopoverClose({ render, children, ...rest }: PopoverCloseProps) {
+  const ctx = usePopoverContext("Popover.Close");
+  const closeProps: PopoverCloseRenderProps = {
+    type: "button",
+    onClick: () => ctx.setOpen(false),
+  };
+  const target = render ?? <Button {...rest}>{children}</Button>;
+  return <>{renderWithProps(target, closeProps)}</>;
+}
+
+export const Popover = {
+  Root: PopoverRoot,
+  Trigger: PopoverTrigger,
+  Popup: PopoverPopup,
+  Title: PopoverTitle,
+  Description: PopoverDescription,
+  Close: PopoverClose,
+};

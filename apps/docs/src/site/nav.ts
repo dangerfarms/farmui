@@ -11,6 +11,8 @@ export interface NavItem {
 export const GETTING_STARTED: { name: string; href: string }[] = [
   { name: "Introduction", href: "/docs" },
   { name: "Installation", href: "/docs/installation" },
+  { name: "Composition", href: "/docs/composition" },
+  { name: "Contextualism", href: "/docs/contextualism" },
   { name: "Theming", href: "/docs/theming" },
 ];
 
@@ -26,6 +28,18 @@ export const CATEGORY_ORDER = [
 
 export const COMPONENTS: NavItem[] = [
   // Inputs
+  {
+    name: "Field",
+    slug: "field",
+    category: "Inputs",
+    description: "Composable form-field primitive.",
+  },
+  {
+    name: "Fieldset",
+    slug: "fieldset",
+    category: "Inputs",
+    description: "Group controls under a semantic label.",
+  },
   {
     name: "Button",
     slug: "button",
@@ -98,12 +112,6 @@ export const COMPONENTS: NavItem[] = [
     slug: "table",
     category: "Data display",
     description: "Display rows and columns of data.",
-  },
-  {
-    name: "Kbd",
-    slug: "kbd",
-    category: "Data display",
-    description: "Render a keyboard key.",
   },
   // Feedback
   {

@@ -53,7 +53,7 @@ const doc: ComponentDoc = {
         "Dedicated agronomist",
         "99.9% uptime SLA",
       ],
-      action: { label: "Contact sales", href: "/contact", variant: "outline" },
+      action: { label: "Contact sales", href: "/contact" },
     },
   ]}
 />`,
@@ -111,7 +111,6 @@ const doc: ComponentDoc = {
               action: {
                 label: "Contact sales",
                 href: "/contact",
-                variant: "outline",
               },
             },
           ]}
@@ -192,7 +191,7 @@ const doc: ComponentDoc = {
       name: "plans",
       type: "PricingPlan[]",
       description:
-        "The plans to display. PricingPlan = { name, price, period?, description?, features: ReactNode[], action: BlockAction, highlighted? }, where BlockAction = { label, href?, variant? }.",
+        "The plans to display. PricingPlan = { name, price, period?, description?, features: ReactNode[], action: BlockAction, highlighted? }, where BlockAction = { label, href? }. The highlighted card is a primary context, so its action takes the brand colour.",
     },
     {
       name: "eyebrow",

@@ -1,6 +1,9 @@
-import { forwardRef, useId } from "react";
+"use client";
+
+import { forwardRef } from "react";
 import type { InputHTMLAttributes, ReactNode } from "react";
-import { cx, type FarmUISize } from "../../utils";
+import { cx, resolveRadius, type FarmUIRadius } from "../../utils";
+import { Field } from "../Field/Field";
 
 export interface InputProps extends Omit<
   InputHTMLAttributes<HTMLInputElement>,
@@ -10,104 +13,116 @@ export interface InputProps extends Omit<
   label?: ReactNode;
   /** Helper text rendered below the label. */
   description?: ReactNode;
-  /** Error message; also puts the field in an invalid state. */
+  /** Error message; its presence puts the field in an invalid state. */
   error?: ReactNode;
-  /** Control size. @default "md" */
-  size?: FarmUISize;
   /** Border radius token. @default "md" */
-  radius?: "sm" | "md" | "lg" | "xl" | "full";
+  radius?: FarmUIRadius;
   /** Content rendered inside the field, before the input. */
   leftSection?: ReactNode;
   /** Content rendered inside the field, after the input. */
   rightSection?: ReactNode;
-  /** Mark the field as required (adds a red asterisk). */
+  /** Mark the field as required (adds an asterisk to the label). */
   withAsterisk?: boolean;
-  /** Root wrapper class. */
+  /** Root wrapper class (applied to the Field root in the labelled form). */
   wrapperClassName?: string;
 }
 
-const radiusVar: Record<NonNullable<InputProps["radius"]>, string> = {
-  sm: "var(--fui-radius-sm)",
-  md: "var(--fui-radius-md)",
-  lg: "var(--fui-radius-lg)",
-  xl: "var(--fui-radius-xl)",
-  full: "var(--fui-radius-full)",
-};
+/** Props for the bare field box (the part Field.Control composes). */
+type InputControlProps = Omit<
+  InputProps,
+  "label" | "description" | "error" | "withAsterisk" | "wrapperClassName"
+>;
 
 /**
- * Input — a labelled text field with description and error states.
+ * InputControl — the bare, composable text field: the bordered box, optional
+ * sections and the `<input>`. It forwards `id` / `aria-*` straight to the
+ * `<input>`, so it drops cleanly into `<Field.Control render={<InputControl />} />`.
+ */
+const InputControl = forwardRef<HTMLInputElement, InputControlProps>(
+  function InputControl(
+    {
+      radius = "md",
+      leftSection,
+      rightSection,
+      disabled,
+      className,
+      style,
+      ...rest
+    },
+    ref,
+  ) {
+    return (
+      <div
+        className="fui-Input-field"
+        data-disabled={disabled || undefined}
+        style={
+          {
+            "--_radius": resolveRadius(radius),
+            ...style,
+          } as React.CSSProperties
+        }
+      >
+        {leftSection && (
+          <span className="fui-Input-section">{leftSection}</span>
+        )}
+        <input
+          ref={ref}
+          className={cx("fui-Input-input", className)}
+          disabled={disabled}
+          {...rest}
+        />
+        {rightSection && (
+          <span className="fui-Input-section">{rightSection}</span>
+        )}
+      </div>
+    );
+  },
+);
+
+/**
+ * Input — a labelled text field.
+ *
+ * With no `label`/`description`/`error` it renders just the bare control. With
+ * any of them it composes the accessible {@link Field} primitive under the
+ * hood, so the label/description/error wiring lives in exactly one place.
+ * For full control over structure, use `Field.*` directly.
  */
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   {
     label,
     description,
     error,
-    size = "md",
-    radius = "md",
-    leftSection,
-    rightSection,
     withAsterisk,
-    disabled,
-    required,
-    id,
-    className,
     wrapperClassName,
-    ...rest
+    id,
+    required,
+    ...control
   },
   ref,
 ) {
-  const autoId = useId();
-  const inputId = id ?? autoId;
-  const descId = description ? `${inputId}-desc` : undefined;
-  const errId = error ? `${inputId}-err` : undefined;
-  const invalid = Boolean(error);
+  if (!label && !description && !error) {
+    return <InputControl ref={ref} id={id} required={required} {...control} />;
+  }
 
   return (
-    <div className={cx("fui-Input-wrapper", wrapperClassName)}>
+    <Field.Root className={wrapperClassName} id={id}>
       {label && (
-        <label className={"fui-Input-label"} htmlFor={inputId}>
+        <Field.Label>
           {label}
           {(withAsterisk || required) && (
-            <span className={"fui-Input-required"} aria-hidden>
+            <span className="fui-Input-required" aria-hidden>
               *
             </span>
           )}
-        </label>
+        </Field.Label>
       )}
-      {description && (
-        <span className={"fui-Input-description"} id={descId}>
-          {description}
-        </span>
-      )}
-      <div
-        className={"fui-Input-field"}
-        data-size={size}
-        data-invalid={invalid || undefined}
-        data-disabled={disabled || undefined}
-        style={{ "--_radius": radiusVar[radius] } as React.CSSProperties}
-      >
-        {leftSection && (
-          <span className={"fui-Input-section"}>{leftSection}</span>
-        )}
-        <input
-          ref={ref}
-          id={inputId}
-          className={cx("fui-Input-input", className)}
-          disabled={disabled}
-          required={required}
-          aria-invalid={invalid || undefined}
-          aria-describedby={cx(descId, errId) || undefined}
-          {...rest}
-        />
-        {rightSection && (
-          <span className={"fui-Input-section"}>{rightSection}</span>
-        )}
-      </div>
-      {error && (
-        <span className={"fui-Input-error"} id={errId} role="alert">
-          {error}
-        </span>
-      )}
-    </div>
+      {description && <Field.Description>{description}</Field.Description>}
+      <Field.Control
+        render={<InputControl ref={ref} required={required} {...control} />}
+      />
+      {error && <Field.Error>{error}</Field.Error>}
+    </Field.Root>
   );
 });
+
+export { InputControl };

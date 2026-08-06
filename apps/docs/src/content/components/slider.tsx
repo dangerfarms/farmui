@@ -1,5 +1,6 @@
 import { Slider } from "@farmui/core";
 import type { ComponentDoc } from "@/docs/types";
+import { SliderFieldDemo } from "./slider.client";
 
 const doc: ComponentDoc = {
   slug: "slider",
@@ -27,6 +28,17 @@ const doc: ComponentDoc = {
       ),
     },
     {
+      title: "Composed inside a Field",
+      description:
+        "The bare SliderControl composes through Field.Control — label, description and error wiring come from the Field, the composition pattern shared by all form controls.",
+      code: `<Field.Root>
+  <Field.Label>Volume</Field.Label>
+  <Field.Description>Applies to alerts only.</Field.Description>
+  <Field.Control render={<SliderControl defaultValue={70} />} />
+</Field.Root>`,
+      render: () => <SliderFieldDemo />,
+    },
+    {
       title: "Steps",
       description: "Snap to increments with the step prop.",
       code: `<Slider label="Fertiliser (kg)" min={0} max={100} step={10} defaultValue={30} />`,
@@ -39,26 +51,6 @@ const doc: ComponentDoc = {
             step={10}
             defaultValue={30}
           />
-        </div>
-      ),
-    },
-    {
-      title: "Sizes",
-      code: `<Slider size="sm" defaultValue={30} />
-<Slider size="md" defaultValue={50} />
-<Slider size="lg" defaultValue={70} />`,
-      render: () => (
-        <div
-          style={{
-            display: "grid",
-            gap: "1rem",
-            maxInlineSize: "22rem",
-            inlineSize: "100%",
-          }}
-        >
-          <Slider size="sm" defaultValue={30} aria-label="Small" />
-          <Slider size="md" defaultValue={50} aria-label="Medium" />
-          <Slider size="lg" defaultValue={70} aria-label="Large" />
         </div>
       ),
     },
@@ -79,10 +71,10 @@ const doc: ComponentDoc = {
       description: "Field label rendered above the track.",
     },
     {
-      name: "size",
-      type: `"sm" | "md" | "lg"`,
-      default: `"md"`,
-      description: "Control size (track height and thumb size).",
+      name: "SliderControl",
+      type: "component",
+      description:
+        "The bare range input without a label — composes inside Field and reads its wiring (id, aria-describedby, aria-invalid) from context.",
     },
     {
       name: "min",

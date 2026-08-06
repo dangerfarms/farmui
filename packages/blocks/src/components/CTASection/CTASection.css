@@ -1,16 +1,15 @@
-@layer farmui.blocks {
-  .fui-CTASection-root {
-    padding-block: clamp(3rem, 7vw, 5rem);
-    font-family: var(--fui-font);
-    color: var(--fui-text);
+@scope (.fui-CTASection-root) {
+  :scope {
+    container-type: inline-size;
+    padding-block: clamp(3rem, 7vi, 5rem);
   }
 
   .fui-CTASection-band {
-    display: flex;
+    display: block flex;
     flex-direction: column;
     align-items: center;
     gap: 1.25rem;
-    padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.5rem, 5vw, 3rem);
+    padding: clamp(2.5rem, 6vi, 4.5rem) clamp(1.5rem, 5vi, 3rem);
     text-align: center;
     border: 1px solid color-mix(in oklch, var(--fui-primary), transparent 80%);
     border-radius: var(--fui-radius-xl);
@@ -26,12 +25,13 @@
   .fui-CTASection-title {
     margin: 0;
     max-inline-size: 30ch;
-    font-size: clamp(1.7rem, 4vw, 2.5rem);
+    font-size: clamp(1.7rem, 4vi, 2.5rem);
     font-weight: 800;
     line-height: 1.1;
     letter-spacing: -0.025em;
     text-wrap: balance;
   }
+
   .fui-CTASection-description {
     margin: 0;
     max-inline-size: 46ch;
@@ -40,8 +40,12 @@
     color: var(--fui-text-muted);
     text-wrap: pretty;
   }
+
   .fui-CTASection-actions {
-    display: flex;
+    /* A CTA section exists to be acted on: its region is primary context. */
+    --fui-context: primary;
+
+    display: block flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 0.85rem;

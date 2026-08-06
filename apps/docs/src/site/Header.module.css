@@ -32,7 +32,7 @@
   color: var(--fui-text-muted);
 }
 .nav a {
-  transition: color var(--fui-transition);
+  transition: color var(--fui-duration-md) var(--fui-ease);
 }
 .nav a:hover {
   color: var(--fui-text);
@@ -49,8 +49,8 @@
   border: 1px solid var(--fui-border);
   border-radius: var(--fui-radius-md);
   transition:
-    border-color var(--fui-transition),
-    background var(--fui-transition);
+    border-color var(--fui-duration-md) var(--fui-ease),
+    background var(--fui-duration-md) var(--fui-ease);
 }
 .stars:hover {
   border-color: var(--fui-border-strong);

@@ -54,26 +54,19 @@ const doc: ComponentDoc = {
         </div>
       ),
     },
-    {
-      title: "Sizes",
-      code: `<Textarea size="sm" placeholder="Small" />
-<Textarea size="md" placeholder="Medium" />
-<Textarea size="lg" placeholder="Large" />`,
-      render: () => (
-        <div
-          style={{
-            display: "grid",
-            gap: "0.75rem",
-            maxInlineSize: "24rem",
-            inlineSize: "100%",
-          }}
-        >
-          <Textarea size="sm" placeholder="Small" />
-          <Textarea size="md" placeholder="Medium" />
-          <Textarea size="lg" placeholder="Large" />
-        </div>
-      ),
-    },
+  ],
+  whenToUse: [
+    "For multi-line, free-form text: messages, comments, addresses, notes.",
+    "When the expected input is longer than a single line or the user may want to add line breaks.",
+  ],
+  whenNotToUse: [
+    "For single-line values (names, emails) — use Input.",
+    "For a fixed set of options — use Select, Radio or Checkbox.",
+  ],
+  accessibility: [
+    "Composes the Field primitive, so the label, description and error share one accessible wiring (label tied by id, aria-describedby, aria-invalid).",
+    'The error uses role="alert" so it is announced when it appears.',
+    "Resizes vertically only, so horizontal resize can't break the layout; give enough default rows to hint at the expected length (Polaris).",
   ],
   props: [
     {
@@ -90,12 +83,6 @@ const doc: ComponentDoc = {
       name: "error",
       type: "ReactNode",
       description: "Error message; puts the field in an invalid state.",
-    },
-    {
-      name: "size",
-      type: `"sm" | "md" | "lg"`,
-      default: `"md"`,
-      description: "Control size (min height, padding, font size).",
     },
     {
       name: "radius",

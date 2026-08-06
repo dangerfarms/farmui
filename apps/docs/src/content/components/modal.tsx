@@ -1,69 +1,103 @@
 import type { ComponentDoc } from "@/docs/types";
-import { ModalDemo, ModalSizesDemo } from "./modal.client";
+import {
+  ModalDemo,
+  ModalHeaderCloseDemo,
+  ModalSizesDemo,
+} from "./modal.client";
 
 const doc: ComponentDoc = {
   slug: "modal",
   name: "Modal",
   category: "Overlays",
   description:
-    "A controlled, focus-trapping dialog rendered in a portal over the page.",
+    "A blocking dialog for must-complete tasks, built on the native <dialog> element and the browser's top layer.",
   importLine: `import { Modal } from "@farmui/core";`,
   demos: [
     {
       title: "Basic usage",
       description:
-        "Control visibility with opened and onClose. Closes on overlay click and Escape.",
-      code: `const [opened, setOpened] = useState(false);
-
-<Button onClick={() => setOpened(true)}>Open modal</Button>
-<Modal opened={opened} onClose={() => setOpened(false)} title="Order confirmed">
-  <p>Your order is on its way.</p>
-  <Button onClick={() => setOpened(false)}>Got it</Button>
-</Modal>`,
+        "Compose the dialog from parts. The Popup is a native <dialog> opened with showModal() — top layer, backdrop, focus containment, Escape and focus restore all come from the browser.",
+      code: `<Modal.Root>
+  <Modal.Trigger>Invite a teammate</Modal.Trigger>
+  <Modal.Popup>
+    <Modal.Title>Invite a teammate</Modal.Title>
+    <Modal.Description>
+      They'll receive an email invitation to join your workspace.
+    </Modal.Description>
+    <Group>
+      <Modal.Close style={{ "--fui-context": "primary" }}>Send invite</Modal.Close>
+      <Modal.Close>Cancel</Modal.Close>
+    </Group>
+  </Modal.Popup>
+</Modal.Root>`,
       render: () => <ModalDemo />,
     },
     {
       title: "Sizes",
-      description: "Three panel widths via the size prop.",
-      code: `<Modal opened={opened} onClose={close} title="Small modal" size="sm">…</Modal>
-<Modal opened={opened} onClose={close} title="Medium modal" size="md">…</Modal>
-<Modal opened={opened} onClose={close} title="Large modal" size="lg">…</Modal>`,
+      description: "Panel widths via the Popup's size prop.",
+      code: `<Modal.Popup size="sm">…</Modal.Popup>
+<Modal.Popup size="md">…</Modal.Popup>
+<Modal.Popup size="lg">…</Modal.Popup>`,
       render: () => <ModalSizesDemo />,
     },
+    {
+      title: "Header with a close button",
+      description:
+        "A header row with an × is a composition pattern, not configuration — compose Modal.Title and Modal.Close however your design needs.",
+      code: `<Modal.Popup>
+  <div className="header-row">
+    <Modal.Title>Settings</Modal.Title>
+    <Modal.Close aria-label="Close">×</Modal.Close>
+  </div>
+  <Modal.Description>Manage your workspace settings.</Modal.Description>
+</Modal.Popup>`,
+      render: () => <ModalHeaderCloseDemo />,
+    },
+  ],
+  whenToUse: [
+    "For blocking, must-complete tasks — confirmations of destructive actions, short focused forms — where the user should not interact with the page behind.",
+    "When losing the in-progress state would be costly, and the dialog protects it.",
+  ],
+  whenNotToUse: [
+    "For supplementary content or quick actions that don't need to block — use Popover.",
+    "For anything long-form or multi-step — navigate to a page instead (GOV.UK: keep interactions in the page flow where possible).",
+    "For non-essential announcements — use Alert in the page.",
+  ],
+  accessibility: [
+    "Built on the native <dialog> opened with showModal(): the browser provides the top layer, ::backdrop, real focus containment, Escape handling, and restores focus to the trigger on close — none of it re-implemented in JavaScript.",
+    "Modal.Title and Modal.Description automatically label and describe the dialog via aria-labelledby / aria-describedby.",
+    "Light dismiss (clicking the backdrop) uses the closedby attribute where supported, with a small feature-detected coordinate-check fallback elsewhere — no polyfills, per the browser support policy.",
+    "Body scroll is locked while open.",
   ],
   props: [
     {
-      name: "opened",
-      type: "boolean",
-      description: "Whether the modal is visible.",
-    },
-    {
-      name: "onClose",
-      type: "() => void",
+      name: "Root",
+      type: "open?, defaultOpen?, onOpenChange?",
       description:
-        "Called when the user requests to close (overlay, Escape, close button).",
+        "Groups the parts and owns open state (controlled or uncontrolled). Renders no element of its own.",
     },
     {
-      name: "title",
-      type: "ReactNode",
-      description: "Heading rendered in the modal header.",
+      name: "Trigger",
+      type: "button props · render?: element | (props) => node",
+      description:
+        "Renders a FarmUI Button that opens the dialog — style it directly, or substitute your own element via render.",
     },
     {
-      name: "size",
-      type: `"sm" | "md" | "lg"`,
-      default: `"md"`,
-      description: "Panel width.",
+      name: "Popup",
+      type: `size?: "sm" | "md" | "lg"`,
+      description:
+        "The native <dialog>. size sets the panel width (24/32/44rem).",
     },
     {
-      name: "withCloseButton",
-      type: "boolean",
-      default: "true",
-      description: "Render the header close (×) button.",
+      name: "Title / Description",
+      type: "heading / paragraph props",
+      description: "Label and describe the dialog for assistive technology.",
     },
     {
-      name: "children",
-      type: "ReactNode",
-      description: "Body content of the dialog.",
+      name: "Close",
+      type: "button props · render?",
+      description:
+        "A FarmUI Button that closes the dialog — compose as many as you need (confirm, cancel, ×).",
     },
   ],
 };

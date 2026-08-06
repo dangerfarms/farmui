@@ -8,13 +8,11 @@ const meta = {
   args: {
     label: "Email",
     placeholder: "you@example.com",
-    size: "md",
     radius: "md",
     disabled: false,
     withAsterisk: false,
   },
   argTypes: {
-    size: { control: "inline-radio", options: ["sm", "md", "lg"] },
     radius: {
       control: "select",
       options: ["sm", "md", "lg", "xl", "full"],
@@ -28,12 +26,34 @@ type Story = StoryObj<typeof meta>;
 /** Live playground — tweak props in the Controls panel. */
 export const Playground: Story = {};
 
-export const Sizes: Story = {
-  render: (args) => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-      <Input {...args} size="sm" label="Small" />
-      <Input {...args} size="md" label="Medium" />
-      <Input {...args} size="lg" label="Large" />
+/**
+ * There is no size prop: padding and font are fluid container-relative
+ * tokens, so the control adapts to the space it lives in — and always
+ * height-aligns with Button, which shares the same derived anatomy.
+ */
+export const FluidSizing: Story = {
+  render: () => (
+    <div style={{ display: "grid", gap: "1rem" }}>
+      <div
+        style={{
+          containerType: "inline-size",
+          inlineSize: "16rem",
+          padding: "1rem",
+          border: "1px dashed var(--fui-border)",
+        }}
+      >
+        <Input label="In a narrow container" placeholder="you@example.com" />
+      </div>
+      <div
+        style={{
+          containerType: "inline-size",
+          inlineSize: "32rem",
+          padding: "1rem",
+          border: "1px dashed var(--fui-border)",
+        }}
+      >
+        <Input label="In a wide one" placeholder="you@example.com" />
+      </div>
     </div>
   ),
 };

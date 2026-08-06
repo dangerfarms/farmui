@@ -1,6 +1,9 @@
+"use client";
+
 import { forwardRef, useId } from "react";
 import type { InputHTMLAttributes, ReactNode } from "react";
-import { cx, type FarmUISize } from "../../utils";
+import { cx } from "../../utils";
+import { useFieldControlProps } from "../Field/Field";
 
 export interface SliderProps extends Omit<
   InputHTMLAttributes<HTMLInputElement>,
@@ -8,58 +11,86 @@ export interface SliderProps extends Omit<
 > {
   /** Field label rendered above the track. */
   label?: ReactNode;
-  /** Control size. @default "md" */
-  size?: FarmUISize;
   /** Root wrapper class. */
   wrapperClassName?: string;
 }
 
-/**
- * Slider — a styled `<input type="range">` for choosing a value from a range.
- *
- * Server-safe: no state is held here. Use it uncontrolled (`defaultValue`) or
- * drive it with `value` + `onChange`.
- */
-export const Slider = forwardRef<HTMLInputElement, SliderProps>(function Slider(
-  {
-    label,
-    size = "md",
-    min = 0,
-    max = 100,
-    step = 1,
-    disabled,
-    id,
-    className,
-    wrapperClassName,
-    ...rest
-  },
-  ref,
-) {
-  const autoId = useId();
-  const inputId = id ?? autoId;
+/** The bare range input, minus any label. */
+type SliderControlProps = Omit<SliderProps, "label" | "wrapperClassName">;
 
-  return (
-    <div
-      className={cx("fui-Slider-wrapper", wrapperClassName)}
-      data-size={size}
-      data-disabled={disabled || undefined}
-    >
-      {label && (
-        <label className={"fui-Slider-label"} htmlFor={inputId}>
-          {label}
-        </label>
-      )}
+/**
+ * SliderControl — the bare `<input type="range">`. When rendered inside a
+ * `Field` it reads its id / describedby / invalid from context; otherwise it
+ * uses its own props.
+ */
+const SliderControl = forwardRef<HTMLInputElement, SliderControlProps>(
+  function SliderControl(
+    {
+      min = 0,
+      max = 100,
+      step = 1,
+      id,
+      className,
+      disabled,
+      "aria-invalid": ariaInvalid,
+      "aria-describedby": ariaDescribedby,
+      ...rest
+    },
+    ref,
+  ) {
+    const field = useFieldControlProps();
+
+    return (
       <input
         ref={ref}
-        id={inputId}
+        id={id ?? field.id}
         type="range"
         className={cx("fui-Slider-input", className)}
+        data-disabled={disabled || undefined}
         min={min}
         max={max}
         step={step}
         disabled={disabled}
+        aria-invalid={ariaInvalid ?? field["aria-invalid"]}
+        aria-describedby={ariaDescribedby ?? field["aria-describedby"]}
         {...rest}
       />
+    );
+  },
+);
+
+/**
+ * Slider — a styled `<input type="range">` for choosing a value from a range.
+ *
+ * With no `label` it renders just the bare control (which self-wires when
+ * placed inside a `Field`); with one it renders its own labelled wrapper.
+ * Server-safe: no state is held here. Use it uncontrolled (`defaultValue`) or
+ * drive it with `value` + `onChange`.
+ */
+export const Slider = forwardRef<HTMLInputElement, SliderProps>(function Slider(
+  { label, disabled, id, wrapperClassName, ...control },
+  ref,
+) {
+  const autoId = useId();
+
+  if (!label) {
+    return (
+      <SliderControl ref={ref} id={id} disabled={disabled} {...control} />
+    );
+  }
+
+  const inputId = id ?? autoId;
+  return (
+    <div
+      className={cx("fui-Slider-wrapper", wrapperClassName)}
+      data-disabled={disabled || undefined}
+    >
+      <label className={"fui-Slider-label"} htmlFor={inputId}>
+        {label}
+      </label>
+      <SliderControl ref={ref} id={inputId} disabled={disabled} {...control} />
     </div>
   );
 });
+
+export { SliderControl };

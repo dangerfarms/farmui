@@ -47,19 +47,21 @@ const doc: ComponentDoc = {
         </div>
       ),
     },
-    {
-      title: "Sizes",
-      code: `<Checkbox size="sm" label="Small" defaultChecked />
-<Checkbox size="md" label="Medium" defaultChecked />
-<Checkbox size="lg" label="Large" defaultChecked />`,
-      render: () => (
-        <div style={{ display: "grid", gap: "0.75rem" }}>
-          <Checkbox size="sm" label="Small" defaultChecked />
-          <Checkbox size="md" label="Medium" defaultChecked />
-          <Checkbox size="lg" label="Large" defaultChecked />
-        </div>
-      ),
-    },
+  ],
+  whenToUse: [
+    "For a single on/off choice (accept terms, stay signed in).",
+    "For selecting any number of options from a list — group related checkboxes in a Fieldset.",
+    "Inside a Field for full control: <Field.Label><Checkbox /> …</Field.Label>.",
+  ],
+  whenNotToUse: [
+    "For one choice among several mutually exclusive options — use Radio.",
+    "For an instant on/off toggle that takes effect immediately — use Switch.",
+  ],
+  accessibility: [
+    'Renders a real <input type="checkbox"> wrapped by its label, so clicking the text toggles it and the state is announced natively.',
+    "Supports an indeterminate (mixed) visual for a 'select all' parent, set on the DOM node — remember it is a display state, not a third value.",
+    "When placed inside a Field it reads its id, aria-describedby and aria-invalid from context; standalone it wires its own label, description and error.",
+    "Group multiple checkboxes under a Fieldset so the legend names the set in the accessibility tree.",
   ],
   props: [
     {
@@ -78,12 +80,6 @@ const doc: ComponentDoc = {
       description: "Error message; puts the field in an invalid state.",
     },
     {
-      name: "size",
-      type: `"sm" | "md" | "lg"`,
-      default: `"md"`,
-      description: "Control size (box and label size).",
-    },
-    {
       name: "indeterminate",
       type: "boolean",
       description: "Render the partially-checked (dash) visual state.",
@@ -91,7 +87,7 @@ const doc: ComponentDoc = {
     {
       name: "...others",
       type: "InputHTMLAttributes",
-      description: "All native <input> props (except size/type) are forwarded.",
+      description: "All native <input> props (except type) are forwarded.",
     },
   ],
 };

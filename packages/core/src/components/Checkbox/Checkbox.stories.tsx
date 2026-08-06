@@ -7,13 +7,11 @@ const meta = {
   tags: ["autodocs"],
   args: {
     label: "I accept the terms and conditions",
-    size: "md",
     indeterminate: false,
     disabled: false,
     defaultChecked: false,
   },
   argTypes: {
-    size: { control: "inline-radio", options: ["sm", "md", "lg"] },
   },
 } satisfies Meta<typeof Checkbox>;
 
@@ -22,16 +20,6 @@ type Story = StoryObj<typeof meta>;
 
 /** Live playground — tweak props in the Controls panel. */
 export const Playground: Story = {};
-
-export const Sizes: Story = {
-  render: (args) => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-      <Checkbox {...args} size="sm" label="Small" />
-      <Checkbox {...args} size="md" label="Medium" />
-      <Checkbox {...args} size="lg" label="Large" />
-    </div>
-  ),
-};
 
 export const Checked: Story = {
   args: { label: "Subscribe to the newsletter", defaultChecked: true },

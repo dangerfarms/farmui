@@ -1,59 +1,67 @@
 "use client";
 
-import { useState } from "react";
-import { Button, Modal } from "@farmui/core";
+import { Group, Modal } from "@farmui/core";
+import type { CSSProperties } from "react";
 
 export function ModalDemo() {
-  const [opened, setOpened] = useState(false);
   return (
-    <>
-      <Button onClick={() => setOpened(true)}>Open modal</Button>
-      <Modal
-        opened={opened}
-        onClose={() => setOpened(false)}
-        title="Order confirmed"
-      >
-        <p style={{ marginBlockStart: 0 }}>
-          Your order is on its way. You&apos;ll receive tracking details by
-          email within 24 hours.
-        </p>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            marginBlockStart: "1rem",
-          }}
-        >
-          <Button onClick={() => setOpened(false)}>Got it</Button>
-        </div>
-      </Modal>
-    </>
+    <Modal.Root>
+      <Modal.Trigger>Invite a teammate</Modal.Trigger>
+      <Modal.Popup>
+        <Modal.Title>Invite a teammate</Modal.Title>
+        <Modal.Description>
+          They&apos;ll receive an email invitation to join your workspace.
+        </Modal.Description>
+        <Group>
+          <Modal.Close style={{ "--fui-context": "primary" } as CSSProperties}>
+            Send invite
+          </Modal.Close>
+          <Modal.Close>Cancel</Modal.Close>
+        </Group>
+      </Modal.Popup>
+    </Modal.Root>
   );
 }
 
 export function ModalSizesDemo() {
-  const [size, setSize] = useState<"sm" | "md" | "lg" | null>(null);
   return (
-    <>
-      <Button variant="light" onClick={() => setSize("sm")}>
-        Small
-      </Button>
-      <Button variant="light" onClick={() => setSize("md")}>
-        Medium
-      </Button>
-      <Button variant="light" onClick={() => setSize("lg")}>
-        Large
-      </Button>
-      <Modal
-        opened={size !== null}
-        onClose={() => setSize(null)}
-        title={`${size ?? ""} modal`}
-        size={size ?? "md"}
-      >
-        <p style={{ margin: 0 }}>
-          This panel is rendered at the <strong>{size}</strong> size.
-        </p>
-      </Modal>
-    </>
+    <Group>
+      {(["sm", "md", "lg"] as const).map((size) => (
+        <Modal.Root key={size}>
+          <Modal.Trigger>Open {size}</Modal.Trigger>
+          <Modal.Popup size={size}>
+            <Modal.Title>A {size} modal</Modal.Title>
+            <Modal.Description>
+              The panel width comes from the size prop.
+            </Modal.Description>
+            <Modal.Close>Close</Modal.Close>
+          </Modal.Popup>
+        </Modal.Root>
+      ))}
+    </Group>
+  );
+}
+
+export function ModalHeaderCloseDemo() {
+  return (
+    <Modal.Root>
+      <Modal.Trigger>Open settings</Modal.Trigger>
+      <Modal.Popup>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBlockEnd: "var(--fui-space-sm)",
+          }}
+        >
+          <Modal.Title style={{ margin: 0 }}>Settings</Modal.Title>
+          <Modal.Close aria-label="Close">
+            ×
+          </Modal.Close>
+        </div>
+        <Modal.Description>Manage your workspace settings.</Modal.Description>
+      </Modal.Popup>
+    </Modal.Root>
   );
 }

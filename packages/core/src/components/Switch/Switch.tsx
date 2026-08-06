@@ -1,6 +1,9 @@
+"use client";
+
 import { forwardRef, useId } from "react";
 import type { InputHTMLAttributes, ReactNode } from "react";
-import { cx, type FarmUISize } from "../../utils";
+import { cx } from "../../utils";
+import { useFieldControlProps } from "../Field/Field";
 
 export interface SwitchProps extends Omit<
   InputHTMLAttributes<HTMLInputElement>,
@@ -8,57 +11,101 @@ export interface SwitchProps extends Omit<
 > {
   /** Label rendered beside the toggle. */
   label?: ReactNode;
-  /** Control size. @default "md" */
-  size?: FarmUISize;
   /** Which side of the toggle the label sits on. @default "end" */
   labelPosition?: "start" | "end";
   /** Root wrapper class. */
   wrapperClassName?: string;
 }
 
+/** The bare toggle (input + track), minus any label. */
+type SwitchControlProps = Omit<
+  SwitchProps,
+  "label" | "labelPosition" | "wrapperClassName"
+>;
+
+/**
+ * SwitchControl — the bare track + `<input role="switch">`. When rendered
+ * inside a `Field` it reads its id / describedby / invalid from context (the
+ * Base UI pattern: `<Field.Label><SwitchControl /> …</Field.Label>`);
+ * otherwise it uses its own props.
+ */
+const SwitchControl = forwardRef<HTMLInputElement, SwitchControlProps>(
+  function SwitchControl(
+    {
+      id,
+      className,
+      disabled,
+      "aria-invalid": ariaInvalid,
+      "aria-describedby": ariaDescribedby,
+      ...rest
+    },
+    ref,
+  ) {
+    const field = useFieldControlProps();
+
+    return (
+      <span
+        className="fui-Switch-control"
+        data-disabled={disabled || undefined}
+      >
+        <input
+          ref={ref}
+          id={id ?? field.id}
+          type="checkbox"
+          role="switch"
+          className={cx("fui-Switch-input", className)}
+          disabled={disabled}
+          aria-invalid={ariaInvalid ?? field["aria-invalid"]}
+          aria-describedby={ariaDescribedby ?? field["aria-describedby"]}
+          {...rest}
+        />
+        <span className={"fui-Switch-track"} aria-hidden>
+          <span className={"fui-Switch-thumb"} />
+        </span>
+      </span>
+    );
+  },
+);
+
 /**
  * Switch — an on/off toggle built on a native checkbox with `role="switch"`.
  *
- * Server-safe: no state is held here. Use it uncontrolled (`defaultChecked`) or
- * drive it with `checked` + `onChange`.
+ * With no `label` it renders just the bare control (which self-wires when
+ * placed inside a `Field`); with one it renders its own accessible inline
+ * label. Server-safe: no state is held here. Use it uncontrolled
+ * (`defaultChecked`) or drive it with `checked` + `onChange`.
  */
 export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
   {
     label,
-    size = "md",
     labelPosition = "end",
     disabled,
     id,
-    className,
     wrapperClassName,
-    ...rest
+    ...control
   },
   ref,
 ) {
   const autoId = useId();
-  const inputId = id ?? autoId;
 
+  if (!label) {
+    return (
+      <SwitchControl ref={ref} id={id} disabled={disabled} {...control} />
+    );
+  }
+
+  const inputId = id ?? autoId;
   return (
     <label
       className={cx("fui-Switch-wrapper", wrapperClassName)}
       htmlFor={inputId}
-      data-size={size}
       data-label-position={labelPosition}
       data-disabled={disabled || undefined}
     >
-      <input
-        ref={ref}
-        id={inputId}
-        type="checkbox"
-        role="switch"
-        className={cx("fui-Switch-input", className)}
-        disabled={disabled}
-        {...rest}
-      />
-      <span className={"fui-Switch-track"} aria-hidden>
-        <span className={"fui-Switch-thumb"} />
-      </span>
-      {label && <span className={"fui-Switch-label"}>{label}</span>}
+      <SwitchControl ref={ref} id={inputId} disabled={disabled} {...control} />
+      <span className={"fui-Switch-label"}>{label}</span>
     </label>
   );
 });
+
+export { SwitchControl };

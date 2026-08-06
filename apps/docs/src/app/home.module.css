@@ -105,8 +105,8 @@
   border: 1px solid transparent;
   border-radius: var(--fui-radius-md);
   transition:
-    background var(--fui-transition),
-    transform var(--fui-transition);
+    background var(--fui-duration-md) var(--fui-ease),
+    transform var(--fui-duration-md) var(--fui-ease);
 }
 .btnLink:hover {
   background: var(--fui-primary-hover);
@@ -270,8 +270,8 @@
   border: 1px solid var(--fui-border);
   border-radius: var(--fui-radius-lg);
   transition:
-    border-color var(--fui-transition),
-    transform var(--fui-transition);
+    border-color var(--fui-duration-md) var(--fui-ease),
+    transform var(--fui-duration-md) var(--fui-ease);
 }
 .feature:hover {
   border-color: var(--fui-border-strong);
@@ -421,8 +421,8 @@
   border: 1px solid var(--fui-border);
   border-radius: var(--fui-radius-lg);
   transition:
-    border-color var(--fui-transition),
-    transform var(--fui-transition);
+    border-color var(--fui-duration-md) var(--fui-ease),
+    transform var(--fui-duration-md) var(--fui-ease);
 }
 .techCard:hover {
   border-color: var(--fui-primary);
@@ -517,8 +517,8 @@
   border: 1px solid var(--fui-border);
   border-radius: var(--fui-radius-lg);
   transition:
-    border-color var(--fui-transition),
-    background var(--fui-transition);
+    border-color var(--fui-duration-md) var(--fui-ease),
+    background var(--fui-duration-md) var(--fui-ease);
 }
 .cat:hover {
   border-color: var(--fui-primary);

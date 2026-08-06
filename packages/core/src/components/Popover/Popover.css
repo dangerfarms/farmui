@@ -1,49 +1,100 @@
-@layer farmui.components {
-  .fui-Popover-root {
+@scope (.fui-Popover-root) {
+  :scope {
     position: relative;
-    display: inline-block;
+    display: inline flow-root;
   }
+}
 
-  .fui-Popover-dropdown {
-    position: absolute;
-    z-index: 50;
-    inset-inline-start: 0;
-    inline-size: var(--_w, max-content);
+/* The popup escapes the wrapper into the top layer when enhanced, so it
+   carries its own scope. */
+@scope (.fui-Popover-popup) {
+  :scope {
+    inline-size: max-content;
     min-inline-size: 12rem;
-    max-inline-size: min(20rem, 90vw);
+    max-inline-size: min(20rem, 90vi);
+    margin: 0;
     padding: var(--fui-space-md);
     border: 1px solid var(--fui-border);
     border-radius: var(--fui-radius-md);
     background: var(--fui-surface);
-    color: var(--fui-text);
-    font-family: var(--fui-font);
-    font-size: var(--fui-text-sm);
     box-shadow: var(--fui-shadow-lg);
-    transform-origin: top;
-    animation: fui-Popover-popover-in var(--fui-transition);
-  }
 
-  .fui-Popover-dropdown[data-position="bottom"] {
-    inset-block-start: calc(100% + var(--fui-space-xs));
-  }
-  .fui-Popover-dropdown[data-position="top"] {
-    inset-block-end: calc(100% + var(--fui-space-xs));
-    transform-origin: bottom;
-  }
+    /* Enhanced: top layer + anchor positioning, tethered to the trigger.
+       position-anchor / anchor-name are set from inline styles with a
+       per-instance name shared by Trigger and Popup. */
+    @supports (anchor-name: --fui-probe) {
+      position: fixed;
 
-  @keyframes fui-Popover-popover-in {
-    from {
-      opacity: 0;
-      transform: translateY(-4px) scale(0.98);
+      /* The UA gives [popover] `inset: 0`; clear it so only the insets each
+         branch sets take part, otherwise the box is over-constrained. */
+      inset: auto;
+      position-try: flip-block;
+      inset-inline-start: anchor(start);
+
+      &[data-position="bottom"] {
+        inset-block-start: calc(anchor(end) + var(--fui-space-xs));
+      }
+
+      &[data-position="top"] {
+        inset-block-end: calc(anchor(start) + var(--fui-space-xs));
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        opacity: 1;
+        translate: 0 0;
+        transition:
+          opacity var(--fui-duration-lg) var(--fui-ease),
+          translate var(--fui-duration-lg) var(--fui-ease),
+          display var(--fui-duration-lg) var(--fui-ease) allow-discrete,
+          overlay var(--fui-duration-lg) var(--fui-ease) allow-discrete;
+
+        @starting-style {
+          opacity: 0;
+          translate: 0 -0.25rem;
+        }
+
+        &[data-position="top"] {
+          @starting-style {
+            translate: 0 0.25rem;
+          }
+        }
+      }
+    }
+
+    /* Fallback: no anchor positioning (and no top layer) — anchor to the
+       wrapper as a normal absolutely-positioned panel. */
+    @supports not (anchor-name: --fui-probe) {
+      position: absolute;
+      z-index: 50;
+      inset-inline-start: 0;
+
+      &[data-position="bottom"] {
+        inset-block-start: calc(100% + var(--fui-space-xs));
+      }
+
+      &[data-position="top"] {
+        inset-block-end: calc(100% + var(--fui-space-xs));
+      }
     }
   }
-  .fui-Popover-dropdown[data-position="top"] {
-    animation-name: fui-Popover-popover-in-top;
+
+  .fui-Popover-title {
+    margin: 0;
+    font-size: var(--fui-text-md);
+    font-weight: 600;
   }
-  @keyframes fui-Popover-popover-in-top {
-    from {
-      opacity: 0;
-      transform: translateY(4px) scale(0.98);
+
+  .fui-Popover-description {
+    margin-block-end: 0;
+    margin-inline: 0;
+    color: var(--fui-text-muted);
+
+    &:not(.fui-Popover-title + *) {
+      margin-block-start: 0;
+    }
+
+    .fui-Popover-title + & {
+      margin-block-start: var(--fui-space-xs);
     }
   }
 }

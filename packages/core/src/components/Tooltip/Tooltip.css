@@ -1,106 +1,200 @@
-@layer farmui.components {
-  .fui-Tooltip-root {
+@scope (.fui-Tooltip-root) {
+  :scope {
     position: relative;
-    display: inline-block;
+    display: inline flow-root;
   }
+}
 
-  .fui-Tooltip-bubble {
-    --_gap: 0.5rem;
-    --_arrow: 5px;
+/* The bubble escapes into the top layer when enhanced, so it carries its
+   own scope. */
+@scope (.fui-Tooltip-popup) {
+  :scope {
+    --_gap: var(--fui-space-xs);
+    --_arrow: 0.3125rem;
 
-    position: absolute;
-    z-index: 40;
     inline-size: max-content;
     max-inline-size: 16rem;
+    margin: 0;
+
+    /* The UA gives [popover] `overflow: auto`, which would clip the arrow
+       poking outside the bubble. Tooltips never scroll. */
+    overflow: visible;
     padding-block: var(--fui-space-xs);
     padding-inline: var(--fui-space-sm);
+    border: 0;
     border-radius: var(--fui-radius-sm);
     background: var(--fui-text);
     color: var(--fui-bg);
-    font-family: var(--fui-font);
     font-size: var(--fui-text-xs);
-    font-weight: 500;
-    line-height: 1.35;
     text-align: center;
     white-space: normal;
     box-shadow: var(--fui-shadow-md);
-    pointer-events: none;
-    opacity: 0;
-    transition:
-      opacity var(--fui-transition),
-      transform var(--fui-transition);
+
+    /* Enhanced: top layer + anchor positioning. position-anchor /
+       anchor-name are set from inline styles with a per-instance name
+       shared by Trigger and Popup. */
+    @supports (anchor-name: --fui-probe) {
+      position: fixed;
+
+      /* The UA gives [popover] `inset: 0`; clear it so only the insets each
+         branch sets take part, otherwise the box is over-constrained. */
+      inset: auto;
+
+      /* Lets the arrow query which position-try fallback actually applied
+         (Chrome 143+; the declaration is inert elsewhere). Stylelint's CSS
+         data doesn't know the value yet. */
+      /* stylelint-disable-next-line declaration-property-value-no-unknown */
+      container-type: anchored;
+
+      &[data-position="top"] {
+        position-try: flip-block;
+        inset-block-end: calc(anchor(start) + var(--_gap));
+        justify-self: anchor-center;
+      }
+
+      &[data-position="bottom"] {
+        position-try: flip-block;
+        inset-block-start: calc(anchor(end) + var(--_gap));
+        justify-self: anchor-center;
+      }
+
+      &[data-position="left"] {
+        position-try: flip-inline;
+        inset-inline-end: calc(anchor(start) + var(--_gap));
+        align-self: anchor-center;
+      }
+
+      &[data-position="right"] {
+        position-try: flip-inline;
+        inset-inline-start: calc(anchor(end) + var(--_gap));
+        align-self: anchor-center;
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        opacity: 1;
+        scale: 1;
+        transition:
+          opacity var(--fui-duration-lg) var(--fui-ease),
+          scale var(--fui-duration-lg) var(--fui-ease),
+          display var(--fui-duration-lg) var(--fui-ease) allow-discrete,
+          overlay var(--fui-duration-lg) var(--fui-ease) allow-discrete;
+
+        @starting-style {
+          opacity: 0;
+          scale: 0.96;
+        }
+      }
+    }
+
+    /* Fallback: anchored to the wrapper. */
+    @supports not (anchor-name: --fui-probe) {
+      position: absolute;
+      z-index: 40;
+
+      /* translate is physical, inset-inline-* is flow-relative — the
+         centering shift must follow the text direction. */
+      &[data-position="top"] {
+        inset-block-end: calc(100% + var(--_gap));
+        inset-inline-start: 50%;
+
+        &:dir(ltr) {
+          translate: -50% 0;
+        }
+
+        &:dir(rtl) {
+          translate: 50% 0;
+        }
+      }
+
+      &[data-position="bottom"] {
+        inset-block-start: calc(100% + var(--_gap));
+        inset-inline-start: 50%;
+
+        &:dir(ltr) {
+          translate: -50% 0;
+        }
+
+        &:dir(rtl) {
+          translate: 50% 0;
+        }
+      }
+
+      &[data-position="left"] {
+        inset-inline-end: calc(100% + var(--_gap));
+        inset-block-start: 50%;
+        translate: 0 -50%;
+      }
+
+      &[data-position="right"] {
+        inset-inline-start: calc(100% + var(--_gap));
+        inset-block-start: 50%;
+        translate: 0 -50%;
+      }
+    }
   }
 
-  /* Placement — position + hidden-state offset for the scale/slide in. */
-  .fui-Tooltip-bubble[data-position="top"] {
-    inset-block-end: calc(100% + var(--_gap));
-    inset-inline-start: 50%;
-    transform: translateX(-50%) translateY(4px) scale(0.96);
-  }
-  .fui-Tooltip-bubble[data-position="bottom"] {
-    inset-block-start: calc(100% + var(--_gap));
-    inset-inline-start: 50%;
-    transform: translateX(-50%) translateY(-4px) scale(0.96);
-  }
-  .fui-Tooltip-bubble[data-position="left"] {
-    inset-inline-end: calc(100% + var(--_gap));
-    inset-block-start: 50%;
-    transform: translateY(-50%) translateX(4px) scale(0.96);
-  }
-  .fui-Tooltip-bubble[data-position="right"] {
-    inset-inline-start: calc(100% + var(--_gap));
-    inset-block-start: 50%;
-    transform: translateY(-50%) translateX(-4px) scale(0.96);
-  }
-
-  /* Revealed */
-  .fui-Tooltip-bubble[data-open][data-position="top"] {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0) scale(1);
-  }
-  .fui-Tooltip-bubble[data-open][data-position="bottom"] {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0) scale(1);
-  }
-  .fui-Tooltip-bubble[data-open][data-position="left"] {
-    opacity: 1;
-    transform: translateY(-50%) translateX(0) scale(1);
-  }
-  .fui-Tooltip-bubble[data-open][data-position="right"] {
-    opacity: 1;
-    transform: translateY(-50%) translateX(0) scale(1);
-  }
-
-  /* Arrow */
-  .fui-Tooltip-bubble[data-arrow]::after {
-    content: "";
+  /* Arrow — points back toward the trigger for the requested side. */
+  .fui-Tooltip-arrow {
     position: absolute;
     inline-size: 0;
     block-size: 0;
     border: var(--_arrow) solid transparent;
-  }
-  .fui-Tooltip-bubble[data-arrow][data-position="top"]::after {
-    inset-block-start: 100%;
-    inset-inline-start: 50%;
-    transform: translateX(-50%);
-    border-block-start-color: var(--fui-text);
-  }
-  .fui-Tooltip-bubble[data-arrow][data-position="bottom"]::after {
-    inset-block-end: 100%;
-    inset-inline-start: 50%;
-    transform: translateX(-50%);
-    border-block-end-color: var(--fui-text);
-  }
-  .fui-Tooltip-bubble[data-arrow][data-position="left"]::after {
-    inset-inline-start: 100%;
-    inset-block-start: 50%;
-    transform: translateY(-50%);
-    border-inline-start-color: var(--fui-text);
-  }
-  .fui-Tooltip-bubble[data-arrow][data-position="right"]::after {
-    inset-inline-end: 100%;
-    inset-block-start: 50%;
-    transform: translateY(-50%);
-    border-inline-end-color: var(--fui-text);
+
+    :scope[data-position="top"] & {
+      inset-block-start: 100%;
+      inset-inline-start: calc(50% - var(--_arrow));
+      border-block-start-color: var(--fui-text);
+    }
+
+    :scope[data-position="bottom"] & {
+      inset-block-end: 100%;
+      inset-inline-start: calc(50% - var(--_arrow));
+      border-block-end-color: var(--fui-text);
+    }
+
+    :scope[data-position="left"] & {
+      inset-inline-start: 100%;
+      inset-block-start: calc(50% - var(--_arrow));
+      border-inline-start-color: var(--fui-text);
+    }
+
+    :scope[data-position="right"] & {
+      inset-inline-end: 100%;
+      inset-block-start: calc(50% - var(--_arrow));
+      border-inline-end-color: var(--fui-text);
+    }
+
+    /* When position-try flipped the bubble, the arrow follows: it moves to
+       the opposite edge and points back at the trigger. Anchored container
+       queries are the only CSS signal for the applied fallback, so these
+       are inherently overrides of the requested side (per the Chrome
+       guide); browsers without them keep the requested-side arrow. */
+    @container anchored(fallback: flip-block) {
+      :scope[data-position="top"] & {
+        inset-block: auto 100%;
+        border-block-start-color: transparent;
+        border-block-end-color: var(--fui-text);
+      }
+
+      :scope[data-position="bottom"] & {
+        inset-block: 100% auto;
+        border-block-end-color: transparent;
+        border-block-start-color: var(--fui-text);
+      }
+    }
+
+    @container anchored(fallback: flip-inline) {
+      :scope[data-position="left"] & {
+        inset-inline: auto 100%;
+        border-inline-start-color: transparent;
+        border-inline-end-color: var(--fui-text);
+      }
+
+      :scope[data-position="right"] & {
+        inset-inline: 100% auto;
+        border-inline-end-color: transparent;
+        border-inline-start-color: var(--fui-text);
+      }
+    }
   }
 }

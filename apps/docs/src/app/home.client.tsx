@@ -67,8 +67,8 @@ export function HeroShowcase() {
       <div
         style={{ display: "flex", gap: "0.6rem", marginBlockStart: "0.25rem" }}
       >
-        <Button fullWidth>Save changes</Button>
-        <Button variant="light">Cancel</Button>
+        <Button>Save changes</Button>
+        <Button>Cancel</Button>
       </div>
     </div>
   );

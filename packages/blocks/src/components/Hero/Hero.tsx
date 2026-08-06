@@ -47,7 +47,7 @@ export function Hero({
             {actions && actions.length > 0 && (
               <div className="fui-Hero-actions">
                 {actions.map((action, i) => (
-                  <ActionButton key={i} size="lg" {...action} />
+                  <ActionButton key={i} {...action} />
                 ))}
               </div>
             )}

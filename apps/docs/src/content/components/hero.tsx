@@ -20,7 +20,7 @@ const doc: ComponentDoc = {
   description="FarmUI blocks give you production-ready sections — no design system to build, no CSS to babysit."
   actions={[
     { label: "Get started" },
-    { label: "Read the docs", variant: "outline" },
+    { label: "Read the docs", href: "/docs" },
   ]}
 />`,
       render: () => (
@@ -30,7 +30,7 @@ const doc: ComponentDoc = {
           description="FarmUI blocks give you production-ready sections — no design system to build, no CSS to babysit."
           actions={[
             { label: "Get started" },
-            { label: "Read the docs", variant: "outline" },
+            { label: "Read the docs", href: "/docs" },
           ]}
         />
       ),
@@ -44,7 +44,7 @@ const doc: ComponentDoc = {
   eyebrow="Analytics"
   title="Understand your customers in real time"
   description="Every event, every session, every funnel — streamed to a dashboard your whole team can read."
-  actions={[{ label: "Start free trial" }, { label: "Book a demo", variant: "light" }]}
+  actions={[{ label: "Start free trial" }, { label: "Book a demo" }]}
   media={
     <img
       src="/preview.png"
@@ -61,7 +61,7 @@ const doc: ComponentDoc = {
           description="Every event, every session, every funnel — streamed to a dashboard your whole team can read."
           actions={[
             { label: "Start free trial" },
-            { label: "Book a demo", variant: "light" },
+            { label: "Book a demo" },
           ]}
           media={
             <img
@@ -108,7 +108,7 @@ const doc: ComponentDoc = {
       name: "actions",
       type: "BlockAction[]",
       description:
-        'Call-to-action buttons, where BlockAction = { label: string; href?: string; variant?: "filled" | "light" | "outline" | "subtle" }.',
+        "Call-to-action buttons, where BlockAction = { label: string; href?: string }. The action row is a primary context, so the buttons take the brand colour.",
     },
     {
       name: "media",

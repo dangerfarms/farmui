@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/sync-css.mjs",
     "dev": "next dev --port 3007",
+    "prebuild": "node scripts/sync-css.mjs",
     "build": "next build",
     "start": "next start --port 3007",
     "check-types": "tsc --noEmit"

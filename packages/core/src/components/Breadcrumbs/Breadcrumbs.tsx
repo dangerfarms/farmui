@@ -1,76 +1,110 @@
-import {
-  Children,
-  cloneElement,
-  forwardRef,
-  Fragment,
-  isValidElement,
+import type {
+  AnchorHTMLAttributes,
+  CSSProperties,
+  HTMLAttributes,
+  ReactNode,
 } from "react";
-import type { HTMLAttributes, ReactElement, ReactNode } from "react";
 import { cx } from "../../utils";
-
-export interface BreadcrumbsProps extends Omit<
-  HTMLAttributes<HTMLElement>,
-  "children"
-> {
-  /**
-   * Node inserted between each item.
-   * @default "/"
-   */
-  separator?: ReactNode;
-  /** The breadcrumb items — links or plain text nodes. */
-  children?: ReactNode;
-}
+import { renderWithProps } from "../../render";
+import type { RenderProp } from "../../render";
 
 /**
  * Breadcrumbs — shows the path to the current page.
  *
- * Renders a `<nav>` labelled "Breadcrumbs" wrapping an ordered list. The last
- * item is marked `aria-current="page"` and styled as the current location.
+ * ```tsx
+ * <Breadcrumbs.Root>
+ *   <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
+ *   <Breadcrumbs.Item href="/settings">Settings</Breadcrumbs.Item>
+ *   <Breadcrumbs.Item current>Billing</Breadcrumbs.Item>
+ * </Breadcrumbs.Root>
+ * ```
+ *
+ * Items are links via `href` (the built-in element), plain text when
+ * `current`, or any element via `render` — e.g. a router link:
+ * `render={<Link href="/settings" />}`. The consumer marks the current page
+ * explicitly, so truncated paths ("Home / … / Billing") stay correct.
+ * Separators are CSS (`--_separator`), not DOM.
  */
-export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(
-  function Breadcrumbs({ separator = "/", className, children, ...rest }, ref) {
-    const items = Children.toArray(children);
-    const lastIndex = items.length - 1;
 
-    return (
-      <nav
-        ref={ref}
-        aria-label="Breadcrumbs"
-        className={cx("fui-Breadcrumbs-root", className)}
-        {...rest}
-      >
-        <ol className={"fui-Breadcrumbs-list"}>
-          {items.map((item, index) => {
-            const isLast = index === lastIndex;
-            const itemNode =
-              isLast && isValidElement(item)
-                ? cloneElement(
-                    item as ReactElement<{ "aria-current"?: string }>,
-                    { "aria-current": "page" },
-                  )
-                : item;
+export interface BreadcrumbsRootProps extends HTMLAttributes<HTMLElement> {
+  /** Separator glyph drawn between items (via CSS). @default "/" */
+  separator?: string;
+}
 
-            return (
-              <Fragment key={index}>
-                <li
-                  className={"fui-Breadcrumbs-item"}
-                  data-current={isLast || undefined}
-                >
-                  {itemNode}
-                </li>
-                {!isLast && (
-                  <li
-                    className={"fui-Breadcrumbs-separator"}
-                    aria-hidden="true"
-                  >
-                    {separator}
-                  </li>
-                )}
-              </Fragment>
-            );
-          })}
-        </ol>
-      </nav>
-    );
-  },
-);
+function BreadcrumbsRoot({
+  separator,
+  className,
+  style,
+  children,
+  ...rest
+}: BreadcrumbsRootProps) {
+  return (
+    <nav
+      aria-label="Breadcrumbs"
+      className={cx("fui-Breadcrumbs-root", className)}
+      style={
+        separator !== undefined
+          ? ({ ...style, "--_separator": `"${separator}"` } as CSSProperties)
+          : style
+      }
+      {...rest}
+    >
+      <ol className={"fui-Breadcrumbs-list"}>{children}</ol>
+    </nav>
+  );
+}
+
+/** Wiring the Item attaches to whatever it renders. */
+export interface BreadcrumbsItemRenderProps {
+  "aria-current": "page" | undefined;
+  children?: ReactNode;
+}
+
+export interface BreadcrumbsItemProps
+  extends AnchorHTMLAttributes<HTMLAnchorElement> {
+  /** Marks this item as the current page (`aria-current="page"`). */
+  current?: boolean;
+  /**
+   * Substitute the built-in element — e.g. a router link:
+   * `render={<Link href="/settings" />}`. Defaults to an `<a>` when `href`
+   * is given, plain text otherwise.
+   */
+  render?: RenderProp<BreadcrumbsItemRenderProps>;
+}
+
+function BreadcrumbsItem({
+  current,
+  render,
+  href,
+  className,
+  children,
+  ...rest
+}: BreadcrumbsItemProps) {
+  const wiring: BreadcrumbsItemRenderProps = {
+    "aria-current": current ? "page" : undefined,
+    children,
+  };
+
+  const content = render ? (
+    renderWithProps(render, wiring)
+  ) : href !== undefined ? (
+    <a href={href} className={className} {...rest} {...wiring}>
+      {children}
+    </a>
+  ) : (
+    <span className={className} {...(rest as HTMLAttributes<HTMLElement>)} {...wiring}>
+      {children}
+    </span>
+  );
+
+  return (
+    <li className={"fui-Breadcrumbs-item"} data-current={current || undefined}>
+      {content}
+    </li>
+  );
+}
+
+export const Breadcrumbs = {
+  Root: BreadcrumbsRoot,
+  Item: BreadcrumbsItem,
+};

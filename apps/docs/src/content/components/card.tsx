@@ -16,7 +16,7 @@ const doc: ComponentDoc = {
   <p style={{ margin: "0 0 1rem", color: "var(--fui-text-muted)" }}>
     Your team shipped 12 tasks this week. Review activity and plan the next sprint.
   </p>
-  <Button size="sm">View report</Button>
+  <Button>View report</Button>
 </Card>`,
       render: () => (
         <div style={{ maxInlineSize: "22rem", inlineSize: "100%" }}>
@@ -32,7 +32,7 @@ const doc: ComponentDoc = {
               Your team shipped 12 tasks this week. Review activity and plan the
               next sprint.
             </p>
-            <Button size="sm">View report</Button>
+            <Button>View report</Button>
           </Card>
         </div>
       ),
