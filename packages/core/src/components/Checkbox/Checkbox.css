@@ -23,9 +23,6 @@
    box is the scope root for everything inside it. */
 @scope (.fui-Checkbox-box) {
   :scope {
-    /* Glyph geometry is em-based on the fluid label size, so the box rides
-       the same container-relative scale as the text beside it (1.3889em ×
-       text-sm's 0.9rem max = the old 1.25rem md box). */
     --_box: 1.3889em;
 
     position: relative;
@@ -64,7 +61,7 @@
   }
 
   /* No forced-colors block is needed for the checked state: the tick/dash
-     are currentColor strokes, which survive forcing (verified by audit). */
+     are currentColor strokes, which survive forcing. */
   :scope:has(.fui-Checkbox-input:checked),
   :scope:has(.fui-Checkbox-input:indeterminate) {
     background: var(--fui-primary);
@@ -78,8 +75,6 @@
     outline-offset: 2px;
   }
 
-  /* Error state is detected from the input's own state: ARIA or native
-     constraint validation (:user-invalid). */
   :scope:has(.fui-Checkbox-input:is([aria-invalid="true"], :user-invalid)) {
     --fui-ring-color: var(--fui-danger-ring);
 

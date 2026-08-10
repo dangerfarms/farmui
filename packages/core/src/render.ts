@@ -3,11 +3,8 @@ import type { CSSProperties, ReactElement, ReactNode, Ref } from "react";
 import { cx } from "./utils";
 
 /**
- * Internal composition plumbing shared by compound components.
- *
- * A part like Popover.Trigger or Field.Control needs to attach wiring props
- * (ids, ARIA, handlers, anchor styles) to an element the consumer provides.
- * These helpers define the single merge contract for that:
+ * Composition plumbing shared by compound components — the single merge
+ * contract for attaching wiring props to a consumer-provided element:
  *
  * - event handlers: BOTH run — the element's own handler first, wiring second,
  *   so consumers can't accidentally disable wiring and wiring can't eat

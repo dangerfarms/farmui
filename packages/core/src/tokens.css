@@ -1,13 +1,8 @@
 /**
  * FarmUI — design tokens (the `farmui.tokens` layer).
- *
- * Every design decision, named. Components reference tokens — never raw
- * values — so theming is token remapping at any scope (`:root` for a brand,
- * a container for a mode, an instance for a one-off). Three bands:
- *
- *   1. Primitives        — raw material (font stacks, the colour scale)
- *   2. Semantic colour   — what the material means, theme-aware
- *   3. Interaction & scales — focus, disabled, type/space/radius/motion
+ * Components reference tokens, never raw values, so theming is token
+ * remapping at any scope. Bands: primitives → semantic colour →
+ * interaction & scales.
  */
 
 @layer farmui.tokens {
@@ -39,8 +34,6 @@
 
     /* Primary (brand) — remap this one line to rebrand the whole library */
     --fui-primary: var(--fui-green-600);
-    --fui-primary-hover: var(--fui-green-700);
-    --fui-primary-active: var(--fui-green-800);
     --fui-primary-soft: light-dark(var(--fui-green-50), oklch(30% 0.06 150deg));
     --fui-primary-contrast: oklch(99% 0 0deg);
     --fui-primary-ring: color-mix(
@@ -49,29 +42,19 @@
       transparent
     );
 
-    /* Status colors — each status carries the same family of derived tokens
-       as primary (base, hover, active, soft, ring) so a context region can
-       remap the primary family wholesale. Hover/active darken the base with
-       an 88%/78% mix; success aliases primary (the brand IS the success
-       colour), so its hover/active alias primary's. */
+    /* Each status carries the same derived family as primary (base, hover,
+       active, soft, ring) so a context region can remap the family
+       wholesale. Success aliases primary. */
     --fui-danger: light-dark(oklch(58% 0.2 25deg), oklch(66% 0.19 25deg));
-    --fui-danger-hover: color-mix(in oklch, var(--fui-danger) 88%, black);
-    --fui-danger-active: color-mix(in oklch, var(--fui-danger) 78%, black);
     --fui-danger-soft: light-dark(oklch(96% 0.03 25deg), oklch(32% 0.09 25deg));
     --fui-warning: light-dark(oklch(72% 0.16 75deg), oklch(79% 0.15 80deg));
-    --fui-warning-hover: color-mix(in oklch, var(--fui-warning) 88%, black);
-    --fui-warning-active: color-mix(in oklch, var(--fui-warning) 78%, black);
     --fui-warning-soft: light-dark(
       oklch(96% 0.05 85deg),
       oklch(34% 0.07 75deg)
     );
     --fui-info: light-dark(oklch(58% 0.16 245deg), oklch(68% 0.15 245deg));
-    --fui-info-hover: color-mix(in oklch, var(--fui-info) 88%, black);
-    --fui-info-active: color-mix(in oklch, var(--fui-info) 78%, black);
     --fui-info-soft: light-dark(oklch(96% 0.03 245deg), oklch(32% 0.08 250deg));
     --fui-success: var(--fui-primary);
-    --fui-success-hover: var(--fui-primary-hover);
-    --fui-success-active: var(--fui-primary-active);
     --fui-success-soft: var(--fui-primary-soft);
 
     /* Surfaces & text */
@@ -124,13 +107,9 @@
     /* Disabled controls — components may remap locally. */
     --fui-disabled-opacity: 0.55;
 
-    /* Fluid type scale — container-relative (cqi falls back to the small
-       viewport where no container is declared; declare
-       `container-type: inline-size` on a region for per-container fluidity).
-       Major Second (1.125) at 320px → Major Third (1.25) at 1240px, base
-       16→18px. Values below the base shrink little (sm) or gently invert
-       (xs) so small text never gets less legible on small screens.
-       @link https://utopia.fyi/type/calculator/?c=320,16,1.125,1240,18,1.25,4,2 */
+    /* Fluid type scale — cqi falls back to the small viewport where no
+       container is declared. Regenerate, don't hand-edit:
+       https://utopia.fyi/type/calculator/?c=320,16,1.125,1240,18,1.25,4,2 */
     --fui-text-xs: clamp(0.72rem, 0.8145rem - 0.122cqi, 0.7901rem);
     --fui-text-sm: clamp(0.8889rem, 0.885rem + 0.0193cqi, 0.9rem);
     --fui-text-md: clamp(1rem, 0.9565rem + 0.2174cqi, 1.125rem);
@@ -139,9 +118,9 @@
     --fui-text-2xl: clamp(1.4238rem, 1.1548rem + 1.3451cqi, 2.1973rem);
     --fui-text-3xl: clamp(1.6018rem, 1.2036rem + 1.9909cqi, 2.7466rem);
 
-    /* Fluid spacing scale — same parameters; current values are the
-       minimums, so nothing shrinks below today's spacing.
-       @link https://utopia.fyi/space/calculator/?c=320,16,1.125,1240,18,1.25&s=0.25|0.5|0.75,1.5 */
+    /* Fluid spacing scale — minimums are the fixed values, so nothing
+       shrinks below them. Regenerate, don't hand-edit:
+       https://utopia.fyi/space/calculator/?c=320,16,1.125,1240,18,1.25&s=0.25|0.5|0.75,1.5 */
     --fui-space-xs: clamp(0.25rem, 0.2391rem + 0.0543cqi, 0.2813rem);
     --fui-space-sm: clamp(0.5rem, 0.4783rem + 0.1087cqi, 0.5625rem);
     --fui-space-md: clamp(0.75rem, 0.7174rem + 0.163cqi, 0.8438rem);
@@ -170,21 +149,17 @@
       0 4px 8px -4px
         light-dark(oklch(20% 0.02 160deg / 10%), oklch(0% 0 0deg / 45%));
 
-    /* Motion — durations by intent, easings by feel.
-       sm: micro feedback (hovers, colour/border shifts)
-       md: default transitions
-       lg: overlay enter/exit, large movement
-       elastic: playful accents, used sparingly */
+    /* Motion — sm: micro feedback; md: default transitions; lg: overlay
+       enter/exit and large movement; elastic: sparingly. */
     --fui-duration-sm: 100ms;
     --fui-duration-md: 175ms;
     --fui-duration-lg: 300ms;
     --fui-ease: cubic-bezier(0.4, 0, 0.2, 1);
     --fui-ease-elastic: cubic-bezier(0.34, 1.56, 0.64, 1);
 
-    /* Control sizing has no tokens: the alignment contract between inputs
-       and buttons is a shared derived anatomy — padding-block --fui-space-sm
-       + font --fui-text-sm × line-height 1.2 + 1px borders — so controls
-       align by construction at every container width. See CONTRIBUTING. */
+    /* No control-sizing tokens: inputs and buttons align by a shared derived
+       anatomy (padding-block --fui-space-sm + --fui-text-sm × 1.2 + 1px
+       borders). Do not add height tokens. */
   }
 
   /* Manual theme override — light-dark() follows the computed color-scheme */
@@ -197,27 +172,13 @@
   }
 
   /*
-   * ── Contexts — contextual meaning as token re-answers ───────────────
-   * The vocabulary is `--fui-context: primary | success | warning | info
-   * | danger`. Declare it on any region (a style attribute or any CSS
-   * rule — no data attributes) and every FarmUI element inside re-answers
-   * the semantic tokens via a container style query. No component
-   * contains context code. The property inherits, so the nearest
-   * ancestor that sets it wins — a one-element region overrides its
-   * surroundings. (`primary` needs no token remap: it is what the tokens
-   * already say; components that are neutral at rest key it themselves.)
-   *
-   * Contexts re-answer semantic colour tokens ONLY (never spacing,
-   * sizing, or layout). Inversion needs no context: set
-   * `color-scheme: dark` on a region and every light-dark() token flips.
-   *
-   * Theme = :root scope, context = region scope — one mechanism.
+   * Contexts — `--fui-context: primary|success|warning|info|danger` on any
+   * region re-answers the semantic tokens via container style queries.
+   * Colour tokens ONLY — never spacing, sizing, or layout.
    */
   @container (style(--fui-context: danger)) {
     :where([class*="fui-"], [class*="fui-"] *) {
       --fui-primary: var(--fui-danger);
-      --fui-primary-hover: var(--fui-danger-hover);
-      --fui-primary-active: var(--fui-danger-active);
       --fui-primary-soft: var(--fui-danger-soft);
       --fui-primary-ring: var(--fui-danger-ring);
 
@@ -231,8 +192,6 @@
   @container (style(--fui-context: success)) {
     :where([class*="fui-"], [class*="fui-"] *) {
       --fui-primary: var(--fui-success);
-      --fui-primary-hover: var(--fui-success-hover);
-      --fui-primary-active: var(--fui-success-active);
       --fui-primary-soft: var(--fui-success-soft);
       --fui-primary-ring: var(--fui-success-ring);
       --fui-ring-color: var(--fui-success-ring);
@@ -242,8 +201,6 @@
   @container (style(--fui-context: warning)) {
     :where([class*="fui-"], [class*="fui-"] *) {
       --fui-primary: var(--fui-warning);
-      --fui-primary-hover: var(--fui-warning-hover);
-      --fui-primary-active: var(--fui-warning-active);
       --fui-primary-soft: var(--fui-warning-soft);
       --fui-primary-ring: var(--fui-warning-ring);
       --fui-ring-color: var(--fui-warning-ring);
@@ -253,8 +210,6 @@
   @container (style(--fui-context: info)) {
     :where([class*="fui-"], [class*="fui-"] *) {
       --fui-primary: var(--fui-info);
-      --fui-primary-hover: var(--fui-info-hover);
-      --fui-primary-active: var(--fui-info-active);
       --fui-primary-soft: var(--fui-info-soft);
       --fui-primary-ring: var(--fui-info-ring);
       --fui-ring-color: var(--fui-info-ring);

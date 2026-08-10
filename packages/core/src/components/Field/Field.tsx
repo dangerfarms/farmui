@@ -59,9 +59,9 @@ function useFieldContext(part: string): FieldContextValue {
  * Read the accessibility props for a control from its surrounding Field.
  *
  * Returns `{}` when used outside a `Field.Root`, so a control can wire itself
- * to the Field when composed inside one (the Base UI pattern —
- * `<Field.Label><Checkbox /> …</Field.Label>`) and fall back to its own props
- * when used standalone. The shape matches {@link FieldControlRenderProps}.
+ * to the Field when composed inside one
+ * (`<Field.Label><Checkbox /> …</Field.Label>`) and fall back to its own
+ * props when used standalone. The shape matches {@link FieldControlRenderProps}.
  */
 export function useFieldControlProps(): Partial<FieldControlRenderProps> {
   const ctx = useContext(FieldContext);
@@ -142,10 +142,7 @@ function FieldRoot({ id, className, children, ...rest }: FieldRootProps) {
 }
 
 export interface FieldLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
-  /**
-   * Mark the field optional in text (GOV.UK guidance: prefer the word
-   * "optional" over a required asterisk).
-   */
+  /** Mark the field optional in text rather than with a required asterisk. */
   optional?: boolean;
 }
 

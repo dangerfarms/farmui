@@ -36,9 +36,9 @@ export type CheckboxControlProps = Omit<
 
 /**
  * CheckboxControl — the bare box + `<input type="checkbox">`. When rendered
- * inside a `Field` it reads its id / describedby / aria-invalid from context (the
- * Base UI pattern: `<Field.Label><Checkbox /> …</Field.Label>`); otherwise it
- * uses its own props.
+ * inside a `Field` it reads its id / describedby / aria-invalid from context
+ * (`<Field.Label><Checkbox /> …</Field.Label>`); otherwise it uses its own
+ * props.
  */
 const CheckboxControl = forwardRef<HTMLInputElement, CheckboxControlProps>(
   function CheckboxControl(

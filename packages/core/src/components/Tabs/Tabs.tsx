@@ -213,11 +213,9 @@ export function TabsPanel({
   const selected = active === value;
   const ref = useRef<HTMLDivElement>(null);
 
-  // Inactive panels hide with `hidden="until-found"` where supported, so
-  // find-in-page and text-fragment links can reach their content; the
-  // browser fires `beforematch` when a match lands in a hidden panel and we
-  // activate that tab. React normalises `hidden` to a boolean, so the
-  // attribute value is set imperatively. Elsewhere: plain boolean hidden.
+  // hidden="until-found" lets find-in-page reach inactive panels;
+  // `beforematch` activates the matched tab. React normalises `hidden` to a
+  // boolean, so the attribute value must be set imperatively.
   const untilFound =
     typeof HTMLElement !== "undefined" &&
     "onbeforematch" in HTMLElement.prototype;

@@ -55,8 +55,6 @@
     );
   }
 
-  /* Error state is detected from the select's own state: ARIA or native
-     constraint validation (:user-invalid). */
   :scope:has(.fui-Select-select:is([aria-invalid="true"], :user-invalid)) {
     --fui-ring-color: var(--fui-danger-ring);
 
@@ -83,8 +81,6 @@
     color: inherit;
     font: inherit;
     cursor: pointer;
-
-    /* Strip the native arrow so our chevron is the only one. */
     appearance: none;
   }
 

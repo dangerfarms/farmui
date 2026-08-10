@@ -226,8 +226,7 @@ function MenuTrigger({ render, children, ...rest }: MenuTriggerProps) {
   };
 
   return render ? (
-    // Consumer props on the part merge into the render element per the
-    // same contract (previously they were silently dropped).
+    // Consumer props on the part must merge into the render element, not drop.
     <>{renderWithProps(render, (mergeProps(triggerProps as unknown as AnyRenderProps, { children, ...rest }) as unknown as typeof triggerProps))}</>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, triggerProps)}</>
@@ -293,7 +292,6 @@ function MenuPopup({
     }
   }, [open, ctx.focusOnOpen, ctx.triggerRef, ref]);
 
-  // Fallback path: outside click and Escape, only while open.
   useEffect(() => {
     if (enhanced || !open) return;
     const onPointer = (e: MouseEvent) => {

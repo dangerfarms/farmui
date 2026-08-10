@@ -130,13 +130,11 @@ export const TogglesAndDismisses: Story = {
     const popup = await within(document.body).findByRole("dialog");
     await expect(popup).toBeVisible();
 
-    // Light dismiss via outside click.
     await userEvent.click(document.body);
     await waitFor(() =>
       expect(trigger).toHaveAttribute("aria-expanded", "false"),
     );
 
-    // Reopen, then Escape closes.
     await userEvent.click(trigger);
     await expect(trigger).toHaveAttribute("aria-expanded", "true");
     await userEvent.keyboard("{Escape}");

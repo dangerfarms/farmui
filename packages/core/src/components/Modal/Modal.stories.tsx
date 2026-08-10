@@ -135,7 +135,6 @@ export const OpensAndDismisses: Story = {
     await expect(dialog.open).toBe(true);
     await expect(trigger).toHaveAttribute("data-popup-open", "true");
 
-    // Native Escape handling closes and restores focus to the opener.
     await userEvent.keyboard("{Escape}");
     await waitFor(() => expect(dialog.open).toBe(false));
     await waitFor(() =>

@@ -1,8 +1,6 @@
 /*
- * Field — authored the modern way: styles are encapsulated with @scope instead
- * of BEM specificity games, and the parts are targeted from within that scope.
- * The root still carries a `fui-` class so the scope root is unambiguous and
- * app styles can find it.
+ * Field — parts are targeted from within the @scope; the root keeps a
+ * `fui-` class so the scope root is unambiguous and app styles can find it.
  */
 @scope (.fui-Field-root) {
   :scope {
@@ -38,13 +36,9 @@
   }
 }
 
-/*
- * Error state is detected, not declared: a field is invalid when it contains
- * a rendered error message — or when the platform itself says so
- * (:user-invalid from native constraint validation, e.g. `required` or
- * `type="email"`, after the user has interacted). Tint the label to
- * reinforce it.
- */
+/* Error state is detected, not declared: a field is invalid when it
+   contains a rendered error message, or when the platform says so
+   (:user-invalid after user interaction). */
 @scope (.fui-Field-root:has(.fui-Field-error, :user-invalid)) {
   .fui-Field-label {
     color: var(--fui-danger);

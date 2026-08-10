@@ -190,14 +190,12 @@ export const OpensNavigatesAndDismisses: Story = {
     });
     await waitFor(() => expect(rename).toHaveFocus());
 
-    // Roving focus: ArrowDown moves to the next item.
     await userEvent.keyboard("{ArrowDown}");
     const duplicate = within(document.body).getByRole("menuitem", {
       name: /duplicate/i,
     });
     await expect(duplicate).toHaveFocus();
 
-    // Escape closes and returns focus to the trigger.
     await userEvent.keyboard("{Escape}");
     await waitFor(() =>
       expect(trigger).toHaveAttribute("aria-expanded", "false"),

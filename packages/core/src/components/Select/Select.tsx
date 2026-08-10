@@ -61,7 +61,6 @@ const SelectControl = forwardRef<HTMLSelectElement, SelectControlProps>(
     ref,
   ) {
     const { nativeInvalid, checkOnBlur, checkOnInvalid } = useUserInvalid();
-    // With a placeholder and no explicit value, default to the empty option.
     const isControlled = value !== undefined;
     const resolvedDefault =
       !isControlled && defaultValue === undefined && placeholder

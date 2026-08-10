@@ -151,18 +151,14 @@ export const RevealsAndDismisses: Story = {
       trigger.getAttribute("aria-describedby")!.split(" ").pop()!,
     )!;
 
-    // Static description link, bubble hidden until interaction.
     await expect(tooltip).not.toBeVisible();
 
-    // Hover reveals.
     await userEvent.hover(trigger);
     await waitFor(() => expect(tooltip).toBeVisible());
 
-    // Escape dismisses while pointer and focus stay put.
     await userEvent.keyboard("{Escape}");
     await waitFor(() => expect(tooltip).not.toBeVisible());
 
-    // Keyboard focus reveals immediately.
     await userEvent.unhover(trigger);
     await userEvent.tab();
     await expect(trigger).toHaveFocus();

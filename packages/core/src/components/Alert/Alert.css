@@ -1,12 +1,6 @@
 /*
- * Alert — contextualism model.
- *
- * One colour channel (--_accent); the whole look is DERIVED from it: the
- * soft background and border via color-mix toward the page background, the
- * accent bar and icon in the channel itself, the title in a text-strength
- * mix of the channel. Status is decided by context, not props: a
- * `--fui-context: primary | success | warning | info | danger` region
- * re-answers the channel; neutral (page text) otherwise. The message stays
+ * Alert — one colour channel (--_accent); the whole look derives from it.
+ * Status is decided by context, not props. The message stays
  * --fui-text-based so long copy remains readable on the tint.
  */
 @scope (.fui-Alert-root) {

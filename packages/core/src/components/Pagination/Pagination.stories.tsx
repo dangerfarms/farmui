@@ -76,17 +76,14 @@ export const NavigatesPages: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    // Page 1 starts active.
     const page1 = canvas.getByRole("button", { name: "Page 1" });
     await expect(page1).toHaveAttribute("aria-current", "page");
 
-    // Click "Next page" → page 2 becomes active.
     await userEvent.click(canvas.getByRole("button", { name: "Next page" }));
     const page2 = canvas.getByRole("button", { name: "Page 2" });
     await expect(page2).toHaveAttribute("aria-current", "page");
     await expect(page1).not.toHaveAttribute("aria-current");
 
-    // Jump directly to page 4 by clicking its number.
     await userEvent.click(canvas.getByRole("button", { name: "Page 4" }));
     const page4 = canvas.getByRole("button", { name: "Page 4" });
     await expect(page4).toHaveAttribute("aria-current", "page");

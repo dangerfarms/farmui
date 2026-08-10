@@ -207,3 +207,6 @@ export function componentsByCategory() {
     items: COMPONENTS.filter((c) => c.category === category),
   })).filter((g) => g.items.length > 0);
 }
+
+/** The canonical "browse components" destination: the first item in nav order. */
+export const FIRST_COMPONENT_HREF = `/docs/components/${COMPONENTS[0]?.slug ?? ""}`;

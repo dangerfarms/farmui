@@ -50,8 +50,7 @@ import { Button } from "../Button/Button";
  *
  * Toasts are for confirmations and background events — never for errors the
  * user must fix (use Field errors or an Alert in place), and never as the
- * only record of something important (GOV.UK: don't rely on transient
- * messages).
+ * only record of something important.
  */
 
 export interface ToastOptions {
@@ -116,9 +115,8 @@ function ToastProvider({
   children,
 }: ToastProviderProps) {
   const [toasts, setToasts] = useState<ToastData[]>([]);
-  // Mirror of `toasts`, updated at every mutation site, so `add` can compute
-  // the next list (and which toasts get dropped) without side effects inside
-  // the state updater.
+  // Mirror of `toasts` so `add` can compute the next list (and which toasts
+  // get dropped) without side effects inside the state updater.
   const toastsRef = useRef<ToastData[]>([]);
   const [exiting, setExiting] = useState<ReadonlySet<string>>(new Set());
   // Per-toast countdown bookkeeping so pause/resume keeps the remaining time.
@@ -189,7 +187,6 @@ function ToastProvider({
       const appended = prev.some((t) => t.id === id)
         ? prev.map((t) => (t.id === id ? data : t))
         : [...prev, data];
-      // Over the limit: drop the oldest (their timers go too).
       const dropIndex = Math.max(0, appended.length - limit);
       for (const dropped of appended.slice(0, dropIndex)) {
         const timer = timers.current.get(dropped.id);
@@ -267,10 +264,9 @@ function ToastViewport({ className, children, ...rest }: ToastViewportProps) {
     [],
   );
 
-  // The viewport lives in the top layer permanently (popover="manual" is
-  // never light-dismissed) so that toasts inserted into it are announced by
-  // their live-region roles — a hidden container would swallow the first
-  // announcement.
+  // The viewport stays in the top layer permanently so toasts inserted into
+  // it are announced by their live-region roles — a hidden container would
+  // swallow the first announcement.
   useEffect(() => {
     const el = ref.current;
     if (!el || !enhanced) return;
@@ -392,8 +388,7 @@ function ToastAction({
     },
   };
   return render ? (
-    // Consumer props on the part merge into the render element per the
-    // same contract (previously they were silently dropped).
+    // Consumer props on the part must merge into the render element, not drop.
     <>{renderWithProps(render, (mergeProps(actionProps as unknown as AnyRenderProps, { children, ...rest }) as unknown as typeof actionProps))}</>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, actionProps)}</>

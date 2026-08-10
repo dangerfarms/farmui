@@ -1,25 +1,8 @@
 /**
- * FarmUI — layout compositions (the `farmui.layout` layer).
- *
- * Layout is CSS's job, so these are CSS, not components: small algorithmic
- * compositions (after the Every Layout school) that manage themselves from
- * their content and container — no media queries, no JavaScript, no React
- * API. Apply the class to any element; tune the knobs with the registered
- * `--fui-*` custom properties, whose defaults come from the fluid space
- * scale so spacing stays token-disciplined.
- *
- *   <div class="fui-sidebar" style="--fui-sidebar-side: 18rem">
- *     <nav>…</nav>
- *     <main>…</main>
- *   </div>
- *
- * A visual editor (the white-label CMS case) binds its layout controls to
- * exactly this surface: a class name plus token-valued properties —
- * serialisable, theme-aware per tenant, zero runtime.
- *
- * Judgment is baked in rather than documented-and-hoped: rows always wrap,
- * alignment is overflow-`safe`, and nothing here reorders content visually
- * (visual order must follow DOM order, or tab order lies).
+ * FarmUI — layout compositions (the `farmui.layout` layer): class-based,
+ * knob-tuned via `--fui-*` custom properties; no media queries, no JS.
+ * Rows always wrap, alignment is overflow-`safe`, and nothing here reorders
+ * content visually (visual order must follow DOM order, or tab order lies).
  */
 
 /* Knobs are registered `inherits: false` so a nested composition never
@@ -123,11 +106,9 @@
   }
 
   /*
-   * Switcher — a row that becomes a column the moment the container is
-   * narrower than the threshold; every child gets equal width in both
-   * arrangements. The flex-basis trick: below the threshold the calc goes
-   * hugely positive, forcing each item past the container width so all
-   * wrap; above it, hugely negative, so items sit on one line and share it.
+   * Switcher — row that becomes a column below the threshold, equal widths
+   * both ways. The ×999 flex-basis goes hugely positive below the threshold
+   * (all wrap) and hugely negative above (one shared line).
    * Knobs: --fui-switcher-threshold, --fui-switcher-gap.
    */
   @scope (.fui-switcher) {
@@ -146,14 +127,10 @@
   }
 
   /*
-   * Sidebar — a fixed-preference side element beside a fluid content
-   * element; stacks the moment the content would drop below its minimum
-   * share. The side is whichever child is NOT the content (the one with
-   * grow 999); reversing sides is a DOM-order change, deliberately — a
-   * visual-only reversal would detach tab order from what the user sees.
-   * Knobs: --fui-sidebar-side (the side's preferred width),
-   * --fui-sidebar-content-min (content's minimum share before stacking),
-   * --fui-sidebar-gap.
+   * Sidebar — fixed-preference side beside fluid content; stacks when the
+   * content would drop below its minimum share. Reversing sides is a
+   * DOM-order change, deliberately — visual-only reversal detaches tab order.
+   * Knobs: --fui-sidebar-side, --fui-sidebar-content-min, --fui-sidebar-gap.
    */
   @scope (.fui-sidebar) {
     :scope {
@@ -175,12 +152,9 @@
   }
 
   /*
-   * Grid — as many equal columns as fit, each at least the minimum; columns
-   * grow to share the remainder. The min() guard stops the minimum itself
-   * from overflowing containers narrower than one column. Explicit-span
-   * grids (a 12-column skeleton) are not a composition — write grid CSS;
-   * see the layout guide's decision tree.
-   * Knobs: --fui-grid-min, --fui-grid-gap.
+   * Grid — as many equal columns as fit, each at least the minimum. The
+   * min() guard stops the minimum itself from overflowing containers
+   * narrower than one column. Knobs: --fui-grid-min, --fui-grid-gap.
    */
   @scope (.fui-grid) {
     :scope {
@@ -223,9 +197,8 @@
   }
 
   /*
-   * Center — centre a column of content at a readable measure. Centring a
-   * single item on both axes is one declaration (`place-content: center` on
-   * a grid), not a composition. Knob: --fui-center-max.
+   * Center — centre a column of content at a readable measure.
+   * Knob: --fui-center-max.
    */
   @scope (.fui-center) {
     :scope {

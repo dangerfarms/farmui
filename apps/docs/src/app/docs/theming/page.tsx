@@ -20,41 +20,56 @@ export default function Theming() {
 
       <h2>Rebrand in one line</h2>
       <p>
-        The single most important token is <code>--fui-primary</code>. Change it
-        and the whole library follows:
+        The single most important token is <code>--fui-primary</code>. It is
+        genuinely one line — hover and active states are <em>derived</em>{" "}
+        from it, so there are no companion tokens to keep in sync:
       </p>
       <div className={prose.block}>
         <CodeBlock
           language="css"
           code={`:root {
-  --fui-primary: oklch(0.62 0.2 275);       /* violet */
-  --fui-primary-hover: oklch(0.55 0.2 275);
-  --fui-primary-active: oklch(0.48 0.19 275);
+  --fui-primary: oklch(0.62 0.2 275); /* violet */
 }`}
         />
       </div>
-
-      <p>Scope it to a subtree to theme just part of a page:</p>
+      <p>
+        The brand colour appears wherever the design says primary: focus
+        rings, checked states, carets, text selection, and{" "}
+        <code>primary</code> context regions. (Buttons are neutral by
+        default — the demo below is wrapped in a primary region so you can
+        see the change.) Scope the token to a subtree to theme just part of
+        a page:
+      </p>
       <div className={prose.block}>
-        <div
-          style={
-            {
-              "--fui-primary": "oklch(0.62 0.2 275)",
-              "--fui-primary-hover": "oklch(0.55 0.2 275)",
-              "--fui-primary-active": "oklch(0.48 0.19 275)",
-              "--fui-primary-soft": "oklch(0.95 0.03 275)",
-              "--fui-context": "primary",
-              display: "flex",
-              gap: "0.75rem",
-              flexWrap: "wrap",
-              padding: "1.5rem",
-              border: "1px solid var(--fui-border)",
-              borderRadius: "var(--fui-radius-lg)",
-            } as React.CSSProperties
-          }
-        >
-          <Button>Violet primary</Button>
-          <Button>Another button</Button>
+        <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+          <div
+            style={
+              {
+                "--fui-context": "primary",
+                padding: "1.5rem",
+                border: "1px solid var(--fui-border)",
+                borderRadius: "var(--fui-radius-lg)",
+              } as React.CSSProperties
+            }
+          >
+            <Button>Default brand</Button>
+          </div>
+          <div
+            style={
+              {
+                "--fui-primary":
+                  "light-dark(oklch(0.62 0.2 275), oklch(0.72 0.17 275))",
+                "--fui-primary-soft":
+                  "light-dark(oklch(0.95 0.03 275), oklch(0.32 0.06 275))",
+                "--fui-context": "primary",
+                padding: "1.5rem",
+                border: "1px solid var(--fui-border)",
+                borderRadius: "var(--fui-radius-lg)",
+              } as React.CSSProperties
+            }
+          >
+            <Button>Violet brand</Button>
+          </div>
         </div>
       </div>
 
@@ -129,24 +144,29 @@ document.documentElement.dataset.theme = "dark";
         Contexts remap <em>semantic colour tokens only</em> — never spacing,
         sizing, or layout. The vocabulary is <code>primary</code>,{" "}
         <code>danger</code>, <code>success</code>, <code>warning</code> and{" "}
-        <code>info</code>. No component has a variant or colour prop —
-        anywhere. A single danger button is just a one-element region — a
-        wrapper (
+        <code>info</code>, and no component has a variant or colour prop —
+        anywhere. The status components (Alert, Badge, Loader, Progress)
+        declare their meaning the same way as everything else.
+      </p>
+      <p>
+        A single danger button is a one-element region — a wrapper (
         <code>{`<span style={{ "--fui-context": "danger" }}><Button>Delete</Button></span>`}</code>
         ), because a style query is answered by ancestors, never by the
-        element that declares the property. The status components (Alert,
-        Badge, Loader, Progress) declare their meaning the same way, and
-        because the property inherits, the nearest ancestor that sets it wins. An inverted &ldquo;on-dark&rdquo; section needs no context at
-        all — set <code>color-scheme: dark</code> on the region and every{" "}
+        element that declares the property. The property inherits, so the
+        nearest ancestor that sets it wins.
+      </p>
+      <p>
+        An inverted &ldquo;on-dark&rdquo; section needs no context at all —
+        set <code>color-scheme: dark</code> on the region and every{" "}
         <code>light-dark()</code> token flips. One caveat: colours already
         resolved on an ancestor inherit as resolved values and don&rsquo;t
         re-resolve, so the inverted region must also re-declare{" "}
-        <code>color</code> (e.g. <code>color: var(--fui-text)</code>) on
-        itself for descendants to pick up the flipped value.
+        <code>color</code> (e.g. <code>color: var(--fui-text)</code>) for
+        descendants to pick up the flipped value.
       </p>
       <div className={prose.callout}>
         Theme, context, and instance are one mechanism at three scopes: remap
-        tokens on <code>:root</code> to theme a tenant, declare a context on a
+        tokens on <code>:root</code> to set a brand, declare a context on a
         region to give it meaning, set a property on an instance to override
         one control.
       </div>
@@ -155,8 +175,9 @@ document.documentElement.dataset.theme = "dark";
       <p>The most useful tokens to override:</p>
       <ul>
         <li>
-          <code>--fui-primary</code> / <code>--fui-primary-hover</code> /{" "}
-          <code>--fui-primary-active</code> — brand color
+          <code>--fui-primary</code> / <code>--fui-primary-soft</code> —
+          brand colour and its soft tint (hover/active are derived; there is
+          nothing else to sync)
         </li>
         <li>
           <code>--fui-bg</code>, <code>--fui-surface</code>,{" "}
@@ -168,7 +189,9 @@ document.documentElement.dataset.theme = "dark";
           rounding
         </li>
         <li>
-          <code>--fui-font-sans</code> — the UI font family
+          <code>--fui-font-sans</code> — the UI font family (an input hook:
+          unset by default, and anything you set flows through the whole
+          stack)
         </li>
         <li>
           <code>--fui-duration-sm/md/lg</code>, <code>--fui-ease</code> —
@@ -205,8 +228,9 @@ document.documentElement.dataset.theme = "dark";
       </p>
 
       <div className={prose.callout}>
-        Because tokens cascade, you can even theme per-tenant or per-section by
-        setting variables on a wrapper element — perfect for white-label apps.
+        Because tokens cascade, you can theme per-brand or per-section by
+        setting variables on any wrapper element — the whole theme is just
+        values in the cascade.
       </div>
 
       <h2>Extending &amp; overriding styles</h2>
@@ -268,7 +292,10 @@ document.documentElement.dataset.theme = "dark";
       <div className={prose.block}>
         <CodeBlock
           language="css"
-          code={`@layer farmui.components, app;
+          code={`/* Declare the full order once — correct wherever it appears,
+   before or after importing FarmUI's stylesheet. */
+@layer farmui.reset, farmui.tokens, farmui.elements, farmui.layout,
+  farmui.components, app;
 
 @layer app {
   .fui-Tabs-tab {

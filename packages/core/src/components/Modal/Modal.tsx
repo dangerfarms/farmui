@@ -91,7 +91,7 @@ function ModalRoot({
   const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);
   const open = openProp ?? uncontrolledOpen;
   const [titleCount, setTitleCount] = useState(0);
-  // The guide's mandated probe — never window/document.
+  // Feature-probe the element prototype, never window/document.
   const [invokers, setInvokers] = useState(false);
   useEffect(
     () => setInvokers("commandForElement" in HTMLButtonElement.prototype),
@@ -198,8 +198,7 @@ function ModalTrigger({ render, children, ...rest }: ModalTriggerProps) {
   };
 
   return render ? (
-    // Consumer props on the part merge into the render element per the
-    // same contract (previously they were silently dropped).
+    // Consumer props on the part must merge into the render element, not drop.
     <>{renderWithProps(render, (mergeProps(triggerProps as unknown as AnyRenderProps, { children, ...rest }) as unknown as typeof triggerProps))}</>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, triggerProps)}</>
@@ -375,8 +374,7 @@ function ModalClose({ render, children, ...rest }: ModalCloseProps) {
     },
   };
   return render ? (
-    // Consumer props on the part merge into the render element per the
-    // same contract (previously they were silently dropped).
+    // Consumer props on the part must merge into the render element, not drop.
     <>{renderWithProps(render, (mergeProps(closeProps as unknown as AnyRenderProps, { children, ...rest }) as unknown as typeof closeProps))}</>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, closeProps)}</>

@@ -26,7 +26,6 @@
     min-inline-size: 0;
   }
 
-  /* Separator lives in CSS, not the DOM — themeable via --_separator. */
   :scope:not(:first-child)::before {
     content: var(--_separator, "/");
     margin-inline-end: var(--fui-space-sm);
@@ -34,7 +33,6 @@
     user-select: none;
   }
 
-  /* Links inside a breadcrumb */
   :scope :where(a) {
     color: var(--fui-text-muted);
     text-decoration: none;

@@ -21,8 +21,6 @@
    inside a Field) sizes itself without the labelled wrapper. */
 @scope (.fui-Switch-control) {
   :scope {
-    /* Em-based track on the fluid label size (× 0.9rem at the clamp max =
-       the old 2.5 × 1.375rem md track). Thumb and travel stay derived. */
     --_track-w: 2.7778em;
     --_track-h: 1.5278em;
     --_gap: 0.2083em;

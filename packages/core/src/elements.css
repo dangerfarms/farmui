@@ -1,22 +1,11 @@
 /**
  * FarmUI — base element defaults (the `farmui.elements` layer).
- *
- * Shared, low-level defaults set ONCE here so components inherit them instead
- * of re-declaring them in every stylesheet: typography, text colour, the
- * focus-ring standard, disabled cursor, and interactive polish (tap
- * highlight, caret/accent/selection colours). Everything is
- * scoped to what FarmUI renders (`:where([class*="fui-"])`) — FarmUI ships no
- * provider and must never restyle the host page, so there are no global `*`,
- * `html`, or `body` rules. Selectors use `:where()` (zero specificity) so both
- * component styles and app styles win effortlessly.
- *
- * Layer order (see styles.css): reset < tokens < elements < components.
- * The only permitted override is components over elements — which is exactly
- * how a component reassigns a default it needs to change.
+ * Everything is scoped to `:where([class*="fui-"])` at zero specificity —
+ * FarmUI must never restyle the host page: no `*`, `html`, or `body` rules.
+ * Components override these defaults only via the components layer.
  */
 
 @layer farmui.elements {
-  /* Typography, set once for everything FarmUI renders. */
   :where([class*="fui-"]) {
     font-family: var(--fui-font);
     line-height: 1.5;
@@ -29,16 +18,9 @@
     color: var(--fui-text);
   }
 
-  /*
-   * Focus ring standard: a two-layer ring everywhere — a background-colour
-   * underlay (box-shadow) beneath a brand outline, so the ring reads on
-   * light, dark, and mid-tone surfaces alike. The outline (not the shadow)
-   * carries the a11y guarantee: it survives forced-colors mode, follows
-   * border-radius, and is never clipped by ancestor overflow. Components
-   * relocate the ring (e.g. to a field wrapper) or restyle it via the
-   * components layer — the sanctioned override — and invalid fields remap
-   * --fui-ring-color to the danger ring.
-   */
+  /* Two-layer focus ring: bg-colour underlay (box-shadow) beneath a brand
+     outline. The outline, not the shadow, carries the a11y guarantee — it
+     survives forced-colors, follows radius, and isn't clipped by overflow. */
   :where([class*="fui-"]):focus-visible,
   :where([class*="fui-"]) :where(a, button, input, select, textarea, [tabindex]):focus-visible {
     box-shadow: 0 0 0 2px var(--fui-bg);
@@ -58,8 +40,6 @@
     cursor: not-allowed;
   }
 
-  /* Interactive polish: no mobile tap flash; brand-coloured caret, native
-     control accents, and text selection. */
   :where([class*="fui-"]) :where(a, button, input, select, textarea, [role="button"]),
   :where(a, button)[class*="fui-"] {
     -webkit-tap-highlight-color: transparent;
@@ -82,13 +62,11 @@
     letter-spacing: inherit;
   }
 
-  /* Headings: tighter leading and balanced wrapping for short, bold text. */
   :where([class*="fui-"]) :is(h1, h2, h3, h4, h5, h6) {
     line-height: 1.2;
     text-wrap: balance;
   }
 
-  /* Long-form copy: nicer last lines and no overflow from long words/URLs. */
   :where([class*="fui-"]) p {
     overflow-wrap: break-word;
     text-wrap: pretty;
@@ -100,7 +78,6 @@
     text-decoration-skip-ink: auto;
   }
 
-  /* Media never overflows its component box. */
   :where([class*="fui-"]) :is(img, svg, video, canvas) {
     max-inline-size: 100%;
   }

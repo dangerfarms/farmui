@@ -1,15 +1,6 @@
 /**
- * FarmUI — @farmui/core stylesheet entry.
- *
- * Import once at your app root:
- *   import "@farmui/core/styles.css";
- *
- * Everything is a CSS custom property, so you theme FarmUI by overriding
- * `--fui-*` tokens on :root (or any scope) — no providers, no JS.
- * Light/dark is native via `light-dark()`; toggle by setting `color-scheme`
- * (wired to [data-theme] in tokens.css).
- *
- * This file only orchestrates: the cascade-layer order, then imports.
+ * FarmUI — @farmui/core stylesheet entry: the cascade-layer order, then
+ * imports. Import once at your app root: `import "@farmui/core/styles.css"`.
  * Component files contain no `@layer` — the layer is assigned here (and by
  * scripts/build-css.mjs for the built artifact).
  */

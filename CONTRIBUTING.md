@@ -89,6 +89,25 @@ Guardrails enforce this: `pnpm lint` runs oxlint + stylelint
   `--force-high-contrast` flag; remember the override must come *after* the
   base rule it replaces (same specificity — order decides).
 
+## Voice standards
+
+**Docs speak in the indicative mood about what the library is.** No
+"proposal", "experimental", "for now", no references to internal reviews or
+decisions, no migration notes for APIs that never shipped. Uncertainty is
+documentable only as platform fact ("Baseline Newly Available since …;
+older Firefox renders the neutral default"). Rationale belongs in docs —
+confidently ("FarmUI ships no spacer component: `gap` replaced spacers") —
+process belongs in DECISIONS.md.
+
+**A code comment earns its place only if it states a constraint or platform
+trap the next edit would otherwise violate, in ≤3 lines.** The test: cover
+the code, read the comment — if you now know nothing the code wouldn't have
+told you, it's noise ("em-based" above `em` values, "flex layout" above
+`display: flex`). History
+("previously…"), philosophy, citations, and architecture narrative live in
+DECISIONS.md and the docs site. JSDoc on exported APIs is API documentation:
+keep it, in the same indicative voice.
+
 ## Component API conventions
 
 FarmUI follows Base UI's composition model with one shared contract, so a

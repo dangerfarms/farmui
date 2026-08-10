@@ -26,9 +26,9 @@ export type SwitchControlProps = Omit<
 
 /**
  * SwitchControl — the bare track + `<input role="switch">`. When rendered
- * inside a `Field` it reads its id / describedby / invalid from context (the
- * Base UI pattern: `<Field.Label><SwitchControl /> …</Field.Label>`);
- * otherwise it uses its own props.
+ * inside a `Field` it reads its id / describedby / invalid from context
+ * (`<Field.Label><SwitchControl /> …</Field.Label>`); otherwise it uses its
+ * own props.
  */
 const SwitchControl = forwardRef<HTMLInputElement, SwitchControlProps>(
   function SwitchControl(

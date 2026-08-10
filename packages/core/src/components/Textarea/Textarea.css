@@ -52,8 +52,6 @@
     );
   }
 
-  /* Error state is detected from the textarea's own state: ARIA or native
-     constraint validation (:user-invalid). */
   :scope:has(.fui-Textarea-textarea:is([aria-invalid="true"], :user-invalid)) {
     --fui-ring-color: var(--fui-danger-ring);
 
@@ -86,9 +84,6 @@
   @supports (field-sizing: content) {
     .fui-Textarea-textarea {
       field-sizing: content;
-
-      /* Growth cap — past this the textarea scrolls instead of consuming
-         the page. */
       max-block-size: 10lh;
     }
   }

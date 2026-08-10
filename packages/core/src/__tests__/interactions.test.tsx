@@ -63,7 +63,6 @@ describe("Tabs", () => {
     await user.click(screen.getByRole("tab", { name: "Security" }));
     expect(screen.getByText("Security panel")).toBeVisible();
 
-    // roving keyboard nav
     await user.keyboard("{ArrowLeft}");
     expect(screen.getByRole("tab", { name: "Account" })).toHaveAttribute(
       "aria-selected",
@@ -179,7 +178,6 @@ describe("Menu", () => {
     await user.click(screen.getByRole("menuitem", { name: "Delete" }));
     expect(onDelete).toHaveBeenCalledOnce();
     expect(screen.queryByRole("menu")).not.toBeInTheDocument();
-    // Activation returns focus to the trigger.
     expect(screen.getByRole("button", { name: "Options" })).toHaveFocus();
   });
 

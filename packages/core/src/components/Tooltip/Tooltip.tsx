@@ -51,9 +51,8 @@ import { Button } from "../Button/Button";
 const SKIP_DELAY_WINDOW = 400;
 /**
  * Grace period for moving the pointer from trigger to bubble. Generous on
- * purpose: screen-magnifier panning and tremor traversal are slow, and a
- * short window is a practical WCAG 1.4.13 "hoverable" failure. Re-entering
- * either element cancels it, so there is no downside to the length.
+ * purpose: magnifier panning and tremor traversal are slow — a short window
+ * is a practical WCAG 1.4.13 "hoverable" failure.
  */
 const CLOSE_DELAY = 300;
 
@@ -338,8 +337,7 @@ export interface TooltipTriggerProps
   /**
    * Substitute your own interactive element as the trigger
    * (`render={<IconButton />}`) or pass a function receiving the wiring
-   * props. Without it, the Trigger renders a FarmUI Button, which adapts
-   * to its context like any Button (see the Contextualism guide).
+   * props. Without it, the Trigger renders a FarmUI Button.
    */
   render?: RenderProp<TooltipTriggerRenderProps>;
 }
@@ -357,11 +355,8 @@ function TooltipTrigger({ render, children, ...rest }: TooltipTriggerProps) {
     style: { anchorName: ctx.anchorName } as CSSProperties,
   };
 
-  // Both paths share the same merge contract: the built-in form is just a
-  // render whose target defaults to a FarmUI Button.
   return render ? (
-    // Consumer props on the part merge into the render element per the
-    // same contract (previously they were silently dropped).
+    // Consumer props on the part must merge into the render element, not drop.
     <>{renderWithProps(render, (mergeProps(triggerProps as unknown as AnyRenderProps, { children, ...rest }) as unknown as typeof triggerProps))}</>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, triggerProps)}</>

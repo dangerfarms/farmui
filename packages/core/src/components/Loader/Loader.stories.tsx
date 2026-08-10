@@ -22,8 +22,8 @@ const meta = {
     docs: {
       description: {
         component:
-          "Draws with `currentColor` — it inherits its parent's text " +
-          "colour, so contextual colour needs no prop.",
+          "Coloured by the brand token — a `--fui-context` region " +
+          "recolours it with no prop; a plain `color:` overrides.",
       },
     },
   },
@@ -56,9 +56,8 @@ export const Sizes: Story = {
 };
 
 /**
- * The loader inherits `currentColor`. Point its `color` at a semantic token
- * and a `--fui-context` region's token remap flows through; any plain
- * `color` (e.g. a button's channel) works just as well.
+ * A `--fui-context` region recolours the loader through the brand token;
+ * a plain `color:` declaration overrides.
  */
 export const Contexts: Story = {
   render: (args) => {

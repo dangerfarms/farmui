@@ -9,7 +9,6 @@
     background: var(--fui-bg-subtle);
     overflow: clip;
 
-    /* Sizes */
     &[data-size="sm"] {
       --_h: 0.375rem;
     }
@@ -43,7 +42,6 @@
     white-space: nowrap;
   }
 
-  /* Stripes */
   .fui-Progress-bar[data-striped] {
     background-image: repeating-linear-gradient(
       45deg,

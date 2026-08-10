@@ -45,8 +45,6 @@
    (the control) stays in scope. */
 @scope (.fui-Radio-control) {
   :scope {
-    /* Em-based glyph on the fluid label size (1.3889em × 0.9rem = the old
-       1.25rem md control). */
     --_size: 1.3889em;
     --_dot: 0.5556em;
 
@@ -103,7 +101,6 @@
     border-color: var(--fui-danger);
   }
 
-  /* A group-level error message marks every option in the group. */
   .fui-Radio-group:has(.fui-Radio-error) :scope {
     --fui-ring-color: var(--fui-danger-ring);
 

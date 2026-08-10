@@ -20,14 +20,11 @@ export default function LayoutGuide() {
     <div className={prose.prose}>
       <h1>Layout compositions</h1>
       <p className={prose.lead}>
-        <strong>Proposal status: experimental</strong> — the React layout
-        components have been removed in favour of this layer; Richard&apos;s
-        review can still reverse that call. Layout in FarmUI is
-        CSS, not components: small algorithmic compositions you apply as
-        classes, tuned with registered <code>--fui-*</code> knobs whose
-        defaults come from the fluid space scale. No media queries, no
-        JavaScript, no React API — the layout manages itself from its content
-        and container.
+        Layout in FarmUI is CSS, not components: small algorithmic
+        compositions you apply as classes, tuned with registered{" "}
+        <code>--fui-*</code> knobs whose defaults come from the fluid space
+        scale. No media queries, no JavaScript, no React API — the layout
+        manages itself from its content and container.
       </p>
 
       <h2>Why not layout components?</h2>
@@ -37,8 +34,8 @@ export default function LayoutGuide() {
         library should contribute — token-valued spacing, rows that always
         wrap, overflow-<code>safe</code> alignment, never reordering content
         visually — lives just as well in a stylesheet, where it also works
-        outside React, serialises into a CMS content model, and themes per
-        tenant through the cascade. So the compositions are the product; any
+        outside React, serialises into any content model, and themes through
+        the cascade. So the compositions are the product; any
         component wrapper is optional sugar that belongs to the consumer.
       </p>
 
@@ -126,7 +123,8 @@ export default function LayoutGuide() {
         Explicit-span grids (a 12-column skeleton with{" "}
         <code>span 4</code> / <code>span 8</code> children) are deliberately
         not a composition — that&apos;s bespoke page structure, so write grid
-        CSS for it; the decision tree is in the css-layout reference.
+        CSS for it: named template areas say what the page means, spans are
+        one rule away.
       </p>
       <div className={prose.block}>
         <CodeBlock
@@ -164,43 +162,34 @@ export default function LayoutGuide() {
         </div>
       </div>
 
-      <h2>Migration from the layout components</h2>
-      <p>
-        The React layout components predated this layer and have been removed
-        in its favour:
-      </p>
+      <h2>What FarmUI deliberately doesn&apos;t ship</h2>
       <ul>
         <li>
-          <code>Stack</code> → <code>.fui-stack</code> ·{" "}
-          <code>Group</code> → <code>.fui-cluster</code> ·{" "}
-          <code>SimpleGrid</code> → <code>.fui-grid</code> (auto-fit/minmax) ·{" "}
-          <code>Container</code> → <code>.fui-container</code> ·{" "}
-          <code>AspectRatio</code> → <code>.fui-frame</code> ·{" "}
-          <code>Center</code> → <code>.fui-center</code>
+          <strong>No Flex utility.</strong> A generic flex wrapper is the
+          platform&apos;s flexbox wearing props — it adds a vocabulary without
+          adding judgment. Where a row should wrap and space itself, that
+          judgment exists as <code>.fui-cluster</code>; for anything else,
+          write flexbox.
         </li>
         <li>
-          <code>Flex</code> and <code>Space</code> have no successors on
-          purpose: Flex was the platform&apos;s flexbox wearing props, and
-          spacer elements are what <code>gap</code> exists to replace.
+          <strong>No spacer component.</strong> Spacer elements are what{" "}
+          <code>gap</code> exists to replace: spacing belongs to the layout
+          that owns it, not to phantom children in the content.
         </li>
         <li>
-          The 12-column <code>Grid</code>/<code>GridCol</code> has no
-          composition successor, also on purpose: explicit-span page
-          skeletons are bespoke structure — write grid CSS (see the decision
-          tree in the css-layout reference).
-        </li>
-        <li>
-          Compositions we never had as components become possible: Switcher
-          and Sidebar here; Cover and Reel are natural next steps for
-          page-building.
+          <strong>No 12-column span grid.</strong> An explicit-span page
+          skeleton (<code>span 4</code> / <code>span 8</code>) is bespoke page
+          structure, not a reusable algorithm — write grid CSS for it, with
+          named template areas that say what the page means.
         </li>
       </ul>
 
-      <h2>The CMS binding</h2>
+      <h2>Driving compositions from data</h2>
       <p>
-        A visual editor gives content managers layout control by mapping its
-        fields onto exactly this surface — a class plus token-valued
-        properties:
+        Because a composition is a class plus token-valued properties, any
+        data-driven renderer — a page builder, a visual editor, a template
+        engine — can expose layout as constrained choices and map them
+        straight onto this surface:
       </p>
       <div className={prose.block}>
         <CodeBlock
@@ -211,11 +200,11 @@ export default function LayoutGuide() {
         />
       </div>
       <p>
-        The choices are enums over tokens, so a tenant&apos;s theme restyles
-        every layout automatically, nothing runs at runtime, and the stored
-        content model stays renderer-agnostic. Guardrails travel with the
-        compositions: an editor cannot produce an unwrappable row or a
-        clipped focus target, because those judgments are inside the CSS.
+        The choices are enums over tokens, so a theme restyles every layout
+        automatically, nothing runs at runtime, and the stored data stays
+        renderer-agnostic. Guardrails travel with the compositions: a
+        renderer cannot produce an unwrappable row or a clipped focus
+        target, because those judgments are inside the CSS.
       </p>
     </div>
   );

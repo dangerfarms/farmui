@@ -10,7 +10,6 @@
       border-color var(--fui-duration-sm) var(--fui-ease),
       box-shadow var(--fui-duration-md) var(--fui-ease);
 
-    /* Padding */
     &[data-padding="sm"] {
       --_p: var(--fui-space-md);
     }
@@ -19,12 +18,10 @@
       --_p: var(--fui-space-xl);
     }
 
-    /* Border */
     &[data-border] {
       border-color: var(--fui-border);
     }
 
-    /* Shadow */
     &[data-shadow="sm"] {
       --_shadow: var(--fui-shadow-sm);
     }

@@ -53,17 +53,14 @@
     border-block-end: none;
   }
 
-  /* Column borders */
   :scope[data-col-borders] :where(th, td):not(:last-child) {
     border-inline-end: 1px solid var(--fui-border);
   }
 
-  /* Striped body rows */
   :scope[data-striped] :where(tbody tr:nth-child(even)) {
     background: var(--fui-bg-subtle);
   }
 
-  /* Highlight on hover */
   :scope[data-hover] :where(tbody tr) {
     transition: background var(--fui-duration-md) var(--fui-ease);
   }

@@ -38,7 +38,7 @@ const doc: ComponentDoc = {
     {
       title: "Alert dialog (confirmation)",
       description:
-        "alert renders role=\"alertdialog\": the backdrop no longer light-dismisses (closedby=\"closerequest\" — Escape still works), and autoFocus belongs on the least-destructive action so it is the default answer. Use for destructive or irreversible confirmations only.",
+        "alert renders role=\"alertdialog\": the backdrop doesn't light-dismiss (closedby=\"closerequest\" — Escape still works), and autoFocus belongs on the least-destructive action so it is the default answer. Use for destructive or irreversible confirmations only.",
       code: `<Modal.Popup alert size="sm">
   <Modal.Title>Delete this file?</Modal.Title>
   <Modal.Description>This cannot be undone.</Modal.Description>

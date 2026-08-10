@@ -75,10 +75,9 @@ function usePopoverContext(part: string): PopoverContextValue {
 }
 
 /*
- * The popover attribute and anchor positioning are adopted together: a popup
- * in the top layer ignores its wrapper's positioning context, so promoting it
- * without anchor positioning would leave it centred in the viewport. Browsers
- * missing either feature get the wrapper-anchored fallback instead.
+ * Adopt popover + anchor positioning together: a top-layer popup ignores its
+ * wrapper's positioning context, so promoting it without anchor positioning
+ * would leave it centred in the viewport.
  */
 function detectEnhanced(): boolean {
   return (
@@ -197,8 +196,7 @@ export interface PopoverTriggerProps
   /**
    * Substitute your own element as the trigger
    * (`render={<a href="…" />}`) or pass a function receiving the wiring
-   * props. Without it, the Trigger renders a FarmUI Button, which adapts
-   * to its context like any Button (see the Contextualism guide).
+   * props. Without it, the Trigger renders a FarmUI Button.
    */
   render?: RenderProp<PopoverTriggerRenderProps>;
 }
@@ -225,11 +223,8 @@ function PopoverTrigger({ render, children, ...rest }: PopoverTriggerProps) {
     },
   };
 
-  // Both paths share the same merge contract: the built-in form is just a
-  // render whose target defaults to a FarmUI Button.
   return render ? (
-    // Consumer props on the part merge into the render element per the
-    // same contract (previously they were silently dropped).
+    // Consumer props on the part must merge into the render element, not drop.
     <>{renderWithProps(render, (mergeProps(triggerProps as unknown as AnyRenderProps, { children, ...rest }) as unknown as typeof triggerProps))}</>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, triggerProps)}</>
@@ -252,11 +247,9 @@ function PopoverPopup({
   const { open, setOpen, enhanced } = ctx;
   const ref = useRef<HTMLDivElement>(null);
 
-  // Enhanced path: reconcile React state with the native popover state, and
-  // let native closes (light dismiss, Escape) flow back into state.
-  // Deliberately no dependency array: a controlled parent may reject a change
-  // reported by the toggle event, leaving `open` unchanged while the DOM
-  // popover moved — only an every-render reconcile converges that back.
+  // Reconcile React state with the native popover state. Deliberately no
+  // dependency array: a controlled parent may reject a toggle-reported change,
+  // and only an every-render reconcile converges the DOM back.
   useEffect(() => {
     const el = ref.current;
     if (!el || !enhanced) return;
@@ -275,10 +268,9 @@ function PopoverPopup({
     return () => el.removeEventListener("toggle", onToggle);
   }, [enhanced, setOpen]);
 
-  // Dialog focus management: move focus into the panel on open; return it to
-  // the trigger on close when it would otherwise be lost (it was inside the
-  // panel, or the browser already reset it to <body>). Skipped when the popup
-  // mounts already open, so a defaultOpen popover doesn't steal page focus.
+  // Move focus into the panel on open; return it to the trigger on close when
+  // it would otherwise be lost. Skipped when the popup mounts already open,
+  // so a defaultOpen popover doesn't steal page focus.
   const prevOpenRef = useRef(open);
   useEffect(() => {
     const el = ref.current;
@@ -295,7 +287,6 @@ function PopoverPopup({
     }
   }, [open, ctx.triggerRef]);
 
-  // Fallback path: outside click and Escape, only while open.
   useEffect(() => {
     if (enhanced || !open) return;
     const onPointer = (e: MouseEvent) => {
@@ -390,8 +381,7 @@ function PopoverClose({ render, children, ...rest }: PopoverCloseProps) {
     onClick: () => ctx.setOpen(false),
   };
   return render ? (
-    // Consumer props on the part merge into the render element per the
-    // same contract (previously they were silently dropped).
+    // Consumer props on the part must merge into the render element, not drop.
     <>{renderWithProps(render, (mergeProps(closeProps as unknown as AnyRenderProps, { children, ...rest }) as unknown as typeof closeProps))}</>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, closeProps)}</>

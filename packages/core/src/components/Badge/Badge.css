@@ -1,12 +1,7 @@
 /*
- * Badge — contextualism model.
- *
- * One colour channel (--_color); the pill is DERIVED from it: a soft tint
- * via color-mix toward the page background, strong text via a mix toward
- * black (light) or white (dark) so the label always reads on its own tint —
- * no per-status hand-tuned values. Status is decided by context, not props:
- * a `--fui-context: primary | success | warning | info | danger` region
- * re-answers the channel; neutral (page text) otherwise.
+ * Badge — one colour channel (--_color); the pill derives from it: soft
+ * tint via color-mix toward the page bg, text mixed toward black/white so
+ * the label always reads on its own tint. Status comes from context, not props.
  */
 @scope (.fui-Badge-root) {
   :scope {
@@ -39,7 +34,6 @@
       background var(--fui-duration-md) var(--fui-ease),
       color var(--fui-duration-md) var(--fui-ease);
 
-    /* Sizes */
     &[data-size="sm"] {
       --_h: 1.125rem;
       --_px: 0.5rem;
@@ -104,8 +98,6 @@
     flex: none;
   }
 
-  /* Context: contains an inline svg icon — composed as a child, detected
-     like Button's. */
   :scope:has(svg) {
     gap: var(--_gap, var(--fui-space-xs));
 

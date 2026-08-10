@@ -1,8 +1,9 @@
 import Link from "next/link";
+import { FIRST_COMPONENT_HREF } from "@/site/nav";
 import { Logo } from "./Logo";
 import { ThemeToggle } from "./ThemeToggle";
 import { CommandMenu } from "./CommandMenu";
-import { GitHubIcon, StarIcon } from "./Icons";
+import { GitHubIcon } from "./Icons";
 import classes from "./Header.module.css";
 
 const GITHUB_URL = "https://github.com/dangerfarms/farmui";
@@ -14,8 +15,9 @@ export function Header() {
         <div className={classes.left}>
           <Logo />
           <nav className={classes.nav} aria-label="Primary">
-            <Link href="/docs">Docs</Link>
-            <Link href="/docs/components/button">Components</Link>
+            <Link href={FIRST_COMPONENT_HREF}>
+              Components
+            </Link>
             <Link href="/docs/theming">Theming</Link>
           </nav>
         </div>
@@ -29,13 +31,9 @@ export function Header() {
             href={GITHUB_URL}
             target="_blank"
             rel="noreferrer"
-            aria-label="Star FarmUI on GitHub"
+            aria-label="FarmUI on GitHub"
           >
             <GitHubIcon width={16} height={16} />
-            <span className={classes.starCount}>
-              <StarIcon width={13} height={13} />
-              32.4k
-            </span>
           </a>
           <ThemeToggle />
         </div>

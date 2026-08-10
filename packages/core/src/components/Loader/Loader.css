@@ -5,9 +5,6 @@
     /* The brand token, so context remaps recolour the loader; parts draw
        with currentColor from here. */
     color: var(--fui-primary);
-
-    /* No color declaration on purpose: the loader draws with currentColor,
-       so it inherits its parent's (possibly contextual) text colour. */
     display: inline flex;
     align-items: center;
     justify-content: center;

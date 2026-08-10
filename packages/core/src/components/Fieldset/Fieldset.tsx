@@ -28,10 +28,7 @@ function FieldsetRoot({ className, children, ...rest }: FieldsetRootProps) {
 }
 
 export interface FieldsetLegendProps extends HTMLAttributes<HTMLLegendElement> {
-  /**
-   * Mark the whole group optional in text (GOV.UK guidance: prefer the word
-   * "optional" over a required asterisk).
-   */
+  /** Mark the whole group optional in text rather than with an asterisk. */
   optional?: boolean;
   children?: ReactNode;
 }

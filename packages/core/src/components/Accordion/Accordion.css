@@ -10,11 +10,8 @@
   }
 }
 
-/*
- * Items are scoped to their own root: an <details class="fui-Accordion-item">
- * is a standalone render path (AccordionItem is exported on its own), so its
- * styles must not depend on the .fui-Accordion-root wrapper.
- */
+/* Items are scoped to their own root: AccordionItem is exported standalone,
+   so item styles must not depend on the .fui-Accordion-root wrapper. */
 @scope (.fui-Accordion-item) {
   /* Open/close height animation on the platform's own content slot.
      interpolate-size is required for the 0 → auto interpolation and is not

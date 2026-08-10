@@ -23,9 +23,9 @@ const sizeVar: Record<FarmUISize, string> = {
 /**
  * Loader — an animated indicator for pending, indeterminate work.
  *
- * Draws with `currentColor` — it inherits its parent's text colour, so it
- * picks up contextual colour (a button's channel, a `color:` declaration)
- * with no prop of its own.
+ * Coloured by the brand token, so a `--fui-context` region recolours it
+ * with no prop; the parts draw with `currentColor`, so a plain `color:`
+ * declaration on the loader (or an ancestor's channel) overrides.
  */
 export const Loader = forwardRef<HTMLSpanElement, LoaderProps>(function Loader(
   {

@@ -96,7 +96,7 @@
 }
 .result[data-active] {
   background: var(--fui-primary-soft);
-  color: var(--fui-primary-hover);
+  color: color-mix(in oklch, var(--fui-primary) 88%, black);
 }
 .hint {
   font-size: var(--fui-text-xs);

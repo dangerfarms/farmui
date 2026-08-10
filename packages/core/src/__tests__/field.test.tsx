@@ -21,7 +21,6 @@ describe("Field composition wiring", () => {
 
     // Label htmlFor matches the control id.
     expect(input).toHaveAttribute("id");
-    // aria-describedby references both the description and the error.
     const describedBy =
       input.getAttribute("aria-describedby")?.split(" ") ?? [];
     expect(describedBy).toContain(description.id);

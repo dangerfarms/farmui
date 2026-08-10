@@ -29,8 +29,6 @@
   }
 
   :scope {
-    /* Em-based on the fluid label size (× 0.9rem at the clamp max = the old
-       0.375rem track / 1.125rem thumb). */
     --_track-h: 0.4167em;
     --_thumb: 1.25em;
 
@@ -42,8 +40,6 @@
     accent-color: var(--fui-primary);
     background: transparent;
     cursor: pointer;
-
-    /* Reset so custom thumb/track styling wins where supported. */
     appearance: none;
   }
 
@@ -72,8 +68,6 @@
     appearance: none;
     inline-size: var(--_thumb);
     block-size: var(--_thumb);
-
-    /* Center the thumb over the track. */
     margin-block-start: calc((var(--_track-h) - var(--_thumb)) / 2);
     border: 2px solid var(--fui-primary-contrast);
     border-radius: var(--fui-radius-full);

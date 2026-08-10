@@ -17,7 +17,6 @@
     user-select: none;
     flex: none;
 
-    /* Sizes */
     &[data-size="sm"] {
       --_size: 2rem;
 

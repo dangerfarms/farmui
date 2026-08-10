@@ -220,7 +220,7 @@ export default function Contextualism() {
       <p>
         The default channel is the neutral text colour — a quiet button that
         needs no &quot;subtle&quot; variant. A context swaps the channel and
-        all the derived looks follow. Where the old model needed 4 variants ×
+        all the derived looks follow. Where a variant model needs 4 variants ×
         3 sizes × 2 colours of hand-picked values, this needs one input.
       </p>
       <p>

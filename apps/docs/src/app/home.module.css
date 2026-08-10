@@ -109,7 +109,7 @@
     transform var(--fui-duration-md) var(--fui-ease);
 }
 .btnLink:hover {
-  background: var(--fui-primary-hover);
+  background: color-mix(in oklch, var(--fui-primary) 88%, black);
 }
 .btnLink:active {
   transform: translateY(0.5px);

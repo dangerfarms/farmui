@@ -25,7 +25,6 @@
       background: color-mix(in oklch, var(--fui-text) 45%, transparent);
     }
 
-    /* Entry and exit motion — opt-in, additive, incl. the backdrop fade. */
     @media (prefers-reduced-motion: no-preference) {
       opacity: 1;
       translate: 0 0;

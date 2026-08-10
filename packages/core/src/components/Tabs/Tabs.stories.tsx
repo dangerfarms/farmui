@@ -102,21 +102,18 @@ export const ClickSelectsPanel: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    // Overview is the default active tab.
     const overviewTab = canvas.getByRole("tab", { name: "Overview" });
     await expect(overviewTab).toHaveAttribute("aria-selected", "true");
     await expect(
       canvas.getByText(/a snapshot of everything at a glance/i),
     ).toBeVisible();
 
-    // Activate the Activity tab.
     const activityTab = canvas.getByRole("tab", { name: "Activity" });
     await userEvent.click(activityTab);
 
     await expect(activityTab).toHaveAttribute("aria-selected", "true");
     await expect(overviewTab).toHaveAttribute("aria-selected", "false");
 
-    // The activity panel is now visible; the overview panel stays mounted but hidden.
     await expect(
       canvas.getByText(/the latest events on your account/i),
     ).toBeVisible();

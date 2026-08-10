@@ -25,7 +25,6 @@
     pointer-events: none;
   }
 
-  /* Fallback (no popover API): same corner, high z-index. */
   @supports not selector(:popover-open) {
     :scope {
       z-index: 100;

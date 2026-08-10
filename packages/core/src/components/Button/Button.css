@@ -1,19 +1,8 @@
 /*
- * Button — contextualism model.
- *
- * One colour channel (--_color); every look is DERIVED from it: the soft
- * background and border via color-mix toward the page background, hover and
- * active via relative-colour lightness shifts. Appearance is decided by
- * context, not props:
- *
- *   - a `--fui-context: primary | success | warning | info | danger` region
- *     re-answers the channel
- *   - narrow containers (≤ 16rem) make the button full width
- *   - an inline svg icon is detected with :has() — no slot props
- *   - size is fluid (cqi tokens) — there are no size steps
- *
- * The one instance-level escape hatch is the public --fui-button-color
- * property (registered in reset.css).
+ * Button — one colour channel (--_color); every look derives from it via
+ * color-mix and relative colour. Appearance is decided by context, not
+ * props. The one instance-level escape hatch is the public
+ * --fui-button-color property (registered in reset.css).
  */
 @scope (.fui-Button-root) {
   :scope {
@@ -23,10 +12,9 @@
     padding-block: var(--fui-space-sm);
     padding-inline: var(--fui-space-lg);
 
-    /* Tints mix in oklab (cartesian), not oklch: hue interpolation against the
-       near-achromatic page background rotates the channel's hue (the declared
-       hue of an achromatic colour still interpolates); cartesian mixing only
-       desaturates, so the channel's hue survives. */
+    /* Tints mix in oklab (cartesian), not oklch: hue interpolation against
+       the near-achromatic page background rotates the channel's hue;
+       cartesian mixing only desaturates, so the hue survives. */
     border: 1px solid color-mix(in oklab, var(--_color), var(--fui-bg) 80%);
     border-radius: var(--_radius, var(--fui-radius-md));
     background: light-dark(
@@ -107,14 +95,12 @@
     }
   }
 
-  /* Context: a narrow container — the button takes the full width. */
   @container (inline-size <= 16rem) {
     :scope {
       inline-size: 100%;
     }
   }
 
-  /* Context: contains an inline svg icon. */
   :scope:has(svg) {
     display: inline flex;
     gap: var(--fui-space-sm);
@@ -127,21 +113,16 @@
     }
   }
 
-  /* Context: icon-only. Detected from the accessible name, not the DOM
-     shape — an icon-only button MUST carry an aria-label (a labelled text
-     button shouldn't), and `svg:only-child` can't tell "icon + bare text"
-     from "icon alone" because text nodes aren't elements. Square padding;
-     the compact look only appears once the button is correctly labelled. */
+  /* Icon-only is detected from the accessible name, not DOM shape: an
+     icon-only button MUST carry an aria-label, and `svg:only-child` can't
+     tell "icon + bare text" from "icon alone" (text nodes aren't elements). */
   :scope[aria-label]:has(svg) {
     padding-inline: var(--fui-space-sm);
   }
 
-  /*
-   * Contextual full width — an explicit layout hint on a region
-   * (`data-fui-buttons="block"`), for when intent should not depend on
-   * container measurements. The region ancestor lives outside the scope; the
-   * subject (the button) stays in scope.
-   */
+  /* Explicit full-width hint (`data-fui-buttons="block"`) for when intent
+     shouldn't depend on container measurements. The region ancestor lives
+     outside the scope; the subject (the button) stays in scope. */
   :scope:is([data-fui-buttons="block"] *) {
     inline-size: 100%;
   }
