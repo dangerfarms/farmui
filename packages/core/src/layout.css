@@ -1,0 +1,236 @@
+/**
+ * FarmUI — layout compositions (the `farmui.layout` layer).
+ *
+ * Layout is CSS's job, so these are CSS, not components: small algorithmic
+ * compositions (after the Every Layout school) that manage themselves from
+ * their content and container — no media queries, no JavaScript, no React
+ * API. Apply the class to any element; tune the knobs with the registered
+ * `--fui-*` custom properties, whose defaults come from the fluid space
+ * scale so spacing stays token-disciplined.
+ *
+ *   <div class="fui-sidebar" style="--fui-sidebar-side: 18rem">
+ *     <nav>…</nav>
+ *     <main>…</main>
+ *   </div>
+ *
+ * A visual editor (the white-label CMS case) binds its layout controls to
+ * exactly this surface: a class name plus token-valued properties —
+ * serialisable, theme-aware per tenant, zero runtime.
+ *
+ * Judgment is baked in rather than documented-and-hoped: rows always wrap,
+ * alignment is overflow-`safe`, and nothing here reorders content visually
+ * (visual order must follow DOM order, or tab order lies).
+ */
+
+/* Knobs are registered `inherits: false` so a nested composition never
+   silently adopts its parent's tuning (the custom-property inheritance
+   trap; see --_radius in reset.css). */
+@property --fui-stack-gap {
+  syntax: "*";
+  inherits: false;
+}
+
+@property --fui-cluster-gap {
+  syntax: "*";
+  inherits: false;
+}
+
+@property --fui-cluster-justify {
+  syntax: "*";
+  inherits: false;
+}
+
+@property --fui-switcher-gap {
+  syntax: "*";
+  inherits: false;
+}
+
+@property --fui-switcher-threshold {
+  syntax: "*";
+  inherits: false;
+}
+
+@property --fui-sidebar-gap {
+  syntax: "*";
+  inherits: false;
+}
+
+@property --fui-sidebar-side {
+  syntax: "*";
+  inherits: false;
+}
+
+@property --fui-sidebar-content-min {
+  syntax: "*";
+  inherits: false;
+}
+
+@property --fui-grid-min {
+  syntax: "*";
+  inherits: false;
+}
+
+@property --fui-grid-gap {
+  syntax: "*";
+  inherits: false;
+}
+
+@property --fui-container-max {
+  syntax: "*";
+  inherits: false;
+}
+
+@property --fui-container-gutter {
+  syntax: "*";
+  inherits: false;
+}
+
+@property --fui-frame-ratio {
+  syntax: "*";
+  inherits: false;
+}
+
+@property --fui-center-max {
+  syntax: "*";
+  inherits: false;
+}
+
+@layer farmui.layout {
+  /*
+   * Stack — space elements along the block axis.
+   * Knob: --fui-stack-gap (default: the fluid md step).
+   */
+  @scope (.fui-stack) {
+    :scope {
+      display: block flex;
+      flex-direction: column;
+      gap: var(--fui-stack-gap, var(--fui-space-md));
+    }
+  }
+
+  /*
+   * Cluster — a row of items that wraps like text (tags, action rows,
+   * metadata). Knobs: --fui-cluster-gap, --fui-cluster-justify.
+   */
+  @scope (.fui-cluster) {
+    :scope {
+      display: block flex;
+      flex-wrap: wrap;
+      gap: var(--fui-cluster-gap, var(--fui-space-sm));
+      align-items: safe center;
+      justify-content: var(--fui-cluster-justify, flex-start);
+    }
+  }
+
+  /*
+   * Switcher — a row that becomes a column the moment the container is
+   * narrower than the threshold; every child gets equal width in both
+   * arrangements. The flex-basis trick: below the threshold the calc goes
+   * hugely positive, forcing each item past the container width so all
+   * wrap; above it, hugely negative, so items sit on one line and share it.
+   * Knobs: --fui-switcher-threshold, --fui-switcher-gap.
+   */
+  @scope (.fui-switcher) {
+    :scope {
+      display: block flex;
+      flex-wrap: wrap;
+      gap: var(--fui-switcher-gap, var(--fui-space-md));
+    }
+
+    :scope > * {
+      flex-grow: 1;
+      flex-basis: calc(
+        (var(--fui-switcher-threshold, 30rem) - 100%) * 999
+      );
+    }
+  }
+
+  /*
+   * Sidebar — a fixed-preference side element beside a fluid content
+   * element; stacks the moment the content would drop below its minimum
+   * share. The side is whichever child is NOT the content (the one with
+   * grow 999); reversing sides is a DOM-order change, deliberately — a
+   * visual-only reversal would detach tab order from what the user sees.
+   * Knobs: --fui-sidebar-side (the side's preferred width),
+   * --fui-sidebar-content-min (content's minimum share before stacking),
+   * --fui-sidebar-gap.
+   */
+  @scope (.fui-sidebar) {
+    :scope {
+      display: block flex;
+      flex-wrap: wrap;
+      gap: var(--fui-sidebar-gap, var(--fui-space-lg));
+    }
+
+    :scope > :first-child {
+      flex-grow: 1;
+      flex-basis: var(--fui-sidebar-side, 15rem);
+    }
+
+    :scope > :last-child {
+      flex-grow: 999;
+      flex-basis: 0;
+      min-inline-size: var(--fui-sidebar-content-min, 55%);
+    }
+  }
+
+  /*
+   * Grid — as many equal columns as fit, each at least the minimum; columns
+   * grow to share the remainder. The min() guard stops the minimum itself
+   * from overflowing containers narrower than one column. Explicit-span
+   * grids (a 12-column skeleton) are not a composition — write grid CSS;
+   * see the layout guide's decision tree.
+   * Knobs: --fui-grid-min, --fui-grid-gap.
+   */
+  @scope (.fui-grid) {
+    :scope {
+      display: block grid;
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(min(var(--fui-grid-min, 16rem), 100%), 1fr)
+      );
+      gap: var(--fui-grid-gap, var(--fui-space-md));
+    }
+  }
+
+  /*
+   * Container — centre content at a comfortable measure with a fluid
+   * gutter. Knobs: --fui-container-max, --fui-container-gutter.
+   */
+  @scope (.fui-container) {
+    :scope {
+      max-inline-size: var(--fui-container-max, 70rem);
+      margin-inline: auto;
+      padding-inline: var(--fui-container-gutter, var(--fui-space-lg));
+    }
+  }
+
+  /*
+   * Frame — reserve a ratio and crop media to it (prevents layout shift
+   * while assets load). Knob: --fui-frame-ratio.
+   */
+  @scope (.fui-frame) {
+    :scope {
+      aspect-ratio: var(--fui-frame-ratio, 16 / 9);
+      overflow: clip;
+    }
+
+    :scope > :is(img, video) {
+      inline-size: 100%;
+      block-size: 100%;
+      object-fit: cover;
+    }
+  }
+
+  /*
+   * Center — centre a column of content at a readable measure. Centring a
+   * single item on both axes is one declaration (`place-content: center` on
+   * a grid), not a composition. Knob: --fui-center-max.
+   */
+  @scope (.fui-center) {
+    :scope {
+      max-inline-size: var(--fui-center-max, 60ch);
+      margin-inline: auto;
+    }
+  }
+}

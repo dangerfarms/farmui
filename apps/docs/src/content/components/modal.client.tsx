@@ -1,6 +1,6 @@
 "use client";
 
-import { Group, Modal } from "@farmui/core";
+import { Modal } from "@farmui/core";
 import type { CSSProperties } from "react";
 
 export function ModalDemo() {
@@ -12,12 +12,12 @@ export function ModalDemo() {
         <Modal.Description>
           They&apos;ll receive an email invitation to join your workspace.
         </Modal.Description>
-        <Group>
+        <div className="fui-cluster">
           <span style={{ "--fui-context": "primary" } as CSSProperties}>
             <Modal.Close>Send invite</Modal.Close>
           </span>
           <Modal.Close>Cancel</Modal.Close>
-        </Group>
+        </div>
       </Modal.Popup>
     </Modal.Root>
   );
@@ -35,12 +35,12 @@ export function ModalAlertDemo() {
           &ldquo;report-final-v2.pdf&rdquo; will be permanently deleted. This
           cannot be undone.
         </Modal.Description>
-        <Group>
+        <div className="fui-cluster">
           <Modal.Close autoFocus>Cancel</Modal.Close>
           <span style={{ "--fui-context": "danger" } as CSSProperties}>
             <Modal.Close>Delete</Modal.Close>
           </span>
-        </Group>
+        </div>
       </Modal.Popup>
     </Modal.Root>
   );
@@ -48,7 +48,7 @@ export function ModalAlertDemo() {
 
 export function ModalSizesDemo() {
   return (
-    <Group>
+    <div className="fui-cluster">
       {(["sm", "md", "lg"] as const).map((size) => (
         <Modal.Root key={size}>
           <Modal.Trigger>Open {size}</Modal.Trigger>
@@ -61,7 +61,7 @@ export function ModalSizesDemo() {
           </Modal.Popup>
         </Modal.Root>
       ))}
-    </Group>
+    </div>
   );
 }
 

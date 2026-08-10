@@ -13,6 +13,7 @@ export const GETTING_STARTED: { name: string; href: string }[] = [
   { name: "Installation", href: "/docs/installation" },
   { name: "Composition", href: "/docs/composition" },
   { name: "Contextualism", href: "/docs/contextualism" },
+  { name: "Layout", href: "/docs/layout" },
   { name: "Theming", href: "/docs/theming" },
 ];
 
@@ -22,7 +23,6 @@ export const CATEGORY_ORDER = [
   "Feedback",
   "Overlays",
   "Navigation",
-  "Layout",
 ] as const;
 
 export const COMPONENTS: NavItem[] = [
@@ -112,6 +112,12 @@ export const COMPONENTS: NavItem[] = [
     category: "Data display",
     description: "Display rows and columns of data.",
   },
+  {
+    name: "Separator",
+    slug: "separator",
+    category: "Data display",
+    description: "A rule between groups of content.",
+  },
   // Feedback
   {
     name: "Alert",
@@ -192,67 +198,6 @@ export const COMPONENTS: NavItem[] = [
     slug: "pagination",
     category: "Navigation",
     description: "Navigate between pages of content.",
-  },
-  // Layout
-  {
-    name: "Container",
-    slug: "container",
-    category: "Layout",
-    description: "Constrain and center page content.",
-  },
-  {
-    name: "Grid",
-    slug: "grid",
-    category: "Layout",
-    description: "Responsive 12-column layout.",
-  },
-  {
-    name: "SimpleGrid",
-    slug: "simple-grid",
-    category: "Layout",
-    description: "Equal-width, responsive columns.",
-  },
-  {
-    name: "Stack",
-    slug: "stack",
-    category: "Layout",
-    description: "Vertical spacing between elements.",
-  },
-  {
-    name: "Group",
-    slug: "group",
-    category: "Layout",
-    description: "Horizontal spacing between elements.",
-  },
-  {
-    name: "Flex",
-    slug: "flex",
-    category: "Layout",
-    description: "A prop-driven flexbox wrapper.",
-  },
-  {
-    name: "Center",
-    slug: "center",
-    category: "Layout",
-    description: "Center content on both axes.",
-  },
-  {
-    name: "Space",
-    slug: "space",
-    category: "Layout",
-    description: "Add empty space between elements.",
-  },
-  {
-    name: "AspectRatio",
-    slug: "aspect-ratio",
-    category: "Layout",
-    description: "Constrain content to a fixed ratio.",
-  },
-  {
-    name: "Separator",
-    slug: "separator",
-    category: "Layout",
-    description: "A rule between groups of content.",
   },
 ];
 

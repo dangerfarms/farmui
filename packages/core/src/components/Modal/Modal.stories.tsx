@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { CSSProperties } from "react";
 import { expect, userEvent, waitFor, within } from "storybook/test";
-import { Group, Modal } from "../../index";
+import { Modal } from "../../index";
 
 const meta = {
   title: "Overlays/Modal",
@@ -15,12 +15,12 @@ const meta = {
         <Modal.Description>
           They&apos;ll receive an email invitation to join your workspace.
         </Modal.Description>
-        <Group>
+        <div className="fui-cluster">
           <span style={{ "--fui-context": "primary" } as CSSProperties}>
             <Modal.Close>Send invite</Modal.Close>
           </span>
           <Modal.Close>Cancel</Modal.Close>
-        </Group>
+        </div>
       </Modal.Popup>
     </Modal.Root>
   ),
@@ -49,12 +49,12 @@ export const AlertDialog: Story = {
       <Modal.Popup alert size="sm">
         <Modal.Title>Delete this file?</Modal.Title>
         <Modal.Description>This cannot be undone.</Modal.Description>
-        <Group>
+        <div className="fui-cluster">
           <Modal.Close autoFocus>Cancel</Modal.Close>
           <span style={{ "--fui-context": "danger" } as CSSProperties}>
             <Modal.Close>Delete</Modal.Close>
           </span>
-        </Group>
+        </div>
       </Modal.Popup>
     </Modal.Root>
   ),
@@ -63,7 +63,7 @@ export const AlertDialog: Story = {
 /** Panel widths via the Popup's size prop. */
 export const Sizes: Story = {
   render: () => (
-    <Group>
+    <div className="fui-cluster">
       {(["sm", "md", "lg"] as const).map((size) => (
         <Modal.Root key={size}>
           <Modal.Trigger>Open {size}</Modal.Trigger>
@@ -76,7 +76,7 @@ export const Sizes: Story = {
           </Modal.Popup>
         </Modal.Root>
       ))}
-    </Group>
+    </div>
   ),
 };
 

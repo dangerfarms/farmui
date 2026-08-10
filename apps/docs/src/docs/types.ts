@@ -45,7 +45,6 @@ export type Category =
   | "Feedback"
   | "Overlays"
   | "Navigation"
-  | "Layout"
   | "Blocks";
 
 /** Sidebar ordering for categories. */
@@ -55,6 +54,5 @@ export const CATEGORY_ORDER: Category[] = [
   "Feedback",
   "Overlays",
   "Navigation",
-  "Layout",
   "Blocks",
 ];

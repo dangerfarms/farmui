@@ -34,16 +34,6 @@ import {
   AccordionItem,
   Breadcrumbs,
   Pagination,
-  Container,
-  Grid,
-  GridCol,
-  SimpleGrid,
-  Stack,
-  Group,
-  Flex,
-  Center,
-  Space,
-  AspectRatio,
 } from "../index";
 
 afterEach(cleanup);
@@ -188,49 +178,6 @@ const cases: Array<[string, ReactElement]> = [
     </Breadcrumbs.Root>,
   ],
   ["Pagination", <Pagination total={5} value={1} onChange={() => {}} />],
-  ["Container", <Container>Content</Container>],
-  [
-    "Grid",
-    <Grid>
-      <GridCol span={6}>A</GridCol>
-      <GridCol span={6}>B</GridCol>
-    </Grid>,
-  ],
-  [
-    "SimpleGrid",
-    <SimpleGrid cols={2}>
-      <div>A</div>
-      <div>B</div>
-    </SimpleGrid>,
-  ],
-  [
-    "Stack",
-    <Stack>
-      <div>A</div>
-      <div>B</div>
-    </Stack>,
-  ],
-  [
-    "Group",
-    <Group>
-      <div>A</div>
-      <div>B</div>
-    </Group>,
-  ],
-  [
-    "Flex",
-    <Flex>
-      <div>A</div>
-    </Flex>,
-  ],
-  ["Center", <Center>Centered</Center>],
-  ["Space", <Space h="md" />],
-  [
-    "AspectRatio",
-    <AspectRatio ratio={16 / 9}>
-      <img src="/x.jpg" alt="Example" />
-    </AspectRatio>,
-  ],
 ];
 
 // Colour-contrast needs a real browser to compute styles (jsdom can't), so we

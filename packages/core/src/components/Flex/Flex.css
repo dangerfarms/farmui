@@ -1,9 +1,0 @@
-@scope (.fui-Flex-root) {
-  :scope {
-    display: block flex;
-    flex-flow: var(--_dir, row) var(--_wrap, nowrap);
-    gap: var(--_gap, 0);
-    align-items: var(--_align, stretch);
-    justify-content: var(--_justify, flex-start);
-  }
-}

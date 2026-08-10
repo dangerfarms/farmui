@@ -18,10 +18,10 @@ const componentsDir = join(src, "components");
 
 const header = `/*!\n * FarmUI — @farmui/core\n * The complete, static stylesheet. Import once at your app root:\n *   import "@farmui/core/styles.css";\n * Nothing runs at runtime — no CSS-in-JS.\n */\n\n`;
 const layerOrder =
-  "@layer farmui.reset, farmui.tokens, farmui.elements, farmui.components;\n";
+  "@layer farmui.reset, farmui.tokens, farmui.elements, farmui.layout, farmui.components;\n";
 
 let out = header + layerOrder;
-for (const base of ["tokens.css", "reset.css", "elements.css"]) {
+for (const base of ["tokens.css", "reset.css", "elements.css", "layout.css"]) {
   out += "\n" + readFileSync(join(src, base), "utf8").trim() + "\n";
 }
 

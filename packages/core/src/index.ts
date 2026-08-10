@@ -1,7 +1,7 @@
 // FarmUI — public API barrel.
 
 export { cx, resolveRadius } from "./utils";
-export type { FarmUISize, FarmUIRadius, FarmUISpacing } from "./utils";
+export type { FarmUISize, FarmUIRadius } from "./utils";
 
 // Inputs
 export * from "./components/Field/index";
@@ -41,13 +41,5 @@ export * from "./components/Accordion/index";
 export * from "./components/Breadcrumbs/index";
 export * from "./components/Pagination/index";
 
-// Layout
-export * from "./components/Container/index";
-export * from "./components/Grid/index";
-export * from "./components/SimpleGrid/index";
-export * from "./components/Stack/index";
-export * from "./components/Group/index";
-export * from "./components/Flex/index";
-export * from "./components/Center/index";
-export * from "./components/Space/index";
-export * from "./components/AspectRatio/index";
+// Layout is CSS, not components: see src/layout.css (fui-stack, fui-cluster,
+// fui-switcher, fui-sidebar, fui-grid, fui-container, fui-frame, fui-center).

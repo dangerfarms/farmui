@@ -4,7 +4,7 @@ import type { ComponentDoc } from "@/docs/types";
 const doc: ComponentDoc = {
   slug: "separator",
   name: "Separator",
-  category: "Layout",
+  category: "Data display",
   description: "A rule between groups of content.",
   importLine: `import { Separator } from "@farmui/core";`,
   demos: [

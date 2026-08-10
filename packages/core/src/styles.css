@@ -14,27 +14,22 @@
  * scripts/build-css.mjs for the built artifact).
  */
 
-@layer farmui.reset, farmui.tokens, farmui.elements, farmui.components;
+@layer farmui.reset, farmui.tokens, farmui.elements, farmui.layout, farmui.components;
 
 @import url("./tokens.css");
 @import url("./reset.css");
 @import url("./elements.css");
+@import url("./layout.css");
 @import url("./components/Accordion/Accordion.css") layer(farmui.components);
 @import url("./components/Alert/Alert.css") layer(farmui.components);
-@import url("./components/AspectRatio/AspectRatio.css") layer(farmui.components);
 @import url("./components/Avatar/Avatar.css") layer(farmui.components);
 @import url("./components/Badge/Badge.css") layer(farmui.components);
 @import url("./components/Breadcrumbs/Breadcrumbs.css") layer(farmui.components);
 @import url("./components/Button/Button.css") layer(farmui.components);
 @import url("./components/Card/Card.css") layer(farmui.components);
-@import url("./components/Center/Center.css") layer(farmui.components);
 @import url("./components/Checkbox/Checkbox.css") layer(farmui.components);
-@import url("./components/Container/Container.css") layer(farmui.components);
 @import url("./components/Field/Field.css") layer(farmui.components);
 @import url("./components/Fieldset/Fieldset.css") layer(farmui.components);
-@import url("./components/Flex/Flex.css") layer(farmui.components);
-@import url("./components/Grid/Grid.css") layer(farmui.components);
-@import url("./components/Group/Group.css") layer(farmui.components);
 @import url("./components/Input/Input.css") layer(farmui.components);
 @import url("./components/Loader/Loader.css") layer(farmui.components);
 @import url("./components/Menu/Menu.css") layer(farmui.components);
@@ -45,11 +40,8 @@
 @import url("./components/Radio/Radio.css") layer(farmui.components);
 @import url("./components/Select/Select.css") layer(farmui.components);
 @import url("./components/Separator/Separator.css") layer(farmui.components);
-@import url("./components/SimpleGrid/SimpleGrid.css") layer(farmui.components);
 @import url("./components/Skeleton/Skeleton.css") layer(farmui.components);
 @import url("./components/Slider/Slider.css") layer(farmui.components);
-@import url("./components/Space/Space.css") layer(farmui.components);
-@import url("./components/Stack/Stack.css") layer(farmui.components);
 @import url("./components/Switch/Switch.css") layer(farmui.components);
 @import url("./components/Table/Table.css") layer(farmui.components);
 @import url("./components/Tabs/Tabs.css") layer(farmui.components);

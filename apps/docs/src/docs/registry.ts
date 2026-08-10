@@ -39,16 +39,8 @@ import accordion from "@/content/components/accordion";
 import breadcrumbs from "@/content/components/breadcrumbs";
 import pagination from "@/content/components/pagination";
 
-// Layout
-import container from "@/content/components/container";
-import grid from "@/content/components/grid";
-import simpleGrid from "@/content/components/simple-grid";
-import stack from "@/content/components/stack";
-import group from "@/content/components/group";
-import flex from "@/content/components/flex";
-import center from "@/content/components/center";
-import space from "@/content/components/space";
-import aspectRatio from "@/content/components/aspect-ratio";
+// Layout is CSS compositions, not components — see the Layout guide
+// (/docs/layout) and @farmui/core's layout.css.
 
 // Blocks
 
@@ -81,15 +73,6 @@ export const components: ComponentDoc[] = [
   accordion,
   breadcrumbs,
   pagination,
-  container,
-  grid,
-  simpleGrid,
-  stack,
-  group,
-  flex,
-  center,
-  space,
-  aspectRatio,
 ];
 
 export function getComponent(slug: string): ComponentDoc | undefined {

@@ -1,8 +1,0 @@
-@scope (.fui-Space-root) {
-  :scope {
-    display: block flow;
-    block-size: var(--_h, 0);
-    inline-size: var(--_w, 0);
-    flex: none;
-  }
-}

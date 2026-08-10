@@ -25,12 +25,12 @@ const doc: ComponentDoc = {
     <Modal.Description>
       They'll receive an email invitation to join your workspace.
     </Modal.Description>
-    <Group>
+    <div className="fui-cluster">
       <span style={{ "--fui-context": "primary" }}>
         <Modal.Close>Send invite</Modal.Close>
       </span>
       <Modal.Close>Cancel</Modal.Close>
-    </Group>
+    </div>
   </Modal.Popup>
 </Modal.Root>`,
       render: () => <ModalDemo />,
@@ -42,12 +42,12 @@ const doc: ComponentDoc = {
       code: `<Modal.Popup alert size="sm">
   <Modal.Title>Delete this file?</Modal.Title>
   <Modal.Description>This cannot be undone.</Modal.Description>
-  <Group>
+  <div className="fui-cluster">
     <Modal.Close autoFocus>Cancel</Modal.Close>
     <span style={{ "--fui-context": "danger" }}>
       <Modal.Close>Delete</Modal.Close>
     </span>
-  </Group>
+  </div>
 </Modal.Popup>`,
       render: () => <ModalAlertDemo />,
     },
