@@ -38,8 +38,21 @@ export default function Theming() {
         <code>primary</code> context regions. (Buttons are neutral by
         default — the demo below is wrapped in a primary region so you can
         see the change.) Scope the token to a subtree to theme just part of
-        a page:
+        a page — the nearest declaration up the tree wins, so both cards
+        below run identical CSS and differ only in where the token is set:
       </p>
+      <div className={prose.block}>
+        <CodeBlock
+          language="tsx"
+          code={`<div style={{ "--fui-context": "primary" }}>
+  <Button>Default brand</Button>   {/* --fui-primary resolves at :root */}
+</div>
+
+<div style={{ "--fui-primary": "oklch(0.62 0.2 275)", "--fui-context": "primary" }}>
+  <Button>Violet brand</Button>    {/* …resolves here instead */}
+</div>`}
+        />
+      </div>
       <div className={prose.block}>
         <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
           <div
@@ -76,17 +89,40 @@ export default function Theming() {
       <h2>Dark mode</h2>
       <p>
         Dark mode is native. Tokens are defined with CSS{" "}
-        <code>light-dark()</code>, so switching themes is just switching{" "}
-        <code>color-scheme</code>. FarmUI wires this to a{" "}
-        <code>data-theme</code> attribute:
+        <code>light-dark()</code> and the root declares{" "}
+        <code>color-scheme: light dark</code>, so the user&apos;s OS
+        preference is followed with no JavaScript and no configuration —
+        that is the default state.
+      </p>
+      <p>
+        The stylesheet can only speak once it has loaded. Add the matching
+        meta tag so the browser paints the canvas in the right scheme{" "}
+        <em>before</em> CSS arrives (otherwise dark-preference users get a
+        flash of light canvas on every load):
       </p>
       <div className={prose.block}>
         <CodeBlock
-          language="js"
-          code={`// Flip the whole app
-document.documentElement.dataset.theme = "dark";
-// or "light" — omit to follow the OS preference`}
+          language="html"
+          code={`<meta name="color-scheme" content="light dark" />`}
         />
+      </div>
+      <p>
+        To override the preference, set{" "}
+        <code>data-theme=&quot;dark&quot;</code> or{" "}
+        <code>data-theme=&quot;light&quot;</code> — on the root for the
+        whole app, or on any element for just that subtree (the attribute
+        simply sets <code>color-scheme</code>, so every{" "}
+        <code>light-dark()</code> token re-resolves there). Remove the
+        attribute to follow the OS preference again.
+      </p>
+      <div className={prose.callout}>
+        This is one instance of FarmUI&apos;s baseline posture:{" "}
+        <strong>the user&apos;s stated preferences are the default.</strong>{" "}
+        Colour scheme is followed natively, motion exists only inside{" "}
+        <code>prefers-reduced-motion: no-preference</code>, and forced
+        colour palettes are honoured rather than overridden. Everything
+        beyond that baseline — a saved theme, an animation — is an explicit
+        opt-in layered on top.
       </div>
 
       <h2>Contexts</h2>
@@ -157,12 +193,14 @@ document.documentElement.dataset.theme = "dark";
       </p>
       <p>
         An inverted &ldquo;on-dark&rdquo; section needs no context at all —
-        set <code>color-scheme: dark</code> on the region and every{" "}
-        <code>light-dark()</code> token flips. One caveat: colours already
-        resolved on an ancestor inherit as resolved values and don&rsquo;t
-        re-resolve, so the inverted region must also re-declare{" "}
-        <code>color</code> (e.g. <code>color: var(--fui-text)</code>) for
-        descendants to pick up the flipped value.
+        set <code>data-theme=&quot;dark&quot;</code> on the region (or{" "}
+        <code>color-scheme: dark</code> in its CSS; the attribute is just a
+        setter for it) and every <code>light-dark()</code> token flips. One
+        caveat: colours already resolved on an ancestor inherit as resolved
+        values and don&rsquo;t re-resolve, so the inverted region must also
+        re-declare <code>color</code> (e.g.{" "}
+        <code>color: var(--fui-text)</code>) for descendants to pick up the
+        flipped value.
       </p>
       <div className={prose.callout}>
         Theme, context, and instance are one mechanism at three scopes: remap

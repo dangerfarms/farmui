@@ -162,12 +162,13 @@
        borders). Do not add height tokens. */
   }
 
-  /* Manual theme override — light-dark() follows the computed color-scheme */
-  :root[data-theme="light"] {
+  /* Manual theme override at any scope — the attribute just sets
+     color-scheme, so light-dark() re-resolves for that subtree. */
+  [data-theme="light"] {
     color-scheme: light;
   }
 
-  :root[data-theme="dark"] {
+  [data-theme="dark"] {
     color-scheme: dark;
   }
 

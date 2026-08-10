@@ -15,6 +15,7 @@ export const GETTING_STARTED: { name: string; href: string }[] = [
   { name: "Contextualism", href: "/docs/contextualism" },
   { name: "Layout", href: "/docs/layout" },
   { name: "Theming", href: "/docs/theming" },
+  { name: "Accessibility", href: "/docs/accessibility" },
 ];
 
 export const CATEGORY_ORDER = [
