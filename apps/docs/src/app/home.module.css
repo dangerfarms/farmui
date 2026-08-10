@@ -96,7 +96,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  block-size: var(--fui-control-height-lg);
+  padding-block: 0.65rem;
   padding-inline: 1.5rem;
   font-size: var(--fui-text-md);
   font-weight: 650;

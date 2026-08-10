@@ -16,9 +16,9 @@ const meta = {
           They&apos;ll receive an email invitation to join your workspace.
         </Modal.Description>
         <Group>
-          <Modal.Close style={{ "--fui-context": "primary" } as CSSProperties}>
-            Send invite
-          </Modal.Close>
+          <span style={{ "--fui-context": "primary" } as CSSProperties}>
+            <Modal.Close>Send invite</Modal.Close>
+          </span>
           <Modal.Close>Cancel</Modal.Close>
         </Group>
       </Modal.Popup>
@@ -35,6 +35,30 @@ type Story = StoryObj<typeof meta>;
  * focus restore all come from the browser.
  */
 export const Playground: Story = {};
+
+/**
+ * `alert` renders `role="alertdialog"`: no light dismiss (Escape still
+ * closes), initial focus on the least-destructive action via autoFocus.
+ */
+export const AlertDialog: Story = {
+  render: () => (
+    <Modal.Root>
+      <span style={{ "--fui-context": "danger" } as CSSProperties}>
+        <Modal.Trigger>Delete file</Modal.Trigger>
+      </span>
+      <Modal.Popup alert size="sm">
+        <Modal.Title>Delete this file?</Modal.Title>
+        <Modal.Description>This cannot be undone.</Modal.Description>
+        <Group>
+          <Modal.Close autoFocus>Cancel</Modal.Close>
+          <span style={{ "--fui-context": "danger" } as CSSProperties}>
+            <Modal.Close>Delete</Modal.Close>
+          </span>
+        </Group>
+      </Modal.Popup>
+    </Modal.Root>
+  ),
+};
 
 /** Panel widths via the Popup's size prop. */
 export const Sizes: Story = {

@@ -5,32 +5,23 @@ import { cx } from "../../utils";
 export interface AlertRootProps extends Omit<
   HTMLAttributes<HTMLDivElement>,
   "color"
-> {
-  /** Semantic color. @default "info" */
-  color?: "info" | "success" | "warning" | "danger";
-  /** Visual style. @default "light" */
-  variant?: "light" | "filled" | "outline";
-}
+> {}
 
-function AlertRoot({
-  color = "info",
-  variant = "light",
-  className,
-  children,
-  ...rest
-}: AlertRootProps & { ref?: React.Ref<HTMLDivElement> }) {
+const AlertRoot = forwardRef<HTMLDivElement, AlertRootProps>(function AlertRoot(
+  { className, children, ...rest },
+  ref,
+) {
   return (
     <div
+      ref={ref}
       role="alert"
       className={cx("fui-Alert-root", className)}
-      data-color={color}
-      data-variant={variant}
       {...rest}
     >
       {children}
     </div>
   );
-}
+});
 
 export interface AlertPartProps extends HTMLAttributes<HTMLElement> {}
 
@@ -76,13 +67,24 @@ export interface AlertProps extends Omit<AlertRootProps, "title"> {
 }
 
 /**
- * Alert — a prominent, colored message box for conveying status or feedback.
+ * Alert — a prominent message box for conveying status or feedback.
+ *
+ * Neutral by default — status is declared by context, not props: declare
+ * `--fui-context` on a region (an ancestor — a style query never matches
+ * the element that declares it, so a one-element region is a wrapper) and
+ * the look derives from that status's colour:
+ *
+ * ```tsx
+ * <div style={{ "--fui-context": "warning" } as React.CSSProperties}>
+ *   <Alert title="Heads up">A new version is available.</Alert>
+ * </div>
+ * ```
  *
  * Compose it from parts, or use the `title`/`icon` convenience props which
  * render the same structure:
  *
  * ```tsx
- * <Alert.Root color="warning">
+ * <Alert.Root>
  *   <Alert.Icon>…</Alert.Icon>
  *   <Alert.Body>
  *     <Alert.Title>Heads up</Alert.Title>

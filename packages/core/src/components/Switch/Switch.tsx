@@ -4,6 +4,7 @@ import { forwardRef, useId } from "react";
 import type { InputHTMLAttributes, ReactNode } from "react";
 import { cx } from "../../utils";
 import { useFieldControlProps } from "../Field/Field";
+import { useUserInvalid } from "../../use-user-invalid";
 
 export interface SwitchProps extends Omit<
   InputHTMLAttributes<HTMLInputElement>,
@@ -18,7 +19,7 @@ export interface SwitchProps extends Omit<
 }
 
 /** The bare toggle (input + track), minus any label. */
-type SwitchControlProps = Omit<
+export type SwitchControlProps = Omit<
   SwitchProps,
   "label" | "labelPosition" | "wrapperClassName"
 >;
@@ -37,11 +38,17 @@ const SwitchControl = forwardRef<HTMLInputElement, SwitchControlProps>(
       disabled,
       "aria-invalid": ariaInvalid,
       "aria-describedby": ariaDescribedby,
+      onBlur,
+      onInvalid,
       ...rest
     },
     ref,
   ) {
     const field = useFieldControlProps();
+
+    const { nativeInvalid, checkOnBlur, checkOnInvalid } = useUserInvalid();
+    const resolvedAriaInvalid =
+      ariaInvalid ?? field["aria-invalid"] ?? (nativeInvalid || undefined);
 
     return (
       <span
@@ -55,8 +62,16 @@ const SwitchControl = forwardRef<HTMLInputElement, SwitchControlProps>(
           role="switch"
           className={cx("fui-Switch-input", className)}
           disabled={disabled}
-          aria-invalid={ariaInvalid ?? field["aria-invalid"]}
+          aria-invalid={resolvedAriaInvalid}
           aria-describedby={ariaDescribedby ?? field["aria-describedby"]}
+          onBlur={(e) => {
+            onBlur?.(e);
+            checkOnBlur(e);
+          }}
+          onInvalid={(e) => {
+            onInvalid?.(e);
+            checkOnInvalid(e);
+          }}
           {...rest}
         />
         <span className={"fui-Switch-track"} aria-hidden>

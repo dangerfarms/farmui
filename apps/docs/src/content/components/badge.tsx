@@ -1,4 +1,5 @@
 import { Badge } from "@farmui/core";
+import type { CSSProperties } from "react";
 import type { ComponentDoc } from "@/docs/types";
 
 const doc: ComponentDoc = {
@@ -9,46 +10,33 @@ const doc: ComponentDoc = {
   importLine: `import { Badge } from "@farmui/core";`,
   demos: [
     {
-      title: "Variants",
-      description: "Four visual styles for different emphasis levels.",
-      code: `<Badge>Filled</Badge>
-<Badge variant="light">Light</Badge>
-<Badge variant="outline">Outline</Badge>
-<Badge variant="dot">Dot</Badge>`,
+      title: "Contexts",
+      description:
+        "Badges are neutral by default. There are no variant or color props — declare --fui-context on a one-element wrapper region (a style query is answered by ancestors, never by the declaring element itself), or let it inherit from a larger region. See the Contextualism guide.",
+      code: `<Badge>Neutral</Badge>
+<span style={{ "--fui-context": "primary" }}><Badge>Primary</Badge></span>
+<span style={{ "--fui-context": "success" }}><Badge>Success</Badge></span>
+<span style={{ "--fui-context": "warning" }}><Badge>Warning</Badge></span>
+<span style={{ "--fui-context": "danger" }}><Badge>Danger</Badge></span>
+<span style={{ "--fui-context": "info" }}><Badge>Info</Badge></span>`,
       render: () => (
         <>
-          <Badge>Filled</Badge>
-          <Badge variant="light">Light</Badge>
-          <Badge variant="outline">Outline</Badge>
-          <Badge variant="dot">Dot</Badge>
-        </>
-      ),
-    },
-    {
-      title: "Colors",
-      description: "Semantic colors map to design tokens.",
-      code: `<Badge color="primary" variant="light">Primary</Badge>
-<Badge color="gray" variant="light">Gray</Badge>
-<Badge color="danger" variant="light">Danger</Badge>
-<Badge color="warning" variant="light">Warning</Badge>
-<Badge color="info" variant="light">Info</Badge>`,
-      render: () => (
-        <>
-          <Badge color="primary" variant="light">
-            Primary
-          </Badge>
-          <Badge color="gray" variant="light">
-            Gray
-          </Badge>
-          <Badge color="danger" variant="light">
-            Danger
-          </Badge>
-          <Badge color="warning" variant="light">
-            Warning
-          </Badge>
-          <Badge color="info" variant="light">
-            Info
-          </Badge>
+          <Badge>Neutral</Badge>
+          <span style={{ "--fui-context": "primary" } as CSSProperties}>
+            <Badge>Primary</Badge>
+          </span>
+          <span style={{ "--fui-context": "success" } as CSSProperties}>
+            <Badge>Success</Badge>
+          </span>
+          <span style={{ "--fui-context": "warning" } as CSSProperties}>
+            <Badge>Warning</Badge>
+          </span>
+          <span style={{ "--fui-context": "danger" } as CSSProperties}>
+            <Badge>Danger</Badge>
+          </span>
+          <span style={{ "--fui-context": "info" } as CSSProperties}>
+            <Badge>Info</Badge>
+          </span>
         </>
       ),
     },
@@ -66,43 +54,65 @@ const doc: ComponentDoc = {
       ),
     },
     {
-      title: "With dot",
+      title: "Status dot",
       description:
-        "The dot variant shows a colored status dot before the label.",
-      code: `<Badge variant="dot" color="primary">Live</Badge>
-<Badge variant="dot" color="warning">Pending</Badge>
-<Badge variant="dot" color="danger">Offline</Badge>
-<Badge variant="dot" color="gray">Draft</Badge>`,
+        "Add dot to show a status dot before the label — it takes the context's colour, so the badge reads at a glance even before the text.",
+      code: `<span style={{ "--fui-context": "success" }}><Badge dot>Live</Badge></span>
+<span style={{ "--fui-context": "warning" }}><Badge dot>Pending</Badge></span>
+<span style={{ "--fui-context": "danger" }}><Badge dot>Offline</Badge></span>
+<Badge dot>Draft</Badge>`,
       render: () => (
         <>
-          <Badge variant="dot" color="primary">
-            Live
-          </Badge>
-          <Badge variant="dot" color="warning">
-            Pending
-          </Badge>
-          <Badge variant="dot" color="danger">
-            Offline
-          </Badge>
-          <Badge variant="dot" color="gray">
-            Draft
-          </Badge>
+          <span style={{ "--fui-context": "success" } as CSSProperties}>
+            <Badge dot>Live</Badge>
+          </span>
+          <span style={{ "--fui-context": "warning" } as CSSProperties}>
+            <Badge dot>Pending</Badge>
+          </span>
+          <span style={{ "--fui-context": "danger" } as CSSProperties}>
+            <Badge dot>Offline</Badge>
+          </span>
+          <Badge dot>Draft</Badge>
         </>
+      ),
+    },
+    {
+      title: "Icons (composed as children)",
+      description:
+        "No leftSection / rightSection props — an svg child is detected via :has(svg) and gets a gap and 1em sizing, exactly like Button.",
+      code: `<span style={{ "--fui-context": "success" }}>
+  <Badge>
+    <svg viewBox="0 -0.5 25 25" fill="none" aria-hidden>
+      <path d="M5.5 12.5L10.167 17L19.5 8" stroke="currentColor"
+        strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+    Verified
+  </Badge>
+</span>`,
+      render: () => (
+        <span style={{ "--fui-context": "success" } as CSSProperties}>
+          <Badge>
+            <svg viewBox="0 -0.5 25 25" fill="none" aria-hidden>
+              <path
+                d="M5.5 12.5L10.167 17L19.5 8"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            Verified
+          </Badge>
+        </span>
       ),
     },
   ],
   props: [
     {
-      name: "variant",
-      type: `"filled" | "light" | "outline" | "dot"`,
-      default: `"filled"`,
-      description: "Visual style of the badge.",
-    },
-    {
-      name: "color",
-      type: `"primary" | "gray" | "danger" | "warning" | "info"`,
-      default: `"primary"`,
-      description: "Semantic color.",
+      name: "dot",
+      type: "boolean",
+      description:
+        "Show a status dot before the label, coloured by the context.",
     },
     {
       name: "size",
@@ -117,19 +127,21 @@ const doc: ComponentDoc = {
       description: "Border radius token.",
     },
     {
-      name: "leftSection",
+      name: "children",
       type: "ReactNode",
-      description: "Content rendered before the label.",
-    },
-    {
-      name: "rightSection",
-      type: "ReactNode",
-      description: "Content rendered after the label.",
+      description: "The badge content — label, and any composed icons.",
     },
     {
       name: "...others",
       type: "SpanHTMLAttributes",
-      description: "All native <span> props are forwarded.",
+      description:
+        "All native <span> props are forwarded, including style for the custom property below.",
+    },
+    {
+      name: "--fui-context",
+      type: `"primary" | "danger" | "success" | "warning" | "info"`,
+      description:
+        "The badge's status. Declare it on an ancestor — a one-element span wrapper for a single badge, or any region — because a style query is answered by ancestors, not by the declaring element; the property inherits.",
     },
   ],
 };

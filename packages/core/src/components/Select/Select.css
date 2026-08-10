@@ -23,7 +23,7 @@
     border-radius: var(--_radius, var(--fui-radius-md));
     background: var(--fui-surface);
     transition:
-      border-color var(--fui-duration-md) var(--fui-ease),
+      border-color var(--fui-duration-sm) var(--fui-ease),
       box-shadow var(--fui-duration-md) var(--fui-ease);
   }
 
@@ -34,10 +34,30 @@
     outline-offset: 2px;
   }
 
+  /* Autofilled: the wrapper border carries the signal (the select itself
+     paints the tint — see below). :autofill and :-webkit-autofill must stay
+     in separate blocks — one unsupported selector invalidates a shared
+     list. Declared before the error state so danger wins at equal
+     specificity. */
+  :scope:has(.fui-Select-select:autofill) {
+    border-color: color-mix(
+      in oklab,
+      var(--fui-primary) 50%,
+      var(--fui-border-strong)
+    );
+  }
+
+  :scope:has(.fui-Select-select:-webkit-autofill) {
+    border-color: color-mix(
+      in oklab,
+      var(--fui-primary) 50%,
+      var(--fui-border-strong)
+    );
+  }
+
   /* Error state is detected from the select's own state: ARIA or native
      constraint validation (:user-invalid). */
-  :scope:has(.fui-Select-select[aria-invalid="true"]),
-  :scope:has(.fui-Select-select:user-invalid) {
+  :scope:has(.fui-Select-select:is([aria-invalid="true"], :user-invalid)) {
     --fui-ring-color: var(--fui-danger-ring);
 
     border-color: var(--fui-danger);
@@ -71,6 +91,19 @@
   /* Empty placeholder value renders dimmed like a real placeholder. */
   .fui-Select-select:has(option[value=""]:checked) {
     color: var(--fui-text-dim);
+  }
+
+  /* background-color cannot be overridden on an autofilled field; an inset
+     shadow wider than the control paints the tint instead. Separate blocks —
+     see the wrapper rules above. */
+  .fui-Select-select:autofill {
+    box-shadow: inset 0 0 0 100px
+      color-mix(in oklab, var(--fui-primary) 8%, var(--fui-surface));
+  }
+
+  .fui-Select-select:-webkit-autofill {
+    box-shadow: inset 0 0 0 100px
+      color-mix(in oklab, var(--fui-primary) 8%, var(--fui-surface));
   }
 
   .fui-Select-chevron {

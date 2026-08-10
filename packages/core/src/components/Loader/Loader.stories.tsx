@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { CSSProperties } from "react";
 import { Loader } from "../../index";
 
 const meta = {
@@ -7,19 +8,23 @@ const meta = {
   tags: ["autodocs"],
   args: {
     size: "md",
-    color: "primary",
     variant: "spinner",
     label: "Loading",
   },
   argTypes: {
     size: { control: "inline-radio", options: ["sm", "md", "lg"] },
-    color: {
-      control: "inline-radio",
-      options: ["primary", "info", "success", "warning", "danger"],
-    },
     variant: {
       control: "inline-radio",
       options: ["spinner", "dots", "bars"],
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Draws with `currentColor` — it inherits its parent's text " +
+          "colour, so contextual colour needs no prop.",
+      },
     },
   },
 } satisfies Meta<typeof Loader>;
@@ -50,14 +55,30 @@ export const Sizes: Story = {
   ),
 };
 
-export const Colors: Story = {
-  render: (args) => (
-    <div style={{ display: "flex", gap: "1.5rem", alignItems: "center" }}>
-      <Loader {...args} color="primary" label="Primary loader" />
-      <Loader {...args} color="info" label="Info loader" />
-      <Loader {...args} color="success" label="Success loader" />
-      <Loader {...args} color="warning" label="Warning loader" />
-      <Loader {...args} color="danger" label="Danger loader" />
-    </div>
-  ),
+/**
+ * The loader inherits `currentColor`. Point its `color` at a semantic token
+ * and a `--fui-context` region's token remap flows through; any plain
+ * `color` (e.g. a button's channel) works just as well.
+ */
+export const Contexts: Story = {
+  render: (args) => {
+    const primary = { color: "var(--fui-primary)" } as CSSProperties;
+    return (
+      <div style={{ display: "flex", gap: "1.5rem", alignItems: "center" }}>
+        <Loader {...args} style={primary} label="Primary loader" />
+        <span style={{ "--fui-context": "success" } as CSSProperties}>
+          <Loader {...args} style={primary} label="Success loader" />
+        </span>
+        <span style={{ "--fui-context": "warning" } as CSSProperties}>
+          <Loader {...args} style={primary} label="Warning loader" />
+        </span>
+        <span style={{ "--fui-context": "info" } as CSSProperties}>
+          <Loader {...args} style={primary} label="Info loader" />
+        </span>
+        <span style={{ "--fui-context": "danger" } as CSSProperties}>
+          <Loader {...args} style={primary} label="Danger loader" />
+        </span>
+      </div>
+    );
+  },
 };

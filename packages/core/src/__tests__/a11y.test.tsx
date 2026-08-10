@@ -1,7 +1,7 @@
 import { describe, it, expect, afterEach } from "vitest";
 import { render, cleanup } from "@testing-library/react";
 import { axe } from "vitest-axe";
-import type { ReactElement } from "react";
+import type { CSSProperties, ReactElement } from "react";
 
 import {
   Button,
@@ -18,11 +18,14 @@ import {
   Table,
   Alert,
   Progress,
+  Separator,
   Skeleton,
   Loader,
   Tooltip,
+  Menu,
   Modal,
   Popover,
+  Toast,
   Tabs,
   TabsList,
   TabsTab,
@@ -83,20 +86,58 @@ const cases: Array<[string, ReactElement]> = [
   ],
   [
     "Alert",
-    <Alert color="info" title="Heads up">
-      A new version is available.
-    </Alert>,
+    <div style={{ "--fui-context": "info" } as CSSProperties}>
+      <Alert title="Heads up">A new version is available.</Alert>
+    </div>,
   ],
   [
     "Alert (composed)",
-    <Alert.Root color="warning">
-      <Alert.Body>
-        <Alert.Title>Storage almost full</Alert.Title>
-        <Alert.Message>Free up space to keep syncing.</Alert.Message>
-      </Alert.Body>
-    </Alert.Root>,
+    <div style={{ "--fui-context": "warning" } as CSSProperties}>
+      <Alert.Root>
+        <Alert.Body>
+          <Alert.Title>Storage almost full</Alert.Title>
+          <Alert.Message>Free up space to keep syncing.</Alert.Message>
+        </Alert.Body>
+      </Alert.Root>
+    </div>,
   ],
   ["Progress", <Progress value={40} aria-label="Upload progress" />],
+  ["Separator", <Separator />],
+  [
+    "Separator (vertical, in a row)",
+    <div style={{ display: "flex", gap: 8 }}>
+      <span>Cut</span>
+      <Separator orientation="vertical" />
+      <span>Copy</span>
+    </div>,
+  ],
+  [
+    "Menu (open)",
+    <Menu.Root defaultOpen>
+      <Menu.Trigger>Options</Menu.Trigger>
+      <Menu.Popup>
+        <Menu.Item>Rename</Menu.Item>
+        <Menu.Item href="/export">Export</Menu.Item>
+        <Menu.Separator />
+        <Menu.Group>
+          <Menu.GroupLabel>Danger zone</Menu.GroupLabel>
+          <Menu.Item>Delete</Menu.Item>
+        </Menu.Group>
+      </Menu.Popup>
+    </Menu.Root>,
+  ],
+  [
+    "Toast (viewport with toast)",
+    <Toast.Provider>
+      <Toast.Viewport>
+        <Toast.Root toast={{ id: "t1" }}>
+          <Toast.Title>Saved</Toast.Title>
+          <Toast.Description>Your changes are live.</Toast.Description>
+          <Toast.Close toastId="t1" />
+        </Toast.Root>
+      </Toast.Viewport>
+    </Toast.Provider>,
+  ],
   ["Skeleton", <Skeleton width={200} height={16} />],
   ["Loader", <Loader />],
   [

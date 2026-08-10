@@ -137,6 +137,12 @@ export const COMPONENTS: NavItem[] = [
     category: "Feedback",
     description: "Indicate an ongoing process.",
   },
+  {
+    name: "Toast",
+    slug: "toast",
+    category: "Feedback",
+    description: "Transient notifications.",
+  },
   // Overlays
   {
     name: "Tooltip",
@@ -155,6 +161,12 @@ export const COMPONENTS: NavItem[] = [
     slug: "popover",
     category: "Overlays",
     description: "Floating content anchored to a trigger.",
+  },
+  {
+    name: "Menu",
+    slug: "menu",
+    category: "Overlays",
+    description: "A list of actions opened from a trigger.",
   },
   // Navigation
   {
@@ -235,6 +247,12 @@ export const COMPONENTS: NavItem[] = [
     slug: "aspect-ratio",
     category: "Layout",
     description: "Constrain content to a fixed ratio.",
+  },
+  {
+    name: "Separator",
+    slug: "separator",
+    category: "Layout",
+    description: "A rule between groups of content.",
   },
 ];
 

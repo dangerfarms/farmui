@@ -6,7 +6,7 @@
     border: 1px solid var(--fui-border);
     border-radius: var(--fui-radius-md);
     background: var(--fui-surface);
-    overflow: hidden;
+    overflow: clip;
   }
 }
 
@@ -16,6 +16,32 @@
  * styles must not depend on the .fui-Accordion-root wrapper.
  */
 @scope (.fui-Accordion-item) {
+  /* Open/close height animation on the platform's own content slot.
+     interpolate-size is required for the 0 → auto interpolation and is not
+     yet Baseline, so the whole recipe gates on it (elsewhere: today's
+     instant toggle). Declared on the item, never :root — a library must not
+     leak keyword interpolation into the host page. */
+  @supports (interpolate-size: allow-keywords) {
+    :scope {
+      interpolate-size: allow-keywords;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      :scope::details-content {
+        block-size: 0;
+        overflow-block: clip;
+        transition:
+          block-size var(--fui-duration-md) var(--fui-ease),
+          content-visibility var(--fui-duration-md) var(--fui-ease)
+          allow-discrete;
+      }
+
+      :scope[open]::details-content {
+        block-size: auto;
+      }
+    }
+  }
+
   :scope {
     border-block-end: 1px solid var(--fui-border);
   }
@@ -59,11 +85,12 @@
   .fui-Accordion-chevron {
     flex: none;
     color: var(--fui-text-muted);
-    transition: transform var(--fui-duration-md) var(--fui-ease);
+    rotate: 0deg;
+    transition: rotate var(--fui-duration-md) var(--fui-ease);
   }
 
   :scope[open] > .fui-Accordion-summary .fui-Accordion-chevron {
-    transform: rotate(180deg);
+    rotate: 180deg;
     color: var(--fui-primary);
   }
 

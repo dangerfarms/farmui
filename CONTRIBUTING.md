@@ -73,23 +73,36 @@ Guardrails enforce this: `pnpm lint` runs oxlint + stylelint
   guarded by `@supports` in CSS or feature detection in JS, with a graceful
   fallback in the same component (e.g. CSS anchor positioning in Popover and
   Tooltip, which fall back to wrapper-anchored positioning).
+- **Single ignorable declarations are exempt from the `@supports` rule**: a
+  lone declaration that is simply ignored where unsupported (e.g.
+  `text-wrap: pretty`, `text-box`) may ship unguarded. The `@supports` gate is
+  for multi-declaration behaviour changes, where partial application would be
+  wrong.
 - **No polyfills, ever** — the library ships zero-runtime static CSS and lean
   components; a browser without a feature gets the fallback behavior, not extra
   JavaScript.
 - Check status with the `modern-web-guidance` skill or
   [webstatus.dev](https://webstatus.dev) before adopting a feature.
+- **Forced colors is part of done**: any state conveyed by background colour
+  needs a `@media (forced-colors: active)` treatment with system colours
+  (see Switch/Radio/Menu for the pattern). Verify with headless Chrome's
+  `--force-high-contrast` flag; remember the override must come *after* the
+  base rule it replaces (same specificity — order decides).
 
 ## Component API conventions
 
 FarmUI follows Base UI's composition model with one shared contract, so a
 consumer (or agent) who learns it once knows every component.
 
-**`render` is never required.** Every part renders a sensible built-in element
-for its role (`Popover.Trigger` → a FarmUI Button, `Breadcrumbs.Item` → a
-link via `href`, `Popover.Close` → a Button). The `render` prop exists only to
-*substitute* that element (`render={<a href="…" />}`, or a function of the
-wiring props). If a part's common case needs `render`, the part has the wrong
-default element.
+**`render` is never required** — with one deliberate exception. Every part
+renders a sensible built-in element for its role (`Popover.Trigger` → a
+FarmUI Button, `Breadcrumbs.Item` → a link via `href`, `Popover.Close` → a
+Button). The `render` prop exists only to *substitute* that element
+(`render={<a href="…" />}`, or a function of the wiring props). If a part's
+common case needs `render`, the part has the wrong default element. The
+exception is `Field.Control`, whose entire purpose is wiring an arbitrary
+control into the field — the labelled controls (`<Input label=…>` etc.) are
+its built-in forms, so a default element would just duplicate them.
 
 **One merge contract** (`src/render.ts`, used by every part): event handlers
 chain — the element's own handler runs first, wiring second, both always run;
@@ -139,14 +152,17 @@ attributes.
 **Contextual channels** — orthogonal ways a region influences the
 components inside it; never blur them:
 
-- **Contexts** (`--fui-context: danger | primary`) — what the region
-  *means*. A registered, inherited custom property declared on any element
-  (style attribute or the region's own CSS) and read via container style
-  queries (`@container (style(--fui-context: danger))`) in the Contexts
-  section of `tokens.css` and in component files. **Never a data
+- **Contexts** (`--fui-context: primary | danger | success | warning | info`)
+  — what the region *means*. A registered, inherited custom property declared
+  on any element (style attribute or the region's own CSS) and read via
+  container style queries (`@container (style(--fui-context: danger))`) in
+  the Contexts section of `tokens.css` and in component files. **Never a data
   attribute.** Contexts remap **only** colour tokens: never spacing, sizing,
   or layout. Components contain no context code; the nearest ancestor that
-  sets the property wins because the property inherits.
+  sets the property wins because the property inherits. Status components
+  (Alert, Badge, Loader, Progress) have no variant or colour props — they
+  consume the same context, typically as a one-element region declared on
+  the component itself.
 - **Layout hints** (`data-fui-buttons="block"`) — how the region *arranges*
   its contents.
 - **Containers** (`container-type: inline-size`) — how *big* the region is;
@@ -183,6 +199,7 @@ pnpm format
 All four should pass cleanly. Please use
 [Conventional Commits](https://www.conventionalcommits.org/) for commit messages
 (`feat:`, `fix:`, `docs:`, `refactor:`, …).
+- `pnpm --filter @farmui/core test` — the a11y and interaction suites
 
 ## Releasing
 

@@ -83,6 +83,12 @@
           opacity: 0;
           scale: 0.96;
         }
+
+        /* Exit: transition back to the closed state (see Modal). */
+        &:not(:popover-open) {
+          opacity: 0;
+          scale: 0.96;
+        }
       }
     }
 
@@ -167,8 +173,8 @@
     /* When position-try flipped the bubble, the arrow follows: it moves to
        the opposite edge and points back at the trigger. Anchored container
        queries are the only CSS signal for the applied fallback, so these
-       are inherently overrides of the requested side (per the Chrome
-       guide); browsers without them keep the requested-side arrow. */
+       are inherently overrides of the requested side; browsers without
+       them keep the requested-side arrow. */
     @container anchored(fallback: flip-block) {
       :scope[data-position="top"] & {
         inset-block: auto 100%;

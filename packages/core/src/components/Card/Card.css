@@ -7,7 +7,7 @@
     background: var(--fui-surface);
     box-shadow: var(--_shadow, none);
     transition:
-      border-color var(--fui-duration-md) var(--fui-ease),
+      border-color var(--fui-duration-sm) var(--fui-ease),
       box-shadow var(--fui-duration-md) var(--fui-ease);
 
     /* Padding */

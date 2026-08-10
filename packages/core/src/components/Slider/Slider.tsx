@@ -16,7 +16,7 @@ export interface SliderProps extends Omit<
 }
 
 /** The bare range input, minus any label. */
-type SliderControlProps = Omit<SliderProps, "label" | "wrapperClassName">;
+export type SliderControlProps = Omit<SliderProps, "label" | "wrapperClassName">;
 
 /**
  * SliderControl — the bare `<input type="range">`. When rendered inside a

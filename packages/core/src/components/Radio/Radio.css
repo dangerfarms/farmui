@@ -15,14 +15,18 @@
 /* The bare form renders a fragment — input + control as siblings with no
    wrapper element — so the input scopes to itself. */
 @scope (.fui-Radio-input) {
-  /* Visually hide the native input but keep it accessible & focusable. */
+  /* Visually hide the native input but keep it accessible & focusable.
+     Radio keeps the 1px clip recipe (rather than the centred hit-area
+     overlay Checkbox and Switch use): its bare form is a fragment — input +
+     control as siblings with no wrapper — so there is no guaranteed
+     positioning context for an overlay. */
   :scope {
     position: absolute;
     inline-size: 1px;
     block-size: 1px;
     padding: 0;
     margin: -1px;
-    overflow: hidden;
+    overflow: clip;
     clip-path: inset(50%);
     white-space: nowrap;
     border: 0;
@@ -56,8 +60,8 @@
     border-radius: var(--fui-radius-full);
     background: var(--fui-surface);
     transition:
-      border-color var(--fui-duration-md) var(--fui-ease),
-      background var(--fui-duration-md) var(--fui-ease),
+      border-color var(--fui-duration-sm) var(--fui-ease),
+      background var(--fui-duration-sm) var(--fui-ease),
       box-shadow var(--fui-duration-md) var(--fui-ease);
   }
 
@@ -104,6 +108,15 @@
     --fui-ring-color: var(--fui-danger-ring);
 
     border-color: var(--fui-danger);
+  }
+
+  /* Forced colors: the selected dot is background-painted and would vanish;
+     CanvasText guarantees contrast on the forced Canvas fill. */
+  @media (forced-colors: active) {
+    :scope::after {
+      forced-color-adjust: none;
+      background: CanvasText;
+    }
   }
 }
 

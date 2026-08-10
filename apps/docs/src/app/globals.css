@@ -75,6 +75,10 @@
     color: var(--fui-text);
     font-family: var(--fui-font);
     font-size: var(--fui-text-md);
+
+    /* Fallback fonts render at the webfont's own aspect — no reflow jolt
+       while the pinned font loads. */
+    font-size-adjust: from-font;
     line-height: 1.6;
   }
 

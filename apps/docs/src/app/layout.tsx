@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Header } from "@/site/Header";
 import { Footer } from "@/site/Footer";
@@ -10,6 +10,13 @@ export const metadata: Metadata = {
   },
   description:
     "FarmUI is a fully-featured React component library focused on accessibility and performance. Zero-runtime styling, WCAG-compliant components, tiny bundles, native light-dark(), container queries, and CSS-variable theming.",
+};
+
+// Renders <meta name="color-scheme" content="light dark"> — the UA needs the
+// supported schemes before the stylesheet loads (correct default canvas,
+// form controls and scrollbars pre-paint).
+export const viewport: Viewport = {
+  colorScheme: "light dark",
 };
 
 // Set the theme before paint to avoid a flash of the wrong color scheme.

@@ -43,6 +43,15 @@
         scale: 0.98;
       }
 
+      /* Exit is the transition BACK to the closed state — without these the
+         dialog would sit fully opaque for the whole duration, then vanish
+         (display/overlay flip discretely at the end). */
+      &:not([open]) {
+        opacity: 0;
+        translate: 0 0.5rem;
+        scale: 0.98;
+      }
+
       &::backdrop {
         opacity: 1;
         transition:
@@ -53,6 +62,10 @@
         @starting-style {
           opacity: 0;
         }
+      }
+
+      &:not([open])::backdrop {
+        opacity: 0;
       }
     }
   }

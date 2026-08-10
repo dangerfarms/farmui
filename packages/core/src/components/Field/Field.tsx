@@ -73,11 +73,6 @@ export function useFieldControlProps(): Partial<FieldControlRenderProps> {
   };
 }
 
-/** True when rendered inside a Field.Root. */
-export function useIsInsideField(): boolean {
-  return useContext(FieldContext) !== null;
-}
-
 export interface FieldRootProps extends HTMLAttributes<HTMLDivElement> {
   /** Base id for the control; auto-generated when omitted. */
   id?: string;

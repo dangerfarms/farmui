@@ -37,12 +37,14 @@
 @import url("./components/Group/Group.css") layer(farmui.components);
 @import url("./components/Input/Input.css") layer(farmui.components);
 @import url("./components/Loader/Loader.css") layer(farmui.components);
+@import url("./components/Menu/Menu.css") layer(farmui.components);
 @import url("./components/Modal/Modal.css") layer(farmui.components);
 @import url("./components/Pagination/Pagination.css") layer(farmui.components);
 @import url("./components/Popover/Popover.css") layer(farmui.components);
 @import url("./components/Progress/Progress.css") layer(farmui.components);
 @import url("./components/Radio/Radio.css") layer(farmui.components);
 @import url("./components/Select/Select.css") layer(farmui.components);
+@import url("./components/Separator/Separator.css") layer(farmui.components);
 @import url("./components/SimpleGrid/SimpleGrid.css") layer(farmui.components);
 @import url("./components/Skeleton/Skeleton.css") layer(farmui.components);
 @import url("./components/Slider/Slider.css") layer(farmui.components);
@@ -52,4 +54,5 @@
 @import url("./components/Table/Table.css") layer(farmui.components);
 @import url("./components/Tabs/Tabs.css") layer(farmui.components);
 @import url("./components/Textarea/Textarea.css") layer(farmui.components);
+@import url("./components/Toast/Toast.css") layer(farmui.components);
 @import url("./components/Tooltip/Tooltip.css") layer(farmui.components);

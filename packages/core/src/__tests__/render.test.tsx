@@ -70,6 +70,26 @@ describe("Button render polymorphism", () => {
   });
 });
 
+describe("Popover.Trigger render merge", () => {
+  it("merges consumer className, children and onClick into the render element", async () => {
+    const user = userEvent.setup();
+    const spy = vi.fn();
+    const { Popover } = await import("../index");
+    render(
+      <Popover.Root>
+        <Popover.Trigger render={<a href="#x" />} className="mine" onClick={spy}>
+          Go
+        </Popover.Trigger>
+      </Popover.Root>,
+    );
+    const link = screen.getByRole("link", { name: "Go" });
+    expect(link).toHaveAttribute("href", "#x");
+    expect(link.className).toContain("mine");
+    await user.click(link);
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
+});
+
 describe("renderWithProps", () => {
   it("calls a function render with the wiring props", () => {
     const fn = vi.fn(() => <span>out</span>);

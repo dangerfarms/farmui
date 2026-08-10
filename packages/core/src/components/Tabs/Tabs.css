@@ -38,9 +38,9 @@
     font-weight: 600;
     line-height: 1;
     transition:
-      color var(--fui-duration-md) var(--fui-ease),
-      border-color var(--fui-duration-md) var(--fui-ease),
-      background var(--fui-duration-md) var(--fui-ease);
+      color var(--fui-duration-sm) var(--fui-ease),
+      border-color var(--fui-duration-sm) var(--fui-ease),
+      background var(--fui-duration-sm) var(--fui-ease);
   }
 
   .fui-Tabs-tab:hover:not(:disabled) {
@@ -61,6 +61,14 @@
     border-block-end-color: var(--fui-primary);
   }
 
+  /* Forced colors: guarantee the active underline with a system colour.
+     Must come after the base rule — same specificity, order decides. */
+  @media (forced-colors: active) {
+    .fui-Tabs-tab[data-active] {
+      border-block-end-color: Highlight;
+    }
+  }
+
   .fui-Tabs-section {
     display: inline flex;
     align-items: center;
@@ -77,7 +85,9 @@
     border-radius: var(--fui-radius-sm);
   }
 
-  .fui-Tabs-panel[hidden] {
+  /* Boolean hidden only — [hidden="until-found"] must keep the UA's
+     content-visibility treatment or find-in-page reveal breaks. */
+  .fui-Tabs-panel[hidden]:not([hidden="until-found"]) {
     display: none;
   }
 }

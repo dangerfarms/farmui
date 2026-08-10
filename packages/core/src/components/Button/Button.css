@@ -1,12 +1,13 @@
 /*
- * Button — contextualism model (after Richard's demo).
+ * Button — contextualism model.
  *
  * One colour channel (--_color); every look is DERIVED from it: the soft
  * background and border via color-mix toward the page background, hover and
  * active via relative-colour lightness shifts. Appearance is decided by
  * context, not props:
  *
- *   - a `--fui-context: primary | danger` region re-answers the channel
+ *   - a `--fui-context: primary | success | warning | info | danger` region
+ *     re-answers the channel
  *   - narrow containers (≤ 16rem) make the button full width
  *   - an inline svg icon is detected with :has() — no slot props
  *   - size is fluid (cqi tokens) — there are no size steps
@@ -40,16 +41,19 @@
     text-decoration: none;
     white-space: nowrap;
     user-select: none;
+
+    /* Identity at rest — the pressed shift transitions both ways. */
+    translate: 0 0;
     transition:
-      background var(--fui-duration-md) var(--fui-ease),
-      border-color var(--fui-duration-md) var(--fui-ease),
-      color var(--fui-duration-md) var(--fui-ease),
+      background var(--fui-duration-sm) var(--fui-ease),
+      border-color var(--fui-duration-sm) var(--fui-ease),
+      color var(--fui-duration-sm) var(--fui-ease),
       box-shadow var(--fui-duration-md) var(--fui-ease),
-      transform var(--fui-duration-md) var(--fui-ease);
+      translate var(--fui-duration-md) var(--fui-ease);
   }
 
-  :scope:hover:not(:disabled, [data-loading]),
-  :scope:active:not(:disabled, [data-loading]) {
+  :scope:hover:not(:disabled),
+  :scope:active:not(:disabled) {
     background: light-dark(
       color-mix(in oklab, var(--_color), var(--fui-bg) 85%),
       color-mix(in oklab, var(--_color), var(--fui-bg) 70%)
@@ -60,17 +64,13 @@
     );
   }
 
-  :scope:active:not(:disabled, [data-loading]) {
+  :scope:active:not(:disabled) {
     box-shadow: var(--fui-shadow-sm);
-    transform: translateY(1px);
+    translate: 0 1px;
   }
 
   :scope:disabled {
     opacity: var(--fui-disabled-opacity);
-  }
-
-  :scope[data-loading] {
-    cursor: progress;
   }
 
   /* Context: within a primary region — THE action of the area. */
@@ -80,12 +80,30 @@
     }
   }
 
-  /* Context: within a danger region. (The region also re-answers the semantic
+  /* Context: within a status region. (The region also re-answers the semantic
      tokens for every other component — see the Contexts section of tokens.css;
-     this rule keys the button's own channel.) */
+     these rules key the button's own channel.) */
   @container (style(--fui-context: danger)) {
     :scope {
       --_color: var(--fui-danger);
+    }
+  }
+
+  @container (style(--fui-context: success)) {
+    :scope {
+      --_color: var(--fui-success);
+    }
+  }
+
+  @container (style(--fui-context: warning)) {
+    :scope {
+      --_color: var(--fui-warning);
+    }
+  }
+
+  @container (style(--fui-context: info)) {
+    :scope {
+      --_color: var(--fui-info);
     }
   }
 
@@ -126,28 +144,5 @@
    */
   :scope:is([data-fui-buttons="block"] *) {
     inline-size: 100%;
-  }
-
-  /* Loading spinner (compose as a child; uses currentcolor). */
-  .fui-Button-spinner {
-    display: inline flow-root;
-    inline-size: 1em;
-    block-size: 1em;
-    border: 2px solid color-mix(in oklch, currentcolor 30%, transparent);
-    border-block-start-color: currentcolor;
-    border-radius: var(--fui-radius-full);
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .fui-Button-spinner {
-      animation: fui-Button-btn-spin 0.6s linear infinite;
-    }
-  }
-}
-
-/* Keyframes are not scope-able; they stay at the top level. */
-@keyframes fui-Button-btn-spin {
-  to {
-    transform: rotate(1turn);
   }
 }

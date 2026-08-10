@@ -18,8 +18,10 @@ import type {
   Ref,
 } from "react";
 import { cx } from "../../utils";
-import { renderWithProps } from "../../render";
+import { mergeProps, renderWithProps } from "../../render";
 import type { RenderProp } from "../../render";
+
+type AnyRenderProps = Record<string, unknown>;
 import { Button } from "../Button/Button";
 
 /**
@@ -225,8 +227,13 @@ function PopoverTrigger({ render, children, ...rest }: PopoverTriggerProps) {
 
   // Both paths share the same merge contract: the built-in form is just a
   // render whose target defaults to a FarmUI Button.
-  const target = render ?? <Button {...rest}>{children}</Button>;
-  return <>{renderWithProps(target, triggerProps)}</>;
+  return render ? (
+    // Consumer props on the part merge into the render element per the
+    // same contract (previously they were silently dropped).
+    <>{renderWithProps(render, (mergeProps(triggerProps as unknown as AnyRenderProps, { children, ...rest }) as unknown as typeof triggerProps))}</>
+  ) : (
+    <>{renderWithProps(<Button {...rest}>{children}</Button>, triggerProps)}</>
+  );
 }
 
 export interface PopoverPopupProps extends HTMLAttributes<HTMLDivElement> {
@@ -382,8 +389,13 @@ function PopoverClose({ render, children, ...rest }: PopoverCloseProps) {
     type: "button",
     onClick: () => ctx.setOpen(false),
   };
-  const target = render ?? <Button {...rest}>{children}</Button>;
-  return <>{renderWithProps(target, closeProps)}</>;
+  return render ? (
+    // Consumer props on the part merge into the render element per the
+    // same contract (previously they were silently dropped).
+    <>{renderWithProps(render, (mergeProps(closeProps as unknown as AnyRenderProps, { children, ...rest }) as unknown as typeof closeProps))}</>
+  ) : (
+    <>{renderWithProps(<Button {...rest}>{children}</Button>, closeProps)}</>
+  );
 }
 
 export const Popover = {

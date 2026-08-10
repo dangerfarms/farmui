@@ -1,4 +1,5 @@
 import { Progress } from "@farmui/core";
+import type { CSSProperties } from "react";
 import type { ComponentDoc } from "@/docs/types";
 
 const doc: ComponentDoc = {
@@ -34,19 +35,31 @@ const doc: ComponentDoc = {
       ),
     },
     {
-      title: "Colors",
-      code: `<Progress value={50} color="primary" />
-<Progress value={50} color="info" />
-<Progress value={50} color="success" />
-<Progress value={50} color="warning" />
-<Progress value={50} color="danger" />`,
+      title: "Contexts",
+      description:
+        "There is no color prop. Declare --fui-context on a one-element wrapper region (a style query is answered by ancestors, never by the declaring element itself), or let it inherit from a region that already means something. See the Contextualism guide.",
+      code: `<Progress value={50} />
+<div style={{ "--fui-context": "warning" }}>
+  <Progress value={88} />
+</div>
+<div style={{ "--fui-context": "danger" }}>
+  <Progress value={98} />
+</div>
+<div style={{ "--fui-context": "success" }}>
+  <Progress value={100} />
+</div>`,
       render: () => (
         <div style={{ display: "grid", gap: "0.75rem", inlineSize: "100%" }}>
-          <Progress value={50} color="primary" />
-          <Progress value={50} color="info" />
-          <Progress value={50} color="success" />
-          <Progress value={50} color="warning" />
-          <Progress value={50} color="danger" />
+          <Progress value={50} />
+          <div style={{ "--fui-context": "warning" } as CSSProperties}>
+            <Progress value={88} />
+          </div>
+          <div style={{ "--fui-context": "danger" } as CSSProperties}>
+            <Progress value={98} />
+          </div>
+          <div style={{ "--fui-context": "success" } as CSSProperties}>
+            <Progress value={100} />
+          </div>
         </div>
       ),
     },
@@ -54,11 +67,11 @@ const doc: ComponentDoc = {
       title: "Striped & animated",
       description: "Stripes convey ongoing, indeterminate-feeling work.",
       code: `<Progress value={65} striped />
-<Progress value={65} animated color="info" />`,
+<Progress value={65} animated />`,
       render: () => (
         <div style={{ display: "grid", gap: "0.75rem", inlineSize: "100%" }}>
           <Progress value={65} striped />
-          <Progress value={65} animated color="info" />
+          <Progress value={65} animated />
         </div>
       ),
     },
@@ -69,12 +82,6 @@ const doc: ComponentDoc = {
       type: "number",
       default: "0",
       description: "Fill amount, 0–100 (clamped).",
-    },
-    {
-      name: "color",
-      type: `"primary" | "info" | "success" | "warning" | "danger"`,
-      default: `"primary"`,
-      description: "Semantic color of the filled bar.",
     },
     {
       name: "size",
@@ -106,7 +113,14 @@ const doc: ComponentDoc = {
     {
       name: "...others",
       type: "HTMLAttributes<HTMLDivElement>",
-      description: "All native <div> props are forwarded.",
+      description:
+        "All native <div> props are forwarded, including style for the custom property below.",
+    },
+    {
+      name: "--fui-context",
+      type: `"primary" | "danger" | "success" | "warning" | "info"`,
+      description:
+        "The bar's status colour. Declare it on an ancestor — a one-element wrapper for a single bar, or any region — because a style query is answered by ancestors, not by the declaring element; the property inherits.",
     },
   ],
 };

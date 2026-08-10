@@ -213,9 +213,9 @@ const doc: ComponentDoc = {
     },
     {
       name: "--fui-context",
-      type: `"primary" | "danger"`,
+      type: `"primary" | "danger" | "success" | "warning" | "info"`,
       description:
-        "Declare on any ancestor (it inherits) to give the region semantic meaning — every FarmUI component inside adapts. For a single button, set it on just that button.",
+        "Declare on any ancestor (it inherits) to give the region semantic meaning — every FarmUI component inside adapts. For a single button, use a one-element wrapper (<span style={{ \"--fui-context\": \"danger\" }}><Button>…</Button></span>) — a style query is answered by ancestors, never by the element that declares the property.",
     },
     {
       name: "--fui-button-color",

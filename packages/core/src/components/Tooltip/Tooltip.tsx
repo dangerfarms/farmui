@@ -19,8 +19,10 @@ import type {
   ReactNode,
 } from "react";
 import { cx } from "../../utils";
-import { renderWithProps } from "../../render";
+import { mergeProps, renderWithProps } from "../../render";
 import type { RenderProp } from "../../render";
+
+type AnyRenderProps = Record<string, unknown>;
 import { Button } from "../Button/Button";
 
 /**
@@ -139,7 +141,7 @@ function isFocusVisible(el: Element): boolean {
   }
 }
 
-export interface TooltipRootProps {
+export interface TooltipRootProps extends HTMLAttributes<HTMLSpanElement> {
   /** Hover delay in ms; overrides the Provider. @default 600 */
   delay?: number;
   /** Controlled open state. */
@@ -148,7 +150,6 @@ export interface TooltipRootProps {
   defaultOpen?: boolean;
   /** Called whenever the open state should change. */
   onOpenChange?: (open: boolean) => void;
-  children?: ReactNode;
 }
 
 function TooltipRoot({
@@ -156,7 +157,9 @@ function TooltipRoot({
   open: openProp,
   defaultOpen = false,
   onOpenChange,
+  className,
   children,
+  ...rest
 }: TooltipRootProps) {
   const provider = useContext(TooltipProviderContext);
   const delay = delayProp ?? provider?.delay ?? 600;
@@ -311,7 +314,9 @@ function TooltipRoot({
 
   return (
     <TooltipContext.Provider value={value}>
-      <span className="fui-Tooltip-root">{children}</span>
+      <span className={cx("fui-Tooltip-root", className)} {...rest}>
+        {children}
+      </span>
     </TooltipContext.Provider>
   );
 }
@@ -354,8 +359,13 @@ function TooltipTrigger({ render, children, ...rest }: TooltipTriggerProps) {
 
   // Both paths share the same merge contract: the built-in form is just a
   // render whose target defaults to a FarmUI Button.
-  const target = render ?? <Button {...rest}>{children}</Button>;
-  return <>{renderWithProps(target, triggerProps)}</>;
+  return render ? (
+    // Consumer props on the part merge into the render element per the
+    // same contract (previously they were silently dropped).
+    <>{renderWithProps(render, (mergeProps(triggerProps as unknown as AnyRenderProps, { children, ...rest }) as unknown as typeof triggerProps))}</>
+  ) : (
+    <>{renderWithProps(<Button {...rest}>{children}</Button>, triggerProps)}</>
+  );
 }
 
 export interface TooltipPopupProps extends HTMLAttributes<HTMLSpanElement> {

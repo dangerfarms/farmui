@@ -1,4 +1,4 @@
-import { cloneElement, isValidElement } from "react";
+import { cloneElement, isValidElement , version as reactVersion } from "react";
 import type { CSSProperties, ReactElement, ReactNode, Ref } from "react";
 import { cx } from "./utils";
 
@@ -28,9 +28,7 @@ export type RenderProp<P> =
 type AnyProps = Record<string, unknown>;
 
 function isEventHandlerKey(key: string): boolean {
-  return (
-    key.startsWith("on") && key.length > 2 && key[2] === key[2]?.toUpperCase()
-  );
+  return /^on[A-Z]/.test(key);
 }
 
 /** Compose two refs so both receive the node. */
@@ -47,6 +45,8 @@ export function composeRefs<T>(
     }
   };
 }
+
+const reactMajor = Number.parseInt(reactVersion, 10);
 
 const ARIA_LIST_KEYS = new Set(["aria-describedby", "aria-labelledby"]);
 
@@ -94,9 +94,18 @@ export function renderWithProps<P extends object>(
     return render(props);
   }
   if (isValidElement<AnyProps>(render)) {
+    // React 19 moves ref into props; on 18 it still lives on the element.
+    const own = render.props as AnyProps;
+    const legacyRef =
+      own.ref === undefined && reactMajor < 19
+        ? (render as unknown as { ref?: unknown }).ref
+        : undefined;
     return cloneElement(
       render,
-      mergeProps(props as AnyProps, render.props as AnyProps),
+      mergeProps(
+        props as AnyProps,
+        legacyRef === undefined ? own : { ...own, ref: legacyRef },
+      ),
     );
   }
   return null;

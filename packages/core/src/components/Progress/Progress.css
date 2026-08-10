@@ -1,6 +1,5 @@
 @scope (.fui-Progress-root) {
   :scope {
-    --_fill: var(--fui-primary);
     --_h: 0.625rem;
 
     display: block flow;
@@ -8,7 +7,7 @@
     block-size: var(--_h);
     border-radius: var(--_radius, var(--fui-radius-full));
     background: var(--fui-bg-subtle);
-    overflow: hidden;
+    overflow: clip;
 
     /* Sizes */
     &[data-size="sm"] {
@@ -17,23 +16,6 @@
 
     &[data-size="lg"] {
       --_h: 1rem;
-    }
-
-    /* Colors */
-    &[data-color="info"] {
-      --_fill: var(--fui-info);
-    }
-
-    &[data-color="success"] {
-      --_fill: var(--fui-success);
-    }
-
-    &[data-color="warning"] {
-      --_fill: var(--fui-warning);
-    }
-
-    &[data-color="danger"] {
-      --_fill: var(--fui-danger);
     }
   }
 
@@ -44,7 +26,11 @@
     block-size: 100%;
     inline-size: 0;
     border-radius: inherit;
-    background: var(--_fill);
+
+    /* The fill IS the primary token — a `--fui-context` region re-answers
+       it (see the Contexts section of tokens.css), so status needs no
+       component code here. */
+    background: var(--fui-primary);
     color: var(--fui-primary-contrast);
     transition: inline-size var(--fui-duration-lg) var(--fui-ease);
   }
@@ -71,6 +57,18 @@
 
   .fui-Progress-bar[data-animated] {
     animation: fui-Progress-progress-stripes 1s linear infinite;
+  }
+
+  /* Forced colors: track and fill are background-painted and would vanish. */
+  @media (forced-colors: active) {
+    :scope {
+      border: 1px solid CanvasText;
+    }
+
+    .fui-Progress-bar {
+      forced-color-adjust: none;
+      background: Highlight;
+    }
   }
 }
 

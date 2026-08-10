@@ -31,9 +31,9 @@
     font-weight: 600;
     line-height: 1.2;
     transition:
-      background var(--fui-duration-md) var(--fui-ease),
-      border-color var(--fui-duration-md) var(--fui-ease),
-      color var(--fui-duration-md) var(--fui-ease),
+      background var(--fui-duration-sm) var(--fui-ease),
+      border-color var(--fui-duration-sm) var(--fui-ease),
+      color var(--fui-duration-sm) var(--fui-ease),
       box-shadow var(--fui-duration-md) var(--fui-ease);
   }
 
@@ -68,5 +68,16 @@
     block-size: var(--_control-h);
     color: var(--fui-text-dim);
     user-select: none;
+  }
+
+  /* Forced colors: the active page's brand fill is stripped, leaving it
+     identical to its neighbours. */
+  @media (forced-colors: active) {
+    .fui-Pagination-page[data-active] {
+      forced-color-adjust: none;
+      background: Highlight;
+      border-color: Highlight;
+      color: HighlightText;
+    }
   }
 }

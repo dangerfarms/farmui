@@ -3,7 +3,7 @@
     position: relative;
     inline-size: 100%;
     aspect-ratio: var(--_ratio, 1);
-    overflow: hidden;
+    overflow: clip;
   }
 
   /* Make a single media/child fill the box. */

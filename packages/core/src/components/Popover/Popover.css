@@ -53,8 +53,18 @@
           translate: 0 -0.25rem;
         }
 
+        /* Exit: transition back to the closed state (see Modal). */
+        &:not(:popover-open) {
+          opacity: 0;
+          translate: 0 -0.25rem;
+        }
+
         &[data-position="top"] {
           @starting-style {
+            translate: 0 0.25rem;
+          }
+
+          &:not(:popover-open) {
             translate: 0 0.25rem;
           }
         }

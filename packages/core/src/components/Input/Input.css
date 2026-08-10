@@ -26,7 +26,7 @@
     border-radius: var(--_radius, var(--fui-radius-md));
     background: var(--fui-surface);
     transition:
-      border-color var(--fui-duration-md) var(--fui-ease),
+      border-color var(--fui-duration-sm) var(--fui-ease),
       box-shadow var(--fui-duration-md) var(--fui-ease);
   }
 
@@ -37,11 +37,31 @@
     outline-offset: 2px;
   }
 
+  /* Autofilled: the wrapper border carries the signal (the input itself
+     paints the tint — see below). :autofill and :-webkit-autofill must stay
+     in separate blocks — one unsupported selector invalidates a shared
+     list. Declared before the error state so danger wins at equal
+     specificity. */
+  :scope:has(.fui-Input-input:autofill) {
+    border-color: color-mix(
+      in oklab,
+      var(--fui-primary) 50%,
+      var(--fui-border-strong)
+    );
+  }
+
+  :scope:has(.fui-Input-input:-webkit-autofill) {
+    border-color: color-mix(
+      in oklab,
+      var(--fui-primary) 50%,
+      var(--fui-border-strong)
+    );
+  }
+
   /* Error state is detected from the input's own state: ARIA (from a
      rendered error message) or the platform's native constraint validation
      (:user-invalid) — the latter needs no JS and no props at all. */
-  :scope:has(.fui-Input-input[aria-invalid="true"]),
-  :scope:has(.fui-Input-input:user-invalid) {
+  :scope:has(.fui-Input-input:is([aria-invalid="true"], :user-invalid)) {
     --fui-ring-color: var(--fui-danger-ring);
 
     border-color: var(--fui-danger);
@@ -68,6 +88,19 @@
 
   .fui-Input-input::placeholder {
     color: var(--fui-text-dim);
+  }
+
+  /* background-color cannot be overridden on an autofilled field; an inset
+     shadow wider than the control paints the tint instead. Separate blocks —
+     see the wrapper rules above. */
+  .fui-Input-input:autofill {
+    box-shadow: inset 0 0 0 100px
+      color-mix(in oklab, var(--fui-primary) 8%, var(--fui-surface));
+  }
+
+  .fui-Input-input:-webkit-autofill {
+    box-shadow: inset 0 0 0 100px
+      color-mix(in oklab, var(--fui-primary) 8%, var(--fui-surface));
   }
 
   .fui-Input-section {

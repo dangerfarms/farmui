@@ -19,7 +19,7 @@ function slugify(s: string) {
  */
 function readComponentCss(
   name: string,
-  pkg: "core" | "blocks",
+  pkg: "core",
 ): string | undefined {
   try {
     const file = join(

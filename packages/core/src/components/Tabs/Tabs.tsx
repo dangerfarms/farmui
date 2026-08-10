@@ -4,6 +4,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useId,
   useMemo,
   useRef,
@@ -29,7 +30,7 @@ const TabsContext = createContext<TabsContextValue | null>(null);
 function useTabsContext(component: string): TabsContextValue {
   const ctx = useContext(TabsContext);
   if (!ctx) {
-    throw new Error(`${component} must be used within <Tabs>.`);
+    throw new Error(`${component} must be rendered inside <Tabs>.`);
   }
   return ctx;
 }
@@ -208,15 +209,39 @@ export function TabsPanel({
   children,
   ...rest
 }: TabsPanelProps) {
-  const { value: active, baseId } = useTabsContext("Tabs.Panel");
+  const { value: active, setValue, baseId } = useTabsContext("Tabs.Panel");
   const selected = active === value;
+  const ref = useRef<HTMLDivElement>(null);
+
+  // Inactive panels hide with `hidden="until-found"` where supported, so
+  // find-in-page and text-fragment links can reach their content; the
+  // browser fires `beforematch` when a match lands in a hidden panel and we
+  // activate that tab. React normalises `hidden` to a boolean, so the
+  // attribute value is set imperatively. Elsewhere: plain boolean hidden.
+  const untilFound =
+    typeof HTMLElement !== "undefined" &&
+    "onbeforematch" in HTMLElement.prototype;
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || !untilFound) return;
+    if (selected) el.removeAttribute("hidden");
+    else el.setAttribute("hidden", "until-found");
+  }, [selected, untilFound]);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || !untilFound) return;
+    const onBeforeMatch = () => setValue(value);
+    el.addEventListener("beforematch", onBeforeMatch);
+    return () => el.removeEventListener("beforematch", onBeforeMatch);
+  }, [untilFound, setValue, value]);
 
   return (
     <div
+      ref={ref}
       role="tabpanel"
       id={`${baseId}-panel-${value}`}
       aria-labelledby={`${baseId}-tab-${value}`}
-      hidden={!selected}
+      hidden={untilFound ? undefined : !selected}
       tabIndex={0}
       className={cx("fui-Tabs-panel", className)}
       {...rest}

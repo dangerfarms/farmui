@@ -28,6 +28,7 @@
     --_gap: 0.2083em;
 
     font-size: var(--fui-text-sm);
+    position: relative;
     display: inline flex;
     align-items: center;
     cursor: pointer;
@@ -39,17 +40,19 @@
     opacity: 0.6;
   }
 
-  /* Visually hide the native input but keep it accessible & focusable. */
+  /* Visually hide the native control but keep it in the a11y tree &
+     focusable. The hit area is at least 24px (WCAG 2.5.8) even when the
+     visible track is smaller — centred, invisible, no layout impact. */
   .fui-Switch-input {
     position: absolute;
-    inline-size: 1px;
-    block-size: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-    border: 0;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    translate: -50% -50%;
+    inline-size: max(100%, 24px);
+    block-size: max(100%, 24px);
+    margin: 0;
+    opacity: 0;
+    cursor: inherit;
   }
 
   .fui-Switch-track {
@@ -61,7 +64,7 @@
     border-radius: var(--fui-radius-full);
     background: var(--fui-border-strong);
     transition:
-      background var(--fui-duration-md) var(--fui-ease),
+      background var(--fui-duration-sm) var(--fui-ease),
       box-shadow var(--fui-duration-md) var(--fui-ease);
   }
 
@@ -72,7 +75,7 @@
     border-radius: var(--fui-radius-full);
     background: var(--fui-primary-contrast);
     box-shadow: var(--fui-shadow-sm);
-    transition: translate var(--fui-duration-md) var(--fui-ease);
+    transition: translate var(--fui-duration-md) var(--fui-ease-elastic);
   }
 
   /* The wrapper ancestor sits outside the scope root; the subject (the
@@ -95,8 +98,7 @@
     translate: calc(var(--_track-w) - var(--_track-h)) 0;
   }
 
-  /* The ring belongs on the track; the 1px hidden input would otherwise
-     paint the elements-layer outline as a stray dot. */
+  /* The ring belongs on the track, not on the invisible hit-area input. */
   .fui-Switch-input:focus-visible {
     outline: none;
   }
@@ -105,6 +107,30 @@
     box-shadow: 0 0 0 2px var(--fui-bg);
     outline: var(--fui-ring-width) solid var(--fui-ring-color);
     outline-offset: 2px;
+  }
+
+  /* Forced colors strips backgrounds — without this the switch is invisible.
+     System colours keep the user's palette: ButtonText chrome, Highlight for
+     the on state (thumb position still moves as the second signal). */
+  @media (forced-colors: active) {
+    .fui-Switch-track {
+      border: 1px solid ButtonText;
+    }
+
+    .fui-Switch-thumb {
+      forced-color-adjust: none;
+      background: ButtonText;
+    }
+
+    .fui-Switch-input:checked + .fui-Switch-track {
+      forced-color-adjust: none;
+      background: Highlight;
+      border-color: Highlight;
+    }
+
+    .fui-Switch-input:checked + .fui-Switch-track .fui-Switch-thumb {
+      background: HighlightText;
+    }
   }
 }
 

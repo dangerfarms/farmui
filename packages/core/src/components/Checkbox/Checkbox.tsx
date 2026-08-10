@@ -10,6 +10,7 @@ import {
 import type { InputHTMLAttributes, ReactNode } from "react";
 import { cx } from "../../utils";
 import { useFieldControlProps } from "../Field/Field";
+import { useUserInvalid } from "../../use-user-invalid";
 
 export interface CheckboxProps extends Omit<
   InputHTMLAttributes<HTMLInputElement>,
@@ -28,7 +29,7 @@ export interface CheckboxProps extends Omit<
 }
 
 /** The bare checkbox box + input, minus any label. */
-type CheckboxControlProps = Omit<
+export type CheckboxControlProps = Omit<
   CheckboxProps,
   "label" | "description" | "error" | "wrapperClassName"
 >;
@@ -48,6 +49,8 @@ const CheckboxControl = forwardRef<HTMLInputElement, CheckboxControlProps>(
       disabled,
       "aria-invalid": ariaInvalid,
       "aria-describedby": ariaDescribedby,
+      onBlur,
+      onInvalid,
       ...rest
     },
     ref,
@@ -62,7 +65,9 @@ const CheckboxControl = forwardRef<HTMLInputElement, CheckboxControlProps>(
       }
     }, [indeterminate]);
 
-    const resolvedAriaInvalid = ariaInvalid ?? field["aria-invalid"];
+    const { nativeInvalid, checkOnBlur, checkOnInvalid } = useUserInvalid();
+    const resolvedAriaInvalid =
+      ariaInvalid ?? field["aria-invalid"] ?? (nativeInvalid || undefined);
     const resolvedId = id ?? field.id;
     const describedBy = ariaDescribedby ?? field["aria-describedby"];
 
@@ -76,6 +81,14 @@ const CheckboxControl = forwardRef<HTMLInputElement, CheckboxControlProps>(
           disabled={disabled}
           aria-invalid={resolvedAriaInvalid}
           aria-describedby={describedBy}
+          onBlur={(e) => {
+            onBlur?.(e);
+            checkOnBlur(e);
+          }}
+          onInvalid={(e) => {
+            onInvalid?.(e);
+            checkOnInvalid(e);
+          }}
           {...rest}
         />
         <svg

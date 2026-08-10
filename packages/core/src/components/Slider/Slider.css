@@ -14,7 +14,8 @@
 
   .fui-Slider-label {
     font-size: var(--fui-text-sm);
-    font-weight: 550;
+    font-weight: 500;
+    line-height: 1.35;
   }
 }
 
@@ -78,8 +79,11 @@
     border-radius: var(--fui-radius-full);
     background: var(--fui-primary);
     box-shadow: var(--fui-shadow-sm);
+
+    /* Identity at rest — the hover grow transitions both ways. */
+    scale: 1;
     transition:
-      transform var(--fui-duration-md) var(--fui-ease),
+      scale var(--fui-duration-md) var(--fui-ease),
       box-shadow var(--fui-duration-md) var(--fui-ease);
   }
 
@@ -90,17 +94,20 @@
     border-radius: var(--fui-radius-full);
     background: var(--fui-primary);
     box-shadow: var(--fui-shadow-sm);
+
+    /* Identity at rest — the hover grow transitions both ways. */
+    scale: 1;
     transition:
-      transform var(--fui-duration-md) var(--fui-ease),
+      scale var(--fui-duration-md) var(--fui-ease),
       box-shadow var(--fui-duration-md) var(--fui-ease);
   }
 
   :scope:hover:not(:disabled)::-webkit-slider-thumb {
-    transform: scale(1.08);
+    scale: 1.08;
   }
 
   :scope:hover:not(:disabled)::-moz-range-thumb {
-    transform: scale(1.08);
+    scale: 1.08;
   }
 
   /* The ring belongs on the thumb (pseudo-element, box-shadow — outline is
@@ -119,5 +126,36 @@
     box-shadow:
       0 0 0 2px var(--fui-bg),
       0 0 0 calc(var(--fui-ring-width) + 2px) var(--fui-ring-color);
+  }
+
+  /* Forced colors: the custom track and thumb are background-painted and
+     would vanish (appearance: none opts out of native painting). */
+  @media (forced-colors: active) {
+    :scope::-webkit-slider-runnable-track {
+      forced-color-adjust: none;
+      background: ButtonText;
+    }
+
+    :scope::-moz-range-track {
+      forced-color-adjust: none;
+      background: ButtonText;
+    }
+
+    :scope::-moz-range-progress {
+      forced-color-adjust: none;
+      background: Highlight;
+    }
+
+    :scope::-webkit-slider-thumb {
+      forced-color-adjust: none;
+      background: Highlight;
+      border-color: Canvas;
+    }
+
+    :scope::-moz-range-thumb {
+      forced-color-adjust: none;
+      background: Highlight;
+      border-color: Canvas;
+    }
   }
 }

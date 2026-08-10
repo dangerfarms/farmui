@@ -1,4 +1,4 @@
-import { describe, it, expect, afterEach } from "vitest";
+import { describe, it, expect, afterEach, vi } from "vitest";
 import { render, screen, cleanup, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
@@ -11,11 +11,16 @@ import {
   TabsPanel,
   Accordion,
   AccordionItem,
+  Menu,
   Modal,
   Popover,
+  Toast,
+  Toasts,
+  useToast,
   Tooltip,
   Button,
 } from "../index";
+import type { ToastOptions } from "../index";
 
 afterEach(cleanup);
 
@@ -143,6 +148,318 @@ describe("Modal", () => {
  * dismiss handling). The enhanced top-layer path is covered by the Storybook
  * play tests, which run in a real browser.
  */
+
+describe("Menu", () => {
+  function renderMenu(onDelete = () => {}) {
+    return render(
+      <Menu.Root>
+        <Menu.Trigger>Options</Menu.Trigger>
+        <Menu.Popup>
+          <Menu.Item>Rename</Menu.Item>
+          <Menu.Item>Duplicate</Menu.Item>
+          <Menu.Separator />
+          <Menu.Item onClick={onDelete}>Delete</Menu.Item>
+        </Menu.Popup>
+      </Menu.Root>,
+    );
+  }
+
+  it("opens on click, focuses the first item, and closes on item activation", async () => {
+    const user = userEvent.setup();
+    const onDelete = vi.fn();
+    renderMenu(onDelete);
+
+    await user.click(screen.getByRole("button", { name: "Options" }));
+    const menu = screen.getByRole("menu");
+    expect(menu).toBeVisible();
+    await waitFor(() =>
+      expect(screen.getByRole("menuitem", { name: "Rename" })).toHaveFocus(),
+    );
+
+    await user.click(screen.getByRole("menuitem", { name: "Delete" }));
+    expect(onDelete).toHaveBeenCalledOnce();
+    expect(screen.queryByRole("menu")).not.toBeInTheDocument();
+    // Activation returns focus to the trigger.
+    expect(screen.getByRole("button", { name: "Options" })).toHaveFocus();
+  });
+
+  it("roves focus with arrow keys, loops, and supports Home/End", async () => {
+    const user = userEvent.setup();
+    renderMenu();
+    await user.click(screen.getByRole("button", { name: "Options" }));
+    await waitFor(() =>
+      expect(screen.getByRole("menuitem", { name: "Rename" })).toHaveFocus(),
+    );
+
+    await user.keyboard("{ArrowDown}");
+    expect(screen.getByRole("menuitem", { name: "Duplicate" })).toHaveFocus();
+    await user.keyboard("{End}");
+    expect(screen.getByRole("menuitem", { name: "Delete" })).toHaveFocus();
+    await user.keyboard("{ArrowDown}"); // loops
+    expect(screen.getByRole("menuitem", { name: "Rename" })).toHaveFocus();
+    await user.keyboard("{ArrowUp}"); // loops back
+    expect(screen.getByRole("menuitem", { name: "Delete" })).toHaveFocus();
+    await user.keyboard("{Home}");
+    expect(screen.getByRole("menuitem", { name: "Rename" })).toHaveFocus();
+  });
+
+  it("jumps to items by typing (typeahead)", async () => {
+    const user = userEvent.setup();
+    renderMenu();
+    await user.click(screen.getByRole("button", { name: "Options" }));
+    await waitFor(() =>
+      expect(screen.getByRole("menuitem", { name: "Rename" })).toHaveFocus(),
+    );
+    await user.keyboard("d");
+    expect(screen.getByRole("menuitem", { name: "Duplicate" })).toHaveFocus();
+  });
+
+  it("closes on Escape and returns focus to the trigger", async () => {
+    const user = userEvent.setup();
+    renderMenu();
+    await user.click(screen.getByRole("button", { name: "Options" }));
+    expect(screen.getByRole("menu")).toBeVisible();
+    await user.keyboard("{Escape}");
+    expect(screen.queryByRole("menu")).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Options" })).toHaveFocus();
+  });
+
+  it("opens from the trigger with ArrowUp focusing the last item", async () => {
+    const user = userEvent.setup();
+    renderMenu();
+    screen.getByRole("button", { name: "Options" }).focus();
+    await user.keyboard("{ArrowUp}");
+    await waitFor(() =>
+      expect(screen.getByRole("menuitem", { name: "Delete" })).toHaveFocus(),
+    );
+  });
+
+  it("skips disabled items when roving", async () => {
+    const user = userEvent.setup();
+    render(
+      <Menu.Root>
+        <Menu.Trigger>Options</Menu.Trigger>
+        <Menu.Popup>
+          <Menu.Item>One</Menu.Item>
+          <Menu.Item disabled>Two</Menu.Item>
+          <Menu.Item>Three</Menu.Item>
+        </Menu.Popup>
+      </Menu.Root>,
+    );
+    await user.click(screen.getByRole("button", { name: "Options" }));
+    await waitFor(() =>
+      expect(screen.getByRole("menuitem", { name: "One" })).toHaveFocus(),
+    );
+    await user.keyboard("{ArrowDown}");
+    expect(screen.getByRole("menuitem", { name: "Three" })).toHaveFocus();
+  });
+});
+
+describe("Toast", () => {
+  function FireButton(props: { options?: Partial<ToastOptions> }) {
+    const toast = useToast();
+    return (
+      <Button
+        onClick={() =>
+          toast.add({ title: "Saved", description: "Done.", ...props.options })
+        }
+      >
+        Fire
+      </Button>
+    );
+  }
+
+  it("announces via role=status and dismisses from the close button", async () => {
+    const user = userEvent.setup();
+    render(
+      <Toast.Provider>
+        <FireButton />
+        <Toasts />
+      </Toast.Provider>,
+    );
+    await user.click(screen.getByRole("button", { name: "Fire" }));
+    const status = screen.getByRole("status");
+    expect(status).toHaveTextContent("Saved");
+    await user.click(
+      screen.getByRole("button", { name: "Dismiss notification" }),
+    );
+    expect(screen.queryByRole("status")).not.toBeInTheDocument();
+  });
+
+  it("uses role=alert for high priority", async () => {
+    const user = userEvent.setup();
+    render(
+      <Toast.Provider>
+        <FireButton options={{ priority: "high" }} />
+        <Toasts />
+      </Toast.Provider>,
+    );
+    await user.click(screen.getByRole("button", { name: "Fire" }));
+    expect(screen.getByRole("alert")).toBeInTheDocument();
+  });
+
+  it("auto-dismisses after its timeout", async () => {
+    const user = userEvent.setup();
+    render(
+      <Toast.Provider timeout={40}>
+        <FireButton />
+        <Toasts />
+      </Toast.Provider>,
+    );
+    await user.click(screen.getByRole("button", { name: "Fire" }));
+    expect(screen.getByRole("status")).toBeInTheDocument();
+    await waitFor(() =>
+      expect(screen.queryByRole("status")).not.toBeInTheDocument(),
+    );
+  });
+
+  it("keeps a persistent toast (timeout: 0) until dismissed", async () => {
+    const user = userEvent.setup();
+    render(
+      <Toast.Provider timeout={30}>
+        <FireButton options={{ timeout: 0 }} />
+        <Toasts />
+      </Toast.Provider>,
+    );
+    await user.click(screen.getByRole("button", { name: "Fire" }));
+    await new Promise((r) => setTimeout(r, 80));
+    expect(screen.getByRole("status")).toBeInTheDocument();
+  });
+
+  it("drops the oldest toast past the limit", async () => {
+    const user = userEvent.setup();
+    function FireMany() {
+      const toast = useToast();
+      return (
+        <Button onClick={() => toast.add({ description: "another" })}>
+          Fire
+        </Button>
+      );
+    }
+    render(
+      <Toast.Provider limit={2} timeout={0}>
+        <FireMany />
+        <Toasts />
+      </Toast.Provider>,
+    );
+    const fire = screen.getByRole("button", { name: "Fire" });
+    await user.click(fire);
+    await user.click(fire);
+    await user.click(fire);
+    expect(screen.getAllByRole("status")).toHaveLength(2);
+  });
+
+  it("runs the action and dismisses", async () => {
+    const user = userEvent.setup();
+    const undo = vi.fn();
+    function FireAction() {
+      const toast = useToast();
+      return (
+        <Button
+          onClick={() =>
+            toast.add({
+              description: "Deleted",
+              timeout: 0,
+              action: { label: "Undo", onClick: undo },
+            })
+          }
+        >
+          Fire
+        </Button>
+      );
+    }
+    render(
+      <Toast.Provider>
+        <FireAction />
+        <Toasts />
+      </Toast.Provider>,
+    );
+    await user.click(screen.getByRole("button", { name: "Fire" }));
+    await user.click(screen.getByRole("button", { name: "Undo" }));
+    expect(undo).toHaveBeenCalledOnce();
+    expect(screen.queryByRole("status")).not.toBeInTheDocument();
+  });
+});
+
+describe("Modal (invoker commands)", () => {
+  it("renders declarative commandfor/command wiring when the API exists", async () => {
+    // jsdom has no Invoker Commands API — simulate the probe the component
+    // uses ('commandForElement' in HTMLButtonElement.prototype).
+    Object.defineProperty(HTMLButtonElement.prototype, "commandForElement", {
+      configurable: true,
+      value: null,
+    });
+    try {
+      render(
+        <Modal.Root>
+          <Modal.Trigger>Open</Modal.Trigger>
+          <Modal.Popup>
+            <Modal.Title>Hi</Modal.Title>
+            <Modal.Close>Done</Modal.Close>
+          </Modal.Popup>
+        </Modal.Root>,
+      );
+      const trigger = screen.getByRole("button", { name: "Open" });
+      await waitFor(() =>
+        expect(trigger).toHaveAttribute("command", "show-modal"),
+      );
+      const dialogId = trigger.getAttribute("commandfor");
+      expect(dialogId).toBeTruthy();
+      // The Close lives inside the (closed, hence aria-hidden) dialog.
+      const done = screen.getByRole("button", { name: "Done", hidden: true });
+      expect(done).toHaveAttribute("command", "close");
+      expect(done).toHaveAttribute("commandfor", dialogId as string);
+    } finally {
+      delete (HTMLButtonElement.prototype as { commandForElement?: unknown })
+        .commandForElement;
+    }
+  });
+
+  it("falls back to onClick wiring without the API", async () => {
+    const user = userEvent.setup();
+    render(
+      <Modal.Root>
+        <Modal.Trigger>Open</Modal.Trigger>
+        <Modal.Popup>
+          <Modal.Title>Hi</Modal.Title>
+          <Modal.Close>Done</Modal.Close>
+        </Modal.Popup>
+      </Modal.Root>,
+    );
+    const trigger = screen.getByRole("button", { name: "Open" });
+    expect(trigger).not.toHaveAttribute("command");
+    await user.click(trigger);
+    expect(await screen.findByRole("dialog")).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "Done" }));
+    await waitFor(() =>
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+    );
+  });
+});
+
+describe("Modal (alert variant)", () => {
+  it("renders role=alertdialog with closerequest dismissal", async () => {
+    const user = userEvent.setup();
+    render(
+      <Modal.Root>
+        <Modal.Trigger>Delete file</Modal.Trigger>
+        <Modal.Popup alert>
+          <Modal.Title>Delete this file?</Modal.Title>
+          <Modal.Description>This cannot be undone.</Modal.Description>
+          <Modal.Close autoFocus>Cancel</Modal.Close>
+          <Modal.Close>Delete</Modal.Close>
+        </Modal.Popup>
+      </Modal.Root>,
+    );
+    await user.click(screen.getByRole("button", { name: "Delete file" }));
+    const dialog = await screen.findByRole("alertdialog");
+    expect(dialog).toHaveAttribute("closedby", "closerequest");
+    // Initial focus on the autoFocus (least-destructive) action is native
+    // showModal behaviour — real browsers do it; the jsdom shim doesn't, so
+    // it is covered by the Storybook interaction suite instead.
+  });
+});
+
 describe("Popover", () => {
   function PopoverDemo() {
     return (

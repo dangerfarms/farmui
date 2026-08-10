@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { CSSProperties } from "react";
 import { Badge } from "../../index";
 
 const meta = {
@@ -7,24 +8,25 @@ const meta = {
   tags: ["autodocs"],
   args: {
     children: "Badge",
-    variant: "filled",
-    color: "primary",
     size: "md",
     radius: "full",
+    dot: false,
   },
   argTypes: {
-    variant: {
-      control: "inline-radio",
-      options: ["filled", "light", "outline", "dot"],
-    },
-    color: {
-      control: "inline-radio",
-      options: ["primary", "gray", "danger", "warning", "info"],
-    },
     size: { control: "inline-radio", options: ["sm", "md", "lg"] },
     radius: {
       control: "select",
       options: ["sm", "md", "lg", "xl", "full"],
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Neutral by default — status is declared by context " +
+          "(`--fui-context` on an ancestor region — a wrapper for a " +
+          "single badge), not by props.",
+      },
     },
   },
 } satisfies Meta<typeof Badge>;
@@ -32,47 +34,74 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Live playground — tweak props in the Controls panel. */
-export const Playground: Story = {};
+/** Neutral by default — there is no variant or color prop. */
+export const Default: Story = {};
 
-export const Variants: Story = {
+/**
+ * Declare `--fui-context` on a region — any ancestor; a one-element region
+ * is a wrapper — and the tint and text derive from that status's colour.
+ */
+export const Contexts: Story = {
   render: (args) => (
     <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-      <Badge {...args} variant="filled">
-        Filled
-      </Badge>
-      <Badge {...args} variant="light">
-        Light
-      </Badge>
-      <Badge {...args} variant="outline">
-        Outline
-      </Badge>
-      <Badge {...args} variant="dot">
-        Dot
-      </Badge>
+      <Badge {...args}>Neutral</Badge>
+      <span style={{ "--fui-context": "primary" } as CSSProperties}>
+        <Badge {...args}>Primary</Badge>
+      </span>
+      <span style={{ "--fui-context": "success" } as CSSProperties}>
+        <Badge {...args}>Success</Badge>
+      </span>
+      <span style={{ "--fui-context": "warning" } as CSSProperties}>
+        <Badge {...args}>Warning</Badge>
+      </span>
+      <span style={{ "--fui-context": "info" } as CSSProperties}>
+        <Badge {...args}>Info</Badge>
+      </span>
+      <span style={{ "--fui-context": "danger" } as CSSProperties}>
+        <Badge {...args}>Danger</Badge>
+      </span>
     </div>
   ),
 };
 
-export const Colors: Story = {
+/** The status dot is semantics, not emphasis — it follows the context. */
+export const WithDot: Story = {
   render: (args) => (
     <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-      <Badge {...args} color="primary">
-        Primary
+      <Badge {...args} dot>
+        Offline
       </Badge>
-      <Badge {...args} color="gray">
-        Gray
-      </Badge>
-      <Badge {...args} color="danger">
-        Danger
-      </Badge>
-      <Badge {...args} color="warning">
-        Warning
-      </Badge>
-      <Badge {...args} color="info">
-        Info
-      </Badge>
+      <span style={{ "--fui-context": "success" } as CSSProperties}>
+        <Badge {...args} dot>
+          Online
+        </Badge>
+      </span>
+      <span style={{ "--fui-context": "warning" } as CSSProperties}>
+        <Badge {...args} dot>
+          Degraded
+        </Badge>
+      </span>
     </div>
+  ),
+};
+
+/** Icons are composed as svg children and detected with `:has(svg)`. */
+export const WithIcon: Story = {
+  render: (args) => (
+    <span style={{ "--fui-context": "success" } as CSSProperties}>
+      <Badge {...args}>
+        <svg viewBox="0 -0.5 25 25" fill="none" aria-hidden>
+          <path
+            d="M5.5 12.5L10.167 17L19.5 8"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+        Verified
+      </Badge>
+    </span>
   ),
 };
 

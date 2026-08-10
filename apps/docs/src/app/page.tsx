@@ -7,10 +7,10 @@ import { HeroShowcase, InstallSnippet } from "./home.client";
 import c from "./home.module.css";
 
 const STATS = [
-  { num: `${COMPONENTS.length}+`, label: "Components" },
-  { num: "32.4k", label: "GitHub stars" },
-  { num: "1.9M", label: "Monthly downloads" },
+  { num: `${COMPONENTS.length}`, label: "Components" },
+  { num: "0", label: "Runtime dependencies" },
   { num: "0kb", label: "Runtime CSS-in-JS" },
+  { num: "MIT", label: "Licensed" },
 ];
 
 const FEATURES = [

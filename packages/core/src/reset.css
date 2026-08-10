@@ -4,12 +4,12 @@
  * Touches only elements FarmUI renders — never the host page.
  */
 
-/* Typed so a missing value resolves to `none`, letting the reduced-motion
-   safety net stop animations cleanly. See the layer below. */
-@property --animation-reduced {
+/* The per-instance radius channel is set inline by several components
+   (Card, Input, …). Without inherits: false it would cascade into every
+   component nested inside them. */
+@property --_radius {
   syntax: "*";
   inherits: false;
-  initial-value: none;
 }
 
 /* The contextualism channel: declare `--fui-context: danger` (etc.) on any
@@ -39,20 +39,22 @@
   }
 
   /*
-   * Reduced-motion handling, per the Chrome Modern Web Guidance.
-   * New components are authored progressively — they add motion only inside
-   * `@media (prefers-reduced-motion: no-preference)`, so they are static by
-   * default and need nothing here. This block is the safety net for older
-   * components that still declare motion unconditionally: it stops animations
-   * cleanly (`--animation-reduced` defaults to `none`) rather than forcing a
-   * jarring `animation-duration: 0.01ms`, and a component may opt into a gentle
-   * reduced variant by setting `--animation-reduced: <name> …`.
+   * Reduced-motion safety net. Motion is opt-in: new components put large
+   * motion inside `@media (prefers-reduced-motion: no-preference)` blocks, so
+   * absence of animation is the default and needs no fallback. This block
+   * covers components whose transitions are declared unconditionally — it
+   * collapses them (and any stray animations, including on ::before/::after
+   * pseudo-elements) when the user asks for reduced motion.
    */
   @media (prefers-reduced-motion: reduce) {
     :where([class*="fui-"]),
-    :where([class*="fui-"] *) {
+    :where([class*="fui-"] *),
+    :where([class*="fui-"])::before,
+    :where([class*="fui-"])::after,
+    :where([class*="fui-"] *)::before,
+    :where([class*="fui-"] *)::after {
       transition-duration: 0.01ms !important;
-      animation: var(--animation-reduced, none) !important;
+      animation: none !important;
     }
   }
 }

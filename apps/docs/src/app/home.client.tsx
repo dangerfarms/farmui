@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { CSSProperties } from "react";
 import { Avatar, Badge, Button, Input, Switch } from "@farmui/core";
 import classes from "./home.module.css";
 
@@ -39,8 +40,15 @@ export function HeroShowcase() {
           <div className={classes.showcaseName}>Jamie Rivera</div>
           <div className={classes.showcaseHandle}>Product designer</div>
         </div>
-        <div style={{ marginInlineStart: "auto" }}>
-          <Badge variant="light">Pro</Badge>
+        <div
+          style={
+            {
+              marginInlineStart: "auto",
+              "--fui-context": "primary",
+            } as CSSProperties
+          }
+        >
+          <Badge>Pro</Badge>
         </div>
       </div>
 
@@ -59,9 +67,15 @@ export function HeroShowcase() {
       </div>
       <div className={classes.showcaseRow}>
         <span className={classes.showcaseLabel}>Plan</span>
-        <Badge variant="outline" color="primary">
-          {notify ? "Notifications on" : "Muted"}
-        </Badge>
+        <span
+          style={
+            {
+              "--fui-context": notify ? "primary" : undefined,
+            } as CSSProperties
+          }
+        >
+          <Badge dot>{notify ? "Notifications on" : "Muted"}</Badge>
+        </span>
       </div>
 
       <div

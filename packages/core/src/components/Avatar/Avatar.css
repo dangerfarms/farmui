@@ -13,7 +13,7 @@
     color: var(--_fg);
     font-weight: 600;
     line-height: 1;
-    overflow: hidden;
+    overflow: clip;
     user-select: none;
     flex: none;
 
@@ -88,7 +88,10 @@
     border: 2px solid var(--fui-surface);
     box-sizing: content-box;
     margin-inline-start: calc(-1 * var(--_overlap, 0.5rem));
-    transition: transform var(--fui-duration-md) var(--fui-ease);
+
+    /* Identity at rest — the hover lift transitions both ways. */
+    translate: 0 0;
+    transition: translate var(--fui-duration-md) var(--fui-ease);
   }
 
   :scope > *:first-child {
@@ -96,7 +99,7 @@
   }
 
   :scope > *:hover {
-    transform: translateY(-2px);
+    translate: 0 -2px;
     z-index: 1;
   }
 }

@@ -4,6 +4,7 @@ import { forwardRef, useContext, useId } from "react";
 import type { ChangeEvent, InputHTMLAttributes, ReactNode } from "react";
 import { cx } from "../../utils";
 import { useFieldControlProps } from "../Field/Field";
+import { useUserInvalid } from "../../use-user-invalid";
 import { RadioGroupContext } from "./group-context";
 
 export interface RadioProps extends Omit<
@@ -19,7 +20,7 @@ export interface RadioProps extends Omit<
 }
 
 /** The bare radio input + control dot, minus any label. */
-type RadioControlProps = Omit<
+export type RadioControlProps = Omit<
   RadioProps,
   "label" | "description" | "wrapperClassName"
 >;
@@ -36,13 +37,17 @@ const RadioControl = forwardRef<HTMLInputElement, RadioControlProps>(
       disabled,
       "aria-invalid": ariaInvalid,
       "aria-describedby": ariaDescribedby,
+      onBlur,
+      onInvalid,
       ...rest
     },
     ref,
   ) {
     const field = useFieldControlProps();
     const group = useContext(RadioGroupContext);
-    const resolvedAriaInvalid = ariaInvalid ?? field["aria-invalid"];
+    const { nativeInvalid, checkOnBlur, checkOnInvalid } = useUserInvalid();
+    const resolvedAriaInvalid =
+      ariaInvalid ?? field["aria-invalid"] ?? (nativeInvalid || undefined);
     const resolvedId = id ?? field.id;
     const describedBy = ariaDescribedby ?? field["aria-describedby"];
 
@@ -77,6 +82,14 @@ const RadioControl = forwardRef<HTMLInputElement, RadioControlProps>(
           disabled={disabled}
           aria-invalid={resolvedAriaInvalid}
           aria-describedby={describedBy}
+          onBlur={(e) => {
+            onBlur?.(e);
+            checkOnBlur(e);
+          }}
+          onInvalid={(e) => {
+            onInvalid?.(e);
+            checkOnInvalid(e);
+          }}
           {...rest}
           name={name}
           onChange={onChange}

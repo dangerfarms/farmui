@@ -4,6 +4,7 @@ import { forwardRef } from "react";
 import type { TextareaHTMLAttributes, ReactNode } from "react";
 import { cx, resolveRadius, type FarmUIRadius } from "../../utils";
 import { Field } from "../Field/Field";
+import { useUserInvalid } from "../../use-user-invalid";
 
 export interface TextareaProps extends Omit<
   TextareaHTMLAttributes<HTMLTextAreaElement>,
@@ -26,7 +27,7 @@ export interface TextareaProps extends Omit<
 }
 
 /** Props for the bare textarea box (the part Field.Control composes). */
-type TextareaControlProps = Omit<
+export type TextareaControlProps = Omit<
   TextareaProps,
   "label" | "description" | "error" | "withAsterisk" | "wrapperClassName"
 >;
@@ -43,10 +44,14 @@ const TextareaControl = forwardRef<HTMLTextAreaElement, TextareaControlProps>(
       disabled,
       className,
       style,
+      "aria-invalid": ariaInvalid,
+      onBlur,
+      onInvalid,
       ...rest
     },
     ref,
   ) {
+    const { nativeInvalid, checkOnBlur, checkOnInvalid } = useUserInvalid();
     return (
       <div
         className="fui-Textarea-field"
@@ -64,6 +69,15 @@ const TextareaControl = forwardRef<HTMLTextAreaElement, TextareaControlProps>(
           rows={rows}
           disabled={disabled}
           {...rest}
+          aria-invalid={ariaInvalid ?? (nativeInvalid || undefined)}
+          onBlur={(e) => {
+            onBlur?.(e);
+            checkOnBlur(e);
+          }}
+          onInvalid={(e) => {
+            onInvalid?.(e);
+            checkOnInvalid(e);
+          }}
         />
       </div>
     );

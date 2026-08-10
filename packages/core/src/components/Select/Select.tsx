@@ -4,6 +4,7 @@ import { forwardRef } from "react";
 import type { SelectHTMLAttributes, ReactNode } from "react";
 import { cx, resolveRadius, type FarmUIRadius } from "../../utils";
 import { Field } from "../Field/Field";
+import { useUserInvalid } from "../../use-user-invalid";
 
 /** An option in a Select — either a bare string or a value/label pair. */
 export type SelectItem = string | { value: string; label: string };
@@ -31,7 +32,7 @@ export interface SelectProps extends Omit<
 }
 
 /** Props for the bare select box (the part Field.Control composes). */
-type SelectControlProps = Omit<
+export type SelectControlProps = Omit<
   SelectProps,
   "label" | "description" | "error" | "withAsterisk" | "wrapperClassName"
 >;
@@ -52,10 +53,14 @@ const SelectControl = forwardRef<HTMLSelectElement, SelectControlProps>(
       children,
       defaultValue,
       value,
+      "aria-invalid": ariaInvalid,
+      onBlur,
+      onInvalid,
       ...rest
     },
     ref,
   ) {
+    const { nativeInvalid, checkOnBlur, checkOnInvalid } = useUserInvalid();
     // With a placeholder and no explicit value, default to the empty option.
     const isControlled = value !== undefined;
     const resolvedDefault =
@@ -81,6 +86,15 @@ const SelectControl = forwardRef<HTMLSelectElement, SelectControlProps>(
           value={value}
           defaultValue={resolvedDefault}
           {...rest}
+          aria-invalid={ariaInvalid ?? (nativeInvalid || undefined)}
+          onBlur={(e) => {
+            onBlur?.(e);
+            checkOnBlur(e);
+          }}
+          onInvalid={(e) => {
+            onInvalid?.(e);
+            checkOnInvalid(e);
+          }}
         >
           {placeholder && (
             <option value="" disabled>

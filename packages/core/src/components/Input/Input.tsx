@@ -4,6 +4,7 @@ import { forwardRef } from "react";
 import type { InputHTMLAttributes, ReactNode } from "react";
 import { cx, resolveRadius, type FarmUIRadius } from "../../utils";
 import { Field } from "../Field/Field";
+import { useUserInvalid } from "../../use-user-invalid";
 
 export interface InputProps extends Omit<
   InputHTMLAttributes<HTMLInputElement>,
@@ -28,7 +29,7 @@ export interface InputProps extends Omit<
 }
 
 /** Props for the bare field box (the part Field.Control composes). */
-type InputControlProps = Omit<
+export type InputControlProps = Omit<
   InputProps,
   "label" | "description" | "error" | "withAsterisk" | "wrapperClassName"
 >;
@@ -47,10 +48,14 @@ const InputControl = forwardRef<HTMLInputElement, InputControlProps>(
       disabled,
       className,
       style,
+      "aria-invalid": ariaInvalid,
+      onBlur,
+      onInvalid,
       ...rest
     },
     ref,
   ) {
+    const { nativeInvalid, checkOnBlur, checkOnInvalid } = useUserInvalid();
     return (
       <div
         className="fui-Input-field"
@@ -70,6 +75,15 @@ const InputControl = forwardRef<HTMLInputElement, InputControlProps>(
           className={cx("fui-Input-input", className)}
           disabled={disabled}
           {...rest}
+          aria-invalid={ariaInvalid ?? (nativeInvalid || undefined)}
+          onBlur={(e) => {
+            onBlur?.(e);
+            checkOnBlur(e);
+          }}
+          onInvalid={(e) => {
+            onInvalid?.(e);
+            checkOnInvalid(e);
+          }}
         />
         {rightSection && (
           <span className="fui-Input-section">{rightSection}</span>

@@ -106,8 +106,18 @@ document.documentElement.dataset.theme = "dark";
       </div>
       <div className={prose.block}>
         <CodeBlock
+          language="css"
+          code={`/* the idiomatic form: a named region declares its meaning in
+   its own stylesheet (a style attribute works for one-offs) */
+.danger-zone {
+  --fui-context: danger;
+}`}
+        />
+      </div>
+      <div className={prose.block}>
+        <CodeBlock
           language="tsx"
-          code={`<section style={{ "--fui-context": "danger" }}>
+          code={`<section className="danger-zone">
   {/* everything inside adopts the danger accent: buttons, checked
       states, carets, text selection — even focus rings */}
   <Checkbox label="I understand this is permanent" />
@@ -117,13 +127,22 @@ document.documentElement.dataset.theme = "dark";
       </div>
       <p>
         Contexts remap <em>semantic colour tokens only</em> — never spacing,
-        sizing, or layout. There is no per-component colour prop: a single
-        danger button is just a one-element region
-        (<code>{`<Button style={{ "--fui-context": "danger" }}>Delete</Button>`}</code>),
-        and because the property inherits, the nearest ancestor that sets it
-        wins. An inverted &ldquo;on-dark&rdquo; section needs no context at
+        sizing, or layout. The vocabulary is <code>primary</code>,{" "}
+        <code>danger</code>, <code>success</code>, <code>warning</code> and{" "}
+        <code>info</code>. No component has a variant or colour prop —
+        anywhere. A single danger button is just a one-element region — a
+        wrapper (
+        <code>{`<span style={{ "--fui-context": "danger" }}><Button>Delete</Button></span>`}</code>
+        ), because a style query is answered by ancestors, never by the
+        element that declares the property. The status components (Alert,
+        Badge, Loader, Progress) declare their meaning the same way, and
+        because the property inherits, the nearest ancestor that sets it wins. An inverted &ldquo;on-dark&rdquo; section needs no context at
         all — set <code>color-scheme: dark</code> on the region and every{" "}
-        <code>light-dark()</code> token flips.
+        <code>light-dark()</code> token flips. One caveat: colours already
+        resolved on an ancestor inherit as resolved values and don&rsquo;t
+        re-resolve, so the inverted region must also re-declare{" "}
+        <code>color</code> (e.g. <code>color: var(--fui-text)</code>) on
+        itself for descendants to pick up the flipped value.
       </p>
       <div className={prose.callout}>
         Theme, context, and instance are one mechanism at three scopes: remap
@@ -178,10 +197,11 @@ document.documentElement.dataset.theme = "dark";
         />
       </div>
       <p>
-        Blocks declare their roots as containers already. Corner radii and
-        control heights are deliberately <em>not</em> fluid — rounding
-        shouldn&rsquo;t breathe, and shared control heights are the alignment
-        contract between inputs and buttons.
+        Corner radii are deliberately <em>not</em> fluid — rounding
+        shouldn&rsquo;t breathe. Control heights aren&rsquo;t tokens at all:
+        buttons and form controls share one derived anatomy (padding +
+        line-height + border), so they align by construction at every
+        container width.
       </p>
 
       <div className={prose.callout}>

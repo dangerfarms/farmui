@@ -1,5 +1,6 @@
 import type { ComponentDoc } from "@/docs/types";
 import {
+  ModalAlertDemo,
   ModalDemo,
   ModalHeaderCloseDemo,
   ModalSizesDemo,
@@ -25,12 +26,30 @@ const doc: ComponentDoc = {
       They'll receive an email invitation to join your workspace.
     </Modal.Description>
     <Group>
-      <Modal.Close style={{ "--fui-context": "primary" }}>Send invite</Modal.Close>
+      <span style={{ "--fui-context": "primary" }}>
+        <Modal.Close>Send invite</Modal.Close>
+      </span>
       <Modal.Close>Cancel</Modal.Close>
     </Group>
   </Modal.Popup>
 </Modal.Root>`,
       render: () => <ModalDemo />,
+    },
+    {
+      title: "Alert dialog (confirmation)",
+      description:
+        "alert renders role=\"alertdialog\": the backdrop no longer light-dismisses (closedby=\"closerequest\" — Escape still works), and autoFocus belongs on the least-destructive action so it is the default answer. Use for destructive or irreversible confirmations only.",
+      code: `<Modal.Popup alert size="sm">
+  <Modal.Title>Delete this file?</Modal.Title>
+  <Modal.Description>This cannot be undone.</Modal.Description>
+  <Group>
+    <Modal.Close autoFocus>Cancel</Modal.Close>
+    <span style={{ "--fui-context": "danger" }}>
+      <Modal.Close>Delete</Modal.Close>
+    </span>
+  </Group>
+</Modal.Popup>`,
+      render: () => <ModalAlertDemo />,
     },
     {
       title: "Sizes",
@@ -84,9 +103,9 @@ const doc: ComponentDoc = {
     },
     {
       name: "Popup",
-      type: `size?: "sm" | "md" | "lg"`,
+      type: `size?: "sm" | "md" | "lg" · alert?: boolean`,
       description:
-        "The native <dialog>. size sets the panel width (24/32/44rem).",
+        "The native <dialog>. size sets the panel width (24/32/44rem); alert renders role=\"alertdialog\" with no light dismiss (Escape still closes) for destructive confirmations.",
     },
     {
       name: "Title / Description",

@@ -8,8 +8,6 @@ export interface ProgressProps extends Omit<
 > {
   /** Fill amount, 0–100. @default 0 */
   value?: number;
-  /** Semantic color. @default "primary" */
-  color?: "primary" | "info" | "success" | "warning" | "danger";
   /** Track thickness. @default "md" */
   size?: FarmUISize;
   /** Border radius token. @default "full" */
@@ -34,12 +32,16 @@ const clamp = (n: number) => Math.min(100, Math.max(0, n));
 
 /**
  * Progress — a horizontal bar showing completion of a task.
+ *
+ * The bar fills with the primary colour; status is declared by context,
+ * not props: declare `--fui-context` on a region (an ancestor — a style
+ * query never matches the element that declares it, so a one-element
+ * region is a wrapper) and the token remap recolours the fill.
  */
 export const Progress = forwardRef<HTMLDivElement, ProgressProps>(
   function Progress(
     {
       value = 0,
-      color = "primary",
       size = "md",
       radius = "full",
       striped,
@@ -63,7 +65,6 @@ export const Progress = forwardRef<HTMLDivElement, ProgressProps>(
         aria-valuemin={0}
         aria-valuemax={100}
         className={cx("fui-Progress-root", className)}
-        data-color={color}
         data-size={size}
         style={
           { "--_radius": radiusVar[radius], ...style } as React.CSSProperties

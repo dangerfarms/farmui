@@ -43,8 +43,8 @@
     background: var(--fui-surface);
     color: var(--fui-primary-contrast);
     transition:
-      background var(--fui-duration-md) var(--fui-ease),
-      border-color var(--fui-duration-md) var(--fui-ease),
+      background var(--fui-duration-sm) var(--fui-ease),
+      border-color var(--fui-duration-sm) var(--fui-ease),
       box-shadow var(--fui-duration-md) var(--fui-ease);
   }
 
@@ -63,6 +63,8 @@
     cursor: inherit;
   }
 
+  /* No forced-colors block is needed for the checked state: the tick/dash
+     are currentColor strokes, which survive forcing (verified by audit). */
   :scope:has(.fui-Checkbox-input:checked),
   :scope:has(.fui-Checkbox-input:indeterminate) {
     background: var(--fui-primary);
@@ -78,8 +80,7 @@
 
   /* Error state is detected from the input's own state: ARIA or native
      constraint validation (:user-invalid). */
-  :scope:has(.fui-Checkbox-input[aria-invalid="true"]),
-  :scope:has(.fui-Checkbox-input:user-invalid) {
+  :scope:has(.fui-Checkbox-input:is([aria-invalid="true"], :user-invalid)) {
     --fui-ring-color: var(--fui-danger-ring);
 
     border-color: var(--fui-danger);
@@ -134,8 +135,8 @@
 
   .fui-Checkbox-label {
     font-size: var(--fui-text-sm);
-    font-weight: 550;
-    line-height: 1.4;
+    font-weight: 500;
+    line-height: 1.35;
   }
 
   .fui-Checkbox-required {

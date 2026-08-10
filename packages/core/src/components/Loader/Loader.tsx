@@ -8,8 +8,6 @@ export interface LoaderProps extends Omit<
 > {
   /** Overall size — a token or an explicit pixel number. @default "md" */
   size?: FarmUISize | number;
-  /** Semantic color. @default "primary" */
-  color?: "primary" | "info" | "success" | "warning" | "danger";
   /** Animation style. @default "spinner" */
   variant?: "spinner" | "dots" | "bars";
   /** Accessible label announced to assistive tech. @default "Loading" */
@@ -22,21 +20,16 @@ const sizeVar: Record<FarmUISize, string> = {
   lg: "2.25rem",
 };
 
-const colorVar: Record<NonNullable<LoaderProps["color"]>, string> = {
-  primary: "var(--fui-primary)",
-  info: "var(--fui-info)",
-  success: "var(--fui-success)",
-  warning: "var(--fui-warning)",
-  danger: "var(--fui-danger)",
-};
-
 /**
  * Loader — an animated indicator for pending, indeterminate work.
+ *
+ * Draws with `currentColor` — it inherits its parent's text colour, so it
+ * picks up contextual colour (a button's channel, a `color:` declaration)
+ * with no prop of its own.
  */
 export const Loader = forwardRef<HTMLSpanElement, LoaderProps>(function Loader(
   {
     size = "md",
-    color = "primary",
     variant = "spinner",
     label = "Loading",
     className,
@@ -48,7 +41,6 @@ export const Loader = forwardRef<HTMLSpanElement, LoaderProps>(function Loader(
   const resolvedSize = typeof size === "number" ? `${size}px` : sizeVar[size];
   const vars = {
     "--_size": resolvedSize,
-    "--_color": colorVar[color],
     ...style,
   } as CSSProperties;
 

@@ -3,8 +3,7 @@
  *
  * Every design decision, named. Components reference tokens — never raw
  * values — so theming is token remapping at any scope (`:root` for a brand,
- * a container for a mode, an instance for a one-off). Three bands, after
- * ModernCSS's variables.css:
+ * a container for a mode, an instance for a one-off). Three bands:
  *
  *   1. Primitives        — raw material (font stacks, the colour scale)
  *   2. Semantic colour   — what the material means, theme-aware
@@ -50,19 +49,29 @@
       transparent
     );
 
-    /* Status colors */
+    /* Status colors — each status carries the same family of derived tokens
+       as primary (base, hover, active, soft, ring) so a context region can
+       remap the primary family wholesale. Hover/active darken the base with
+       an 88%/78% mix; success aliases primary (the brand IS the success
+       colour), so its hover/active alias primary's. */
     --fui-danger: light-dark(oklch(58% 0.2 25deg), oklch(66% 0.19 25deg));
     --fui-danger-hover: color-mix(in oklch, var(--fui-danger) 88%, black);
     --fui-danger-active: color-mix(in oklch, var(--fui-danger) 78%, black);
     --fui-danger-soft: light-dark(oklch(96% 0.03 25deg), oklch(32% 0.09 25deg));
     --fui-warning: light-dark(oklch(72% 0.16 75deg), oklch(79% 0.15 80deg));
+    --fui-warning-hover: color-mix(in oklch, var(--fui-warning) 88%, black);
+    --fui-warning-active: color-mix(in oklch, var(--fui-warning) 78%, black);
     --fui-warning-soft: light-dark(
       oklch(96% 0.05 85deg),
       oklch(34% 0.07 75deg)
     );
     --fui-info: light-dark(oklch(58% 0.16 245deg), oklch(68% 0.15 245deg));
+    --fui-info-hover: color-mix(in oklch, var(--fui-info) 88%, black);
+    --fui-info-active: color-mix(in oklch, var(--fui-info) 78%, black);
     --fui-info-soft: light-dark(oklch(96% 0.03 245deg), oklch(32% 0.08 250deg));
     --fui-success: var(--fui-primary);
+    --fui-success-hover: var(--fui-primary-hover);
+    --fui-success-active: var(--fui-primary-active);
     --fui-success-soft: var(--fui-primary-soft);
 
     /* Surfaces & text */
@@ -97,7 +106,20 @@
        (e.g. fields with a detected error switch it to the danger ring). */
     --fui-ring-width: 3px;
     --fui-ring-color: var(--fui-primary-ring);
+
+    /* Status focus rings — the same 40%-transparent mix for every status */
     --fui-danger-ring: color-mix(in oklch, var(--fui-danger) 40%, transparent);
+    --fui-success-ring: color-mix(
+      in oklch,
+      var(--fui-success) 40%,
+      transparent
+    );
+    --fui-warning-ring: color-mix(
+      in oklch,
+      var(--fui-warning) 40%,
+      transparent
+    );
+    --fui-info-ring: color-mix(in oklch, var(--fui-info) 40%, transparent);
 
     /* Disabled controls — components may remap locally. */
     --fui-disabled-opacity: 0.55;
@@ -152,7 +174,7 @@
        sm: micro feedback (hovers, colour/border shifts)
        md: default transitions
        lg: overlay enter/exit, large movement
-       elastic: playful accents (blocks), use sparingly */
+       elastic: playful accents, used sparingly */
     --fui-duration-sm: 100ms;
     --fui-duration-md: 175ms;
     --fui-duration-lg: 300ms;
@@ -176,12 +198,14 @@
 
   /*
    * ── Contexts — contextual meaning as token re-answers ───────────────
-   * Declare `--fui-context: danger` on any region (a style attribute or
-   * any CSS rule — no data attributes) and every FarmUI element inside
-   * re-answers the semantic tokens via a container style query. No
-   * component contains context code. The property inherits, so the
-   * nearest ancestor that sets it wins — a one-element region overrides
-   * its surroundings.
+   * The vocabulary is `--fui-context: primary | success | warning | info
+   * | danger`. Declare it on any region (a style attribute or any CSS
+   * rule — no data attributes) and every FarmUI element inside re-answers
+   * the semantic tokens via a container style query. No component
+   * contains context code. The property inherits, so the nearest
+   * ancestor that sets it wins — a one-element region overrides its
+   * surroundings. (`primary` needs no token remap: it is what the tokens
+   * already say; components that are neutral at rest key it themselves.)
    *
    * Contexts re-answer semantic colour tokens ONLY (never spacing,
    * sizing, or layout). Inversion needs no context: set
@@ -201,6 +225,39 @@
          properties resolve var() where declared, so it must be re-answered
          directly here or focus rings would stay brand-coloured. */
       --fui-ring-color: var(--fui-danger-ring);
+    }
+  }
+
+  @container (style(--fui-context: success)) {
+    :where([class*="fui-"], [class*="fui-"] *) {
+      --fui-primary: var(--fui-success);
+      --fui-primary-hover: var(--fui-success-hover);
+      --fui-primary-active: var(--fui-success-active);
+      --fui-primary-soft: var(--fui-success-soft);
+      --fui-primary-ring: var(--fui-success-ring);
+      --fui-ring-color: var(--fui-success-ring);
+    }
+  }
+
+  @container (style(--fui-context: warning)) {
+    :where([class*="fui-"], [class*="fui-"] *) {
+      --fui-primary: var(--fui-warning);
+      --fui-primary-hover: var(--fui-warning-hover);
+      --fui-primary-active: var(--fui-warning-active);
+      --fui-primary-soft: var(--fui-warning-soft);
+      --fui-primary-ring: var(--fui-warning-ring);
+      --fui-ring-color: var(--fui-warning-ring);
+    }
+  }
+
+  @container (style(--fui-context: info)) {
+    :where([class*="fui-"], [class*="fui-"] *) {
+      --fui-primary: var(--fui-info);
+      --fui-primary-hover: var(--fui-info-hover);
+      --fui-primary-active: var(--fui-info-active);
+      --fui-primary-soft: var(--fui-info-soft);
+      --fui-primary-ring: var(--fui-info-ring);
+      --fui-ring-color: var(--fui-info-ring);
     }
   }
 }

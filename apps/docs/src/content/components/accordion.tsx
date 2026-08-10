@@ -39,6 +39,19 @@ const doc: ComponentDoc = {
       ),
     },
     {
+      title: "Single collapsible",
+      description:
+        "One AccordionItem on its own is the platform's disclosure widget — a native <details>/<summary>, no root required. This is FarmUI's \"Collapsible\": no separate component needed.",
+      code: `<AccordionItem label="Advanced options">
+  Extra settings most people never need.
+</AccordionItem>`,
+      render: () => (
+        <AccordionItem label="Advanced options">
+          Extra settings most people never need.
+        </AccordionItem>
+      ),
+    },
+    {
       title: "Default open",
       description: "Use defaultOpen to expand an item on first render.",
       code: `<Accordion>

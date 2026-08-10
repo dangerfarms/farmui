@@ -8,6 +8,7 @@ import button from "@/content/components/button";
 import input from "@/content/components/input";
 import textarea from "@/content/components/textarea";
 import select from "@/content/components/select";
+import separator from "@/content/components/separator";
 import checkbox from "@/content/components/checkbox";
 import radio from "@/content/components/radio";
 import switchDoc from "@/content/components/switch";
@@ -24,11 +25,13 @@ import alert from "@/content/components/alert";
 import progress from "@/content/components/progress";
 import skeleton from "@/content/components/skeleton";
 import loader from "@/content/components/loader";
+import toast from "@/content/components/toast";
 
 // Overlays
 import tooltip from "@/content/components/tooltip";
 import modal from "@/content/components/modal";
 import popover from "@/content/components/popover";
+import menu from "@/content/components/menu";
 
 // Navigation
 import tabs from "@/content/components/tabs";
@@ -56,6 +59,7 @@ export const components: ComponentDoc[] = [
   input,
   textarea,
   select,
+  separator,
   checkbox,
   radio,
   switchDoc,
@@ -68,9 +72,11 @@ export const components: ComponentDoc[] = [
   progress,
   skeleton,
   loader,
+  toast,
   tooltip,
   modal,
   popover,
+  menu,
   tabs,
   accordion,
   breadcrumbs,

@@ -1,4 +1,4 @@
-export { Field, useFieldControlProps, useIsInsideField } from "./Field";
+export { Field, useFieldControlProps } from "./Field";
 export type {
   FieldRootProps,
   FieldLabelProps,
