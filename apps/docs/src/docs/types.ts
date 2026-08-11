@@ -18,6 +18,22 @@ export interface PropRow {
   description: string;
 }
 
+/** A titled passage of usage judgment, optionally with its own example. */
+export interface HowItWorksEntry {
+  title: string;
+  /** Prose stating the prescription and its reason. */
+  body: string;
+  /** Optional live example illustrating the prescription. */
+  code?: string;
+  render?: () => ReactNode;
+}
+
+/** An error-message template for one situation (GOV.UK-style). */
+export interface ErrorTemplate {
+  situation: string;
+  message: string;
+}
+
 /** The full documentation entry for one component. */
 export interface ComponentDoc {
   slug: string;
@@ -35,6 +51,10 @@ export interface ComponentDoc {
   whenNotToUse?: string[];
   /** Accessibility notes and the reasoning behind them. */
   accessibility?: string[];
+  /** Per-situation usage judgment — the "How it works" section. */
+  howItWorks?: HowItWorksEntry[];
+  /** Error-message templates for form components. */
+  errors?: ErrorTemplate[];
   /** Which package the component ships in (used by the CSS tab). @default "core" */
   pkg?: "core";
 }
@@ -44,8 +64,7 @@ export type Category =
   | "Data display"
   | "Feedback"
   | "Overlays"
-  | "Navigation"
-  | "Blocks";
+  | "Navigation";
 
 /** Sidebar ordering for categories. */
 export const CATEGORY_ORDER: Category[] = [
@@ -54,5 +73,4 @@ export const CATEGORY_ORDER: Category[] = [
   "Feedback",
   "Overlays",
   "Navigation",
-  "Blocks",
 ];

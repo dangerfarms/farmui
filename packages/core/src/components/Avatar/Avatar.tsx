@@ -76,6 +76,11 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
 ) {
   const numericSize = typeof size === "number";
   const initials = name ? initialsFrom(name) : "";
+  // With no name anywhere, an avatar is decorative — hide it rather than
+  // expose an unnamed role="img" to assistive technology.
+  const accessibleName = name ?? alt;
+  const consumerNamed =
+    rest["aria-label"] != null || rest["aria-labelledby"] != null;
 
   let content: ReactNode;
   if (children) {
@@ -96,8 +101,9 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
       className={cx("fui-Avatar-root", className)}
       data-size={numericSize ? undefined : size}
       data-color={color}
-      role={src ? undefined : "img"}
-      aria-label={src ? undefined : (name ?? alt)}
+      role={src || (!accessibleName && !consumerNamed) ? undefined : "img"}
+      aria-label={src ? undefined : accessibleName}
+      aria-hidden={!src && !accessibleName && !consumerNamed ? true : undefined}
       style={
         {
           "--_radius": radiusVar[radius],

@@ -136,7 +136,7 @@ export default function Accessibility() {
         </li>
       </ul>
 
-      <h2>Detection keeps ARIA honest</h2>
+      <h2>ARIA is derived, not declared</h2>
       <p>
         Accessibility state is derived from one source of truth rather than
         set by hand. A field is invalid exactly when it contains a rendered
@@ -175,9 +175,9 @@ export default function Accessibility() {
           popovers, computed styles).
         </li>
         <li>
-          Honest limits: colour contrast is checked in the browser-based
-          Storybook tooling, not in the unit suite; forced-colors rendering
-          is verified with emulation; and no automated tool replaces testing
+          Colour contrast is checked in the browser-based Storybook
+          tooling, not in the unit suite; forced-colors rendering is
+          verified with emulation; and no automated tool replaces testing
           with actual screen readers — treat this page as the contract, not
           a substitute for testing your composed product.
         </li>

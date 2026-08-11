@@ -71,6 +71,31 @@ const doc: ComponentDoc = {
       ),
     },
   ],
+  whenToUse: [
+    "For waits of unknown duration where the shape of the outcome is also unknown — searching, saving, waiting on a third party.",
+    "For small inline busy states, composed as a child of the affected control — a Button showing <Loader size=\"sm\" /> while it saves.",
+  ],
+  whenNotToUse: [
+    "When you know what the loaded content will look like — Skeleton holds the layout open and makes the swap calmer than a spinner in an empty region.",
+    "When progress is measurable — use Progress with a truthful value; a spinner where a percentage exists withholds information the user could have.",
+  ],
+  howItWorks: [
+    {
+      title: "Pair it with words",
+      body: "A bare spinner says something is happening but not what, or where, or whether the user should wait or leave. Put visible text next to it (“Saving…”, “Searching flights”) and set label to the same words so sighted and screen-reader users get the same answer.",
+    },
+    {
+      title: "Name the work in label",
+      body: 'label is the loader\'s accessible name and defaults to "Loading" — fine for a page with one wait, ambiguous the moment there are two. "Loading search results" costs nothing and tells a screen-reader user exactly which region is busy.',
+    },
+  ],
+  accessibility: [
+    'Renders role="status" — a polite live region — so a loader appearing in the DOM announces its label without interrupting what is currently being read.',
+    "The label is exposed twice on purpose: as aria-label and as a visually hidden text node, so it reaches assistive tech regardless of how the role is mapped.",
+    "All animated parts are aria-hidden — assistive tech gets the label, never the animation structure (three dots do not read as three elements).",
+    "Under prefers-reduced-motion: reduce the library-wide reset stops the animation; the glyph remains visible as a static indicator, so meaning never depends on motion.",
+    "When composed inside a Button as a busy state, add aria-hidden to the Loader and disable the button — the button's own text (“Saving”) should be the announcement, not a nested status region.",
+  ],
   props: [
     {
       name: "size",

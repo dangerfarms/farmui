@@ -107,6 +107,31 @@ const doc: ComponentDoc = {
       ),
     },
   ],
+  whenToUse: [
+    "To label a record with its status or category at a glance — one or two words sitting next to the thing they describe, readable without reading the row.",
+    "For small counts and metadata — unread messages, item totals — where a full sentence would drown the signal.",
+    "With dot for presence and liveness (“Live”, “Offline”): the dot carries the raw status colour so the state reads even before the word.",
+  ],
+  whenNotToUse: [
+    "As a click target — Badge renders a plain <span> with no role, focus or keyboard handling. If the status should filter or navigate, use a Button or a link and style from there.",
+    "For sentences or long labels — the pill is white-space: nowrap, so long text will not wrap; it is built for one or two words.",
+  ],
+  howItWorks: [
+    {
+      title: "One or two words",
+      body: "A badge is metadata absorbed at a glance while scanning past it. The moment the label needs a verb it has become content, and content belongs in text the eye is meant to stop on. The nowrap styling enforces this: prose in a badge will not fit.",
+    },
+    {
+      title: "Never interactive",
+      body: "The rendered element is a span with no interactive semantics, and that is deliberate: a status is a fact, not an affordance. Making a badge clickable creates a control that keyboards and screen readers cannot find. Put the action on a real Button or link beside it.",
+    },
+  ],
+  accessibility: [
+    "Renders a plain <span> with no role and no focus behaviour — screen readers announce it as ordinary inline text, exactly what a label should be.",
+    "The status dot is aria-hidden decoration, so the visible word must carry the state on its own (“Live”, not a bare green dot).",
+    "The context colours the pill but is never announced — assistive tech hears only the text, so never let colour be the only difference between two badges.",
+    "The label is not the raw status colour: it is mixed toward black (light scheme) or white (dark) so it keeps contrast on the pill's own tint in both schemes.",
+  ],
   props: [
     {
       name: "dot",

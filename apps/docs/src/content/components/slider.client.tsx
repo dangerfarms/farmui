@@ -1,6 +1,20 @@
 "use client";
 
-import { Field, SliderControl } from "@farmui/core";
+import { useState } from "react";
+import { Field, Slider, SliderControl } from "@farmui/core";
+
+export function SliderValueDemo() {
+  const [volume, setVolume] = useState(70);
+  return (
+    <div style={{ maxInlineSize: "22rem", inlineSize: "100%" }}>
+      <Slider
+        label={`Volume: ${volume}`}
+        value={volume}
+        onChange={(e) => setVolume(e.target.valueAsNumber)}
+      />
+    </div>
+  );
+}
 
 export function SliderFieldDemo() {
   return (

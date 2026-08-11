@@ -11,6 +11,7 @@ import {
   TabsPanel,
   Accordion,
   AccordionItem,
+  ErrorSummary,
   Menu,
   Modal,
   Popover,
@@ -147,6 +148,33 @@ describe("Modal", () => {
  * dismiss handling). The enhanced top-layer path is covered by the Storybook
  * play tests, which run in a real browser.
  */
+
+describe("ErrorSummary", () => {
+  it("takes focus when it appears and moves focus to a field on activation", async () => {
+    const user = userEvent.setup();
+    render(
+      <>
+        <ErrorSummary.Root>
+          <ErrorSummary.Title />
+          <ErrorSummary.List>
+            <ErrorSummary.Item href="#email-field">
+              Enter your email address
+            </ErrorSummary.Item>
+          </ErrorSummary.List>
+        </ErrorSummary.Root>
+        <input id="email-field" aria-label="Email" />
+      </>,
+    );
+    const region = screen.getByRole("group", { name: "There is a problem" });
+    await waitFor(() => expect(region).toHaveFocus());
+    await user.click(
+      screen.getByRole("link", { name: "Enter your email address" }),
+    );
+    await waitFor(() =>
+      expect(screen.getByRole("textbox", { name: "Email" })).toHaveFocus(),
+    );
+  });
+});
 
 describe("Menu", () => {
   function renderMenu(onDelete = () => {}) {

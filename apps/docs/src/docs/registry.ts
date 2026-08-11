@@ -10,6 +10,8 @@ import textarea from "@/content/components/textarea";
 import select from "@/content/components/select";
 import separator from "@/content/components/separator";
 import checkbox from "@/content/components/checkbox";
+import dateinput from "@/content/components/dateinput";
+import errorsummary from "@/content/components/errorsummary";
 import radio from "@/content/components/radio";
 import switchDoc from "@/content/components/switch";
 import slider from "@/content/components/slider";
@@ -42,7 +44,6 @@ import pagination from "@/content/components/pagination";
 // Layout is CSS compositions, not components — see the Layout guide
 // (/docs/layout) and @farmui/core's layout.css.
 
-// Blocks
 
 export const components: ComponentDoc[] = [
   field,
@@ -53,6 +54,8 @@ export const components: ComponentDoc[] = [
   select,
   separator,
   checkbox,
+  dateinput,
+  errorsummary,
   radio,
   switchDoc,
   slider,

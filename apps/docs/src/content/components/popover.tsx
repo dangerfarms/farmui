@@ -68,7 +68,7 @@ const doc: ComponentDoc = {
   ],
   accessibility: [
     "Where the popover attribute and anchor positioning are both supported, the browser provides top-layer rendering, light dismiss and Escape; other browsers get a wrapper-anchored fallback with the same behavior re-implemented in a few lines of JS — a deliberate no-polyfill, progressive-enhancement trade-off (see the browser support policy in CONTRIBUTING).",
-    "Dialog semantics are honest: opening moves focus into the panel and closing returns it to the trigger, matching what aria-haspopup=\"dialog\" promises screen-reader users.",
+    "Dialog semantics match what aria-haspopup=\"dialog\" promises screen-reader users: opening moves focus into the panel and closing returns it to the trigger.",
     "Trigger is a real <button> with aria-expanded; Popover.Title and Popover.Description automatically label the dialog via aria-labelledby / aria-describedby.",
     "Collision handling uses position-try flipping at viewport edges in supporting browsers; the fallback keeps the requested side.",
   ],

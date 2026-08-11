@@ -69,6 +69,31 @@ const doc: ComponentDoc = {
       ),
     },
   ],
+  whenToUse: [
+    "To identify a person next to something they did — a comment, an assignee, a row in a member list.",
+    "With AvatarGroup, to show a set of participants compactly where listing every name would not fit.",
+  ],
+  whenNotToUse: [
+    "For arbitrary images — the image is cover-cropped into a fixed square or circle, which is right for faces and wrong for logos, screenshots or product photos; use a plain <img>.",
+    "As a click target — Avatar renders a <span>; if it should open a profile, wrap it in a real link or button rather than adding onClick to it.",
+  ],
+  howItWorks: [
+    {
+      title: "The name is the API",
+      body: "Pass the person's full name and everything derives from it: the initials (first and last word, uppercased), the image alt when you give a src, and the aria-label when you do not. One prop keeps what sighted users see and what screen readers hear describing the same person.",
+    },
+    {
+      title: "Identifying or decorative — decide which",
+      body: "An avatar identifies when it is the only place the person appears; it decorates when their name is printed right beside it. A decorative avatar should be aria-hidden so the name is not announced twice; an identifying one must have a name (or alt) — never neither.",
+    },
+  ],
+  accessibility: [
+    "With src, a real <img> is rendered and its alt falls back to name — pass the name and the image announces the person.",
+    'Without an image, the root becomes role="img" with aria-label from name (or alt) — screen readers hear the full name (“Jane Doe”), never the raw initials (“JD”).',
+    "A bare <Avatar /> with no name from any source is treated as decorative automatically (aria-hidden, no role) — an identifying avatar must be given a name, an alt, or an aria-label.",
+    "When the name is visibly printed next to the avatar, pass aria-hidden so assistive tech does not read the same name twice.",
+    "The fallback glyph is aria-hidden and focusable=\"false\" — it is decoration; identity always comes from the name/alt wiring above.",
+  ],
   props: [
     {
       name: "src",

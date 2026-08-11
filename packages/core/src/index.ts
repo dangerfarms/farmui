@@ -12,6 +12,8 @@ export * from "./components/Textarea/index";
 export * from "./components/Select/index";
 export * from "./components/Separator/index";
 export * from "./components/Checkbox/index";
+export * from "./components/DateInput/index";
+export * from "./components/ErrorSummary/index";
 export * from "./components/Radio/index";
 export * from "./components/Switch/index";
 export * from "./components/Slider/index";

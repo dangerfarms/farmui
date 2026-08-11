@@ -99,6 +99,12 @@ older Firefox renders the neutral default"). Rationale belongs in docs —
 confidently ("FarmUI ships no spacer component: `gap` replaced spacers") —
 process belongs in DECISIONS.md.
 
+**Docs state facts about the system, never their own virtues.** No
+"honestly", "to be transparent", "honest limits", "worth being honest
+about" — if a sentence performs a quality instead of stating a fact,
+delete the performance and keep the fact. A limitation is documented by
+stating it, not by announcing that it is being admitted.
+
 **A code comment earns its place only if it states a constraint or platform
 trap the next edit would otherwise violate, in ≤3 lines.** The test: cover
 the code, read the comment — if you now know nothing the code wouldn't have

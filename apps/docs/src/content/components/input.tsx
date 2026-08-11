@@ -128,10 +128,76 @@ const doc: ComponentDoc = {
     "For choosing from a fixed set of options — use Select, Radio or Checkbox.",
     "When you need full control over the label/description/error structure — compose Field.* directly.",
   ],
+  howItWorks: [
+    {
+      title: "Asking for numbers",
+      body: 'Never use type="number": scroll wheels and arrow keys silently change the value, and browsers give poor feedback when the input is invalid. Pass inputMode="numeric" for whole numbers or inputMode="decimal" for amounts — both forward straight to the native input — so touch devices raise a number pad while the field keeps normal text behaviour.',
+      code: `<Input label="Account number" inputMode="numeric" />
+<Input label="Weight in kilograms" inputMode="decimal" />`,
+      render: () => (
+        <div
+          style={{
+            display: "grid",
+            gap: "0.75rem",
+            maxInlineSize: "20rem",
+            inlineSize: "100%",
+          }}
+        >
+          <Input label="Account number" inputMode="numeric" />
+          <Input label="Weight in kilograms" inputMode="decimal" />
+        </div>
+      ),
+    },
+    {
+      title: "Codes and references",
+      body: "Values users copy rather than compose — booking references, invoice numbers, licence keys — are not words, so set spellCheck={false} to stop browsers underlining a correct value as a mistake. A digits-only reference also takes inputMode=\"numeric\".",
+    },
+    {
+      title: "Autofill and input purpose",
+      body: 'Any field asking for something about the user gets the matching autoComplete value — "name", "email", "postal-code", "bday-day" and the rest of the HTML autofill set, forwarded straight through. This is WCAG 1.3.5 (Identify Input Purpose): it lets browsers fill the answer correctly and lets assistive tech present the field in the user’s own terms.',
+      code: `<Input label="Email" type="email" autoComplete="email" />`,
+      render: () => (
+        <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
+          <Input label="Email" type="email" autoComplete="email" />
+        </div>
+      ),
+    },
+    {
+      title: "Placeholders are not labels",
+      body: "A placeholder vanishes the moment the user types, is skipped by some assistive technology, and its dimmed colour fails contrast as instruction text. The label prop is the shortest path through this API — use it for what the field is, and put format hints in description, which stays visible and is announced. Reserve placeholder for a genuinely disposable example.",
+    },
+    {
+      title: "Width belongs to the container",
+      body: "The field fills whatever it is placed in — there is no size or width prop. Width is information: a four-character reference in a page-wide box reads as a harder question than it is, so put the field in a container sized to the expected answer.",
+    },
+  ],
+  errors: [
+    {
+      situation: "The field is empty",
+      message: "Enter [whatever the label asks for]",
+    },
+    {
+      situation: "The value is the wrong format",
+      message: "Enter [a/an] [thing] in the correct format, like [example]",
+    },
+    {
+      situation: "The value is too long / too short",
+      message: "[Label] must be [N] characters or fewer / or more",
+    },
+    {
+      situation: "The value contains a disallowed character",
+      message: "[Label] must only include [allowed characters]",
+    },
+    {
+      situation: "A number is out of range",
+      message: "[Label] must be between [min] and [max]",
+    },
+  ],
   accessibility: [
     "The label is a real <label> tied to the input by id, so clicking it focuses the field and screen readers announce it.",
     "Description and error are linked via aria-describedby, and an error also sets aria-invalid — announced together when the field gains focus.",
     'The error message uses role="alert" so it is announced as it appears.',
+    "leftSection / rightSection render your content beside the input but outside its accessible name. Mark visual content like currency symbols or icons aria-hidden, and carry the unit in the label or description so non-visual users get it too.",
     "Following GOV.UK guidance, prefer marking optional fields in words; reserve the required asterisk for genuinely required fields and explain it once per form.",
   ],
   props: [

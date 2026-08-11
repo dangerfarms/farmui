@@ -192,6 +192,24 @@ const doc: ComponentDoc = {
     'To navigate to another page or URL — use a link. A button that navigates breaks right-click, middle-click and "open in new tab" (GOV.UK).',
     "For many low-emphasis choices at once — consider a menu, tabs, or a segmented control instead of a row of equal buttons.",
   ],
+  howItWorks: [
+    {
+      title: "Buttons act, links navigate",
+      body: 'The element must match the behaviour, not the look. When a design wants button styling on a genuine navigation, keep real link semantics with render: <Button render={<a href="/signup" />}>Get started</Button> merges the Button\'s classes onto a real <a> — so right-click, middle-click, open-in-new-tab and link announcement all keep working. What render never justifies is the reverse: an <a> with an onClick that mutates data is still a button in disguise.',
+    },
+    {
+      title: "Avoid disabled buttons",
+      body: "A disabled submit button has poor contrast, can't receive focus in most browsers, and — worst — gives no feedback about why it's disabled or how to fix it; users are left guessing which field is wrong. Keep the button enabled, validate on submit, and answer a bad submission with specific field errors (see Field). The one good use of disabled is a genuine busy state, paired with a composed Loader.",
+    },
+    {
+      title: "Prevent double submission on the server",
+      body: "Button deliberately ships no preventDoubleClick or debounce prop. A client-side debounce doesn't prevent duplicates — retries, impatient refreshes and flaky networks bypass it — while it does hide real failures by swallowing clicks that deserved a response. Make the operation safe to repeat instead: an idempotency key or server-side dedupe, with disabled + <Loader/> as visible feedback while the request is in flight, not as the safety mechanism.",
+    },
+    {
+      title: "One primary action per section",
+      body: `Emphasis is a property of the region, not the button: wrap the section's single most important action in a primary context (--fui-context: "primary") and leave every other button neutral. Two "primary" buttons side by side ask the user to make a decision the interface should have made — if everything is emphasised, nothing is.`,
+    },
+  ],
   accessibility: [
     "Always renders a real <button>, so keyboard focus, Enter/Space activation and the button role come from the platform for free.",
     'Write a specific label: the text should make sense out of context ("Save changes", not "OK"). Icon-only buttons need an aria-label.',

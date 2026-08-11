@@ -1,0 +1,38 @@
+@scope (.fui-ErrorSummary-root) {
+  :scope {
+    padding: var(--fui-space-lg);
+    border: 2px solid var(--fui-danger);
+    border-radius: var(--fui-radius-md);
+    background: var(--fui-danger-soft);
+  }
+
+  :scope:focus-visible {
+    box-shadow: 0 0 0 2px var(--fui-bg);
+    outline: var(--fui-ring-width) solid var(--fui-danger-ring);
+    outline-offset: 2px;
+  }
+
+  .fui-ErrorSummary-title {
+    margin: 0;
+    font-size: var(--fui-text-md);
+    font-weight: 700;
+    text-wrap: balance;
+  }
+
+  .fui-ErrorSummary-list {
+    display: block flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    margin-block: var(--fui-space-sm) 0;
+    margin-inline: 0;
+    padding-inline-start: var(--fui-space-lg);
+  }
+
+  .fui-ErrorSummary-item a {
+    color: var(--fui-danger);
+    font-size: var(--fui-text-sm);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+  }
+}

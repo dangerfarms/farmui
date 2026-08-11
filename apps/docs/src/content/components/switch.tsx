@@ -63,6 +63,16 @@ const doc: ComponentDoc = {
     "When the change only applies after submitting a form — use a Checkbox instead (Polaris).",
     "For selecting among more than two states — use Radio or Select.",
   ],
+  howItWorks: [
+    {
+      title: "A switch acts now, a checkbox acts on submit",
+      body: "role=\"switch\" announces on/off, and users expect flipping it to take effect immediately — like a light switch. Inside a form that applies changes on save, that expectation is a lie: use Checkbox, whose ticked state reads as “will apply when I submit”. The test is the presence of a save button — if there is one, it isn't a Switch.",
+    },
+    {
+      title: "Label the affirmative",
+      body: "The label names the thing that is on when the switch is on: “Email notifications”, never “Disable emails” — the control already says on or off, so a negated label makes on mean off. Keep the label constant across states; a label that rewrites itself when toggled leaves users unsure whether it describes the current state or the action.",
+    },
+  ],
   accessibility: [
     'Renders a native checkbox exposed with role="switch", so it is operable by keyboard and announced as on/off.',
     "The label is tied to the control; the whole row is clickable.",

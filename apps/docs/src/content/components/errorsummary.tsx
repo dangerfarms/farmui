@@ -1,0 +1,84 @@
+import type { ComponentDoc } from "@/docs/types";
+import { ErrorSummaryDemo } from "./errorsummary.client";
+
+const doc: ComponentDoc = {
+  slug: "error-summary",
+  name: "ErrorSummary",
+  category: "Inputs",
+  description:
+    "A box at the top of a form listing every error as a link to its field.",
+  importLine: `import { ErrorSummary } from "@farmui/core";`,
+  demos: [
+    {
+      title: "After a failed submit",
+      description:
+        "Submit the empty form: the summary appears, takes keyboard focus so the problem is announced, and its link moves focus into the field.",
+      code: `{errors.length > 0 && (
+  <ErrorSummary.Root>
+    <ErrorSummary.Title />
+    <ErrorSummary.List>
+      <ErrorSummary.Item href="#email">
+        Enter your email address
+      </ErrorSummary.Item>
+    </ErrorSummary.List>
+  </ErrorSummary.Root>
+)}
+<Input id="email" label="Email address" error={emailError} />`,
+      render: () => <ErrorSummaryDemo />,
+    },
+  ],
+  whenToUse: [
+    "At the top of a form after a failed submit, listing every field error in the order the fields appear.",
+    "Whenever there is more than one field on the form — with a single field, the field's own error carries the message alone.",
+  ],
+  whenNotToUse: [
+    "For a single global failure that has no field to link to — use an Alert.",
+    "While the user is still typing — the summary responds to a submit attempt, not to keystrokes.",
+  ],
+  howItWorks: [
+    {
+      title: "Same words in both places",
+      body: "Each item repeats its field's error message exactly, so the message reads identically in the summary, beside the field, and out of context. Write both from the Field page's error-message doctrine.",
+    },
+    {
+      title: "Links land the user in the field",
+      body: "Fragment navigation scrolls to the field but does not focus it, so each item also moves focus into the target — the user activates a link and starts typing the correction.",
+    },
+    {
+      title: "Order follows the form",
+      body: "List errors in the order the fields appear on the page, so fixing them top to bottom walks the form once.",
+    },
+    {
+      title: "Multi-field controls",
+      body: 'A control made of several fields, like DateInput, takes one item per error, linked to the first field that error applies to: give the DateInput.Root id="date-of-birth" and point the item at #date-of-birth-day — or straight at #date-of-birth-year when the error names the year.',
+    },
+  ],
+  accessibility: [
+    "The summary takes keyboard focus when it appears (tabIndex -1 + focus), so assistive technology announces the group — labelled by its title — the moment the submit fails.",
+    'The Title renders "There is a problem" by default and labels the region via aria-labelledby.',
+    "Items are real links: right-click, open-in-new-tab and AT link lists all behave; activation focuses the field so the correction can start immediately.",
+    "Keep the user's failed input in the fields — never clear values when showing errors.",
+  ],
+  props: [
+    {
+      name: "Root",
+      type: "autoFocus?: boolean · div props",
+      description:
+        "The focusable group. autoFocus (default true) moves keyboard focus to the summary when it mounts.",
+    },
+    {
+      name: "Title",
+      type: "heading props",
+      description:
+        'An <h2> labelling the region. Children default to "There is a problem".',
+    },
+    {
+      name: "List / Item",
+      type: "Item: href (required) · li props",
+      description:
+        "Item renders a real link to the field's fragment and focuses the target on activation.",
+    },
+  ],
+};
+
+export default doc;

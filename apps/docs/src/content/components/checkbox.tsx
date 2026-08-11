@@ -57,6 +57,34 @@ const doc: ComponentDoc = {
     "For one choice among several mutually exclusive options — use Radio.",
     "For an instant on/off toggle that takes effect immediately — use Switch.",
   ],
+  howItWorks: [
+    {
+      title: "One box or a group",
+      body: "A single checkbox is for one self-contained agreement or opt-in whose label is a complete statement (“Agree to the terms of service”). Several related options belong in a Fieldset whose legend asks the question — and because checkboxes and radios look alike, say in the legend or description that users can select all that apply.",
+    },
+    {
+      title: "Write the label positively",
+      body: "The label states what happens when the box is ticked, in positive, unambiguous words: “Send me email updates”, never “Don't send me emails”. A negated label makes ticking mean refusing and unticking a double negative, and users acting quickly resolve it wrong.",
+    },
+    {
+      title: "Leave boxes unticked",
+      body: "A pre-ticked box gets submitted by everyone who never read it, so the data records a choice nobody made — and for consent it records nothing at all. Start unticked, so every tick is a deliberate act.",
+    },
+  ],
+  errors: [
+    {
+      situation: "A required agreement is unticked",
+      message: "Select [whatever the checkbox label states] to continue",
+    },
+    {
+      situation: "Nothing in a required group is selected",
+      message: "Select [whatever the legend asks for]",
+    },
+    {
+      situation: "Too many options are selected",
+      message: "Select no more than [N] [things]",
+    },
+  ],
   accessibility: [
     'Renders a real <input type="checkbox"> wrapped by its label, so clicking the text toggles it and the state is announced natively.',
     "Supports an indeterminate (mixed) visual for a 'select all' parent, set on the DOM node — remember it is a display state, not a third value.",

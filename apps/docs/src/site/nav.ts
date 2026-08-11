@@ -41,6 +41,12 @@ export const COMPONENTS: NavItem[] = [
     description: "Group controls under a semantic label.",
   },
   {
+    name: "ErrorSummary",
+    slug: "error-summary",
+    category: "Inputs",
+    description: "List form errors as links to their fields.",
+  },
+  {
     name: "Button",
     slug: "button",
     category: "Inputs",
@@ -63,6 +69,12 @@ export const COMPONENTS: NavItem[] = [
     slug: "select",
     category: "Inputs",
     description: "Choose one option from a list.",
+  },
+  {
+    name: "DateInput",
+    slug: "date-input",
+    category: "Inputs",
+    description: "Labelled fields for a memorable date.",
   },
   {
     name: "Checkbox",

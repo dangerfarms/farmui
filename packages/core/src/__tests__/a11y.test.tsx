@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach } from "vitest";
-import { render, cleanup } from "@testing-library/react";
+import { render, screen, cleanup } from "@testing-library/react";
 import { axe } from "vitest-axe";
 import type { CSSProperties, ReactElement } from "react";
 
@@ -9,6 +9,8 @@ import {
   Textarea,
   Select,
   Checkbox,
+  DateInput,
+  ErrorSummary,
   RadioGroup,
   Switch,
   Slider,
@@ -47,6 +49,32 @@ const cases: Array<[string, ReactElement]> = [
   ["Textarea", <Textarea label="Bio" />],
   ["Select", <Select label="Country" data={["United States", "Canada"]} />],
   ["Checkbox", <Checkbox label="Accept the terms" />],
+  [
+    "DateInput",
+    <DateInput.Root name="date-of-birth" autoComplete="bday">
+      <DateInput.Legend>Date of birth</DateInput.Legend>
+      <DateInput.Description>For example, 27 3 2007</DateInput.Description>
+      <DateInput.Fields>
+        <DateInput.Field part="day" />
+        <DateInput.Field part="month" />
+        <DateInput.Field part="year" />
+      </DateInput.Fields>
+    </DateInput.Root>,
+  ],
+  [
+    "DateInput (error)",
+    <DateInput.Root>
+      <DateInput.Legend>When did your membership start?</DateInput.Legend>
+      <DateInput.Error parts={["year"]}>
+        Membership start date must include a year
+      </DateInput.Error>
+      <DateInput.Fields>
+        <DateInput.Field part="day" />
+        <DateInput.Field part="month" />
+        <DateInput.Field part="year" />
+      </DateInput.Fields>
+    </DateInput.Root>,
+  ],
   [
     "RadioGroup",
     <RadioGroup label="Plan" defaultValue="pro" data={["free", "pro"]} />,
@@ -93,6 +121,17 @@ const cases: Array<[string, ReactElement]> = [
   ],
   ["Progress", <Progress value={40} aria-label="Upload progress" />],
   ["Separator", <Separator />],
+  [
+    "ErrorSummary",
+    <ErrorSummary.Root autoFocus={false}>
+      <ErrorSummary.Title />
+      <ErrorSummary.List>
+        <ErrorSummary.Item href="#email">
+          Enter your email address
+        </ErrorSummary.Item>
+      </ErrorSummary.List>
+    </ErrorSummary.Root>,
+  ],
   [
     "Separator (vertical, in a row)",
     <div style={{ display: "flex", gap: 8 }}>
@@ -202,5 +241,110 @@ describe("accessibility (axe)", () => {
       </Modal.Root>,
     );
     expect(await axe(document.body, axeOptions)).toHaveNoViolations();
+  });
+});
+
+describe("Avatar naming", () => {
+  it("is decorative when it has no name from any source", () => {
+    const { container } = render(<Avatar />);
+    const root = container.querySelector(".fui-Avatar-root");
+    expect(root).toHaveAttribute("aria-hidden", "true");
+    expect(root).not.toHaveAttribute("role");
+  });
+
+  it("is a named image when a name is given", () => {
+    render(<Avatar name="Ada Lovelace" />);
+    expect(screen.getByRole("img", { name: "Ada Lovelace" })).toBeInTheDocument();
+  });
+
+  it("honours a consumer-supplied aria-label", () => {
+    render(<Avatar aria-label="Team member" />);
+    expect(screen.getByRole("img", { name: "Team member" })).toBeInTheDocument();
+  });
+});
+
+describe("DateInput wiring", () => {
+  const threeFields = (
+    <DateInput.Fields>
+      <DateInput.Field part="day" />
+      <DateInput.Field part="month" />
+      <DateInput.Field part="year" />
+    </DateInput.Fields>
+  );
+
+  it("renders three labelled numeric fields named and autofillable per part", () => {
+    render(
+      <DateInput.Root name="date-of-birth" autoComplete="bday">
+        <DateInput.Legend>Date of birth</DateInput.Legend>
+        <DateInput.Description>For example, 27 3 2007</DateInput.Description>
+        {threeFields}
+      </DateInput.Root>,
+    );
+    const group = screen.getByRole("group", { name: "Date of birth" });
+    expect(group).toHaveAccessibleDescription("For example, 27 3 2007");
+    for (const part of ["day", "month", "year"] as const) {
+      const field = screen.getByLabelText(
+        part.charAt(0).toUpperCase() + part.slice(1),
+      );
+      expect(field).toHaveAttribute("inputmode", "numeric");
+      expect(field).toHaveAttribute("name", `date-of-birth-${part}`);
+      expect(field).toHaveAttribute("autocomplete", `bday-${part}`);
+    }
+  });
+
+  it("narrows the invalid state to the parts the error names", () => {
+    render(
+      <DateInput.Root>
+        <DateInput.Legend>When did your membership start?</DateInput.Legend>
+        <DateInput.Error parts={["year"]}>
+          Membership start date must include a year
+        </DateInput.Error>
+        {threeFields}
+      </DateInput.Root>,
+    );
+    expect(screen.getByRole("alert")).toHaveTextContent(
+      "Membership start date must include a year",
+    );
+    expect(screen.getByLabelText("Year")).toHaveAttribute(
+      "aria-invalid",
+      "true",
+    );
+    expect(screen.getByLabelText("Day")).not.toHaveAttribute("aria-invalid");
+    expect(screen.getByLabelText("Month")).not.toHaveAttribute("aria-invalid");
+  });
+
+  it("marks all parts invalid when the error names none", () => {
+    render(
+      <DateInput.Root>
+        <DateInput.Legend>Date of birth</DateInput.Legend>
+        <DateInput.Error>Enter your date of birth</DateInput.Error>
+        {threeFields}
+      </DateInput.Root>,
+    );
+    for (const label of ["Day", "Month", "Year"]) {
+      expect(screen.getByLabelText(label)).toHaveAttribute(
+        "aria-invalid",
+        "true",
+      );
+    }
+  });
+
+  it("forwards per-field props and custom labels through Field", () => {
+    render(
+      <DateInput.Root name="dob">
+        <DateInput.Legend>Date de naissance</DateInput.Legend>
+        <DateInput.Fields>
+          <DateInput.Field part="day">Jour</DateInput.Field>
+          <DateInput.Field part="month">Mois</DateInput.Field>
+          <DateInput.Field part="year" maxLength={4} name="year-of-birth">
+            Année
+          </DateInput.Field>
+        </DateInput.Fields>
+      </DateInput.Root>,
+    );
+    expect(screen.getByLabelText("Jour")).toHaveAttribute("name", "dob-day");
+    const year = screen.getByLabelText("Année");
+    expect(year).toHaveAttribute("maxlength", "4");
+    expect(year).toHaveAttribute("name", "year-of-birth");
   });
 });

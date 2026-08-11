@@ -63,6 +63,34 @@ const doc: ComponentDoc = {
     "For single-line values (names, emails) — use Input.",
     "For a fixed set of options — use Select, Radio or Checkbox.",
   ],
+  howItWorks: [
+    {
+      title: "Auto-grow is built in",
+      body: "Where the platform supports field-sizing: content, the field grows with the answer up to ten lines and then scrolls — no JS, no measuring. A minimum height keeps the empty field recognisably multi-line, and the rows prop remains the semantic fallback height where auto-grow is unsupported — set it to match the expected answer: three rows asks for a note, ten invites an essay.",
+    },
+    {
+      title: "Keep resize on",
+      body: "The field is user-resizable in the block direction (resize: block), so anyone can make room for a long answer without horizontal drag ever breaking the layout. Don't remove it with CSS — taking resize away removes user control and gains nothing. Disabled fields drop the handle automatically.",
+    },
+    {
+      title: "Limits live in the description",
+      body: "State a length limit up front in the description (“Your answer must be 200 characters or fewer”) rather than springing it as an error after the user has written too much. FarmUI does not ship a live character counter, so keep the validation message in exactly the words the description used — the rule then reads the same before and after the mistake.",
+    },
+  ],
+  errors: [
+    {
+      situation: "The field is empty",
+      message: "Enter [whatever the label asks for]",
+    },
+    {
+      situation: "The answer is too long",
+      message: "[Label] must be [N] characters or fewer",
+    },
+    {
+      situation: "The answer is too short",
+      message: "[Label] must be [N] characters or more",
+    },
+  ],
   accessibility: [
     "Composes the Field primitive, so the label, description and error share one accessible wiring (label tied by id, aria-describedby, aria-invalid).",
     'The error uses role="alert" so it is announced when it appears.',

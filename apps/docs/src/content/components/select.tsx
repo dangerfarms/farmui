@@ -84,6 +84,26 @@ const doc: ComponentDoc = {
     "For yes/no or on/off — use Checkbox or Switch.",
     "For free-form input — use Input.",
   ],
+  howItWorks: [
+    {
+      title: "Start without a value",
+      body: "Pass placeholder to render a disabled, empty first option, so the field starts unanswered and required validation catches an untouched select. Without it the first real option is pre-selected, and users who skip the field silently submit an answer they never chose.",
+    },
+    {
+      title: "Order the options",
+      body: "List options alphabetically so users can predict where an answer sits in a long menu — the reason to use a Select at all. Depart only for an order that is genuinely more useful in the domain, like months in calendar order or years newest-first.",
+    },
+    {
+      title: "A select conceals its options",
+      body: "Until opened, the menu shows one value and hides every alternative, so users can't survey or compare the choices. That is the cost that makes RadioGroup the better control for small sets — reserve Select for long lists of familiar answers users recognise rather than weigh up.",
+    },
+  ],
+  errors: [
+    {
+      situation: "Nothing is selected",
+      message: "Select [whatever the label asks for]",
+    },
+  ],
   accessibility: [
     "Wraps a native <select>, so keyboard interaction, typeahead and the mobile picker come from the platform.",
     'Composes the Field primitive: label, description and error are wired via id / aria-describedby / aria-invalid with the error as role="alert".',

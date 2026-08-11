@@ -79,8 +79,8 @@ export default function Contextualism() {
         component CSS reads it with a container style query:
       </p>
       <p>
-        One consequence worth being honest about: a container style query is
-        answered by <em>ancestors</em>, never by the element that declares the
+        One consequence: a container style query is answered by{" "}
+        <em>ancestors</em>, never by the element that declares the
         property. So the declaration must sit <strong>on an ancestor</strong>{" "}
         of whatever it styles — for a single component that means a
         one-element wrapper around it, not a style on the instance itself. A

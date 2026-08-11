@@ -61,6 +61,16 @@ const doc: ComponentDoc = {
     "For a single labelled control — use Field (or a control's own label).",
     "As a generic layout box — Fieldset carries grouping semantics, not just spacing.",
   ],
+  howItWorks: [
+    {
+      title: "The legend is the question",
+      body: "Write the legend as the question the group answers — “How should we contact you?”, not the category “Contact” — because screen readers announce it alongside each control's own label, so every option is heard in the context of the question. That also keeps each control's label short: the shared part of the wording lives in the legend once, not in every label.",
+    },
+    {
+      title: "One question per fieldset",
+      body: "Everything inside the fieldset is announced under the legend's name, so a fieldset holding two unrelated questions mislabels half its controls. Give each question its own fieldset, and avoid nesting them — a legend inside a legend multiplies what is read before every control. GOV.UK services go as far as one question per page with the legend as the page heading; the transferable core for a component library is the one-legend-one-question rule, not the page pattern.",
+    },
+  ],
   accessibility: [
     "Renders a native <fieldset> + <legend>: the legend is announced as the group's name when a control inside receives focus.",
     'This is preferred over a <div role="group"> with aria-labelledby — the native semantics are better supported.',

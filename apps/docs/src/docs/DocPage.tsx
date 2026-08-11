@@ -5,6 +5,7 @@ import { Preview } from "./Preview";
 import { CodeBlock } from "./CodeBlock";
 import { PropsTable } from "./PropsTable";
 import classes from "./DocPage.module.css";
+import tableClasses from "./PropsTable.module.css";
 
 function slugify(s: string) {
   return s
@@ -106,6 +107,64 @@ export function DocPage({ doc }: { doc: ComponentDoc }) {
                 </ul>
               </div>
             )}
+          </div>
+        </section>
+      )}
+
+      {doc.howItWorks && (
+        <section className={classes.section}>
+          <h2 id="how-it-works" className={classes.h2}>
+            How it works
+          </h2>
+          <div className={classes.demos}>
+            {doc.howItWorks.map((entry) => (
+              <div
+                key={entry.title}
+                id={slugify(entry.title)}
+                className={classes.demo}
+              >
+                <h3 className={classes.h3}>{entry.title}</h3>
+                <p className={classes.demoDesc}>{entry.body}</p>
+                {entry.code && entry.render && (
+                  <Preview code={entry.code} css={css}>
+                    {entry.render()}
+                  </Preview>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {doc.errors && (
+        <section className={classes.section}>
+          <h2 id="error-messages" className={classes.h2}>
+            Error messages
+          </h2>
+          <p className={classes.usageNote}>
+            Say what happened and how to fix it, in the words of the
+            question itself — see the writing guidance on the{" "}
+            <a href="/docs/components/field#error-messages">Field page</a>.
+          </p>
+          <div className={tableClasses.scroll}>
+            <table className={tableClasses.table}>
+              <thead>
+                <tr>
+                  <th>Situation</th>
+                  <th>Message</th>
+                </tr>
+              </thead>
+              <tbody>
+                {doc.errors.map((e) => (
+                  <tr key={e.situation}>
+                    <td>{e.situation}</td>
+                    <td>
+                      <code className={tableClasses.name}>{e.message}</code>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </section>
       )}
