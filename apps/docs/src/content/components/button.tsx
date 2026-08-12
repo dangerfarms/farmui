@@ -10,7 +10,7 @@ const doc: ComponentContent = {
     {
       title: "Contexts",
       description:
-        "Buttons are neutral by default. Declare --fui-context on a region and every button inside re-answers its colour — there are no variant props. See the Contextualism guide.",
+        "Buttons are neutral by default. Declare --fui-context on a region and every button inside re-answers its colour; there are no variant props. See the Contextualism guide.",
       code: `<Button>Neutral</Button>
 
 <div style={{ "--fui-context": "primary" }}>
@@ -57,7 +57,7 @@ const doc: ComponentContent = {
     {
       title: "Danger regions adapt everything",
       description:
-        "--fui-context isn't a button feature — every FarmUI component in the region adapts: checkboxes, focus rings, carets. You declare intent once on the container instead of a color prop on each control.",
+        "--fui-context isn't a button feature. Every FarmUI component in the region adapts: checkboxes, focus rings, carets. You declare intent once on the container instead of a color prop on each control.",
       code: `<div style={{ "--fui-context": "danger" }}>
   <Button>Delete account</Button>
   <Button>Discard</Button>
@@ -117,7 +117,7 @@ const doc: ComponentContent = {
     {
       title: "Icons & loading (composed as children)",
       description:
-        "Icons are detected — a button containing an svg gets flex layout, a gap, and 1em icon sizing via :has(svg). Icon-only is detected from the accessible name: add the aria-label the icon-only case requires anyway and the button becomes square. No leftSection / rightSection / loading props; compose a Loader for busy states.",
+        "Icons are detected: a button containing an svg gets flex layout, a gap, and 1em icon sizing via :has(svg). Icon-only is detected from the accessible name: add the aria-label the icon-only case requires anyway and the button becomes square. No leftSection / rightSection / loading props; compose a Loader for busy states.",
       code: `<Button>
   <svg viewBox="0 -0.5 25 25" fill="none" aria-hidden>
     <path d="M5.5 12.5L10.167 17L19.5 8" stroke="currentColor"
@@ -165,7 +165,7 @@ const doc: ComponentContent = {
     {
       title: "Contextual full width",
       description:
-        'Mark a region data-fui-buttons="block" and its buttons stretch — the explicit layout hint for when the container is wide but the design wants stacked, full-width actions.',
+        'Mark a region data-fui-buttons="block" and its buttons stretch, the explicit layout hint for when the container is wide but the design wants stacked, full-width actions.',
       code: `<div data-fui-buttons="block">
   <Button>Save changes</Button>
   <Button>Cancel</Button>
@@ -182,34 +182,34 @@ const doc: ComponentContent = {
     },
   ],
   whenToUse: [
-    "To trigger an action in the current context — submitting a form, opening a dialog, confirming a choice.",
+    "To trigger an action in the current context: submitting a form, opening a dialog, confirming a choice.",
     "For the single most important action on a screen, put the region in a primary context (--fui-context: primary) and leave the rest neutral (Polaris: one primary action per section).",
     "Set intent with --fui-context on a container rather than repeating props on every button.",
   ],
   whenNotToUse: [
-    'To navigate to another page or URL — use a link. A button that navigates breaks right-click, middle-click and "open in new tab" (GOV.UK).',
-    "For many low-emphasis choices at once — consider a menu, tabs, or a segmented control instead of a row of equal buttons.",
+    'To navigate to another page or URL: use a link. A button that navigates breaks right-click, middle-click and "open in new tab" (GOV.UK).',
+    "For many low-emphasis choices at once: consider a menu, tabs, or a segmented control instead of a row of equal buttons.",
   ],
   howItWorks: [
     {
       title: "Buttons act, links navigate",
-      body: 'The element must match the behaviour, not the look. When a design wants button styling on a genuine navigation, keep real link semantics with render: <Button render={<a href="/signup" />}>Get started</Button> merges the Button\'s classes onto a real <a> — so right-click, middle-click, open-in-new-tab and link announcement all keep working. What render never justifies is the reverse: an <a> with an onClick that mutates data is still a button in disguise.',
+      body: 'The element must match the behaviour, not the look. When a design wants button styling on a genuine navigation, keep real link semantics with render: <Button render={<a href="/signup" />}>Get started</Button> merges the Button\'s classes onto a real <a>, so right-click, middle-click, open-in-new-tab and link announcement all keep working. What render never justifies is the reverse: an <a> with an onClick that mutates data is still a button in disguise.',
     },
     {
       title: "Buttons don't submit by accident",
-      body: 'A bare <button> inside a form is a native submit button, so Button defaults type="button" — a Cancel button can never submit the form it sits in. Pass type="submit" on the one button that should. The render path forwards your element untouched, so a render={<button/>} keeps the native default and needs its own type.',
+      body: 'A bare <button> inside a form is a native submit button, so Button defaults type="button": a Cancel button can never submit the form it sits in. Pass type="submit" on the one button that should. The render path forwards your element untouched, so a render={<button/>} keeps the native default and needs its own type.',
     },
     {
       title: "Avoid disabled buttons",
-      body: "A disabled submit button has poor contrast, can't receive focus in most browsers, and — worst — gives no feedback about why it's disabled or how to fix it; users are left guessing which field is wrong. Keep the button enabled, validate on submit, and answer a bad submission with specific field errors (see Field). The one good use of disabled is a genuine busy state, paired with a composed Loader.",
+      body: "A disabled submit button has poor contrast, can't receive focus in most browsers, and, worst of all, gives no feedback about why it's disabled or how to fix it; users are left guessing which field is wrong. Keep the button enabled, validate on submit, and answer a bad submission with specific field errors (see Field). The one good use of disabled is a genuine busy state, paired with a composed Loader.",
     },
     {
       title: "Prevent double submission on the server",
-      body: "Button deliberately ships no preventDoubleClick or debounce prop. A client-side debounce doesn't prevent duplicates — retries, impatient refreshes and flaky networks bypass it — while it does hide real failures by swallowing clicks that deserved a response. Make the operation safe to repeat instead: an idempotency key or server-side dedupe, with disabled + <Loader/> as visible feedback while the request is in flight, not as the safety mechanism.",
+      body: "Button deliberately ships no preventDoubleClick or debounce prop. A client-side debounce doesn't prevent duplicates (retries, impatient refreshes and flaky networks bypass it), while it does hide real failures by swallowing clicks that deserved a response. Make the operation safe to repeat instead: an idempotency key or server-side dedupe, with disabled + <Loader/> as visible feedback while the request is in flight, not as the safety mechanism.",
     },
     {
       title: "One primary action per section",
-      body: `Emphasis is a property of the region, not the button: wrap the section's single most important action in a primary context (--fui-context: "primary") and leave every other button neutral. Two "primary" buttons side by side ask the user to make a decision the interface should have made — if everything is emphasised, nothing is.`,
+      body: `Emphasis is a property of the region, not the button: wrap the section's single most important action in a primary context (--fui-context: "primary") and leave every other button neutral. Two "primary" buttons side by side ask the user to make a decision the interface should have made: if everything is emphasised, nothing is.`,
     },
   ],
   accessibility: [
@@ -222,8 +222,7 @@ const doc: ComponentContent = {
     {
       name: "children",
       type: "ReactNode",
-      description:
-        "The button content — label, and any composed icons/spinner.",
+      description: "The button content: label, and any composed icons/spinner.",
     },
     {
       name: "type",
@@ -242,14 +241,14 @@ const doc: ComponentContent = {
       name: "--fui-context",
       type: `"primary" | "danger" | "success" | "warning" | "info"`,
       description:
-        'Declare on any ancestor (it inherits) to give the region semantic meaning — every FarmUI component inside adapts. For a single button, use a one-element wrapper (<span style={{ "--fui-context": "danger" }}><Button>…</Button></span>) — a style query is answered by ancestors, never by the element that declares the property.',
+        'Declare on any ancestor (it inherits) to give the region semantic meaning: every FarmUI component inside adapts. For a single button, use a one-element wrapper (<span style={{ "--fui-context": "danger" }}><Button>…</Button></span>). A style query is answered by ancestors, never by the element that declares the property.',
     },
     {
       name: "--fui-button-color",
       type: "CSS color",
       default: "var(--fui-text)",
       description:
-        "The button's single colour channel — set it to recolour one instance or a wrapper component; background, border, hover and active are all derived from it.",
+        "The button's single colour channel. Set it to recolour one instance or a wrapper component; background, border, hover and active are all derived from it.",
     },
     {
       name: "data-fui-buttons",

@@ -23,17 +23,17 @@ export default function LayoutGuide() {
         Layout in FarmUI is CSS, not components: small algorithmic compositions
         you apply as classes, tuned with registered <code>--fui-*</code> knobs
         whose defaults come from the fluid space scale. No media queries, no
-        JavaScript, no React API — the layout manages itself from its content
-        and container.
+        JavaScript, no React API: the layout manages itself from its content and
+        container.
       </p>
 
       <h2>Why not layout components?</h2>
       <p>
         A <code>&lt;Stack gap=&quot;md&quot;&gt;</code> component is three
         declarations of CSS wearing a JavaScript costume. The judgment a library
-        should contribute — token-valued spacing, rows that always wrap,
-        overflow-<code>safe</code> alignment, never reordering content visually
-        — lives just as well in a stylesheet, where it also works outside React,
+        should contribute (token-valued spacing, rows that always wrap,
+        overflow-<code>safe</code> alignment, never reordering content visually)
+        lives just as well in a stylesheet, where it also works outside React,
         serialises into any content model, and themes through the cascade. So
         the compositions are the product; any component wrapper is optional
         sugar that belongs to the consumer.
@@ -57,7 +57,7 @@ export default function LayoutGuide() {
 
       <h2>Cluster</h2>
       <p>
-        A row that wraps like text — tags, action rows, metadata. Alignment is
+        A row that wraps like text: tags, action rows, metadata. Alignment is
         overflow-<code>safe</code> so focusable items are never clipped.
       </p>
       <div className={prose.block}>
@@ -71,7 +71,7 @@ export default function LayoutGuide() {
 
       <h2>Switcher</h2>
       <p>
-        Equal-width items in a row — until the container is narrower than the
+        Equal-width items in a row, until the container is narrower than the
         threshold, when every item goes full width. The flip is computed by the
         layout itself (a <code>flex-basis</code> calc), not a media query, so it
         works at any nesting depth.
@@ -106,7 +106,7 @@ export default function LayoutGuide() {
       <p>
         A fixed-preference side element beside fluid content; the pair stacks
         the moment the content would drop below its minimum share. Reversing the
-        sides is a DOM-order change, deliberately — a visual-only reversal would
+        sides is a DOM-order change, deliberately: a visual-only reversal would
         detach tab order from what the user sees.
       </p>
       <div className={prose.block}>
@@ -124,8 +124,8 @@ export default function LayoutGuide() {
         As many equal columns as fit, each at least the minimum (
         <code>--fui-grid-min</code>); columns grow to share the remainder.
         Explicit-span grids (a 12-column skeleton with <code>span 4</code> /{" "}
-        <code>span 8</code> children) are deliberately not a composition —
-        that&apos;s bespoke page structure, so write grid CSS for it: named
+        <code>span 8</code> children) are deliberately not a composition.
+        That&apos;s bespoke page structure, so write grid CSS for it: named
         template areas say what the page means, spans are one rule away.
       </p>
       <div className={prose.block}>
@@ -166,7 +166,7 @@ export default function LayoutGuide() {
       <ul>
         <li>
           <strong>No Flex utility.</strong> A generic flex wrapper is the
-          platform&apos;s flexbox wearing props — it adds a vocabulary without
+          platform&apos;s flexbox wearing props: it adds a vocabulary without
           adding judgment. Where a row should wrap and space itself, that
           judgment exists as <code>.fui-cluster</code>; for anything else, write
           flexbox.
@@ -179,16 +179,16 @@ export default function LayoutGuide() {
         <li>
           <strong>No 12-column span grid.</strong> An explicit-span page
           skeleton (<code>span 4</code> / <code>span 8</code>) is bespoke page
-          structure, not a reusable algorithm — write grid CSS for it, with
-          named template areas that say what the page means.
+          structure, not a reusable algorithm; write grid CSS for it, with named
+          template areas that say what the page means.
         </li>
       </ul>
 
       <h2>Driving compositions from data</h2>
       <p>
         Because a composition is a class plus token-valued properties, any
-        data-driven renderer — a page builder, a visual editor, a template
-        engine — can expose layout as constrained choices and map them straight
+        data-driven renderer (a page builder, a visual editor, a template
+        engine) can expose layout as constrained choices and map them straight
         onto this surface:
       </p>
       <div className={prose.block}>

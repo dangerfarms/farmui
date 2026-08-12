@@ -10,7 +10,7 @@
   grid-template-columns: 1.4fr 2fr;
   gap: 3rem;
 }
-@media (max-width: 52rem) {
+@media (width <= 52rem) {
   .inner {
     grid-template-columns: 1fr;
     gap: 2.5rem;
@@ -40,7 +40,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
 }
-@media (max-width: 34rem) {
+@media (width <= 34rem) {
   .cols {
     grid-template-columns: repeat(2, 1fr);
   }

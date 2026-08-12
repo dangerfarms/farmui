@@ -3,7 +3,7 @@
   align-items: center;
   gap: 0.55rem;
   font-weight: 800;
-  font-size: 1.15rem;
+  font-size: var(--fui-text-lg);
   letter-spacing: -0.03em;
 }
 

@@ -24,7 +24,7 @@
   padding-block: 2.5rem 4rem;
 }
 
-@media (max-width: 60rem) {
+@media (width <= 60rem) {
   .shell {
     grid-template-columns: 1fr;
   }

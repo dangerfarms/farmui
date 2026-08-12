@@ -47,17 +47,17 @@ const doc: ComponentContent = {
   ],
   whenToUse: [
     "For a single on/off choice (accept terms, stay signed in).",
-    "For selecting any number of options from a list — group related checkboxes in a Fieldset.",
+    "For selecting any number of options from a list: group related checkboxes in a Fieldset.",
     "Inside a Field for full control: <Field.Label><Checkbox /> …</Field.Label>.",
   ],
   whenNotToUse: [
-    "For one choice among several mutually exclusive options — use Radio.",
-    "For an instant on/off toggle that takes effect immediately — use Switch.",
+    "For one choice among several mutually exclusive options: use Radio.",
+    "For an instant on/off toggle that takes effect immediately: use Switch.",
   ],
   howItWorks: [
     {
       title: "One box or a group",
-      body: "A single checkbox is for one self-contained agreement or opt-in whose label is a complete statement (“Agree to the terms of service”). Several related options belong in a Fieldset whose legend asks the question — and because checkboxes and radios look alike, say in the legend or description that users can select all that apply.",
+      body: "A single checkbox is for one self-contained agreement or opt-in whose label is a complete statement (“Agree to the terms of service”). Several related options belong in a Fieldset whose legend asks the question. Because checkboxes and radios look alike, say in the legend or description that users can select all that apply.",
     },
     {
       title: "Write the label positively",
@@ -65,7 +65,7 @@ const doc: ComponentContent = {
     },
     {
       title: "Leave boxes unticked",
-      body: "A pre-ticked box gets submitted by everyone who never read it, so the data records a choice nobody made — and for consent it records nothing at all. Start unticked, so every tick is a deliberate act.",
+      body: "A pre-ticked box gets submitted by everyone who never read it, so the data records a choice nobody made, and for consent it records nothing at all. Start unticked, so every tick is a deliberate act.",
     },
   ],
   errors: [
@@ -84,7 +84,7 @@ const doc: ComponentContent = {
   ],
   accessibility: [
     'Renders a real <input type="checkbox"> wrapped by its label, so clicking the text toggles it and the state is announced natively.',
-    "Supports an indeterminate (mixed) visual for a 'select all' parent, set on the DOM node — remember it is a display state, not a third value.",
+    "Supports an indeterminate (mixed) visual for a 'select all' parent, set on the DOM node. It is a display state, not a third value.",
     "When placed inside a Field it reads its id, aria-describedby and aria-invalid from context; standalone it wires its own label, description and error.",
     "Group multiple checkboxes under a Fieldset so the legend names the set in the accessibility tree.",
   ],

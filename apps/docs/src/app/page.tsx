@@ -18,7 +18,7 @@ const FEATURES = [
     title: "Semantic HTML",
     body: (
       <>
-        Real elements — <code>&lt;details&gt;</code>,{" "}
+        Real elements: <code>&lt;details&gt;</code>,{" "}
         <code>&lt;nav&gt;&lt;ol&gt;</code>,{" "}
         <code>role=&quot;tablist&quot;</code>. The rendered markup is clean,
         meaningful and screen-reader friendly.
@@ -29,8 +29,8 @@ const FEATURES = [
     title: "Zero runtime",
     body: (
       <>
-        Styles are static CSS in cascade layers. Nothing executes in the browser
-        — fully compatible with React Server Components.
+        Styles are static CSS in cascade layers. Nothing executes in the
+        browser, so everything is fully compatible with React Server Components.
       </>
     ),
   },
@@ -48,7 +48,7 @@ const FEATURES = [
     body: (
       <>
         Container queries, <code>color-mix()</code>, <code>light-dark()</code>,
-        logical properties and <code>:where()</code> — Baseline features, not
+        logical properties and <code>:where()</code>. Baseline features, not
         polyfills.
       </>
     ),
@@ -58,7 +58,7 @@ const FEATURES = [
     body: (
       <>
         Rebrand by overriding <code>--fui-primary</code>. No provider, no theme
-        objects — scope tokens to any subtree.
+        objects. Scope tokens to any subtree.
       </>
     ),
   },
@@ -103,7 +103,7 @@ const TAILWIND_CODE = `// shadcn/ui + Tailwind — utilities inlined on every el
 const TECHNIQUES = [
   {
     name: "light-dark()",
-    desc: "One value, both themes — no duplicated theme objects.",
+    desc: "One value, both themes: no duplicated theme objects.",
     code: "color: light-dark(#1a1a1a, #fafafa);",
   },
   {
@@ -123,12 +123,12 @@ const TECHNIQUES = [
   },
   {
     name: "logical properties",
-    desc: "RTL-ready by default — no hardcoded left / right.",
+    desc: "RTL-ready by default, with no hardcoded left / right.",
     code: "padding-inline: 1rem; margin-block: 0.5rem;",
   },
   {
     name: "@layer",
-    desc: "A predictable cascade — no specificity wars, no !important.",
+    desc: "A predictable cascade: no specificity wars, no !important.",
     code: "@layer farmui.components { … }",
   },
   {
@@ -208,7 +208,7 @@ export default function HomePage() {
             Component library ergonomics, minus the runtime.
           </h2>
           <p className={c.sectionSub}>
-            Labelled inputs, composable overlays and tokened theming — with the
+            Labelled inputs, composable overlays and tokened theming, with the
             styling layer rebuilt on the modern CSS platform.
           </p>
         </div>
@@ -238,7 +238,7 @@ export default function HomePage() {
           <span className="eyebrow">See the difference</span>
           <h2 className={c.sectionTitle}>Same button. Cleaner everything.</h2>
           <p className={c.sectionSub}>
-            FarmUI keeps styling in one shared, cacheable stylesheet — your
+            FarmUI keeps styling in one shared, cacheable stylesheet, so your
             markup stays readable. Utility frameworks inline dozens of classes
             onto every element; runtime CSS-in-JS serializes styles on each
             render.
@@ -252,7 +252,7 @@ export default function HomePage() {
             </div>
             <CodeBlock code={FARMUI_CODE} />
             <p className={c.compareNote}>
-              One prop. Styles live in shared CSS — <strong>0&nbsp;kb</strong>{" "}
+              One prop. Styles live in shared CSS: <strong>0&nbsp;kb</strong>{" "}
               runtime, works with any build tool.
             </p>
           </div>
@@ -278,7 +278,7 @@ export default function HomePage() {
           <span className="eyebrow">Under the hood</span>
           <h2 className={c.sectionTitle}>Modern CSS, put to work.</h2>
           <p className={c.sectionSub}>
-            No abstractions over the platform — FarmUI ships the same modern CSS
+            No abstractions over the platform: FarmUI ships the same modern CSS
             features you&rsquo;d reach for by hand, so nothing runs at runtime.
           </p>
         </div>
@@ -344,7 +344,7 @@ export default function HomePage() {
             {COMPONENTS.length} components, ready to ship.
           </h2>
           <p className={c.sectionSub}>
-            Inputs, data display, feedback, overlays and navigation — accessible
+            Inputs, data display, feedback, overlays and navigation, accessible
             and themeable out of the box.
           </p>
         </div>

@@ -10,7 +10,7 @@
   margin: 0;
   padding: 1rem 1.125rem;
   overflow-x: auto;
-  font-size: 0.8125rem;
+  font-size: var(--fui-text-sm);
   line-height: 1.6;
   background: transparent !important;
 }

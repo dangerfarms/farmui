@@ -43,7 +43,7 @@ const doc: ComponentContent = {
     {
       title: "Composed inside a Field",
       description:
-        "The bare SwitchControl self-wires from Field context — label association and description linking come from the Field, the Base UI composition pattern shared by all form controls.",
+        "The bare SwitchControl self-wires from Field context: label association and description linking come from the Field, the Base UI composition pattern shared by all form controls.",
       code: `<Field.Root>
   <Field.Label>
     <SwitchControl defaultChecked /> Email notifications
@@ -58,17 +58,17 @@ const doc: ComponentContent = {
     "When the two states are clearly opposite and the control acts like a physical switch.",
   ],
   whenNotToUse: [
-    "When the change only applies after submitting a form — use a Checkbox instead (Polaris).",
-    "For selecting among more than two states — use Radio or Select.",
+    "When the change only applies after submitting a form. Use a Checkbox instead (Polaris).",
+    "For selecting among more than two states. Use Radio or Select.",
   ],
   howItWorks: [
     {
       title: "A switch acts now, a checkbox acts on submit",
-      body: 'role="switch" announces on/off, and users expect flipping it to take effect immediately — like a light switch. Inside a form that applies changes on save, that expectation is a lie: use Checkbox, whose ticked state reads as “will apply when I submit”. The test is the presence of a save button — if there is one, it isn\'t a Switch.',
+      body: 'role="switch" announces on/off, and users expect flipping it to take effect immediately, like a light switch. Inside a form that applies changes on save, that expectation is a lie: use Checkbox, whose ticked state reads as “will apply when I submit”. The test is the presence of a save button: if there is one, it isn\'t a Switch.',
     },
     {
       title: "Label the affirmative",
-      body: "The label names the thing that is on when the switch is on: “Email notifications”, never “Disable emails” — the control already says on or off, so a negated label makes on mean off. Keep the label constant across states; a label that rewrites itself when toggled leaves users unsure whether it describes the current state or the action.",
+      body: "The label names the thing that is on when the switch is on: “Email notifications”, never “Disable emails”. The control already says on or off, so a negated label makes on mean off. Keep the label constant across states; a label that rewrites itself when toggled leaves users unsure whether it describes the current state or the action.",
     },
   ],
   accessibility: [
@@ -112,7 +112,7 @@ const doc: ComponentContent = {
       name: "SwitchControl",
       type: "component",
       description:
-        "The bare toggle without a label — composes inside Field and reads its wiring (id, aria-describedby, aria-invalid) from context.",
+        "The bare toggle without a label. It composes inside Field and reads its wiring (id, aria-describedby, aria-invalid) from context.",
     },
   ],
 };

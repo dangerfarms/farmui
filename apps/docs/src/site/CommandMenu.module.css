@@ -34,7 +34,7 @@
   z-index: 100;
   display: grid;
   place-items: start center;
-  padding-block-start: 12vh;
+  padding-block-start: 12vb;
   background: oklch(0 0 0 / 0.4);
   backdrop-filter: blur(3px);
 }
@@ -46,8 +46,13 @@
   border-radius: var(--fui-radius-lg);
   box-shadow: var(--fui-shadow-lg);
   overflow: hidden;
-  animation: pop 120ms ease;
 }
+@media (prefers-reduced-motion: no-preference) {
+  .panel {
+    animation: pop 120ms ease;
+  }
+}
+
 @keyframes pop {
   from {
     opacity: 0;

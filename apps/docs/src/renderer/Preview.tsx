@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useId, useRef, useState, type ReactNode } from "react";
 import { CodeBlock } from "./CodeBlock";
 import classes from "./Preview.module.css";
 
@@ -17,49 +17,72 @@ export function Preview({
   children: ReactNode;
 }) {
   const [tab, setTab] = useState<Tab>("preview");
+  const baseId = useId();
+  const listRef = useRef<HTMLDivElement>(null);
+
+  const tabs: Tab[] = css ? ["preview", "code", "css"] : ["preview", "code"];
+  const labels: Record<Tab, string> = {
+    preview: "Preview",
+    code: "Code",
+    css: "CSS",
+  };
+
+  // APG tabs pattern: one tab stop, arrow keys move selection.
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    const i = tabs.indexOf(tab);
+    let next: number | undefined;
+    if (e.key === "ArrowRight") next = (i + 1) % tabs.length;
+    else if (e.key === "ArrowLeft") next = (i - 1 + tabs.length) % tabs.length;
+    else if (e.key === "Home") next = 0;
+    else if (e.key === "End") next = tabs.length - 1;
+    if (next === undefined) return;
+    e.preventDefault();
+    const target = tabs[next];
+    if (!target) return;
+    setTab(target);
+    listRef.current
+      ?.querySelectorAll<HTMLButtonElement>("[role=tab]")
+      [next]?.focus();
+  };
 
   return (
     <div className={classes.wrap}>
-      <div className={classes.tabs} role="tablist">
-        <button
-          role="tab"
-          aria-selected={tab === "preview"}
-          className={classes.tab}
-          data-active={tab === "preview" || undefined}
-          onClick={() => setTab("preview")}
-          type="button"
-        >
-          Preview
-        </button>
-        <button
-          role="tab"
-          aria-selected={tab === "code"}
-          className={classes.tab}
-          data-active={tab === "code" || undefined}
-          onClick={() => setTab("code")}
-          type="button"
-        >
-          Code
-        </button>
-        {css && (
+      <div
+        className={classes.tabs}
+        role="tablist"
+        aria-label="Example view"
+        ref={listRef}
+        onKeyDown={onKeyDown}
+      >
+        {tabs.map((t) => (
           <button
+            key={t}
             role="tab"
-            aria-selected={tab === "css"}
+            id={`${baseId}-tab-${t}`}
+            aria-selected={tab === t}
+            aria-controls={`${baseId}-panel-${t}`}
+            tabIndex={tab === t ? 0 : -1}
             className={classes.tab}
-            data-active={tab === "css" || undefined}
-            onClick={() => setTab("css")}
+            data-active={tab === t || undefined}
+            onClick={() => setTab(t)}
             type="button"
           >
-            CSS
+            {labels[t]}
           </button>
-        )}
+        ))}
       </div>
 
-      {tab === "preview" && <div className={classes.stage}>{children}</div>}
-      {tab === "code" && <CodeBlock code={code} className={classes.code} />}
-      {tab === "css" && css && (
-        <CodeBlock code={css} language="css" className={classes.code} />
-      )}
+      <div
+        role="tabpanel"
+        id={`${baseId}-panel-${tab}`}
+        aria-labelledby={`${baseId}-tab-${tab}`}
+      >
+        {tab === "preview" && <div className={classes.stage}>{children}</div>}
+        {tab === "code" && <CodeBlock code={code} className={classes.code} />}
+        {tab === "css" && css && (
+          <CodeBlock code={css} language="css" className={classes.code} />
+        )}
+      </div>
     </div>
   );
 }

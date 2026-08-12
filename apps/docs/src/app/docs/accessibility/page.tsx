@@ -14,8 +14,8 @@ export default function Accessibility() {
         FarmUI&apos;s accessibility comes from the platform first: real elements
         with built-in semantics, native behaviours instead of
         re-implementations, and ARIA only where the platform has no word for
-        something. On top of that sit specific, engineered guarantees — listed
-        here, together with how they are tested and where the limits are.
+        something. On top of that sit specific, engineered guarantees, listed
+        here together with how they are tested and where the limits are.
       </p>
 
       <h2>Semantics from the platform</h2>
@@ -31,9 +31,9 @@ export default function Accessibility() {
           .
         </li>
         <li>
-          Every styled form control wraps a real native input — checkboxes,
+          Every styled form control wraps a real native input: checkboxes,
           radios, switches (a checkbox with <code>role=&quot;switch&quot;</code>
-          ), sliders (<code>&lt;input type=&quot;range&quot;&gt;</code>) — so
+          ), sliders (<code>&lt;input type=&quot;range&quot;&gt;</code>). So
           keyboard operation, form participation, and assistive-technology
           reporting come from the platform.
         </li>
@@ -59,7 +59,7 @@ export default function Accessibility() {
           <strong>Tabs</strong> follow the tabs pattern with{" "}
           <code>aria-selected</code> wiring, and inactive panels stay reachable
           by find-in-page (<code>hidden=&quot;until-found&quot;</code> where
-          supported — a match activates the tab).
+          supported; a match activates the tab).
         </li>
         <li>
           <strong>Tooltips</strong> open on keyboard focus as well as hover, and
@@ -67,8 +67,8 @@ export default function Accessibility() {
           so a toast&apos;s action is reachable from anywhere.
         </li>
         <li>
-          Disabled menu items use <code>aria-disabled</code> — visible to
-          assistive technology, skipped by roving focus — rather than vanishing
+          Disabled menu items use <code>aria-disabled</code> (visible to
+          assistive technology, skipped by roving focus) rather than vanishing
           from the accessibility tree.
         </li>
       </ul>
@@ -76,31 +76,31 @@ export default function Accessibility() {
       <h2>Engineered WCAG specifics</h2>
       <ul>
         <li>
-          <strong>1.4.13 (Content on Hover or Focus)</strong> — tooltips are
+          <strong>1.4.13 (Content on Hover or Focus)</strong>: tooltips are
           dismissible with Escape without moving focus, hoverable across the gap
           onto the bubble, and persistent while hovered or focused; hover and
           focus are tracked independently so a passing pointer cannot steal a
           focused trigger&apos;s tooltip.
         </li>
         <li>
-          <strong>2.2.1 (Timing Adjustable)</strong> — toast auto-dismiss timers
+          <strong>2.2.1 (Timing Adjustable)</strong>: toast auto-dismiss timers
           pause while the pointer or keyboard focus is inside the viewport and
           resume with the remaining time.
         </li>
         <li>
-          <strong>2.5.8 (Target Size)</strong> — the checkbox&apos;s invisible
+          <strong>2.5.8 (Target Size)</strong>: the checkbox&apos;s invisible
           hit area is floored at 24px even where the visible box is smaller;
           buttons and text controls share a derived anatomy that keeps them
           comfortably above the minimum at every container width.
         </li>
         <li>
-          <strong>Focus visibility</strong> — every interactive element shows a
+          <strong>Focus visibility</strong>: every interactive element shows a
           two-layer <code>:focus-visible</code> ring (a background-colour
           underlay beneath the brand outline, so the ring reads on any surface).
           Focus styling is never removed without a replacement.
         </li>
         <li>
-          <strong>Not colour alone</strong> — state always carries a second
+          <strong>Not colour alone</strong>: state always carries a second
           signal: the tick and dash glyphs on checkboxes, thumb position on
           switches, the error message text beside a danger border, an asterisk
           or the word &quot;(optional)&quot; beside labels.
@@ -115,7 +115,7 @@ export default function Accessibility() {
       <ul>
         <li>
           <strong>Motion is opt-in.</strong> Animations and large transitions
-          exist only inside <code>prefers-reduced-motion: no-preference</code> —
+          exist only inside <code>prefers-reduced-motion: no-preference</code>;
           the absence of motion is the baseline, so nothing needs to be switched
           off.
         </li>
@@ -138,13 +138,13 @@ export default function Accessibility() {
       <p>
         Accessibility state is derived from one source of truth rather than set
         by hand. A field is invalid exactly when it contains a rendered error
-        message — the CSS detects it with <code>:has()</code> and{" "}
+        message: the CSS detects it with <code>:has()</code> and{" "}
         <code>aria-invalid</code> is wired from the same fact. On the native
         validation path, the platform&apos;s own <code>:user-invalid</code>{" "}
         verdict is mirrored onto <code>aria-invalid</code> at blur and submit,
         so what assistive technology hears always matches what the screen shows.
         Icon-only buttons are detected by the <code>aria-label</code> they must
-        carry anyway — the compact style only appears when the button is
+        carry anyway; the compact style only appears when the button is
         correctly labelled.
       </p>
 
@@ -155,8 +155,8 @@ export default function Accessibility() {
         marked with the word &quot;(optional)&quot; in preference to decorating
         required ones with asterisks; where asterisks are used they are
         presentational and the requirement is conveyed by <code>required</code>.
-        Buttons act, links navigate — a button that navigates breaks
-        right-click, middle-click and open-in-new-tab.
+        Buttons act, links navigate: a button that navigates breaks right-click,
+        middle-click and open-in-new-tab.
       </p>
 
       <h2>How this is tested — and the limits</h2>
@@ -174,8 +174,8 @@ export default function Accessibility() {
         <li>
           Colour contrast is checked in the browser-based Storybook tooling, not
           in the unit suite; forced-colors rendering is verified with emulation;
-          and no automated tool replaces testing with actual screen readers —
-          treat this page as the contract, not a substitute for testing your
+          and no automated tool replaces testing with actual screen readers.
+          Treat this page as the contract, not a substitute for testing your
           composed product.
         </li>
       </ul>

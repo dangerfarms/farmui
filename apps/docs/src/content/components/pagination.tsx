@@ -12,7 +12,7 @@ const doc: ComponentContent = {
   demos: [
     {
       title: "Basic",
-      description: "Controlled — hold the current page in state.",
+      description: "Controlled: hold the current page in state.",
       code: `function Demo() {
   const [page, setPage] = useState(1);
   return <Pagination total={10} value={page} onChange={setPage} />;
@@ -41,17 +41,17 @@ const doc: ComponentContent = {
     },
   ],
   whenToUse: [
-    "For long result sets — search results, tables, archives — where users need to know where they are in the set and jump to a position.",
+    "For long result sets (search results, tables, archives) where users need to know where they are in the set and jump to a position.",
     "When users may want to return to a specific point: numbered pages give every position a stable address, which continuous scrolling cannot.",
   ],
   whenNotToUse: [
-    "For short lists — if everything fits on one or two pages, show it all; a pager over a handful of items adds clicks without adding orientation.",
-    "For feeds built for continuous browsing where position never matters — a 'load more' control fits that reading pattern better than page numbers nobody will cite.",
+    "For short lists: if everything fits on one or two pages, show it all; a pager over a handful of items adds clicks without adding orientation.",
+    "For feeds built for continuous browsing where position never matters: a 'load more' control fits that reading pattern better than page numbers nobody will cite.",
   ],
   howItWorks: [
     {
       title: "Show more per page before adding more pages",
-      body: "Deep pagination is a poor way to find anything — nobody browses to page 37 of 120. Before reaching for a longer pager, raise the page size or improve search and filtering so users land near what they want. Pagination is for orienting within a set, not a substitute for findability.",
+      body: "Deep pagination is a poor way to find anything: nobody browses to page 37 of 120. Before reaching for a longer pager, raise the page size or improve search and filtering so users land near what they want. Pagination is for orienting within a set, not a substitute for findability.",
     },
     {
       title: "Previous and Next stay put",
@@ -63,15 +63,15 @@ const doc: ComponentContent = {
     },
     {
       title: "Mirror the page in the URL",
-      body: "The component is controlled — you hold the page in state and pass value/onChange. Reflect that value in the query string so page 4 of your results is linkable, survives a reload, and works with the back button; a pager whose position lives only in memory strands users at page 1 every visit.",
+      body: "The component is controlled: you hold the page in state and pass value/onChange. Reflect that value in the query string so page 4 of your results is linkable, survives a reload, and works with the back button; a pager whose position lives only in memory strands users at page 1 every visit.",
     },
   ],
   accessibility: [
     'The pager is a <nav aria-label="Pagination"> (the label is overridable) wrapping a list, so assistive technology exposes it as a navigation landmark with a known number of items.',
-    'The active page carries aria-current="page", and it is also styled via data-active — the position is announced, and colour is not the only visual signal.',
-    'Every control is a real <button type="button"> with an explicit aria-label — "Previous page", "Page 7", "Last page" — so the icon-only controls and bare numbers all have unambiguous accessible names.',
+    'The active page carries aria-current="page", and it is also styled via data-active; the position is announced, and colour is not the only visual signal.',
+    'Every control is a real <button type="button"> with an explicit aria-label ("Previous page", "Page 7", "Last page"), so the icon-only controls and bare numbers all have unambiguous accessible names.',
     "Ellipsis separators are aria-hidden: they are visual shorthand for the gap, not stops in the reading order.",
-    "Edge controls disable rather than disappear at the ends, and onChange fires only when the page actually changes — activating the current page or a disabled control announces nothing and reloads nothing.",
+    "Edge controls disable rather than disappear at the ends, and onChange fires only when the page actually changes; activating the current page or a disabled control announces nothing and reloads nothing.",
   ],
   props: [
     {

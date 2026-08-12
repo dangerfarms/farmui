@@ -104,22 +104,22 @@ const doc: ComponentContent = {
     "Always inside a RadioGroup, which shares a name and labels the set with a <fieldset>/<legend>.",
   ],
   whenNotToUse: [
-    "For many options — a Select is more compact.",
-    "For selecting several options — use Checkbox.",
-    "For a single on/off — use Checkbox or Switch.",
+    "For many options: a Select is more compact.",
+    "For selecting several options: use Checkbox.",
+    "For a single on/off: use Checkbox or Switch.",
   ],
   howItWorks: [
     {
       title: "Never pre-select",
-      body: "A group with a defaultValue lets users miss the question entirely and submit an answer they never gave — and once any radio is selected, the group can never be returned to unanswered. Omit defaultValue so the first selection is always a deliberate choice; reserve a default for the rare setting with one safe, overwhelmingly common value.",
+      body: "A group with a defaultValue lets users miss the question entirely and submit an answer they never gave, and once any radio is selected, the group can never be returned to unanswered. Omit defaultValue so the first selection is always a deliberate choice; reserve a default for the rare setting with one safe, overwhelmingly common value.",
     },
     {
       title: "Order the options",
-      body: "List options alphabetically by default, so the order carries no editorial weight. Ordering by expected popularity needs extreme caution: it nudges users toward the top answers and, repeated across every form, can entrench the very distribution it assumed. Orders with intrinsic domain meaning — size, severity, date — are fine.",
+      body: "List options alphabetically by default, so the order carries no editorial weight. Ordering by expected popularity needs extreme caution: it nudges users toward the top answers and, repeated across every form, can entrench the very distribution it assumed. Orders with intrinsic domain meaning (size, severity, date) are fine.",
     },
     {
       title: "Controls sit left of labels",
-      body: "Radio renders the control before its label, keeping every control on the reading edge where screen-magnifier users panning a zoomed viewport will find it next to the text they are reading. Don't restyle labels to the other side — a right-hand control drifts out of the magnified view entirely.",
+      body: "Radio renders the control before its label, keeping every control on the reading edge where screen-magnifier users panning a zoomed viewport will find it next to the text they are reading. Don't restyle labels to the other side: a right-hand control drifts out of the magnified view entirely.",
     },
   ],
   errors: [
@@ -133,7 +133,7 @@ const doc: ComponentContent = {
     },
   ],
   accessibility: [
-    "RadioGroup renders a native <fieldset> with a <legend>, the accessible way to name a group — screen readers announce the legend when a radio is focused.",
+    "RadioGroup renders a native <fieldset> with a <legend>, the accessible way to name a group: screen readers announce the legend when a radio is focused.",
     "Radios share one name so the browser enforces single-selection and arrow-key navigation natively.",
     "A group error sets aria-describedby and aria-invalid on the fieldset and reflects on the radios' invalid state.",
   ],

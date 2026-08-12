@@ -23,8 +23,8 @@ export default function DocsIntro() {
       <p>
         Most component libraries ship a styling engine to your users&rsquo;
         browsers. FarmUI doesn&rsquo;t. Every component is styled with plain CSS
-        — cascade layers, custom properties, <code>light-dark()</code>,{" "}
-        <code>color-mix()</code>, container queries and logical properties — so
+        (cascade layers, custom properties, <code>light-dark()</code>,{" "}
+        <code>color-mix()</code>, container queries and logical properties), so
         there&rsquo;s nothing to run at runtime and nothing extra to download.
       </p>
       <ul>
@@ -38,8 +38,7 @@ export default function DocsIntro() {
         </li>
         <li>
           <strong>Native dark mode.</strong> Powered by CSS{" "}
-          <code>light-dark()</code> — one toggle flips <code>color-scheme</code>
-          .
+          <code>light-dark()</code>: one toggle flips <code>color-scheme</code>.
         </li>
         <li>
           <strong>Accessible by default.</strong> Semantic HTML, focus
@@ -47,7 +46,7 @@ export default function DocsIntro() {
         </li>
         <li>
           <strong>{COMPONENTS.length} components</strong> across inputs, data
-          display, feedback, overlays and navigation — and expanding.
+          display, feedback, overlays and navigation, and expanding.
         </li>
       </ul>
 
@@ -77,15 +76,15 @@ export default function Page() {
       <h2>Next steps</h2>
       <ul>
         <li>
-          <Link href="/docs/installation">Installation</Link> — framework guides
+          <Link href="/docs/installation">Installation</Link>: framework guides
           for Next.js, Vite and more.
         </li>
         <li>
-          <Link href="/docs/theming">Theming</Link> — rebrand FarmUI with CSS
+          <Link href="/docs/theming">Theming</Link>: rebrand FarmUI with CSS
           variables.
         </li>
         <li>
-          <Link href="/docs/components/button">Browse components</Link> — live
+          <Link href="/docs/components/button">Browse components</Link>: live
           examples and props for every component.
         </li>
       </ul>

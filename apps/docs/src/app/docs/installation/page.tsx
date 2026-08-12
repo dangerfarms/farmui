@@ -12,7 +12,7 @@ export default function Installation() {
       <h1>Installation</h1>
       <p className={prose.lead}>
         FarmUI works in any React 18+ setup. There&rsquo;s no provider and no
-        build plugin — just a package and a stylesheet.
+        build plugin: just a package and a stylesheet.
       </p>
 
       <h2>1. Install the package</h2>
@@ -59,7 +59,7 @@ export function SignIn() {
       <h3>Vite</h3>
       <p>
         Import <code>@farmui/core/styles.css</code> in your{" "}
-        <code>main.tsx</code> entry. No plugin required — the styles are plain
+        <code>main.tsx</code> entry. No plugin required; the styles are plain
         CSS.
       </p>
 

@@ -10,7 +10,7 @@ const doc: ComponentContent = {
     {
       title: "Contexts",
       description:
-        "Alert has no color or variant props. Declare --fui-context on a one-element wrapper region — a style query is answered by ancestors, never by the element that declares the property — and the status colours follow. See the Contextualism guide.",
+        "Alert has no color or variant props. Declare --fui-context on a one-element wrapper region (a style query is answered by ancestors, never by the element that declares the property) and the status colours follow. See the Contextualism guide.",
       code: `<div style={{ "--fui-context": "info" }}>
   <Alert title="Heads up">A new version is available.</Alert>
 </div>
@@ -43,7 +43,7 @@ const doc: ComponentContent = {
     {
       title: "Inherited from a region",
       description:
-        "--fui-context inherits, so an alert inside a region that already declares its meaning needs nothing of its own — the nearest ancestor that sets the property wins.",
+        "--fui-context inherits, so an alert inside a region that already declares its meaning needs nothing of its own: the nearest ancestor that sets the property wins.",
       code: `<section style={{ "--fui-context": "warning" }}>
   <Alert title="Scheduled maintenance tonight." />
 </section>`,
@@ -98,12 +98,12 @@ const doc: ComponentContent = {
     },
   ],
   whenToUse: [
-    "For in-page status the user needs to act on or know about now — a failed deploy, a quota about to run out — placed next to the content it describes.",
+    "For in-page status the user needs to act on or know about now (a failed deploy, a quota about to run out), placed next to the content it describes.",
     "When the message must stay on screen: alerts never auto-dismiss, so the information survives until the state it reports changes and you remove it.",
   ],
   whenNotToUse: [
-    "For transient confirmations that need no follow-up (“Saved”, “Copied”) — use Toast; an alert that lingers after the moment has passed becomes noise.",
-    "For an error tied to a single form field — use Field.Error, which wires aria-describedby and aria-invalid to the control the error belongs to.",
+    "For transient confirmations that need no follow-up (“Saved”, “Copied”). Use Toast; an alert that lingers after the moment has passed becomes noise.",
+    "For an error tied to a single form field. Use Field.Error, which wires aria-describedby and aria-invalid to the control the error belongs to.",
   ],
   howItWorks: [
     {
@@ -112,18 +112,18 @@ const doc: ComponentContent = {
     },
     {
       title: "Persistent by design",
-      body: "There is no auto-dismiss and no built-in close button: an alert exists exactly as long as the condition it reports. Remove it by no longer rendering it when the state changes — a warning that disappears on its own while the problem remains would be lying.",
+      body: "There is no auto-dismiss and no built-in close button: an alert exists exactly as long as the condition it reports. Remove it by no longer rendering it when the state changes: a warning that disappears on its own while the problem remains would be lying.",
     },
     {
       title: "Announcement happens at insertion",
-      body: 'role="alert" only interrupts when the element enters the DOM — an alert rendered with the rest of the page is simply read in document order. So render the alert conditionally when the condition becomes true, never hidden-then-shown, and the announcement arrives exactly when the event does.',
+      body: 'role="alert" only interrupts when the element enters the DOM; an alert rendered with the rest of the page is simply read in document order. So render the alert conditionally when the condition becomes true, never hidden-then-shown, and the announcement arrives exactly when the event does.',
     },
   ],
   accessibility: [
-    'Renders role="alert" — an assertive live region — so an alert inserted in response to an event is announced immediately by screen readers, ahead of whatever else was queued.',
+    'Renders role="alert" (an assertive live region), so an alert inserted in response to an event is announced immediately by screen readers, ahead of whatever else was queued.',
     'For dynamic messages that are not urgent, pass role="status": forwarded props are spread after the default, so your role wins and the announcement becomes polite instead of interrupting.',
-    "The status colour is never announced: write the title so the meaning survives in words (“Deploy failed”, not “Error” next to a red bar) — the accent bar and tint are visual-only.",
-    "The icon slot is rendered aria-hidden — icons are decoration here, so any meaning they carry must also be in the text.",
+    "The status colour is never announced: write the title so the meaning survives in words (“Deploy failed”, not “Error” next to a red bar); the accent bar and tint are visual-only.",
+    "The icon slot is rendered aria-hidden. Icons are decoration here, so any meaning they carry must also be in the text.",
     "Title text is not the raw status colour: it is mixed toward black (light scheme) or white (dark) so it keeps AA contrast on the tint even for light channels like warning; only decorative parts (icon, accent bar) carry the raw channel.",
   ],
   props: [
@@ -152,7 +152,7 @@ const doc: ComponentContent = {
       name: "--fui-context",
       type: `"primary" | "danger" | "success" | "warning" | "info"`,
       description:
-        "The alert's status. Declare it on an ancestor — a one-element wrapper for a single alert, or any region — because a style query is answered by ancestors, not by the declaring element; the property inherits.",
+        "The alert's status. Declare it on an ancestor (a one-element wrapper for a single alert, or any region) because a style query is answered by ancestors, not by the declaring element; the property inherits.",
     },
   ],
 };

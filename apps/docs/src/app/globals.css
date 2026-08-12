@@ -125,3 +125,27 @@
     border: 0;
   }
 }
+
+/* Visually hidden until keyboard-focused, then a real control. */
+.skip-link {
+  position: absolute;
+  inset-block-start: 0.5rem;
+  inset-inline-start: 0.5rem;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  background: var(--fui-surface);
+  border: 1px solid var(--fui-border-strong);
+  border-radius: var(--fui-radius-md);
+  font-weight: 600;
+  transform: translateY(calc(-100% - 1rem));
+}
+
+.skip-link:focus-visible {
+  transform: none;
+}
+
+/* The skip target takes programmatic focus; the page itself is not an
+   interactive control, so no ring. */
+main:focus {
+  outline: none;
+}

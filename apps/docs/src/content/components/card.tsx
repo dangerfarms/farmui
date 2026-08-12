@@ -68,27 +68,27 @@ const doc: ComponentContent = {
     },
   ],
   whenToUse: [
-    "To group related content — a heading, supporting text, an action — onto one surface so it reads as a single unit.",
+    "To group related content (a heading, supporting text, an action) onto one surface so it reads as a single unit.",
     "To lift a region off the page background where the boundary matters: withBorder for a quiet outline, shadow for elevation.",
   ],
   whenNotToUse: [
-    "As a control — Card renders a <div> with no role, focus or keyboard behaviour, and putting onClick on it creates a target keyboards and screen readers cannot reach (see below for the accessible whole-card pattern).",
-    "Around everything on the page — when every region is a card, no region stands out, and the borders become visual noise that plain document flow would avoid.",
+    "As a control. Card renders a <div> with no role, focus or keyboard behaviour, and putting onClick on it creates a target keyboards and screen readers cannot reach (see below for the accessible whole-card pattern).",
+    "Around everything on the page. When every region is a card, no region stands out, and the borders become visual noise that plain document flow would avoid.",
   ],
   howItWorks: [
     {
       title: "A surface, not a control",
-      body: "Card is deliberately just a styled <div>: no role, no tabindex, no cursor. If the whole card should be clickable, the accessible pattern is one real <a> inside it — usually on the card's heading — stretched over the surface with an ::after covering the card. Keyboard users get one tab stop, screen readers get a real link with a real name, and right-click / open-in-new-tab keep working. A click handler on the div gives you none of that.",
+      body: "Card is deliberately just a styled <div>: no role, no tabindex, no cursor. If the whole card should be clickable, the accessible pattern is one real <a> inside it (usually on the card's heading) stretched over the surface with an ::after covering the card. Keyboard users get one tab stop, screen readers get a real link with a real name, and right-click / open-in-new-tab keep working. A click handler on the div gives you none of that.",
     },
     {
       title: "Cards are skimmed by their headings",
-      body: "Screen-reader users navigate by heading; sighted users scan the same way. Start each card with one heading at the level the page's outline requires — a grid of cards under an <h2> section takes <h3>s — rather than styled bold text, so the grid is traversable without reading every card.",
+      body: "Screen-reader users navigate by heading; sighted users scan the same way. Start each card with one heading at the level the page's outline requires (a grid of cards under an <h2> section takes <h3>s) rather than styled bold text, so the grid is traversable without reading every card.",
     },
   ],
   accessibility: [
-    "Renders a plain <div> with no role — all semantics come from what you put inside, so use real headings, lists and links rather than styled text.",
+    "Renders a plain <div> with no role: all semantics come from what you put inside, so use real headings, lists and links rather than styled text.",
     "The card draws no focus ring of its own because it is never a focus target; interactive children keep their own :focus-visible treatment.",
-    "Border and shadow are purely visual grouping — they are invisible to assistive tech, so the content must also read as a unit in document order alone.",
+    "Border and shadow are purely visual grouping, invisible to assistive tech, so the content must also read as a unit in document order alone.",
   ],
   props: [
     {

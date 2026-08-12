@@ -42,34 +42,34 @@ const doc: ComponentContent = {
     },
   ],
   whenToUse: [
-    "To label icon-only buttons or clarify what a control does — short, redundant, visual-only text.",
+    "To label icon-only buttons or clarify what a control does: short, redundant, visual-only text.",
     "To expand an abbreviation or term in place for pointer and keyboard users.",
   ],
   whenNotToUse: [
-    "For information the user needs in order to proceed — hover does not exist on touch devices, so essential content must be visible in the page (Polaris/GOV.UK guidance).",
-    "For interactive content (links, buttons) — use Popover, which is click-invoked and keyboard-operable.",
-    "As a replacement for a visible label on a form field — use Field.Label.",
+    "For information the user needs in order to proceed: hover does not exist on touch devices, so essential content must be visible in the page (Polaris/GOV.UK guidance).",
+    "For interactive content (links, buttons), use Popover, which is click-invoked and keyboard-operable.",
+    "As a replacement for a visible label on a form field, use Field.Label.",
   ],
   howItWorks: [
     {
       title: "Tooltips repeat, they never reveal",
-      body: "A tooltip may only say what the page already makes knowable — the label of an icon button, the expansion of an abbreviation. Touch devices have no hover, so content that exists only in a tooltip does not exist for a large share of users.",
+      body: "A tooltip may only say what the page already makes knowable: the label of an icon button, the expansion of an abbreviation. Touch devices have no hover, so content that exists only in a tooltip does not exist for a large share of users.",
     },
     {
       title: "Same words as the accessible name",
-      body: "On an icon-only button, the aria-label and the tooltip should say the same thing. If the tooltip wants to say more than the name, the extra is content — put it in the page or a Popover, not appended to a hover bubble.",
+      body: "On an icon-only button, the aria-label and the tooltip should say the same thing. If the tooltip wants to say more than the name, the extra is content: put it in the page or a Popover, not appended to a hover bubble.",
     },
     {
       title: "Nothing interactive inside",
-      body: 'The bubble is role="tooltip" and never receives focus — a link or button inside it is unreachable by keyboard. The moment a tooltip needs a control, it is a Popover.',
+      body: 'The bubble is role="tooltip" and never receives focus: a link or button inside it is unreachable by keyboard. The moment a tooltip needs a control, it is a Popover.',
     },
   ],
   accessibility: [
     "The trigger is permanently linked to the bubble via aria-describedby, so screen readers announce the text with the control whether or not it is visually shown.",
-    "Escape dismisses the bubble without moving pointer or focus, the bubble stays open while hovered, and it persists until hover/focus leaves — the three requirements of WCAG 1.4.13 (Content on Hover or Focus).",
+    "Escape dismisses the bubble without moving pointer or focus, the bubble stays open while hovered, and it persists until hover/focus leaves: the three requirements of WCAG 1.4.13 (Content on Hover or Focus).",
     "Opens immediately on visible (keyboard) focus with no hover delay; hover-open and tap-focus-open are both suppressed for touch pointers, where hover does not exist.",
     "Hover and keyboard focus are tracked independently, so a pointer passing over a focused trigger cannot steal the bubble away.",
-    "Rendered with the native popover attribute (hint where the browser supports it, detected explicitly) and CSS anchor positioning where supported, with a wrapper-anchored fallback elsewhere — no polyfills, per the browser support policy.",
+    "Rendered with the native popover attribute (hint where the browser supports it, detected explicitly) and CSS anchor positioning where supported, with a wrapper-anchored fallback elsewhere: no polyfills, per the browser support policy.",
   ],
   props: [
     {
@@ -88,7 +88,7 @@ const doc: ComponentContent = {
       name: "Trigger",
       type: "button props · render?: element | (props) => node",
       description:
-        "Renders a FarmUI Button wired with hover/focus handlers and aria-describedby — style it directly, or substitute your own element via render.",
+        "Renders a FarmUI Button wired with hover/focus handlers and aria-describedby; style it directly, or substitute your own element via render.",
     },
     {
       name: "Popup",

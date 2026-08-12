@@ -13,19 +13,21 @@
     pointer-events: none;
   }
 
-  /* Base tint + gradient highlight. The gradient is static by default; the
-     moving shimmer is opt-in motion (see the no-preference block below), so
+  /* The tint is a weak mix of the text colour: text is guaranteed to
+     contrast with any surface, so the skeleton stays visible on cards,
+     stages and the page in both schemes. The gradient is static by
+     default; the moving shimmer is opt-in motion (below), so
      reduced-motion users need no override. */
   :scope::after {
     content: "";
     position: absolute;
     inset: 0;
-    background-color: var(--fui-bg-subtle);
+    background-color: color-mix(in oklab, var(--fui-text) 8%, transparent);
     background-image: linear-gradient(
       90deg,
-      var(--fui-bg-subtle) 0%,
-      color-mix(in oklch, var(--fui-surface) 60%, var(--fui-bg-subtle)) 50%,
-      var(--fui-bg-subtle) 100%
+      transparent 0%,
+      color-mix(in oklab, var(--fui-text) 7%, transparent) 50%,
+      transparent 100%
     );
   }
 

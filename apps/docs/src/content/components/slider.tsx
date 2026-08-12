@@ -28,7 +28,7 @@ const doc: ComponentContent = {
     {
       title: "Composed inside a Field",
       description:
-        "The bare SliderControl composes through Field.Control — label, description and error wiring come from the Field, the composition pattern shared by all form controls.",
+        "The bare SliderControl composes through Field.Control: label, description and error wiring come from the Field, the composition pattern shared by all form controls.",
       code: `<Field.Root>
   <Field.Label>Volume</Field.Label>
   <Field.Description>Applies to alerts only.</Field.Description>
@@ -67,13 +67,13 @@ const doc: ComponentContent = {
     "When the effect of the value is visible as it changes, so users steer by the result rather than the figure.",
   ],
   whenNotToUse: [
-    'For exact numbers the user already knows (a quantity, an amount, a year) — use Input with inputMode="numeric" or "decimal"; landing on one precise value on a track is slow and error-prone, especially on touch.',
-    "For choosing among a few discrete options — use RadioGroup, where every option is visible and labelled.",
+    'For exact numbers the user already knows (a quantity, an amount, a year). Use Input with inputMode="numeric" or "decimal"; landing on one precise value on a track is slow and error-prone, especially on touch.',
+    "For choosing among a few discrete options. Use RadioGroup, where every option is visible and labelled.",
   ],
   howItWorks: [
     {
       title: "Show the current value",
-      body: "A track communicates roughly where you are, never what you chose — so render the number where the user can see it. The label accepts any ReactNode and the component is stateless, so drive it with value and onChange and put the live value in the label.",
+      body: "A track communicates roughly where you are, never what you chose, so render the number where the user can see it. The label accepts any ReactNode and the component is stateless, so drive it with value and onChange and put the live value in the label.",
       code: `const [volume, setVolume] = useState(70);
 
 <Slider
@@ -89,9 +89,9 @@ const doc: ComponentContent = {
     },
   ],
   accessibility: [
-    'Renders a native <input type="range">: arrow keys adjust the value and Home/End jump to the ends, with the current value announced — no custom key handling to maintain.',
+    'Renders a native <input type="range">: arrow keys adjust the value and Home/End jump to the ends, with the current value announced. There is no custom key handling to maintain.',
     "Always give it an accessible name: the label prop, or an aria-label when rendering the bare control or a bare SliderControl.",
-    "Assistive tech hears the value change as it moves; sighted users have no equivalent unless you render the value visibly — see above.",
+    "Assistive tech hears the value change as it moves; sighted users have no equivalent unless you render the value visibly (see above).",
   ],
   props: [
     {
@@ -103,7 +103,7 @@ const doc: ComponentContent = {
       name: "SliderControl",
       type: "component",
       description:
-        "The bare range input without a label — composes inside Field and reads its wiring (id, aria-describedby, aria-invalid) from context.",
+        "The bare range input without a label. It composes inside Field and reads its wiring (id, aria-describedby, aria-invalid) from context.",
     },
     {
       name: "min",

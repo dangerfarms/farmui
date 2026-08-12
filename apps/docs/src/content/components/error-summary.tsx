@@ -26,11 +26,11 @@ const doc: ComponentContent = {
   ],
   whenToUse: [
     "At the top of a form after a failed submit, listing every field error in the order the fields appear.",
-    "Whenever there is more than one field on the form — with a single field, the field's own error carries the message alone.",
+    "Whenever there is more than one field on the form: with a single field, the field's own error carries the message alone.",
   ],
   whenNotToUse: [
-    "For a single global failure that has no field to link to — use an Alert.",
-    "While the user is still typing — the summary responds to a submit attempt, not to keystrokes.",
+    "For a single global failure that has no field to link to: use an Alert.",
+    "While the user is still typing: the summary responds to a submit attempt, not to keystrokes.",
   ],
   howItWorks: [
     {
@@ -39,7 +39,7 @@ const doc: ComponentContent = {
     },
     {
       title: "Links land the user in the field",
-      body: "Fragment navigation scrolls to the field but does not focus it, so each item also moves focus into the target — the user activates a link and starts typing the correction.",
+      body: "Fragment navigation scrolls to the field but does not focus it, so each item also moves focus into the target: the user activates a link and starts typing the correction.",
     },
     {
       title: "Order follows the form",
@@ -47,14 +47,14 @@ const doc: ComponentContent = {
     },
     {
       title: "Multi-field controls",
-      body: 'A control made of several fields, like DateInput, takes one item per error, linked to the first field that error applies to: give the DateInput.Root id="date-of-birth" and point the item at #date-of-birth-day — or straight at #date-of-birth-year when the error names the year.',
+      body: 'A control made of several fields, like DateInput, takes one item per error, linked to the first field that error applies to: give the DateInput.Root id="date-of-birth" and point the item at #date-of-birth-day, or straight at #date-of-birth-year when the error names the year.',
     },
   ],
   accessibility: [
     "The summary takes keyboard focus when it appears (tabIndex -1 + focus), so assistive technology announces the group, labelled by its title, as soon as the submit fails.",
     'The Title renders "There is a problem" by default and labels the region via aria-labelledby.',
     "Items are real links: right-click, open-in-new-tab and AT link lists all behave; activation focuses the field so the correction can start immediately.",
-    "Keep the user's failed input in the fields — never clear values when showing errors.",
+    "Keep the user's failed input in the fields: never clear values when showing errors.",
   ],
   props: [
     {

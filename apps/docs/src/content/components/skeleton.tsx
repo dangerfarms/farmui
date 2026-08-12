@@ -69,27 +69,27 @@ const doc: ComponentContent = {
     },
   ],
   whenToUse: [
-    "While loading content whose shape you already know — the skeleton mirrors the coming layout, so the swap to real content is a fill-in, not a rearrangement.",
+    "While loading content whose shape you already know: the skeleton mirrors the coming layout, so the swap to real content is a fill-in, not a rearrangement.",
     "To hold the loaded content's space open and avoid layout shift while data arrives.",
   ],
   whenNotToUse: [
-    "When you cannot predict what the loaded layout looks like — a skeleton that does not match what replaces it makes the swap more jarring than showing nothing, and perceived performance gets worse, not better. Use Loader.",
-    "For an operation that is not producing visible content in that spot — saving, deleting, background work — a skeleton promises content that never comes; use Loader next to the affected control.",
+    "When you cannot predict what the loaded layout looks like. A skeleton that does not match what replaces it makes the swap more jarring than showing nothing, and perceived performance gets worse, not better. Use Loader.",
+    "For an operation that is not producing visible content in that spot (saving, deleting, background work). A skeleton promises content that never comes; use Loader next to the affected control.",
   ],
   howItWorks: [
     {
       title: "Match the shape you are loading",
-      body: "Build the skeleton from the loaded UI's real dimensions — the avatar's diameter, the text's line heights, the thumbnail's radius. The entire benefit of a skeleton is that the eye has already parsed the layout before the content lands; a placeholder of a different shape spends that benefit and charges interest.",
+      body: "Build the skeleton from the loaded UI's real dimensions: the avatar's diameter, the text's line heights, the thumbnail's radius. The entire benefit of a skeleton is that the eye has already parsed the layout before the content lands; a placeholder of a different shape spends that benefit and charges interest.",
     },
     {
       title: "Swap in place with visible",
-      body: "Wrap the real content and flip visible to false when it is ready — the component then renders the children and nothing else. While the skeleton is visible, any children are hidden from pointer, selection and assistive tech, so wrapping is safe: nothing half-loaded leaks out.",
+      body: "Wrap the real content and flip visible to false when it is ready; the component then renders the children and nothing else. While the skeleton is visible, any children are hidden from pointer, selection and assistive tech, so wrapping is safe: nothing half-loaded leaks out.",
     },
   ],
   accessibility: [
-    "The root renders aria-hidden — skeletons are never announced. Screen-reader users hear the real content when it arrives instead of a stream of meaningless placeholders.",
-    'Because skeletons are silent, announce the wait elsewhere if it needs announcing — a Loader (which renders role="status") or a visually hidden status message.',
-    "The moving shimmer is gated behind prefers-reduced-motion: no-preference — reduced-motion users get the same placeholder with a static gradient, with no override needed because the motion is opt-in.",
+    "The root renders aria-hidden: skeletons are never announced. Screen-reader users hear the real content when it arrives instead of a stream of meaningless placeholders.",
+    'Because skeletons are silent, announce the wait elsewhere if it needs announcing: a Loader (which renders role="status") or a visually hidden status message.',
+    "The moving shimmer is gated behind prefers-reduced-motion: no-preference. Reduced-motion users get the same placeholder with a static gradient, with no override needed because the motion is opt-in.",
     "While visible, wrapped children are also unreachable by pointer and text selection (pointer-events: none, user-select: none), so nothing interactive is exposed before it is real.",
   ],
   props: [

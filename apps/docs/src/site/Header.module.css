@@ -57,12 +57,12 @@
   border-color: var(--fui-border-strong);
   background: var(--fui-surface-hover);
 }
-@media (max-width: 62rem) {
+@media (width <= 62rem) {
   .nav {
     display: none;
   }
 }
-@media (max-width: 48rem) {
+@media (width <= 48rem) {
   .search {
     display: none;
   }

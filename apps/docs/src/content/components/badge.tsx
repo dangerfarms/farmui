@@ -10,7 +10,7 @@ const doc: ComponentContent = {
     {
       title: "Contexts",
       description:
-        "Badges are neutral by default. There are no variant or color props — declare --fui-context on a one-element wrapper region (a style query is answered by ancestors, never by the declaring element itself), or let it inherit from a larger region. See the Contextualism guide.",
+        "Badges are neutral by default. There are no variant or color props: declare --fui-context on a one-element wrapper region (a style query is answered by ancestors, never by the declaring element itself), or let it inherit from a larger region. See the Contextualism guide.",
       code: `<Badge>Neutral</Badge>
 <span style={{ "--fui-context": "primary" }}><Badge>Primary</Badge></span>
 <span style={{ "--fui-context": "success" }}><Badge>Success</Badge></span>
@@ -54,7 +54,7 @@ const doc: ComponentContent = {
     {
       title: "Status dot",
       description:
-        "Add dot to show a status dot before the label — it takes the context's colour, so the badge reads at a glance even before the text.",
+        "Add dot to show a status dot before the label. It takes the context's colour, so the badge reads at a glance even before the text.",
       code: `<span style={{ "--fui-context": "success" }}><Badge dot>Live</Badge></span>
 <span style={{ "--fui-context": "warning" }}><Badge dot>Pending</Badge></span>
 <span style={{ "--fui-context": "danger" }}><Badge dot>Offline</Badge></span>
@@ -77,7 +77,7 @@ const doc: ComponentContent = {
     {
       title: "Icons (composed as children)",
       description:
-        "No leftSection / rightSection props — an svg child is detected via :has(svg) and gets a gap and 1em sizing, exactly like Button.",
+        "No leftSection / rightSection props: an svg child is detected via :has(svg) and gets a gap and 1em sizing, exactly like Button.",
       code: `<span style={{ "--fui-context": "success" }}>
   <Badge>
     <svg viewBox="0 -0.5 25 25" fill="none" aria-hidden>
@@ -106,13 +106,13 @@ const doc: ComponentContent = {
     },
   ],
   whenToUse: [
-    "To label a record with its status or category at a glance — one or two words sitting next to the thing they describe, readable without reading the row.",
-    "For small counts and metadata — unread messages, item totals — where a full sentence would drown the signal.",
+    "To label a record with its status or category at a glance: one or two words sitting next to the thing they describe, readable without reading the row.",
+    "For small counts and metadata (unread messages, item totals) where a full sentence would drown the signal.",
     "With dot for presence and liveness (“Live”, “Offline”): the dot carries the raw status colour so the state reads even before the word.",
   ],
   whenNotToUse: [
-    "As a click target — Badge renders a plain <span> with no role, focus or keyboard handling. If the status should filter or navigate, use a Button or a link and style from there.",
-    "For sentences or long labels — the pill is white-space: nowrap, so long text will not wrap; it is built for one or two words.",
+    "As a click target. Badge renders a plain <span> with no role, focus or keyboard handling. If the status should filter or navigate, use a Button or a link and style from there.",
+    "For sentences or long labels. The pill is white-space: nowrap, so long text will not wrap; it is built for one or two words.",
   ],
   howItWorks: [
     {
@@ -125,9 +125,9 @@ const doc: ComponentContent = {
     },
   ],
   accessibility: [
-    "Renders a plain <span> with no role and no focus behaviour — screen readers announce it as ordinary inline text, exactly what a label should be.",
+    "Renders a plain <span> with no role and no focus behaviour: screen readers announce it as ordinary inline text, exactly what a label should be.",
     "The status dot is aria-hidden decoration, so the visible word must carry the state on its own (“Live”, not a bare green dot).",
-    "The context colours the pill but is never announced — assistive tech hears only the text, so never let colour be the only difference between two badges.",
+    "The context colours the pill but is never announced. Assistive tech hears only the text, so never let colour be the only difference between two badges.",
     "The label is not the raw status colour: it is mixed toward black (light scheme) or white (dark) so it keeps contrast on the pill's own tint in both schemes.",
   ],
   props: [
@@ -152,7 +152,7 @@ const doc: ComponentContent = {
     {
       name: "children",
       type: "ReactNode",
-      description: "The badge content — label, and any composed icons.",
+      description: "The badge content: label, and any composed icons.",
     },
     {
       name: "...others",
@@ -164,7 +164,7 @@ const doc: ComponentContent = {
       name: "--fui-context",
       type: `"primary" | "danger" | "success" | "warning" | "info"`,
       description:
-        "The badge's status. Declare it on an ancestor — a one-element span wrapper for a single badge, or any region — because a style query is answered by ancestors, not by the declaring element; the property inherits.",
+        "The badge's status. Declare it on an ancestor (a one-element span wrapper for a single badge, or any region) because a style query is answered by ancestors, not by the declaring element; the property inherits.",
     },
   ],
 };

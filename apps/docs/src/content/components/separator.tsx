@@ -3,13 +3,13 @@ import type { ComponentContent } from "@/renderer/types";
 
 const doc: ComponentContent = {
   slug: "separator",
-  lead: "A native <hr> for boundaries that mean something — announced as a separator, not just drawn as a line.",
+  lead: "A native <hr> for boundaries that mean something: announced as a separator, not just drawn as a line.",
   importLine: `import { Separator } from "@farmui/core";`,
   demos: [
     {
       title: "Basic usage",
       description:
-        "A real <hr> — the platform's separator role, no ARIA required.",
+        "A real <hr>: the platform's separator role, no ARIA required.",
       code: `<p>Account settings</p>
 <Separator />
 <p>Danger zone</p>`,
@@ -42,21 +42,21 @@ const doc: ComponentContent = {
     },
   ],
   whenToUse: [
-    "Between groups of related content where the division itself carries meaning — it is announced as a separator by assistive technology.",
+    "Between groups of related content where the division itself carries meaning: it is announced as a separator by assistive technology.",
     "Between inline items in a toolbar-like row (vertical form).",
   ],
   whenNotToUse: [
-    "For purely visual division between layout areas — a border on the region is simpler and adds nothing to the accessibility tree.",
-    "Inside a Menu — Menu.Separator exists for that and is already styled for menu padding.",
+    "For purely visual division between layout areas. A border on the region is simpler and adds nothing to the accessibility tree.",
+    "Inside a Menu. Menu.Separator exists for that and is already styled for menu padding.",
   ],
   howItWorks: [
     {
       title: "Meaningful division only",
-      body: "An <hr> is announced to assistive technology as a separator — a real boundary between one group of content and the next. A line that is only visual rhythm belongs in CSS as a border, where it adds nothing to what a screen reader must walk through.",
+      body: "An <hr> is announced to assistive technology as a separator, a real boundary between one group of content and the next. A line that is only visual rhythm belongs in CSS as a border, where it adds nothing to what a screen reader must walk through.",
     },
     {
       title: "Prefer space before rules",
-      body: "Whitespace and headings usually divide content more quietly than a drawn line, and grouped controls have better tools (Fieldset, Card). Reach for Separator when groups genuinely need a marked boundary the eye and the screen reader should both register — a toolbar's action clusters, a footer's legal block.",
+      body: "Whitespace and headings usually divide content more quietly than a drawn line, and grouped controls have better tools (Fieldset, Card). Reach for Separator when groups genuinely need a marked boundary the eye and the screen reader should both register: a toolbar's action clusters, a footer's legal block.",
     },
   ],
   accessibility: [

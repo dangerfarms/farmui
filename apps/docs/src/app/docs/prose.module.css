@@ -2,8 +2,12 @@
   max-inline-size: 46rem;
   padding-block-start: 0.5rem;
 }
+.prose :is(h1, h2, h3) {
+  text-wrap: balance;
+}
+
 .prose h1 {
-  font-size: clamp(2rem, 5vw, 2.6rem);
+  font-size: clamp(2rem, 1.829rem + 0.8571vi, 2.6rem);
   font-weight: 800;
   margin-block-end: 0.75rem;
 }
@@ -13,17 +17,18 @@
   margin-block-end: 2rem;
 }
 .prose h2 {
-  font-size: 1.4rem;
+  font-size: var(--fui-text-xl);
   font-weight: 700;
   margin-block: 2.5rem 1rem;
   scroll-margin-block-start: 5rem;
 }
 .prose h3 {
-  font-size: 1.1rem;
+  font-size: var(--fui-text-lg);
   font-weight: 650;
   margin-block: 1.75rem 0.6rem;
 }
 .prose p {
+  text-wrap: pretty;
   margin-block-end: 1rem;
   color: var(--fui-text);
 }

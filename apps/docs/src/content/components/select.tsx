@@ -11,7 +11,7 @@ const countries = [
 
 const doc: ComponentContent = {
   slug: "select",
-  lead: "A styled wrapper around a native select — accessible and zero-JS.",
+  lead: "A styled wrapper around a native select, accessible and zero-JS.",
   importLine: `import { Select } from "@farmui/core";`,
   demos: [
     {
@@ -77,9 +77,9 @@ const doc: ComponentContent = {
     "When the options are familiar and the user doesn't need to compare them side by side.",
   ],
   whenNotToUse: [
-    "For a small set of options the user should see at once — use Radio (GOV.UK: avoid selects where radios fit).",
-    "For yes/no or on/off — use Checkbox or Switch.",
-    "For free-form input — use Input.",
+    "For a small set of options the user should see at once: use Radio (GOV.UK: avoid selects where radios fit).",
+    "For yes/no or on/off: use Checkbox or Switch.",
+    "For free-form input: use Input.",
   ],
   howItWorks: [
     {
@@ -88,11 +88,11 @@ const doc: ComponentContent = {
     },
     {
       title: "Order the options",
-      body: "List options alphabetically so users can predict where an answer sits in a long menu — the reason to use a Select at all. Depart only for an order that is genuinely more useful in the domain, like months in calendar order or years newest-first.",
+      body: "List options alphabetically so users can predict where an answer sits in a long menu, the reason to use a Select at all. Depart only for an order that is genuinely more useful in the domain, like months in calendar order or years newest-first.",
     },
     {
       title: "A select conceals its options",
-      body: "Until opened, the menu shows one value and hides every alternative, so users can't survey or compare the choices. That is the cost that makes RadioGroup the better control for small sets — reserve Select for long lists of familiar answers users recognise rather than weigh up.",
+      body: "Until opened, the menu shows one value and hides every alternative, so users can't survey or compare the choices. That is the cost that makes RadioGroup the better control for small sets. Reserve Select for long lists of familiar answers users recognise rather than weigh up.",
     },
   ],
   errors: [
