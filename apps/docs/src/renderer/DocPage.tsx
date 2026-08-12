@@ -18,10 +18,7 @@ function slugify(s: string) {
  * Read a component's real, complete stylesheet from disk at build time.
  * This is the actual CSS that ships — showing it is the whole point.
  */
-function readComponentCss(
-  name: string,
-  pkg: "core",
-): string | undefined {
+function readComponentCss(name: string, pkg: "core"): string | undefined {
   try {
     const file = join(
       process.cwd(),
@@ -142,8 +139,8 @@ export function DocPage({ doc }: { doc: ComponentDoc }) {
             Error messages
           </h2>
           <p className={classes.usageNote}>
-            Say what happened and how to fix it, in the words of the
-            question itself — see the writing guidance on the{" "}
+            Say what happened and how to fix it, in the words of the question
+            itself — see the writing guidance on the{" "}
             <a href="/docs/components/field#error-messages">Field page</a>.
           </p>
           <div className={tableClasses.scroll}>

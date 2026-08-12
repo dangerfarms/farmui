@@ -107,7 +107,7 @@ const doc: ComponentContent = {
   ],
   howItWorks: [
     {
-      title: "Now, not later",
+      title: "Render it when it happens",
       body: "An alert reports the current state of the page the user is on. Information they could act on some other time belongs in ordinary content; a confirmation that expires in seconds belongs in a Toast. Reserving Alert for “this matters here, now” is what keeps it noticeable when it appears.",
     },
     {
@@ -116,7 +116,7 @@ const doc: ComponentContent = {
     },
     {
       title: "Announcement happens at insertion",
-      body: 'role="alert" only interrupts when the element enters the DOM — an alert rendered with the rest of the page is simply read in document order. So render the alert conditionally at the moment the condition becomes true, not hidden-then-shown, and the announcement arrives exactly when the event does.',
+      body: 'role="alert" only interrupts when the element enters the DOM — an alert rendered with the rest of the page is simply read in document order. So render the alert conditionally when the condition becomes true, never hidden-then-shown, and the announcement arrives exactly when the event does.',
     },
   ],
   accessibility: [

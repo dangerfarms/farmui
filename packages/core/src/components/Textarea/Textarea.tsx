@@ -33,7 +33,7 @@ export type TextareaControlProps = Omit<
 >;
 
 /**
- * TextareaControl — the bare, composable multi-line field: the bordered box and
+ * The bare, composable multi-line field: the bordered box and
  * the `<textarea>`. Forwards `id` / `aria-*` straight to the `<textarea>`.
  */
 const TextareaControl = forwardRef<HTMLTextAreaElement, TextareaControlProps>(
@@ -85,11 +85,10 @@ const TextareaControl = forwardRef<HTMLTextAreaElement, TextareaControlProps>(
 );
 
 /**
- * Textarea — a labelled multi-line text field.
+ * A labelled multi-line text field.
  *
- * With no `label`/`description`/`error` it renders just the bare control; with
- * any of them it composes the accessible {@link Field} primitive, so the
- * label/description/error wiring lives in one place.
+ * Like {@link Input}, the `label`/`description`/`error` props compose the
+ * {@link Field} primitive; without them only the field box renders.
  */
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   function Textarea(
@@ -117,7 +116,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           <Field.Label>
             {label}
             {(withAsterisk || required) && (
-              <span className="fui-Textarea-required" aria-hidden>
+              <span className="fui-required" aria-hidden>
                 *
               </span>
             )}

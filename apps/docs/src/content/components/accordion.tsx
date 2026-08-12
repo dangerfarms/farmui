@@ -126,7 +126,7 @@ const doc: ComponentContent = {
       body: "An accordion trades space for discoverability: the page gets shorter, but every collapsed section becomes content most users will never open. That trade only pays on a genuinely long page of independent sections. If everyone needs the content, showing it costs nothing and hiding it costs readers — use headings and prose.",
     },
     {
-      title: "Exclusivity is the platform's, not JavaScript's",
+      title: "The browser closes the others",
       body: "In the default single-open mode, every item shares a native HTML name attribute on its <details>, and the browser itself closes the others when one opens — no state, no JS. But that native closing can yank content away from someone mid-read: when users may want two sections open to compare them, pass multiple, which simply drops the shared name.",
     },
     {

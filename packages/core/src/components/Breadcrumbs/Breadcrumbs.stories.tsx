@@ -24,7 +24,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Live playground — change the separator in the Controls panel. */
 export const Playground: Story = {};
 
 /** A custom separator glyph, drawn by CSS between items. */

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     template: "%s · FarmUI",
   },
   description:
-    "FarmUI is a React component library focused on accessibility and performance. Zero-runtime styling, WCAG-compliant components, tiny bundles, native light-dark(), container queries, and CSS-variable theming.",
+    "FarmUI is a React component library focused on accessibility and performance. Zero-runtime styling, accessibility-audited components, tiny bundles, native light-dark(), container queries, and CSS-variable theming.",
 };
 
 // Renders <meta name="color-scheme" content="light dark"> — the UA needs the

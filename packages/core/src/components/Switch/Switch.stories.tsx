@@ -21,7 +21,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Live playground — tweak props in the Controls panel. */
 export const Playground: Story = {};
 
 export const LabelPosition: Story = {
@@ -31,6 +30,24 @@ export const LabelPosition: Story = {
       <Switch {...args} labelPosition="start" label="Label before control" />
     </div>
   ),
+};
+
+export const WithDescription: Story = {
+  args: {
+    label: "Auto-renew",
+    description: "Charges the card on file at the end of each cycle.",
+  },
+};
+
+export const WithError: Story = {
+  args: {
+    label: "Two-factor authentication",
+    error: "Two-factor authentication must be on for admin accounts",
+  },
+};
+
+export const Required: Story = {
+  args: { label: "Accept audit logging", withAsterisk: true },
 };
 
 export const States: Story = {

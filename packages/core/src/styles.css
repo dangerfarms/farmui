@@ -20,7 +20,8 @@
 @import url("./components/Card/Card.css") layer(farmui.components);
 @import url("./components/Checkbox/Checkbox.css") layer(farmui.components);
 @import url("./components/DateInput/DateInput.css") layer(farmui.components);
-@import url("./components/ErrorSummary/ErrorSummary.css") layer(farmui.components);
+@import url("./components/ErrorSummary/ErrorSummary.css")
+layer(farmui.components);
 @import url("./components/Field/Field.css") layer(farmui.components);
 @import url("./components/Fieldset/Fieldset.css") layer(farmui.components);
 @import url("./components/Input/Input.css") layer(farmui.components);

@@ -82,10 +82,28 @@ const doc: ComponentContent = {
     "For navigation — prefer visible links; a menu hides destinations behind an extra interaction (GOV.UK: don't hide the things users need).",
     "For one or two actions — plain Buttons are simpler and one click fewer.",
   ],
+  howItWorks: [
+    {
+      title: "Commands, with one exception for links",
+      body: 'Menu items carry role="menuitem" — announced as commands, not destinations. When one entry genuinely navigates (Export as CSV, View profile), give the Item an href: it renders a real <a> inside the menu, so right-click and open-in-new-tab keep working. A menu that is mostly links, though, is navigation — use visible links instead.',
+    },
+    {
+      title: "Disabled items stay in the menu",
+      body: "A disabled item renders aria-disabled and is skipped by roving focus but stays visible and announced — the user learns the command exists and is currently unavailable. Removing it instead teaches them the feature is gone.",
+    },
+    {
+      title: "Destructive commands live in a labelled danger group",
+      body: "Put Delete and its kin in a Menu.Group with a GroupLabel, inside a --fui-context: danger wrapper — the separation and the colour both signal the stakes before the click, and the group label is announced with each item.",
+    },
+    {
+      title: "Icon-only triggers need a name",
+      body: 'The ⋯ trigger reads as "menu" to a sighted user and as nothing to anyone else. Give it an aria-label naming the object it operates on — "Actions for INV-1024", not "menu" — because in a list of rows, ten triggers labelled "menu" are indistinguishable.',
+    },
+  ],
   accessibility: [
     "Implements the APG menu-button pattern: ArrowDown/ArrowUp on the trigger open the menu and focus the first/last item; inside, arrow keys rove focus through the items (looping), Home/End jump to the ends, and typing jumps to the next item matching the query.",
     "Escape closes and returns focus to the trigger, as does activating an item; Tab closes the menu and lets focus continue naturally — the menu moves focus, it never traps it.",
-    "The trigger is a real <button> with aria-haspopup=\"menu\" and aria-expanded; the popup is role=\"menu\" with role=\"menuitem\" children, and Menu.Separator is a real <hr> — the platform's separator role, no ARIA needed.",
+    'The trigger is a real <button> with aria-haspopup="menu" and aria-expanded; the popup is role="menu" with role="menuitem" children, and Menu.Separator is a real <hr> — the platform\'s separator role, no ARIA needed.',
     "Disabled items use aria-disabled rather than disabled, so they remain visible to assistive technology while roving focus skips them.",
     "Where the popover attribute and anchor positioning are both supported, the browser provides top-layer rendering, light dismiss and Escape; other browsers get a wrapper-anchored fallback with the same behavior re-implemented — the deliberate no-polyfill trade-off (see the browser support policy in CONTRIBUTING).",
   ],

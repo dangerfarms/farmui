@@ -45,7 +45,7 @@ function initialsFrom(name: string): string {
 function UserGlyph() {
   return (
     <svg
-      className={"fui-Avatar-glyph"}
+      className="fui-Avatar-glyph"
       viewBox="0 0 24 24"
       fill="currentColor"
       aria-hidden
@@ -57,7 +57,7 @@ function UserGlyph() {
 }
 
 /**
- * Avatar — an image, initials, or fallback glyph representing a user.
+ * An image, initials, or fallback glyph representing a user.
  */
 export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
   {
@@ -87,10 +87,10 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
     content = children;
   } else if (src) {
     content = (
-      <img className={"fui-Avatar-img"} src={src} alt={alt ?? name ?? ""} />
+      <img className="fui-Avatar-img" src={src} alt={alt ?? name ?? ""} />
     );
   } else if (initials) {
-    content = <span className={"fui-Avatar-initials"}>{initials}</span>;
+    content = <span className="fui-Avatar-initials">{initials}</span>;
   } else {
     content = <UserGlyph />;
   }
@@ -125,7 +125,7 @@ export interface AvatarGroupProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * AvatarGroup — overlaps a row of avatars with a surface-colored ring.
+ * Overlaps a row of avatars with a surface-colored ring.
  */
 export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
   function AvatarGroup(

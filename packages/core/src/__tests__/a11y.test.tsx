@@ -254,12 +254,16 @@ describe("Avatar naming", () => {
 
   it("is a named image when a name is given", () => {
     render(<Avatar name="Ada Lovelace" />);
-    expect(screen.getByRole("img", { name: "Ada Lovelace" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("img", { name: "Ada Lovelace" }),
+    ).toBeInTheDocument();
   });
 
   it("honours a consumer-supplied aria-label", () => {
     render(<Avatar aria-label="Team member" />);
-    expect(screen.getByRole("img", { name: "Team member" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("img", { name: "Team member" }),
+    ).toBeInTheDocument();
   });
 });
 

@@ -2,7 +2,7 @@ import type { FieldsetHTMLAttributes, HTMLAttributes, ReactNode } from "react";
 import { cx } from "../../utils";
 
 /**
- * Fieldset — groups related controls under a shared, semantic label.
+ * Groups related controls under a shared, semantic label.
  *
  * Renders a native `<fieldset>` + `<legend>`, which is the accessible way to
  * label a set of checkboxes or radios (the legend names the group in the

@@ -21,8 +21,8 @@ export default function Theming() {
       <h2>Rebrand in one line</h2>
       <p>
         The single most important token is <code>--fui-primary</code>. It is
-        genuinely one line — hover and active states are <em>derived</em>{" "}
-        from it, so there are no companion tokens to keep in sync:
+        genuinely one line — hover and active states are <em>derived</em> from
+        it, so there are no companion tokens to keep in sync:
       </p>
       <div className={prose.block}>
         <CodeBlock
@@ -33,13 +33,13 @@ export default function Theming() {
         />
       </div>
       <p>
-        The brand colour appears wherever the design says primary: focus
-        rings, checked states, carets, text selection, and{" "}
-        <code>primary</code> context regions. (Buttons are neutral by
-        default — the demo below is wrapped in a primary region so you can
-        see the change.) Scope the token to a subtree to theme just part of
-        a page — the nearest declaration up the tree wins, so both cards
-        below run identical CSS and differ only in where the token is set:
+        The brand colour appears wherever the design says primary: focus rings,
+        checked states, carets, text selection, and <code>primary</code> context
+        regions. (Buttons are neutral by default — the demo below is wrapped in
+        a primary region so you can see the change.) Scope the token to a
+        subtree to theme just part of a page — the nearest declaration up the
+        tree wins, so both cards below run identical CSS and differ only in
+        where the token is set:
       </p>
       <div className={prose.block}>
         <CodeBlock
@@ -90,15 +90,15 @@ export default function Theming() {
       <p>
         Dark mode is native. Tokens are defined with CSS{" "}
         <code>light-dark()</code> and the root declares{" "}
-        <code>color-scheme: light dark</code>, so the user&apos;s OS
-        preference is followed with no JavaScript and no configuration —
-        that is the default state.
+        <code>color-scheme: light dark</code>, so the user&apos;s OS preference
+        is followed with no JavaScript and no configuration — that is the
+        default state.
       </p>
       <p>
-        The stylesheet can only speak once it has loaded. Add the matching
-        meta tag so the browser paints the canvas in the right scheme{" "}
-        <em>before</em> CSS arrives (otherwise dark-preference users get a
-        flash of light canvas on every load):
+        The stylesheet can only speak once it has loaded. Add the matching meta
+        tag so the browser paints the canvas in the right scheme <em>before</em>{" "}
+        CSS arrives (otherwise dark-preference users get a flash of light canvas
+        on every load):
       </p>
       <div className={prose.block}>
         <CodeBlock
@@ -107,22 +107,21 @@ export default function Theming() {
         />
       </div>
       <p>
-        To override the preference, set{" "}
-        <code>data-theme=&quot;dark&quot;</code> or{" "}
-        <code>data-theme=&quot;light&quot;</code> — on the root for the
-        whole app, or on any element for just that subtree (the attribute
-        simply sets <code>color-scheme</code>, so every{" "}
-        <code>light-dark()</code> token re-resolves there). Remove the
-        attribute to follow the OS preference again.
+        To override the preference, set <code>data-theme=&quot;dark&quot;</code>{" "}
+        or <code>data-theme=&quot;light&quot;</code> — on the root for the whole
+        app, or on any element for just that subtree (the attribute simply sets{" "}
+        <code>color-scheme</code>, so every <code>light-dark()</code> token
+        re-resolves there). Remove the attribute to follow the OS preference
+        again.
       </p>
       <div className={prose.callout}>
         This is one instance of FarmUI&apos;s baseline posture:{" "}
         <strong>the user&apos;s stated preferences are the default.</strong>{" "}
         Colour scheme is followed natively, motion exists only inside{" "}
-        <code>prefers-reduced-motion: no-preference</code>, and forced
-        colour palettes are honoured rather than overridden. Everything
-        beyond that baseline — a saved theme, an animation — is an explicit
-        opt-in layered on top.
+        <code>prefers-reduced-motion: no-preference</code>, and forced colour
+        palettes are honoured rather than overridden. Everything beyond that
+        baseline — a saved theme, an animation — is an explicit opt-in layered
+        on top.
       </div>
 
       <h2>Contexts</h2>
@@ -148,7 +147,7 @@ export default function Theming() {
           }
         >
           <strong>Delete workspace</strong>
-          <Checkbox label="I understand this is permanent" defaultChecked />
+          <Checkbox label="I understand this is permanent" />
           <div style={{ display: "flex", gap: "0.75rem" }}>
             <Button>Delete</Button>
             <Button>Cancel</Button>
@@ -181,41 +180,40 @@ export default function Theming() {
         sizing, or layout. The vocabulary is <code>primary</code>,{" "}
         <code>danger</code>, <code>success</code>, <code>warning</code> and{" "}
         <code>info</code>, and no component has a variant or colour prop —
-        anywhere. The status components (Alert, Badge, Loader, Progress)
-        declare their meaning the same way as everything else.
+        anywhere. The status components (Alert, Badge, Loader, Progress) declare
+        their meaning the same way as everything else.
       </p>
       <p>
         A single danger button is a one-element region — a wrapper (
         <code>{`<span style={{ "--fui-context": "danger" }}><Button>Delete</Button></span>`}</code>
-        ), because a style query is answered by ancestors, never by the
-        element that declares the property. The property inherits, so the
-        nearest ancestor that sets it wins.
+        ), because a style query is answered by ancestors, never by the element
+        that declares the property. The property inherits, so the nearest
+        ancestor that sets it wins.
       </p>
       <p>
-        An inverted &ldquo;on-dark&rdquo; section needs no context at all —
-        set <code>data-theme=&quot;dark&quot;</code> on the region (or{" "}
+        An inverted &ldquo;on-dark&rdquo; section needs no context at all — set{" "}
+        <code>data-theme=&quot;dark&quot;</code> on the region (or{" "}
         <code>color-scheme: dark</code> in its CSS; the attribute is just a
         setter for it) and every <code>light-dark()</code> token flips. One
         caveat: colours already resolved on an ancestor inherit as resolved
         values and don&rsquo;t re-resolve, so the inverted region must also
-        re-declare <code>color</code> (e.g.{" "}
-        <code>color: var(--fui-text)</code>) for descendants to pick up the
-        flipped value.
+        re-declare <code>color</code> (e.g. <code>color: var(--fui-text)</code>)
+        for descendants to pick up the flipped value.
       </p>
       <div className={prose.callout}>
         Theme, context, and instance are one mechanism at three scopes: remap
         tokens on <code>:root</code> to set a brand, declare a context on a
-        region to give it meaning, set a property on an instance to override
-        one control.
+        region to give it meaning, set a property on an instance to override one
+        control.
       </div>
 
       <h2>Token reference</h2>
       <p>The most useful tokens to override:</p>
       <ul>
         <li>
-          <code>--fui-primary</code> / <code>--fui-primary-soft</code> —
-          brand colour and its soft tint (hover/active are derived; there is
-          nothing else to sync)
+          <code>--fui-primary</code> / <code>--fui-primary-soft</code> — brand
+          colour and its soft tint (hover/active are derived; there is nothing
+          else to sync)
         </li>
         <li>
           <code>--fui-bg</code>, <code>--fui-surface</code>,{" "}
@@ -228,8 +226,7 @@ export default function Theming() {
         </li>
         <li>
           <code>--fui-font-sans</code> — the UI font family (an input hook:
-          unset by default, and anything you set flows through the whole
-          stack)
+          unset by default, and anything you set flows through the whole stack)
         </li>
         <li>
           <code>--fui-duration-sm/md/lg</code>, <code>--fui-ease</code> —
@@ -242,11 +239,10 @@ export default function Theming() {
         The type (<code>--fui-text-xs</code>…<code>3xl</code>) and spacing (
         <code>--fui-space-xs</code>…<code>xl</code>) scales are fluid{" "}
         <code>clamp()</code> values in container units (<code>cqi</code>),
-        generated with{" "}
-        <a href="https://utopia.fyi">Utopia</a> — the calculator parameters are
-        committed as comments in <code>tokens.css</code>. Without a container
-        they respond to the viewport; declare one on any region to make its
-        FarmUI typography respond to <em>that region&rsquo;s</em> width
+        generated with <a href="https://utopia.fyi">Utopia</a> — the calculator
+        parameters are committed as comments in <code>tokens.css</code>. Without
+        a container they respond to the viewport; declare one on any region to
+        make its FarmUI typography respond to <em>that region&rsquo;s</em> width
         instead:
       </p>
       <div className={prose.block}>
@@ -261,8 +257,8 @@ export default function Theming() {
         Corner radii are deliberately <em>not</em> fluid — rounding
         shouldn&rsquo;t breathe. Control heights aren&rsquo;t tokens at all:
         buttons and form controls share one derived anatomy (padding +
-        line-height + border), so they align by construction at every
-        container width.
+        line-height + border), so they align by construction at every container
+        width.
       </p>
 
       <div className={prose.callout}>

@@ -10,7 +10,7 @@ export interface SeparatorProps extends HTMLAttributes<HTMLHRElement> {
 }
 
 /**
- * Separator — a rule between groups of content.
+ * A rule between groups of content.
  *
  * Renders a real `<hr>`, the platform's separator role — no ARIA needed for
  * the horizontal form; the vertical form adds `aria-orientation`. Purely

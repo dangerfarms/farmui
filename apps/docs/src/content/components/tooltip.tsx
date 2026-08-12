@@ -50,6 +50,20 @@ const doc: ComponentContent = {
     "For interactive content (links, buttons) — use Popover, which is click-invoked and keyboard-operable.",
     "As a replacement for a visible label on a form field — use Field.Label.",
   ],
+  howItWorks: [
+    {
+      title: "Tooltips repeat, they never reveal",
+      body: "A tooltip may only say what the page already makes knowable — the label of an icon button, the expansion of an abbreviation. Touch devices have no hover, so content that exists only in a tooltip does not exist for a large share of users.",
+    },
+    {
+      title: "Same words as the accessible name",
+      body: "On an icon-only button, the aria-label and the tooltip should say the same thing. If the tooltip wants to say more than the name, the extra is content — put it in the page or a Popover, not appended to a hover bubble.",
+    },
+    {
+      title: "Nothing interactive inside",
+      body: 'The bubble is role="tooltip" and never receives focus — a link or button inside it is unreachable by keyboard. The moment a tooltip needs a control, it is a Popover.',
+    },
+  ],
   accessibility: [
     "The trigger is permanently linked to the bubble via aria-describedby, so screen readers announce the text with the control whether or not it is visually shown.",
     "Escape dismisses the bubble without moving pointer or focus, the bubble stays open while hovered, and it persists until hover/focus leaves — the three requirements of WCAG 1.4.13 (Content on Hover or Focus).",

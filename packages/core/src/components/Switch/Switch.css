@@ -139,3 +139,21 @@
     line-height: 1.35;
   }
 }
+
+@scope (.fui-Switch-field) {
+  :scope {
+    display: block flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+  }
+
+  .fui-Switch-description {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-Switch-error {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-danger);
+  }
+}

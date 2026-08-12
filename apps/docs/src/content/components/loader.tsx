@@ -71,7 +71,7 @@ const doc: ComponentContent = {
   ],
   whenToUse: [
     "For waits of unknown duration where the shape of the outcome is also unknown — searching, saving, waiting on a third party.",
-    "For small inline busy states, composed as a child of the affected control — a Button showing <Loader size=\"sm\" /> while it saves.",
+    'For small inline busy states, composed as a child of the affected control — a Button showing <Loader size="sm" /> while it saves.',
   ],
   whenNotToUse: [
     "When you know what the loaded content will look like — Skeleton holds the layout open and makes the swap calmer than a spinner in an empty region.",
@@ -80,11 +80,11 @@ const doc: ComponentContent = {
   howItWorks: [
     {
       title: "Pair it with words",
-      body: "A bare spinner says something is happening but not what, or where, or whether the user should wait or leave. Put visible text next to it (“Saving…”, “Searching flights”) and set label to the same words so sighted and screen-reader users get the same answer.",
+      body: 'A bare spinner says something is happening but not what, or whether the user should wait. Put visible text next to it and set label to the same words — the default "Loading" turns ambiguous as soon as a page has two waits.',
     },
     {
-      title: "Name the work in label",
-      body: 'label is the loader\'s accessible name and defaults to "Loading" — fine for a page with one wait, ambiguous the moment there are two. "Loading search results" costs nothing and tells a screen-reader user exactly which region is busy.',
+      title: "Hold it back briefly",
+      body: "A spinner that flashes for 200ms reads as flicker, and one that appears instantly makes fast responses feel slow. Hold it back briefly (say 300ms) so quick operations complete without ever showing one; Skeleton is the better tool when the coming content's shape is known.",
     },
   ],
   accessibility: [

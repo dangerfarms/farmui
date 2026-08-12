@@ -27,7 +27,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Fills with the primary token — status is declared by context " +
+          "Fills with the primary token, re-coloured by any context region " +
           "(`--fui-context` on a region), not by props.",
       },
     },
@@ -37,7 +37,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Live playground — tweak props in the Controls panel. */
 export const Playground: Story = {};
 
 /**

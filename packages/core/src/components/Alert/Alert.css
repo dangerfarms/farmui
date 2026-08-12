@@ -1,6 +1,8 @@
 /*
- * Alert — one colour channel (--_accent); the whole look derives from it.
- * Status is decided by context, not props. The message stays
+ * Everything here derives from a single --_accent channel (the same
+ * derivation scheme as Button's --_color).
+ * There is no color prop; the surrounding --fui-context region picks the
+ * accent. The message stays
  * --fui-text-based so long copy remains readable on the tint.
  */
 @scope (.fui-Alert-root) {

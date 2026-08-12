@@ -22,7 +22,7 @@ const radiusVar: Record<NonNullable<CardProps["radius"]>, string> = {
 };
 
 /**
- * Card — a surface container that groups related content.
+ * A surface container that groups related content.
  */
 export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
   {

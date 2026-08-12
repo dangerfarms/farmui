@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useId,
-  useRef,
-} from "react";
+import { createContext, useContext, useEffect, useId, useRef } from "react";
 import type {
   HTMLAttributes,
   LiHTMLAttributes,
@@ -16,7 +10,7 @@ import type {
 import { cx } from "../../utils";
 
 /**
- * ErrorSummary — the form-level error pattern: a box at the top of the form
+ * The form-level error pattern: a box at the top of the form
  * listing every error as a link to its field, shown after a failed submit.
  *
  * When it appears it takes keyboard focus, so assistive technology
@@ -68,15 +62,14 @@ function ErrorSummaryRoot({
   children,
   ...rest
 }: ErrorSummaryRootProps) {
-  const autoId = useId();
-  const titleId = `${autoId.replace(/[^a-zA-Z0-9-]/g, "")}-errorsummary`;
+  const titleId = `${useId()}-errorsummary`;
   const ref = useRef<HTMLDivElement>(null);
 
   // Focus announces the region (labelled by the Title) the moment it
   // appears — the user starts at the list of problems, not the top of the
   // page.
   useEffect(() => {
-    if (autoFocus) ref.current?.focus({ preventScroll: false });
+    if (autoFocus) ref.current?.focus();
   }, [autoFocus]);
 
   return (
@@ -95,8 +88,7 @@ function ErrorSummaryRoot({
   );
 }
 
-export interface ErrorSummaryTitleProps
-  extends HTMLAttributes<HTMLHeadingElement> {}
+export interface ErrorSummaryTitleProps extends HTMLAttributes<HTMLHeadingElement> {}
 
 function ErrorSummaryTitle({
   className,
@@ -115,8 +107,7 @@ function ErrorSummaryTitle({
   );
 }
 
-export interface ErrorSummaryListProps
-  extends HTMLAttributes<HTMLUListElement> {
+export interface ErrorSummaryListProps extends HTMLAttributes<HTMLUListElement> {
   children?: ReactNode;
 }
 
@@ -132,8 +123,10 @@ function ErrorSummaryList({
   );
 }
 
-export interface ErrorSummaryItemProps
-  extends Omit<LiHTMLAttributes<HTMLLIElement>, "onClick"> {
+export interface ErrorSummaryItemProps extends Omit<
+  LiHTMLAttributes<HTMLLIElement>,
+  "onClick"
+> {
   /** The target field's fragment (e.g. "#email"). */
   href: string;
   onClick?: (e: ReactMouseEvent<HTMLAnchorElement>) => void;

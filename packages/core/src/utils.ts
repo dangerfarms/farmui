@@ -21,4 +21,3 @@ const RADIUS: Record<FarmUIRadius, string> = {
 export function resolveRadius(radius: FarmUIRadius = "md"): string {
   return RADIUS[radius];
 }
-

@@ -112,7 +112,7 @@ function EdgeIcon({ dir }: { dir: "first" | "last" }) {
 }
 
 /**
- * Pagination — controlled page navigator.
+ * Controlled page navigator.
  *
  * Renders previous/next controls (plus optional first/last edges) and numbered
  * page buttons with ellipsis gaps. The active page carries `aria-current="page"`.
@@ -143,12 +143,12 @@ export function Pagination({
       className={cx("fui-Pagination-root", className)}
       {...rest}
     >
-      <ul className={"fui-Pagination-list"}>
+      <ul className="fui-Pagination-list">
         {withEdges && (
           <li>
             <button
               type="button"
-              className={"fui-Pagination-control"}
+              className="fui-Pagination-control"
               onClick={() => go(1)}
               disabled={atStart}
               aria-label="First page"
@@ -160,7 +160,7 @@ export function Pagination({
         <li>
           <button
             type="button"
-            className={"fui-Pagination-control"}
+            className="fui-Pagination-control"
             onClick={() => go(active - 1)}
             disabled={atStart}
             aria-label="Previous page"
@@ -173,7 +173,7 @@ export function Pagination({
           if (item === DOTS) {
             return (
               <li key={`dots-${index}`} aria-hidden="true">
-                <span className={"fui-Pagination-dots"}>…</span>
+                <span className="fui-Pagination-dots">…</span>
               </li>
             );
           }
@@ -182,7 +182,7 @@ export function Pagination({
             <li key={item}>
               <button
                 type="button"
-                className={"fui-Pagination-page"}
+                className="fui-Pagination-page"
                 data-active={isActive || undefined}
                 aria-current={isActive ? "page" : undefined}
                 aria-label={`Page ${item}`}
@@ -197,7 +197,7 @@ export function Pagination({
         <li>
           <button
             type="button"
-            className={"fui-Pagination-control"}
+            className="fui-Pagination-control"
             onClick={() => go(active + 1)}
             disabled={atEnd}
             aria-label="Next page"
@@ -209,7 +209,7 @@ export function Pagination({
           <li>
             <button
               type="button"
-              className={"fui-Pagination-control"}
+              className="fui-Pagination-control"
               onClick={() => go(total)}
               disabled={atEnd}
               aria-label="Last page"

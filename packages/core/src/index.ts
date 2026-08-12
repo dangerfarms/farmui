@@ -10,7 +10,6 @@ export * from "./components/Button/index";
 export * from "./components/Input/index";
 export * from "./components/Textarea/index";
 export * from "./components/Select/index";
-export * from "./components/Separator/index";
 export * from "./components/Checkbox/index";
 export * from "./components/DateInput/index";
 export * from "./components/ErrorSummary/index";
@@ -20,6 +19,7 @@ export * from "./components/Slider/index";
 
 // Data display
 export * from "./components/Badge/index";
+export * from "./components/Separator/index";
 export * from "./components/Card/index";
 export * from "./components/Avatar/index";
 export * from "./components/Table/index";

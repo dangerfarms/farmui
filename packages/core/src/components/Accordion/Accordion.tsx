@@ -32,12 +32,12 @@ export interface AccordionItemProps extends Omit<
 }
 
 /**
- * Accordion — vertically stacked, expandable sections.
+ * Vertically stacked, expandable sections.
  *
  * Built on native `<details>/<summary>` for zero-JS toggling. In single mode
  * (the default) items share an HTML `name`, so opening one closes the others.
  */
-export function Accordion({
+function AccordionBase({
   multiple = false,
   className,
   children,
@@ -72,10 +72,10 @@ export function AccordionItem({
       open={defaultOpen}
       {...rest}
     >
-      <summary className={"fui-Accordion-summary"}>
-        <span className={"fui-Accordion-label"}>{label}</span>
+      <summary className="fui-Accordion-summary">
+        <span className="fui-Accordion-label">{label}</span>
         <svg
-          className={"fui-Accordion-chevron"}
+          className="fui-Accordion-chevron"
           viewBox="0 0 24 24"
           width="18"
           height="18"
@@ -89,9 +89,11 @@ export function AccordionItem({
           <polyline points="6 9 12 15 18 9" />
         </svg>
       </summary>
-      <div className={"fui-Accordion-content"}>{children}</div>
+      <div className="fui-Accordion-content">{children}</div>
     </details>
   );
 }
 
-Accordion.Item = AccordionItem;
+export const Accordion = Object.assign(AccordionBase, {
+  Item: AccordionItem,
+});

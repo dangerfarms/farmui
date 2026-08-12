@@ -1,5 +1,12 @@
 import { describe, it, expect, afterEach, vi } from "vitest";
-import { render, screen, cleanup, waitFor } from "@testing-library/react";
+import { useState } from "react";
+import {
+  render,
+  screen,
+  cleanup,
+  fireEvent,
+  waitFor,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import {
@@ -92,6 +99,67 @@ describe("Accordion", () => {
  * not UA behaviors: Escape, closedby light dismiss, and focus-restore run in
  * a real browser only — they're covered by the Storybook play test.
  */
+describe("controlled overlays", () => {
+  function ControlledModal() {
+    const [open, setOpen] = useState(false);
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Open it</Button>
+        <Modal.Root open={open} onOpenChange={setOpen}>
+          <Modal.Popup>
+            <Modal.Title>Controlled</Modal.Title>
+            <Modal.Close>Close</Modal.Close>
+          </Modal.Popup>
+        </Modal.Root>
+      </>
+    );
+  }
+
+  it("Modal follows the open prop and reports closes through onOpenChange", async () => {
+    const user = userEvent.setup();
+    render(<ControlledModal />);
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: "Open it" }));
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+
+    // A native close (Escape, backdrop) fires the dialog's close event; the
+    // reconcile must report it upward instead of re-opening the dialog.
+    fireEvent(screen.getByRole("dialog"), new Event("close"));
+    await waitFor(() =>
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+    );
+  });
+
+  function ControlledPopover() {
+    const [open, setOpen] = useState(false);
+    return (
+      <Popover.Root open={open} onOpenChange={setOpen}>
+        <Popover.Trigger>Filters</Popover.Trigger>
+        <Popover.Popup>
+          <Popover.Title>Filters</Popover.Title>
+          <Popover.Close>Done</Popover.Close>
+        </Popover.Popup>
+      </Popover.Root>
+    );
+  }
+
+  it("Popover round-trips open state through the trigger and Close", async () => {
+    const user = userEvent.setup();
+    render(<ControlledPopover />);
+    const trigger = screen.getByRole("button", { name: "Filters" });
+    expect(trigger).toHaveAttribute("aria-expanded", "false");
+
+    await user.click(trigger);
+    expect(trigger).toHaveAttribute("aria-expanded", "true");
+
+    await user.click(screen.getByRole("button", { name: "Done" }));
+    await waitFor(() =>
+      expect(trigger).toHaveAttribute("aria-expanded", "false"),
+    );
+  });
+});
+
 describe("Modal", () => {
   function ModalDemo() {
     return (
@@ -136,9 +204,7 @@ describe("Modal", () => {
     // A native close (Escape / light dismiss / method="dialog" all funnel
     // here) must update React state, reflected in the trigger's hook.
     dialog.close();
-    await waitFor(() =>
-      expect(trigger).not.toHaveAttribute("data-popup-open"),
-    );
+    await waitFor(() => expect(trigger).not.toHaveAttribute("data-popup-open"));
   });
 });
 
@@ -334,6 +400,30 @@ describe("Toast", () => {
     );
     await user.click(screen.getByRole("button", { name: "Fire" }));
     expect(screen.getByRole("status")).toBeInTheDocument();
+    await waitFor(() =>
+      expect(screen.queryByRole("status")).not.toBeInTheDocument(),
+    );
+  });
+
+  it("pauses the dismiss timer while hovered and resumes with remaining time", async () => {
+    const user = userEvent.setup();
+    render(
+      <Toast.Provider timeout={80}>
+        <FireButton />
+        <Toasts />
+      </Toast.Provider>,
+    );
+    await user.click(screen.getByRole("button", { name: "Fire" }));
+    const status = screen.getByRole("status");
+    const viewport = status.closest("[aria-label]") as HTMLElement;
+
+    // Hover before the timeout lands; the toast must outlive its 80ms.
+    fireEvent.pointerEnter(viewport);
+    await new Promise((r) => setTimeout(r, 160));
+    expect(screen.getByRole("status")).toBeInTheDocument();
+
+    // Leaving resumes the countdown from the remaining time.
+    fireEvent.pointerLeave(viewport);
     await waitFor(() =>
       expect(screen.queryByRole("status")).not.toBeInTheDocument(),
     );

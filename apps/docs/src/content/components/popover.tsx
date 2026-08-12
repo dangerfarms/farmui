@@ -63,9 +63,23 @@ const doc: ComponentContent = {
     "For a short text label describing a control — use Tooltip.",
     "For disclosure of inline page content — use the native <details> element via Accordion, or plain layout.",
   ],
+  howItWorks: [
+    {
+      title: "Light dismiss is the contract",
+      body: "A popover closes on outside click and Escape — that is what distinguishes it from Modal. Never put an action with consequences inside one: a surface the user can dismiss by accident must only ever hold things that are safe to abandon.",
+    },
+    {
+      title: "The trigger announces what it opens",
+      body: 'Popover.Trigger renders aria-haspopup="dialog" and aria-expanded, and closing returns focus to it. Keep the trigger a real button — moving the popover behind a hover or a bare span breaks the promise those attributes make to screen-reader users.',
+    },
+    {
+      title: "Card-sized at most",
+      body: "A popover earns its place when it holds a handful of controls — a filter set, a quick form. When the content wants headings or scrolling, it stops being glanceable and starts being a page in the wrong place; move it to a Modal or the page itself.",
+    },
+  ],
   accessibility: [
     "Where the popover attribute and anchor positioning are both supported, the browser provides top-layer rendering, light dismiss and Escape; other browsers get a wrapper-anchored fallback with the same behavior re-implemented in a few lines of JS — a deliberate no-polyfill, progressive-enhancement trade-off (see the browser support policy in CONTRIBUTING).",
-    "Dialog semantics match what aria-haspopup=\"dialog\" promises screen-reader users: opening moves focus into the panel and closing returns it to the trigger.",
+    'Dialog semantics match what aria-haspopup="dialog" promises screen-reader users: opening moves focus into the panel and closing returns it to the trigger.',
     "Trigger is a real <button> with aria-expanded; Popover.Title and Popover.Description automatically label the dialog via aria-labelledby / aria-describedby.",
     "Collision handling uses position-try flipping at viewport edges in supporting browsers; the fallback keeps the requested side.",
   ],

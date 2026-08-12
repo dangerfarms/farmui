@@ -24,6 +24,8 @@ export interface CheckboxProps extends Omit<
   error?: ReactNode;
   /** Render the "partially checked" (dash) visual state. */
   indeterminate?: boolean;
+  /** Mark the field as required (adds an asterisk to the label). */
+  withAsterisk?: boolean;
   /** Root wrapper class. */
   wrapperClassName?: string;
 }
@@ -31,11 +33,11 @@ export interface CheckboxProps extends Omit<
 /** The bare checkbox box + input, minus any label. */
 export type CheckboxControlProps = Omit<
   CheckboxProps,
-  "label" | "description" | "error" | "wrapperClassName"
+  "label" | "description" | "error" | "withAsterisk" | "wrapperClassName"
 >;
 
 /**
- * CheckboxControl — the bare box + `<input type="checkbox">`. When rendered
+ * The bare box + `<input type="checkbox">`. When rendered
  * inside a `Field` it reads its id / describedby / aria-invalid from context
  * (`<Field.Label><Checkbox /> …</Field.Label>`); otherwise it uses its own
  * props.
@@ -79,6 +81,7 @@ const CheckboxControl = forwardRef<HTMLInputElement, CheckboxControlProps>(
           type="checkbox"
           className={cx("fui-Checkbox-input", className)}
           disabled={disabled}
+          {...rest}
           aria-invalid={resolvedAriaInvalid}
           aria-describedby={describedBy}
           onBlur={(e) => {
@@ -89,7 +92,6 @@ const CheckboxControl = forwardRef<HTMLInputElement, CheckboxControlProps>(
             onInvalid?.(e);
             checkOnInvalid(e);
           }}
-          {...rest}
         />
         <svg
           className="fui-Checkbox-check"
@@ -119,11 +121,11 @@ const CheckboxControl = forwardRef<HTMLInputElement, CheckboxControlProps>(
 );
 
 /**
- * Checkbox — a styled `<input type="checkbox">`.
+ * A styled `<input type="checkbox">`.
  *
- * With no `label`/`description`/`error` it renders just the bare control (which
- * self-wires when placed inside a `Field`). With any of them it renders its own
- * accessible inline label, description and error.
+ * The `label`/`description`/`error` props render an accessible inline
+ * row. Without them you get only the box, which self-wires when placed
+ * inside a `Field`.
  */
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   function Checkbox(
@@ -133,6 +135,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       error,
       disabled,
       required,
+      withAsterisk,
       id,
       wrapperClassName,
       ...control
@@ -176,8 +179,8 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             {label && (
               <span className="fui-Checkbox-label">
                 {label}
-                {required && (
-                  <span className="fui-Checkbox-required" aria-hidden>
+                {(withAsterisk || required) && (
+                  <span className="fui-required" aria-hidden>
                     *
                   </span>
                 )}

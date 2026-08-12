@@ -24,11 +24,10 @@ import { cx } from "../../utils";
 import { mergeProps, renderWithProps } from "../../render";
 import type { RenderProp } from "../../render";
 
-type AnyRenderProps = Record<string, unknown>;
 import { Button } from "../Button/Button";
 
 /**
- * Menu — a list of actions opened from a trigger, composed from parts.
+ * A list of actions opened from a trigger, composed from parts.
  *
  * The Popup renders with the native `popover` attribute (top layer, light
  * dismiss, Escape) and CSS anchor positioning where supported, falling back
@@ -189,8 +188,7 @@ export interface MenuTriggerRenderProps {
   onKeyDown: (e: ReactKeyboardEvent<Element>) => void;
 }
 
-export interface MenuTriggerProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface MenuTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Substitute your own element as the trigger, or pass a function receiving
    * the wiring props. Without it, the Trigger renders a FarmUI Button, which
@@ -227,7 +225,9 @@ function MenuTrigger({ render, children, ...rest }: MenuTriggerProps) {
 
   return render ? (
     // Consumer props on the part must merge into the render element, not drop.
-    <>{renderWithProps(render, (mergeProps(triggerProps as unknown as AnyRenderProps, { children, ...rest }) as unknown as typeof triggerProps))}</>
+    <>
+      {renderWithProps(render, mergeProps(triggerProps, { children, ...rest }))}
+    </>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, triggerProps)}</>
   );
@@ -347,7 +347,8 @@ function MenuPopup({
         const t = typeahead.current;
         t.query = (now - t.at < 500 ? t.query : "") + e.key.toLowerCase();
         t.at = now;
-        const from = current >= 0 ? current + (t.query.length === 1 ? 1 : 0) : 0;
+        const from =
+          current >= 0 ? current + (t.query.length === 1 ? 1 : 0) : 0;
         for (let i = 0; i < items.length; i++) {
           const item = items[(from + i) % items.length];
           if (item?.textContent?.trim().toLowerCase().startsWith(t.query)) {
@@ -389,8 +390,10 @@ export interface MenuItemRenderProps {
   onClick: (e: ReactMouseEvent<Element>) => void;
 }
 
-export interface MenuItemProps
-  extends Omit<HTMLAttributes<HTMLElement>, "onClick"> {
+export interface MenuItemProps extends Omit<
+  HTMLAttributes<HTMLElement>,
+  "onClick"
+> {
   /** Renders the item as a link instead of a button. */
   href?: string;
   /** The action. Runs before the menu closes. */

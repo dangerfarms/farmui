@@ -15,7 +15,7 @@ import { renderWithProps } from "../../render";
 import type { RenderProp } from "../../render";
 
 /**
- * Field — a composable form-field primitive.
+ * A composable form-field primitive.
  *
  * Assemble a labelled control from small parts and the Root wires accessibility
  * for you: the Label points at the control, the control's `aria-describedby`

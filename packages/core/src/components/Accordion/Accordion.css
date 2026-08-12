@@ -30,7 +30,7 @@
         transition:
           block-size var(--fui-duration-md) var(--fui-ease),
           content-visibility var(--fui-duration-md) var(--fui-ease)
-          allow-discrete;
+            allow-discrete;
       }
 
       :scope[open]::details-content {

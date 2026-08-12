@@ -70,12 +70,12 @@ export interface TabsPanelProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * Tabs — switch between related panels of content.
+ * Switch between related panels of content.
  *
  * Supports uncontrolled (`defaultValue`) and controlled (`value`/`onChange`)
  * usage. Compose with `Tabs.List`, `Tabs.Tab` and `Tabs.Panel`.
  */
-export function Tabs({
+function TabsBase({
   defaultValue,
   value: controlled,
   onChange,
@@ -191,12 +191,12 @@ export function TabsTab({
       className={cx("fui-Tabs-tab", className)}
       data-active={selected || undefined}
       onClick={(event) => {
-        setValue(value);
         onClick?.(event);
+        setValue(value);
       }}
       {...rest}
     >
-      {leftSection && <span className={"fui-Tabs-section"}>{leftSection}</span>}
+      {leftSection && <span className="fui-Tabs-section">{leftSection}</span>}
       {children}
     </button>
   );
@@ -249,6 +249,8 @@ export function TabsPanel({
   );
 }
 
-Tabs.List = TabsList;
-Tabs.Tab = TabsTab;
-Tabs.Panel = TabsPanel;
+export const Tabs = Object.assign(TabsBase, {
+  List: TabsList,
+  Tab: TabsTab,
+  Panel: TabsPanel,
+});

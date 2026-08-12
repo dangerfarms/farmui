@@ -1,14 +1,3 @@
-/* Label, description and error are rendered by the Field primitive; the
-   Textarea styles below cover only the bare control that Field composes. The
-   required marker renders inside Field's label — outside the control box —
-   so it is scoped to itself. */
-@scope (.fui-Textarea-required) {
-  :scope {
-    margin-inline-start: 0.15em;
-    color: var(--fui-danger);
-  }
-}
-
 @scope (.fui-Textarea-field) {
   :scope {
     display: block flex;

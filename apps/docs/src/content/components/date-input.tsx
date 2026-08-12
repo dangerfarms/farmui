@@ -81,7 +81,7 @@ const doc: ComponentContent = {
   ],
   whenNotToUse: [
     "For choosing a date from availability — booking an appointment, picking a delivery slot — where a calendar shows which dates are possible.",
-    "For a single free-text answer where an approximate date is fine (\"summer 2019\") — use Input.",
+    'For a single free-text answer where an approximate date is fine ("summer 2019") — use Input.',
   ],
   howItWorks: [
     {
@@ -90,15 +90,15 @@ const doc: ComponentContent = {
     },
     {
       title: "Example dates that teach the format",
-      body: "Give an example in the Description, and choose it so it can only be read one way: a day above 12 (so it cannot be a month) and a month of 9 or less without a leading zero (so it is clear none is needed). \"27 3 2007\" answers both questions users actually have; \"01 02 2003\" answers neither.",
+      body: 'Give an example in the Description, and choose it so it can only be read one way: a day above 12 (so it cannot be a month) and a month of 9 or less without a leading zero (so it is clear none is needed). "27 3 2007" answers both questions users actually have; "01 02 2003" answers neither.',
     },
     {
       title: "Highlight only the wrong part",
-      body: "If one field is empty or impossible, say so — \"[Date] must include a year\" — and pass parts to the Error to mark just that field invalid. If you cannot tell which part is wrong, or the parts are individually fine but the date is not real, leave parts unset so the whole date is highlighted. Either way the user's correct entries are never cleared.",
+      body: 'If one field is empty or impossible, say so — "[Date] must include a year" — and pass parts to the Error to mark just that field invalid. If you cannot tell which part is wrong, or the parts are individually fine but the date is not real, leave parts unset so the whole date is highlighted. Either way the user\'s correct entries are never cleared.',
     },
     {
       title: "Autofill for dates of birth",
-      body: 'When the date is the user\'s own date of birth, pass autoComplete="bday" to the Root — each Field gets the matching bday-day / bday-month / bday-year value, so browsers can fill it and assistive technology knows the field\'s purpose. This is WCAG 1.3.5 (Identify Input Purpose). Leave it off for any other date: a wrong autofilled birthday in a membership-start field is worse than typing.',
+      body: "When the date is the user's own date of birth, pass autoComplete=\"bday\" to the Root — each Field gets the matching bday-day / bday-month / bday-year value, so browsers can fill it and assistive technology knows the field's purpose. This is WCAG 1.3.5 (Identify Input Purpose). Leave it off for any other date: a wrong autofilled birthday in a membership-start field is worse than typing.",
     },
     {
       title: "Linking from an ErrorSummary",
@@ -117,7 +117,7 @@ const doc: ComponentContent = {
     },
     {
       title: "Accept how people write dates",
-      body: "Users copy dates from documents that disagree about format. Accept a leading zero and its absence, and validate on submit rather than while typing — a field that complains about \"3\" before the user has finished \"31\" teaches them to distrust the form.",
+      body: 'Users copy dates from documents that disagree about format. Accept a leading zero and its absence, and validate on submit rather than while typing — a field that complains about "3" before the user has finished "31" teaches them to distrust the form.',
     },
   ],
   errors: [
@@ -145,16 +145,16 @@ const doc: ComponentContent = {
   accessibility: [
     "The group is a native <fieldset> named by its <legend>, so screen readers announce the question with each of the fields.",
     "Each Field has its own visible <label> — Day, Month, Year by default; pass children to swap them for other languages.",
-    "The Description and Error are linked to the fieldset via aria-describedby, and the Error uses role=\"alert\" so it is announced as it appears; invalid fields also set aria-invalid.",
+    'The Description and Error are linked to the fieldset via aria-describedby, and the Error uses role="alert" so it is announced as it appears; invalid fields also set aria-invalid.',
     'Each field uses inputMode="numeric" — a number pad on touch devices without the scroll-wheel and silent-value-change hazards of type="number".',
     "The fields are sized to their answers (two digits, four for the year) — width is information about the expected length.",
   ],
   props: [
     {
       name: "Root",
-      type: "name? · autoComplete?: \"bday\" · fieldset props",
+      type: 'name? · autoComplete?: "bday" · fieldset props',
       description:
-        "The fieldset and the wiring. name prefixes each field's submitted name ({name}-day…); autoComplete=\"bday\" wires date-of-birth autofill.",
+        'The fieldset and the wiring. name prefixes each field\'s submitted name ({name}-day…); autoComplete="bday" wires date-of-birth autofill.',
     },
     {
       name: "Legend",
@@ -165,14 +165,13 @@ const doc: ComponentContent = {
     {
       name: "Description",
       type: "p props",
-      description:
-        "Helper text linked to the group — give an example date.",
+      description: "Helper text linked to the group — give an example date.",
     },
     {
       name: "Error",
-      type: "parts?: (\"day\" | \"month\" | \"year\")[] · p props",
+      type: 'parts?: ("day" | "month" | "year")[] · p props',
       description:
-        "Error message announced via role=\"alert\". parts narrows the invalid state to the fields it names; default is all of them.",
+        'Error message announced via role="alert". parts narrows the invalid state to the fields it names; default is all of them.',
     },
     {
       name: "Fields / Field",

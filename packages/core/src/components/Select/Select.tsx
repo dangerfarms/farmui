@@ -38,7 +38,7 @@ export type SelectControlProps = Omit<
 >;
 
 /**
- * SelectControl — the bare, composable select: the styled box, chevron and the
+ * The bare, composable select: the styled box, chevron and the
  * native `<select>`. Forwards `id` / `aria-*` straight to the `<select>`.
  */
 const SelectControl = forwardRef<HTMLSelectElement, SelectControlProps>(
@@ -133,10 +133,10 @@ const SelectControl = forwardRef<HTMLSelectElement, SelectControlProps>(
 );
 
 /**
- * Select — a styled wrapper around a native `<select>`; accessible and zero-JS.
+ * A styled wrapper around a native `<select>`; accessible and zero-JS.
  *
- * With no `label`/`description`/`error` it renders just the bare control; with
- * any of them it composes the accessible {@link Field} primitive.
+ * The `label`/`description`/`error` props compose {@link Field}, exactly
+ * as Input does; bare, it is the styled box alone.
  */
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   function Select(
@@ -164,7 +164,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           <Field.Label>
             {label}
             {(withAsterisk || required) && (
-              <span className="fui-Select-required" aria-hidden>
+              <span className="fui-required" aria-hidden>
                 *
               </span>
             )}

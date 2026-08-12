@@ -36,6 +36,16 @@
   }
 }
 
+/* The required asterisk: one marker class shared by every labelled
+   control. It renders inside a label, outside any control box, so it is
+   scoped to itself. */
+@scope (.fui-required) {
+  :scope {
+    margin-inline-start: 0.15em;
+    color: var(--fui-danger);
+  }
+}
+
 /* Error state is detected, not declared: a field is invalid when it
    contains a rendered error message, or when the platform says so
    (:user-invalid after user interaction). */

@@ -21,7 +21,7 @@ const sizeVar: Record<FarmUISize, string> = {
 };
 
 /**
- * Loader — an animated indicator for pending, indeterminate work.
+ * An animated indicator for pending, indeterminate work.
  *
  * Coloured by the brand token, so a `--fui-context` region recolours it
  * with no prop; the parts draw with `currentColor`, so a plain `color:`
@@ -55,23 +55,23 @@ export const Loader = forwardRef<HTMLSpanElement, LoaderProps>(function Loader(
       {...rest}
     >
       {variant === "spinner" && (
-        <span className={"fui-Loader-spinner"} aria-hidden />
+        <span className="fui-Loader-spinner" aria-hidden />
       )}
       {variant === "dots" && (
-        <span className={"fui-Loader-dots"} aria-hidden>
-          <span className={"fui-Loader-dot"} />
-          <span className={"fui-Loader-dot"} />
-          <span className={"fui-Loader-dot"} />
+        <span className="fui-Loader-dots" aria-hidden>
+          <span className="fui-Loader-dot" />
+          <span className="fui-Loader-dot" />
+          <span className="fui-Loader-dot" />
         </span>
       )}
       {variant === "bars" && (
-        <span className={"fui-Loader-bars"} aria-hidden>
-          <span className={"fui-Loader-bar"} />
-          <span className={"fui-Loader-bar"} />
-          <span className={"fui-Loader-bar"} />
+        <span className="fui-Loader-bars" aria-hidden>
+          <span className="fui-Loader-bar" />
+          <span className="fui-Loader-bar" />
+          <span className="fui-Loader-bar" />
         </span>
       )}
-      <span className={"fui-Loader-srOnly"}>{label}</span>
+      <span className="fui-Loader-srOnly">{label}</span>
     </span>
   );
 });

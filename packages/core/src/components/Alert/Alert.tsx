@@ -67,9 +67,9 @@ export interface AlertProps extends Omit<AlertRootProps, "title"> {
 }
 
 /**
- * Alert — a prominent message box for conveying status or feedback.
+ * A prominent message box for conveying status or feedback.
  *
- * Neutral by default — status is declared by context, not props: declare
+ * Neutral until a --fui-context region says otherwise: declare
  * `--fui-context` on a region (an ancestor — a style query never matches
  * the element that declares it, so a one-element region is a wrapper) and
  * the look derives from that status's colour:

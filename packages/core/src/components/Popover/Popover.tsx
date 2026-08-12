@@ -21,11 +21,10 @@ import { cx } from "../../utils";
 import { mergeProps, renderWithProps } from "../../render";
 import type { RenderProp } from "../../render";
 
-type AnyRenderProps = Record<string, unknown>;
 import { Button } from "../Button/Button";
 
 /**
- * Popover — a click-triggered floating panel, composed from parts.
+ * A click-triggered floating panel, composed from parts.
  *
  * The Popup renders with the native `popover` attribute, so the browser
  * provides the top layer (no z-index, no clipping by ancestor overflow),
@@ -191,8 +190,7 @@ export interface PopoverTriggerRenderProps {
   onClick: (e: ReactMouseEvent<Element>) => void;
 }
 
-export interface PopoverTriggerProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface PopoverTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Substitute your own element as the trigger
    * (`render={<a href="…" />}`) or pass a function receiving the wiring
@@ -225,7 +223,9 @@ function PopoverTrigger({ render, children, ...rest }: PopoverTriggerProps) {
 
   return render ? (
     // Consumer props on the part must merge into the render element, not drop.
-    <>{renderWithProps(render, (mergeProps(triggerProps as unknown as AnyRenderProps, { children, ...rest }) as unknown as typeof triggerProps))}</>
+    <>
+      {renderWithProps(render, mergeProps(triggerProps, { children, ...rest }))}
+    </>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, triggerProps)}</>
   );
@@ -334,14 +334,17 @@ function PopoverTitle({ className, children, ...rest }: PopoverTitleProps) {
   const { registerTitle } = ctx;
   useEffect(() => registerTitle(), [registerTitle]);
   return (
-    <h2 className={cx("fui-Popover-title", className)} id={ctx.titleId} {...rest}>
+    <h2
+      className={cx("fui-Popover-title", className)}
+      id={ctx.titleId}
+      {...rest}
+    >
       {children}
     </h2>
   );
 }
 
-export interface PopoverDescriptionProps
-  extends HTMLAttributes<HTMLParagraphElement> {}
+export interface PopoverDescriptionProps extends HTMLAttributes<HTMLParagraphElement> {}
 
 function PopoverDescription({
   className,
@@ -368,8 +371,7 @@ export interface PopoverCloseRenderProps {
   onClick: (e: ReactMouseEvent<Element>) => void;
 }
 
-export interface PopoverCloseProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface PopoverCloseProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Substitute your own element; defaults to a FarmUI Button. */
   render?: RenderProp<PopoverCloseRenderProps>;
 }
@@ -382,7 +384,9 @@ function PopoverClose({ render, children, ...rest }: PopoverCloseProps) {
   };
   return render ? (
     // Consumer props on the part must merge into the render element, not drop.
-    <>{renderWithProps(render, (mergeProps(closeProps as unknown as AnyRenderProps, { children, ...rest }) as unknown as typeof closeProps))}</>
+    <>
+      {renderWithProps(render, mergeProps(closeProps, { children, ...rest }))}
+    </>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, closeProps)}</>
   );

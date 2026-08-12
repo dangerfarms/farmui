@@ -44,7 +44,6 @@ import pagination from "@/content/components/pagination";
 // Layout is CSS compositions, not components — see the Layout guide
 // (/docs/layout) and @farmui/core's layout.css.
 
-
 const content: ComponentContent[] = [
   field,
   fieldset,

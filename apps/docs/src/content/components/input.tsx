@@ -34,7 +34,10 @@ const doc: ComponentContent = {
               borderRadius: "var(--fui-radius-md)",
             }}
           >
-            <Input label="In a narrow container" placeholder="you@example.com" />
+            <Input
+              label="In a narrow container"
+              placeholder="you@example.com"
+            />
           </div>
           <div
             style={{
@@ -90,7 +93,7 @@ const doc: ComponentContent = {
     {
       title: "Native validation — no JS, no props",
       description:
-        "Constraint validation is detected too: with required or type=\"email\", the field styles itself via :user-invalid after you interact with it — no error prop, no state, nothing running in the browser. Try typing a non-email and tabbing away.",
+        'Constraint validation is detected too: with required or type="email", the field styles itself via :user-invalid after you interact with it — no error prop, no state, nothing running in the browser. Try typing a non-email and tabbing away.',
       code: `<Input label="Work email" type="email" required />`,
       render: () => (
         <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
@@ -148,7 +151,7 @@ const doc: ComponentContent = {
     },
     {
       title: "Codes and references",
-      body: "Values users copy rather than compose — booking references, invoice numbers, licence keys — are not words, so set spellCheck={false} to stop browsers underlining a correct value as a mistake. A digits-only reference also takes inputMode=\"numeric\".",
+      body: 'Values users copy rather than compose — booking references, invoice numbers, licence keys — are not words, so set spellCheck={false} to stop browsers underlining a correct value as a mistake. A digits-only reference also takes inputMode="numeric".',
     },
     {
       title: "Autofill and input purpose",

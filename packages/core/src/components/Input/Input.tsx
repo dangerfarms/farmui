@@ -35,7 +35,7 @@ export type InputControlProps = Omit<
 >;
 
 /**
- * InputControl — the bare, composable text field: the bordered box, optional
+ * The bare, composable text field: the bordered box, optional
  * sections and the `<input>`. It forwards `id` / `aria-*` straight to the
  * `<input>`, so it drops cleanly into `<Field.Control render={<InputControl />} />`.
  */
@@ -94,12 +94,12 @@ const InputControl = forwardRef<HTMLInputElement, InputControlProps>(
 );
 
 /**
- * Input — a labelled text field.
+ * A labelled text field.
  *
- * With no `label`/`description`/`error` it renders just the bare control. With
- * any of them it composes the accessible {@link Field} primitive under the
- * hood, so the label/description/error wiring lives in exactly one place.
- * For full control over structure, use `Field.*` directly.
+ * `label`, `description` and `error` compose the accessible {@link Field}
+ * primitive under the hood, so that wiring lives in exactly one place;
+ * omit all three and only the bordered box renders. For full control over
+ * structure, use `Field.*` directly.
  */
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   {
@@ -124,7 +124,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         <Field.Label>
           {label}
           {(withAsterisk || required) && (
-            <span className="fui-Input-required" aria-hidden>
+            <span className="fui-required" aria-hidden>
               *
             </span>
           )}

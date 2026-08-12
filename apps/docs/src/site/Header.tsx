@@ -15,9 +15,7 @@ export function Header() {
         <div className={classes.left}>
           <Logo />
           <nav className={classes.nav} aria-label="Primary">
-            <Link href={FIRST_COMPONENT_HREF}>
-              Components
-            </Link>
+            <Link href={FIRST_COMPONENT_HREF}>Components</Link>
             <Link href="/docs/theming">Theming</Link>
           </nav>
         </div>

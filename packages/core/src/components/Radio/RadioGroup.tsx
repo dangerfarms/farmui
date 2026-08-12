@@ -42,7 +42,7 @@ export interface RadioGroupProps {
 }
 
 /**
- * RadioGroup — labels and lays out a set of mutually exclusive {@link Radio}
+ * Labels and lays out a set of mutually exclusive {@link Radio}
  * options, sharing a single `name` so native inputs enforce exclusivity.
  *
  * Options participate via context (not element cloning), so `<Radio>`s work
@@ -98,22 +98,22 @@ export function RadioGroup({
           <Fieldset.Legend>
             {label}
             {withAsterisk && (
-              <span className={"fui-Radio-required"} aria-hidden>
+              <span className="fui-required" aria-hidden>
                 *
               </span>
             )}
           </Fieldset.Legend>
         )}
         {description && (
-          <span className={"fui-Radio-groupDescription"} id={descId}>
+          <span className="fui-Radio-groupDescription" id={descId}>
             {description}
           </span>
         )}
-        <div className={"fui-Radio-options"} data-orientation={orientation}>
+        <div className="fui-Radio-options" data-orientation={orientation}>
           {options}
         </div>
         {error && (
-          <span className={"fui-Radio-error"} id={errId} role="alert">
+          <span className="fui-Radio-error" id={errId} role="alert">
             {error}
           </span>
         )}

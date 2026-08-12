@@ -19,11 +19,10 @@ import { cx } from "../../utils";
 import { mergeProps, renderWithProps } from "../../render";
 import type { RenderProp } from "../../render";
 
-type AnyRenderProps = Record<string, unknown>;
 import { Button } from "../Button/Button";
 
 /**
- * Toast — transient notifications, composed from parts.
+ * Transient notifications, composed from parts.
  *
  * The Viewport renders with `popover="manual"`, so the browser provides the
  * top layer (above every dialog and popover, no z-index war) and nothing can
@@ -91,7 +90,10 @@ interface ToastContextValue {
 const ToastContext = createContext<ToastContextValue | null>(null);
 
 /** Fire and dismiss toasts from anywhere under a Toast.Provider. */
-export function useToast(): Pick<ToastContextValue, "toasts" | "add" | "close"> {
+export function useToast(): Pick<
+  ToastContextValue,
+  "toasts" | "add" | "close"
+> {
   const ctx = useContext(ToastContext);
   if (!ctx) {
     throw new Error("useToast must be called inside <Toast.Provider>.");
@@ -121,14 +123,19 @@ function ToastProvider({
   const [exiting, setExiting] = useState<ReadonlySet<string>>(new Set());
   // Per-toast countdown bookkeeping so pause/resume keeps the remaining time.
   const timers = useRef(
-    new Map<string, { handle: ReturnType<typeof setTimeout> | null; remaining: number; startedAt: number }>(),
+    new Map<
+      string,
+      {
+        handle: ReturnType<typeof setTimeout> | null;
+        remaining: number;
+        startedAt: number;
+      }
+    >(),
   );
   const pausedRef = useRef(false);
 
   const remove = useCallback((id?: string) => {
-    toastsRef.current = id
-      ? toastsRef.current.filter((t) => t.id !== id)
-      : [];
+    toastsRef.current = id ? toastsRef.current.filter((t) => t.id !== id) : [];
     setToasts(toastsRef.current);
     setExiting((prev) => {
       if (!id) return new Set();
@@ -164,6 +171,8 @@ function ToastProvider({
       const timer = timers.current.get(id);
       if (timer?.handle) clearTimeout(timer.handle);
       timers.current.delete(id);
+      // Must match the CSS exit transition (--fui-duration-lg = 300ms):
+      // shorter unmounts mid-animation, longer leaves a ghost node.
       setTimeout(() => remove(id), 300);
     },
     [remove],
@@ -360,8 +369,7 @@ export interface ToastActionRenderProps {
   onClick: (e: ReactMouseEvent<Element>) => void;
 }
 
-export interface ToastActionProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ToastActionProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** The toast this action belongs to (its activation dismisses it). */
   toastId: string;
   onAction?: () => void;
@@ -389,19 +397,25 @@ function ToastAction({
   };
   return render ? (
     // Consumer props on the part must merge into the render element, not drop.
-    <>{renderWithProps(render, (mergeProps(actionProps as unknown as AnyRenderProps, { children, ...rest }) as unknown as typeof actionProps))}</>
+    <>
+      {renderWithProps(render, mergeProps(actionProps, { children, ...rest }))}
+    </>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, actionProps)}</>
   );
 }
 
-export interface ToastCloseProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ToastCloseProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** The toast to dismiss. */
   toastId: string;
 }
 
-function ToastClose({ toastId, className, children, ...rest }: ToastCloseProps) {
+function ToastClose({
+  toastId,
+  className,
+  children,
+  ...rest
+}: ToastCloseProps) {
   const ctx = useContext(ToastContext);
   if (!ctx) {
     throw new Error("Toast.Close must be rendered inside <Toast.Provider>.");
@@ -429,7 +443,7 @@ function ToastClose({ toastId, className, children, ...rest }: ToastCloseProps) 
 }
 
 /**
- * Toasts — the ready-made viewport: renders every active toast with title,
+ * The ready-made viewport: renders every active toast with title,
  * description, action and a dismiss button. Compose the parts yourself only
  * when this layout doesn't fit.
  */

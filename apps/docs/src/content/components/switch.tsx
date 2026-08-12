@@ -64,7 +64,7 @@ const doc: ComponentContent = {
   howItWorks: [
     {
       title: "A switch acts now, a checkbox acts on submit",
-      body: "role=\"switch\" announces on/off, and users expect flipping it to take effect immediately — like a light switch. Inside a form that applies changes on save, that expectation is a lie: use Checkbox, whose ticked state reads as “will apply when I submit”. The test is the presence of a save button — if there is one, it isn't a Switch.",
+      body: 'role="switch" announces on/off, and users expect flipping it to take effect immediately — like a light switch. Inside a form that applies changes on save, that expectation is a lie: use Checkbox, whose ticked state reads as “will apply when I submit”. The test is the presence of a save button — if there is one, it isn\'t a Switch.',
     },
     {
       title: "Label the affirmative",
@@ -81,6 +81,21 @@ const doc: ComponentContent = {
       name: "label",
       type: "ReactNode",
       description: "Label rendered beside the toggle.",
+    },
+    {
+      name: "description",
+      type: "ReactNode",
+      description: "Helper text rendered below the label row.",
+    },
+    {
+      name: "error",
+      type: "ReactNode",
+      description: "Error message; puts the switch in an invalid state.",
+    },
+    {
+      name: "withAsterisk",
+      type: "boolean",
+      description: "Show a required asterisk next to the label.",
     },
     {
       name: "labelPosition",

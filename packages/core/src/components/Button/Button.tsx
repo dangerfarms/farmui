@@ -15,7 +15,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 /**
- * Button — the primary way to trigger an action.
+ * The primary way to trigger an action.
  *
  * Intentionally minimal: it renders a native `<button>` and takes children.
  * Appearance is decided by CONTEXT, not props (see the Contextualism guide):
@@ -55,7 +55,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       );
     }
     return (
-      <button ref={ref} className={cx("fui-Button-root", className)} {...rest}>
+      // type="button" unless overridden: a bare <button> inside a form is a
+      // native submit, so "Cancel" buttons would submit the form.
+      <button
+        ref={ref}
+        type="button"
+        className={cx("fui-Button-root", className)}
+        {...rest}
+      >
         {children}
       </button>
     );

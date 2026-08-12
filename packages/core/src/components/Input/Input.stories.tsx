@@ -23,7 +23,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Live playground — tweak props in the Controls panel. */
 export const Playground: Story = {};
 
 /**
@@ -70,7 +69,8 @@ export const WithError: Story = {
   args: {
     label: "Email",
     placeholder: "you@example.com",
-    error: "Enter an email address in the correct format, like name@example.com",
+    error:
+      "Enter an email address in the correct format, like name@example.com",
     defaultValue: "not-an-email",
   },
 };

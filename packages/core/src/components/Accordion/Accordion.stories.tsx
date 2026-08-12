@@ -40,7 +40,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Live playground — toggle single vs. multiple open in the Controls panel. */
 export const Playground: Story = {};
 
 /**

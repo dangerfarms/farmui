@@ -86,7 +86,7 @@ Guardrails enforce this: `pnpm lint` runs oxlint + stylelint
 - **Forced colors is part of done**: any state conveyed by background colour
   needs a `@media (forced-colors: active)` treatment with system colours
   (see Switch/Radio/Menu for the pattern). Verify with headless Chrome's
-  `--force-high-contrast` flag; remember the override must come *after* the
+  `--force-high-contrast` flag; remember the override must come _after_ the
   base rule it replaces (same specificity — order decides).
 
 ## Voice standards
@@ -122,7 +122,7 @@ consumer (or agent) who learns it once knows every component.
 **`render` is never required** — with one deliberate exception. Every part
 renders a sensible built-in element for its role (`Popover.Trigger` → a
 FarmUI Button, `Breadcrumbs.Item` → a link via `href`, `Popover.Close` → a
-Button). The `render` prop exists only to *substitute* that element
+Button). The `render` prop exists only to _substitute_ that element
 (`render={<a href="…" />}`, or a function of the wiring props). If a part's
 common case needs `render`, the part has the wrong default element. The
 exception is `Field.Control`, whose entire purpose is wiring an arbitrary
@@ -157,12 +157,12 @@ Any JSX that uses compound parts (docs demos included) must live in a
 **State attributes** — the shared styling vocabulary, identical on every
 component (never invent synonyms):
 
-| Attribute         | Where          | Meaning                                    |
-| ----------------- | -------------- | ------------------------------------------ |
-| `data-popup-open` | trigger        | its popup/bubble is open                   |
-| `data-open`       | popup/panel    | open — uniform across enhanced & fallback  |
-| `data-disabled`   | wrapper/control| disabled styling hook                      |
-| `data-current`    | nav item       | current page/location                      |
+| Attribute                     | Where                                                    | Meaning                                                                                                 |
+| ----------------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `data-popup-open`             | trigger                                                  | its popup/bubble is open                                                                                |
+| `data-open`                   | popup/panel                                              | open — uniform across enhanced & fallback                                                               |
+| `data-disabled`               | wrapper/control                                          | disabled styling hook                                                                                   |
+| `data-current`                | nav item                                                 | current page/location                                                                                   |
 | `data-size` / `data-position` | some display components (Badge, Avatar, Progress, Modal) | instance styling hooks read by the stylesheet — form controls have no size hooks: their sizing is fluid |
 
 Components built on native state use the platform's hook instead (e.g.
@@ -178,7 +178,7 @@ attributes.
 components inside it; never blur them:
 
 - **Contexts** (`--fui-context: primary | danger | success | warning | info`)
-  — what the region *means*. A registered, inherited custom property declared
+  — what the region _means_. A registered, inherited custom property declared
   on any element (style attribute or the region's own CSS) and read via
   container style queries (`@container (style(--fui-context: danger))`) in
   the Contexts section of `tokens.css` and in component files. **Never a data
@@ -188,9 +188,9 @@ components inside it; never blur them:
   (Alert, Badge, Loader, Progress) have no variant or colour props — they
   consume the same context, typically as a one-element region declared on
   the component itself.
-- **Layout hints** (`data-fui-buttons="block"`) — how the region *arranges*
+- **Layout hints** (`data-fui-buttons="block"`) — how the region _arranges_
   its contents.
-- **Containers** (`container-type: inline-size`) — how *big* the region is;
+- **Containers** (`container-type: inline-size`) — how _big_ the region is;
   drives the fluid `cqi` tokens and Button's narrow-container full-width
   behaviour.
 
@@ -224,6 +224,7 @@ pnpm format
 All four should pass cleanly. Please use
 [Conventional Commits](https://www.conventionalcommits.org/) for commit messages
 (`feat:`, `fix:`, `docs:`, `refactor:`, …).
+
 - `pnpm --filter @farmui/core test` — the a11y and interaction suites
 
 ## Releasing

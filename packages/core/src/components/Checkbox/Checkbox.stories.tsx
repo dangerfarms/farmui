@@ -11,18 +11,19 @@ const meta = {
     disabled: false,
     defaultChecked: false,
   },
-  argTypes: {
-  },
 } satisfies Meta<typeof Checkbox>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Live playground — tweak props in the Controls panel. */
 export const Playground: Story = {};
 
 export const Checked: Story = {
   args: { label: "Subscribe to the newsletter", defaultChecked: true },
+};
+
+export const Required: Story = {
+  args: { label: "Accept the terms", withAsterisk: true },
 };
 
 export const Indeterminate: Story = {

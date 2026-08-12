@@ -21,7 +21,7 @@ const toLen = (v: number | string | undefined): string | undefined =>
   typeof v === "number" ? `${v}px` : v;
 
 /**
- * Skeleton — an animated placeholder shown while content loads.
+ * An animated placeholder shown while content loads.
  */
 export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
   function Skeleton(

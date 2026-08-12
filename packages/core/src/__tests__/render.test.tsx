@@ -34,7 +34,11 @@ describe("mergeProps", () => {
       { style: { anchorName: "--a", color: "wiring" } },
       { style: { color: "own", margin: 1 } },
     );
-    expect(props.style).toEqual({ anchorName: "--a", color: "wiring", margin: 1 });
+    expect(props.style).toEqual({
+      anchorName: "--a",
+      color: "wiring",
+      margin: 1,
+    });
   });
 
   it("lets the element's own scalar props win", () => {
@@ -59,11 +63,7 @@ describe("mergeProps", () => {
 describe("Button render polymorphism", () => {
   it("renders as a link with Button classes and attributes", async () => {
     const { Button } = await import("../index");
-    render(
-      <Button render={<a href="/signup" />}>
-        Get started
-      </Button>,
-    );
+    render(<Button render={<a href="/signup" />}>Get started</Button>);
     const link = screen.getByRole("link", { name: "Get started" });
     expect(link).toHaveAttribute("href", "/signup");
     expect(link).toHaveClass("fui-Button-root");
@@ -77,7 +77,11 @@ describe("Popover.Trigger render merge", () => {
     const { Popover } = await import("../index");
     render(
       <Popover.Root>
-        <Popover.Trigger render={<a href="#x" />} className="mine" onClick={spy}>
+        <Popover.Trigger
+          render={<a href="#x" />}
+          className="mine"
+          onClick={spy}
+        >
           Go
         </Popover.Trigger>
       </Popover.Root>,
@@ -100,10 +104,12 @@ describe("renderWithProps", () => {
 
   it("clones an element render with merged props", () => {
     render(
-      <>{renderWithProps(<button className="own">el</button>, {
-        className: "wiring",
-        id: "b1",
-      })}</>,
+      <>
+        {renderWithProps(<button className="own">el</button>, {
+          className: "wiring",
+          id: "b1",
+        })}
+      </>,
     );
     const btn = screen.getByRole("button");
     expect(btn.className).toBe("wiring own");

@@ -22,11 +22,10 @@ import { cx } from "../../utils";
 import { mergeProps, renderWithProps } from "../../render";
 import type { RenderProp } from "../../render";
 
-type AnyRenderProps = Record<string, unknown>;
 import { Button } from "../Button/Button";
 
 /**
- * Tooltip — a small floating label revealed on hover and keyboard focus.
+ * A small floating label revealed on hover and keyboard focus.
  *
  * Tooltips are visual-only: never put essential information in one, since
  * hover is unavailable to touch users. The bubble opens after a short delay
@@ -197,8 +196,12 @@ function TooltipRoot({
   const hoveredRef = useRef(false);
   const focusedRef = useRef(false);
 
-  const showTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
-  const hideTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const showTimer = useRef<ReturnType<typeof setTimeout> | undefined>(
+    undefined,
+  );
+  const hideTimer = useRef<ReturnType<typeof setTimeout> | undefined>(
+    undefined,
+  );
   const clearTimers = useCallback(() => {
     clearTimeout(showTimer.current);
     clearTimeout(hideTimer.current);
@@ -332,8 +335,7 @@ export interface TooltipTriggerRenderProps {
   style: CSSProperties;
 }
 
-export interface TooltipTriggerProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface TooltipTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Substitute your own interactive element as the trigger
    * (`render={<IconButton />}`) or pass a function receiving the wiring
@@ -357,7 +359,9 @@ function TooltipTrigger({ render, children, ...rest }: TooltipTriggerProps) {
 
   return render ? (
     // Consumer props on the part must merge into the render element, not drop.
-    <>{renderWithProps(render, (mergeProps(triggerProps as unknown as AnyRenderProps, { children, ...rest }) as unknown as typeof triggerProps))}</>
+    <>
+      {renderWithProps(render, mergeProps(triggerProps, { children, ...rest }))}
+    </>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, triggerProps)}</>
   );

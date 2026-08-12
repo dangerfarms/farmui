@@ -90,7 +90,7 @@ const doc: ComponentContent = {
     'Without an image, the root becomes role="img" with aria-label from name (or alt) — screen readers hear the full name (“Jane Doe”), never the raw initials (“JD”).',
     "A bare <Avatar /> with no name from any source is treated as decorative automatically (aria-hidden, no role) — an identifying avatar must be given a name, an alt, or an aria-label.",
     "When the name is visibly printed next to the avatar, pass aria-hidden so assistive tech does not read the same name twice.",
-    "The fallback glyph is aria-hidden and focusable=\"false\" — it is decoration; identity always comes from the name/alt wiring above.",
+    'The fallback glyph is aria-hidden and focusable="false" — it is decoration; identity always comes from the name/alt wiring above.',
   ],
   props: [
     {

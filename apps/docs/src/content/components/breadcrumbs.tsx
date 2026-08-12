@@ -23,7 +23,8 @@ const doc: ComponentContent = {
     },
     {
       title: "Custom separator",
-      description: "Set any glyph once on the Root; CSS draws it between items.",
+      description:
+        "Set any glyph once on the Root; CSS draws it between items.",
       code: `<Breadcrumbs.Root separator="→">
   <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
   <Breadcrumbs.Item href="/projects">Projects</Breadcrumbs.Item>
@@ -56,7 +57,7 @@ const doc: ComponentContent = {
   howItWorks: [
     {
       title: "The current page ends the trail, unlinked",
-      body: "The last crumb is the page the user is on: mark it current and give it no href. It then renders as plain text with aria-current=\"page\" — a link to the page you are already on is a no-op that costs a click and misleads assistive technology. And never render breadcrumbs on the homepage: there is no path above it to show.",
+      body: 'The last crumb is the page the user is on: mark it current and give it no href. It then renders as plain text with aria-current="page" — a link to the page you are already on is a no-op that costs a click and misleads assistive technology. And never render breadcrumbs on the homepage: there is no path above it to show.',
     },
     {
       title: "A trail needs a real hierarchy",
@@ -68,8 +69,8 @@ const doc: ComponentContent = {
     },
   ],
   accessibility: [
-    "Renders a <nav aria-label=\"Breadcrumbs\"> wrapping an ordered list, so assistive technology announces it as navigation with a known item count.",
-    "The current page is marked aria-current=\"page\" — explicitly by the consumer, so truncated paths stay correct.",
+    'Renders a <nav aria-label="Breadcrumbs"> wrapping an ordered list, so assistive technology announces it as navigation with a known item count.',
+    'The current page is marked aria-current="page" — explicitly by the consumer, so truncated paths stay correct.',
     "Separators are CSS pseudo-content, invisible to screen readers — no aria-hidden bookkeeping in the DOM.",
   ],
   props: [
@@ -77,7 +78,7 @@ const doc: ComponentContent = {
       name: "Root",
       type: `separator?: string`,
       description:
-        "The <nav> + list wrapper. separator sets the CSS-drawn glyph between items (default \"/\").",
+        'The <nav> + list wrapper. separator sets the CSS-drawn glyph between items (default "/").',
     },
     {
       name: "Item",

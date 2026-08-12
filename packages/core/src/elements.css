@@ -22,7 +22,8 @@
      outline. The outline, not the shadow, carries the a11y guarantee — it
      survives forced-colors, follows radius, and isn't clipped by overflow. */
   :where([class*="fui-"]):focus-visible,
-  :where([class*="fui-"]) :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  :where([class*="fui-"])
+    :where(a, button, input, select, textarea, [tabindex]):focus-visible {
     box-shadow: 0 0 0 2px var(--fui-bg);
     outline: var(--fui-ring-width) solid var(--fui-ring-color);
     outline-offset: 2px;
@@ -35,12 +36,18 @@
 
   /* Disabled controls share one cursor; opacity stays a component decision
      via the --fui-disabled-opacity token. */
-  :where([class*="fui-"]):where(:disabled, [data-disabled], [aria-disabled="true"]),
-  :where([class*="fui-"]) :where(:disabled, [data-disabled], [aria-disabled="true"]) {
+  :where([class*="fui-"]):where(
+    :disabled,
+    [data-disabled],
+    [aria-disabled="true"]
+  ),
+  :where([class*="fui-"])
+    :where(:disabled, [data-disabled], [aria-disabled="true"]) {
     cursor: not-allowed;
   }
 
-  :where([class*="fui-"]) :where(a, button, input, select, textarea, [role="button"]),
+  :where([class*="fui-"])
+    :where(a, button, input, select, textarea, [role="button"]),
   :where(a, button)[class*="fui-"] {
     -webkit-tap-highlight-color: transparent;
   }

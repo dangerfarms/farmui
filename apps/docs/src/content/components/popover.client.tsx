@@ -44,9 +44,7 @@ export function PopoverFormDemo() {
         >
           <Input label="Name" placeholder="Wireless headphones" />
           <Input label="Price" placeholder="49.00" />
-          <Button type="submit">
-            Save
-          </Button>
+          <Button type="submit">Save</Button>
         </form>
       </Popover.Popup>
     </Popover.Root>

@@ -67,9 +67,9 @@ const doc: ComponentContent = {
     },
   ],
   accessibility: [
-    "The pager is a <nav aria-label=\"Pagination\"> (the label is overridable) wrapping a list, so assistive technology exposes it as a navigation landmark with a known number of items.",
-    "The active page carries aria-current=\"page\", and it is also styled via data-active — the position is announced, and colour is not the only visual signal.",
-    "Every control is a real <button type=\"button\"> with an explicit aria-label — \"Previous page\", \"Page 7\", \"Last page\" — so the icon-only controls and bare numbers all have unambiguous accessible names.",
+    'The pager is a <nav aria-label="Pagination"> (the label is overridable) wrapping a list, so assistive technology exposes it as a navigation landmark with a known number of items.',
+    'The active page carries aria-current="page", and it is also styled via data-active — the position is announced, and colour is not the only visual signal.',
+    'Every control is a real <button type="button"> with an explicit aria-label — "Previous page", "Page 7", "Last page" — so the icon-only controls and bare numbers all have unambiguous accessible names.',
     "Ellipsis separators are aria-hidden: they are visual shorthand for the gap, not stops in the reading order.",
     "Edge controls disable rather than disappear at the ends, and onChange fires only when the page actually changes — activating the current page or a disabled control announces nothing and reloads nothing.",
   ],

@@ -49,7 +49,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Live playground — tweak total/siblings/edges in the Controls panel. */
 export const Playground: Story = {};
 
 /** First/last edge buttons enabled via `withEdges`. */

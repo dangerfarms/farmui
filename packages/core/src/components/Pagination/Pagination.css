@@ -2,7 +2,9 @@
   :scope {
     /* Derived control height (the Button anatomy, incl. 1px borders) —
        keeps square min-width and the dots cell in step with the pages. */
-    --_control-h: calc(1.2 * var(--fui-text-sm) + 2 * var(--fui-space-sm) + 2px);
+    --_control-h: calc(
+      1.2 * var(--fui-text-sm) + 2 * var(--fui-space-sm) + 2px
+    );
   }
 
   .fui-Pagination-list {

@@ -35,7 +35,7 @@ const doc: ComponentContent = {
     {
       title: "Alert dialog (confirmation)",
       description:
-        "alert renders role=\"alertdialog\": the backdrop doesn't light-dismiss (closedby=\"closerequest\" — Escape still works), and autoFocus belongs on the least-destructive action so it is the default answer. Use for destructive or irreversible confirmations only.",
+        'alert renders role="alertdialog": the backdrop doesn\'t light-dismiss (closedby="closerequest" — Escape still works), and autoFocus belongs on the least-destructive action so it is the default answer. Use for destructive or irreversible confirmations only.',
       code: `<Modal.Popup alert size="sm">
   <Modal.Title>Delete this file?</Modal.Title>
   <Modal.Description>This cannot be undone.</Modal.Description>
@@ -79,6 +79,24 @@ const doc: ComponentContent = {
     "For anything long-form or multi-step — navigate to a page instead (GOV.UK: keep interactions in the page flow where possible).",
     "For non-essential announcements — use Alert in the page.",
   ],
+  howItWorks: [
+    {
+      title: "Destructive confirmations use the alert variant",
+      body: 'The alert prop on Modal.Popup renders role="alertdialog" and sets closedby="closerequest": the backdrop stops light-dismissing, so a stray click cannot answer a destructive question — only an explicit choice or Escape closes it. Reserve it for decisions with consequences; an ordinary modal should stay casually dismissible.',
+    },
+    {
+      title: "Focus is the browser's to manage",
+      body: "showModal() moves focus into the dialog, contains it, and returns it to the trigger on close. Add autoFocus only when the dialog's task starts at a specific control — a name field in a rename dialog. Anything else fights behaviour screen-reader users rely on.",
+    },
+    {
+      title: "A modal is one task",
+      body: "If the content scrolls, needs sections, or asks more than one question, it has outgrown the dialog — make it a page. The dialog's value is that everything needed for the decision is visible at once.",
+    },
+    {
+      title: "Always render a Title",
+      body: 'Modal.Title labels the dialog via aria-labelledby — it is what screen readers announce on open. A dialog without one is announced as, at best, "dialog": the user hears that something opened but not what it wants.',
+    },
+  ],
   accessibility: [
     "Built on the native <dialog> opened with showModal(): the browser provides the top layer, ::backdrop, real focus containment, Escape handling, and restores focus to the trigger on close — none of it re-implemented in JavaScript.",
     "Modal.Title and Modal.Description automatically label and describe the dialog via aria-labelledby / aria-describedby.",
@@ -102,7 +120,7 @@ const doc: ComponentContent = {
       name: "Popup",
       type: `size?: "sm" | "md" | "lg" · alert?: boolean`,
       description:
-        "The native <dialog>. size sets the panel width (24/32/44rem); alert renders role=\"alertdialog\" with no light dismiss (Escape still closes) for destructive confirmations.",
+        'The native <dialog>. size sets the panel width (24/32/44rem); alert renders role="alertdialog" with no light dismiss (Escape still closes) for destructive confirmations.',
     },
     {
       name: "Title / Description",

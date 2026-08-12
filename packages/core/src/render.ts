@@ -1,4 +1,4 @@
-import { cloneElement, isValidElement , version as reactVersion } from "react";
+import { cloneElement, isValidElement, version as reactVersion } from "react";
 import type { CSSProperties, ReactElement, ReactNode, Ref } from "react";
 import { cx } from "./utils";
 
@@ -19,8 +19,7 @@ import { cx } from "./utils";
 
 /** A render target: an element to merge props onto, or a function of them. */
 export type RenderProp<P> =
-  | ReactElement<Record<string, unknown>>
-  | ((props: P) => ReactNode);
+  ReactElement<Record<string, unknown>> | ((props: P) => ReactNode);
 
 type AnyProps = Record<string, unknown>;
 
@@ -48,15 +47,24 @@ const reactMajor = Number.parseInt(reactVersion, 10);
 const ARIA_LIST_KEYS = new Set(["aria-describedby", "aria-labelledby"]);
 
 /** Merge wiring props with an element's own props (see contract above). */
-export function mergeProps(wiring: AnyProps, own: AnyProps): AnyProps {
-  const merged: AnyProps = { ...wiring, ...own };
+export function mergeProps<W extends object, O extends object>(
+  wiring: W,
+  own: O,
+): W & O {
+  const wiringProps = wiring as AnyProps;
+  const ownProps = own as AnyProps;
+  const merged: AnyProps = { ...wiringProps, ...ownProps };
 
-  for (const key of Object.keys(wiring)) {
-    const w = wiring[key];
-    const o = own[key];
+  for (const key of Object.keys(wiringProps)) {
+    const w = wiringProps[key];
+    const o = ownProps[key];
     if (o === undefined || w === undefined) continue;
 
-    if (isEventHandlerKey(key) && typeof w === "function" && typeof o === "function") {
+    if (
+      isEventHandlerKey(key) &&
+      typeof w === "function" &&
+      typeof o === "function"
+    ) {
       merged[key] = (...args: unknown[]) => {
         (o as (...a: unknown[]) => void)(...args);
         (w as (...a: unknown[]) => void)(...args);
@@ -73,7 +81,7 @@ export function mergeProps(wiring: AnyProps, own: AnyProps): AnyProps {
     // else: own already wins via the spread order.
   }
 
-  return merged;
+  return merged as W & O;
 }
 
 /** Render a RenderProp with wiring props applied per the merge contract. */

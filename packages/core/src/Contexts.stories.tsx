@@ -1,15 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { CSSProperties, HTMLAttributes } from "react";
-import {
-  Button,
-  CheckboxControl,
-  Input,
-  Slider,
-  SwitchControl,
-} from "./index";
+import { Button, CheckboxControl, Input, Slider, SwitchControl } from "./index";
 
 /**
- * Contexts — contextual meaning as a custom property.
+ * Contextual meaning as a custom property.
  *
  * Declare `--fui-context: danger` on any region and every FarmUI component
  * inside adopts that meaning via container style queries; no component
@@ -89,7 +83,14 @@ export const InvertedRegion: Story = {
   render: () => (
     <Zone style={{ colorScheme: "dark" } as CSSProperties}>
       <strong style={{ color: "var(--fui-text)" }}>An on-dark section</strong>
-      <label style={{ display: "flex", gap: "0.5rem", alignItems: "center", color: "var(--fui-text)" }}>
+      <label
+        style={{
+          display: "flex",
+          gap: "0.5rem",
+          alignItems: "center",
+          color: "var(--fui-text)",
+        }}
+      >
         <CheckboxControl defaultChecked /> Dark-scheme tokens throughout
       </label>
       <div style={{ display: "flex", gap: "0.75rem" }}>

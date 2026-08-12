@@ -1,7 +1,7 @@
 /*
- * Badge — one colour channel (--_color); the pill derives from it: soft
- * tint via color-mix toward the page bg, text mixed toward black/white so
- * the label always reads on its own tint. Status comes from context, not props.
+ * The pill is mixed down from one --_color channel: a soft tint toward
+ * the page background, with the text pushed toward black or white so the
+ * label always reads on its own tint. The accent is the region's.
  */
 @scope (.fui-Badge-root) {
   :scope {

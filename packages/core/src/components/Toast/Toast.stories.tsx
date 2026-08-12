@@ -108,7 +108,9 @@ export const FiresAndDismisses: Story = {
     });
     await userEvent.click(dismiss);
     await waitFor(() =>
-      expect(within(document.body).queryByRole("status")).not.toBeInTheDocument(),
+      expect(
+        within(document.body).queryByRole("status"),
+      ).not.toBeInTheDocument(),
     );
   },
 };

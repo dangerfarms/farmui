@@ -14,7 +14,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Neutral by default — status is declared by context " +
+          "Neutral by default; the surrounding region sets the status " +
           "(`--fui-context` on an ancestor region — a wrapper for a " +
           "single alert), not by props.",
       },

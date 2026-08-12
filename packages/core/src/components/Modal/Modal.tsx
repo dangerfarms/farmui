@@ -22,11 +22,10 @@ import { cx } from "../../utils";
 import { mergeProps, renderWithProps } from "../../render";
 import type { RenderProp } from "../../render";
 
-type AnyRenderProps = Record<string, unknown>;
 import { Button } from "../Button/Button";
 
 /**
- * Modal — a blocking dialog for must-complete tasks, composed from parts.
+ * A blocking dialog for must-complete tasks, composed from parts.
  *
  * The Popup renders a native `<dialog>` opened with `showModal()`, so the
  * top layer, `::backdrop`, focus containment, Escape handling and
@@ -170,8 +169,7 @@ export interface ModalTriggerRenderProps {
   onClick: (e: ReactMouseEvent<Element>) => void;
 }
 
-export interface ModalTriggerProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ModalTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Substitute your own element as the trigger (`render={<a href="…" />}`)
    * or pass a function receiving the wiring props. Without it, the Trigger
@@ -199,14 +197,18 @@ function ModalTrigger({ render, children, ...rest }: ModalTriggerProps) {
 
   return render ? (
     // Consumer props on the part must merge into the render element, not drop.
-    <>{renderWithProps(render, (mergeProps(triggerProps as unknown as AnyRenderProps, { children, ...rest }) as unknown as typeof triggerProps))}</>
+    <>
+      {renderWithProps(render, mergeProps(triggerProps, { children, ...rest }))}
+    </>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, triggerProps)}</>
   );
 }
 
-export interface ModalPopupProps
-  extends Omit<DialogHTMLAttributes<HTMLDialogElement>, "open"> {
+export interface ModalPopupProps extends Omit<
+  DialogHTMLAttributes<HTMLDialogElement>,
+  "open"
+> {
   /** Panel width. @default "md" */
   size?: "sm" | "md" | "lg";
   /**
@@ -324,8 +326,7 @@ function ModalTitle({ className, children, ...rest }: ModalTitleProps) {
   );
 }
 
-export interface ModalDescriptionProps
-  extends HTMLAttributes<HTMLParagraphElement> {}
+export interface ModalDescriptionProps extends HTMLAttributes<HTMLParagraphElement> {}
 
 function ModalDescription({
   className,
@@ -355,8 +356,7 @@ export interface ModalCloseRenderProps {
   onClick: (e: ReactMouseEvent<Element>) => void;
 }
 
-export interface ModalCloseProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ModalCloseProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Substitute your own element; defaults to a FarmUI Button. */
   render?: RenderProp<ModalCloseRenderProps>;
 }
@@ -375,7 +375,9 @@ function ModalClose({ render, children, ...rest }: ModalCloseProps) {
   };
   return render ? (
     // Consumer props on the part must merge into the render element, not drop.
-    <>{renderWithProps(render, (mergeProps(closeProps as unknown as AnyRenderProps, { children, ...rest }) as unknown as typeof closeProps))}</>
+    <>
+      {renderWithProps(render, mergeProps(closeProps, { children, ...rest }))}
+    </>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, closeProps)}</>
   );

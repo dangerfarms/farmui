@@ -142,11 +142,6 @@
     gap: var(--fui-space-xs);
   }
 
-  .fui-Radio-required {
-    margin-inline-start: 0.15em;
-    color: var(--fui-danger);
-  }
-
   .fui-Radio-groupDescription {
     font-size: var(--fui-text-xs);
     color: var(--fui-text-muted);

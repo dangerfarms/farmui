@@ -38,7 +38,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Live playground — pick the default tab in the Controls panel. */
 export const Playground: Story = {};
 
 /** Tabs with an icon rendered before each label via `leftSection`. */

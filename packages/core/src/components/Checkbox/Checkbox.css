@@ -134,11 +134,6 @@
     line-height: 1.35;
   }
 
-  .fui-Checkbox-required {
-    color: var(--fui-danger);
-    margin-inline-start: 0.15em;
-  }
-
   .fui-Checkbox-description {
     font-size: var(--fui-text-xs);
     color: var(--fui-text-muted);

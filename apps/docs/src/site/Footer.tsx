@@ -27,9 +27,10 @@ const COLUMNS = [
     title: "Community",
     links: [
       { label: "GitHub", href: "https://github.com/dangerfarms/farmui" },
-      { label: "Discord", href: "#" },
-      { label: "X / Twitter", href: "#" },
-      { label: "Changelog", href: "#" },
+      {
+        label: "Changelog",
+        href: "https://github.com/dangerfarms/farmui/releases",
+      },
     ],
   },
 ];

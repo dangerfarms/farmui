@@ -162,9 +162,8 @@ export default function HomePage() {
               <span className="brandText">fast &amp; accessible.</span>
             </h1>
             <p className={c.subtitle}>
-              FarmUI is a React component library built
-              accessibility-first on the native web platform. Zero-runtime
-              styling, WCAG-compliant by default, and tiny bundles.
+              A React component library built on the native web platform: real
+              elements, zero-runtime CSS, and bundles small enough to read.
             </p>
             <div className={c.ctaRow}>
               <Link href="/docs" className={c.btnLink}>
@@ -342,7 +341,7 @@ export default function HomePage() {
         <div className={`${c.sectionHead} ${c.center}`}>
           <span className="eyebrow">The library</span>
           <h2 className={c.sectionTitle}>
-            {COMPONENTS.length}+ components, ready to ship.
+            {COMPONENTS.length} components, ready to ship.
           </h2>
           <p className={c.sectionSub}>
             Inputs, data display, feedback, overlays and navigation — accessible

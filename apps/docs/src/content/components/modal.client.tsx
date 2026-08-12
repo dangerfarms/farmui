@@ -79,9 +79,7 @@ export function ModalHeaderCloseDemo() {
           }}
         >
           <Modal.Title style={{ margin: 0 }}>Settings</Modal.Title>
-          <Modal.Close aria-label="Close">
-            ×
-          </Modal.Close>
+          <Modal.Close aria-label="Close">×</Modal.Close>
         </div>
         <Modal.Description>Manage your workspace settings.</Modal.Description>
       </Modal.Popup>

@@ -72,7 +72,12 @@ export const ProviderGroup: Story = {
   render: () => (
     <Tooltip.Provider>
       <div
-        style={{ display: "flex", gap: "1rem", justifyContent: "center", padding: "3rem" }}
+        style={{
+          display: "flex",
+          gap: "1rem",
+          justifyContent: "center",
+          padding: "3rem",
+        }}
       >
         {["Cut", "Copy", "Paste"].map((label) => (
           <Tooltip.Root key={label}>
@@ -104,9 +109,7 @@ export const FlipsAtViewportEdge: Story = {
         }}
       >
         <Tooltip.Root defaultOpen>
-          <Tooltip.Trigger>
-            Near the top edge
-          </Tooltip.Trigger>
+          <Tooltip.Trigger>Near the top edge</Tooltip.Trigger>
           <Tooltip.Popup position="top">
             Flipped below — arrow points up <Tooltip.Arrow />
           </Tooltip.Popup>

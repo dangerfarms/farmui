@@ -26,7 +26,7 @@ export type RadioControlProps = Omit<
 >;
 
 /**
- * RadioControl — the bare `<input type="radio">` + control dot. When rendered
+ * The bare `<input type="radio">` + control dot. When rendered
  * inside a `Field` it reads its id / describedby / aria-invalid from context.
  */
 const RadioControl = forwardRef<HTMLInputElement, RadioControlProps>(
@@ -80,6 +80,7 @@ const RadioControl = forwardRef<HTMLInputElement, RadioControlProps>(
           type="radio"
           className={cx("fui-Radio-input", className)}
           disabled={disabled}
+          {...rest}
           aria-invalid={resolvedAriaInvalid}
           aria-describedby={describedBy}
           onBlur={(e) => {
@@ -90,7 +91,6 @@ const RadioControl = forwardRef<HTMLInputElement, RadioControlProps>(
             onInvalid?.(e);
             checkOnInvalid(e);
           }}
-          {...rest}
           name={name}
           onChange={onChange}
           {...selection}
@@ -102,28 +102,20 @@ const RadioControl = forwardRef<HTMLInputElement, RadioControlProps>(
 );
 
 /**
- * Radio — a single choice within a set of mutually exclusive options.
+ * A single choice within a set of mutually exclusive options.
  *
- * With no `label`/`description` it renders just the bare control (which
- * self-wires inside a `Field`). Usually rendered inside a {@link RadioGroup}.
+ * Pass `label`/`description` for the usual labelled row, or nothing for
+ * the bare input (it self-wires inside a `Field`). Usually lives inside a
+ * {@link RadioGroup}.
  */
 export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
-  {
-    label,
-    description,
-    disabled,
-    id,
-    wrapperClassName,
-    ...control
-  },
+  { label, description, disabled, id, wrapperClassName, ...control },
   ref,
 ) {
   const autoId = useId();
 
   if (!label && !description) {
-    return (
-      <RadioControl ref={ref} id={id} disabled={disabled} {...control} />
-    );
+    return <RadioControl ref={ref} id={id} disabled={disabled} {...control} />;
   }
 
   const inputId = id ?? autoId;

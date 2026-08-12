@@ -14,9 +14,9 @@ export default function DocsIntro() {
     <div className={prose.prose}>
       <h1>Introduction</h1>
       <p className={prose.lead}>
-        FarmUI is a React component library focused on accessibility and
-        performance — WCAG-compliant components, zero-runtime
-        styling on native modern CSS, and tiny bundles.
+        FarmUI is a React component library that trusts the platform: native
+        elements carry the semantics, plain CSS carries the styling, and every
+        component ships with axe and keyboard tests.
       </p>
 
       <h2>Why FarmUI?</h2>
@@ -46,7 +46,7 @@ export default function DocsIntro() {
           management, and keyboard support baked in.
         </li>
         <li>
-          <strong>{COMPONENTS.length}+ components</strong> across inputs, data
+          <strong>{COMPONENTS.length} components</strong> across inputs, data
           display, feedback, overlays and navigation — and expanding.
         </li>
       </ul>

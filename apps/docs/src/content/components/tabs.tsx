@@ -135,15 +135,15 @@ const doc: ComponentContent = {
       body: "Many users never open a second tab, so nothing that everyone must see can live in one. Anything required — warnings, costs, prerequisites — goes above or outside the tabs, and the first tab gets the most-needed content because it is the only panel guaranteed to be read.",
     },
     {
-      title: "Tabs are view state, not routes",
+      title: "View state stays out of the URL",
       body: "Switching a tab updates React state, not the URL — reloading returns to defaultValue and the back button ignores tab changes. When a view should be linkable, use the controlled form (value/onChange) and mirror the value in the query string yourself; if every view deserves its own URL, you want pages with links, not tabs.",
     },
   ],
   accessibility: [
     "The tab list uses a roving tabindex: only the active tab sits in the Tab order (tabIndex 0, the rest -1), so keyboard users cross the whole list in one Tab press instead of stepping through every tab.",
     "Arrow Left/Right move through the tabs and wrap at the ends, Home/End jump to the first and last, and disabled tabs are skipped; moving focus also selects — the newly focused tab is activated immediately, so no separate Enter press is needed.",
-    "Inactive panels are hidden with hidden=\"until-found\" where the browser supports it, so find-in-page can match text inside a closed tab; a beforematch event then activates that tab. Browsers without support fall back to plain hidden.",
-    "The wiring is generated from one id: role=\"tablist\"/\"tab\"/\"tabpanel\" with aria-selected, aria-controls on each tab and aria-labelledby on each panel, so assistive technology announces which tab is active and what it controls.",
+    'Inactive panels are hidden with hidden="until-found" where the browser supports it, so find-in-page can match text inside a closed tab; a beforematch event then activates that tab. Browsers without support fall back to plain hidden.',
+    'The wiring is generated from one id: role="tablist"/"tab"/"tabpanel" with aria-selected, aria-controls on each tab and aria-labelledby on each panel, so assistive technology announces which tab is active and what it controls.',
     "Each panel has tabIndex 0, so a panel whose content contains no focusable element is still reachable — and scrollable — by keyboard.",
   ],
   props: [

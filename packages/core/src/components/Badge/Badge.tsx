@@ -1,6 +1,11 @@
 import { forwardRef } from "react";
 import type { HTMLAttributes, ReactNode } from "react";
-import { cx, resolveRadius, type FarmUIRadius, type FarmUISize } from "../../utils";
+import {
+  cx,
+  resolveRadius,
+  type FarmUIRadius,
+  type FarmUISize,
+} from "../../utils";
 
 export interface BadgeProps extends Omit<
   HTMLAttributes<HTMLSpanElement>,
@@ -16,24 +21,16 @@ export interface BadgeProps extends Omit<
 }
 
 /**
- * Badge — a compact pill for statuses, counts, and labels.
+ * A compact pill for statuses, counts, and labels.
  *
- * Neutral by default — status is declared by context, not props: declare
+ * Neutral by default; a --fui-context region colours it. Declare
  * `--fui-context` on a region (an ancestor — a style query never matches
  * the element that declares it, so a one-element region is a wrapper) and
  * the pill's tint and text derive from that status's colour. Icons are
  * composed as svg children and detected — there are no slot props.
  */
 export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(function Badge(
-  {
-    size = "md",
-    radius = "full",
-    dot,
-    className,
-    style,
-    children,
-    ...rest
-  },
+  { size = "md", radius = "full", dot, className, style, children, ...rest },
   ref,
 ) {
   return (
@@ -46,7 +43,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(function Badge(
       }
       {...rest}
     >
-      {dot && <span className={"fui-Badge-dot"} aria-hidden />}
+      {dot && <span className="fui-Badge-dot" aria-hidden />}
       {children}
     </span>
   );

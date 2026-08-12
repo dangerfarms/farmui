@@ -95,9 +95,7 @@ export const WithHeaderClose: Story = {
           }}
         >
           <Modal.Title style={{ margin: 0 }}>Settings</Modal.Title>
-          <Modal.Close aria-label="Close">
-            ×
-          </Modal.Close>
+          <Modal.Close aria-label="Close">×</Modal.Close>
         </div>
         <Modal.Description>Manage your workspace settings.</Modal.Description>
       </Modal.Popup>
@@ -137,9 +135,7 @@ export const OpensAndDismisses: Story = {
 
     await userEvent.keyboard("{Escape}");
     await waitFor(() => expect(dialog.open).toBe(false));
-    await waitFor(() =>
-      expect(trigger).not.toHaveAttribute("data-popup-open"),
-    );
+    await waitFor(() => expect(trigger).not.toHaveAttribute("data-popup-open"));
     await expect(trigger).toHaveFocus();
   },
 };

@@ -53,8 +53,8 @@ export default function Composition() {
       <p>
         When you need a different element — a link styled as a button, your
         router&apos;s <code>Link</code>, a component of your own — pass it via{" "}
-        <code>render</code>. The part&apos;s wiring (ids, ARIA, handlers,
-        anchor styles) merges onto the element you provide:
+        <code>render</code>. The part&apos;s wiring (ids, ARIA, handlers, anchor
+        styles) merges onto the element you provide:
       </p>
       <div className={prose.block}>
         <CodeBlock
@@ -80,10 +80,10 @@ export default function Composition() {
         simpler built-in form — or a gap you should report.
       </p>
       <p>
-        (If you&apos;ve used Radix&apos;s <code>asChild</code>: <code>render</code>{" "}
-        is Base UI&apos;s successor to it. A dedicated prop keeps{" "}
-        <code>children</code> unambiguous — always content, never secretly the
-        element — and the function form gives you typed access to the wiring
+        (If you&apos;ve used Radix&apos;s <code>asChild</code>:{" "}
+        <code>render</code> is Base UI&apos;s successor to it. A dedicated prop
+        keeps <code>children</code> unambiguous — always content, never secretly
+        the element — and the function form gives you typed access to the wiring
         when you need it.)
       </p>
 
@@ -98,12 +98,16 @@ export default function Composition() {
           accidentally disable the other.
         </li>
         <li>
-          <strong><code>className</code>s concatenate</strong> — yours and the
-          component&apos;s both apply.
+          <strong>
+            <code>className</code>s concatenate
+          </strong>{" "}
+          — yours and the component&apos;s both apply.
         </li>
         <li>
-          <strong><code>style</code> merges, wiring wins on conflicts</strong> —
-          wiring styles such as <code>anchorName</code> position the popup and
+          <strong>
+            <code>style</code> merges, wiring wins on conflicts
+          </strong>{" "}
+          — wiring styles such as <code>anchorName</code> position the popup and
           are load-bearing; everything else of yours passes through.
         </li>
         <li>
@@ -111,8 +115,8 @@ export default function Composition() {
           <code>aria-describedby</code> on your element is kept and extended.
         </li>
         <li>
-          <strong>Refs compose</strong> — your ref and the component&apos;s
-          both receive the node.
+          <strong>Refs compose</strong> — your ref and the component&apos;s both
+          receive the node.
         </li>
         <li>
           <strong>Everything else: your prop wins.</strong>

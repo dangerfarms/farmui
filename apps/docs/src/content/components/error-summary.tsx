@@ -51,7 +51,7 @@ const doc: ComponentContent = {
     },
   ],
   accessibility: [
-    "The summary takes keyboard focus when it appears (tabIndex -1 + focus), so assistive technology announces the group — labelled by its title — the moment the submit fails.",
+    "The summary takes keyboard focus when it appears (tabIndex -1 + focus), so assistive technology announces the group, labelled by its title, as soon as the submit fails.",
     'The Title renders "There is a problem" by default and labels the region via aria-labelledby.',
     "Items are real links: right-click, open-in-new-tab and AT link lists all behave; activation focuses the field so the correction can start immediately.",
     "Keep the user's failed input in the fields — never clear values when showing errors.",

@@ -9,7 +9,7 @@ import { renderWithProps } from "../../render";
 import type { RenderProp } from "../../render";
 
 /**
- * Breadcrumbs — shows the path to the current page.
+ * Shows the path to the current page.
  *
  * ```tsx
  * <Breadcrumbs.Root>
@@ -49,7 +49,7 @@ function BreadcrumbsRoot({
       }
       {...rest}
     >
-      <ol className={"fui-Breadcrumbs-list"}>{children}</ol>
+      <ol className="fui-Breadcrumbs-list">{children}</ol>
     </nav>
   );
 }
@@ -60,8 +60,7 @@ export interface BreadcrumbsItemRenderProps {
   children?: ReactNode;
 }
 
-export interface BreadcrumbsItemProps
-  extends AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface BreadcrumbsItemProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   /** Marks this item as the current page (`aria-current="page"`). */
   current?: boolean;
   /**
@@ -92,13 +91,17 @@ function BreadcrumbsItem({
       {children}
     </a>
   ) : (
-    <span className={className} {...(rest as HTMLAttributes<HTMLElement>)} {...wiring}>
+    <span
+      className={className}
+      {...(rest as HTMLAttributes<HTMLElement>)}
+      {...wiring}
+    >
       {children}
     </span>
   );
 
   return (
-    <li className={"fui-Breadcrumbs-item"} data-current={current || undefined}>
+    <li className="fui-Breadcrumbs-item" data-current={current || undefined}>
       {content}
     </li>
   );

@@ -84,19 +84,14 @@ const doc: ComponentContent = {
       title: "Disabled option & error",
       code: `<RadioGroup
   label="Plan"
-  defaultValue="basic"
-  error="Select an available plan"
+  error="Select a plan"
 >
   <Radio value="basic" label="Basic" />
   <Radio value="pro" label="Pro" />
   <Radio value="legacy" label="Legacy" disabled />
 </RadioGroup>`,
       render: () => (
-        <RadioGroup
-          label="Plan"
-          defaultValue="basic"
-          error="Select an available plan"
-        >
+        <RadioGroup label="Plan" error="Select a plan">
           <Radio value="basic" label="Basic" />
           <Radio value="pro" label="Pro" />
           <Radio value="legacy" label="Legacy" disabled />

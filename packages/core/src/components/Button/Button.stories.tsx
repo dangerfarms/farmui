@@ -11,7 +11,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Neutral by default — appearance is decided by context " +
+          "Neutral by default; the surrounding region decides the look " +
           "(`--fui-context` on a region, container width, composed icons), " +
           "not by props.",
       },

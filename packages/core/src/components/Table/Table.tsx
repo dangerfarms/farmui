@@ -16,7 +16,7 @@ export interface TableProps extends TableHTMLAttributes<HTMLTableElement> {
 }
 
 /**
- * Table — a styled data table. Compose with native
+ * A styled data table. Compose with native
  * thead/tbody/tr/th/td. Scrolls horizontally on overflow.
  */
 export const Table = forwardRef<HTMLTableElement, TableProps>(function Table(
@@ -32,7 +32,7 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(function Table(
   ref,
 ) {
   return (
-    <div className={"fui-Table-scroll"}>
+    <div className="fui-Table-scroll">
       <table
         ref={ref}
         className={cx("fui-Table-root", className)}

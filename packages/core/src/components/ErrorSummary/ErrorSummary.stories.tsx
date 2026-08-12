@@ -28,11 +28,7 @@ export const Default: Story = {
           </ErrorSummary.Item>
         </ErrorSummary.List>
       </ErrorSummary.Root>
-      <Input
-        id="es-name"
-        label="Full name"
-        error="Enter your full name"
-      />
+      <Input id="es-name" label="Full name" error="Enter your full name" />
       <Input
         id="es-email"
         label="Email address"

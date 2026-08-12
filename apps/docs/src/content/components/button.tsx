@@ -129,7 +129,7 @@ const doc: ComponentContent = {
   <svg>…</svg>
 </Button>
 <Button disabled>
-  <Loader size="sm" /> Saving
+  <Loader size="sm" aria-hidden /> Saving
 </Button>`,
       render: () => (
         <>
@@ -157,7 +157,7 @@ const doc: ComponentContent = {
             </svg>
           </Button>
           <Button disabled>
-            <Loader size="sm" /> Saving
+            <Loader size="sm" aria-hidden /> Saving
           </Button>
         </>
       ),
@@ -196,6 +196,10 @@ const doc: ComponentContent = {
       body: 'The element must match the behaviour, not the look. When a design wants button styling on a genuine navigation, keep real link semantics with render: <Button render={<a href="/signup" />}>Get started</Button> merges the Button\'s classes onto a real <a> — so right-click, middle-click, open-in-new-tab and link announcement all keep working. What render never justifies is the reverse: an <a> with an onClick that mutates data is still a button in disguise.',
     },
     {
+      title: "Buttons don't submit by accident",
+      body: 'A bare <button> inside a form is a native submit button, so Button defaults type="button" — a Cancel button can never submit the form it sits in. Pass type="submit" on the one button that should. The render path forwards your element untouched, so a render={<button/>} keeps the native default and needs its own type.',
+    },
+    {
       title: "Avoid disabled buttons",
       body: "A disabled submit button has poor contrast, can't receive focus in most browsers, and — worst — gives no feedback about why it's disabled or how to fix it; users are left guessing which field is wrong. Keep the button enabled, validate on submit, and answer a bad submission with specific field errors (see Field). The one good use of disabled is a genuine busy state, paired with a composed Loader.",
     },
@@ -222,6 +226,13 @@ const doc: ComponentContent = {
         "The button content — label, and any composed icons/spinner.",
     },
     {
+      name: "type",
+      type: `"button" | "submit" | "reset"`,
+      default: `"button"`,
+      description:
+        "Unlike a native <button>, never a submit button unless you say so.",
+    },
+    {
       name: "...others",
       type: "ButtonHTMLAttributes",
       description:
@@ -231,7 +242,7 @@ const doc: ComponentContent = {
       name: "--fui-context",
       type: `"primary" | "danger" | "success" | "warning" | "info"`,
       description:
-        "Declare on any ancestor (it inherits) to give the region semantic meaning — every FarmUI component inside adapts. For a single button, use a one-element wrapper (<span style={{ \"--fui-context\": \"danger\" }}><Button>…</Button></span>) — a style query is answered by ancestors, never by the element that declares the property.",
+        'Declare on any ancestor (it inherits) to give the region semantic meaning — every FarmUI component inside adapts. For a single button, use a one-element wrapper (<span style={{ "--fui-context": "danger" }}><Button>…</Button></span>) — a style query is answered by ancestors, never by the element that declares the property.',
     },
     {
       name: "--fui-button-color",

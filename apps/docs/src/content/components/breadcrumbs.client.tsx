@@ -26,7 +26,9 @@ export function BreadcrumbsRenderDemo() {
   return (
     <Breadcrumbs.Root>
       <Breadcrumbs.Item render={<a href="/" />}>Home</Breadcrumbs.Item>
-      <Breadcrumbs.Item render={<a href="/settings" />}>Settings</Breadcrumbs.Item>
+      <Breadcrumbs.Item render={<a href="/settings" />}>
+        Settings
+      </Breadcrumbs.Item>
       <Breadcrumbs.Item current>Billing</Breadcrumbs.Item>
     </Breadcrumbs.Root>
   );

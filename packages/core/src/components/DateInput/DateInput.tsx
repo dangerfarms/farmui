@@ -21,7 +21,7 @@ import { Fieldset } from "../Fieldset/Fieldset";
 import { InputControl } from "../Input/Input";
 
 /**
- * DateInput — composable parts for asking for a memorable date.
+ * Composable parts for asking for a memorable date.
  *
  * A date the user already knows — a date of birth, the date on a document —
  * is typed, not picked: a calendar widget makes them navigate to a value
@@ -77,8 +77,10 @@ function useDateInputContext(part: string): DateInputContextValue {
   return ctx;
 }
 
-export interface DateInputRootProps
-  extends Omit<FieldsetHTMLAttributes<HTMLFieldSetElement>, "name"> {
+export interface DateInputRootProps extends Omit<
+  FieldsetHTMLAttributes<HTMLFieldSetElement>,
+  "name"
+> {
   /** Name prefix for form submission: `{name}-day`, `{name}-month`, `{name}-year`. */
   name?: string;
   /** Wire browser autofill when asking for a date of birth (WCAG 1.3.5). */
@@ -162,8 +164,7 @@ function DateInputRoot({
   );
 }
 
-export interface DateInputDescriptionProps
-  extends HTMLAttributes<HTMLParagraphElement> {}
+export interface DateInputDescriptionProps extends HTMLAttributes<HTMLParagraphElement> {}
 
 function DateInputDescription({
   className,
@@ -184,8 +185,7 @@ function DateInputDescription({
   );
 }
 
-export interface DateInputErrorProps
-  extends HTMLAttributes<HTMLParagraphElement> {
+export interface DateInputErrorProps extends HTMLAttributes<HTMLParagraphElement> {
   /**
    * Which fields the error applies to. Defaults to all of them — narrow it
    * when the error names a specific part ("must include a year").
@@ -225,7 +225,11 @@ function DateInputError({
 
 export interface DateInputFieldsProps extends HTMLAttributes<HTMLDivElement> {}
 
-function DateInputFields({ className, children, ...rest }: DateInputFieldsProps) {
+function DateInputFields({
+  className,
+  children,
+  ...rest
+}: DateInputFieldsProps) {
   return (
     <div className={cx("fui-DateInput-parts", className)} {...rest}>
       {children}
@@ -233,8 +237,10 @@ function DateInputFields({ className, children, ...rest }: DateInputFieldsProps)
   );
 }
 
-export interface DateInputFieldProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "children"> {
+export interface DateInputFieldProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "children"
+> {
   /** Which date part this field asks for. */
   part: DateInputPart;
   /** Visible field label. @default "Day" / "Month" / "Year" */
@@ -245,8 +251,7 @@ const DateInputField = forwardRef<HTMLInputElement, DateInputFieldProps>(
   function DateInputField({ part, children, id, ...rest }, ref) {
     const ctx = useDateInputContext("DateInput.Field");
     const inputId = id ?? `${ctx.baseId}-${part}`;
-    const invalid =
-      ctx.hasError && (ctx.errorParts?.includes(part) ?? true);
+    const invalid = ctx.hasError && (ctx.errorParts?.includes(part) ?? true);
     return (
       <div className="fui-DateInput-part" data-part={part}>
         <label className="fui-DateInput-label" htmlFor={inputId}>
