@@ -53,7 +53,6 @@ export function Preview({
             CSS
           </button>
         )}
-        {css && <span className={classes.badge}>0&nbsp;kb runtime</span>}
       </div>
 
       {tab === "preview" && <div className={classes.stage}>{children}</div>}

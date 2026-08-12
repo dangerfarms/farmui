@@ -53,14 +53,3 @@
   border: none;
   border-radius: 0;
 }
-
-.badge {
-  margin-inline-start: auto;
-  align-self: center;
-  padding: 0.15rem 0.5rem;
-  font-size: var(--fui-text-xs);
-  font-weight: 600;
-  color: var(--fui-primary);
-  background: var(--fui-primary-soft);
-  border-radius: var(--fui-radius-full);
-}

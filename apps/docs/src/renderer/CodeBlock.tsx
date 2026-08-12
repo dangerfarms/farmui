@@ -8,8 +8,14 @@ function useIsDark() {
   const [dark, setDark] = useState(false);
   useEffect(() => {
     const read = () => {
+      // color-scheme resolves to "dark", "light", or "light dark" (follow
+      // the OS) — the last one needs the media query to break the tie.
       const scheme = getComputedStyle(document.documentElement).colorScheme;
-      setDark(scheme.includes("dark") && !scheme.includes("light dark"));
+      const dark =
+        scheme.includes("dark") &&
+        (!scheme.includes("light") ||
+          window.matchMedia("(prefers-color-scheme: dark)").matches);
+      setDark(dark);
     };
     read();
     const obs = new MutationObserver(read);

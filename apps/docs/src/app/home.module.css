@@ -453,8 +453,8 @@
   background: var(--fui-bg-subtle);
   border: 1px solid var(--fui-border);
   border-radius: var(--fui-radius-sm);
-  overflow-x: auto;
-  white-space: pre;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 
 /* ---------- Split: code + preview ---------- */

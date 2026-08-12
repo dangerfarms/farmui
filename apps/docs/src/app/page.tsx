@@ -109,12 +109,12 @@ const TECHNIQUES = [
   {
     name: "color-mix()",
     desc: "Derive every hover and tint from a single token.",
-    code: "color-mix(in oklch, var(--fui-primary) 12%, #0000)",
+    code: "color-mix(\n  in oklab, var(--_color), #0000\n)",
   },
   {
     name: "@container",
     desc: "Components respond to their container, not the viewport.",
-    code: "@container (min-width: 20rem) { … }",
+    code: "@container (width > 20rem) { … }",
   },
   {
     name: ":has()",
@@ -134,7 +134,7 @@ const TECHNIQUES = [
   {
     name: "clamp()",
     desc: "Fluid type and spacing without a single media query.",
-    code: "font-size: clamp(1rem, 2vw, 1.25rem);",
+    code: "font-size: clamp(1rem, 0.93rem + 0.35cqi, 1.25rem);",
   },
   {
     name: "oklch()",
