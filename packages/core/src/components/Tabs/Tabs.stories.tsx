@@ -95,7 +95,7 @@ export const DisabledTab: Story = {
 
 /**
  * Interaction test: clicking a tab reveals its panel. Inactive panels stay
- * mounted (they carry the `hidden` attribute) so we assert on *visibility*,
+ * mounted (they carry the `hidden` attribute) so the assertions target *visibility*,
  * not presence.
  */
 export const ClickSelectsPanel: Story = {

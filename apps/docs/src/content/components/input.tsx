@@ -77,14 +77,14 @@ const doc: ComponentDoc = {
       code: `<Input
   label="Email"
   defaultValue="not-an-email"
-  error="Please enter a valid email address."
+  error="Enter an email address in the correct format, like name@example.com"
 />`,
       render: () => (
         <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
           <Input
             label="Email"
             defaultValue="not-an-email"
-            error="Please enter a valid email address."
+            error="Enter an email address in the correct format, like name@example.com"
           />
         </div>
       ),

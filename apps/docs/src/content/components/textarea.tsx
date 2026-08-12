@@ -42,14 +42,14 @@ const doc: ComponentDoc = {
       code: `<Textarea
   label="Message"
   defaultValue="Too short"
-  error="Please enter at least 20 characters."
+  error="Message must be 20 characters or more"
 />`,
       render: () => (
         <div style={{ maxInlineSize: "24rem", inlineSize: "100%" }}>
           <Textarea
             label="Message"
             defaultValue="Too short"
-            error="Please enter at least 20 characters."
+            error="Message must be 20 characters or more"
           />
         </div>
       ),

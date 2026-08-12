@@ -87,7 +87,7 @@ const doc: ComponentDoc = {
       code: `<RadioGroup
   label="Plan"
   defaultValue="basic"
-  error="Please pick an available plan."
+  error="Select an available plan"
 >
   <Radio value="basic" label="Basic" />
   <Radio value="pro" label="Pro" />
@@ -97,7 +97,7 @@ const doc: ComponentDoc = {
         <RadioGroup
           label="Plan"
           defaultValue="basic"
-          error="Please pick an available plan."
+          error="Select an available plan"
         >
           <Radio value="basic" label="Basic" />
           <Radio value="pro" label="Pro" />

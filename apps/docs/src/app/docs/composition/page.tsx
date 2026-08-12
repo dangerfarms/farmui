@@ -76,7 +76,7 @@ export default function Composition() {
           <code>render</code> is never required.
         </strong>{" "}
         It exists only to substitute the built-in element. If you find yourself
-        writing <code>render</code> for an everyday case, there is probably a
+        writing <code>render</code> for an everyday case, there is usually a
         simpler built-in form — or a gap you should report.
       </p>
       <p>

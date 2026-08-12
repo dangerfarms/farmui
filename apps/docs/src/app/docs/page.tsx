@@ -6,7 +6,7 @@ import prose from "./prose.module.css";
 export const metadata = {
   title: "Introduction",
   description:
-    "FarmUI is a fully-featured React component library rebuilt on native modern CSS.",
+    "FarmUI is a React component library rebuilt on native modern CSS.",
 };
 
 export default function DocsIntro() {
@@ -14,8 +14,8 @@ export default function DocsIntro() {
     <div className={prose.prose}>
       <h1>Introduction</h1>
       <p className={prose.lead}>
-        FarmUI is a fully-featured React component library focused on
-        accessibility and performance — WCAG-compliant components, zero-runtime
+        FarmUI is a React component library focused on accessibility and
+        performance — WCAG-compliant components, zero-runtime
         styling on native modern CSS, and tiny bundles.
       </p>
 

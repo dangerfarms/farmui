@@ -295,7 +295,7 @@ function ModalPopup({
       {...rest}
       ref={ref}
       id={ctx.dialogId}
-      // Not yet in React's typings; lowercase passes through as an attribute.
+      // Missing from React's typings; lowercase passes through as an attribute.
       // "closerequest" = Escape closes, backdrop clicks don't — the native
       // spelling of an alert dialog's dismissal contract.
       {...({ closedby: alert ? "closerequest" : "any" } as object)}

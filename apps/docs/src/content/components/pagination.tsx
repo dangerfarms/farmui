@@ -85,7 +85,7 @@ const doc: ComponentDoc = {
     {
       name: "value",
       type: "number",
-      description: "Currently active page (1-based).",
+      description: "The active page (1-based).",
     },
     {
       name: "onChange",

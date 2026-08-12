@@ -70,7 +70,7 @@ export const WithError: Story = {
   args: {
     label: "Email",
     placeholder: "you@example.com",
-    error: "Please enter a valid email address.",
+    error: "Enter an email address in the correct format, like name@example.com",
     defaultValue: "not-an-email",
   },
 };

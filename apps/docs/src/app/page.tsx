@@ -162,9 +162,9 @@ export default function HomePage() {
               <span className="brandText">fast &amp; accessible.</span>
             </h1>
             <p className={c.subtitle}>
-              FarmUI is a fully-featured component library — the most
-              accessible, best-performing components you can install.
-              Zero-runtime styling, WCAG-compliant by default, and tiny bundles.
+              FarmUI is a React component library built
+              accessibility-first on the native web platform. Zero-runtime
+              styling, WCAG-compliant by default, and tiny bundles.
             </p>
             <div className={c.ctaRow}>
               <Link href="/docs" className={c.btnLink}>
@@ -206,11 +206,11 @@ export default function HomePage() {
             <BoltIcon width={14} height={14} /> Why FarmUI
           </span>
           <h2 className={c.sectionTitle}>
-            Everything you loved about Mantine, minus the runtime.
+            Component library ergonomics, minus the runtime.
           </h2>
           <p className={c.sectionSub}>
-            We kept the component API you know and rebuilt the styling layer on
-            the modern CSS platform.
+            Labelled inputs, composable overlays and tokened theming — with the
+            styling layer rebuilt on the modern CSS platform.
           </p>
         </div>
         <div className={c.features}>
@@ -368,10 +368,10 @@ export default function HomePage() {
       {/* Final CTA */}
       <section className="container">
         <div className={c.cta}>
-          <h2 className={c.ctaTitle}>Ready to build something great?</h2>
+          <h2 className={c.ctaTitle}>Start building</h2>
           <p className={c.ctaSub}>
-            Install FarmUI and ship a polished, accessible, fast UI this
-            afternoon.
+            Install the package, import one stylesheet, and start with any
+            component.
           </p>
           <div className={c.ctaRowCenter}>
             <Link href="/docs" className={c.btnLink}>

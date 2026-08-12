@@ -40,7 +40,7 @@ export const Horizontal: Story = {
 
 export const WithError: Story = {
   args: {
-    error: "Please choose a crop.",
+    error: "Select a crop",
     withAsterisk: true,
     defaultValue: undefined,
   },

@@ -9,7 +9,7 @@ export interface PaginationProps extends Omit<
 > {
   /** Total number of pages. */
   total: number;
-  /** Currently active page (1-based). */
+  /** The active page (1-based). */
   value: number;
   /** Called with the new page when a control is activated. */
   onChange: (page: number) => void;

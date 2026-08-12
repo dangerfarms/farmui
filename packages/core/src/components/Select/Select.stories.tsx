@@ -52,7 +52,7 @@ export const WithDescription: Story = {
 export const WithError: Story = {
   args: {
     label: "Framework",
-    error: "Please choose a framework.",
+    error: "Select a framework",
   },
 };
 

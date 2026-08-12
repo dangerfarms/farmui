@@ -61,7 +61,7 @@ const doc: ComponentDoc = {
   label="Country"
   placeholder="Pick a country"
   data={["United States", "Canada", "United Kingdom"]}
-  error="Please choose a country."
+  error="Select a country"
 />`,
       render: () => (
         <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
@@ -69,7 +69,7 @@ const doc: ComponentDoc = {
             label="Country"
             placeholder="Pick a country"
             data={["United States", "Canada", "United Kingdom"]}
-            error="Please choose a country."
+            error="Select a country"
           />
         </div>
       ),

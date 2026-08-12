@@ -1,7 +1,7 @@
 # FarmUI
 
-**Beautiful React components, fast & accessible.** A fully-featured component
-library rebuilt on native modern CSS — zero-runtime styling, WCAG-compliant by
+**Beautiful React components, fast & accessible.** A component library rebuilt
+on native modern CSS — zero-runtime styling, WCAG-compliant by
 default, and tiny bundles.
 
 [![npm](https://img.shields.io/npm/v/@farmui/core.svg)](https://www.npmjs.com/package/@farmui/core)
