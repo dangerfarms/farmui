@@ -1,4 +1,4 @@
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 import {
   MenuDemo,
   MenuDisabledDemo,
@@ -6,12 +6,9 @@ import {
   MenuLinksDemo,
 } from "./menu.client";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "menu",
-  name: "Menu",
-  category: "Overlays",
-  description:
-    "A list of actions opened from a trigger — the APG menu-button pattern on top of the browser's top layer and anchor positioning.",
+  lead: "A list of actions opened from a trigger — the APG menu-button pattern on top of the browser's top layer and anchor positioning.",
   importLine: `import { Menu } from "@farmui/core";`,
   demos: [
     {

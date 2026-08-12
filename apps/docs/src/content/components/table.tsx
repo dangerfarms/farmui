@@ -1,5 +1,5 @@
 import { Table } from "@farmui/core";
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 
 const rows = [
   { invoice: "INV-1024", status: "Paid", amount: "$1,240.00" },
@@ -8,12 +8,9 @@ const rows = [
   { invoice: "INV-1027", status: "Overdue", amount: "$640.00" },
 ];
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "table",
-  name: "Table",
-  category: "Data display",
-  description:
-    "A styled data table composed from native thead/tbody/tr/th/td markup.",
+  lead: "A styled data table composed from native thead/tbody/tr/th/td markup.",
   importLine: `import { Table } from "@farmui/core";`,
   demos: [
     {

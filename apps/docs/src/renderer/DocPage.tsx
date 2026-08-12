@@ -49,7 +49,7 @@ export function DocPage({ doc }: { doc: ComponentDoc }) {
       <header className={classes.header}>
         <p className={classes.category}>{doc.category}</p>
         <h1 className={classes.title}>{doc.name}</h1>
-        <p className={classes.lead}>{doc.description}</p>
+        <p className={classes.lead}>{doc.lead ?? doc.description}</p>
       </header>
 
       <section className={classes.section}>

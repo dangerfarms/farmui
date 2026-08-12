@@ -1,11 +1,9 @@
 import { Tabs, TabsList, TabsTab, TabsPanel } from "@farmui/core";
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "tabs",
-  name: "Tabs",
-  category: "Navigation",
-  description: "Switch between related panels of content in the same view.",
+  lead: "Switch between related panels of content in the same view.",
   importLine: `import { Tabs } from "@farmui/core";`,
   demos: [
     {

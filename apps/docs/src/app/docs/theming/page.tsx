@@ -1,5 +1,5 @@
 import { Button, Checkbox } from "@farmui/core";
-import { CodeBlock } from "@/docs/CodeBlock";
+import { CodeBlock } from "@/renderer/CodeBlock";
 import prose from "../prose.module.css";
 
 export const metadata = {

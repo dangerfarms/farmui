@@ -1,12 +1,10 @@
 import { Button, Loader } from "@farmui/core";
 import type { CSSProperties } from "react";
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "button",
-  name: "Button",
-  category: "Inputs",
-  description: "Trigger an action or event with a single click.",
+  lead: "Trigger an action or event with a single click.",
   importLine: `import { Button } from "@farmui/core";`,
   demos: [
     {

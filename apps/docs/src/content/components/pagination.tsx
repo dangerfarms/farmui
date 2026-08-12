@@ -1,16 +1,13 @@
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 import {
   PaginationDemo,
   PaginationEdgesDemo,
   PaginationManyDemo,
 } from "./pagination.client";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "pagination",
-  name: "Pagination",
-  category: "Navigation",
-  description:
-    "Navigate through pages of content with a controlled page picker.",
+  lead: "Navigate through pages of content with a controlled page picker.",
   importLine: `import { Pagination } from "@farmui/core";`,
   demos: [
     {

@@ -1,12 +1,10 @@
 import { Progress } from "@farmui/core";
 import type { CSSProperties } from "react";
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "progress",
-  name: "Progress",
-  category: "Feedback",
-  description: "A horizontal bar showing completion of a task.",
+  lead: "A horizontal bar showing completion of a task.",
   importLine: `import { Progress } from "@farmui/core";`,
   demos: [
     {

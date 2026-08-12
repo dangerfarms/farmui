@@ -1,16 +1,13 @@
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 import {
   FieldsetCheckboxDemo,
   FieldsetOptionalDemo,
   FieldsetRadioDemo,
 } from "./fieldset.client";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "fieldset",
-  name: "Fieldset",
-  category: "Inputs",
-  description:
-    "Groups related controls under a shared, semantic label using a native fieldset and legend.",
+  lead: "Groups related controls under a shared, semantic label using a native fieldset and legend.",
   importLine: `import { Fieldset } from "@farmui/core";`,
   demos: [
     {

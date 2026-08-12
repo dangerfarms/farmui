@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { components, getComponent } from "@/docs/registry";
-import { DocPage } from "@/docs/DocPage";
+import { components, getComponent } from "@/renderer/registry";
+import { DocPage } from "@/renderer/DocPage";
 
 export function generateStaticParams() {
   return components.map((c) => ({ slug: c.slug }));

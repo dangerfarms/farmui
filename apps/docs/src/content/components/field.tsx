@@ -1,16 +1,13 @@
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 import {
   FieldComposeDemo,
   FieldErrorDemo,
   FieldOptionalDemo,
 } from "./field.client";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "field",
-  name: "Field",
-  category: "Inputs",
-  description:
-    "A composable form-field primitive that wires label, description, error and accessibility for any control.",
+  lead: "A composable form-field primitive that wires label, description, error and accessibility for any control.",
   importLine: `import { Field } from "@farmui/core";`,
   demos: [
     {

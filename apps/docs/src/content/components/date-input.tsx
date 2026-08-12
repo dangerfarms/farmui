@@ -1,17 +1,14 @@
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 import {
   DateInputDemo,
   DateInputWholeErrorDemo,
   DateInputPartErrorDemo,
   DateInputMonthYearDemo,
-} from "./dateinput.client";
+} from "./date-input.client";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "date-input",
-  name: "DateInput",
-  category: "Inputs",
-  description:
-    "Composable labelled fields for a date the user already knows.",
+  lead: "Composable labelled fields for a date the user already knows.",
   importLine: `import { DateInput } from "@farmui/core";`,
   demos: [
     {

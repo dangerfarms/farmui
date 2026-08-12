@@ -1,11 +1,9 @@
 import { Input } from "@farmui/core";
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "input",
-  name: "Input",
-  category: "Inputs",
-  description: "A labelled text field with description and error states.",
+  lead: "A labelled text field with description and error states.",
   importLine: `import { Input } from "@farmui/core";`,
   demos: [
     {

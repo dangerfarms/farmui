@@ -1,11 +1,9 @@
 import { Radio, RadioGroup } from "@farmui/core";
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "radio",
-  name: "Radio",
-  category: "Inputs",
-  description: "Choose a single option from a mutually exclusive set.",
+  lead: "Choose a single option from a mutually exclusive set.",
   importLine: `import { Radio, RadioGroup } from "@farmui/core";`,
   demos: [
     {

@@ -1,12 +1,10 @@
 import { Badge } from "@farmui/core";
 import type { CSSProperties } from "react";
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "badge",
-  name: "Badge",
-  category: "Data display",
-  description: "A compact pill for statuses, counts, and labels.",
+  lead: "A compact pill for statuses, counts, and labels.",
   importLine: `import { Badge } from "@farmui/core";`,
   demos: [
     {

@@ -1,14 +1,12 @@
 import { Avatar, AvatarGroup } from "@farmui/core";
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 
 const IMG =
   "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=128&h=128&fit=crop&crop=faces";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "avatar",
-  name: "Avatar",
-  category: "Data display",
-  description: "An image, initials, or fallback glyph representing a user.",
+  lead: "An image, initials, or fallback glyph representing a user.",
   importLine: `import { Avatar, AvatarGroup } from "@farmui/core";`,
   demos: [
     {

@@ -1,5 +1,5 @@
-import type { ComponentDoc, Category } from "./types";
-import { CATEGORY_ORDER } from "./types";
+import type { ComponentContent, ComponentDoc } from "./types";
+import { COMPONENTS } from "@/site/nav";
 
 // Inputs
 import field from "@/content/components/field";
@@ -10,8 +10,8 @@ import textarea from "@/content/components/textarea";
 import select from "@/content/components/select";
 import separator from "@/content/components/separator";
 import checkbox from "@/content/components/checkbox";
-import dateinput from "@/content/components/dateinput";
-import errorsummary from "@/content/components/errorsummary";
+import dateinput from "@/content/components/date-input";
+import errorsummary from "@/content/components/error-summary";
 import radio from "@/content/components/radio";
 import switchDoc from "@/content/components/switch";
 import slider from "@/content/components/slider";
@@ -45,7 +45,7 @@ import pagination from "@/content/components/pagination";
 // (/docs/layout) and @farmui/core's layout.css.
 
 
-export const components: ComponentDoc[] = [
+const content: ComponentContent[] = [
   field,
   fieldset,
   button,
@@ -78,18 +78,27 @@ export const components: ComponentDoc[] = [
   pagination,
 ];
 
-export function getComponent(slug: string): ComponentDoc | undefined {
-  return components.find((c) => c.slug === slug);
+// Identity lives in the manifest (site/nav.ts), substance in the content
+// files; the join makes drift loud in both directions at build time.
+export const components: ComponentDoc[] = COMPONENTS.map((meta) => {
+  const doc = content.find((c) => c.slug === meta.slug);
+  if (!doc) {
+    throw new Error(
+      `"${meta.slug}" is in site/nav.ts but has no content file registered here.`,
+    );
+  }
+  return { ...doc, ...meta };
+});
+
+const unlisted = content.filter(
+  (c) => !COMPONENTS.some((m) => m.slug === c.slug),
+);
+if (unlisted.length > 0) {
+  throw new Error(
+    `Content files missing from site/nav.ts: ${unlisted.map((c) => c.slug).join(", ")}.`,
+  );
 }
 
-export function componentsByCategory(): {
-  category: Category;
-  items: ComponentDoc[];
-}[] {
-  return CATEGORY_ORDER.map((category) => ({
-    category,
-    items: components
-      .filter((c) => c.category === category)
-      .sort((a, b) => a.name.localeCompare(b.name)),
-  })).filter((g) => g.items.length > 0);
+export function getComponent(slug: string): ComponentDoc | undefined {
+  return components.find((c) => c.slug === slug);
 }

@@ -1,5 +1,5 @@
 import { Select } from "@farmui/core";
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 
 const countries = [
   "United States",
@@ -9,12 +9,9 @@ const countries = [
   "Japan",
 ];
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "select",
-  name: "Select",
-  category: "Inputs",
-  description:
-    "A styled wrapper around a native select — accessible and zero-JS.",
+  lead: "A styled wrapper around a native select — accessible and zero-JS.",
   importLine: `import { Select } from "@farmui/core";`,
   demos: [
     {

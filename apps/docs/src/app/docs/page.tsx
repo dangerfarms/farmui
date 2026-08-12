@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CodeBlock } from "@/docs/CodeBlock";
+import { CodeBlock } from "@/renderer/CodeBlock";
 import { COMPONENTS } from "@/site/nav";
 import prose from "./prose.module.css";
 

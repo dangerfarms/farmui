@@ -1,11 +1,9 @@
 import { Skeleton } from "@farmui/core";
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "skeleton",
-  name: "Skeleton",
-  category: "Feedback",
-  description: "An animated placeholder shown while content loads.",
+  lead: "An animated placeholder shown while content loads.",
   importLine: `import { Skeleton } from "@farmui/core";`,
   demos: [
     {

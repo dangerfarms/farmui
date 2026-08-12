@@ -1,12 +1,9 @@
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 import { TooltipArrow, TooltipGroup, TooltipPositions } from "./tooltip.client";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "tooltip",
-  name: "Tooltip",
-  category: "Overlays",
-  description:
-    "A small floating label revealed on hover and keyboard focus, composed from parts.",
+  lead: "A small floating label revealed on hover and keyboard focus, composed from parts.",
   importLine: `import { Tooltip } from "@farmui/core";`,
   demos: [
     {

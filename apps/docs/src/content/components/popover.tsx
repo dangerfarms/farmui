@@ -1,16 +1,13 @@
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 import {
   PopoverDemo,
   PopoverFormDemo,
   PopoverLinkTriggerDemo,
 } from "./popover.client";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "popover",
-  name: "Popover",
-  category: "Overlays",
-  description:
-    "A click-triggered floating panel, composed from parts and rendered in the browser's top layer via the native popover attribute.",
+  lead: "A click-triggered floating panel, composed from parts and rendered in the browser's top layer via the native popover attribute.",
   importLine: `import { Popover } from "@farmui/core";`,
   demos: [
     {

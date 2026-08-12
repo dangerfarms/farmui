@@ -1,11 +1,9 @@
 import { Card, Button } from "@farmui/core";
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "card",
-  name: "Card",
-  category: "Data display",
-  description: "A surface container that groups related content.",
+  lead: "A surface container that groups related content.",
   importLine: `import { Card } from "@farmui/core";`,
   demos: [
     {

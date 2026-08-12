@@ -1,13 +1,10 @@
 import { Alert } from "@farmui/core";
 import type { CSSProperties } from "react";
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "alert",
-  name: "Alert",
-  category: "Feedback",
-  description:
-    "A prominent message box whose status comes from its context.",
+  lead: "A prominent message box whose status comes from its context.",
   importLine: `import { Alert } from "@farmui/core";`,
   demos: [
     {

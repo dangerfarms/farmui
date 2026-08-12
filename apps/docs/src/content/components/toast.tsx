@@ -1,4 +1,4 @@
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 import {
   ToastActionDemo,
   ToastDemo,
@@ -6,12 +6,9 @@ import {
   ToastPriorityDemo,
 } from "./toast.client";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "toast",
-  name: "Toast",
-  category: "Feedback",
-  description:
-    "Transient notifications announced by native live regions and rendered in the browser's top layer.",
+  lead: "Transient notifications announced by native live regions and rendered in the browser's top layer.",
   importLine: `import { Button, Toast, Toasts, useToast } from "@farmui/core";`,
   demos: [
     {

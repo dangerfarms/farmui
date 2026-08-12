@@ -1,11 +1,9 @@
 import { Accordion, AccordionItem } from "@farmui/core";
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "accordion",
-  name: "Accordion",
-  category: "Navigation",
-  description: "Stacked, expandable sections built on native <details>.",
+  lead: "Stacked, expandable sections built on native <details>.",
   importLine: `import { Accordion, AccordionItem } from "@farmui/core";`,
   demos: [
     {

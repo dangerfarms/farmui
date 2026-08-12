@@ -34,13 +34,18 @@ export interface ErrorTemplate {
   message: string;
 }
 
-/** The full documentation entry for one component. */
-export interface ComponentDoc {
+/**
+ * A component's page content, as authored in src/content/components/.
+ * Identity (name, category, description) lives once in site/nav.ts — the
+ * component manifest — and the registry joins the two by slug.
+ */
+export interface ComponentContent {
   slug: string;
-  name: string;
-  category: Category;
-  /** One-line summary shown under the title and in search. */
-  description: string;
+  /**
+   * Page lead rendered under the title. Falls back to the manifest's
+   * one-line description, which stays short for the sidebar and search.
+   */
+  lead?: string;
   /** Import statement shown at the top of the page. */
   importLine: string;
   demos: Demo[];
@@ -59,18 +64,17 @@ export interface ComponentDoc {
   pkg?: "core";
 }
 
+/** Content joined with its manifest identity — what the page renders. */
+export interface ComponentDoc extends ComponentContent {
+  name: string;
+  category: Category;
+  /** One-line summary shown under the title and in search. */
+  description: string;
+}
+
 export type Category =
   | "Inputs"
   | "Data display"
   | "Feedback"
   | "Overlays"
   | "Navigation";
-
-/** Sidebar ordering for categories. */
-export const CATEGORY_ORDER: Category[] = [
-  "Inputs",
-  "Data display",
-  "Feedback",
-  "Overlays",
-  "Navigation",
-];

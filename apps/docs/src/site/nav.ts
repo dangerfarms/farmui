@@ -1,10 +1,14 @@
-// Plain navigation index (no JSX) shared by the sidebar and command menu.
-// Kept in sync with src/docs/registry.ts.
+// The component manifest: each component's identity (name, slug, category,
+// description) lives here once, in curated sidebar order. The registry
+// joins page content onto these entries by slug. JSX-free, so the sidebar
+// and command menu can import it without pulling in demo code.
+
+import type { Category } from "@/renderer/types";
 
 export interface NavItem {
   name: string;
   slug: string;
-  category: string;
+  category: Category;
   description: string;
 }
 

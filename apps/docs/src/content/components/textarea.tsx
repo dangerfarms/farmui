@@ -1,12 +1,9 @@
 import { Textarea } from "@farmui/core";
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "textarea",
-  name: "Textarea",
-  category: "Inputs",
-  description:
-    "A labelled multi-line text field with description and error states.",
+  lead: "A labelled multi-line text field with description and error states.",
   importLine: `import { Textarea } from "@farmui/core";`,
   demos: [
     {

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@farmui/core";
-import { CodeBlock } from "@/docs/CodeBlock";
+import { CodeBlock } from "@/renderer/CodeBlock";
 import { COMPONENTS, componentsByCategory } from "@/site/nav";
 import { ArrowRightIcon, BoltIcon, CheckIcon, GitHubIcon } from "@/site/Icons";
 import { HeroShowcase, InstallSnippet } from "./home.client";

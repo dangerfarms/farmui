@@ -1,12 +1,10 @@
 import { Switch } from "@farmui/core";
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 import { SwitchFieldDemo } from "./switch.client";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "switch",
-  name: "Switch",
-  category: "Inputs",
-  description: "Toggle a single setting on or off.",
+  lead: "Toggle a single setting on or off.",
   importLine: `import { Switch } from "@farmui/core";`,
   demos: [
     {

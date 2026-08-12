@@ -1,12 +1,10 @@
 import { Slider } from "@farmui/core";
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 import { SliderFieldDemo, SliderValueDemo } from "./slider.client";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "slider",
-  name: "Slider",
-  category: "Inputs",
-  description: "Pick a numeric value from a continuous range.",
+  lead: "Pick a numeric value from a continuous range.",
   importLine: `import { Slider } from "@farmui/core";`,
   demos: [
     {

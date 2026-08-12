@@ -1,11 +1,8 @@
 import { Separator } from "@farmui/core";
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "separator",
-  name: "Separator",
-  category: "Data display",
-  description: "A rule between groups of content.",
   importLine: `import { Separator } from "@farmui/core";`,
   demos: [
     {

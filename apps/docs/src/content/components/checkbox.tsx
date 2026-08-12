@@ -1,12 +1,9 @@
 import { Checkbox } from "@farmui/core";
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "checkbox",
-  name: "Checkbox",
-  category: "Inputs",
-  description:
-    "A styled checkbox with an adjacent label, description and error states.",
+  lead: "A styled checkbox with an adjacent label, description and error states.",
   importLine: `import { Checkbox } from "@farmui/core";`,
   demos: [
     {

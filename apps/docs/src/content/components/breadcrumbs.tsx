@@ -3,14 +3,11 @@ import {
   BreadcrumbsRenderDemo,
   BreadcrumbsSeparatorDemo,
 } from "./breadcrumbs.client";
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "breadcrumbs",
-  name: "Breadcrumbs",
-  category: "Navigation",
-  description:
-    "Show the path to the current page and let users step back up it.",
+  lead: "Show the path to the current page and let users step back up it.",
   importLine: `import { Breadcrumbs } from "@farmui/core";`,
   demos: [
     {

@@ -1,12 +1,9 @@
-import type { ComponentDoc } from "@/docs/types";
-import { ErrorSummaryDemo } from "./errorsummary.client";
+import type { ComponentContent } from "@/renderer/types";
+import { ErrorSummaryDemo } from "./error-summary.client";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "error-summary",
-  name: "ErrorSummary",
-  category: "Inputs",
-  description:
-    "A box at the top of a form listing every error as a link to its field.",
+  lead: "A box at the top of a form listing every error as a link to its field.",
   importLine: `import { ErrorSummary } from "@farmui/core";`,
   demos: [
     {

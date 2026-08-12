@@ -1,4 +1,4 @@
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 import {
   ModalAlertDemo,
   ModalDemo,
@@ -6,12 +6,9 @@ import {
   ModalSizesDemo,
 } from "./modal.client";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "modal",
-  name: "Modal",
-  category: "Overlays",
-  description:
-    "A blocking dialog for must-complete tasks, built on the native <dialog> element and the browser's top layer.",
+  lead: "A blocking dialog for must-complete tasks, built on the native <dialog> element and the browser's top layer.",
   importLine: `import { Modal } from "@farmui/core";`,
   demos: [
     {
