@@ -8,16 +8,10 @@ const meta = {
   args: {
     label: "Message",
     placeholder: "Write your message…",
-    radius: "md",
     rows: 3,
     disabled: false,
-    withAsterisk: false,
   },
   argTypes: {
-    radius: {
-      control: "select",
-      options: ["sm", "md", "lg", "xl", "full"],
-    },
     rows: { control: { type: "number", min: 1, max: 12 } },
   },
 } satisfies Meta<typeof Textarea>;
@@ -45,7 +39,7 @@ export const WithError: Story = {
 };
 
 export const Required: Story = {
-  args: { label: "Feedback", withAsterisk: true },
+  args: { label: "Feedback", required: true },
 };
 
 export const Disabled: Story = {

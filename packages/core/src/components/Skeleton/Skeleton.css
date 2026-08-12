@@ -3,14 +3,35 @@
     position: relative;
     display: block flow;
     inline-size: var(--_w, 100%);
-    block-size: var(--_h, 1rem);
+    block-size: var(--_h, 1lh);
     border-radius: var(--_radius, var(--fui-radius-md));
     overflow: clip;
-
-    /* Hide any real children placed inside while the skeleton is visible. */
-    color: transparent;
     user-select: none;
     pointer-events: none;
+
+    /* Bare text children have no box for the child rule below to hide. */
+    color: transparent;
+  }
+
+  /* Wrapped children size the box: measured, not declared. */
+  :scope:has(> *) {
+    inline-size: var(--_w, fit-content);
+    block-size: var(--_h, auto);
+  }
+
+  /* Element children keep their layout but paint nothing — visibility
+     also hides backgrounds, which a transparent color cannot. */
+  :scope > * {
+    visibility: hidden;
+  }
+
+  /* After the :has() rule so the circle wins at equal specificity.
+     2.5rem matches Avatar's md, the shape this exists to stand in for. */
+  :scope[data-circle] {
+    inline-size: var(--_size, 2.5rem);
+    block-size: auto;
+    aspect-ratio: 1;
+    border-radius: var(--fui-radius-full);
   }
 
   /* The tint is a weak mix of the text colour: text is guaranteed to

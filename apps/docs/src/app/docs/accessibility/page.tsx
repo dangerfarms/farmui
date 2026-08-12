@@ -95,9 +95,10 @@ export default function Accessibility() {
         </li>
         <li>
           <strong>Focus visibility</strong>: every interactive element shows a
-          two-layer <code>:focus-visible</code> ring (a background-colour
-          underlay beneath the brand outline, so the ring reads on any surface).
-          Focus styling is never removed without a replacement.
+          brand <code>:focus-visible</code> outline offset from the control, so
+          the true surface shows through the gap and the ring reads as separate
+          on any background. Focus styling is never removed without a
+          replacement.
         </li>
         <li>
           <strong>Not colour alone</strong>: state always carries a second

@@ -115,12 +115,6 @@ const doc: ComponentContent = {
       description: "Size token or explicit pixel size.",
     },
     {
-      name: "radius",
-      type: `"sm" | "md" | "lg" | "xl" | "full"`,
-      default: `"full"`,
-      description: "Border radius token.",
-    },
-    {
       name: "color",
       type: `"primary" | "gray" | "danger" | "warning" | "info"`,
       default: `"primary"`,

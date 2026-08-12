@@ -16,8 +16,6 @@ export interface SwitchProps extends Omit<
   description?: ReactNode;
   /** Error message; its presence puts the field in an invalid state. */
   error?: ReactNode;
-  /** Mark the field as required (adds an asterisk to the label). */
-  withAsterisk?: boolean;
   /** Which side of the toggle the label sits on. @default "end" */
   labelPosition?: "start" | "end";
   /** Root wrapper class. */
@@ -27,12 +25,7 @@ export interface SwitchProps extends Omit<
 /** The bare toggle (input + track), minus any label. */
 export type SwitchControlProps = Omit<
   SwitchProps,
-  | "label"
-  | "description"
-  | "error"
-  | "withAsterisk"
-  | "labelPosition"
-  | "wrapperClassName"
+  "label" | "description" | "error" | "labelPosition" | "wrapperClassName"
 >;
 
 /**
@@ -106,7 +99,6 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
     label,
     description,
     error,
-    withAsterisk,
     required,
     labelPosition = "end",
     disabled,
@@ -155,7 +147,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
       />
       <span className="fui-Switch-label">
         {label}
-        {(withAsterisk || required) && (
+        {required && (
           <span className="fui-required" aria-hidden>
             *
           </span>

@@ -16,20 +16,10 @@ export interface AvatarProps extends Omit<
   name?: string;
   /** Size token or explicit pixel size. @default "md" */
   size?: AvatarSize;
-  /** Border radius token. @default "full" */
-  radius?: "sm" | "md" | "lg" | "xl" | "full";
   /** Background color for the initials/fallback state. @default "primary" */
   color?: "primary" | "gray" | "danger" | "warning" | "info";
   children?: ReactNode;
 }
-
-const radiusVar: Record<NonNullable<AvatarProps["radius"]>, string> = {
-  sm: "var(--fui-radius-sm)",
-  md: "var(--fui-radius-md)",
-  lg: "var(--fui-radius-lg)",
-  xl: "var(--fui-radius-xl)",
-  full: "var(--fui-radius-full)",
-};
 
 /** Derive up to two uppercase initials from a name. */
 function initialsFrom(name: string): string {
@@ -65,7 +55,6 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
     alt,
     name,
     size = "md",
-    radius = "full",
     color = "primary",
     className,
     style,
@@ -106,7 +95,6 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
       aria-hidden={!src && !accessibleName && !consumerNamed ? true : undefined}
       style={
         {
-          "--_radius": radiusVar[radius],
           ...(numericSize ? { "--_size": `${size}px` } : {}),
           ...style,
         } as React.CSSProperties

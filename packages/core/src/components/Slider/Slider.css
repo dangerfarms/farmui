@@ -111,15 +111,11 @@
   }
 
   :scope:focus-visible::-webkit-slider-thumb {
-    box-shadow:
-      0 0 0 2px var(--fui-bg),
-      0 0 0 calc(var(--fui-ring-width) + 2px) var(--fui-ring-color);
+    box-shadow: 0 0 0 var(--fui-ring-width) var(--fui-ring-color);
   }
 
   :scope:focus-visible::-moz-range-thumb {
-    box-shadow:
-      0 0 0 2px var(--fui-bg),
-      0 0 0 calc(var(--fui-ring-width) + 2px) var(--fui-ring-color);
+    box-shadow: 0 0 0 var(--fui-ring-width) var(--fui-ring-color);
   }
 
   /* Forced colors: the custom track and thumb are background-painted and

@@ -107,14 +107,10 @@ describe("Fieldset / grouped controls", () => {
 
   it("RadioGroup labels its options with a native fieldset/legend", () => {
     render(
-      <RadioGroup
-        label="Plan"
-        name="plan"
-        data={[
-          { value: "free", label: "Free" },
-          { value: "pro", label: "Pro" },
-        ]}
-      />,
+      <RadioGroup label="Plan" name="plan">
+        <Radio value="free" label="Free" />
+        <Radio value="pro" label="Pro" />
+      </RadioGroup>,
     );
     const group = screen.getByRole("group", { name: "Plan" });
     expect(group.tagName).toBe("FIELDSET");

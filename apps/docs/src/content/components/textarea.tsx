@@ -21,7 +21,7 @@ const doc: ComponentContent = {
   label="Bio"
   description="A short description for your public profile."
   placeholder="Tell us about yourself…"
-  withAsterisk
+  required
 />`,
       render: () => (
         <div style={{ maxInlineSize: "24rem", inlineSize: "100%" }}>
@@ -29,7 +29,7 @@ const doc: ComponentContent = {
             label="Bio"
             description="A short description for your public profile."
             placeholder="Tell us about yourself…"
-            withAsterisk
+            required
           />
         </div>
       ),
@@ -108,17 +108,6 @@ const doc: ComponentContent = {
       name: "error",
       type: "ReactNode",
       description: "Error message; puts the field in an invalid state.",
-    },
-    {
-      name: "radius",
-      type: `"sm" | "md" | "lg" | "xl" | "full"`,
-      default: `"md"`,
-      description: "Border radius token.",
-    },
-    {
-      name: "withAsterisk",
-      type: "boolean",
-      description: "Show a required asterisk next to the label.",
     },
     {
       name: "rows",

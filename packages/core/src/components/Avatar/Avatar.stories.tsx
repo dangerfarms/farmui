@@ -8,15 +8,10 @@ const meta = {
   args: {
     name: "Ada Lovelace",
     size: "md",
-    radius: "full",
     color: "primary",
   },
   argTypes: {
     size: { control: "inline-radio", options: ["sm", "md", "lg"] },
-    radius: {
-      control: "select",
-      options: ["sm", "md", "lg", "xl", "full"],
-    },
     color: {
       control: "inline-radio",
       options: ["primary", "gray", "danger", "warning", "info"],

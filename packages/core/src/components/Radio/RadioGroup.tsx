@@ -4,12 +4,8 @@ import { useId, useMemo } from "react";
 import type { ReactNode } from "react";
 import { cx } from "../../utils";
 import { Fieldset } from "../Fieldset/Fieldset";
-import { Radio } from "./Radio";
 import { RadioGroupContext } from "./group-context";
 import type { RadioGroupContextValue } from "./group-context";
-
-/** One option when building a group from a `data` array. */
-export type RadioGroupItem = string | { value: string; label?: ReactNode };
 
 export interface RadioGroupProps {
   /** Group label rendered above the options. */
@@ -31,10 +27,6 @@ export interface RadioGroupProps {
   onChange?: (value: string) => void;
   /** Layout direction of the options. @default "vertical" */
   orientation?: "vertical" | "horizontal";
-  /** Build the options from an array instead of `<Radio>` children. */
-  data?: RadioGroupItem[];
-  /** Mark the group as required (adds a red asterisk). */
-  withAsterisk?: boolean;
   /** `<Radio>` elements to render as the group's options. */
   children?: ReactNode;
   /** Root wrapper class. */
@@ -58,8 +50,6 @@ export function RadioGroup({
   defaultValue,
   onChange,
   orientation = "vertical",
-  data,
-  withAsterisk,
   children,
   className,
 }: RadioGroupProps) {
@@ -79,14 +69,6 @@ export function RadioGroup({
     [groupName, value, defaultValue, onChange],
   );
 
-  const options =
-    data?.map((item) => {
-      const optValue = typeof item === "string" ? item : item.value;
-      const optLabel =
-        typeof item === "string" ? item : (item.label ?? item.value);
-      return <Radio key={optValue} value={optValue} label={optLabel} />;
-    }) ?? children;
-
   return (
     <RadioGroupContext.Provider value={ctx}>
       <Fieldset.Root
@@ -94,23 +76,14 @@ export function RadioGroup({
         aria-describedby={cx(descId, errId) || undefined}
         aria-invalid={invalid || undefined}
       >
-        {label && (
-          <Fieldset.Legend>
-            {label}
-            {withAsterisk && (
-              <span className="fui-required" aria-hidden>
-                *
-              </span>
-            )}
-          </Fieldset.Legend>
-        )}
+        {label && <Fieldset.Legend>{label}</Fieldset.Legend>}
         {description && (
           <span className="fui-Radio-groupDescription" id={descId}>
             {description}
           </span>
         )}
         <div className="fui-Radio-options" data-orientation={orientation}>
-          {options}
+          {children}
         </div>
         {error && (
           <span className="fui-Radio-error" id={errId} role="alert">

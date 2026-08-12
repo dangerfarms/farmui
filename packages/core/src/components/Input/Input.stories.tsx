@@ -8,16 +8,9 @@ const meta = {
   args: {
     label: "Email",
     placeholder: "you@example.com",
-    radius: "md",
     disabled: false,
-    withAsterisk: false,
   },
-  argTypes: {
-    radius: {
-      control: "select",
-      options: ["sm", "md", "lg", "xl", "full"],
-    },
-  },
+  argTypes: {},
 } satisfies Meta<typeof Input>;
 
 export default meta;
@@ -76,7 +69,7 @@ export const WithError: Story = {
 };
 
 export const Required: Story = {
-  args: { label: "Full name", withAsterisk: true, placeholder: "Jane Doe" },
+  args: { label: "Full name", required: true, placeholder: "Jane Doe" },
 };
 
 export const Disabled: Story = {

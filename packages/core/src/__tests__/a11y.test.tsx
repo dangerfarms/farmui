@@ -11,6 +11,7 @@ import {
   Checkbox,
   DateInput,
   ErrorSummary,
+  Radio,
   RadioGroup,
   Switch,
   Slider,
@@ -47,7 +48,13 @@ const cases: Array<[string, ReactElement]> = [
   ["Button", <Button>Save changes</Button>],
   ["Input", <Input label="Email" placeholder="you@example.com" />],
   ["Textarea", <Textarea label="Bio" />],
-  ["Select", <Select label="Country" data={["United States", "Canada"]} />],
+  [
+    "Select",
+    <Select label="Country">
+      <option>United States</option>
+      <option>Canada</option>
+    </Select>,
+  ],
   ["Checkbox", <Checkbox label="Accept the terms" />],
   [
     "DateInput",
@@ -77,7 +84,10 @@ const cases: Array<[string, ReactElement]> = [
   ],
   [
     "RadioGroup",
-    <RadioGroup label="Plan" defaultValue="pro" data={["free", "pro"]} />,
+    <RadioGroup label="Plan" defaultValue="pro">
+      <Radio value="free" label="free" />
+      <Radio value="pro" label="pro" />
+    </RadioGroup>,
   ],
   ["Switch", <Switch label="Email notifications" />],
   ["Slider", <Slider label="Volume" defaultValue={50} />],

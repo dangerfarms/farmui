@@ -23,7 +23,7 @@ export const Checked: Story = {
 };
 
 export const Required: Story = {
-  args: { label: "Accept the terms", withAsterisk: true },
+  args: { label: "Accept the terms", required: true },
 };
 
 export const Indeterminate: Story = {

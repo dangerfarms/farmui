@@ -1,11 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Radio, RadioGroup } from "../../index";
 
-const data = [
-  { value: "wheat", label: "Wheat" },
-  { value: "barley", label: "Barley" },
-  { value: "oats", label: "Oats" },
-];
+const cropOptions = (
+  <>
+    <Radio value="wheat" label="Wheat" />
+    <Radio value="barley" label="Barley" />
+    <Radio value="oats" label="Oats" />
+  </>
+);
 
 const meta = {
   title: "Inputs/Radio",
@@ -14,17 +16,15 @@ const meta = {
   args: {
     label: "Crop",
     description: "Choose the primary crop for this field.",
-    data,
+    children: cropOptions,
     defaultValue: "wheat",
     orientation: "vertical",
-    withAsterisk: false,
   },
   argTypes: {
     orientation: {
       control: "inline-radio",
       options: ["vertical", "horizontal"],
     },
-    withAsterisk: { control: "boolean" },
   },
 } satisfies Meta<typeof RadioGroup>;
 
@@ -40,14 +40,11 @@ export const Horizontal: Story = {
 export const WithError: Story = {
   args: {
     error: "Select a crop",
-    withAsterisk: true,
     defaultValue: undefined,
   },
 };
 
-/** Compose the group from `<Radio>` children instead of a `data` array. */
-export const WithChildren: Story = {
-  args: { data: undefined },
+export const OptionDescriptions: Story = {
   render: (args) => (
     <RadioGroup {...args} label="Field status" defaultValue="active">
       <Radio value="active" label="Active" />

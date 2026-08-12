@@ -1,17 +1,18 @@
-import { Skeleton } from "@farmui/core";
+import { Avatar, Skeleton } from "@farmui/core";
 import type { ComponentContent } from "@/renderer/types";
 
 const doc: ComponentContent = {
   slug: "skeleton",
   lead: "An animated placeholder shown while content loads.",
-  importLine: `import { Skeleton } from "@farmui/core";`,
+  importLine: `import { Avatar, Skeleton } from "@farmui/core";`,
   demos: [
     {
       title: "Basic lines",
-      description: "Stack skeletons to stand in for text while it loads.",
-      code: `<Skeleton height="1rem" />
-<Skeleton height="1rem" width="80%" />
-<Skeleton height="1rem" width="60%" />`,
+      description:
+        "Stack skeletons to stand in for text while it loads. A bare Skeleton is one line tall (1lh) in the local typography, so it needs no height.",
+      code: `<Skeleton />
+<Skeleton width="80%" />
+<Skeleton width="60%" />`,
       render: () => (
         <div
           style={{
@@ -21,9 +22,9 @@ const doc: ComponentContent = {
             maxInlineSize: "22rem",
           }}
         >
-          <Skeleton height="1rem" />
-          <Skeleton height="1rem" width="80%" />
-          <Skeleton height="1rem" width="60%" />
+          <Skeleton />
+          <Skeleton width="80%" />
+          <Skeleton width="60%" />
         </div>
       ),
     },
@@ -57,14 +58,38 @@ const doc: ComponentContent = {
     },
     {
       title: "Custom sizes",
-      description: "Use width, height and radius for cards or thumbnails.",
-      code: `<Skeleton width="8rem" height="8rem" radius="var(--fui-radius-lg)" />
+      description:
+        "Use width and height for cards or thumbnails; shape comes from --_radius or circle.",
+      code: `<Skeleton
+  width="8rem"
+  height="8rem"
+  style={{ "--_radius": "var(--fui-radius-lg)" }}
+/>
 <Skeleton width="8rem" height="8rem" circle />`,
       render: () => (
         <>
-          <Skeleton width="8rem" height="8rem" radius="var(--fui-radius-lg)" />
+          <Skeleton
+            width="8rem"
+            height="8rem"
+            style={
+              { "--_radius": "var(--fui-radius-lg)" } as React.CSSProperties
+            }
+          />
           <Skeleton width="8rem" height="8rem" circle />
         </>
+      ),
+    },
+    {
+      title: "Wrap real content",
+      description:
+        "Wrapped children size the box, so the placeholder matches the coming layout with no size props; flip visible when the data lands.",
+      code: `<Skeleton visible={loading}>
+  <Avatar name="Ada Lovelace" />
+</Skeleton>`,
+      render: () => (
+        <Skeleton visible>
+          <Avatar name="Ada Lovelace" />
+        </Skeleton>
       ),
     },
   ],
@@ -83,7 +108,7 @@ const doc: ComponentContent = {
     },
     {
       title: "Swap in place with visible",
-      body: "Wrap the real content and flip visible to false when it is ready; the component then renders the children and nothing else. While the skeleton is visible, any children are hidden from pointer, selection and assistive tech, so wrapping is safe: nothing half-loaded leaks out.",
+      body: "Wrap the real content and flip visible to false when it is ready. The wrapped children size the placeholder themselves, so it mirrors the coming layout without declared dimensions; width and height exist for bare placeholders, where the absent content cannot be measured. While the skeleton is visible, children are hidden from pointer, selection and assistive tech, so nothing half-loaded leaks out.",
     },
   ],
   accessibility: [
@@ -97,19 +122,14 @@ const doc: ComponentContent = {
       name: "width",
       type: "number | string",
       default: `"100%"`,
-      description: "Inline size (number → px, or any CSS length).",
+      description:
+        "Inline size for a bare placeholder (number → px, or any CSS length). Wrapped content sizes itself.",
     },
     {
       name: "height",
       type: "number | string",
       default: `"1rem"`,
       description: "Block size (number → px, or any CSS length).",
-    },
-    {
-      name: "radius",
-      type: "number | string",
-      default: `"var(--fui-radius-md)"`,
-      description: "Border radius (number → px, or any CSS value).",
     },
     {
       name: "circle",

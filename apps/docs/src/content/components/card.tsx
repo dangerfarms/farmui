@@ -98,12 +98,6 @@ const doc: ComponentContent = {
       description: "Inner padding.",
     },
     {
-      name: "radius",
-      type: `"sm" | "md" | "lg" | "xl"`,
-      default: `"lg"`,
-      description: "Border radius token.",
-    },
-    {
       name: "withBorder",
       type: "boolean",
       description: "Draw a border around the card.",

@@ -9,15 +9,10 @@ const meta = {
   args: {
     children: "Badge",
     size: "md",
-    radius: "full",
     dot: false,
   },
   argTypes: {
     size: { control: "inline-radio", options: ["sm", "md", "lg"] },
-    radius: {
-      control: "select",
-      options: ["sm", "md", "lg", "xl", "full"],
-    },
   },
   parameters: {
     docs: {

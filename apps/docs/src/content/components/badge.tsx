@@ -144,12 +144,6 @@ const doc: ComponentContent = {
       description: "Control size (height, padding, font size).",
     },
     {
-      name: "radius",
-      type: `"sm" | "md" | "lg" | "xl" | "full"`,
-      default: `"full"`,
-      description: "Border radius token.",
-    },
-    {
       name: "children",
       type: "ReactNode",
       description: "The badge content: label, and any composed icons.",

@@ -47,7 +47,7 @@ export const WithError: Story = {
 };
 
 export const Required: Story = {
-  args: { label: "Accept audit logging", withAsterisk: true },
+  args: { label: "Accept audit logging", required: true },
 };
 
 export const States: Story = {

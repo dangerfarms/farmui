@@ -1,54 +1,80 @@
 import { Select } from "@farmui/core";
+import { SelectFieldDemo } from "./select.client";
 import type { ComponentContent } from "@/renderer/types";
 
-const countries = [
-  "United States",
-  "Canada",
-  "United Kingdom",
-  "Germany",
-  "Japan",
-];
+const countryOptions = (
+  <>
+    <option>United States</option>
+    <option>Canada</option>
+    <option>United Kingdom</option>
+    <option>Germany</option>
+    <option>Japan</option>
+  </>
+);
 
 const doc: ComponentContent = {
   slug: "select",
   lead: "A styled wrapper around a native select, accessible and zero-JS.",
-  importLine: `import { Select } from "@farmui/core";`,
+  importLine: `import { Select } from "@farmui/core";
+import { SelectFieldDemo } from "./select.client";`,
   demos: [
     {
       title: "Basic usage",
-      code: `<Select
-  label="Country"
-  data={["United States", "Canada", "United Kingdom", "Germany", "Japan"]}
-/>`,
+      code: `<Select label="Country">
+  <option>United States</option>
+  <option>Canada</option>
+  <option>United Kingdom</option>
+</Select>`,
       render: () => (
         <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
-          <Select label="Country" data={countries} />
+          <Select label="Country">{countryOptions}</Select>
         </div>
       ),
     },
     {
       title: "With placeholder",
       description: "Pass a placeholder to render an empty prompt option first.",
-      code: `<Select
-  label="Country"
-  placeholder="Pick a country"
-  data={[
-    { value: "us", label: "United States" },
-    { value: "ca", label: "Canada" },
-    { value: "uk", label: "United Kingdom" },
-  ]}
-/>`,
+      code: `<Select label="Country" placeholder="Pick a country">
+  <option value="us">United States</option>
+  <option value="ca">Canada</option>
+  <option value="uk">United Kingdom</option>
+</Select>`,
       render: () => (
         <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
-          <Select
-            label="Country"
-            placeholder="Pick a country"
-            data={[
-              { value: "us", label: "United States" },
-              { value: "ca", label: "Canada" },
-              { value: "uk", label: "United Kingdom" },
-            ]}
-          />
+          <Select label="Country" placeholder="Pick a country">
+            <option value="us">United States</option>
+            <option value="ca">Canada</option>
+            <option value="uk">United Kingdom</option>
+          </Select>
+        </div>
+      ),
+    },
+    {
+      title: "Groups and disabled options",
+      description:
+        "Options pass straight to the native select, so optgroup and disabled work exactly as the platform defines them.",
+      code: `<Select label="Instrument">
+  <optgroup label="Strings">
+    <option>Violin</option>
+    <option>Cello</option>
+  </optgroup>
+  <optgroup label="Brass">
+    <option>Trumpet</option>
+    <option disabled>Tuba (unavailable)</option>
+  </optgroup>
+</Select>`,
+      render: () => (
+        <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
+          <Select label="Instrument">
+            <optgroup label="Strings">
+              <option>Violin</option>
+              <option>Cello</option>
+            </optgroup>
+            <optgroup label="Brass">
+              <option>Trumpet</option>
+              <option disabled>Tuba (unavailable)</option>
+            </optgroup>
+          </Select>
         </div>
       ),
     },
@@ -57,19 +83,41 @@ const doc: ComponentContent = {
       code: `<Select
   label="Country"
   placeholder="Pick a country"
-  data={["United States", "Canada", "United Kingdom"]}
   error="Select a country"
-/>`,
+>
+  <option>United States</option>
+  <option>Canada</option>
+  <option>United Kingdom</option>
+</Select>`,
       render: () => (
         <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
           <Select
             label="Country"
             placeholder="Pick a country"
-            data={["United States", "Canada", "United Kingdom"]}
             error="Select a country"
-          />
+          >
+            {countryOptions}
+          </Select>
         </div>
       ),
+    },
+    {
+      title: "Compose with Field",
+      description:
+        "SelectControl is the bare box; drop it into Field.Control and the Field wires the label, description, error and aria state, exactly as it does for Input.",
+      code: `<Field.Root>
+  <Field.Label>Country</Field.Label>
+  <Field.Description>Where you are resident for tax.</Field.Description>
+  <Field.Control
+    render={
+      <SelectControl>
+        <option>United States</option>
+        <option>Canada</option>
+      </SelectControl>
+    }
+  />
+</Field.Root>`,
+      render: () => <SelectFieldDemo />,
     },
   ],
   whenToUse: [
@@ -123,25 +171,15 @@ const doc: ComponentContent = {
       description: "Error message; puts the field in an invalid state.",
     },
     {
-      name: "radius",
-      type: `"sm" | "md" | "lg" | "xl" | "full"`,
-      default: `"md"`,
-      description: "Border radius token.",
-    },
-    {
-      name: "withAsterisk",
-      type: "boolean",
-      description: "Show a required asterisk next to the label.",
-    },
-    {
       name: "placeholder",
       type: "string",
       description: "Non-selectable prompt shown as the first, empty option.",
     },
     {
-      name: "data",
-      type: "Array<string | { value: string; label: string }>",
-      description: "The options to render.",
+      name: "children",
+      type: "ReactNode",
+      description:
+        "Native <option> / <optgroup> elements, passed straight through.",
     },
     {
       name: "...others",

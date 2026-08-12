@@ -7,7 +7,6 @@
   }
 
   :scope:focus-visible {
-    box-shadow: 0 0 0 2px var(--fui-bg);
     outline: var(--fui-ring-width) solid var(--fui-danger-ring);
     outline-offset: 2px;
   }

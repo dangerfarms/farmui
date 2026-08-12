@@ -1,11 +1,6 @@
 import { forwardRef } from "react";
 import type { HTMLAttributes } from "react";
-import {
-  cx,
-  resolveRadius,
-  type FarmUIRadius,
-  type FarmUISize,
-} from "../../utils";
+import { cx, type FarmUISize } from "../../utils";
 
 export interface ProgressProps extends Omit<
   HTMLAttributes<HTMLDivElement>,
@@ -15,8 +10,6 @@ export interface ProgressProps extends Omit<
   value?: number;
   /** Track thickness. @default "md" */
   size?: FarmUISize;
-  /** Border radius token. @default "full" */
-  radius?: FarmUIRadius;
   /** Overlay diagonal stripes on the filled bar. */
   striped?: boolean;
   /** Animate the stripes (implies `striped`). */
@@ -40,7 +33,6 @@ export const Progress = forwardRef<HTMLDivElement, ProgressProps>(
     {
       value = 0,
       size = "md",
-      radius = "full",
       striped,
       animated,
       label,
@@ -63,12 +55,7 @@ export const Progress = forwardRef<HTMLDivElement, ProgressProps>(
         aria-valuemax={100}
         className={cx("fui-Progress-root", className)}
         data-size={size}
-        style={
-          {
-            "--_radius": resolveRadius(radius),
-            ...style,
-          } as React.CSSProperties
-        }
+        style={style}
         {...rest}
       >
         <div

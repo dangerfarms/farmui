@@ -90,7 +90,6 @@
   }
 
   .fui-Radio-input:focus-visible + :scope {
-    box-shadow: 0 0 0 2px var(--fui-bg);
     outline: var(--fui-ring-width) solid var(--fui-ring-color);
     outline-offset: 2px;
   }

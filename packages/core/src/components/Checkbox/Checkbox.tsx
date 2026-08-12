@@ -24,8 +24,6 @@ export interface CheckboxProps extends Omit<
   error?: ReactNode;
   /** Render the "partially checked" (dash) visual state. */
   indeterminate?: boolean;
-  /** Mark the field as required (adds an asterisk to the label). */
-  withAsterisk?: boolean;
   /** Root wrapper class. */
   wrapperClassName?: string;
 }
@@ -33,7 +31,7 @@ export interface CheckboxProps extends Omit<
 /** The bare checkbox box + input, minus any label. */
 export type CheckboxControlProps = Omit<
   CheckboxProps,
-  "label" | "description" | "error" | "withAsterisk" | "wrapperClassName"
+  "label" | "description" | "error" | "wrapperClassName"
 >;
 
 /**
@@ -135,7 +133,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       error,
       disabled,
       required,
-      withAsterisk,
       id,
       wrapperClassName,
       ...control
@@ -179,7 +176,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             {label && (
               <span className="fui-Checkbox-label">
                 {label}
-                {(withAsterisk || required) && (
+                {required && (
                   <span className="fui-required" aria-hidden>
                     *
                   </span>

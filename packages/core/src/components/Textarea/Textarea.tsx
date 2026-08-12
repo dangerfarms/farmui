@@ -2,7 +2,7 @@
 
 import { forwardRef } from "react";
 import type { TextareaHTMLAttributes, ReactNode } from "react";
-import { cx, resolveRadius, type FarmUIRadius } from "../../utils";
+import { cx } from "../../utils";
 import { Field } from "../Field/Field";
 import { useUserInvalid } from "../../use-user-invalid";
 
@@ -16,10 +16,6 @@ export interface TextareaProps extends Omit<
   description?: ReactNode;
   /** Error message; its presence puts the field in an invalid state. */
   error?: ReactNode;
-  /** Border radius token. @default "md" */
-  radius?: FarmUIRadius;
-  /** Mark the field as required (adds an asterisk to the label). */
-  withAsterisk?: boolean;
   /** Number of visible text rows. @default 3 */
   rows?: number;
   /** Root wrapper class (applied to the Field root in the labelled form). */
@@ -29,7 +25,7 @@ export interface TextareaProps extends Omit<
 /** Props for the bare textarea box (the part Field.Control composes). */
 export type TextareaControlProps = Omit<
   TextareaProps,
-  "label" | "description" | "error" | "withAsterisk" | "wrapperClassName"
+  "label" | "description" | "error" | "wrapperClassName"
 >;
 
 /**
@@ -39,7 +35,6 @@ export type TextareaControlProps = Omit<
 const TextareaControl = forwardRef<HTMLTextAreaElement, TextareaControlProps>(
   function TextareaControl(
     {
-      radius = "md",
       rows = 3,
       disabled,
       className,
@@ -56,12 +51,7 @@ const TextareaControl = forwardRef<HTMLTextAreaElement, TextareaControlProps>(
       <div
         className="fui-Textarea-field"
         data-disabled={disabled || undefined}
-        style={
-          {
-            "--_radius": resolveRadius(radius),
-            ...style,
-          } as React.CSSProperties
-        }
+        style={style}
       >
         <textarea
           ref={ref}
@@ -92,16 +82,7 @@ const TextareaControl = forwardRef<HTMLTextAreaElement, TextareaControlProps>(
  */
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   function Textarea(
-    {
-      label,
-      description,
-      error,
-      withAsterisk,
-      wrapperClassName,
-      id,
-      required,
-      ...control
-    },
+    { label, description, error, wrapperClassName, id, required, ...control },
     ref,
   ) {
     if (!label && !description && !error) {
@@ -115,7 +96,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         {label && (
           <Field.Label>
             {label}
-            {(withAsterisk || required) && (
+            {required && (
               <span className="fui-required" aria-hidden>
                 *
               </span>

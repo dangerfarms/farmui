@@ -1,12 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Select } from "../../index";
 
-const FRAMEWORKS = [
-  { value: "react", label: "React" },
-  { value: "vue", label: "Vue" },
-  { value: "svelte", label: "Svelte" },
-  { value: "solid", label: "Solid" },
-];
+const frameworkOptions = (
+  <>
+    <option value="react">React</option>
+    <option value="vue">Vue</option>
+    <option value="svelte">Svelte</option>
+    <option value="solid">Solid</option>
+  </>
+);
 
 const meta = {
   title: "Inputs/Select",
@@ -15,16 +17,8 @@ const meta = {
   args: {
     label: "Framework",
     placeholder: "Pick one",
-    data: FRAMEWORKS,
-    radius: "md",
+    children: frameworkOptions,
     disabled: false,
-    withAsterisk: false,
-  },
-  argTypes: {
-    radius: {
-      control: "select",
-      options: ["sm", "md", "lg", "xl", "full"],
-    },
   },
 } satisfies Meta<typeof Select>;
 
@@ -33,12 +27,19 @@ type Story = StoryObj<typeof meta>;
 
 export const Playground: Story = {};
 
-export const StringData: Story = {
-  args: {
-    label: "Fruit",
-    placeholder: "Pick a fruit",
-    data: ["Apple", "Banana", "Cherry"],
-  },
+export const Grouped: Story = {
+  render: (args) => (
+    <Select {...args} label="Instrument" placeholder="Pick one">
+      <optgroup label="Strings">
+        <option>Violin</option>
+        <option>Cello</option>
+      </optgroup>
+      <optgroup label="Brass">
+        <option>Trumpet</option>
+        <option disabled>Tuba (unavailable)</option>
+      </optgroup>
+    </Select>
+  ),
 };
 
 export const WithDescription: Story = {
@@ -56,7 +57,7 @@ export const WithError: Story = {
 };
 
 export const Required: Story = {
-  args: { label: "Framework", withAsterisk: true },
+  args: { label: "Framework", required: true },
 };
 
 export const Disabled: Story = {

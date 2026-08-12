@@ -1,6 +1,6 @@
 "use client";
 
-import { Fieldset, Checkbox, RadioGroup } from "@farmui/core";
+import { Fieldset, Checkbox, Radio, RadioGroup } from "@farmui/core";
 
 export function FieldsetCheckboxDemo() {
   return (
@@ -25,15 +25,10 @@ export function FieldsetOptionalDemo() {
 
 export function FieldsetRadioDemo() {
   return (
-    <RadioGroup
-      label="Plan"
-      name="fieldset-plan"
-      defaultValue="pro"
-      data={[
-        { value: "free", label: "Free" },
-        { value: "pro", label: "Pro" },
-        { value: "team", label: "Team" },
-      ]}
-    />
+    <RadioGroup label="Plan" name="fieldset-plan" defaultValue="pro">
+      <Radio value="free" label="Free" />
+      <Radio value="pro" label="Pro" />
+      <Radio value="team" label="Team" />
+    </RadioGroup>
   );
 }

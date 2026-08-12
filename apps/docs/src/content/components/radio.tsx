@@ -54,30 +54,27 @@ const doc: ComponentContent = {
       ),
     },
     {
-      title: "Horizontal & from data",
-      description:
-        "Lay options out in a row, and build them from a data array instead of children.",
+      title: "Horizontal",
+      description: "Lay the options out in a row when they are few and short.",
       code: `<RadioGroup
   label="Portion size"
   orientation="horizontal"
   defaultValue="m"
-  data={[
-    { value: "s", label: "Small" },
-    { value: "m", label: "Medium" },
-    { value: "l", label: "Large" },
-  ]}
-/>`,
+>
+  <Radio value="s" label="Small" />
+  <Radio value="m" label="Medium" />
+  <Radio value="l" label="Large" />
+</RadioGroup>`,
       render: () => (
         <RadioGroup
           label="Portion size"
           orientation="horizontal"
           defaultValue="m"
-          data={[
-            { value: "s", label: "Small" },
-            { value: "m", label: "Medium" },
-            { value: "l", label: "Large" },
-          ]}
-        />
+        >
+          <Radio value="s" label="Small" />
+          <Radio value="m" label="Medium" />
+          <Radio value="l" label="Large" />
+        </RadioGroup>
       ),
     },
     {
@@ -188,11 +185,6 @@ const doc: ComponentContent = {
       type: `"vertical" | "horizontal"`,
       default: `"vertical"`,
       description: "Layout direction of the options.",
-    },
-    {
-      name: "RadioGroup.data",
-      type: "Array<string | { value; label? }>",
-      description: "Build options from an array instead of children.",
     },
     {
       name: "...others",

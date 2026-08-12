@@ -2,7 +2,7 @@
 
 import { forwardRef } from "react";
 import type { InputHTMLAttributes, ReactNode } from "react";
-import { cx, resolveRadius, type FarmUIRadius } from "../../utils";
+import { cx } from "../../utils";
 import { Field } from "../Field/Field";
 import { useUserInvalid } from "../../use-user-invalid";
 
@@ -16,14 +16,10 @@ export interface InputProps extends Omit<
   description?: ReactNode;
   /** Error message; its presence puts the field in an invalid state. */
   error?: ReactNode;
-  /** Border radius token. @default "md" */
-  radius?: FarmUIRadius;
   /** Content rendered inside the field, before the input. */
   leftSection?: ReactNode;
   /** Content rendered inside the field, after the input. */
   rightSection?: ReactNode;
-  /** Mark the field as required (adds an asterisk to the label). */
-  withAsterisk?: boolean;
   /** Root wrapper class (applied to the Field root in the labelled form). */
   wrapperClassName?: string;
 }
@@ -31,7 +27,7 @@ export interface InputProps extends Omit<
 /** Props for the bare field box (the part Field.Control composes). */
 export type InputControlProps = Omit<
   InputProps,
-  "label" | "description" | "error" | "withAsterisk" | "wrapperClassName"
+  "label" | "description" | "error" | "wrapperClassName"
 >;
 
 /**
@@ -42,7 +38,6 @@ export type InputControlProps = Omit<
 const InputControl = forwardRef<HTMLInputElement, InputControlProps>(
   function InputControl(
     {
-      radius = "md",
       leftSection,
       rightSection,
       disabled,
@@ -60,12 +55,7 @@ const InputControl = forwardRef<HTMLInputElement, InputControlProps>(
       <div
         className="fui-Input-field"
         data-disabled={disabled || undefined}
-        style={
-          {
-            "--_radius": resolveRadius(radius),
-            ...style,
-          } as React.CSSProperties
-        }
+        style={style}
       >
         {leftSection && (
           <span className="fui-Input-section">{leftSection}</span>
@@ -102,16 +92,7 @@ const InputControl = forwardRef<HTMLInputElement, InputControlProps>(
  * structure, use `Field.*` directly.
  */
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-  {
-    label,
-    description,
-    error,
-    withAsterisk,
-    wrapperClassName,
-    id,
-    required,
-    ...control
-  },
+  { label, description, error, wrapperClassName, id, required, ...control },
   ref,
 ) {
   if (!label && !description && !error) {
@@ -123,7 +104,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
       {label && (
         <Field.Label>
           {label}
-          {(withAsterisk || required) && (
+          {required && (
             <span className="fui-required" aria-hidden>
               *
             </span>

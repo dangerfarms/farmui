@@ -3,17 +3,15 @@ import type { CSSProperties, HTMLAttributes, ReactNode } from "react";
 import { cx } from "../../utils";
 
 export interface SkeletonProps extends HTMLAttributes<HTMLDivElement> {
-  /** Inline size (any CSS length). @default "100%" */
+  /** Inline size (any CSS length). Bare placeholders default to "100%". */
   width?: number | string;
-  /** Block size (any CSS length). @default "1rem" */
+  /** Block size (any CSS length). Bare placeholders default to "1lh". */
   height?: number | string;
-  /** Border radius (any CSS length or token value). @default "var(--fui-radius-md)" */
-  radius?: number | string;
-  /** Render as a circle (equal width/height, full radius). */
+  /** Render as a circle (width sets the diameter; radius is ignored). */
   circle?: boolean;
   /** When false, render `children` instead of the placeholder. @default true */
   visible?: boolean;
-  /** Real content, shown once `visible` is false. */
+  /** Real content: it sizes the placeholder, and shows once `visible` is false. */
   children?: ReactNode;
 }
 
@@ -22,13 +20,18 @@ const toLen = (v: number | string | undefined): string | undefined =>
 
 /**
  * An animated placeholder shown while content loads.
+ *
+ * Wrapped children size the box, so the placeholder mirrors the coming
+ * layout with nothing declared; `width`/`height` are for bare
+ * placeholders, where the absent content cannot be measured. All sizing
+ * policy lives in the stylesheet — inline custom properties carry only
+ * what the consumer declared, so skeletons stay themeable from CSS.
  */
 export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
   function Skeleton(
     {
       width,
       height,
-      radius,
       circle,
       visible = true,
       className,
@@ -40,24 +43,24 @@ export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
   ) {
     if (!visible) return <>{children}</>;
 
-    const size = circle
-      ? (toLen(width) ?? toLen(height) ?? "2.5rem")
-      : undefined;
-    const vars: CSSProperties = {
-      "--_w": circle ? size : (toLen(width) ?? "100%"),
-      "--_h": circle ? size : (toLen(height) ?? "1rem"),
-      "--_radius": circle
-        ? "var(--fui-radius-full)"
-        : (toLen(radius) ?? "var(--fui-radius-md)"),
-      ...style,
-    } as CSSProperties;
+    const declared: Record<string, string> = {};
+    if (circle) {
+      const size = toLen(width) ?? toLen(height);
+      if (size) declared["--_size"] = size;
+    } else {
+      const w = toLen(width);
+      const h = toLen(height);
+      if (w) declared["--_w"] = w;
+      if (h) declared["--_h"] = h;
+    }
 
     return (
       <div
         ref={ref}
         className={cx("fui-Skeleton-root", className)}
         aria-hidden
-        style={vars}
+        data-circle={circle || undefined}
+        style={{ ...declared, ...style } as CSSProperties}
         {...rest}
       >
         {children}

@@ -10,7 +10,6 @@ const meta = {
     "aria-label": "Upload progress",
     value: 60,
     size: "md",
-    radius: "full",
     striped: false,
     animated: false,
     label: false,
@@ -18,10 +17,6 @@ const meta = {
   argTypes: {
     value: { control: { type: "range", min: 0, max: 100, step: 1 } },
     size: { control: "inline-radio", options: ["sm", "md", "lg"] },
-    radius: {
-      control: "select",
-      options: ["sm", "md", "lg", "xl", "full"],
-    },
   },
   parameters: {
     docs: {

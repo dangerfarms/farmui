@@ -7,13 +7,11 @@ const meta = {
   tags: ["autodocs"],
   args: {
     padding: "md",
-    radius: "lg",
     shadow: "none",
     withBorder: true,
   },
   argTypes: {
     padding: { control: "inline-radio", options: ["sm", "md", "lg"] },
-    radius: { control: "inline-radio", options: ["sm", "md", "lg", "xl"] },
     shadow: {
       control: "inline-radio",
       options: ["none", "sm", "md", "lg"],

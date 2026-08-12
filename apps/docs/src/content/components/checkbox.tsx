@@ -105,11 +105,6 @@ const doc: ComponentContent = {
       description: "Error message; puts the field in an invalid state.",
     },
     {
-      name: "withAsterisk",
-      type: "boolean",
-      description: "Show a required asterisk next to the label.",
-    },
-    {
       name: "indeterminate",
       type: "boolean",
       description: "Render the partially-checked (dash) visual state.",

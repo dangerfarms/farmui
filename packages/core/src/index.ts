@@ -1,7 +1,7 @@
 // FarmUI — public API barrel.
 
-export { cx, resolveRadius } from "./utils";
-export type { FarmUISize, FarmUIRadius } from "./utils";
+export { cx } from "./utils";
+export type { FarmUISize } from "./utils";
 
 // Inputs
 export * from "./components/Field/index";

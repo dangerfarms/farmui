@@ -1,3 +1,6 @@
+import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Header } from "@/site/Header";
@@ -31,6 +34,18 @@ const themeInit = `
 })();
 `;
 
+// Content-hash the static library stylesheet so browsers refetch it when
+// it changes — the URL is otherwise identical across deploys.
+function libraryCssHref(base: string): string {
+  try {
+    const css = readFileSync(join(process.cwd(), "public", "farmui-core.css"));
+    const v = createHash("sha256").update(css).digest("hex").slice(0, 8);
+    return `${base}/farmui-core.css?v=${v}`;
+  } catch {
+    return `${base}/farmui-core.css`;
+  }
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -41,7 +56,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         {/* Served statically (not bundler-parsed) — see scripts/sync-css.mjs */}
-        <link rel="stylesheet" href={`${base}/farmui-core.css`} />
+        <link rel="stylesheet" href={libraryCssHref(base)} />
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
       </head>
       <body>

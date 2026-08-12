@@ -18,13 +18,13 @@
     color: var(--fui-text);
   }
 
-  /* Two-layer focus ring: bg-colour underlay (box-shadow) beneath a brand
-     outline. The outline, not the shadow, carries the a11y guarantee — it
-     survives forced-colors, follows radius, and isn't clipped by overflow. */
+  /* Focus ring: outline offset from the element so the true surface shows
+     through the gap — on any background, the ring reads as separate. The
+     outline survives forced-colors, follows radius, and isn't clipped by
+     overflow. */
   :where([class*="fui-"]):focus-visible,
   :where([class*="fui-"])
     :where(a, button, input, select, textarea, [tabindex]):focus-visible {
-    box-shadow: 0 0 0 2px var(--fui-bg);
     outline: var(--fui-ring-width) solid var(--fui-ring-color);
     outline-offset: 2px;
   }

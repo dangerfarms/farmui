@@ -2,12 +2,9 @@
 
 import { forwardRef } from "react";
 import type { SelectHTMLAttributes, ReactNode } from "react";
-import { cx, resolveRadius, type FarmUIRadius } from "../../utils";
+import { cx } from "../../utils";
 import { Field } from "../Field/Field";
 import { useUserInvalid } from "../../use-user-invalid";
-
-/** An option in a Select — either a bare string or a value/label pair. */
-export type SelectItem = string | { value: string; label: string };
 
 export interface SelectProps extends Omit<
   SelectHTMLAttributes<HTMLSelectElement>,
@@ -19,14 +16,8 @@ export interface SelectProps extends Omit<
   description?: ReactNode;
   /** Error message; its presence puts the field in an invalid state. */
   error?: ReactNode;
-  /** Border radius token. @default "md" */
-  radius?: FarmUIRadius;
-  /** Mark the field as required (adds an asterisk to the label). */
-  withAsterisk?: boolean;
   /** Non-selectable prompt shown as the first, empty-valued option. */
   placeholder?: string;
-  /** The options to render. */
-  data?: SelectItem[];
   /** Root wrapper class (applied to the Field root in the labelled form). */
   wrapperClassName?: string;
 }
@@ -34,7 +25,7 @@ export interface SelectProps extends Omit<
 /** Props for the bare select box (the part Field.Control composes). */
 export type SelectControlProps = Omit<
   SelectProps,
-  "label" | "description" | "error" | "withAsterisk" | "wrapperClassName"
+  "label" | "description" | "error" | "wrapperClassName"
 >;
 
 /**
@@ -44,9 +35,7 @@ export type SelectControlProps = Omit<
 const SelectControl = forwardRef<HTMLSelectElement, SelectControlProps>(
   function SelectControl(
     {
-      radius = "md",
       placeholder,
-      data = [],
       disabled,
       className,
       style,
@@ -71,12 +60,7 @@ const SelectControl = forwardRef<HTMLSelectElement, SelectControlProps>(
       <div
         className="fui-Select-field"
         data-disabled={disabled || undefined}
-        style={
-          {
-            "--_radius": resolveRadius(radius),
-            ...style,
-          } as React.CSSProperties
-        }
+        style={style}
       >
         <select
           ref={ref}
@@ -100,16 +84,7 @@ const SelectControl = forwardRef<HTMLSelectElement, SelectControlProps>(
               {placeholder}
             </option>
           )}
-          {children ??
-            data.map((item) => {
-              const opt =
-                typeof item === "string" ? { value: item, label: item } : item;
-              return (
-                <option key={opt.value} value={opt.value}>
-                  {opt.label}
-                </option>
-              );
-            })}
+          {children}
         </select>
         <svg
           className="fui-Select-chevron"
@@ -140,16 +115,7 @@ const SelectControl = forwardRef<HTMLSelectElement, SelectControlProps>(
  */
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   function Select(
-    {
-      label,
-      description,
-      error,
-      withAsterisk,
-      wrapperClassName,
-      id,
-      required,
-      ...control
-    },
+    { label, description, error, wrapperClassName, id, required, ...control },
     ref,
   ) {
     if (!label && !description && !error) {
@@ -163,7 +129,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         {label && (
           <Field.Label>
             {label}
-            {(withAsterisk || required) && (
+            {required && (
               <span className="fui-required" aria-hidden>
                 *
               </span>

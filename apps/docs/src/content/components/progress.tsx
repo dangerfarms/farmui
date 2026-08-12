@@ -117,12 +117,6 @@ const doc: ComponentContent = {
       description: "Track thickness.",
     },
     {
-      name: "radius",
-      type: `"sm" | "md" | "lg" | "xl" | "full"`,
-      default: `"full"`,
-      description: "Border radius token.",
-    },
-    {
       name: "striped",
       type: "boolean",
       description: "Overlay diagonal stripes on the filled bar.",

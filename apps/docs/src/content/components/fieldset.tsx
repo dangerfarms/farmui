@@ -41,12 +41,11 @@ const doc: ComponentContent = {
   label="Plan"
   name="plan"
   defaultValue="pro"
-  data={[
-    { value: "free", label: "Free" },
-    { value: "pro", label: "Pro" },
-    { value: "team", label: "Team" },
-  ]}
-/>`,
+>
+  <Radio value="free" label="Free" />
+  <Radio value="pro" label="Pro" />
+  <Radio value="team" label="Team" />
+</RadioGroup>`,
       render: () => <FieldsetRadioDemo />,
     },
   ],

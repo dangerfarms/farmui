@@ -60,7 +60,7 @@ const doc: ComponentContent = {
   label="Username"
   description="This will be your public handle."
   placeholder="ada_lovelace"
-  withAsterisk
+  required
 />`,
       render: () => (
         <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
@@ -68,7 +68,7 @@ const doc: ComponentContent = {
             label="Username"
             description="This will be your public handle."
             placeholder="ada_lovelace"
-            withAsterisk
+            required
           />
         </div>
       ),
@@ -218,12 +218,6 @@ const doc: ComponentContent = {
       description: "Error message; puts the field in an invalid state.",
     },
     {
-      name: "radius",
-      type: `"sm" | "md" | "lg" | "xl" | "full"`,
-      default: `"md"`,
-      description: "Border radius token.",
-    },
-    {
       name: "leftSection",
       type: "ReactNode",
       description: "Content inside the field, before the input.",
@@ -232,11 +226,6 @@ const doc: ComponentContent = {
       name: "rightSection",
       type: "ReactNode",
       description: "Content inside the field, after the input.",
-    },
-    {
-      name: "withAsterisk",
-      type: "boolean",
-      description: "Show a required asterisk next to the label.",
     },
     {
       name: "...others",

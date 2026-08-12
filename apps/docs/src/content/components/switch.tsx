@@ -93,11 +93,6 @@ const doc: ComponentContent = {
       description: "Error message; puts the switch in an invalid state.",
     },
     {
-      name: "withAsterisk",
-      type: "boolean",
-      description: "Show a required asterisk next to the label.",
-    },
-    {
       name: "labelPosition",
       type: `"start" | "end"`,
       default: `"end"`,
