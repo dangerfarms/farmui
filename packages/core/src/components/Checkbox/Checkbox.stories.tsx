@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Checkbox } from "../../index";
+import { Checkbox, Field } from "../../index";
 
 const meta = {
   title: "Inputs/Checkbox",
@@ -38,10 +38,12 @@ export const WithDescription: Story = {
 };
 
 export const WithError: Story = {
-  args: {
-    label: "I accept the terms and conditions",
-    error: "You must accept the terms to continue.",
-  },
+  render: (args) => (
+    <Field.Root>
+      <Checkbox {...args} label="I accept the terms and conditions" />
+      <Field.Error>You must accept the terms to continue.</Field.Error>
+    </Field.Root>
+  ),
 };
 
 export const Disabled: Story = {

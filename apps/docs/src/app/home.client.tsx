@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { CSSProperties } from "react";
-import { Avatar, Badge, Button, Input, Switch } from "@farmui/core";
+import { Avatar, Badge, Button, Field, Input, Switch } from "@farmui/core";
 import classes from "./home.module.css";
 
 export function InstallSnippet() {
@@ -52,21 +52,22 @@ export function HeroShowcase() {
         </div>
       </div>
 
-      <Input
-        label="Work email"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
+      <Field.Root>
+        <Field.Label>Work email</Field.Label>
+        <Input value={name} onChange={(e) => setName(e.target.value)} />
+      </Field.Root>
 
       <div className={classes.showcaseRow}>
-        <span className={classes.showcaseLabel}>Email notifications</span>
         <Switch
+          label="Email notifications"
+          labelPosition="start"
+          wrapperClassName={classes.showcaseSwitch}
           checked={notify}
           onChange={(e) => setNotify(e.currentTarget.checked)}
         />
       </div>
       <div className={classes.showcaseRow}>
-        <span className={classes.showcaseLabel}>Plan</span>
+        <span className={classes.showcaseLabel}>Notifications</span>
         <span
           style={
             {

@@ -1,153 +1,119 @@
-import { Input } from "@farmui/core";
 import type { ComponentContent } from "@/renderer/types";
+import {
+  InputAutofillDemo,
+  InputBasicDemo,
+  InputContainersDemo,
+  InputDescriptionDemo,
+  InputErrorDemo,
+  InputNativeValidationDemo,
+  InputNumericDemo,
+  InputSectionsDemo,
+} from "./input.client";
 
 const doc: ComponentContent = {
   slug: "input",
-  lead: "A labelled text field with description and error states.",
-  importLine: `import { Input } from "@farmui/core";`,
+  lead: "The single-line text box. Compose it inside a Field for its label, description and error.",
+  importLine: `import { Field, Input } from "@farmui/core";`,
   demos: [
     {
       title: "Basic usage",
-      code: `<Input label="Email" placeholder="you@example.com" />`,
-      render: () => (
-        <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
-          <Input label="Email" placeholder="you@example.com" />
-        </div>
-      ),
+      description:
+        "Wrap the control in Field.Root and add a Field.Label: the input reads its id from the field, so the label is wired without any props.",
+      code: `<Field.Root>
+  <Field.Label>Email</Field.Label>
+  <Input placeholder="you@example.com" />
+</Field.Root>`,
+      render: () => <InputBasicDemo />,
     },
     {
       title: "No size prop",
       description:
         "Padding and font are fluid container-relative tokens: the control adapts to the space it lives in, and always height-aligns with Button, which shares the same derived anatomy. See the Contextualism guide.",
       code: `<div style={{ containerType: "inline-size", inlineSize: "16rem" }}>
-  <Input label="In a narrow container" />
+  <Field.Root>
+    <Field.Label>In a narrow container</Field.Label>
+    <Input placeholder="you@example.com" />
+  </Field.Root>
+</div>
+
+<div style={{ containerType: "inline-size", inlineSize: "30rem" }}>
+  <Field.Root>
+    <Field.Label>In a wide one</Field.Label>
+    <Input placeholder="you@example.com" />
+  </Field.Root>
 </div>`,
-      render: () => (
-        <div style={{ display: "grid", gap: "1rem", inlineSize: "100%" }}>
-          <div
-            style={{
-              containerType: "inline-size",
-              inlineSize: "16rem",
-              maxInlineSize: "100%",
-              padding: "0.75rem",
-              border: "1px dashed var(--fui-border)",
-              borderRadius: "var(--fui-radius-md)",
-            }}
-          >
-            <Input
-              label="In a narrow container"
-              placeholder="you@example.com"
-            />
-          </div>
-          <div
-            style={{
-              containerType: "inline-size",
-              inlineSize: "30rem",
-              maxInlineSize: "100%",
-              padding: "0.75rem",
-              border: "1px dashed var(--fui-border)",
-              borderRadius: "var(--fui-radius-md)",
-            }}
-          >
-            <Input label="In a wide one" placeholder="you@example.com" />
-          </div>
-        </div>
-      ),
+      render: () => <InputContainersDemo />,
     },
     {
       title: "Description & required",
-      code: `<Input
-  label="Username"
-  description="This will be your public handle."
-  placeholder="ada_lovelace"
-  required
-/>`,
-      render: () => (
-        <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
-          <Input
-            label="Username"
-            description="This will be your public handle."
-            placeholder="ada_lovelace"
-            required
-          />
-        </div>
-      ),
+      code: `<Field.Root>
+  <Field.Label>Username</Field.Label>
+  <Field.Description>This will be your public handle.</Field.Description>
+  <Input placeholder="ada_lovelace" required />
+</Field.Root>`,
+      render: () => <InputDescriptionDemo />,
     },
     {
       title: "Error state",
-      code: `<Input
-  label="Email"
-  defaultValue="not-an-email"
-  error="Enter an email address in the correct format, like name@example.com"
-/>`,
-      render: () => (
-        <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
-          <Input
-            label="Email"
-            defaultValue="not-an-email"
-            error="Enter an email address in the correct format, like name@example.com"
-          />
-        </div>
-      ),
+      description:
+        "A Field.Error after the control marks the field invalid and is announced: no error prop, the message's presence is the state.",
+      code: `<Field.Root>
+  <Field.Label>Email</Field.Label>
+  <Input defaultValue="not-an-email" />
+  <Field.Error>
+    Enter an email address in the correct format, like name@example.com
+  </Field.Error>
+</Field.Root>`,
+      render: () => <InputErrorDemo />,
     },
     {
-      title: "Native validation: no JS, no props",
+      title: "Native validation: no JS, no parts",
       description:
-        'Constraint validation is detected too: with required or type="email", the field styles itself via :user-invalid after you interact with it: no error prop, no state, nothing running in the browser. Try typing a non-email and tabbing away.',
-      code: `<Input label="Work email" type="email" required />`,
-      render: () => (
-        <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
-          <Input label="Work email" type="email" required />
-        </div>
-      ),
+        'Constraint validation is detected too: with required or type="email", the field styles itself via :user-invalid after you interact with it: no Field.Error, no state, nothing running in the browser. Try typing a non-email and tabbing away.',
+      code: `<Field.Root>
+  <Field.Label>Work email</Field.Label>
+  <Input type="email" required />
+</Field.Root>`,
+      render: () => <InputNativeValidationDemo />,
     },
     {
       title: "With sections",
-      code: `<Input leftSection="@" placeholder="handle" />
-<Input rightSection=".dev" placeholder="yoursite" />`,
-      render: () => (
-        <div
-          style={{
-            display: "grid",
-            gap: "0.75rem",
-            maxInlineSize: "20rem",
-            inlineSize: "100%",
-          }}
-        >
-          <Input leftSection="@" placeholder="handle" />
-          <Input rightSection=".dev" placeholder="yoursite" />
-        </div>
-      ),
+      description:
+        "Sections sit inside the field but outside the accessible name, so the Field.Label still does the naming — a placeholder alone never can.",
+      code: `<Field.Root>
+  <Field.Label>Handle</Field.Label>
+  <Input leftSection="@" placeholder="handle" />
+</Field.Root>
+
+<Field.Root>
+  <Field.Label>Site name</Field.Label>
+  <Input rightSection=".dev" placeholder="yoursite" />
+</Field.Root>`,
+      render: () => <InputSectionsDemo />,
     },
   ],
   whenToUse: [
     "For short, free-form single-line text: names, emails, search terms, URLs.",
-    "When you need a label, helper description and inline error tied together: Input composes the Field primitive for you so the wiring is correct.",
+    "Inside a Field.Root, which ties the label, helper description and inline error together: the control self-wires from the surrounding field, so the accessibility is correct by construction. See the Field page.",
   ],
   whenNotToUse: [
     "For multi-line text: use Textarea.",
     "For choosing from a fixed set of options: use Select, Radio or Checkbox.",
-    "When you need full control over the label/description/error structure: compose Field.* directly.",
   ],
   howItWorks: [
     {
       title: "Asking for numbers",
       body: 'Never use type="number": scroll wheels and arrow keys silently change the value, and browsers give poor feedback when the input is invalid. Pass inputMode="numeric" for whole numbers or inputMode="decimal" for amounts (both forward straight to the native input) so touch devices raise a number pad while the field keeps normal text behaviour.',
-      code: `<Input label="Account number" inputMode="numeric" />
-<Input label="Weight in kilograms" inputMode="decimal" />`,
-      render: () => (
-        <div
-          style={{
-            display: "grid",
-            gap: "0.75rem",
-            maxInlineSize: "20rem",
-            inlineSize: "100%",
-          }}
-        >
-          <Input label="Account number" inputMode="numeric" />
-          <Input label="Weight in kilograms" inputMode="decimal" />
-        </div>
-      ),
+      code: `<Field.Root>
+  <Field.Label>Account number</Field.Label>
+  <Input inputMode="numeric" />
+</Field.Root>
+
+<Field.Root>
+  <Field.Label>Weight in kilograms</Field.Label>
+  <Input inputMode="decimal" />
+</Field.Root>`,
+      render: () => <InputNumericDemo />,
     },
     {
       title: "Codes and references",
@@ -156,16 +122,15 @@ const doc: ComponentContent = {
     {
       title: "Autofill and input purpose",
       body: 'Any field asking for something about the user gets the matching autoComplete value: "name", "email", "postal-code", "bday-day" and the rest of the HTML autofill set, forwarded straight through. This is WCAG 1.3.5 (Identify Input Purpose): it lets browsers fill the answer correctly and lets assistive tech present the field in the user’s own terms.',
-      code: `<Input label="Email" type="email" autoComplete="email" />`,
-      render: () => (
-        <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
-          <Input label="Email" type="email" autoComplete="email" />
-        </div>
-      ),
+      code: `<Field.Root>
+  <Field.Label>Email</Field.Label>
+  <Input type="email" autoComplete="email" />
+</Field.Root>`,
+      render: () => <InputAutofillDemo />,
     },
     {
       title: "Placeholders are not labels",
-      body: "A placeholder vanishes the moment the user types, is skipped by some assistive technology, and its dimmed colour fails contrast as instruction text. The label prop is the shortest path through this API: use it for what the field is, and put format hints in description, which stays visible and is announced. Reserve placeholder for a genuinely disposable example.",
+      body: "A placeholder vanishes the moment the user types, is skipped by some assistive technology, and its dimmed colour fails contrast as instruction text. Field.Label is for what the field is; format hints go in Field.Description, which stays visible and is announced. Reserve placeholder for a genuinely disposable example.",
     },
     {
       title: "Width belongs to the container",
@@ -195,28 +160,13 @@ const doc: ComponentContent = {
     },
   ],
   accessibility: [
-    "The label is a real <label> tied to the input by id, so clicking it focuses the field and screen readers announce it.",
-    "Description and error are linked via aria-describedby, and an error also sets aria-invalid, announced together when the field gains focus.",
-    'The error message uses role="alert" so it is announced as it appears.',
+    "Inside a Field.Root the input reads its id from the field, so Field.Label is a real <label> tied to it: clicking the label focuses the field and screen readers announce it.",
+    "Field.Description and Field.Error are linked via aria-describedby, and a rendered error also sets aria-invalid, announced together when the field gains focus.",
+    'Field.Error uses role="alert" so the message is announced as it appears.',
     "leftSection / rightSection render your content beside the input but outside its accessible name. Mark visual content like currency symbols or icons aria-hidden, and carry the unit in the label or description so non-visual users get it too.",
-    "Following GOV.UK guidance, prefer marking optional fields in words; reserve the required asterisk for genuinely required fields and explain it once per form.",
+    "Following GOV.UK guidance, mark optional fields in words (Field.Label's optional prop) rather than asterisking required ones: required lives on the control as the native required attribute, which drives validation and :user-invalid styling.",
   ],
   props: [
-    {
-      name: "label",
-      type: "ReactNode",
-      description: "Field label rendered above the input.",
-    },
-    {
-      name: "description",
-      type: "ReactNode",
-      description: "Helper text rendered below the label.",
-    },
-    {
-      name: "error",
-      type: "ReactNode",
-      description: "Error message; puts the field in an invalid state.",
-    },
     {
       name: "leftSection",
       type: "ReactNode",

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Button, ErrorSummary, Input } from "../../index";
+import { Button, ErrorSummary, Field, Input } from "../../index";
 
 const meta = {
   title: "Inputs/ErrorSummary",
@@ -28,12 +28,16 @@ export const Default: Story = {
           </ErrorSummary.Item>
         </ErrorSummary.List>
       </ErrorSummary.Root>
-      <Input id="es-name" label="Full name" error="Enter your full name" />
-      <Input
-        id="es-email"
-        label="Email address"
-        error="Enter your email address"
-      />
+      <Field.Root id="es-name">
+        <Field.Label>Full name</Field.Label>
+        <Input />
+        <Field.Error>Enter your full name</Field.Error>
+      </Field.Root>
+      <Field.Root id="es-email">
+        <Field.Label>Email address</Field.Label>
+        <Input />
+        <Field.Error>Enter your email address</Field.Error>
+      </Field.Root>
       <div>
         <Button>Save and continue</Button>
       </div>

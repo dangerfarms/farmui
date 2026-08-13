@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Input, Popover } from "@farmui/core";
+import { Button, Field, Input, Popover } from "@farmui/core";
 
 export function PopoverDemo() {
   return (
@@ -42,8 +42,14 @@ export function PopoverFormDemo() {
           style={{ display: "grid", gap: "0.75rem" }}
           onSubmit={(e) => e.preventDefault()}
         >
-          <Input label="Name" placeholder="Wireless headphones" />
-          <Input label="Price" placeholder="49.00" />
+          <Field.Root>
+            <Field.Label>Name</Field.Label>
+            <Input placeholder="Wireless headphones" />
+          </Field.Root>
+          <Field.Root>
+            <Field.Label>Price</Field.Label>
+            <Input inputMode="decimal" placeholder="49.00" />
+          </Field.Root>
           <Button type="submit">Save</Button>
         </form>
       </Popover.Popup>

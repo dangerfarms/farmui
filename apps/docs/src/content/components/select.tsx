@@ -1,123 +1,91 @@
-import { Select } from "@farmui/core";
-import { SelectFieldDemo } from "./select.client";
 import type { ComponentContent } from "@/renderer/types";
-
-const countryOptions = (
-  <>
-    <option>United States</option>
-    <option>Canada</option>
-    <option>United Kingdom</option>
-    <option>Germany</option>
-    <option>Japan</option>
-  </>
-);
+import {
+  SelectBasicDemo,
+  SelectDescriptionDemo,
+  SelectErrorDemo,
+  SelectGroupsDemo,
+  SelectPlaceholderDemo,
+} from "./select.client";
 
 const doc: ComponentContent = {
   slug: "select",
-  lead: "A styled wrapper around a native select, accessible and zero-JS.",
-  importLine: `import { Select } from "@farmui/core";
-import { SelectFieldDemo } from "./select.client";`,
+  lead: "A styled wrapper around a native select, accessible and zero-JS. Compose it inside a Field for its label, description and error.",
+  importLine: `import { Field, Select } from "@farmui/core";`,
   demos: [
     {
       title: "Basic usage",
-      code: `<Select label="Country">
-  <option>United States</option>
-  <option>Canada</option>
-  <option>United Kingdom</option>
-</Select>`,
-      render: () => (
-        <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
-          <Select label="Country">{countryOptions}</Select>
-        </div>
-      ),
+      description:
+        "Wrap the control in Field.Root and add a Field.Label: the select reads its id from the field, so the label is wired without any props.",
+      code: `<Field.Root>
+  <Field.Label>Country</Field.Label>
+  <Select>
+    <option>United States</option>
+    <option>Canada</option>
+    <option>United Kingdom</option>
+  </Select>
+</Field.Root>`,
+      render: () => <SelectBasicDemo />,
     },
     {
       title: "With placeholder",
       description: "Pass a placeholder to render an empty prompt option first.",
-      code: `<Select label="Country" placeholder="Pick a country">
-  <option value="us">United States</option>
-  <option value="ca">Canada</option>
-  <option value="uk">United Kingdom</option>
-</Select>`,
-      render: () => (
-        <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
-          <Select label="Country" placeholder="Pick a country">
-            <option value="us">United States</option>
-            <option value="ca">Canada</option>
-            <option value="uk">United Kingdom</option>
-          </Select>
-        </div>
-      ),
+      code: `<Field.Root>
+  <Field.Label>Country</Field.Label>
+  <Select placeholder="Pick a country">
+    <option value="us">United States</option>
+    <option value="ca">Canada</option>
+    <option value="uk">United Kingdom</option>
+  </Select>
+</Field.Root>`,
+      render: () => <SelectPlaceholderDemo />,
     },
     {
       title: "Groups and disabled options",
       description:
         "Options pass straight to the native select, so optgroup and disabled work exactly as the platform defines them.",
-      code: `<Select label="Instrument">
-  <optgroup label="Strings">
-    <option>Violin</option>
-    <option>Cello</option>
-  </optgroup>
-  <optgroup label="Brass">
-    <option>Trumpet</option>
-    <option disabled>Tuba (unavailable)</option>
-  </optgroup>
-</Select>`,
-      render: () => (
-        <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
-          <Select label="Instrument">
-            <optgroup label="Strings">
-              <option>Violin</option>
-              <option>Cello</option>
-            </optgroup>
-            <optgroup label="Brass">
-              <option>Trumpet</option>
-              <option disabled>Tuba (unavailable)</option>
-            </optgroup>
-          </Select>
-        </div>
-      ),
+      code: `<Field.Root>
+  <Field.Label>Instrument</Field.Label>
+  <Select>
+    <optgroup label="Strings">
+      <option>Violin</option>
+      <option>Cello</option>
+    </optgroup>
+    <optgroup label="Brass">
+      <option>Trumpet</option>
+      <option disabled>Tuba (unavailable)</option>
+    </optgroup>
+  </Select>
+</Field.Root>`,
+      render: () => <SelectGroupsDemo />,
     },
     {
-      title: "Error state",
-      code: `<Select
-  label="Country"
-  placeholder="Pick a country"
-  error="Select a country"
->
-  <option>United States</option>
-  <option>Canada</option>
-  <option>United Kingdom</option>
-</Select>`,
-      render: () => (
-        <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
-          <Select
-            label="Country"
-            placeholder="Pick a country"
-            error="Select a country"
-          >
-            {countryOptions}
-          </Select>
-        </div>
-      ),
-    },
-    {
-      title: "Compose with Field",
+      title: "With a description",
       description:
-        "SelectControl is the bare box; drop it into Field.Control and the Field wires the label, description, error and aria state, exactly as it does for Input.",
+        "Field.Description links to the select via aria-describedby, the same wiring every control gets inside a Field.",
       code: `<Field.Root>
   <Field.Label>Country</Field.Label>
   <Field.Description>Where you are resident for tax.</Field.Description>
-  <Field.Control
-    render={
-      <SelectControl>
-        <option>United States</option>
-        <option>Canada</option>
-      </SelectControl>
-    }
-  />
+  <Select>
+    <option>United States</option>
+    <option>Canada</option>
+  </Select>
 </Field.Root>`,
-      render: () => <SelectFieldDemo />,
+      render: () => <SelectDescriptionDemo />,
+    },
+    {
+      title: "Error state",
+      description:
+        "A Field.Error after the control marks the field invalid and is announced: the message's presence is the state.",
+      code: `<Field.Root>
+  <Field.Label>Country</Field.Label>
+  <Select placeholder="Pick a country">
+    <option>United States</option>
+    <option>Canada</option>
+    <option>United Kingdom</option>
+  </Select>
+  <Field.Error>Select a country</Field.Error>
+</Field.Root>`,
+      render: () => <SelectErrorDemo />,
     },
   ],
   whenToUse: [
@@ -151,25 +119,10 @@ import { SelectFieldDemo } from "./select.client";`,
   ],
   accessibility: [
     "Wraps a native <select>, so keyboard interaction, typeahead and the mobile picker come from the platform.",
-    'Composes the Field primitive: label, description and error are wired via id / aria-describedby / aria-invalid with the error as role="alert".',
+    'Inside a Field.Root it self-wires: the label, description and error are linked via id / aria-describedby / aria-invalid, with the error announced as role="alert". See the Field page.',
     "A placeholder renders as a disabled first option so it is never a selectable value.",
   ],
   props: [
-    {
-      name: "label",
-      type: "ReactNode",
-      description: "Field label rendered above the select.",
-    },
-    {
-      name: "description",
-      type: "ReactNode",
-      description: "Helper text rendered below the label.",
-    },
-    {
-      name: "error",
-      type: "ReactNode",
-      description: "Error message; puts the field in an invalid state.",
-    },
     {
       name: "placeholder",
       type: "string",

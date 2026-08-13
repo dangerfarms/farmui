@@ -59,7 +59,7 @@ const doc: ComponentContent = {
     },
     {
       title: "The ends are always visible",
-      body: "The page list always includes page 1 and the last page, with aria-hidden ellipses standing in for the gaps and siblings pages shown around the active one. Users can therefore read the size of the whole set and reach either end in one click from anywhere.",
+      body: "The page list always includes page 1 and the last page, with aria-hidden ellipses standing in for the gaps and sibling pages shown around the active one. Users can therefore read the size of the whole set and reach either end in one click from anywhere.",
     },
     {
       title: "Mirror the page in the URL",

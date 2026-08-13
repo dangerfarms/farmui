@@ -18,7 +18,7 @@ import type {
 } from "react";
 import { cx } from "../../utils";
 import { Fieldset } from "../Fieldset/Fieldset";
-import { InputControl } from "../Input/Input";
+import { Input } from "../Input/Input";
 
 /**
  * Composable parts for asking for a memorable date.
@@ -257,7 +257,7 @@ const DateInputField = forwardRef<HTMLInputElement, DateInputFieldProps>(
         <label className="fui-DateInput-label" htmlFor={inputId}>
           {children ?? PART_LABELS[part]}
         </label>
-        <InputControl
+        <Input
           ref={ref}
           inputMode="numeric"
           name={ctx.name ? `${ctx.name}-${part}` : undefined}

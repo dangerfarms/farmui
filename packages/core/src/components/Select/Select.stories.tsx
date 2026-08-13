@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Select } from "../../index";
+import { Field, Select } from "../../index";
 
 const frameworkOptions = (
   <>
@@ -15,11 +15,16 @@ const meta = {
   component: Select,
   tags: ["autodocs"],
   args: {
-    label: "Framework",
     placeholder: "Pick one",
     children: frameworkOptions,
     disabled: false,
   },
+  render: (args) => (
+    <Field.Root>
+      <Field.Label>Framework</Field.Label>
+      <Select {...args} />
+    </Field.Root>
+  ),
 } satisfies Meta<typeof Select>;
 
 export default meta;
@@ -28,38 +33,54 @@ type Story = StoryObj<typeof meta>;
 export const Playground: Story = {};
 
 export const Grouped: Story = {
-  render: (args) => (
-    <Select {...args} label="Instrument" placeholder="Pick one">
-      <optgroup label="Strings">
-        <option>Violin</option>
-        <option>Cello</option>
-      </optgroup>
-      <optgroup label="Brass">
-        <option>Trumpet</option>
-        <option disabled>Tuba (unavailable)</option>
-      </optgroup>
-    </Select>
+  render: () => (
+    <Field.Root>
+      <Field.Label>Instrument</Field.Label>
+      <Select placeholder="Pick one">
+        <optgroup label="Strings">
+          <option>Violin</option>
+          <option>Cello</option>
+        </optgroup>
+        <optgroup label="Brass">
+          <option>Trumpet</option>
+          <option disabled>Tuba (unavailable)</option>
+        </optgroup>
+      </Select>
+    </Field.Root>
   ),
 };
 
 export const WithDescription: Story = {
-  args: {
-    label: "Framework",
-    description: "You can change this later in settings.",
-  },
+  render: (args) => (
+    <Field.Root>
+      <Field.Label>Framework</Field.Label>
+      <Field.Description>
+        You can change this later in settings.
+      </Field.Description>
+      <Select {...args} />
+    </Field.Root>
+  ),
 };
 
 export const WithError: Story = {
-  args: {
-    label: "Framework",
-    error: "Select a framework",
-  },
+  render: (args) => (
+    <Field.Root>
+      <Field.Label>Framework</Field.Label>
+      <Select {...args} />
+      <Field.Error>Select a framework</Field.Error>
+    </Field.Root>
+  ),
 };
 
 export const Required: Story = {
-  args: { label: "Framework", required: true },
+  render: (args) => (
+    <Field.Root>
+      <Field.Label>Framework</Field.Label>
+      <Select {...args} required />
+    </Field.Root>
+  ),
 };
 
 export const Disabled: Story = {
-  args: { label: "Framework", defaultValue: "react", disabled: true },
+  args: { defaultValue: "react", disabled: true },
 };

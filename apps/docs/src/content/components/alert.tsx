@@ -122,9 +122,9 @@ const doc: ComponentContent = {
   accessibility: [
     'Renders role="alert" (an assertive live region), so an alert inserted in response to an event is announced immediately by screen readers, ahead of whatever else was queued.',
     'For dynamic messages that are not urgent, pass role="status": forwarded props are spread after the default, so your role wins and the announcement becomes polite instead of interrupting.',
-    "The status colour is never announced: write the title so the meaning survives in words (“Deploy failed”, not “Error” next to a red bar); the accent bar and tint are visual-only.",
+    "The status colour is never announced: write the title so the meaning survives in words (“Deploy failed”, not “Error” on a red tint); the border and tint are visual-only.",
     "The icon slot is rendered aria-hidden. Icons are decoration here, so any meaning they carry must also be in the text.",
-    "Title text is not the raw status colour: it is mixed toward black (light scheme) or white (dark) so it keeps AA contrast on the tint even for light channels like warning; only decorative parts (icon, accent bar) carry the raw channel.",
+    "Title text is not the raw status colour: it is mixed toward black (light scheme) or white (dark) so it keeps AA contrast on the tint even for light channels like warning; only decorative parts (the icon, the border) carry the raw channel.",
   ],
   props: [
     {

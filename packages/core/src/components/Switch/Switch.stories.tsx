@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Switch } from "../../index";
+import { Field, Switch } from "../../index";
 
 const meta = {
   title: "Inputs/Switch",
@@ -40,10 +40,14 @@ export const WithDescription: Story = {
 };
 
 export const WithError: Story = {
-  args: {
-    label: "Two-factor authentication",
-    error: "Two-factor authentication must be on for admin accounts",
-  },
+  render: (args) => (
+    <Field.Root>
+      <Switch {...args} label="Two-factor authentication" />
+      <Field.Error>
+        Two-factor authentication must be on for admin accounts
+      </Field.Error>
+    </Field.Root>
+  ),
 };
 
 export const Required: Story = {

@@ -8,15 +8,10 @@ const meta = {
   tags: ["autodocs"],
   args: {
     size: "md",
-    variant: "spinner",
     label: "Loading",
   },
   argTypes: {
     size: { control: "inline-radio", options: ["sm", "md", "lg"] },
-    variant: {
-      control: "inline-radio",
-      options: ["spinner", "dots", "bars"],
-    },
   },
   parameters: {
     docs: {
@@ -37,9 +32,7 @@ export const Playground: Story = {};
 export const Variants: Story = {
   render: (args) => (
     <div style={{ display: "flex", gap: "1.5rem", alignItems: "center" }}>
-      <Loader {...args} variant="spinner" label="Loading spinner" />
-      <Loader {...args} variant="dots" label="Loading dots" />
-      <Loader {...args} variant="bars" label="Loading bars" />
+      <Loader {...args} label="Loading" />
     </div>
   ),
 };

@@ -5,17 +5,17 @@ import { SwitchFieldDemo } from "./switch.client";
 const doc: ComponentContent = {
   slug: "switch",
   lead: "Toggle a single setting on or off.",
-  importLine: `import { Switch } from "@farmui/core";`,
+  importLine: `import { Field, Switch, SwitchControl } from "@farmui/core";`,
   demos: [
     {
       title: "Basic usage",
-      code: `<Switch />`,
+      code: `<Switch aria-label="Toggle" />`,
       render: () => <Switch aria-label="Toggle" />,
     },
     {
       title: "Checked",
-      description: "The track fills with the primary color when on.",
-      code: `<Switch defaultChecked />`,
+      description: "The track fills with the primary colour when on.",
+      code: `<Switch defaultChecked aria-label="Toggle on" />`,
       render: () => <Switch defaultChecked aria-label="Toggle on" />,
     },
     {
@@ -74,6 +74,7 @@ const doc: ComponentContent = {
   accessibility: [
     'Renders a native checkbox exposed with role="switch", so it is operable by keyboard and announced as on/off.',
     "The label is tied to the control; the whole row is clickable.",
+    "In the rare case a switch needs an error message, wrap it in a Field.Root and add a Field.Error after the control: the message marks it invalid and is announced.",
     "State is conveyed by more than colour (the thumb position), so it remains clear in forced-colors and for colour-blind users.",
   ],
   props: [
@@ -86,11 +87,6 @@ const doc: ComponentContent = {
       name: "description",
       type: "ReactNode",
       description: "Helper text rendered below the label row.",
-    },
-    {
-      name: "error",
-      type: "ReactNode",
-      description: "Error message; puts the switch in an invalid state.",
     },
     {
       name: "labelPosition",

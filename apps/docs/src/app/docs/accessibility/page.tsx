@@ -103,8 +103,8 @@ export default function Accessibility() {
         <li>
           <strong>Not colour alone</strong>: state always carries a second
           signal: the tick and dash glyphs on checkboxes, thumb position on
-          switches, the error message text beside a danger border, an asterisk
-          or the word &quot;(optional)&quot; beside labels.
+          switches, the error message text beside a danger border, the word
+          &quot;(optional)&quot; beside labels.
         </li>
       </ul>
 
@@ -153,11 +153,10 @@ export default function Accessibility() {
       <p>
         Labels are real <code>&lt;label&gt;</code> elements tied to their
         controls; placeholders are never used as labels. Optional fields are
-        marked with the word &quot;(optional)&quot; in preference to decorating
-        required ones with asterisks; where asterisks are used they are
-        presentational and the requirement is conveyed by <code>required</code>.
-        Buttons act, links navigate: a button that navigates breaks right-click,
-        middle-click and open-in-new-tab.
+        marked with the word &quot;(optional)&quot;; there is no asterisk
+        convention, and the requirement itself is conveyed by the native{" "}
+        <code>required</code> attribute. Buttons act, links navigate: a button
+        that navigates breaks right-click, middle-click and open-in-new-tab.
       </p>
 
       <h2>How this is tested — and the limits</h2>

@@ -62,8 +62,8 @@
 .callout {
   margin-block: 1.5rem;
   padding: 1rem 1.15rem;
-  border: 1px solid var(--fui-border);
-  border-inline-start: 3px solid var(--fui-primary);
+  border: 1px solid
+    color-mix(in oklab, var(--fui-primary), var(--fui-border) 55%);
   border-radius: var(--fui-radius-md);
   background: var(--fui-primary-soft);
   font-size: var(--fui-text-sm);

@@ -149,11 +149,32 @@ export default function Composition() {
 
       <h2>Form controls and Field</h2>
       <p>
-        Every form control comes as a pair: a labelled convenience form (
-        <code>{`<Checkbox label="…" />`}</code>) and a bare control (
-        <code>CheckboxControl</code>, <code>SwitchControl</code>, …) that
-        self-wires when composed inside a <code>Field</code>; ids, described-by
-        and invalid state all flow from context:
+        The text-like controls (<code>Input</code>, <code>Select</code>,{" "}
+        <code>Textarea</code>, <code>Slider</code>) are bare: compose them
+        inside a <code>Field</code> and they self-wire — id, described-by and
+        invalid state all flow from context, with <code>Field.Label</code>,{" "}
+        <code>Field.Description</code> and <code>Field.Error</code> as the
+        parts:
+      </p>
+      <div className={prose.block}>
+        <CodeBlock
+          language="tsx"
+          code={`<Field.Root>
+  <Field.Label>Email</Field.Label>
+  <Field.Description>We'll only use this to reply.</Field.Description>
+  <Input type="email" />
+  <Field.Error>{error}</Field.Error>
+</Field.Root>`}
+        />
+      </div>
+      <p>
+        Inline controls (<code>Checkbox</code>, <code>Switch</code>,{" "}
+        <code>Radio</code>) keep a labelled convenience form (
+        <code>{`<Checkbox label="…" />`}</code>) because their anatomy is a row;
+        their bare parts (<code>CheckboxControl</code>,{" "}
+        <code>SwitchControl</code>, …) compose inside a <code>Field</code> the
+        same way. For an arbitrary element of your own,{" "}
+        <code>Field.Control render={`{…}`}</code> wires the same props onto it:
       </p>
       <div className={prose.block}>
         <CodeBlock

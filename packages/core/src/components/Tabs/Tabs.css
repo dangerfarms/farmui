@@ -69,11 +69,16 @@
     }
   }
 
-  .fui-Tabs-section {
+  /* Icons compose as children and are detected, exactly as in Button. */
+  .fui-Tabs-tab:has(svg) {
     display: inline flex;
     align-items: center;
-    font-size: 1.1em;
-    line-height: 0;
+    gap: 0.45em;
+
+    svg {
+      inline-size: 1.1em;
+      block-size: 1.1em;
+    }
   }
 
   .fui-Tabs-panel {

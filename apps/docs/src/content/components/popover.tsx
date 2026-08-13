@@ -8,7 +8,7 @@ import {
 const doc: ComponentContent = {
   slug: "popover",
   lead: "A click-triggered floating panel, composed from parts and rendered in the browser's top layer via the native popover attribute.",
-  importLine: `import { Popover } from "@farmui/core";`,
+  importLine: `import { Button, Field, Input, Popover } from "@farmui/core";`,
   demos: [
     {
       title: "Basic usage",
@@ -33,8 +33,14 @@ const doc: ComponentContent = {
   <Popover.Trigger>Add product</Popover.Trigger>
   <Popover.Popup>
     <form>
-      <Input label="Name" placeholder="Wireless headphones" />
-      <Input label="Price" placeholder="49.00" />
+      <Field.Root>
+        <Field.Label>Name</Field.Label>
+        <Input placeholder="Wireless headphones" />
+      </Field.Root>
+      <Field.Root>
+        <Field.Label>Price</Field.Label>
+        <Input inputMode="decimal" placeholder="49.00" />
+      </Field.Root>
       <Button type="submit">Save</Button>
     </form>
   </Popover.Popup>

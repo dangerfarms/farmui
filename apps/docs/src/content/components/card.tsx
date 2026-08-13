@@ -9,7 +9,7 @@ const doc: ComponentContent = {
     {
       title: "Basic card",
       description: "A padded surface holding a heading, text, and an action.",
-      code: `<Card withBorder>
+      code: `<Card>
   <h3 style={{ margin: "0 0 0.5rem" }}>Weekly summary</h3>
   <p style={{ margin: "0 0 1rem", color: "var(--fui-text-muted)" }}>
     Your team shipped 12 tasks this week. Review activity and plan the next sprint.
@@ -18,7 +18,7 @@ const doc: ComponentContent = {
 </Card>`,
       render: () => (
         <div style={{ maxInlineSize: "22rem", inlineSize: "100%" }}>
-          <Card withBorder>
+          <Card>
             <h3 style={{ margin: "0 0 0.5rem" }}>Weekly summary</h3>
             <p
               style={{

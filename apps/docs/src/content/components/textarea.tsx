@@ -1,55 +1,46 @@
-import { Textarea } from "@farmui/core";
 import type { ComponentContent } from "@/renderer/types";
+import {
+  TextareaBasicDemo,
+  TextareaDescriptionDemo,
+  TextareaErrorDemo,
+} from "./textarea.client";
 
 const doc: ComponentContent = {
   slug: "textarea",
-  lead: "A labelled multi-line text field with description and error states.",
-  importLine: `import { Textarea } from "@farmui/core";`,
+  lead: "The multi-line text box. Compose it inside a Field for its label, description and error.",
+  importLine: `import { Field, Textarea } from "@farmui/core";`,
   demos: [
     {
       title: "Basic usage",
-      code: `<Textarea label="Notes" placeholder="Anything to add?" />`,
-      render: () => (
-        <div style={{ maxInlineSize: "24rem", inlineSize: "100%" }}>
-          <Textarea label="Notes" placeholder="Anything to add?" />
-        </div>
-      ),
+      description:
+        "Wrap the control in Field.Root and add a Field.Label: the textarea reads its id from the field, so the label is wired without any props.",
+      code: `<Field.Root>
+  <Field.Label>Notes</Field.Label>
+  <Textarea placeholder="Anything to add?" />
+</Field.Root>`,
+      render: () => <TextareaBasicDemo />,
     },
     {
       title: "With description",
-      code: `<Textarea
-  label="Bio"
-  description="A short description for your public profile."
-  placeholder="Tell us about yourself…"
-  required
-/>`,
-      render: () => (
-        <div style={{ maxInlineSize: "24rem", inlineSize: "100%" }}>
-          <Textarea
-            label="Bio"
-            description="A short description for your public profile."
-            placeholder="Tell us about yourself…"
-            required
-          />
-        </div>
-      ),
+      code: `<Field.Root>
+  <Field.Label>Bio</Field.Label>
+  <Field.Description>
+    A short description for your public profile.
+  </Field.Description>
+  <Textarea placeholder="Tell us about yourself…" required />
+</Field.Root>`,
+      render: () => <TextareaDescriptionDemo />,
     },
     {
       title: "Error state",
-      code: `<Textarea
-  label="Message"
-  defaultValue="Too short"
-  error="Message must be 20 characters or more"
-/>`,
-      render: () => (
-        <div style={{ maxInlineSize: "24rem", inlineSize: "100%" }}>
-          <Textarea
-            label="Message"
-            defaultValue="Too short"
-            error="Message must be 20 characters or more"
-          />
-        </div>
-      ),
+      description:
+        "A Field.Error after the control marks the field invalid and is announced: the message's presence is the state.",
+      code: `<Field.Root>
+  <Field.Label>Message</Field.Label>
+  <Textarea defaultValue="Too short" />
+  <Field.Error>Message must be 20 characters or more</Field.Error>
+</Field.Root>`,
+      render: () => <TextareaErrorDemo />,
     },
   ],
   whenToUse: [
@@ -71,7 +62,7 @@ const doc: ComponentContent = {
     },
     {
       title: "Limits live in the description",
-      body: "State a length limit up front in the description (“Your answer must be 200 characters or fewer”) rather than springing it as an error after the user has written too much. FarmUI does not ship a live character counter, so keep the validation message in exactly the words the description used: the rule then reads the same before and after the mistake.",
+      body: "State a length limit up front in the Field.Description (“Your answer must be 200 characters or fewer”) rather than springing it as an error after the user has written too much. FarmUI does not ship a live character counter, so keep the validation message in exactly the words the description used: the rule then reads the same before and after the mistake.",
     },
   ],
   errors: [
@@ -89,26 +80,11 @@ const doc: ComponentContent = {
     },
   ],
   accessibility: [
-    "Composes the Field primitive, so the label, description and error share one accessible wiring (label tied by id, aria-describedby, aria-invalid).",
-    'The error uses role="alert" so it is announced when it appears.',
+    "Inside a Field.Root it self-wires, so the label, description and error share one accessible wiring (label tied by id, aria-describedby, aria-invalid). See the Field page.",
+    'Field.Error uses role="alert" so the message is announced when it appears.',
     "Resizes vertically only, so horizontal resize can't break the layout; give enough default rows to hint at the expected length (Polaris).",
   ],
   props: [
-    {
-      name: "label",
-      type: "ReactNode",
-      description: "Field label rendered above the textarea.",
-    },
-    {
-      name: "description",
-      type: "ReactNode",
-      description: "Helper text rendered below the label.",
-    },
-    {
-      name: "error",
-      type: "ReactNode",
-      description: "Error message; puts the field in an invalid state.",
-    },
     {
       name: "rows",
       type: "number",

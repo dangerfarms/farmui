@@ -46,7 +46,8 @@
   font-size: var(--fui-text-sm);
   color: var(--fui-text-muted);
   background: var(--fui-primary-soft);
-  border-inline-start: 3px solid var(--fui-primary);
+  border: 1px solid
+    color-mix(in oklab, var(--fui-primary), var(--fui-border) 55%);
   border-radius: var(--fui-radius-md);
 }
 

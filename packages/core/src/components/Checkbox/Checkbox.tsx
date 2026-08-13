@@ -20,8 +20,6 @@ export interface CheckboxProps extends Omit<
   label?: ReactNode;
   /** Helper text rendered below the label. */
   description?: ReactNode;
-  /** Error message; its presence puts the field in an invalid state. */
-  error?: ReactNode;
   /** Render the "partially checked" (dash) visual state. */
   indeterminate?: boolean;
   /** Root wrapper class. */
@@ -31,7 +29,7 @@ export interface CheckboxProps extends Omit<
 /** The bare checkbox box + input, minus any label. */
 export type CheckboxControlProps = Omit<
   CheckboxProps,
-  "label" | "description" | "error" | "wrapperClassName"
+  "label" | "description" | "wrapperClassName"
 >;
 
 /**
@@ -121,8 +119,8 @@ const CheckboxControl = forwardRef<HTMLInputElement, CheckboxControlProps>(
 /**
  * A styled `<input type="checkbox">`.
  *
- * The `label`/`description`/`error` props render an accessible inline
- * row. Without them you get only the box, which self-wires when placed
+ * The `label`/`description` props render an accessible inline row;
+ * errors compose via `Field.Error`. Without them you get only the box, which self-wires when placed
  * inside a `Field`.
  */
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
@@ -130,7 +128,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     {
       label,
       description,
-      error,
       disabled,
       required,
       id,
@@ -141,7 +138,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   ) {
     const autoId = useId();
 
-    if (!label && !description && !error) {
+    if (!label && !description) {
       return (
         <CheckboxControl
           ref={ref}
@@ -155,7 +152,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
     const fieldId = id ?? autoId;
     const descId = description ? `${fieldId}-desc` : undefined;
-    const errId = error ? `${fieldId}-err` : undefined;
 
     return (
       <div
@@ -168,21 +164,11 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             id={fieldId}
             disabled={disabled}
             required={required}
-            aria-invalid={error ? true : undefined}
-            aria-describedby={cx(descId, errId) || undefined}
+            aria-describedby={descId}
             {...control}
           />
           <span className="fui-Checkbox-body">
-            {label && (
-              <span className="fui-Checkbox-label">
-                {label}
-                {required && (
-                  <span className="fui-required" aria-hidden>
-                    *
-                  </span>
-                )}
-              </span>
-            )}
+            {label && <span className="fui-Checkbox-label">{label}</span>}
             {description && (
               <span className="fui-Checkbox-description" id={descId}>
                 {description}
@@ -190,11 +176,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             )}
           </span>
         </label>
-        {error && (
-          <span className="fui-Checkbox-error" id={errId} role="alert">
-            {error}
-          </span>
-        )}
       </div>
     );
   },

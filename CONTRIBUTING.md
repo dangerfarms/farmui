@@ -126,8 +126,9 @@ Button). The `render` prop exists only to _substitute_ that element
 (`render={<a href="…" />}`, or a function of the wiring props). If a part's
 common case needs `render`, the part has the wrong default element. The
 exception is `Field.Control`, whose entire purpose is wiring an arbitrary
-control into the field — the labelled controls (`<Input label=…>` etc.) are
-its built-in forms, so a default element would just duplicate them.
+element into the field — the FarmUI controls (`Input`, `Select`, `Textarea`,
+`Slider`) self-wire from Field context when rendered inside `Field.Root`, so
+they never go through it.
 
 **One merge contract** (`src/render.ts`, used by every part): event handlers
 chain — the element's own handler runs first, wiring second, both always run;
@@ -143,8 +144,11 @@ chain — the element's own handler runs first, wiring second, both always run;
 - Convenience form + parts (Alert) →
   `Object.assign(Convenience, { Root, … })` so both `<Alert title=…>` and
   `<Alert.Root>` work
-- Form controls → the hybrid pair: labelled `X` plus a bare `XControl` that
-  self-wires from Field context via `useFieldControlProps()`
+- Form controls → bare controls that self-wire from Field context via
+  `useFieldControlProps()` (`Input`, `Select`, `Textarea`, `Slider`): no
+  label/description/error props — composition inside `Field.Root` supplies
+  them. Inline controls whose anatomy is a row (Checkbox, Switch, Radio)
+  keep the labelled convenience form plus a bare `XControl` part
 
 RSC note: `@farmui/core` ships as a single bundle with a `"use client"`
 banner, so in React Server Components **every** compound export is a client

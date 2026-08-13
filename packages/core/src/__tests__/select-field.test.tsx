@@ -1,22 +1,18 @@
 import { describe, it, expect, afterEach } from "vitest";
 import { render, screen, cleanup } from "@testing-library/react";
-import { Field, SelectControl, Select } from "../index";
+import { Field, Select } from "../index";
 
 afterEach(cleanup);
 
 describe("Select ↔ Field wiring", () => {
-  it("SelectControl composed via Field.Control gets id/describedby/invalid", () => {
+  it("Select inside a Field gets id/describedby/invalid from context", () => {
     render(
       <Field.Root>
         <Field.Label>Country</Field.Label>
         <Field.Description>Where you live.</Field.Description>
-        <Field.Control
-          render={
-            <SelectControl>
-              <option>UK</option>
-            </SelectControl>
-          }
-        />
+        <Select>
+          <option>UK</option>
+        </Select>
         <Field.Error>Select a country</Field.Error>
       </Field.Root>,
     );
@@ -26,11 +22,15 @@ describe("Select ↔ Field wiring", () => {
     expect(select).toHaveAttribute("aria-invalid", "true");
   });
 
-  it("the convenience form wires error the same way", () => {
+  it("Field.Error puts the composed select in an invalid state", () => {
     render(
-      <Select label="Country" error="Select a country">
-        <option>UK</option>
-      </Select>,
+      <Field.Root>
+        <Field.Label>Country</Field.Label>
+        <Select>
+          <option>UK</option>
+        </Select>
+        <Field.Error>Select a country</Field.Error>
+      </Field.Root>,
     );
     const select = screen.getByLabelText("Country");
     expect(select).toHaveAttribute("aria-invalid", "true");

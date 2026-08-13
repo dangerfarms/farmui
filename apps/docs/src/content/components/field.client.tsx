@@ -10,7 +10,7 @@ export function FieldComposeDemo() {
         <Field.Description>
           We&apos;ll only use this to reply.
         </Field.Description>
-        <Field.Control render={<Input placeholder="you@example.com" />} />
+        <Input placeholder="you@example.com" />
       </Field.Root>
     </div>
   );
@@ -21,8 +21,10 @@ export function FieldErrorDemo() {
     <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
       <Field.Root>
         <Field.Label>Email</Field.Label>
-        <Field.Control render={<Input defaultValue="not-an-email" />} />
-        <Field.Error>Enter a valid email address.</Field.Error>
+        <Input defaultValue="not-an-email" />
+        <Field.Error>
+          Enter an email address in the correct format, like name@example.com
+        </Field.Error>
       </Field.Root>
     </div>
   );
@@ -33,7 +35,23 @@ export function FieldOptionalDemo() {
     <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
       <Field.Root>
         <Field.Label optional>Company</Field.Label>
-        <Field.Control render={<Input placeholder="Acme Inc." />} />
+        <Input placeholder="Acme Inc." />
+      </Field.Root>
+    </div>
+  );
+}
+
+export function FieldCustomControlDemo() {
+  return (
+    <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
+      <Field.Root>
+        <Field.Label>Amount</Field.Label>
+        <Field.Description>
+          A bare native input, not a FarmUI control.
+        </Field.Description>
+        <Field.Control
+          render={(props) => <input {...props} inputMode="decimal" />}
+        />
       </Field.Root>
     </div>
   );

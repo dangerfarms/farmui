@@ -16,8 +16,6 @@ export interface AvatarProps extends Omit<
   name?: string;
   /** Size token or explicit pixel size. @default "md" */
   size?: AvatarSize;
-  /** Background color for the initials/fallback state. @default "primary" */
-  color?: "primary" | "gray" | "danger" | "warning" | "info";
   children?: ReactNode;
 }
 
@@ -50,17 +48,7 @@ function UserGlyph() {
  * An image, initials, or fallback glyph representing a user.
  */
 export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
-  {
-    src,
-    alt,
-    name,
-    size = "md",
-    color = "primary",
-    className,
-    style,
-    children,
-    ...rest
-  },
+  { src, alt, name, size = "md", className, style, children, ...rest },
   ref,
 ) {
   const numericSize = typeof size === "number";
@@ -89,7 +77,6 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
       ref={ref}
       className={cx("fui-Avatar-root", className)}
       data-size={numericSize ? undefined : size}
-      data-color={color}
       role={src || (!accessibleName && !consumerNamed) ? undefined : "img"}
       aria-label={src ? undefined : accessibleName}
       aria-hidden={!src && !accessibleName && !consumerNamed ? true : undefined}

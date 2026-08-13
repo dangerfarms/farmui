@@ -1,5 +1,6 @@
 import { Avatar, Skeleton } from "@farmui/core";
 import type { ComponentContent } from "@/renderer/types";
+import { SkeletonSwapDemo } from "./skeleton.client";
 
 const doc: ComponentContent = {
   slug: "skeleton",
@@ -86,11 +87,7 @@ const doc: ComponentContent = {
       code: `<Skeleton visible={loading}>
   <Avatar name="Ada Lovelace" />
 </Skeleton>`,
-      render: () => (
-        <Skeleton visible>
-          <Avatar name="Ada Lovelace" />
-        </Skeleton>
-      ),
+      render: () => <SkeletonSwapDemo />,
     },
   ],
   whenToUse: [
@@ -128,7 +125,7 @@ const doc: ComponentContent = {
     {
       name: "height",
       type: "number | string",
-      default: `"1rem"`,
+      default: `"1lh"`,
       description: "Block size (number → px, or any CSS length).",
     },
     {

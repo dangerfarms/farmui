@@ -36,12 +36,15 @@ import "@farmui/core/styles.css";`}
       <h2>3. Use a component</h2>
       <div className={prose.block}>
         <CodeBlock
-          code={`import { Button, Input } from "@farmui/core";
+          code={`import { Button, Field, Input } from "@farmui/core";
 
 export function SignIn() {
   return (
     <form>
-      <Input label="Email" placeholder="you@acme.com" />
+      <Field.Root>
+        <Field.Label>Email</Field.Label>
+        <Input type="email" placeholder="you@acme.com" />
+      </Field.Root>
       <Button type="submit">Sign in</Button>
     </form>
   );
@@ -66,7 +69,8 @@ export function SignIn() {
       <div className={prose.callout}>
         FarmUI ships static CSS with cascade layers. If you use your own
         <code> @layer</code> order, the FarmUI layers are named{" "}
-        <code>farmui.reset</code>, <code>farmui.tokens</code> and{" "}
+        <code>farmui.reset</code>, <code>farmui.tokens</code>,{" "}
+        <code>farmui.elements</code>, <code>farmui.layout</code> and{" "}
         <code>farmui.components</code>.
       </div>
     </div>

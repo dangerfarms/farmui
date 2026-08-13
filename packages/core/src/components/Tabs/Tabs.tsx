@@ -58,8 +58,6 @@ export interface TabsTabProps extends Omit<
 > {
   /** Unique value linking this tab to its panel. */
   value: string;
-  /** Content rendered before the label (icon/emoji). */
-  leftSection?: ReactNode;
   children?: ReactNode;
 }
 
@@ -169,7 +167,6 @@ export function TabsList({ className, children, ...rest }: TabsListProps) {
 /** A single tab control. */
 export function TabsTab({
   value,
-  leftSection,
   disabled,
   className,
   children,
@@ -196,7 +193,6 @@ export function TabsTab({
       }}
       {...rest}
     >
-      {leftSection && <span className="fui-Tabs-section">{leftSection}</span>}
       {children}
     </button>
   );

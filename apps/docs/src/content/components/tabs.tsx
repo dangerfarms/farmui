@@ -4,7 +4,7 @@ import type { ComponentContent } from "@/renderer/types";
 const doc: ComponentContent = {
   slug: "tabs",
   lead: "Switch between related panels of content in the same view.",
-  importLine: `import { Tabs } from "@farmui/core";`,
+  importLine: `import { Tabs, TabsList, TabsTab, TabsPanel } from "@farmui/core";`,
   demos: [
     {
       title: "Basic",
@@ -42,14 +42,20 @@ const doc: ComponentContent = {
       ),
     },
     {
-      title: "With icons",
+      title: "With icons (composed as children)",
       description:
-        "Use leftSection to place an icon or emoji before the label.",
+        "No leftSection prop: an svg child is detected via :has(svg) and gets a gap and 1em sizing, exactly like Button. Compose the icon before the label and mark it aria-hidden.",
       code: `<Tabs defaultValue="files">
   <TabsList>
-    <TabsTab value="files" leftSection={<span aria-hidden>📄</span>}>Files</TabsTab>
-    <TabsTab value="team" leftSection={<span aria-hidden>👥</span>}>Team</TabsTab>
-    <TabsTab value="settings" leftSection={<span aria-hidden>⚙️</span>}>Settings</TabsTab>
+    <TabsTab value="files">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+        <path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0
+          2-2V8l-6-6H6Zm7 1.5L18.5 9H13V3.5Z" />
+      </svg>
+      Files
+    </TabsTab>
+    <TabsTab value="team"><svg>…</svg> Team</TabsTab>
+    <TabsTab value="settings"><svg>…</svg> Settings</TabsTab>
   </TabsList>
   <TabsPanel value="files">All your documents in one place.</TabsPanel>
   <TabsPanel value="team">Invite teammates and manage roles.</TabsPanel>
@@ -59,16 +65,22 @@ const doc: ComponentContent = {
         <div style={{ inlineSize: "100%", maxInlineSize: "28rem" }}>
           <Tabs defaultValue="files">
             <TabsList>
-              <TabsTab value="files" leftSection={<span aria-hidden>📄</span>}>
+              <TabsTab value="files">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                  <path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6Zm7 1.5L18.5 9H13V3.5Z" />
+                </svg>
                 Files
               </TabsTab>
-              <TabsTab value="team" leftSection={<span aria-hidden>👥</span>}>
+              <TabsTab value="team">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                  <path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-4.42 0-8 2.69-8 6v1a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-1c0-3.31-3.58-6-8-6Z" />
+                </svg>
                 Team
               </TabsTab>
-              <TabsTab
-                value="settings"
-                leftSection={<span aria-hidden>⚙️</span>}
-              >
+              <TabsTab value="settings">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                  <path d="M19.43 12.98a7.8 7.8 0 0 0 0-1.96l2.03-1.58-1.92-3.32-2.39.96a7.6 7.6 0 0 0-1.7-.98L15.1 3.5h-3.84l-.35 2.54a7.6 7.6 0 0 0-1.7.98l-2.39-.96-1.92 3.32 2.03 1.58a7.8 7.8 0 0 0 0 1.96l-2.03 1.58 1.92 3.32 2.39-.96c.52.4 1.09.73 1.7.98l.35 2.54h3.84l.35-2.54a7.6 7.6 0 0 0 1.7-.98l2.39.96 1.92-3.32-2.03-1.58ZM12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z" />
+                </svg>
                 Settings
               </TabsTab>
             </TabsList>
@@ -144,7 +156,7 @@ const doc: ComponentContent = {
     "Arrow Left/Right move through the tabs and wrap at the ends, Home/End jump to the first and last, and disabled tabs are skipped; moving focus also selects: the newly focused tab is activated immediately, so no separate Enter press is needed.",
     'Inactive panels are hidden with hidden="until-found" where the browser supports it, so find-in-page can match text inside a closed tab; a beforematch event then activates that tab. Browsers without support fall back to plain hidden.',
     'The wiring is generated from one id: role="tablist"/"tab"/"tabpanel" with aria-selected, aria-controls on each tab and aria-labelledby on each panel, so assistive technology announces which tab is active and what it controls.',
-    "Each panel has tabIndex 0, so a panel whose content contains no focusable element is still reachable — and scrollable — by keyboard.",
+    "Each panel has tabIndex 0, so a panel whose content contains no focusable element can still be reached and scrolled by keyboard.",
   ],
   props: [
     {
@@ -166,11 +178,6 @@ const doc: ComponentContent = {
       name: "TabsTab value",
       type: "string",
       description: "Unique value linking a tab to its panel (required).",
-    },
-    {
-      name: "TabsTab leftSection",
-      type: "ReactNode",
-      description: "Content (icon/emoji) rendered before the tab label.",
     },
     {
       name: "TabsTab disabled",

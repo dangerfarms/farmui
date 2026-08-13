@@ -4,7 +4,7 @@ import { ErrorSummaryDemo } from "./error-summary.client";
 const doc: ComponentContent = {
   slug: "error-summary",
   lead: "A box at the top of a form listing every error as a link to its field.",
-  importLine: `import { ErrorSummary } from "@farmui/core";`,
+  importLine: `import { ErrorSummary, Field, Input } from "@farmui/core";`,
   demos: [
     {
       title: "After a failed submit",
@@ -20,7 +20,11 @@ const doc: ComponentContent = {
     </ErrorSummary.List>
   </ErrorSummary.Root>
 )}
-<Input id="email" label="Email address" error={emailError} />`,
+<Field.Root id="email">
+  <Field.Label>Email address</Field.Label>
+  <Input />
+  <Field.Error>{emailError}</Field.Error>
+</Field.Root>`,
       render: () => <ErrorSummaryDemo />,
     },
   ],

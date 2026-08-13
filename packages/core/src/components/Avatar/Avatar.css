@@ -34,26 +34,32 @@
 
       font-size: var(--fui-text-lg);
     }
+  }
 
-    /* Colors — used for initials / glyph background */
-    &[data-color="gray"] {
-      --_bg: var(--fui-bg-subtle);
-      --_fg: var(--fui-text-muted);
-    }
-
-    &[data-color="danger"] {
+  /* The initials background answers the surrounding context region, the
+     same contract as every status-coloured component. */
+  @container (style(--fui-context: danger)) {
+    :scope {
       --_bg: var(--fui-danger);
-      --_fg: var(--fui-primary-contrast);
     }
+  }
 
-    &[data-color="warning"] {
+  @container (style(--fui-context: warning)) {
+    :scope {
       --_bg: var(--fui-warning);
       --_fg: oklch(24% 0.02 80deg);
     }
+  }
 
-    &[data-color="info"] {
+  @container (style(--fui-context: info)) {
+    :scope {
       --_bg: var(--fui-info);
-      --_fg: var(--fui-primary-contrast);
+    }
+  }
+
+  @container (style(--fui-context: success)) {
+    :scope {
+      --_bg: var(--fui-success);
     }
   }
 

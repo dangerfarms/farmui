@@ -5,6 +5,7 @@ import type { CSSProperties, ReactElement } from "react";
 
 import {
   Button,
+  Field,
   Input,
   Textarea,
   Select,
@@ -46,14 +47,29 @@ afterEach(cleanup);
 // a11y addon in a real browser.
 const cases: Array<[string, ReactElement]> = [
   ["Button", <Button>Save changes</Button>],
-  ["Input", <Input label="Email" placeholder="you@example.com" />],
-  ["Textarea", <Textarea label="Bio" />],
+  [
+    "Input",
+    <Field.Root>
+      <Field.Label>Email</Field.Label>
+      <Input placeholder="you@example.com" />
+    </Field.Root>,
+  ],
+  [
+    "Textarea",
+    <Field.Root>
+      <Field.Label>Bio</Field.Label>
+      <Textarea />
+    </Field.Root>,
+  ],
   [
     "Select",
-    <Select label="Country">
-      <option>United States</option>
-      <option>Canada</option>
-    </Select>,
+    <Field.Root>
+      <Field.Label>Country</Field.Label>
+      <Select>
+        <option>United States</option>
+        <option>Canada</option>
+      </Select>
+    </Field.Root>,
   ],
   ["Checkbox", <Checkbox label="Accept the terms" />],
   [
@@ -90,7 +106,13 @@ const cases: Array<[string, ReactElement]> = [
     </RadioGroup>,
   ],
   ["Switch", <Switch label="Email notifications" />],
-  ["Slider", <Slider label="Volume" defaultValue={50} />],
+  [
+    "Slider",
+    <Field.Root>
+      <Field.Label>Volume</Field.Label>
+      <Slider defaultValue={50} />
+    </Field.Root>,
+  ],
   ["Badge", <Badge>New</Badge>],
   ["Card", <Card>Card content</Card>],
   ["Avatar", <Avatar name="Ada Lovelace" />],

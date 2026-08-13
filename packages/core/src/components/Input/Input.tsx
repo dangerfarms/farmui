@@ -3,121 +3,80 @@
 import { forwardRef } from "react";
 import type { InputHTMLAttributes, ReactNode } from "react";
 import { cx } from "../../utils";
-import { Field } from "../Field/Field";
+import { useFieldControlProps } from "../Field/Field";
 import { useUserInvalid } from "../../use-user-invalid";
 
 export interface InputProps extends Omit<
   InputHTMLAttributes<HTMLInputElement>,
   "size"
 > {
-  /** Field label rendered above the input. */
-  label?: ReactNode;
-  /** Helper text rendered below the label. */
-  description?: ReactNode;
-  /** Error message; its presence puts the field in an invalid state. */
-  error?: ReactNode;
   /** Content rendered inside the field, before the input. */
   leftSection?: ReactNode;
   /** Content rendered inside the field, after the input. */
   rightSection?: ReactNode;
-  /** Root wrapper class (applied to the Field root in the labelled form). */
-  wrapperClassName?: string;
 }
 
-/** Props for the bare field box (the part Field.Control composes). */
-export type InputControlProps = Omit<
-  InputProps,
-  "label" | "description" | "error" | "wrapperClassName"
->;
-
 /**
- * The bare, composable text field: the bordered box, optional
- * sections and the `<input>`. It forwards `id` / `aria-*` straight to the
- * `<input>`, so it drops cleanly into `<Field.Control render={<InputControl />} />`.
- */
-const InputControl = forwardRef<HTMLInputElement, InputControlProps>(
-  function InputControl(
-    {
-      leftSection,
-      rightSection,
-      disabled,
-      className,
-      style,
-      "aria-invalid": ariaInvalid,
-      onBlur,
-      onInvalid,
-      ...rest
-    },
-    ref,
-  ) {
-    const { nativeInvalid, checkOnBlur, checkOnInvalid } = useUserInvalid();
-    return (
-      <div
-        className="fui-Input-field"
-        data-disabled={disabled || undefined}
-        style={style}
-      >
-        {leftSection && (
-          <span className="fui-Input-section">{leftSection}</span>
-        )}
-        <input
-          ref={ref}
-          className={cx("fui-Input-input", className)}
-          disabled={disabled}
-          {...rest}
-          aria-invalid={ariaInvalid ?? (nativeInvalid || undefined)}
-          onBlur={(e) => {
-            onBlur?.(e);
-            checkOnBlur(e);
-          }}
-          onInvalid={(e) => {
-            onInvalid?.(e);
-            checkOnInvalid(e);
-          }}
-        />
-        {rightSection && (
-          <span className="fui-Input-section">{rightSection}</span>
-        )}
-      </div>
-    );
-  },
-);
-
-/**
- * A labelled text field.
+ * The bordered text box: sections and a native `<input>`.
  *
- * `label`, `description` and `error` compose the accessible {@link Field}
- * primitive under the hood, so that wiring lives in exactly one place;
- * omit all three and only the bordered box renders. For full control over
- * structure, use `Field.*` directly.
+ * Label it by composing {@link Field} — the control reads its id,
+ * description and error wiring from the surrounding `Field.Root`:
+ *
+ * ```tsx
+ * <Field.Root>
+ *   <Field.Label>Email</Field.Label>
+ *   <Input type="email" autoComplete="email" />
+ *   <Field.Error>{error}</Field.Error>
+ * </Field.Root>
+ * ```
  */
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-  { label, description, error, wrapperClassName, id, required, ...control },
+  {
+    leftSection,
+    rightSection,
+    disabled,
+    className,
+    style,
+    id,
+    "aria-invalid": ariaInvalid,
+    "aria-describedby": ariaDescribedby,
+    onBlur,
+    onInvalid,
+    ...rest
+  },
   ref,
 ) {
-  if (!label && !description && !error) {
-    return <InputControl ref={ref} id={id} required={required} {...control} />;
-  }
-
+  const field = useFieldControlProps();
+  const { nativeInvalid, checkOnBlur, checkOnInvalid } = useUserInvalid();
   return (
-    <Field.Root className={wrapperClassName} id={id}>
-      {label && (
-        <Field.Label>
-          {label}
-          {required && (
-            <span className="fui-required" aria-hidden>
-              *
-            </span>
-          )}
-        </Field.Label>
-      )}
-      {description && <Field.Description>{description}</Field.Description>}
-      <Field.Control
-        render={<InputControl ref={ref} required={required} {...control} />}
+    <div
+      className="fui-Input-field"
+      data-disabled={disabled || undefined}
+      style={style}
+    >
+      {leftSection && <span className="fui-Input-section">{leftSection}</span>}
+      <input
+        ref={ref}
+        className={cx("fui-Input-input", className)}
+        disabled={disabled}
+        id={id ?? field.id}
+        {...rest}
+        aria-invalid={
+          ariaInvalid ?? field["aria-invalid"] ?? (nativeInvalid || undefined)
+        }
+        aria-describedby={ariaDescribedby ?? field["aria-describedby"]}
+        onBlur={(e) => {
+          onBlur?.(e);
+          checkOnBlur(e);
+        }}
+        onInvalid={(e) => {
+          onInvalid?.(e);
+          checkOnInvalid(e);
+        }}
       />
-      {error && <Field.Error>{error}</Field.Error>}
-    </Field.Root>
+      {rightSection && (
+        <span className="fui-Input-section">{rightSection}</span>
+      )}
+    </div>
   );
 });
-
-export { InputControl };

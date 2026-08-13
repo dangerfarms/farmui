@@ -14,8 +14,6 @@ export interface SwitchProps extends Omit<
   label?: ReactNode;
   /** Helper text rendered below the label. */
   description?: ReactNode;
-  /** Error message; its presence puts the field in an invalid state. */
-  error?: ReactNode;
   /** Which side of the toggle the label sits on. @default "end" */
   labelPosition?: "start" | "end";
   /** Root wrapper class. */
@@ -25,7 +23,7 @@ export interface SwitchProps extends Omit<
 /** The bare toggle (input + track), minus any label. */
 export type SwitchControlProps = Omit<
   SwitchProps,
-  "label" | "description" | "error" | "labelPosition" | "wrapperClassName"
+  "label" | "description" | "labelPosition" | "wrapperClassName"
 >;
 
 /**
@@ -89,8 +87,9 @@ const SwitchControl = forwardRef<HTMLInputElement, SwitchControlProps>(
 /**
  * An on/off toggle built on a native checkbox with `role="switch"`.
  *
- * Renders an accessible inline row when given `label`/`description`/
- * `error`, or the bare track alone (self-wiring inside a `Field`).
+ * Renders an accessible inline row when given `label`/`description`,
+ * or the bare track alone (self-wiring inside a `Field`). Errors
+ * compose via `Field.Error`.
  * Stateless and server-safe: `defaultChecked` uncontrolled, or
  * `checked` + `onChange`.
  */
@@ -98,7 +97,6 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
   {
     label,
     description,
-    error,
     required,
     labelPosition = "end",
     disabled,
@@ -110,7 +108,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
 ) {
   const autoId = useId();
 
-  if (!label && !description && !error) {
+  if (!label && !description) {
     return (
       <SwitchControl
         ref={ref}
@@ -124,13 +122,12 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
 
   const inputId = id ?? autoId;
   const descId = description ? `${inputId}-desc` : undefined;
-  const errId = error ? `${inputId}-err` : undefined;
 
   const labelRow = (
     <label
       className={cx(
         "fui-Switch-wrapper",
-        !description && !error ? wrapperClassName : undefined,
+        !description ? wrapperClassName : undefined,
       )}
       htmlFor={inputId}
       data-label-position={labelPosition}
@@ -141,22 +138,14 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
         id={inputId}
         disabled={disabled}
         required={required}
-        aria-invalid={error ? true : undefined}
-        aria-describedby={cx(descId, errId) || undefined}
+        aria-describedby={descId}
         {...control}
       />
-      <span className="fui-Switch-label">
-        {label}
-        {required && (
-          <span className="fui-required" aria-hidden>
-            *
-          </span>
-        )}
-      </span>
+      <span className="fui-Switch-label">{label}</span>
     </label>
   );
 
-  if (!description && !error) return labelRow;
+  if (!description) return labelRow;
 
   return (
     <div
@@ -167,11 +156,6 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
       {description && (
         <span className="fui-Switch-description" id={descId}>
           {description}
-        </span>
-      )}
-      {error && (
-        <span className="fui-Switch-error" id={errId} role="alert">
-          {error}
         </span>
       )}
     </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Button, ErrorSummary, Input } from "@farmui/core";
+import { Button, ErrorSummary, Field, Input } from "@farmui/core";
 
 export function ErrorSummaryDemo() {
   const [submitted, setSubmitted] = useState(false);
@@ -23,11 +23,13 @@ export function ErrorSummaryDemo() {
           </ErrorSummary.List>
         </ErrorSummary.Root>
       )}
-      <Input
-        id="demo-email"
-        label="Email address"
-        error={submitted ? "Enter your email address" : undefined}
-      />
+      <Field.Root id="demo-email">
+        <Field.Label>Email address</Field.Label>
+        <Input />
+        <Field.Error>
+          {submitted ? "Enter your email address" : undefined}
+        </Field.Error>
+      </Field.Root>
       <div>
         <Button type="submit">Save and continue</Button>
       </div>

@@ -1,4 +1,5 @@
 import { Avatar, AvatarGroup } from "@farmui/core";
+import type { CSSProperties } from "react";
 import type { ComponentContent } from "@/renderer/types";
 
 const IMG =
@@ -18,16 +19,20 @@ const doc: ComponentContent = {
     {
       title: "Initials",
       description:
-        "With no image, initials are derived from name. Colors map to tokens.",
+        "With no image, initials are derived from name. There is no color prop: the initials background answers the surrounding --fui-context region (a style query is answered by ancestors, never by the declaring element itself), exactly like Badge — wrap a single avatar in a one-element span, or let it inherit from a larger region. See the Contextualism guide.",
       code: `<Avatar name="Jane Doe" />
-<Avatar name="Sam Reed" color="gray" />
-<Avatar name="Amara Okafor" color="info" />
+<span style={{ "--fui-context": "info" }}><Avatar name="Amara Okafor" /></span>
+<span style={{ "--fui-context": "success" }}><Avatar name="Sam Reed" /></span>
 <Avatar />`,
       render: () => (
         <>
           <Avatar name="Jane Doe" />
-          <Avatar name="Sam Reed" color="gray" />
-          <Avatar name="Amara Okafor" color="info" />
+          <span style={{ "--fui-context": "info" } as CSSProperties}>
+            <Avatar name="Amara Okafor" />
+          </span>
+          <span style={{ "--fui-context": "success" } as CSSProperties}>
+            <Avatar name="Sam Reed" />
+          </span>
           <Avatar />
         </>
       ),
@@ -53,16 +58,16 @@ const doc: ComponentContent = {
       description: "AvatarGroup overlaps children with a surface-colored ring.",
       code: `<AvatarGroup>
   <Avatar name="Jane Doe" />
-  <Avatar name="Sam Reed" color="info" />
-  <Avatar name="Amara Okafor" color="warning" />
-  <Avatar name="+5" color="gray" />
+  <Avatar name="Sam Reed" />
+  <Avatar name="Amara Okafor" />
+  <Avatar name="+5" />
 </AvatarGroup>`,
       render: () => (
         <AvatarGroup>
           <Avatar name="Jane Doe" />
-          <Avatar name="Sam Reed" color="info" />
-          <Avatar name="Amara Okafor" color="warning" />
-          <Avatar name="+5" color="gray" />
+          <Avatar name="Sam Reed" />
+          <Avatar name="Amara Okafor" />
+          <Avatar name="+5" />
         </AvatarGroup>
       ),
     },
@@ -115,15 +120,16 @@ const doc: ComponentContent = {
       description: "Size token or explicit pixel size.",
     },
     {
-      name: "color",
-      type: `"primary" | "gray" | "danger" | "warning" | "info"`,
-      default: `"primary"`,
-      description: "Background color for the initials/fallback state.",
-    },
-    {
       name: "...others",
       type: "SpanHTMLAttributes",
-      description: "All native <span> props are forwarded.",
+      description:
+        "All native <span> props are forwarded, including style for the custom property below.",
+    },
+    {
+      name: "--fui-context",
+      type: `"primary" | "danger" | "success" | "warning" | "info"`,
+      description:
+        "Colours the initials/fallback background. Declare it on an ancestor (a one-element span wrapper for a single avatar, or any region) because a style query is answered by ancestors, not by the declaring element; the property inherits.",
     },
   ],
 };

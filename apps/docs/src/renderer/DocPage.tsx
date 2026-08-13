@@ -140,8 +140,18 @@ export function DocPage({ doc }: { doc: ComponentDoc }) {
           </h2>
           <p className={classes.usageNote}>
             Say what happened and how to fix it, in the words of the question
-            itself — see the writing guidance on the{" "}
-            <a href="/docs/components/field#error-messages">Field page</a>.
+            itself — see the writing guidance{" "}
+            {doc.slug === "field" ? (
+              <>above.</>
+            ) : (
+              <>
+                on the{" "}
+                <a href="/docs/components/field#writing-error-messages">
+                  Field page
+                </a>
+                .
+              </>
+            )}
           </p>
           <div className={tableClasses.scroll}>
             <table className={tableClasses.table}>

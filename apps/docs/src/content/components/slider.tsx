@@ -1,15 +1,22 @@
 import { Slider } from "@farmui/core";
 import type { ComponentContent } from "@/renderer/types";
-import { SliderFieldDemo, SliderValueDemo } from "./slider.client";
+import {
+  SliderDisabledDemo,
+  SliderFieldDemo,
+  SliderStepsDemo,
+  SliderValueDemo,
+} from "./slider.client";
 
 const doc: ComponentContent = {
   slug: "slider",
-  lead: "Pick a numeric value from a continuous range.",
-  importLine: `import { Slider } from "@farmui/core";`,
+  lead: "Pick a numeric value from a continuous range. Compose it inside a Field for its label, description and error.",
+  importLine: `import { Field, Slider } from "@farmui/core";`,
   demos: [
     {
       title: "Basic usage",
-      code: `<Slider defaultValue={40} />`,
+      description:
+        "Rendered bare, the control needs an aria-label; a Field.Label (below) is the usual way to name it.",
+      code: `<Slider defaultValue={40} aria-label="Value" />`,
       render: () => (
         <div style={{ maxInlineSize: "22rem", inlineSize: "100%" }}>
           <Slider defaultValue={40} aria-label="Value" />
@@ -17,49 +24,32 @@ const doc: ComponentContent = {
       ),
     },
     {
-      title: "With label",
-      code: `<Slider label="Water level" defaultValue={65} />`,
-      render: () => (
-        <div style={{ maxInlineSize: "22rem", inlineSize: "100%" }}>
-          <Slider label="Water level" defaultValue={65} />
-        </div>
-      ),
-    },
-    {
-      title: "Composed inside a Field",
+      title: "Labelled inside a Field",
       description:
-        "The bare SliderControl composes through Field.Control: label, description and error wiring come from the Field, the composition pattern shared by all form controls.",
+        "Wrap the control in Field.Root: it reads its id, description and error wiring from the field, the composition pattern shared by all form controls.",
       code: `<Field.Root>
   <Field.Label>Volume</Field.Label>
   <Field.Description>Applies to alerts only.</Field.Description>
-  <Field.Control render={<SliderControl defaultValue={70} />} />
+  <Slider defaultValue={70} />
 </Field.Root>`,
       render: () => <SliderFieldDemo />,
     },
     {
       title: "Steps",
       description: "Snap to increments with the step prop.",
-      code: `<Slider label="Fertiliser (kg)" min={0} max={100} step={10} defaultValue={30} />`,
-      render: () => (
-        <div style={{ maxInlineSize: "22rem", inlineSize: "100%" }}>
-          <Slider
-            label="Fertiliser (kg)"
-            min={0}
-            max={100}
-            step={10}
-            defaultValue={30}
-          />
-        </div>
-      ),
+      code: `<Field.Root>
+  <Field.Label>Fertiliser (kg)</Field.Label>
+  <Slider min={0} max={100} step={10} defaultValue={30} />
+</Field.Root>`,
+      render: () => <SliderStepsDemo />,
     },
     {
       title: "Disabled",
-      code: `<Slider label="Locked" defaultValue={50} disabled />`,
-      render: () => (
-        <div style={{ maxInlineSize: "22rem", inlineSize: "100%" }}>
-          <Slider label="Locked" defaultValue={50} disabled />
-        </div>
-      ),
+      code: `<Field.Root>
+  <Field.Label>Locked</Field.Label>
+  <Slider defaultValue={50} disabled />
+</Field.Root>`,
+      render: () => <SliderDisabledDemo />,
     },
   ],
   whenToUse: [
@@ -73,14 +63,16 @@ const doc: ComponentContent = {
   howItWorks: [
     {
       title: "Show the current value",
-      body: "A track communicates roughly where you are, never what you chose, so render the number where the user can see it. The label accepts any ReactNode and the component is stateless, so drive it with value and onChange and put the live value in the label.",
+      body: "A track communicates roughly where you are, never what you chose, so render the number where the user can see it. Field.Label accepts any content and the control is stateless, so drive it with value and onChange and put the live value in the label.",
       code: `const [volume, setVolume] = useState(70);
 
-<Slider
-  label={\`Volume: \${volume}\`}
-  value={volume}
-  onChange={(e) => setVolume(e.target.valueAsNumber)}
-/>`,
+<Field.Root>
+  <Field.Label>Volume: {volume}</Field.Label>
+  <Slider
+    value={volume}
+    onChange={(e) => setVolume(e.target.valueAsNumber)}
+  />
+</Field.Root>`,
       render: () => <SliderValueDemo />,
     },
     {
@@ -90,21 +82,10 @@ const doc: ComponentContent = {
   ],
   accessibility: [
     'Renders a native <input type="range">: arrow keys adjust the value and Home/End jump to the ends, with the current value announced. There is no custom key handling to maintain.',
-    "Always give it an accessible name: the label prop, or an aria-label when rendering the bare control or a bare SliderControl.",
+    "Always give it an accessible name: a Field.Label in the surrounding Field.Root, or an aria-label when rendering it bare.",
     "Assistive tech hears the value change as it moves; sighted users have no equivalent unless you render the value visibly (see above).",
   ],
   props: [
-    {
-      name: "label",
-      type: "ReactNode",
-      description: "Field label rendered above the track.",
-    },
-    {
-      name: "SliderControl",
-      type: "component",
-      description:
-        "The bare range input without a label. It composes inside Field and reads its wiring (id, aria-describedby, aria-invalid) from context.",
-    },
     {
       name: "min",
       type: "number",

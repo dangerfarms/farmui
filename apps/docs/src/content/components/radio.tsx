@@ -26,7 +26,7 @@ const doc: ComponentContent = {
     {
       title: "With descriptions",
       description: "Each option can carry helper text under its label.",
-      code: `<RadioGroup label="Delivery" defaultValue="standard">
+      code: `<RadioGroup label="Delivery">
   <Radio
     value="standard"
     label="Standard"
@@ -39,7 +39,7 @@ const doc: ComponentContent = {
   />
 </RadioGroup>`,
       render: () => (
-        <RadioGroup label="Delivery" defaultValue="standard">
+        <RadioGroup label="Delivery">
           <Radio
             value="standard"
             label="Standard"
@@ -56,21 +56,13 @@ const doc: ComponentContent = {
     {
       title: "Horizontal",
       description: "Lay the options out in a row when they are few and short.",
-      code: `<RadioGroup
-  label="Portion size"
-  orientation="horizontal"
-  defaultValue="m"
->
+      code: `<RadioGroup label="Portion size" orientation="horizontal">
   <Radio value="s" label="Small" />
   <Radio value="m" label="Medium" />
   <Radio value="l" label="Large" />
 </RadioGroup>`,
       render: () => (
-        <RadioGroup
-          label="Portion size"
-          orientation="horizontal"
-          defaultValue="m"
-        >
+        <RadioGroup label="Portion size" orientation="horizontal">
           <Radio value="s" label="Small" />
           <Radio value="m" label="Medium" />
           <Radio value="l" label="Large" />

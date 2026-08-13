@@ -8,7 +8,6 @@ import {
   RadioGroup,
   SwitchControl,
   Slider,
-  SliderControl,
 } from "../index";
 
 afterEach(cleanup);
@@ -62,12 +61,12 @@ describe("Inline controls composed inside Field", () => {
     );
   });
 
-  it("wires a SliderControl through Field.Control (stacked field)", () => {
+  it("wires a Slider through Field.Control (stacked field)", () => {
     render(
       <Field.Root>
         <Field.Label>Volume</Field.Label>
         <Field.Description>Between 0 and 100.</Field.Description>
-        <Field.Control render={<SliderControl />} />
+        <Field.Control render={<Slider />} />
       </Field.Root>,
     );
 
@@ -81,7 +80,10 @@ describe("Inline controls composed inside Field", () => {
   it("keeps standalone Switch and Slider working with their own labels", () => {
     render(
       <>
-        <Slider label="Brightness" defaultValue={40} />
+        <Field.Root>
+          <Field.Label>Brightness</Field.Label>
+          <Slider defaultValue={40} />
+        </Field.Root>
       </>,
     );
     expect(screen.getByLabelText("Brightness")).toHaveAttribute(

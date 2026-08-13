@@ -1,7 +1,8 @@
 import type { CSSProperties } from "react";
-import { Button, Checkbox, Input } from "@farmui/core";
+import { Button, Checkbox } from "@farmui/core";
 import { CodeBlock } from "@/renderer/CodeBlock";
 import prose from "../prose.module.css";
+import { DetectedErrorDemo } from "./demos.client";
 
 export const metadata = {
   title: "Contextualism",
@@ -341,13 +342,7 @@ export function BrandButton(props: ButtonProps) {
         />
       </div>
       <div className={prose.block}>
-        <div style={{ maxInlineSize: "22rem" }}>
-          <Input
-            label="Workspace name"
-            defaultValue="my workspace!"
-            error="Names can only contain letters, numbers and dashes."
-          />
-        </div>
+        <DetectedErrorDemo />
       </div>
       <p>
         Accessibility state still flows through React (<code>aria-invalid</code>{" "}

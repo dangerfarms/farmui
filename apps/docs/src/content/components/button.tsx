@@ -57,7 +57,7 @@ const doc: ComponentContent = {
     {
       title: "Danger regions adapt everything",
       description:
-        "--fui-context isn't a button feature. Every FarmUI component in the region adapts: checkboxes, focus rings, carets. You declare intent once on the container instead of a color prop on each control.",
+        "--fui-context isn't a button feature. Every FarmUI component in the region adapts: checkboxes, focus rings, carets. You declare intent once on the container instead of a colour prop on each control.",
       code: `<div style={{ "--fui-context": "danger" }}>
   <Button>Delete account</Button>
   <Button>Discard</Button>

@@ -8,7 +8,7 @@ import {
 const doc: ComponentContent = {
   slug: "fieldset",
   lead: "Groups related controls under a shared, semantic label using a native fieldset and legend.",
-  importLine: `import { Fieldset } from "@farmui/core";`,
+  importLine: `import { Checkbox, Fieldset, Radio, RadioGroup } from "@farmui/core";`,
   demos: [
     {
       title: "Grouping checkboxes",

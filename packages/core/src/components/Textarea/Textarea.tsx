@@ -1,51 +1,41 @@
 "use client";
 
 import { forwardRef } from "react";
-import type { TextareaHTMLAttributes, ReactNode } from "react";
+import type { TextareaHTMLAttributes } from "react";
 import { cx } from "../../utils";
-import { Field } from "../Field/Field";
+import { useFieldControlProps } from "../Field/Field";
 import { useUserInvalid } from "../../use-user-invalid";
 
 export interface TextareaProps extends Omit<
   TextareaHTMLAttributes<HTMLTextAreaElement>,
   "size"
 > {
-  /** Field label rendered above the textarea. */
-  label?: ReactNode;
-  /** Helper text rendered below the label. */
-  description?: ReactNode;
-  /** Error message; its presence puts the field in an invalid state. */
-  error?: ReactNode;
   /** Number of visible text rows. @default 3 */
   rows?: number;
-  /** Root wrapper class (applied to the Field root in the labelled form). */
-  wrapperClassName?: string;
 }
 
-/** Props for the bare textarea box (the part Field.Control composes). */
-export type TextareaControlProps = Omit<
-  TextareaProps,
-  "label" | "description" | "error" | "wrapperClassName"
->;
-
 /**
- * The bare, composable multi-line field: the bordered box and
- * the `<textarea>`. Forwards `id` / `aria-*` straight to the `<textarea>`.
+ * The bordered multi-line field: a native `<textarea>` in the shared
+ * control box. Label it by composing {@link Field}; the control reads its
+ * wiring from the surrounding `Field.Root`.
  */
-const TextareaControl = forwardRef<HTMLTextAreaElement, TextareaControlProps>(
-  function TextareaControl(
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+  function Textarea(
     {
       rows = 3,
       disabled,
       className,
       style,
+      id,
       "aria-invalid": ariaInvalid,
+      "aria-describedby": ariaDescribedby,
       onBlur,
       onInvalid,
       ...rest
     },
     ref,
   ) {
+    const field = useFieldControlProps();
     const { nativeInvalid, checkOnBlur, checkOnInvalid } = useUserInvalid();
     return (
       <div
@@ -58,8 +48,12 @@ const TextareaControl = forwardRef<HTMLTextAreaElement, TextareaControlProps>(
           className={cx("fui-Textarea-textarea", className)}
           rows={rows}
           disabled={disabled}
+          id={id ?? field.id}
           {...rest}
-          aria-invalid={ariaInvalid ?? (nativeInvalid || undefined)}
+          aria-invalid={
+            ariaInvalid ?? field["aria-invalid"] ?? (nativeInvalid || undefined)
+          }
+          aria-describedby={ariaDescribedby ?? field["aria-describedby"]}
           onBlur={(e) => {
             onBlur?.(e);
             checkOnBlur(e);
@@ -73,46 +67,3 @@ const TextareaControl = forwardRef<HTMLTextAreaElement, TextareaControlProps>(
     );
   },
 );
-
-/**
- * A labelled multi-line text field.
- *
- * Like {@link Input}, the `label`/`description`/`error` props compose the
- * {@link Field} primitive; without them only the field box renders.
- */
-export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  function Textarea(
-    { label, description, error, wrapperClassName, id, required, ...control },
-    ref,
-  ) {
-    if (!label && !description && !error) {
-      return (
-        <TextareaControl ref={ref} id={id} required={required} {...control} />
-      );
-    }
-
-    return (
-      <Field.Root className={wrapperClassName} id={id}>
-        {label && (
-          <Field.Label>
-            {label}
-            {required && (
-              <span className="fui-required" aria-hidden>
-                *
-              </span>
-            )}
-          </Field.Label>
-        )}
-        {description && <Field.Description>{description}</Field.Description>}
-        <Field.Control
-          render={
-            <TextareaControl ref={ref} required={required} {...control} />
-          }
-        />
-        {error && <Field.Error>{error}</Field.Error>}
-      </Field.Root>
-    );
-  },
-);
-
-export { TextareaControl };

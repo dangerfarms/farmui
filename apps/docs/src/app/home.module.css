@@ -198,6 +198,11 @@
 .showcaseLabel {
   color: var(--fui-text-muted);
 }
+.showcaseSwitch {
+  flex: 1;
+  justify-content: space-between;
+  color: var(--fui-text-muted);
+}
 
 /* ---------- Section scaffolding ---------- */
 .section {

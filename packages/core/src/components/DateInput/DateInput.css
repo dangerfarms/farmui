@@ -1,5 +1,5 @@
 /* The legend comes from the Fieldset primitive and each part reuses
-   InputControl, so borders, focus rings and the aria-invalid danger state
+   Input, so borders, focus rings and the aria-invalid danger state
    are Input's own. Only the description/error text and the part layout
    live here. */
 @scope (.fui-DateInput-root) {
