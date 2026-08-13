@@ -11,7 +11,8 @@
   },
   "categories": {
     "correctness": "error",
-    "suspicious": "warn"
+    "suspicious": "warn",
+    "perf": "warn"
   },
   "rules": {
     "react/react-in-jsx-scope": "off",
@@ -29,6 +30,14 @@
           "Slider"
         ],
         "depth": 3
+      }
+    ],
+    "no-console": [
+      "error",
+      {
+        "allow": [
+          "error"
+        ]
       }
     ]
   },
@@ -91,6 +100,15 @@
       ],
       "rules": {
         "jsx-a11y/interactive-supports-focus": "off"
+      }
+    },
+    {
+      "files": [
+        "**/renderer/CodeBlock.tsx",
+        "**/Pagination/Pagination.tsx"
+      ],
+      "rules": {
+        "react/no-array-index-key": "off"
       }
     }
   ]

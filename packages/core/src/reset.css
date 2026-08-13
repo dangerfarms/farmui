@@ -48,7 +48,11 @@
     :where([class*="fui-"])::after,
     :where([class*="fui-"] *)::before,
     :where([class*="fui-"] *)::after {
+      /* stylelint-disable-next-line declaration-no-important --
+         the one sanctioned !important: a user preference must out-rank
+         any consumer specificity. */
       transition-duration: 0.01ms !important;
+      /* stylelint-disable-next-line declaration-no-important */
       animation: none !important;
     }
   }

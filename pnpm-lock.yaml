@@ -26,9 +26,6 @@ importers:
       stylelint-config-standard:
         specifier: ^40.0.0
         version: 40.0.0(stylelint@17.14.0(typescript@5.9.2))
-      stylelint-order:
-        specifier: ^8.1.1
-        version: 8.1.1(stylelint@17.14.0(typescript@5.9.2))
       stylelint-value-no-unknown-custom-properties:
         specifier: ^6.1.1
         version: 6.1.1(stylelint@17.14.0(typescript@5.9.2))
@@ -2595,11 +2592,6 @@ packages:
     resolution: {integrity: sha512-HeP7D2wyhkR+XaK6v4W8oRF62Dsz4flyuczALJp61GckGm42u1saSSJ/0auvcBqxs3jMRFEcPK34At/0JBKdOg==}
     engines: {node: '>=4'}
 
-  postcss-sorting@10.0.0:
-    resolution: {integrity: sha512-TXbU+h6vVRW+86c/+ewhWq9k7pr7ijASTnepVhCQiC87zAOTkvB1v2dHyWP+ggstSTX/PNvjzS+IOqzejndz9w==}
-    peerDependencies:
-      postcss: ^8.4.20
-
   postcss-value-parser@4.2.0:
     resolution: {integrity: sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==}
 
@@ -2844,12 +2836,6 @@ packages:
     engines: {node: '>=20.19.0'}
     peerDependencies:
       stylelint: ^17.0.0
-
-  stylelint-order@8.1.1:
-    resolution: {integrity: sha512-LqsEB6VggJuu5v10RtkrQsBObcdwBE7GuAOlwfc/LR3VL/w8UqKX2BOLIjhyGt0Gne/njo7gRNGiJAKhfmPMNw==}
-    engines: {node: '>=20.19.0'}
-    peerDependencies:
-      stylelint: ^16.18.0 || ^17.0.0
 
   stylelint-value-no-unknown-custom-properties@6.1.1:
     resolution: {integrity: sha512-eQ1zidKD5t9zMEaskjGUY4W47lH76qMlmsDSmCAPEwtaGzB4Ls7ORTfysC1D6hamp2zFC+vN1vpQ+GFz3Tw3lw==}
@@ -5165,10 +5151,6 @@ snapshots:
       cssesc: 3.0.0
       util-deprecate: 1.0.2
 
-  postcss-sorting@10.0.0(postcss@8.5.16):
-    dependencies:
-      postcss: 8.5.16
-
   postcss-value-parser@4.2.0: {}
 
   postcss@8.4.31:
@@ -5446,12 +5428,6 @@ snapshots:
     dependencies:
       stylelint: 17.14.0(typescript@5.9.2)
       stylelint-config-recommended: 18.0.0(stylelint@17.14.0(typescript@5.9.2))
-
-  stylelint-order@8.1.1(stylelint@17.14.0(typescript@5.9.2)):
-    dependencies:
-      postcss: 8.5.16
-      postcss-sorting: 10.0.0(postcss@8.5.16)
-      stylelint: 17.14.0(typescript@5.9.2)
 
   stylelint-value-no-unknown-custom-properties@6.1.1(stylelint@17.14.0(typescript@5.9.2)):
     dependencies:

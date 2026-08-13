@@ -12,7 +12,7 @@
   overflow-inline: auto;
   font-size: var(--fui-text-sm);
   line-height: 1.6;
-  background: transparent !important;
+  background: transparent;
 }
 
 .line {
