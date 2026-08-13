@@ -126,6 +126,7 @@ function ToastProvider({ timeout = 5000, limit = 3, children }: ToastProviderPro
     >(),
   );
   const pausedRef = useRef(false);
+  const exitTimers = useRef(new Set<ReturnType<typeof setTimeout>>());
 
   const remove = useCallback((id?: string) => {
     toastsRef.current = id ? toastsRef.current.filter((t) => t.id !== id) : [];
@@ -166,7 +167,11 @@ function ToastProvider({ timeout = 5000, limit = 3, children }: ToastProviderPro
       timers.current.delete(id);
       // Must match the CSS exit transition (--fui-duration-lg = 300ms):
       // shorter unmounts mid-animation, longer leaves a ghost node.
-      setTimeout(() => remove(id), 300);
+      const handle = setTimeout(() => {
+        exitTimers.current.delete(handle);
+        remove(id);
+      }, 300);
+      exitTimers.current.add(handle);
     },
     [remove],
   );
@@ -229,10 +234,12 @@ function ToastProvider({ timeout = 5000, limit = 3, children }: ToastProviderPro
 
   useEffect(() => {
     const map = timers.current;
+    const exits = exitTimers.current;
     return () => {
       for (const t of map.values()) {
         if (t.handle) clearTimeout(t.handle);
       }
+      for (const handle of exits) clearTimeout(handle);
     };
   }, []);
 
@@ -241,7 +248,7 @@ function ToastProvider({ timeout = 5000, limit = 3, children }: ToastProviderPro
     [toasts, exiting, add, close, pause, resume],
   );
 
-  return <ToastContext.Provider value={value}>{children}</ToastContext.Provider>;
+  return <ToastContext value={value}>{children}</ToastContext>;
 }
 
 export interface ToastViewportProps extends HTMLAttributes<HTMLDivElement> {}
@@ -374,7 +381,6 @@ function ToastAction({ toastId, onAction, render, children, ...rest }: ToastActi
     },
   };
   return render ? (
-    // Consumer props on the part must merge into the render element, not drop.
     <>{renderWithProps(render, mergeProps(actionProps, { children, ...rest }))}</>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, actionProps)}</>

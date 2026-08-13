@@ -1,7 +1,6 @@
 "use client";
 
-import { forwardRef } from "react";
-import type { TextareaHTMLAttributes } from "react";
+import type { Ref, TextareaHTMLAttributes } from "react";
 import { cx } from "../../utils";
 import { useFieldControlProps } from "../Field/Field";
 import { useUserInvalid } from "../../use-user-invalid";
@@ -9,6 +8,7 @@ import { useUserInvalid } from "../../use-user-invalid";
 export interface TextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "size"> {
   /** Number of visible text rows. @default 3 */
   rows?: number;
+  ref?: Ref<HTMLTextAreaElement>;
 }
 
 /**
@@ -16,21 +16,19 @@ export interface TextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaE
  * control box. Label it by composing {@link Field}; the control reads its
  * wiring from the surrounding `Field.Root`.
  */
-export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function Textarea(
-  {
-    rows = 3,
-    disabled,
-    className,
-    style,
-    id,
-    "aria-invalid": ariaInvalid,
-    "aria-describedby": ariaDescribedby,
-    onBlur,
-    onInvalid,
-    ...rest
-  },
+export function Textarea({
+  rows = 3,
+  disabled,
+  className,
+  style,
+  id,
+  "aria-invalid": ariaInvalid,
+  "aria-describedby": ariaDescribedby,
+  onBlur,
+  onInvalid,
   ref,
-) {
+  ...rest
+}: TextareaProps) {
   const field = useFieldControlProps();
   const { nativeInvalid, checkOnBlur, checkOnInvalid } = useUserInvalid();
   return (
@@ -55,4 +53,4 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
       />
     </div>
   );
-});
+}

@@ -1,8 +1,9 @@
 "use client";
 
-import { forwardRef, useEffect, useId, useImperativeHandle, useRef } from "react";
-import type { InputHTMLAttributes, ReactNode } from "react";
+import { useEffect, useId, useRef } from "react";
+import type { InputHTMLAttributes, ReactNode, Ref } from "react";
 import { cx } from "../../utils";
+import { composeRefs } from "../../render";
 import { useFieldControlProps } from "../Field/Field";
 import { useUserInvalid } from "../../use-user-invalid";
 
@@ -18,6 +19,7 @@ export interface CheckboxProps extends Omit<
   indeterminate?: boolean;
   /** Root wrapper class. */
   wrapperClassName?: string;
+  ref?: Ref<HTMLInputElement>;
 }
 
 /** The bare checkbox box + input, minus any label. */
@@ -32,23 +34,20 @@ export type CheckboxControlProps = Omit<
  * (`<Field.Label><Checkbox /> …</Field.Label>`); otherwise it uses its own
  * props.
  */
-const CheckboxControl = forwardRef<HTMLInputElement, CheckboxControlProps>(function CheckboxControl(
-  {
-    indeterminate = false,
-    id,
-    className,
-    disabled,
-    "aria-invalid": ariaInvalid,
-    "aria-describedby": ariaDescribedby,
-    onBlur,
-    onInvalid,
-    ...rest
-  },
+function CheckboxControl({
+  indeterminate = false,
+  id,
+  className,
+  disabled,
+  "aria-invalid": ariaInvalid,
+  "aria-describedby": ariaDescribedby,
+  onBlur,
+  onInvalid,
   ref,
-) {
+  ...rest
+}: CheckboxControlProps) {
   const field = useFieldControlProps();
   const innerRef = useRef<HTMLInputElement>(null);
-  useImperativeHandle(ref, () => innerRef.current as HTMLInputElement, []);
 
   useEffect(() => {
     if (innerRef.current) {
@@ -64,7 +63,7 @@ const CheckboxControl = forwardRef<HTMLInputElement, CheckboxControlProps>(funct
   return (
     <span className="fui-Checkbox-box" data-disabled={disabled || undefined}>
       <input
-        ref={innerRef}
+        ref={composeRefs(ref, innerRef)}
         id={resolvedId}
         type="checkbox"
         className={cx("fui-Checkbox-input", className)}
@@ -100,7 +99,7 @@ const CheckboxControl = forwardRef<HTMLInputElement, CheckboxControlProps>(funct
       </svg>
     </span>
   );
-});
+}
 
 /**
  * A styled `<input type="checkbox">`.
@@ -109,10 +108,16 @@ const CheckboxControl = forwardRef<HTMLInputElement, CheckboxControlProps>(funct
  * errors compose via `Field.Error`. Without them you get only the box, which self-wires when placed
  * inside a `Field`.
  */
-export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Checkbox(
-  { label, description, disabled, required, id, wrapperClassName, ...control },
+export function Checkbox({
+  label,
+  description,
+  disabled,
+  required,
+  id,
+  wrapperClassName,
   ref,
-) {
+  ...control
+}: CheckboxProps) {
   const autoId = useId();
 
   if (!label && !description) {
@@ -149,6 +154,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
       </label>
     </div>
   );
-});
+}
 
 export { CheckboxControl };

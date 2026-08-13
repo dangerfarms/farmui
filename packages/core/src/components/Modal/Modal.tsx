@@ -11,6 +11,7 @@ import {
   useState,
 } from "react";
 import type {
+  RefObject,
   ButtonHTMLAttributes,
   DialogHTMLAttributes,
   HTMLAttributes,
@@ -19,6 +20,7 @@ import type {
   Ref,
 } from "react";
 import { cx } from "../../utils";
+import { usePresence } from "../../use-presence";
 import { mergeProps, renderWithProps } from "../../render";
 import type { RenderProp } from "../../render";
 
@@ -51,7 +53,7 @@ interface ModalContextValue {
   invokers: boolean;
   setOpen: (open: boolean) => void;
   /** The Trigger's element (native dialog close restores focus to it). */
-  triggerRef: { current: HTMLButtonElement | null };
+  triggerRef: RefObject<HTMLButtonElement | null>;
   dialogId: string;
   titleId: string;
   descriptionId: string;
@@ -89,14 +91,14 @@ function ModalRoot({
 }: ModalRootProps) {
   const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);
   const open = openProp ?? uncontrolledOpen;
-  const [titleCount, setTitleCount] = useState(0);
+  const [hasTitle, registerTitle] = usePresence();
   // Feature-probe the element prototype, never window/document.
   const [invokers, setInvokers] = useState(false);
   useEffect(() => setInvokers("commandForElement" in HTMLButtonElement.prototype), []);
-  const [descriptionCount, setDescriptionCount] = useState(0);
+  const [hasDescription, registerDescription] = usePresence();
 
   const autoId = useId();
-  const dialogId = `${autoId.replace(/[^a-zA-Z0-9-]/g, "")}-modal`;
+  const dialogId = `${autoId}-modal`;
 
   const openRef = useRef(open);
   openRef.current = open;
@@ -113,15 +115,6 @@ function ModalRoot({
     [onOpenChange],
   );
 
-  const registerTitle = useCallback(() => {
-    setTitleCount((n) => n + 1);
-    return () => setTitleCount((n) => n - 1);
-  }, []);
-  const registerDescription = useCallback(() => {
-    setDescriptionCount((n) => n + 1);
-    return () => setDescriptionCount((n) => n - 1);
-  }, []);
-
   const value = useMemo<ModalContextValue>(
     () => ({
       open,
@@ -131,8 +124,8 @@ function ModalRoot({
       dialogId,
       titleId: `${dialogId}-title`,
       descriptionId: `${dialogId}-description`,
-      hasTitle: titleCount > 0,
-      hasDescription: descriptionCount > 0,
+      hasTitle,
+      hasDescription,
       registerTitle,
       registerDescription,
     }),
@@ -141,19 +134,18 @@ function ModalRoot({
       setOpen,
       invokers,
       dialogId,
-      titleCount,
-      descriptionCount,
+      hasTitle,
+      hasDescription,
       registerTitle,
       registerDescription,
     ],
   );
 
-  return <ModalContext.Provider value={value}>{children}</ModalContext.Provider>;
+  return <ModalContext value={value}>{children}</ModalContext>;
 }
 
 /** Wiring the Trigger attaches to whatever it renders. */
 export interface ModalTriggerRenderProps {
-  ref: Ref<HTMLButtonElement>;
   type: "button";
   /** Declarative invoker wiring (Invoker Commands API) where supported. */
   commandfor: string | undefined;
@@ -162,6 +154,7 @@ export interface ModalTriggerRenderProps {
   /** Styling hook — present while the modal is open. */
   "data-popup-open": "true" | undefined;
   onClick: (e: ReactMouseEvent<Element>) => void;
+  ref: Ref<HTMLButtonElement>;
 }
 
 export interface ModalTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -191,7 +184,6 @@ function ModalTrigger({ render, children, ...rest }: ModalTriggerProps) {
   };
 
   return render ? (
-    // Consumer props on the part must merge into the render element, not drop.
     <>{renderWithProps(render, mergeProps(triggerProps, { children, ...rest }))}</>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, triggerProps)}</>
@@ -276,7 +268,8 @@ function ModalPopup({ size = "md", alert = false, className, children, ...rest }
   }, [open]);
 
   return (
-    // `rest` is spread first: the wiring props below are load-bearing.
+    // rest cannot override what follows: the dialog wiring (id, open
+    // reconciliation, closedby) must win.
     <dialog
       {...rest}
       ref={ref}
@@ -350,7 +343,6 @@ function ModalClose({ render, children, ...rest }: ModalCloseProps) {
     },
   };
   return render ? (
-    // Consumer props on the part must merge into the render element, not drop.
     <>{renderWithProps(render, mergeProps(closeProps, { children, ...rest }))}</>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, closeProps)}</>

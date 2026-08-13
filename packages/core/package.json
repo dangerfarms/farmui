@@ -1,7 +1,7 @@
 {
   "name": "@farmui/core",
   "version": "1.0.0",
-  "description": "Beautiful React components, fast & accessible — zero-runtime, built on native modern CSS.",
+  "description": "Beautiful React components, fast & accessible \u2014 zero-runtime, built on native modern CSS.",
   "keywords": [
     "a11y",
     "accessible",
@@ -81,7 +81,7 @@
     "vitest-axe": "^0.1.0"
   },
   "peerDependencies": {
-    "react": ">=18",
-    "react-dom": ">=18"
+    "react": ">=19",
+    "react-dom": ">=19"
   }
 }

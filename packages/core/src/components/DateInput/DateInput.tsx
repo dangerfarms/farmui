@@ -1,16 +1,13 @@
 "use client";
 
-import {
-  createContext,
-  forwardRef,
-  useCallback,
-  useContext,
-  useEffect,
-  useId,
-  useMemo,
-  useState,
+import { createContext, useCallback, useContext, useEffect, useId, useMemo, useState } from "react";
+import type {
+  FieldsetHTMLAttributes,
+  HTMLAttributes,
+  InputHTMLAttributes,
+  ReactNode,
+  Ref,
 } from "react";
-import type { FieldsetHTMLAttributes, HTMLAttributes, InputHTMLAttributes, ReactNode } from "react";
 import { cx } from "../../utils";
 import { Fieldset } from "../Fieldset/Fieldset";
 import { Input } from "../Input/Input";
@@ -144,7 +141,7 @@ function DateInputRoot({
   );
 
   return (
-    <DateInputContext.Provider value={value}>
+    <DateInputContext value={value}>
       <Fieldset.Root
         id={id}
         className={cx("fui-DateInput-root", className)}
@@ -153,7 +150,7 @@ function DateInputRoot({
       >
         {children}
       </Fieldset.Root>
-    </DateInputContext.Provider>
+    </DateInputContext>
   );
 }
 
@@ -215,12 +212,10 @@ export interface DateInputFieldProps extends Omit<
   part: DateInputPart;
   /** Visible field label. @default "Day" / "Month" / "Year" */
   children?: ReactNode;
+  ref?: Ref<HTMLInputElement>;
 }
 
-const DateInputField = forwardRef<HTMLInputElement, DateInputFieldProps>(function DateInputField(
-  { part, children, id, ...rest },
-  ref,
-) {
+function DateInputField({ part, children, id, ref, ...rest }: DateInputFieldProps) {
   const ctx = useDateInputContext("DateInput.Field");
   const inputId = id ?? `${ctx.baseId}-${part}`;
   const invalid = ctx.hasError && (ctx.errorParts?.includes(part) ?? true);
@@ -242,7 +237,7 @@ const DateInputField = forwardRef<HTMLInputElement, DateInputFieldProps>(functio
       />
     </div>
   );
-});
+}
 
 export const DateInput = {
   Root: DateInputRoot,

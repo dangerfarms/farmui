@@ -1,8 +1,9 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useId, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useId, useMemo } from "react";
 import type { HTMLAttributes, LabelHTMLAttributes } from "react";
 import { cx } from "../../utils";
+import { usePresence } from "../../use-presence";
 import { renderWithProps } from "../../render";
 import type { RenderProp } from "../../render";
 
@@ -73,20 +74,9 @@ export interface FieldRootProps extends HTMLAttributes<HTMLDivElement> {
 function FieldRoot({ id, className, children, ...rest }: FieldRootProps) {
   const autoId = useId();
   const fieldId = id ?? autoId;
-  const [descriptionCount, setDescriptionCount] = useState(0);
-  const [errorCount, setErrorCount] = useState(0);
+  const [hasDescription, registerDescription] = usePresence();
+  const [hasError, registerError] = usePresence();
 
-  const registerDescription = useCallback(() => {
-    setDescriptionCount((n) => n + 1);
-    return () => setDescriptionCount((n) => n - 1);
-  }, []);
-  const registerError = useCallback(() => {
-    setErrorCount((n) => n + 1);
-    return () => setErrorCount((n) => n - 1);
-  }, []);
-
-  const hasDescription = descriptionCount > 0;
-  const hasError = errorCount > 0;
   // Invalid is never declared, only detected: the field is invalid exactly
   // when a Field.Error with content is rendered. CSS detects the same thing
   // with :has(.fui-Field-error).
@@ -122,11 +112,11 @@ function FieldRoot({ id, className, children, ...rest }: FieldRootProps) {
   );
 
   return (
-    <FieldContext.Provider value={value}>
+    <FieldContext value={value}>
       <div className={cx("fui-Field-root", className)} {...rest}>
         {children}
       </div>
-    </FieldContext.Provider>
+    </FieldContext>
   );
 }
 

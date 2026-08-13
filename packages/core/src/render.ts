@@ -1,4 +1,4 @@
-import { cloneElement, isValidElement, version as reactVersion } from "react";
+import { cloneElement, isValidElement } from "react";
 import type { CSSProperties, ReactElement, ReactNode, Ref } from "react";
 import { cx } from "./utils";
 
@@ -37,8 +37,6 @@ export function composeRefs<T>(a: Ref<T> | undefined, b: Ref<T> | undefined): Re
     }
   };
 }
-
-const reactMajor = Number.parseInt(reactVersion, 10);
 
 const ARIA_LIST_KEYS = new Set(["aria-describedby", "aria-labelledby"]);
 
@@ -85,16 +83,8 @@ export function renderWithProps<P extends object>(render: RenderProp<P>, props: 
     return render(props);
   }
   if (isValidElement<AnyProps>(render)) {
-    // React 19 moves ref into props; on 18 it still lives on the element.
-    const own = render.props as AnyProps;
-    const legacyRef =
-      own.ref === undefined && reactMajor < 19
-        ? (render as unknown as { ref?: unknown }).ref
-        : undefined;
-    return cloneElement(
-      render,
-      mergeProps(props as AnyProps, legacyRef === undefined ? own : { ...own, ref: legacyRef }),
-    );
+    // React 19: the element's ref is an ordinary prop and merges like one.
+    return cloneElement(render, mergeProps(props as AnyProps, render.props as AnyProps));
   }
   return null;
 }

@@ -39,11 +39,11 @@ function AccordionBase({ multiple = false, className, children, ...rest }: Accor
   const name = multiple ? undefined : autoName;
 
   return (
-    <AccordionContext.Provider value={{ name }}>
+    <AccordionContext value={{ name }}>
       <div className={cx("fui-Accordion-root", className)} {...rest}>
         {children}
       </div>
-    </AccordionContext.Provider>
+    </AccordionContext>
   );
 }
 

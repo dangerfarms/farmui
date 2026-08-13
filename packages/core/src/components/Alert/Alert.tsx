@@ -1,19 +1,17 @@
-import { forwardRef } from "react";
-import type { HTMLAttributes, ReactNode } from "react";
+import type { HTMLAttributes, ReactNode, Ref } from "react";
 import { cx } from "../../utils";
 
-export interface AlertRootProps extends Omit<HTMLAttributes<HTMLDivElement>, "color"> {}
+export interface AlertRootProps extends Omit<HTMLAttributes<HTMLDivElement>, "color"> {
+  ref?: Ref<HTMLDivElement>;
+}
 
-const AlertRoot = forwardRef<HTMLDivElement, AlertRootProps>(function AlertRoot(
-  { className, children, ...rest },
-  ref,
-) {
+function AlertRoot({ className, children, ref, ...rest }: AlertRootProps) {
   return (
     <div ref={ref} role="alert" className={cx("fui-Alert-root", className)} {...rest}>
       {children}
     </div>
   );
-});
+}
 
 export interface AlertPartProps extends HTMLAttributes<HTMLElement> {}
 
@@ -85,10 +83,7 @@ export interface AlertProps extends Omit<AlertRootProps, "title"> {
  * </Alert.Root>
  * ```
  */
-const AlertBase = forwardRef<HTMLDivElement, AlertProps>(function Alert(
-  { title, icon, children, ...rest },
-  ref,
-) {
+function AlertBase({ title, icon, children, ref, ...rest }: AlertProps) {
   return (
     <AlertRoot ref={ref} {...rest}>
       {icon && <AlertIcon>{icon}</AlertIcon>}
@@ -98,7 +93,7 @@ const AlertBase = forwardRef<HTMLDivElement, AlertProps>(function Alert(
       </AlertBody>
     </AlertRoot>
   );
-});
+}
 
 export const Alert = Object.assign(AlertBase, {
   Root: AlertRoot,

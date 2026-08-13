@@ -1,5 +1,4 @@
-import { forwardRef } from "react";
-import type { HTMLAttributes } from "react";
+import type { HTMLAttributes, Ref } from "react";
 import { cx, type FarmUISize } from "../../utils";
 
 export interface ProgressProps extends Omit<HTMLAttributes<HTMLDivElement>, "color"> {
@@ -13,6 +12,7 @@ export interface ProgressProps extends Omit<HTMLAttributes<HTMLDivElement>, "col
   animated?: boolean;
   /** Render the percentage as text inside the bar. */
   label?: boolean;
+  ref?: Ref<HTMLDivElement>;
 }
 
 const clamp = (n: number) => Math.min(100, Math.max(0, n));
@@ -25,10 +25,17 @@ const clamp = (n: number) => Math.min(100, Math.max(0, n));
  * query never matches the element that declares it, so a one-element
  * region is a wrapper) and the token remap recolours the fill.
  */
-export const Progress = forwardRef<HTMLDivElement, ProgressProps>(function Progress(
-  { value = 0, size = "md", striped, animated, label, className, style, ...rest },
+export function Progress({
+  value = 0,
+  size = "md",
+  striped,
+  animated,
+  label,
+  className,
+  style,
   ref,
-) {
+  ...rest
+}: ProgressProps) {
   const pct = clamp(value);
   const rounded = Math.round(pct);
   const showStripes = striped || animated;
@@ -55,4 +62,4 @@ export const Progress = forwardRef<HTMLDivElement, ProgressProps>(function Progr
       </div>
     </div>
   );
-});
+}

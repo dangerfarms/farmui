@@ -1,7 +1,6 @@
 "use client";
 
-import { forwardRef } from "react";
-import type { SelectHTMLAttributes } from "react";
+import type { Ref, SelectHTMLAttributes } from "react";
 import { cx } from "../../utils";
 import { useFieldControlProps } from "../Field/Field";
 import { useUserInvalid } from "../../use-user-invalid";
@@ -9,6 +8,7 @@ import { useUserInvalid } from "../../use-user-invalid";
 export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, "size"> {
   /** Non-selectable prompt shown as the first, empty-valued option. */
   placeholder?: string;
+  ref?: Ref<HTMLSelectElement>;
 }
 
 /**
@@ -17,24 +17,22 @@ export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement
  * platform defines them. Label it by composing {@link Field}; the control
  * reads its wiring from the surrounding `Field.Root`.
  */
-export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select(
-  {
-    placeholder,
-    disabled,
-    className,
-    style,
-    children,
-    defaultValue,
-    value,
-    id,
-    "aria-invalid": ariaInvalid,
-    "aria-describedby": ariaDescribedby,
-    onBlur,
-    onInvalid,
-    ...rest
-  },
+export function Select({
+  placeholder,
+  disabled,
+  className,
+  style,
+  children,
+  defaultValue,
+  value,
+  id,
+  "aria-invalid": ariaInvalid,
+  "aria-describedby": ariaDescribedby,
+  onBlur,
+  onInvalid,
   ref,
-) {
+  ...rest
+}: SelectProps) {
   const field = useFieldControlProps();
   const { nativeInvalid, checkOnBlur, checkOnInvalid } = useUserInvalid();
   const isControlled = value !== undefined;
@@ -87,4 +85,4 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
       </svg>
     </div>
   );
-});
+}

@@ -1,5 +1,4 @@
-import { forwardRef } from "react";
-import type { HTMLAttributes, ReactNode } from "react";
+import type { HTMLAttributes, ReactNode, Ref } from "react";
 import { cx } from "../../utils";
 
 type AvatarSize = "sm" | "md" | "lg" | number;
@@ -14,6 +13,7 @@ export interface AvatarProps extends Omit<HTMLAttributes<HTMLSpanElement>, "colo
   /** Size token or explicit pixel size. @default "md" */
   size?: AvatarSize;
   children?: ReactNode;
+  ref?: Ref<HTMLSpanElement>;
 }
 
 /** Derive up to two uppercase initials from a name. */
@@ -44,10 +44,17 @@ function UserGlyph() {
 /**
  * An image, initials, or fallback glyph representing a user.
  */
-export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
-  { src, alt, name, size = "md", className, style, children, ...rest },
+export function Avatar({
+  src,
+  alt,
+  name,
+  size = "md",
+  className,
+  style,
+  children,
   ref,
-) {
+  ...rest
+}: AvatarProps) {
   const numericSize = typeof size === "number";
   const initials = name ? initialsFrom(name) : "";
   // With no name anywhere, an avatar is decorative — hide it rather than
@@ -85,21 +92,26 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
       {content}
     </span>
   );
-});
+}
 
 export interface AvatarGroupProps extends HTMLAttributes<HTMLDivElement> {
   /** Overlap amount between avatars. @default "0.5rem" */
   spacing?: string;
   children?: ReactNode;
+  ref?: Ref<HTMLDivElement>;
 }
 
 /**
  * Overlaps a row of avatars with a surface-colored ring.
  */
-export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(function AvatarGroup(
-  { spacing = "0.5rem", className, style, children, ...rest },
+export function AvatarGroup({
+  spacing = "0.5rem",
+  className,
+  style,
+  children,
   ref,
-) {
+  ...rest
+}: AvatarGroupProps) {
   return (
     <div
       ref={ref}
@@ -110,4 +122,4 @@ export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(function
       {children}
     </div>
   );
-});
+}

@@ -1,7 +1,7 @@
 "use client";
 
-import { forwardRef, useId } from "react";
-import type { InputHTMLAttributes, ReactNode } from "react";
+import { useId } from "react";
+import type { InputHTMLAttributes, ReactNode, Ref } from "react";
 import { cx } from "../../utils";
 import { useFieldControlProps } from "../Field/Field";
 import { useUserInvalid } from "../../use-user-invalid";
@@ -15,6 +15,7 @@ export interface SwitchProps extends Omit<InputHTMLAttributes<HTMLInputElement>,
   labelPosition?: "start" | "end";
   /** Root wrapper class. */
   wrapperClassName?: string;
+  ref?: Ref<HTMLInputElement>;
 }
 
 /** The bare toggle (input + track), minus any label. */
@@ -29,19 +30,17 @@ export type SwitchControlProps = Omit<
  * (`<Field.Label><SwitchControl /> …</Field.Label>`); otherwise it uses its
  * own props.
  */
-const SwitchControl = forwardRef<HTMLInputElement, SwitchControlProps>(function SwitchControl(
-  {
-    id,
-    className,
-    disabled,
-    "aria-invalid": ariaInvalid,
-    "aria-describedby": ariaDescribedby,
-    onBlur,
-    onInvalid,
-    ...rest
-  },
+function SwitchControl({
+  id,
+  className,
+  disabled,
+  "aria-invalid": ariaInvalid,
+  "aria-describedby": ariaDescribedby,
+  onBlur,
+  onInvalid,
   ref,
-) {
+  ...rest
+}: SwitchControlProps) {
   const field = useFieldControlProps();
 
   const { nativeInvalid, checkOnBlur, checkOnInvalid } = useUserInvalid();
@@ -75,7 +74,7 @@ const SwitchControl = forwardRef<HTMLInputElement, SwitchControlProps>(function 
       </span>
     </span>
   );
-});
+}
 
 /**
  * An on/off toggle built on a native checkbox with `role="switch"`.
@@ -86,19 +85,17 @@ const SwitchControl = forwardRef<HTMLInputElement, SwitchControlProps>(function 
  * Stateless and server-safe: `defaultChecked` uncontrolled, or
  * `checked` + `onChange`.
  */
-export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
-  {
-    label,
-    description,
-    required,
-    labelPosition = "end",
-    disabled,
-    id,
-    wrapperClassName,
-    ...control
-  },
+export function Switch({
+  label,
+  description,
+  required,
+  labelPosition = "end",
+  disabled,
+  id,
+  wrapperClassName,
   ref,
-) {
+  ...control
+}: SwitchProps) {
   const autoId = useId();
 
   if (!label && !description) {
@@ -139,6 +136,6 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
       )}
     </div>
   );
-});
+}
 
 export { SwitchControl };

@@ -1,7 +1,7 @@
 "use client";
 
-import { forwardRef, useContext, useId } from "react";
-import type { ChangeEvent, InputHTMLAttributes, ReactNode } from "react";
+import { useContext, useId } from "react";
+import type { ChangeEvent, InputHTMLAttributes, ReactNode, Ref } from "react";
 import { cx } from "../../utils";
 import { useFieldControlProps } from "../Field/Field";
 import { RadioGroupContext } from "./group-context";
@@ -13,6 +13,7 @@ export interface RadioProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   description?: ReactNode;
   /** Root wrapper class. */
   wrapperClassName?: string;
+  ref?: Ref<HTMLInputElement>;
 }
 
 /** The bare radio input + control dot, minus any label. */
@@ -22,10 +23,14 @@ export type RadioControlProps = Omit<RadioProps, "label" | "description" | "wrap
  * The bare `<input type="radio">` + control dot. When rendered
  * inside a `Field` it reads its id / describedby / aria-invalid from context.
  */
-const RadioControl = forwardRef<HTMLInputElement, RadioControlProps>(function RadioControl(
-  { id, className, disabled, "aria-describedby": ariaDescribedby, ...rest },
+function RadioControl({
+  id,
+  className,
+  disabled,
+  "aria-describedby": ariaDescribedby,
   ref,
-) {
+  ...rest
+}: RadioControlProps) {
   const field = useFieldControlProps();
   const group = useContext(RadioGroupContext);
   // No aria-invalid here: ARIA allows it on the radiogroup, not the
@@ -71,7 +76,7 @@ const RadioControl = forwardRef<HTMLInputElement, RadioControlProps>(function Ra
       <span className="fui-Radio-control" aria-hidden />
     </>
   );
-});
+}
 
 /**
  * A single choice within a set of mutually exclusive options.
@@ -80,10 +85,15 @@ const RadioControl = forwardRef<HTMLInputElement, RadioControlProps>(function Ra
  * the bare input (it self-wires inside a `Field`). Usually lives inside a
  * {@link RadioGroup}.
  */
-export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
-  { label, description, disabled, id, wrapperClassName, ...control },
+export function Radio({
+  label,
+  description,
+  disabled,
+  id,
+  wrapperClassName,
   ref,
-) {
+  ...control
+}: RadioProps) {
   const autoId = useId();
 
   if (!label && !description) {
@@ -116,6 +126,6 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
       </span>
     </label>
   );
-});
+}
 
 export { RadioControl };

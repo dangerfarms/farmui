@@ -1,5 +1,4 @@
-import { forwardRef } from "react";
-import type { HTMLAttributes, ReactNode } from "react";
+import type { HTMLAttributes, ReactNode, Ref } from "react";
 import { cx } from "../../utils";
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
@@ -10,15 +9,22 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   /** Drop shadow depth. @default "none" */
   shadow?: "none" | "sm" | "md" | "lg";
   children?: ReactNode;
+  ref?: Ref<HTMLDivElement>;
 }
 
 /**
  * A surface container that groups related content.
  */
-export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
-  { padding = "md", withBorder, shadow = "none", className, style, children, ...rest },
+export function Card({
+  padding = "md",
+  withBorder,
+  shadow = "none",
+  className,
+  style,
+  children,
   ref,
-) {
+  ...rest
+}: CardProps) {
   return (
     <div
       ref={ref}
@@ -32,4 +38,4 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
       {children}
     </div>
   );
-});
+}

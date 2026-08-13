@@ -1,11 +1,12 @@
 "use client";
 
-import { forwardRef } from "react";
-import type { InputHTMLAttributes } from "react";
+import type { InputHTMLAttributes, Ref } from "react";
 import { cx } from "../../utils";
 import { useFieldControlProps } from "../Field/Field";
 
-export interface SliderProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "type"> {}
+export interface SliderProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "type"> {
+  ref?: Ref<HTMLInputElement>;
+}
 
 /**
  * A styled `<input type="range">` for choosing a value from a range.
@@ -15,20 +16,18 @@ export interface SliderProps extends Omit<InputHTMLAttributes<HTMLInputElement>,
  * state is held here: uncontrolled via `defaultValue`, or controlled
  * with `value` + `onChange`.
  */
-export const Slider = forwardRef<HTMLInputElement, SliderProps>(function Slider(
-  {
-    min = 0,
-    max = 100,
-    step = 1,
-    id,
-    className,
-    disabled,
-    "aria-invalid": ariaInvalid,
-    "aria-describedby": ariaDescribedby,
-    ...rest
-  },
+export function Slider({
+  min = 0,
+  max = 100,
+  step = 1,
+  id,
+  className,
+  disabled,
+  "aria-invalid": ariaInvalid,
+  "aria-describedby": ariaDescribedby,
   ref,
-) {
+  ...rest
+}: SliderProps) {
   const field = useFieldControlProps();
 
   return (
@@ -50,4 +49,4 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>(function Slider(
       {...rest}
     />
   );
-});
+}

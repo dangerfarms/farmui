@@ -92,11 +92,11 @@ function TabsBase({
   );
 
   return (
-    <TabsContext.Provider value={ctx}>
+    <TabsContext value={ctx}>
       <div className={cx("fui-Tabs-root", className)} {...rest}>
         {children}
       </div>
-    </TabsContext.Provider>
+    </TabsContext>
   );
 }
 

@@ -1,7 +1,6 @@
 "use client";
 
-import { forwardRef } from "react";
-import type { InputHTMLAttributes, ReactNode } from "react";
+import type { InputHTMLAttributes, ReactNode, Ref } from "react";
 import { cx } from "../../utils";
 import { useFieldControlProps } from "../Field/Field";
 import { useUserInvalid } from "../../use-user-invalid";
@@ -11,6 +10,7 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   leftSection?: ReactNode;
   /** Content rendered inside the field, after the input. */
   rightSection?: ReactNode;
+  ref?: Ref<HTMLInputElement>;
 }
 
 /**
@@ -27,22 +27,20 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
  * </Field.Root>
  * ```
  */
-export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-  {
-    leftSection,
-    rightSection,
-    disabled,
-    className,
-    style,
-    id,
-    "aria-invalid": ariaInvalid,
-    "aria-describedby": ariaDescribedby,
-    onBlur,
-    onInvalid,
-    ...rest
-  },
+export function Input({
+  leftSection,
+  rightSection,
+  disabled,
+  className,
+  style,
+  id,
+  "aria-invalid": ariaInvalid,
+  "aria-describedby": ariaDescribedby,
+  onBlur,
+  onInvalid,
   ref,
-) {
+  ...rest
+}: InputProps) {
   const field = useFieldControlProps();
   const { nativeInvalid, checkOnBlur, checkOnInvalid } = useUserInvalid();
   return (
@@ -68,4 +66,4 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
       {rightSection && <span className="fui-Input-section">{rightSection}</span>}
     </div>
   );
-});
+}

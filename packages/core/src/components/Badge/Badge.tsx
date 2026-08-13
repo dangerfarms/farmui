@@ -1,5 +1,4 @@
-import { forwardRef } from "react";
-import type { HTMLAttributes, ReactNode } from "react";
+import type { HTMLAttributes, ReactNode, Ref } from "react";
 import { cx, type FarmUISize } from "../../utils";
 
 export interface BadgeProps extends Omit<HTMLAttributes<HTMLSpanElement>, "color"> {
@@ -8,6 +7,7 @@ export interface BadgeProps extends Omit<HTMLAttributes<HTMLSpanElement>, "color
   /** Render a status dot before the label, colored by the context. */
   dot?: boolean;
   children?: ReactNode;
+  ref?: Ref<HTMLSpanElement>;
 }
 
 /**
@@ -19,10 +19,7 @@ export interface BadgeProps extends Omit<HTMLAttributes<HTMLSpanElement>, "color
  * the pill's tint and text derive from that status's colour. Icons are
  * composed as svg children and detected — there are no slot props.
  */
-export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(function Badge(
-  { size = "md", dot, className, style, children, ...rest },
-  ref,
-) {
+export function Badge({ size = "md", dot, className, style, children, ref, ...rest }: BadgeProps) {
   return (
     <span
       ref={ref}
@@ -35,4 +32,4 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(function Badge(
       {children}
     </span>
   );
-});
+}

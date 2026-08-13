@@ -11,7 +11,7 @@ export default function Installation() {
     <div className={prose.prose}>
       <h1>Installation</h1>
       <p className={prose.lead}>
-        FarmUI works in any React 18+ setup. There&rsquo;s no provider and no build plugin: just a
+        FarmUI works in any React 19 setup. There&rsquo;s no provider and no build plugin: just a
         package and a stylesheet.
       </p>
 

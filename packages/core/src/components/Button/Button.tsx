@@ -1,5 +1,4 @@
-import { forwardRef } from "react";
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import type { ButtonHTMLAttributes, ReactNode, Ref } from "react";
 import { cx } from "../../utils";
 import { renderWithProps } from "../../render";
 import type { RenderProp } from "../../render";
@@ -12,6 +11,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
    * Button's classes and attributes merge onto the element it renders.
    */
   render?: RenderProp<Record<string, unknown>>;
+  ref?: Ref<HTMLButtonElement>;
 }
 
 /**
@@ -40,10 +40,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
  * For a one-off colour set the public `--fui-button-color` property; for a
  * house style, wrap it (the SecondaryButton pattern).
  */
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  { render, className, children, ...rest },
-  ref,
-) {
+export function Button({ render, className, children, ref, ...rest }: ButtonProps) {
   if (render) {
     return (
       <>
@@ -63,4 +60,4 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       {children}
     </button>
   );
-});
+}

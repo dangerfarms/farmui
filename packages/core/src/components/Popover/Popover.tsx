@@ -11,6 +11,7 @@ import {
   useState,
 } from "react";
 import type {
+  RefObject,
   ButtonHTMLAttributes,
   CSSProperties,
   HTMLAttributes,
@@ -18,6 +19,8 @@ import type {
   Ref,
 } from "react";
 import { cx } from "../../utils";
+import { cssSafeId, supportsAnchoredPopover } from "../../anchor";
+import { usePresence } from "../../use-presence";
 import { mergeProps, renderWithProps } from "../../render";
 import type { RenderProp } from "../../render";
 
@@ -49,7 +52,7 @@ interface PopoverContextValue {
   open: boolean;
   setOpen: (open: boolean) => void;
   /** The Trigger's element, for focus restoration on close. */
-  triggerRef: { current: HTMLButtonElement | null };
+  triggerRef: RefObject<HTMLButtonElement | null>;
   popupId: string;
   titleId: string;
   descriptionId: string;
@@ -78,15 +81,6 @@ function usePopoverContext(part: string): PopoverContextValue {
  * wrapper's positioning context, so promoting it without anchor positioning
  * would leave it centred in the viewport.
  */
-function detectEnhanced(): boolean {
-  return (
-    typeof HTMLElement !== "undefined" &&
-    "showPopover" in HTMLElement.prototype &&
-    typeof CSS !== "undefined" &&
-    CSS.supports("anchor-name: --fui-probe")
-  );
-}
-
 export interface PopoverRootProps extends HTMLAttributes<HTMLSpanElement> {
   /** Controlled open state. */
   open?: boolean;
@@ -106,13 +100,13 @@ function PopoverRoot({
 }: PopoverRootProps) {
   const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);
   const open = openProp ?? uncontrolledOpen;
-  const [titleCount, setTitleCount] = useState(0);
-  const [descriptionCount, setDescriptionCount] = useState(0);
+  const [hasTitle, registerTitle] = usePresence();
+  const [hasDescription, registerDescription] = usePresence();
   const [enhanced, setEnhanced] = useState(false);
-  useEffect(() => setEnhanced(detectEnhanced()), []);
+  useEffect(() => setEnhanced(supportsAnchoredPopover()), []);
 
   const autoId = useId();
-  const popupId = `${autoId.replace(/[^a-zA-Z0-9-]/g, "")}-popup`;
+  const popupId = `${cssSafeId(autoId)}-popup`;
   const anchorName = `--fui-anchor-${popupId}`;
 
   const openRef = useRef(open);
@@ -130,15 +124,6 @@ function PopoverRoot({
     [onOpenChange],
   );
 
-  const registerTitle = useCallback(() => {
-    setTitleCount((n) => n + 1);
-    return () => setTitleCount((n) => n - 1);
-  }, []);
-  const registerDescription = useCallback(() => {
-    setDescriptionCount((n) => n + 1);
-    return () => setDescriptionCount((n) => n - 1);
-  }, []);
-
   const value = useMemo<PopoverContextValue>(
     () => ({
       open,
@@ -147,8 +132,8 @@ function PopoverRoot({
       popupId,
       titleId: `${popupId}-title`,
       descriptionId: `${popupId}-description`,
-      hasTitle: titleCount > 0,
-      hasDescription: descriptionCount > 0,
+      hasTitle,
+      hasDescription,
       registerTitle,
       registerDescription,
       anchorName,
@@ -158,8 +143,8 @@ function PopoverRoot({
       open,
       setOpen,
       popupId,
-      titleCount,
-      descriptionCount,
+      hasTitle,
+      hasDescription,
       registerTitle,
       registerDescription,
       anchorName,
@@ -168,17 +153,16 @@ function PopoverRoot({
   );
 
   return (
-    <PopoverContext.Provider value={value}>
+    <PopoverContext value={value}>
       <span className={cx("fui-Popover-root", className)} {...rest}>
         {children}
       </span>
-    </PopoverContext.Provider>
+    </PopoverContext>
   );
 }
 
 /** Wiring the Trigger attaches to whatever it renders. */
 export interface PopoverTriggerRenderProps {
-  ref: Ref<HTMLButtonElement>;
   type: "button";
   popoverTarget: string | undefined;
   "aria-haspopup": "dialog";
@@ -188,6 +172,7 @@ export interface PopoverTriggerRenderProps {
   "data-popup-open": "true" | undefined;
   style: CSSProperties;
   onClick: (e: ReactMouseEvent<Element>) => void;
+  ref: Ref<HTMLButtonElement>;
 }
 
 export interface PopoverTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -222,7 +207,6 @@ function PopoverTrigger({ render, children, ...rest }: PopoverTriggerProps) {
   };
 
   return render ? (
-    // Consumer props on the part must merge into the render element, not drop.
     <>{renderWithProps(render, mergeProps(triggerProps, { children, ...rest }))}</>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, triggerProps)}</>
@@ -300,8 +284,8 @@ function PopoverPopup({
   }, [enhanced, open, setOpen]);
 
   return (
-    // `rest` is spread first: the wiring props below are load-bearing and
-    // must not be silently clobbered by consumer props.
+    // rest cannot override what follows: the popover/anchor wiring is
+    // what makes the panel a popover at all.
     <div
       {...rest}
       ref={ref}
@@ -366,7 +350,6 @@ function PopoverClose({ render, children, ...rest }: PopoverCloseProps) {
     onClick: () => ctx.setOpen(false),
   };
   return render ? (
-    // Consumer props on the part must merge into the render element, not drop.
     <>{renderWithProps(render, mergeProps(closeProps, { children, ...rest }))}</>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, closeProps)}</>

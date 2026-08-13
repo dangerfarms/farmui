@@ -11,6 +11,7 @@ import {
   useState,
 } from "react";
 import type {
+  RefObject,
   ButtonHTMLAttributes,
   CSSProperties,
   FocusEvent,
@@ -19,6 +20,7 @@ import type {
   ReactNode,
 } from "react";
 import { cx } from "../../utils";
+import { cssSafeId, supportsAnchoredPopover } from "../../anchor";
 import { mergeProps, renderWithProps } from "../../render";
 import type { RenderProp } from "../../render";
 
@@ -58,7 +60,7 @@ const CLOSE_DELAY = 300;
 interface TooltipProviderValue {
   delay: number;
   /** Shared timestamp of recent tooltip activity, for instant adjacent opens. */
-  lastVisibleAt: { current: number };
+  lastVisibleAt: RefObject<number>;
 }
 
 const TooltipProviderContext = createContext<TooltipProviderValue | null>(null);
@@ -72,9 +74,7 @@ export interface TooltipProviderProps {
 function TooltipProvider({ delay = 600, children }: TooltipProviderProps) {
   const lastVisibleAt = useRef(0);
   const value = useMemo(() => ({ delay, lastVisibleAt }), [delay]);
-  return (
-    <TooltipProviderContext.Provider value={value}>{children}</TooltipProviderContext.Provider>
-  );
+  return <TooltipProviderContext value={value}>{children}</TooltipProviderContext>;
 }
 
 interface TooltipContextValue {
@@ -105,15 +105,6 @@ function useTooltipContext(part: string): TooltipContextValue {
 
 /* Same coupling as Popover: top layer without anchor positioning would leave
    the bubble centred in the viewport, so both are required to enhance. */
-function detectEnhanced(): boolean {
-  return (
-    typeof HTMLElement !== "undefined" &&
-    "showPopover" in HTMLElement.prototype &&
-    typeof CSS !== "undefined" &&
-    CSS.supports("anchor-name: --fui-probe")
-  );
-}
-
 /* popover="hint" is narrower than the popover API itself; an unknown value
    silently becomes "manual", so detect via IDL reflection and be explicit. */
 function detectPopoverKind(): "hint" | "manual" {
@@ -166,12 +157,12 @@ function TooltipRoot({
   const [enhanced, setEnhanced] = useState(false);
   const [popoverKind, setPopoverKind] = useState<"hint" | "manual">("manual");
   useEffect(() => {
-    setEnhanced(detectEnhanced());
+    setEnhanced(supportsAnchoredPopover());
     setPopoverKind(detectPopoverKind());
   }, []);
 
   const autoId = useId();
-  const bubbleId = `${autoId.replace(/[^a-zA-Z0-9-]/g, "")}-tooltip`;
+  const bubbleId = `${cssSafeId(autoId)}-tooltip`;
   const anchorName = `--fui-anchor-${bubbleId}`;
 
   const openRef = useRef(open);
@@ -308,11 +299,11 @@ function TooltipRoot({
   );
 
   return (
-    <TooltipContext.Provider value={value}>
+    <TooltipContext value={value}>
       <span className={cx("fui-Tooltip-root", className)} {...rest}>
         {children}
       </span>
-    </TooltipContext.Provider>
+    </TooltipContext>
   );
 }
 
@@ -351,7 +342,6 @@ function TooltipTrigger({ render, children, ...rest }: TooltipTriggerProps) {
   };
 
   return render ? (
-    // Consumer props on the part must merge into the render element, not drop.
     <>{renderWithProps(render, mergeProps(triggerProps, { children, ...rest }))}</>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, triggerProps)}</>
@@ -399,9 +389,9 @@ function TooltipPopup({
   }, [enhanced, hideNow]);
 
   return (
-    // `rest` is spread first: the wiring props below are load-bearing and
-    // must not be silently clobbered by consumer props. The pointer handlers
-    // chain any consumer handlers rather than replacing them.
+    // rest cannot override what follows: the hover/focus tracking and
+    // aria-describedby are the 1.4.13 contract; pointer handlers chain
+    // consumer handlers rather than replacing them.
     <span
       {...rest}
       ref={ref}

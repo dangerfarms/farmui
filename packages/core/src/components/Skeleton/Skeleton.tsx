@@ -1,5 +1,4 @@
-import { forwardRef } from "react";
-import type { CSSProperties, HTMLAttributes, ReactNode } from "react";
+import type { CSSProperties, HTMLAttributes, ReactNode, Ref } from "react";
 import { cx } from "../../utils";
 
 export interface SkeletonProps extends HTMLAttributes<HTMLDivElement> {
@@ -13,6 +12,7 @@ export interface SkeletonProps extends HTMLAttributes<HTMLDivElement> {
   visible?: boolean;
   /** Real content: it sizes the placeholder, and shows once `visible` is false. */
   children?: ReactNode;
+  ref?: Ref<HTMLDivElement>;
 }
 
 const toLen = (v: number | string | undefined): string | undefined =>
@@ -27,10 +27,17 @@ const toLen = (v: number | string | undefined): string | undefined =>
  * policy lives in the stylesheet — inline custom properties carry only
  * what the consumer declared, so skeletons stay themeable from CSS.
  */
-export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(function Skeleton(
-  { width, height, circle, visible = true, className, style, children, ...rest },
+export function Skeleton({
+  width,
+  height,
+  circle,
+  visible = true,
+  className,
+  style,
+  children,
   ref,
-) {
+  ...rest
+}: SkeletonProps) {
   if (!visible) return <>{children}</>;
 
   const declared: Record<string, string> = {};
@@ -56,4 +63,4 @@ export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(function Skele
       {children}
     </div>
   );
-});
+}

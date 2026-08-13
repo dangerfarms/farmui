@@ -71,7 +71,7 @@ function ErrorSummaryRoot({
   }, [autoFocus]);
 
   return (
-    <ErrorSummaryContext.Provider value={{ titleId }}>
+    <ErrorSummaryContext value={{ titleId }}>
       <div
         ref={ref}
         role="group"
@@ -82,7 +82,7 @@ function ErrorSummaryRoot({
       >
         {children}
       </div>
-    </ErrorSummaryContext.Provider>
+    </ErrorSummaryContext>
   );
 }
 

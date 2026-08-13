@@ -1,5 +1,4 @@
-import { forwardRef } from "react";
-import type { CSSProperties, HTMLAttributes } from "react";
+import type { CSSProperties, HTMLAttributes, Ref } from "react";
 import { cx, type FarmUISize } from "../../utils";
 
 export interface LoaderProps extends Omit<HTMLAttributes<HTMLSpanElement>, "color"> {
@@ -7,6 +6,7 @@ export interface LoaderProps extends Omit<HTMLAttributes<HTMLSpanElement>, "colo
   size?: FarmUISize | number;
   /** Accessible label announced to assistive tech. @default "Loading" */
   label?: string;
+  ref?: Ref<HTMLSpanElement>;
 }
 
 const sizeVar: Record<FarmUISize, string> = {
@@ -22,10 +22,14 @@ const sizeVar: Record<FarmUISize, string> = {
  * with no prop; the parts draw with `currentColor`, so a plain `color:`
  * declaration on the loader (or an ancestor's channel) overrides.
  */
-export const Loader = forwardRef<HTMLSpanElement, LoaderProps>(function Loader(
-  { size = "md", label = "Loading", className, style, ...rest },
+export function Loader({
+  size = "md",
+  label = "Loading",
+  className,
+  style,
   ref,
-) {
+  ...rest
+}: LoaderProps) {
   const resolvedSize = typeof size === "number" ? `${size}px` : sizeVar[size];
   const vars = {
     "--_size": resolvedSize,
@@ -45,4 +49,4 @@ export const Loader = forwardRef<HTMLSpanElement, LoaderProps>(function Loader(
       <span className="fui-Loader-srOnly">{label}</span>
     </span>
   );
-});
+}

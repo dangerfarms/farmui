@@ -73,7 +73,7 @@ export function RadioGroup({
   );
 
   return (
-    <RadioGroupContext.Provider value={ctx}>
+    <RadioGroupContext value={ctx}>
       <Fieldset.Root
         // radiogroup (not the fieldset's implicit group): the precise role,
         // and the one ARIA allows aria-invalid on.
@@ -98,6 +98,6 @@ export function RadioGroup({
           </span>
         )}
       </Fieldset.Root>
-    </RadioGroupContext.Provider>
+    </RadioGroupContext>
   );
 }

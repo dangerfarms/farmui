@@ -11,6 +11,7 @@ import {
   useState,
 } from "react";
 import type {
+  RefObject,
   AnchorHTMLAttributes,
   ButtonHTMLAttributes,
   CSSProperties,
@@ -21,6 +22,7 @@ import type {
   Ref,
 } from "react";
 import { cx } from "../../utils";
+import { cssSafeId, supportsAnchoredPopover } from "../../anchor";
 import { mergeProps, renderWithProps } from "../../render";
 import type { RenderProp } from "../../render";
 
@@ -59,8 +61,8 @@ import { Button } from "../Button/Button";
 interface MenuContextValue {
   open: boolean;
   setOpen: (open: boolean) => void;
-  triggerRef: { current: HTMLButtonElement | null };
-  popupRef: { current: HTMLDivElement | null };
+  triggerRef: RefObject<HTMLButtonElement | null>;
+  popupRef: RefObject<HTMLDivElement | null>;
   popupId: string;
   anchorName: string;
   enhanced: boolean;
@@ -82,15 +84,6 @@ function useMenuContext(part: string): MenuContextValue {
 
 /* Popover's coupling, for the same reason: the top layer without anchor
    positioning would leave the menu centred in the viewport. */
-function detectEnhanced(): boolean {
-  return (
-    typeof HTMLElement !== "undefined" &&
-    "showPopover" in HTMLElement.prototype &&
-    typeof CSS !== "undefined" &&
-    CSS.supports("anchor-name: --fui-probe")
-  );
-}
-
 /** The focusable items, in DOM order — disabled items are skipped. */
 function menuItems(popup: HTMLElement | null): HTMLElement[] {
   if (!popup) return [];
@@ -119,10 +112,10 @@ function MenuRoot({
   const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);
   const open = openProp ?? uncontrolledOpen;
   const [enhanced, setEnhanced] = useState(false);
-  useEffect(() => setEnhanced(detectEnhanced()), []);
+  useEffect(() => setEnhanced(supportsAnchoredPopover()), []);
 
   const autoId = useId();
-  const popupId = `${autoId.replace(/[^a-zA-Z0-9-]/g, "")}-menu`;
+  const popupId = `${cssSafeId(autoId)}-menu`;
   const anchorName = `--fui-anchor-${popupId}`;
 
   const openRef = useRef(open);
@@ -163,17 +156,16 @@ function MenuRoot({
   );
 
   return (
-    <MenuContext.Provider value={value}>
+    <MenuContext value={value}>
       <span className={cx("fui-Menu-root", className)} {...rest}>
         {children}
       </span>
-    </MenuContext.Provider>
+    </MenuContext>
   );
 }
 
 /** Wiring the Trigger attaches to whatever it renders. */
 export interface MenuTriggerRenderProps {
-  ref: Ref<HTMLButtonElement>;
   type: "button";
   popoverTarget: string | undefined;
   "aria-haspopup": "menu";
@@ -184,6 +176,7 @@ export interface MenuTriggerRenderProps {
   style: CSSProperties;
   onClick: (e: ReactMouseEvent<Element>) => void;
   onKeyDown: (e: ReactKeyboardEvent<Element>) => void;
+  ref: Ref<HTMLButtonElement>;
 }
 
 export interface MenuTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -222,7 +215,6 @@ function MenuTrigger({ render, children, ...rest }: MenuTriggerProps) {
   };
 
   return render ? (
-    // Consumer props on the part must merge into the render element, not drop.
     <>{renderWithProps(render, mergeProps(triggerProps, { children, ...rest }))}</>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, triggerProps)}</>
@@ -353,7 +345,8 @@ function MenuPopup({
   };
 
   return (
-    // `rest` is spread first: the wiring props below are load-bearing.
+    // rest cannot override what follows: role, the roving tabIndex and
+    // the typeahead handlers are the menu pattern itself.
     <div
       {...rest}
       ref={ref}
@@ -455,7 +448,7 @@ export interface MenuGroupProps extends HTMLAttributes<HTMLDivElement> {}
 
 function MenuGroup({ className, children, ...rest }: MenuGroupProps) {
   const autoId = useId();
-  const labelId = `${autoId.replace(/[^a-zA-Z0-9-]/g, "")}-menugroup`;
+  const labelId = `${autoId}-menugroup`;
   const [labelCount, setLabelCount] = useState(0);
   const registerLabel = useCallback(() => {
     setLabelCount((n) => n + 1);
@@ -466,7 +459,7 @@ function MenuGroup({ className, children, ...rest }: MenuGroupProps) {
     [labelId, registerLabel, labelCount],
   );
   return (
-    <MenuGroupContext.Provider value={value}>
+    <MenuGroupContext value={value}>
       <div
         role="group"
         aria-labelledby={labelCount > 0 ? labelId : undefined}
@@ -475,7 +468,7 @@ function MenuGroup({ className, children, ...rest }: MenuGroupProps) {
       >
         {children}
       </div>
-    </MenuGroupContext.Provider>
+    </MenuGroupContext>
   );
 }
 
