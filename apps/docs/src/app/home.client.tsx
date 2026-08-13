@@ -79,9 +79,7 @@ export function HeroShowcase() {
         </span>
       </div>
 
-      <div
-        style={{ display: "flex", gap: "0.6rem", marginBlockStart: "0.25rem" }}
-      >
+      <div style={{ display: "flex", gap: "0.6rem", marginBlockStart: "0.25rem" }}>
         <Button>Save changes</Button>
         <Button>Cancel</Button>
       </div>

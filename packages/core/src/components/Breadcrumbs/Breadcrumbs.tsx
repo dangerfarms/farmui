@@ -1,9 +1,4 @@
-import type {
-  AnchorHTMLAttributes,
-  CSSProperties,
-  HTMLAttributes,
-  ReactNode,
-} from "react";
+import type { AnchorHTMLAttributes, CSSProperties, HTMLAttributes, ReactNode } from "react";
 import { cx } from "../../utils";
 import { renderWithProps } from "../../render";
 import type { RenderProp } from "../../render";
@@ -31,13 +26,7 @@ export interface BreadcrumbsRootProps extends HTMLAttributes<HTMLElement> {
   separator?: string;
 }
 
-function BreadcrumbsRoot({
-  separator,
-  className,
-  style,
-  children,
-  ...rest
-}: BreadcrumbsRootProps) {
+function BreadcrumbsRoot({ separator, className, style, children, ...rest }: BreadcrumbsRootProps) {
   return (
     <nav
       aria-label="Breadcrumbs"
@@ -91,11 +80,7 @@ function BreadcrumbsItem({
       {children}
     </a>
   ) : (
-    <span
-      className={className}
-      {...(rest as HTMLAttributes<HTMLElement>)}
-      {...wiring}
-    >
+    <span className={className} {...(rest as HTMLAttributes<HTMLElement>)} {...wiring}>
       {children}
     </span>
   );

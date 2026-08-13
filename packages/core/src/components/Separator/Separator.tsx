@@ -18,11 +18,7 @@ export interface SeparatorProps extends HTMLAttributes<HTMLHRElement> {
  * on the region instead; reach for Separator when the division is *content*
  * (it is announced to assistive technology as a separator).
  */
-export function Separator({
-  orientation = "horizontal",
-  className,
-  ...rest
-}: SeparatorProps) {
+export function Separator({ orientation = "horizontal", className, ...rest }: SeparatorProps) {
   return (
     <hr
       aria-orientation={orientation === "vertical" ? "vertical" : undefined}

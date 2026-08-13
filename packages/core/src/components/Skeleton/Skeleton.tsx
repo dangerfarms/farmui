@@ -27,44 +27,33 @@ const toLen = (v: number | string | undefined): string | undefined =>
  * policy lives in the stylesheet — inline custom properties carry only
  * what the consumer declared, so skeletons stay themeable from CSS.
  */
-export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
-  function Skeleton(
-    {
-      width,
-      height,
-      circle,
-      visible = true,
-      className,
-      style,
-      children,
-      ...rest
-    },
-    ref,
-  ) {
-    if (!visible) return <>{children}</>;
+export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(function Skeleton(
+  { width, height, circle, visible = true, className, style, children, ...rest },
+  ref,
+) {
+  if (!visible) return <>{children}</>;
 
-    const declared: Record<string, string> = {};
-    if (circle) {
-      const size = toLen(width) ?? toLen(height);
-      if (size) declared["--_size"] = size;
-    } else {
-      const w = toLen(width);
-      const h = toLen(height);
-      if (w) declared["--_w"] = w;
-      if (h) declared["--_h"] = h;
-    }
+  const declared: Record<string, string> = {};
+  if (circle) {
+    const size = toLen(width) ?? toLen(height);
+    if (size) declared["--_size"] = size;
+  } else {
+    const w = toLen(width);
+    const h = toLen(height);
+    if (w) declared["--_w"] = w;
+    if (h) declared["--_h"] = h;
+  }
 
-    return (
-      <div
-        ref={ref}
-        className={cx("fui-Skeleton-root", className)}
-        aria-hidden
-        data-circle={circle || undefined}
-        style={{ ...declared, ...style } as CSSProperties}
-        {...rest}
-      >
-        {children}
-      </div>
-    );
-  },
-);
+  return (
+    <div
+      ref={ref}
+      className={cx("fui-Skeleton-root", className)}
+      aria-hidden
+      data-circle={circle || undefined}
+      style={{ ...declared, ...style } as CSSProperties}
+      {...rest}
+    >
+      {children}
+    </div>
+  );
+});

@@ -8,9 +8,7 @@ export function FieldComposeDemo() {
     <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
       <Field.Root>
         <Field.Label>Email</Field.Label>
-        <Field.Description>
-          We&apos;ll only use this to reply.
-        </Field.Description>
+        <Field.Description>We&apos;ll only use this to reply.</Field.Description>
         <Input placeholder="you@example.com" />
       </Field.Root>
     </div>
@@ -47,12 +45,8 @@ export function FieldCustomControlDemo() {
     <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
       <Field.Root>
         <Field.Label>Amount</Field.Label>
-        <Field.Description>
-          A bare native input, not a FarmUI control.
-        </Field.Description>
-        <Field.Control
-          render={(props) => <input {...props} inputMode="decimal" />}
-        />
+        <Field.Description>A bare native input, not a FarmUI control.</Field.Description>
+        <Field.Control render={(props) => <input {...props} inputMode="decimal" />} />
       </Field.Root>
     </div>
   );
@@ -83,9 +77,7 @@ export function FieldFormDemo() {
       </Field.Root>
       <Field.Root>
         <Field.Label>Email address</Field.Label>
-        <Field.Description>
-          We&apos;ll only use this to reply.
-        </Field.Description>
+        <Field.Description>We&apos;ll only use this to reply.</Field.Description>
         <Input name="email" type="email" autoComplete="email" />
         <Field.Error>{errors.email}</Field.Error>
       </Field.Root>

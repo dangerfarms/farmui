@@ -2,22 +2,14 @@ import { forwardRef } from "react";
 import type { HTMLAttributes, ReactNode } from "react";
 import { cx } from "../../utils";
 
-export interface AlertRootProps extends Omit<
-  HTMLAttributes<HTMLDivElement>,
-  "color"
-> {}
+export interface AlertRootProps extends Omit<HTMLAttributes<HTMLDivElement>, "color"> {}
 
 const AlertRoot = forwardRef<HTMLDivElement, AlertRootProps>(function AlertRoot(
   { className, children, ...rest },
   ref,
 ) {
   return (
-    <div
-      ref={ref}
-      role="alert"
-      className={cx("fui-Alert-root", className)}
-      {...rest}
-    >
+    <div ref={ref} role="alert" className={cx("fui-Alert-root", className)} {...rest}>
       {children}
     </div>
   );

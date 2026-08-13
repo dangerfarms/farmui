@@ -6,10 +6,7 @@ import { cx } from "../../utils";
 import { useFieldControlProps } from "../Field/Field";
 import { useUserInvalid } from "../../use-user-invalid";
 
-export interface SelectProps extends Omit<
-  SelectHTMLAttributes<HTMLSelectElement>,
-  "size"
-> {
+export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, "size"> {
   /** Non-selectable prompt shown as the first, empty-valued option. */
   placeholder?: string;
 }
@@ -20,84 +17,74 @@ export interface SelectProps extends Omit<
  * platform defines them. Label it by composing {@link Field}; the control
  * reads its wiring from the surrounding `Field.Root`.
  */
-export const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  function Select(
-    {
-      placeholder,
-      disabled,
-      className,
-      style,
-      children,
-      defaultValue,
-      value,
-      id,
-      "aria-invalid": ariaInvalid,
-      "aria-describedby": ariaDescribedby,
-      onBlur,
-      onInvalid,
-      ...rest
-    },
-    ref,
-  ) {
-    const field = useFieldControlProps();
-    const { nativeInvalid, checkOnBlur, checkOnInvalid } = useUserInvalid();
-    const isControlled = value !== undefined;
-    const resolvedDefault =
-      !isControlled && defaultValue === undefined && placeholder
-        ? ""
-        : defaultValue;
-
-    return (
-      <div
-        className="fui-Select-field"
-        data-disabled={disabled || undefined}
-        style={style}
-      >
-        <select
-          ref={ref}
-          className={cx("fui-Select-select", className)}
-          disabled={disabled}
-          value={value}
-          defaultValue={resolvedDefault}
-          id={id ?? field.id}
-          {...rest}
-          aria-invalid={
-            ariaInvalid ?? field["aria-invalid"] ?? (nativeInvalid || undefined)
-          }
-          aria-describedby={ariaDescribedby ?? field["aria-describedby"]}
-          onBlur={(e) => {
-            onBlur?.(e);
-            checkOnBlur(e);
-          }}
-          onInvalid={(e) => {
-            onInvalid?.(e);
-            checkOnInvalid(e);
-          }}
-        >
-          {placeholder && (
-            <option value="" disabled>
-              {placeholder}
-            </option>
-          )}
-          {children}
-        </select>
-        <svg
-          className="fui-Select-chevron"
-          viewBox="0 0 16 16"
-          width="16"
-          height="16"
-          fill="none"
-          aria-hidden
-        >
-          <path
-            d="M4 6l4 4 4-4"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </div>
-    );
+export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select(
+  {
+    placeholder,
+    disabled,
+    className,
+    style,
+    children,
+    defaultValue,
+    value,
+    id,
+    "aria-invalid": ariaInvalid,
+    "aria-describedby": ariaDescribedby,
+    onBlur,
+    onInvalid,
+    ...rest
   },
-);
+  ref,
+) {
+  const field = useFieldControlProps();
+  const { nativeInvalid, checkOnBlur, checkOnInvalid } = useUserInvalid();
+  const isControlled = value !== undefined;
+  const resolvedDefault =
+    !isControlled && defaultValue === undefined && placeholder ? "" : defaultValue;
+
+  return (
+    <div className="fui-Select-field" data-disabled={disabled || undefined} style={style}>
+      <select
+        ref={ref}
+        className={cx("fui-Select-select", className)}
+        disabled={disabled}
+        value={value}
+        defaultValue={resolvedDefault}
+        id={id ?? field.id}
+        {...rest}
+        aria-invalid={ariaInvalid ?? field["aria-invalid"] ?? (nativeInvalid || undefined)}
+        aria-describedby={ariaDescribedby ?? field["aria-describedby"]}
+        onBlur={(e) => {
+          onBlur?.(e);
+          checkOnBlur(e);
+        }}
+        onInvalid={(e) => {
+          onInvalid?.(e);
+          checkOnInvalid(e);
+        }}
+      >
+        {placeholder && (
+          <option value="" disabled>
+            {placeholder}
+          </option>
+        )}
+        {children}
+      </select>
+      <svg
+        className="fui-Select-chevron"
+        viewBox="0 0 16 16"
+        width="16"
+        height="16"
+        fill="none"
+        aria-hidden
+      >
+        <path
+          d="M4 6l4 4 4-4"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </div>
+  );
+});

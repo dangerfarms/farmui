@@ -88,9 +88,7 @@ const cases: Array<[string, ReactElement]> = [
     "DateInput (error)",
     <DateInput.Root>
       <DateInput.Legend>When did your membership start?</DateInput.Legend>
-      <DateInput.Error parts={["year"]}>
-        Membership start date must include a year
-      </DateInput.Error>
+      <DateInput.Error parts={["year"]}>Membership start date must include a year</DateInput.Error>
       <DateInput.Fields>
         <DateInput.Field part="day" />
         <DateInput.Field part="month" />
@@ -158,9 +156,7 @@ const cases: Array<[string, ReactElement]> = [
     <ErrorSummary.Root autoFocus={false}>
       <ErrorSummary.Title />
       <ErrorSummary.List>
-        <ErrorSummary.Item href="#email">
-          Enter your email address
-        </ErrorSummary.Item>
+        <ErrorSummary.Item href="#email">Enter your email address</ErrorSummary.Item>
       </ErrorSummary.List>
     </ErrorSummary.Root>,
   ],
@@ -235,9 +231,7 @@ const cases: Array<[string, ReactElement]> = [
   [
     "Accordion",
     <Accordion>
-      <AccordionItem label="What is FarmUI?">
-        A component library.
-      </AccordionItem>
+      <AccordionItem label="What is FarmUI?">A component library.</AccordionItem>
     </Accordion>,
   ],
   [
@@ -286,16 +280,12 @@ describe("Avatar naming", () => {
 
   it("is a named image when a name is given", () => {
     render(<Avatar name="Ada Lovelace" />);
-    expect(
-      screen.getByRole("img", { name: "Ada Lovelace" }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "Ada Lovelace" })).toBeInTheDocument();
   });
 
   it("honours a consumer-supplied aria-label", () => {
     render(<Avatar aria-label="Team member" />);
-    expect(
-      screen.getByRole("img", { name: "Team member" }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "Team member" })).toBeInTheDocument();
   });
 });
 
@@ -319,9 +309,7 @@ describe("DateInput wiring", () => {
     const group = screen.getByRole("group", { name: "Date of birth" });
     expect(group).toHaveAccessibleDescription("For example, 27 3 2007");
     for (const part of ["day", "month", "year"] as const) {
-      const field = screen.getByLabelText(
-        part.charAt(0).toUpperCase() + part.slice(1),
-      );
+      const field = screen.getByLabelText(part.charAt(0).toUpperCase() + part.slice(1));
       if (part === "month") {
         // The month accepts names ("jan") as well as digits, so it keeps
         // the full keyboard.
@@ -347,10 +335,7 @@ describe("DateInput wiring", () => {
     expect(screen.getByRole("alert")).toHaveTextContent(
       "Membership start date must include a year",
     );
-    expect(screen.getByLabelText("Year")).toHaveAttribute(
-      "aria-invalid",
-      "true",
-    );
+    expect(screen.getByLabelText("Year")).toHaveAttribute("aria-invalid", "true");
     expect(screen.getByLabelText("Day")).not.toHaveAttribute("aria-invalid");
     expect(screen.getByLabelText("Month")).not.toHaveAttribute("aria-invalid");
   });
@@ -364,10 +349,7 @@ describe("DateInput wiring", () => {
       </DateInput.Root>,
     );
     for (const label of ["Day", "Month", "Year"]) {
-      expect(screen.getByLabelText(label)).toHaveAttribute(
-        "aria-invalid",
-        "true",
-      );
+      expect(screen.getByLabelText(label)).toHaveAttribute("aria-invalid", "true");
     }
   });
 

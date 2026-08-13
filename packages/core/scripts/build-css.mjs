@@ -3,12 +3,7 @@
 // component's CSS wrapped into `farmui.components` here. Component source
 // files contain no `@layer` — the layer is assigned at build time (and by
 // the src/styles.css orchestrator's `layer()` imports during dev).
-import {
-  readFileSync,
-  writeFileSync,
-  readdirSync,
-  mkdirSync,
-} from "node:fs";
+import { readFileSync, writeFileSync, readdirSync, mkdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -58,9 +53,7 @@ for (const name of names) {
 
 mkdirSync(join(pkgRoot, "dist"), { recursive: true });
 writeFileSync(join(pkgRoot, "dist", "styles.css"), out);
-console.log(
-  `build-css: wrote dist/styles.css (${count} components, ${out.length} bytes)`,
-);
+console.log(`build-css: wrote dist/styles.css (${count} components, ${out.length} bytes)`);
 
 // FarmUI ships as a client-safe package (like @mantine/core): prepend the
 // "use client" directive so every component can be imported directly from a

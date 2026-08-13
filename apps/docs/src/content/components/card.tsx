@@ -27,8 +27,7 @@ const doc: ComponentContent = {
                 fontSize: "0.875rem",
               }}
             >
-              Your team shipped 12 tasks this week. Review activity and plan the
-              next sprint.
+              Your team shipped 12 tasks this week. Review activity and plan the next sprint.
             </p>
             <Button>View report</Button>
           </Card>

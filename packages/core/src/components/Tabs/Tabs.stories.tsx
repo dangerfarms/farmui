@@ -127,9 +127,7 @@ export const ClickSelectsPanel: Story = {
 
     const overviewTab = canvas.getByRole("tab", { name: "Overview" });
     await expect(overviewTab).toHaveAttribute("aria-selected", "true");
-    await expect(
-      canvas.getByText(/a snapshot of everything at a glance/i),
-    ).toBeVisible();
+    await expect(canvas.getByText(/a snapshot of everything at a glance/i)).toBeVisible();
 
     const activityTab = canvas.getByRole("tab", { name: "Activity" });
     await userEvent.click(activityTab);
@@ -137,11 +135,7 @@ export const ClickSelectsPanel: Story = {
     await expect(activityTab).toHaveAttribute("aria-selected", "true");
     await expect(overviewTab).toHaveAttribute("aria-selected", "false");
 
-    await expect(
-      canvas.getByText(/the latest events on your account/i),
-    ).toBeVisible();
-    await expect(
-      canvas.getByText(/a snapshot of everything at a glance/i),
-    ).not.toBeVisible();
+    await expect(canvas.getByText(/the latest events on your account/i)).toBeVisible();
+    await expect(canvas.getByText(/a snapshot of everything at a glance/i)).not.toBeVisible();
   },
 };

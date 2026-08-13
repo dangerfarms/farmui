@@ -86,8 +86,7 @@ const doc: ComponentContent = {
     },
     {
       title: "Highlight on hover",
-      description:
-        "Rows highlight under the pointer; a caption labels the table.",
+      description: "Rows highlight under the pointer; a caption labels the table.",
       code: `<Table highlightOnHover captionSide="bottom">
   <caption>Recent invoices by status</caption>
   {/* thead / tbody */}

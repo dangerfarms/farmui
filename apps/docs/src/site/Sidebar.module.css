@@ -1,5 +1,5 @@
 .sidebar {
-  display: flex;
+  display: block flex;
   flex-direction: column;
   gap: 1.75rem;
   padding-block: 2rem;
@@ -10,7 +10,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
+  display: block flex;
   flex-direction: column;
   gap: 0.1rem;
 }
@@ -25,7 +25,7 @@
 }
 
 .link {
-  display: block;
+  display: block flow;
   padding: 0.35rem 0.6rem;
   font-size: var(--fui-text-sm);
   color: var(--fui-text-muted);
@@ -35,10 +35,12 @@
     color var(--fui-duration-md) var(--fui-ease),
     background var(--fui-duration-md) var(--fui-ease);
 }
+
 .link:hover {
   color: var(--fui-text);
   background: var(--fui-surface-hover);
 }
+
 .link[data-active] {
   color: var(--fui-primary);
   font-weight: 600;

@@ -13,8 +13,8 @@ const meta = {
         <Popover.Popup>
           <Popover.Title>Anchored panel</Popover.Title>
           <Popover.Description>
-            Rendered in the top layer via the native popover attribute — click
-            outside or press Escape to dismiss.
+            Rendered in the top layer via the native popover attribute — click outside or press
+            Escape to dismiss.
           </Popover.Description>
         </Popover.Popup>
       </Popover.Root>
@@ -88,8 +88,7 @@ export const EscapesOverflowClipping: Story = {
         <Popover.Trigger>Inside overflow:hidden</Popover.Trigger>
         <Popover.Popup>
           <Popover.Description>
-            Top-layer rendering means this panel is not clipped by the dashed
-            box.
+            Top-layer rendering means this panel is not clipped by the dashed box.
           </Popover.Description>
         </Popover.Popup>
       </Popover.Root>
@@ -105,9 +104,7 @@ export const OpenByDefault: Story = {
         <Popover.Trigger>Open popover</Popover.Trigger>
         <Popover.Popup>
           <Popover.Title>Anchored panel</Popover.Title>
-          <Popover.Description>
-            Should render directly beneath the trigger.
-          </Popover.Description>
+          <Popover.Description>Should render directly beneath the trigger.</Popover.Description>
         </Popover.Popup>
       </Popover.Root>
     </div>
@@ -131,15 +128,11 @@ export const TogglesAndDismisses: Story = {
     await expect(popup).toBeVisible();
 
     await userEvent.click(document.body);
-    await waitFor(() =>
-      expect(trigger).toHaveAttribute("aria-expanded", "false"),
-    );
+    await waitFor(() => expect(trigger).toHaveAttribute("aria-expanded", "false"));
 
     await userEvent.click(trigger);
     await expect(trigger).toHaveAttribute("aria-expanded", "true");
     await userEvent.keyboard("{Escape}");
-    await waitFor(() =>
-      expect(trigger).toHaveAttribute("aria-expanded", "false"),
-    );
+    await waitFor(() => expect(trigger).toHaveAttribute("aria-expanded", "false"));
   },
 };

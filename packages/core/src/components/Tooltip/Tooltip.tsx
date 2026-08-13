@@ -73,9 +73,7 @@ function TooltipProvider({ delay = 600, children }: TooltipProviderProps) {
   const lastVisibleAt = useRef(0);
   const value = useMemo(() => ({ delay, lastVisibleAt }), [delay]);
   return (
-    <TooltipProviderContext.Provider value={value}>
-      {children}
-    </TooltipProviderContext.Provider>
+    <TooltipProviderContext.Provider value={value}>{children}</TooltipProviderContext.Provider>
   );
 }
 
@@ -196,12 +194,8 @@ function TooltipRoot({
   const hoveredRef = useRef(false);
   const focusedRef = useRef(false);
 
-  const showTimer = useRef<ReturnType<typeof setTimeout> | undefined>(
-    undefined,
-  );
-  const hideTimer = useRef<ReturnType<typeof setTimeout> | undefined>(
-    undefined,
-  );
+  const showTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const hideTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const clearTimers = useCallback(() => {
     clearTimeout(showTimer.current);
     clearTimeout(hideTimer.current);
@@ -215,8 +209,7 @@ function TooltipRoot({
 
   const scheduleShow = useCallback(() => {
     clearTimeout(hideTimer.current);
-    const skipDelay =
-      lastVisibleAt && Date.now() - lastVisibleAt.current < SKIP_DELAY_WINDOW;
+    const skipDelay = lastVisibleAt && Date.now() - lastVisibleAt.current < SKIP_DELAY_WINDOW;
     if (skipDelay || delay <= 0) {
       setOpen(true);
       return;
@@ -359,9 +352,7 @@ function TooltipTrigger({ render, children, ...rest }: TooltipTriggerProps) {
 
   return render ? (
     // Consumer props on the part must merge into the render element, not drop.
-    <>
-      {renderWithProps(render, mergeProps(triggerProps, { children, ...rest }))}
-    </>
+    <>{renderWithProps(render, mergeProps(triggerProps, { children, ...rest }))}</>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, triggerProps)}</>
   );
@@ -441,13 +432,7 @@ export interface TooltipArrowProps extends HTMLAttributes<HTMLSpanElement> {}
 
 function TooltipArrow({ className, ...rest }: TooltipArrowProps) {
   useTooltipContext("Tooltip.Arrow");
-  return (
-    <span
-      aria-hidden="true"
-      className={cx("fui-Tooltip-arrow", className)}
-      {...rest}
-    />
-  );
+  return <span aria-hidden="true" className={cx("fui-Tooltip-arrow", className)} {...rest} />;
 }
 
 export const Tooltip = {

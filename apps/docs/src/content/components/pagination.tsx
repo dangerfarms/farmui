@@ -1,9 +1,5 @@
 import type { ComponentContent } from "@/renderer/types";
-import {
-  PaginationDemo,
-  PaginationEdgesDemo,
-  PaginationManyDemo,
-} from "./pagination.client";
+import { PaginationDemo, PaginationEdgesDemo, PaginationManyDemo } from "./pagination.client";
 
 const doc: ComponentContent = {
   slug: "pagination",
@@ -93,8 +89,7 @@ const doc: ComponentContent = {
       name: "siblings",
       type: "number",
       default: "1",
-      description:
-        "Number of sibling pages shown on each side of the active page.",
+      description: "Number of sibling pages shown on each side of the active page.",
     },
     {
       name: "withEdges",

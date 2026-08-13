@@ -1,11 +1,11 @@
-import { Avatar, Skeleton } from "@farmui/core";
+import { Skeleton } from "@farmui/core";
 import type { ComponentContent } from "@/renderer/types";
 import { SkeletonSwapDemo } from "./skeleton.client";
 
 const doc: ComponentContent = {
   slug: "skeleton",
   lead: "An animated placeholder shown while content loads.",
-  importLine: `import { Avatar, Skeleton } from "@farmui/core";`,
+  importLine: `import { Skeleton } from "@farmui/core";`,
   demos: [
     {
       title: "Basic lines",
@@ -72,9 +72,7 @@ const doc: ComponentContent = {
           <Skeleton
             width="8rem"
             height="8rem"
-            style={
-              { "--_radius": "var(--fui-radius-lg)" } as React.CSSProperties
-            }
+            style={{ "--_radius": "var(--fui-radius-lg)" } as React.CSSProperties}
           />
           <Skeleton width="8rem" height="8rem" circle />
         </>

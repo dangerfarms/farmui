@@ -16,15 +16,7 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
  * A surface container that groups related content.
  */
 export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
-  {
-    padding = "md",
-    withBorder,
-    shadow = "none",
-    className,
-    style,
-    children,
-    ...rest
-  },
+  { padding = "md", withBorder, shadow = "none", className, style, children, ...rest },
   ref,
 ) {
   return (

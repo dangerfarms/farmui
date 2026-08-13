@@ -33,12 +33,7 @@ export interface FieldsetLegendProps extends HTMLAttributes<HTMLLegendElement> {
   children?: ReactNode;
 }
 
-function FieldsetLegend({
-  optional,
-  className,
-  children,
-  ...rest
-}: FieldsetLegendProps) {
+function FieldsetLegend({ optional, className, children, ...rest }: FieldsetLegendProps) {
   return (
     <legend className={cx("fui-Fieldset-legend", className)} {...rest}>
       {children}

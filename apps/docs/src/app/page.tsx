@@ -18,10 +18,9 @@ const FEATURES = [
     title: "Semantic HTML",
     body: (
       <>
-        Real elements: <code>&lt;details&gt;</code>,{" "}
-        <code>&lt;nav&gt;&lt;ol&gt;</code>,{" "}
-        <code>role=&quot;tablist&quot;</code>. The rendered markup is clean,
-        meaningful and screen-reader friendly.
+        Real elements: <code>&lt;details&gt;</code>, <code>&lt;nav&gt;&lt;ol&gt;</code>,{" "}
+        <code>role=&quot;tablist&quot;</code>. The rendered markup is clean, meaningful and
+        screen-reader friendly.
       </>
     ),
   },
@@ -29,8 +28,8 @@ const FEATURES = [
     title: "Zero runtime",
     body: (
       <>
-        Styles are static CSS in cascade layers. Nothing executes in the
-        browser, so everything is fully compatible with React Server Components.
+        Styles are static CSS in cascade layers. Nothing executes in the browser, so everything is
+        fully compatible with React Server Components.
       </>
     ),
   },
@@ -38,8 +37,8 @@ const FEATURES = [
     title: "Accessible by default",
     body: (
       <>
-        WAI-ARIA patterns, focus management and full keyboard support are built
-        into every component and tested against axe.
+        WAI-ARIA patterns, focus management and full keyboard support are built into every component
+        and tested against axe.
       </>
     ),
   },
@@ -47,9 +46,8 @@ const FEATURES = [
     title: "Modern CSS, everywhere",
     body: (
       <>
-        Container queries, <code>color-mix()</code>, <code>light-dark()</code>,
-        logical properties and <code>:where()</code>. Baseline features, not
-        polyfills.
+        Container queries, <code>color-mix()</code>, <code>light-dark()</code>, logical properties
+        and <code>:where()</code>. Baseline features, not polyfills.
       </>
     ),
   },
@@ -57,8 +55,8 @@ const FEATURES = [
     title: "Theme with variables",
     body: (
       <>
-        Rebrand by overriding <code>--fui-primary</code>. No provider, no theme
-        objects. Scope tokens to any subtree.
+        Rebrand by overriding <code>--fui-primary</code>. No provider, no theme objects. Scope
+        tokens to any subtree.
       </>
     ),
   },
@@ -66,8 +64,8 @@ const FEATURES = [
     title: "Tiny bundles",
     body: (
       <>
-        No styling engine ships to your users. Atomic, deduplicated, cacheable
-        CSS and tree-shakeable components.
+        No styling engine ships to your users. Atomic, deduplicated, cacheable CSS and
+        tree-shakeable components.
       </>
     ),
   },
@@ -158,12 +156,11 @@ export default function HomePage() {
               Accessibility-first, zero-runtime
             </span>
             <h1 className={c.title}>
-              Beautiful React components,{" "}
-              <span className="brandText">fast &amp; accessible.</span>
+              Beautiful React components, <span className="brandText">fast &amp; accessible.</span>
             </h1>
             <p className={c.subtitle}>
-              A React component library built on the native web platform: real
-              elements, zero-runtime CSS, and bundles small enough to read.
+              A React component library built on the native web platform: real elements,
+              zero-runtime CSS, and bundles small enough to read.
             </p>
             <div className={c.ctaRow}>
               <Link href="/docs" className={c.btnLink}>
@@ -204,12 +201,10 @@ export default function HomePage() {
           <span className="eyebrow">
             <BoltIcon width={14} height={14} /> Why FarmUI
           </span>
-          <h2 className={c.sectionTitle}>
-            Component library ergonomics, minus the runtime.
-          </h2>
+          <h2 className={c.sectionTitle}>Component library ergonomics, minus the runtime.</h2>
           <p className={c.sectionSub}>
-            Labelled inputs, composable overlays and tokened theming, with the
-            styling layer rebuilt on the modern CSS platform.
+            Labelled inputs, composable overlays and tokened theming, with the styling layer rebuilt
+            on the modern CSS platform.
           </p>
         </div>
         <div className={c.features}>
@@ -238,10 +233,9 @@ export default function HomePage() {
           <span className="eyebrow">See the difference</span>
           <h2 className={c.sectionTitle}>Same button. Cleaner everything.</h2>
           <p className={c.sectionSub}>
-            FarmUI keeps styling in one shared, cacheable stylesheet, so your
-            markup stays readable. Utility frameworks inline dozens of classes
-            onto every element; runtime CSS-in-JS serializes styles on each
-            render.
+            FarmUI keeps styling in one shared, cacheable stylesheet, so your markup stays readable.
+            Utility frameworks inline dozens of classes onto every element; runtime CSS-in-JS
+            serializes styles on each render.
           </p>
         </div>
         <div className={c.compare}>
@@ -252,8 +246,8 @@ export default function HomePage() {
             </div>
             <CodeBlock code={FARMUI_CODE} />
             <p className={c.compareNote}>
-              One prop. Styles live in shared CSS: <strong>0&nbsp;kb</strong>{" "}
-              runtime, works with any build tool.
+              One prop. Styles live in shared CSS: <strong>0&nbsp;kb</strong> runtime, works with
+              any build tool.
             </p>
           </div>
           <div className={c.compareCol}>
@@ -265,8 +259,8 @@ export default function HomePage() {
             </div>
             <CodeBlock code={TAILWIND_CODE} language="jsx" />
             <p className={c.compareNote}>
-              ~15 utility classes on the element, repeated everywhere, plus a
-              build step to generate them.
+              ~15 utility classes on the element, repeated everywhere, plus a build step to generate
+              them.
             </p>
           </div>
         </div>
@@ -278,8 +272,8 @@ export default function HomePage() {
           <span className="eyebrow">Under the hood</span>
           <h2 className={c.sectionTitle}>Modern CSS, put to work.</h2>
           <p className={c.sectionSub}>
-            No abstractions over the platform: FarmUI ships the same modern CSS
-            features you&rsquo;d reach for by hand, so nothing runs at runtime.
+            No abstractions over the platform: FarmUI ships the same modern CSS features you&rsquo;d
+            reach for by hand, so nothing runs at runtime.
           </p>
         </div>
         <ul className={c.tech}>
@@ -300,9 +294,8 @@ export default function HomePage() {
             <span className="eyebrow">Theming</span>
             <h2 className={c.sectionTitle}>Rebrand in one line of CSS.</h2>
             <p className={c.sectionSub}>
-              No <code>ThemeProvider</code>, no theme objects. FarmUI is themed
-              with CSS custom properties, so a single token change flows through
-              every component.
+              No <code>ThemeProvider</code>, no theme objects. FarmUI is themed with CSS custom
+              properties, so a single token change flows through every component.
             </p>
             <ul className={c.splitList}>
               {[
@@ -340,12 +333,10 @@ export default function HomePage() {
       <section className={`container ${c.section}`}>
         <div className={`${c.sectionHead} ${c.center}`}>
           <span className="eyebrow">The library</span>
-          <h2 className={c.sectionTitle}>
-            {COMPONENTS.length} components, ready to ship.
-          </h2>
+          <h2 className={c.sectionTitle}>{COMPONENTS.length} components, ready to ship.</h2>
           <p className={c.sectionSub}>
-            Inputs, data display, feedback, overlays and navigation, accessible
-            and themeable out of the box.
+            Inputs, data display, feedback, overlays and navigation, accessible and themeable out of
+            the box.
           </p>
         </div>
         <div className={c.cats}>
@@ -356,9 +347,7 @@ export default function HomePage() {
               className={c.cat}
             >
               <div className={c.catTitle}>{cat.category}</div>
-              <div className={c.catItems}>
-                {cat.items.map((i) => i.name).join(" · ")}
-              </div>
+              <div className={c.catItems}>{cat.items.map((i) => i.name).join(" · ")}</div>
             </Link>
           ))}
         </div>
@@ -369,17 +358,13 @@ export default function HomePage() {
         <div className={c.cta}>
           <h2 className={c.ctaTitle}>Start building</h2>
           <p className={c.ctaSub}>
-            Install the package, import one stylesheet, and start with any
-            component.
+            Install the package, import one stylesheet, and start with any component.
           </p>
           <div className={c.ctaRowCenter}>
             <Link href="/docs" className={c.btnLink}>
               Read the docs <ArrowRightIcon width={16} height={16} />
             </Link>
-            <Link
-              href="/docs/components/button"
-              className={`${c.btnLink} ${c.btnLinkGhost}`}
-            >
+            <Link href="/docs/components/button" className={`${c.btnLink} ${c.btnLinkGhost}`}>
               Browse components
             </Link>
           </div>

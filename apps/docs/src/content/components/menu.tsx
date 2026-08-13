@@ -1,10 +1,5 @@
 import type { ComponentContent } from "@/renderer/types";
-import {
-  MenuDemo,
-  MenuDisabledDemo,
-  MenuGroupsDemo,
-  MenuLinksDemo,
-} from "./menu.client";
+import { MenuDemo, MenuDisabledDemo, MenuGroupsDemo, MenuLinksDemo } from "./menu.client";
 
 const doc: ComponentContent = {
   slug: "menu",

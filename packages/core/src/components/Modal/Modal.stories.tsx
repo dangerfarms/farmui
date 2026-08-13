@@ -69,9 +69,7 @@ export const Sizes: Story = {
           <Modal.Trigger>Open {size}</Modal.Trigger>
           <Modal.Popup size={size}>
             <Modal.Title>A {size} modal</Modal.Title>
-            <Modal.Description>
-              The panel width comes from the size prop.
-            </Modal.Description>
+            <Modal.Description>The panel width comes from the size prop.</Modal.Description>
             <Modal.Close>Close</Modal.Close>
           </Modal.Popup>
         </Modal.Root>
@@ -110,9 +108,7 @@ export const OpenByDefault: Story = {
       <Modal.Trigger>Invite a teammate</Modal.Trigger>
       <Modal.Popup>
         <Modal.Title>Invite a teammate</Modal.Title>
-        <Modal.Description>
-          Should sit centred over a dimmed backdrop.
-        </Modal.Description>
+        <Modal.Description>Should sit centred over a dimmed backdrop.</Modal.Description>
         <Modal.Close>Close</Modal.Close>
       </Modal.Popup>
     </Modal.Root>

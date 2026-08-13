@@ -42,8 +42,7 @@ export function Footer() {
         <div className={classes.brand}>
           <Logo />
           <p className={classes.tagline}>
-            Accessible, high-performance React components. Open source and
-            MIT-licensed.
+            Accessible, high-performance React components. Open source and MIT-licensed.
           </p>
           <a
             className={classes.gh}

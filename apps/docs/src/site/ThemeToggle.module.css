@@ -1,5 +1,5 @@
 .btn {
-  display: grid;
+  display: block grid;
   place-items: center;
   inline-size: 2.25rem;
   block-size: 2.25rem;
@@ -13,6 +13,7 @@
     border-color var(--fui-duration-md) var(--fui-ease),
     background var(--fui-duration-md) var(--fui-ease);
 }
+
 .btn:hover {
   color: var(--fui-text);
   border-color: var(--fui-border-strong);

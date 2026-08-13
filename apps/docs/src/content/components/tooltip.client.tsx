@@ -7,9 +7,7 @@ export function TooltipPositions() {
     <>
       {(["top", "bottom", "left", "right"] as const).map((position) => (
         <Tooltip.Root key={position}>
-          <Tooltip.Trigger style={{ textTransform: "capitalize" }}>
-            {position}
-          </Tooltip.Trigger>
+          <Tooltip.Trigger style={{ textTransform: "capitalize" }}>{position}</Tooltip.Trigger>
           <Tooltip.Popup position={position}>On the {position}</Tooltip.Popup>
         </Tooltip.Root>
       ))}

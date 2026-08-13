@@ -20,23 +20,20 @@ export default function LayoutGuide() {
     <div className={prose.prose}>
       <h1>Layout compositions</h1>
       <p className={prose.lead}>
-        Layout in FarmUI is CSS, not components: small algorithmic compositions
-        you apply as classes, tuned with registered <code>--fui-*</code> knobs
-        whose defaults come from the fluid space scale. No media queries, no
-        JavaScript, no React API: the layout manages itself from its content and
-        container.
+        Layout in FarmUI is CSS, not components: small algorithmic compositions you apply as
+        classes, tuned with registered <code>--fui-*</code> knobs whose defaults come from the fluid
+        space scale. No media queries, no JavaScript, no React API: the layout manages itself from
+        its content and container.
       </p>
 
       <h2>Why not layout components?</h2>
       <p>
-        A <code>&lt;Stack gap=&quot;md&quot;&gt;</code> component is three
-        declarations of CSS wearing a JavaScript costume. The judgment a library
-        should contribute (token-valued spacing, rows that always wrap,
-        overflow-<code>safe</code> alignment, never reordering content visually)
-        lives just as well in a stylesheet, where it also works outside React,
-        serialises into any content model, and themes through the cascade. So
-        the compositions are the product; any component wrapper is optional
-        sugar that belongs to the consumer.
+        A <code>&lt;Stack gap=&quot;md&quot;&gt;</code> component is three declarations of CSS
+        wearing a JavaScript costume. The judgment a library should contribute (token-valued
+        spacing, rows that always wrap, overflow-<code>safe</code> alignment, never reordering
+        content visually) lives just as well in a stylesheet, where it also works outside React,
+        serialises into any content model, and themes through the cascade. So the compositions are
+        the product; any component wrapper is optional sugar that belongs to the consumer.
       </p>
 
       <h2>Stack</h2>
@@ -57,8 +54,8 @@ export default function LayoutGuide() {
 
       <h2>Cluster</h2>
       <p>
-        A row that wraps like text: tags, action rows, metadata. Alignment is
-        overflow-<code>safe</code> so focusable items are never clipped.
+        A row that wraps like text: tags, action rows, metadata. Alignment is overflow-
+        <code>safe</code> so focusable items are never clipped.
       </p>
       <div className={prose.block}>
         <div className="fui-cluster" style={{ maxInlineSize: "18rem" }}>
@@ -71,10 +68,9 @@ export default function LayoutGuide() {
 
       <h2>Switcher</h2>
       <p>
-        Equal-width items in a row, until the container is narrower than the
-        threshold, when every item goes full width. The flip is computed by the
-        layout itself (a <code>flex-basis</code> calc), not a media query, so it
-        works at any nesting depth.
+        Equal-width items in a row, until the container is narrower than the threshold, when every
+        item goes full width. The flip is computed by the layout itself (a <code>flex-basis</code>{" "}
+        calc), not a media query, so it works at any nesting depth.
       </p>
       <div className={prose.block}>
         <CodeBlock
@@ -86,10 +82,7 @@ export default function LayoutGuide() {
       </div>
       <div className={prose.block}>
         <div style={{ display: "grid", gap: "0.75rem" }}>
-          <div
-            className="fui-switcher"
-            style={{ inlineSize: "min(34rem, 100%)" }}
-          >
+          <div className="fui-switcher" style={{ inlineSize: "min(34rem, 100%)" }}>
             <div style={box}>A</div>
             <div style={box}>B</div>
             <div style={box}>C</div>
@@ -104,29 +97,27 @@ export default function LayoutGuide() {
 
       <h2>Sidebar</h2>
       <p>
-        A fixed-preference side element beside fluid content; the pair stacks
-        the moment the content would drop below its minimum share. Reversing the
-        sides is a DOM-order change, deliberately: a visual-only reversal would
-        detach tab order from what the user sees.
+        A fixed-preference side element beside fluid content; the pair stacks the moment the content
+        would drop below its minimum share. Reversing the sides is a DOM-order change, deliberately:
+        a visual-only reversal would detach tab order from what the user sees.
       </p>
       <div className={prose.block}>
         <div className="fui-sidebar">
           <div style={box}>Sidebar</div>
           <div style={box}>
-            Main content flows beside the sidebar until it would drop below its
-            minimum share, then the pair stacks.
+            Main content flows beside the sidebar until it would drop below its minimum share, then
+            the pair stacks.
           </div>
         </div>
       </div>
 
       <h2>Grid</h2>
       <p>
-        As many equal columns as fit, each at least the minimum (
-        <code>--fui-grid-min</code>); columns grow to share the remainder.
-        Explicit-span grids (a 12-column skeleton with <code>span 4</code> /{" "}
-        <code>span 8</code> children) are deliberately not a composition.
-        That&apos;s bespoke page structure, so write grid CSS for it: named
-        template areas say what the page means, spans are one rule away.
+        As many equal columns as fit, each at least the minimum (<code>--fui-grid-min</code>);
+        columns grow to share the remainder. Explicit-span grids (a 12-column skeleton with{" "}
+        <code>span 4</code> / <code>span 8</code> children) are deliberately not a composition.
+        That&apos;s bespoke page structure, so write grid CSS for it: named template areas say what
+        the page means, spans are one rule away.
       </p>
       <div className={prose.block}>
         <CodeBlock
@@ -135,10 +126,7 @@ export default function LayoutGuide() {
         />
       </div>
       <div className={prose.block}>
-        <div
-          className="fui-grid"
-          style={{ "--fui-grid-min": "8rem" } as React.CSSProperties}
-        >
+        <div className="fui-grid" style={{ "--fui-grid-min": "8rem" } as React.CSSProperties}>
           <div style={box}>One</div>
           <div style={box}>Two</div>
           <div style={box}>Three</div>
@@ -148,16 +136,12 @@ export default function LayoutGuide() {
 
       <h2>Center</h2>
       <p>
-        Centre a column of content at a readable measure (
-        <code>--fui-center-max</code>, default <code>60ch</code>). Centring a
-        single item on both axes is one declaration (
+        Centre a column of content at a readable measure (<code>--fui-center-max</code>, default{" "}
+        <code>60ch</code>). Centring a single item on both axes is one declaration (
         <code>place-content: center</code> on a grid), not a composition.
       </p>
       <div className={prose.block}>
-        <div
-          className="fui-center"
-          style={{ "--fui-center-max": "24ch" } as React.CSSProperties}
-        >
+        <div className="fui-center" style={{ "--fui-center-max": "24ch" } as React.CSSProperties}>
           <div style={box}>A centred column, capped at a readable measure.</div>
         </div>
       </div>
@@ -165,31 +149,28 @@ export default function LayoutGuide() {
       <h2>What FarmUI deliberately doesn&apos;t ship</h2>
       <ul>
         <li>
-          <strong>No Flex utility.</strong> A generic flex wrapper is the
-          platform&apos;s flexbox wearing props: it adds a vocabulary without
-          adding judgment. Where a row should wrap and space itself, that
-          judgment exists as <code>.fui-cluster</code>; for anything else, write
+          <strong>No Flex utility.</strong> A generic flex wrapper is the platform&apos;s flexbox
+          wearing props: it adds a vocabulary without adding judgment. Where a row should wrap and
+          space itself, that judgment exists as <code>.fui-cluster</code>; for anything else, write
           flexbox.
         </li>
         <li>
-          <strong>No spacer component.</strong> Spacer elements are what{" "}
-          <code>gap</code> exists to replace: spacing belongs to the layout that
-          owns it, not to phantom children in the content.
+          <strong>No spacer component.</strong> Spacer elements are what <code>gap</code> exists to
+          replace: spacing belongs to the layout that owns it, not to phantom children in the
+          content.
         </li>
         <li>
-          <strong>No 12-column span grid.</strong> An explicit-span page
-          skeleton (<code>span 4</code> / <code>span 8</code>) is bespoke page
-          structure, not a reusable algorithm; write grid CSS for it, with named
-          template areas that say what the page means.
+          <strong>No 12-column span grid.</strong> An explicit-span page skeleton (
+          <code>span 4</code> / <code>span 8</code>) is bespoke page structure, not a reusable
+          algorithm; write grid CSS for it, with named template areas that say what the page means.
         </li>
       </ul>
 
       <h2>Driving compositions from data</h2>
       <p>
-        Because a composition is a class plus token-valued properties, any
-        data-driven renderer (a page builder, a visual editor, a template
-        engine) can expose layout as constrained choices and map them straight
-        onto this surface:
+        Because a composition is a class plus token-valued properties, any data-driven renderer (a
+        page builder, a visual editor, a template engine) can expose layout as constrained choices
+        and map them straight onto this surface:
       </p>
       <div className={prose.block}>
         <CodeBlock
@@ -200,11 +181,10 @@ export default function LayoutGuide() {
         />
       </div>
       <p>
-        The choices are enums over tokens, so a theme restyles every layout
-        automatically, nothing runs at runtime, and the stored data stays
-        renderer-agnostic. Guardrails travel with the compositions: a renderer
-        cannot produce an unwrappable row or a clipped focus target, because
-        those judgments are inside the CSS.
+        The choices are enums over tokens, so a theme restyles every layout automatically, nothing
+        runs at runtime, and the stored data stays renderer-agnostic. Guardrails travel with the
+        compositions: a renderer cannot produce an unwrappable row or a clipped focus target,
+        because those judgments are inside the CSS.
       </p>
     </div>
   );

@@ -54,9 +54,7 @@ export const WithDescription: Story = {
   render: (args) => (
     <Field.Root>
       <Field.Label>Framework</Field.Label>
-      <Field.Description>
-        You can change this later in settings.
-      </Field.Description>
+      <Field.Description>You can change this later in settings.</Field.Description>
       <Select {...args} />
     </Field.Root>
   ),

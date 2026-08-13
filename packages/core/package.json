@@ -2,36 +2,36 @@
   "name": "@farmui/core",
   "version": "1.0.0",
   "description": "Beautiful React components, fast & accessible — zero-runtime, built on native modern CSS.",
+  "keywords": [
+    "a11y",
+    "accessible",
+    "component-library",
+    "components",
+    "css",
+    "dark-mode",
+    "design-system",
+    "modern-css",
+    "react",
+    "ui",
+    "zero-runtime"
+  ],
+  "homepage": "https://farmui.dev",
+  "bugs": {
+    "url": "https://github.com/dangerfarms/farmui/issues"
+  },
   "license": "MIT",
   "author": "Danger Farms",
-  "homepage": "https://farmui.dev",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dangerfarms/farmui.git",
     "directory": "packages/core"
   },
-  "bugs": {
-    "url": "https://github.com/dangerfarms/farmui/issues"
-  },
-  "keywords": [
-    "react",
-    "components",
-    "component-library",
-    "ui",
-    "design-system",
-    "css",
-    "zero-runtime",
-    "accessible",
-    "a11y",
-    "modern-css",
-    "dark-mode"
+  "files": [
+    "dist"
   ],
   "type": "module",
   "sideEffects": [
     "**/*.css"
-  ],
-  "files": [
-    "dist"
   ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -60,10 +60,6 @@
     "storybook": "storybook dev -p 6006 --no-open",
     "build-storybook": "storybook build"
   },
-  "peerDependencies": {
-    "react": ">=18",
-    "react-dom": ">=18"
-  },
   "devDependencies": {
     "@storybook/addon-a11y": "^10.4.2",
     "@storybook/addon-docs": "^10.4.2",
@@ -83,5 +79,9 @@
     "vite": "^6.0.0",
     "vitest": "^3.0.0",
     "vitest-axe": "^0.1.0"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
   }
 }

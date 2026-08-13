@@ -81,8 +81,7 @@ const doc: ComponentContent = {
     {
       name: "Root",
       type: "delay?, open?, defaultOpen?, onOpenChange?",
-      description:
-        "Groups the parts and owns open state, timers, and Escape handling.",
+      description: "Groups the parts and owns open state, timers, and Escape handling.",
     },
     {
       name: "Trigger",

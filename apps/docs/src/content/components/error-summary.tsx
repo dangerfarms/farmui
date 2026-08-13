@@ -74,8 +74,7 @@ const doc: ComponentContent = {
     {
       name: "Title",
       type: "heading props",
-      description:
-        'An <h2> labelling the region. Children default to "There is a problem".',
+      description: 'An <h2> labelling the region. Children default to "There is a problem".',
     },
     {
       name: "List / Item",

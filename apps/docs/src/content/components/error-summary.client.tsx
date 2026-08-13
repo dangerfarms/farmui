@@ -17,18 +17,14 @@ export function ErrorSummaryDemo() {
         <ErrorSummary.Root>
           <ErrorSummary.Title />
           <ErrorSummary.List>
-            <ErrorSummary.Item href="#demo-email">
-              Enter your email address
-            </ErrorSummary.Item>
+            <ErrorSummary.Item href="#demo-email">Enter your email address</ErrorSummary.Item>
           </ErrorSummary.List>
         </ErrorSummary.Root>
       )}
       <Field.Root id="demo-email">
         <Field.Label>Email address</Field.Label>
         <Input />
-        <Field.Error>
-          {submitted ? "Enter your email address" : undefined}
-        </Field.Error>
+        <Field.Error>{submitted ? "Enter your email address" : undefined}</Field.Error>
       </Field.Root>
       <div>
         <Button type="submit">Save and continue</Button>

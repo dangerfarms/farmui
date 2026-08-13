@@ -20,12 +20,8 @@ export const Default: Story = {
       <ErrorSummary.Root autoFocus={false}>
         <ErrorSummary.Title />
         <ErrorSummary.List>
-          <ErrorSummary.Item href="#es-email">
-            Enter your email address
-          </ErrorSummary.Item>
-          <ErrorSummary.Item href="#es-name">
-            Enter your full name
-          </ErrorSummary.Item>
+          <ErrorSummary.Item href="#es-email">Enter your email address</ErrorSummary.Item>
+          <ErrorSummary.Item href="#es-name">Enter your full name</ErrorSummary.Item>
         </ErrorSummary.List>
       </ErrorSummary.Root>
       <Field.Root id="es-name">

@@ -223,9 +223,7 @@ function PopoverTrigger({ render, children, ...rest }: PopoverTriggerProps) {
 
   return render ? (
     // Consumer props on the part must merge into the render element, not drop.
-    <>
-      {renderWithProps(render, mergeProps(triggerProps, { children, ...rest }))}
-    </>
+    <>{renderWithProps(render, mergeProps(triggerProps, { children, ...rest }))}</>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, triggerProps)}</>
   );
@@ -279,10 +277,7 @@ function PopoverPopup({
     if (!el || was === open) return;
     if (open) {
       el.focus({ preventScroll: true });
-    } else if (
-      el.contains(document.activeElement) ||
-      document.activeElement === document.body
-    ) {
+    } else if (el.contains(document.activeElement) || document.activeElement === document.body) {
       ctx.triggerRef.current?.focus({ preventScroll: true });
     }
   }, [open, ctx.triggerRef]);
@@ -334,11 +329,7 @@ function PopoverTitle({ className, children, ...rest }: PopoverTitleProps) {
   const { registerTitle } = ctx;
   useEffect(() => registerTitle(), [registerTitle]);
   return (
-    <h2
-      className={cx("fui-Popover-title", className)}
-      id={ctx.titleId}
-      {...rest}
-    >
+    <h2 className={cx("fui-Popover-title", className)} id={ctx.titleId} {...rest}>
       {children}
     </h2>
   );
@@ -346,20 +337,12 @@ function PopoverTitle({ className, children, ...rest }: PopoverTitleProps) {
 
 export interface PopoverDescriptionProps extends HTMLAttributes<HTMLParagraphElement> {}
 
-function PopoverDescription({
-  className,
-  children,
-  ...rest
-}: PopoverDescriptionProps) {
+function PopoverDescription({ className, children, ...rest }: PopoverDescriptionProps) {
   const ctx = usePopoverContext("Popover.Description");
   const { registerDescription } = ctx;
   useEffect(() => registerDescription(), [registerDescription]);
   return (
-    <p
-      className={cx("fui-Popover-description", className)}
-      id={ctx.descriptionId}
-      {...rest}
-    >
+    <p className={cx("fui-Popover-description", className)} id={ctx.descriptionId} {...rest}>
       {children}
     </p>
   );
@@ -384,9 +367,7 @@ function PopoverClose({ render, children, ...rest }: PopoverCloseProps) {
   };
   return render ? (
     // Consumer props on the part must merge into the render element, not drop.
-    <>
-      {renderWithProps(render, mergeProps(closeProps, { children, ...rest }))}
-    </>
+    <>{renderWithProps(render, mergeProps(closeProps, { children, ...rest }))}</>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, closeProps)}</>
   );

@@ -23,8 +23,7 @@ const doc: ComponentContent = {
     },
     {
       title: "Custom separator",
-      description:
-        "Set any glyph once on the Root; CSS draws it between items.",
+      description: "Set any glyph once on the Root; CSS draws it between items.",
       code: `<Breadcrumbs.Root separator="→">
   <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
   <Breadcrumbs.Item href="/projects">Projects</Breadcrumbs.Item>

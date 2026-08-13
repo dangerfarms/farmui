@@ -9,14 +9,14 @@
 .pre {
   margin: 0;
   padding: 1rem 1.125rem;
-  overflow-x: auto;
+  overflow-inline: auto;
   font-size: var(--fui-text-sm);
   line-height: 1.6;
   background: transparent !important;
 }
 
 .line {
-  display: block;
+  display: block flow;
 }
 
 .copy {
@@ -36,6 +36,7 @@
     color var(--fui-duration-md) var(--fui-ease),
     border-color var(--fui-duration-md) var(--fui-ease);
 }
+
 .copy:hover {
   color: var(--fui-text);
   border-color: var(--fui-border-strong);

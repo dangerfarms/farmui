@@ -143,8 +143,7 @@ const doc: ComponentContent = {
     {
       name: "Field.Label",
       type: "{ optional?, ...label }",
-      description:
-        "Label tied to the control. `optional` appends an “(optional)” hint.",
+      description: "Label tied to the control. `optional` appends an “(optional)” hint.",
     },
     {
       name: "Field.Description",
@@ -160,8 +159,7 @@ const doc: ComponentContent = {
     {
       name: "Field.Error",
       type: "{ ...p }",
-      description:
-        'Error message with role="alert"; sets the invalid state when it has content.',
+      description: 'Error message with role="alert"; sets the invalid state when it has content.',
     },
   ],
 };

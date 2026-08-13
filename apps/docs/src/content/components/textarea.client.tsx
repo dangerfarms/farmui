@@ -18,9 +18,7 @@ export function TextareaDescriptionDemo() {
     <div style={{ maxInlineSize: "24rem", inlineSize: "100%" }}>
       <Field.Root>
         <Field.Label>Bio</Field.Label>
-        <Field.Description>
-          A short description for your public profile.
-        </Field.Description>
+        <Field.Description>A short description for your public profile.</Field.Description>
         <Textarea placeholder="Tell us about yourself…" required />
       </Field.Root>
     </div>

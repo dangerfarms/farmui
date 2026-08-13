@@ -23,11 +23,7 @@ const meta = {
   },
   render: () => (
     <Toast.Provider>
-      <FireToast
-        label="Save changes"
-        title="Saved"
-        description="Your changes are live."
-      />
+      <FireToast label="Save changes" title="Saved" description="Your changes are live." />
       <Toasts />
     </Toast.Provider>
   ),
@@ -108,9 +104,7 @@ export const FiresAndDismisses: Story = {
     });
     await userEvent.click(dismiss);
     await waitFor(() =>
-      expect(
-        within(document.body).queryByRole("status"),
-      ).not.toBeInTheDocument(),
+      expect(within(document.body).queryByRole("status")).not.toBeInTheDocument(),
     );
   },
 };

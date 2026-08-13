@@ -20,10 +20,7 @@ export interface AccordionProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
 }
 
-export interface AccordionItemProps extends Omit<
-  HTMLAttributes<HTMLDetailsElement>,
-  "title"
-> {
+export interface AccordionItemProps extends Omit<HTMLAttributes<HTMLDetailsElement>, "title"> {
   /** The summary label shown in the always-visible header. */
   label: ReactNode;
   /** Open this item by default. */
@@ -37,12 +34,7 @@ export interface AccordionItemProps extends Omit<
  * Built on native `<details>/<summary>` for zero-JS toggling. In single mode
  * (the default) items share an HTML `name`, so opening one closes the others.
  */
-function AccordionBase({
-  multiple = false,
-  className,
-  children,
-  ...rest
-}: AccordionProps) {
+function AccordionBase({ multiple = false, className, children, ...rest }: AccordionProps) {
   const autoName = useId();
   const name = multiple ? undefined : autoName;
 

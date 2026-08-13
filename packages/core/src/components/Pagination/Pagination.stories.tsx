@@ -15,9 +15,7 @@ function PaginationDemo({
   ...props
 }: Partial<PaginationProps> & { initialPage?: number }) {
   const [page, setPage] = useState(initialPage);
-  return (
-    <Pagination {...props} total={total} value={page} onChange={setPage} />
-  );
+  return <Pagination {...props} total={total} value={page} onChange={setPage} />;
 }
 
 const meta = {

@@ -1,14 +1,6 @@
 import { afterEach, describe, expect, it } from "vitest";
 import { cleanup, render, screen } from "@testing-library/react";
-import {
-  Field,
-  Fieldset,
-  Checkbox,
-  Radio,
-  RadioGroup,
-  SwitchControl,
-  Slider,
-} from "../index";
+import { Field, Fieldset, Checkbox, Radio, RadioGroup, SwitchControl, Slider } from "../index";
 
 afterEach(cleanup);
 
@@ -28,8 +20,7 @@ describe("Inline controls composed inside Field", () => {
     // Label association: clicking the label text finds this control.
     expect(screen.getByLabelText(/Accept the terms/)).toBe(checkbox);
     expect(checkbox).toHaveAttribute("aria-invalid", "true");
-    const describedBy =
-      checkbox.getAttribute("aria-describedby")?.split(" ") ?? [];
+    const describedBy = checkbox.getAttribute("aria-describedby")?.split(" ") ?? [];
     expect(describedBy).toContain(screen.getByText(/must accept/).id);
     expect(describedBy).toContain(screen.getByRole("alert").id);
   });
@@ -39,9 +30,14 @@ describe("Inline controls composed inside Field", () => {
     expect(screen.getByLabelText("Stay signed in")).toBeInTheDocument();
   });
 
-  it("passes aria-invalid through to the Radio input", () => {
-    render(<Radio label="Yes" aria-invalid />);
-    expect(screen.getByRole("radio")).toHaveAttribute("aria-invalid", "true");
+  it("puts aria-invalid on the radiogroup, never the radios", () => {
+    render(
+      <RadioGroup label="Plan" error="Select a plan">
+        <Radio value="a" label="A" />
+      </RadioGroup>,
+    );
+    expect(screen.getByRole("radiogroup")).toHaveAttribute("aria-invalid", "true");
+    expect(screen.getByRole("radio")).not.toHaveAttribute("aria-invalid");
   });
 
   it("wires a SwitchControl from Field context (label + describedby)", () => {
@@ -56,9 +52,7 @@ describe("Inline controls composed inside Field", () => {
 
     const sw = screen.getByRole("switch");
     expect(screen.getByLabelText(/Email notifications/)).toBe(sw);
-    expect(sw.getAttribute("aria-describedby")).toBe(
-      screen.getByText(/once a day/).id,
-    );
+    expect(sw.getAttribute("aria-describedby")).toBe(screen.getByText(/once a day/).id);
   });
 
   it("wires a Slider through Field.Control (stacked field)", () => {
@@ -72,9 +66,7 @@ describe("Inline controls composed inside Field", () => {
 
     const slider = screen.getByRole("slider");
     expect(screen.getByLabelText("Volume")).toBe(slider);
-    expect(slider.getAttribute("aria-describedby")).toBe(
-      screen.getByText(/Between 0 and 100/).id,
-    );
+    expect(slider.getAttribute("aria-describedby")).toBe(screen.getByText(/Between 0 and 100/).id);
   });
 
   it("keeps standalone Switch and Slider working with their own labels", () => {
@@ -86,10 +78,7 @@ describe("Inline controls composed inside Field", () => {
         </Field.Root>
       </>,
     );
-    expect(screen.getByLabelText("Brightness")).toHaveAttribute(
-      "type",
-      "range",
-    );
+    expect(screen.getByLabelText("Brightness")).toHaveAttribute("type", "range");
   });
 });
 
@@ -114,7 +103,7 @@ describe("Fieldset / grouped controls", () => {
         <Radio value="pro" label="Pro" />
       </RadioGroup>,
     );
-    const group = screen.getByRole("group", { name: "Plan" });
+    const group = screen.getByRole("radiogroup", { name: "Plan" });
     expect(group.tagName).toBe("FIELDSET");
     expect(screen.getAllByRole("radio")).toHaveLength(2);
   });

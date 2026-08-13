@@ -18,8 +18,7 @@ import { cx } from "./utils";
  */
 
 /** A render target: an element to merge props onto, or a function of them. */
-export type RenderProp<P> =
-  ReactElement<Record<string, unknown>> | ((props: P) => ReactNode);
+export type RenderProp<P> = ReactElement<Record<string, unknown>> | ((props: P) => ReactNode);
 
 type AnyProps = Record<string, unknown>;
 
@@ -28,10 +27,7 @@ function isEventHandlerKey(key: string): boolean {
 }
 
 /** Compose two refs so both receive the node. */
-export function composeRefs<T>(
-  a: Ref<T> | undefined,
-  b: Ref<T> | undefined,
-): Ref<T> | undefined {
+export function composeRefs<T>(a: Ref<T> | undefined, b: Ref<T> | undefined): Ref<T> | undefined {
   if (!a) return b;
   if (!b) return a;
   return (node: T | null) => {
@@ -47,10 +43,7 @@ const reactMajor = Number.parseInt(reactVersion, 10);
 const ARIA_LIST_KEYS = new Set(["aria-describedby", "aria-labelledby"]);
 
 /** Merge wiring props with an element's own props (see contract above). */
-export function mergeProps<W extends object, O extends object>(
-  wiring: W,
-  own: O,
-): W & O {
+export function mergeProps<W extends object, O extends object>(wiring: W, own: O): W & O {
   const wiringProps = wiring as AnyProps;
   const ownProps = own as AnyProps;
   const merged: AnyProps = { ...wiringProps, ...ownProps };
@@ -60,11 +53,7 @@ export function mergeProps<W extends object, O extends object>(
     const o = ownProps[key];
     if (o === undefined || w === undefined) continue;
 
-    if (
-      isEventHandlerKey(key) &&
-      typeof w === "function" &&
-      typeof o === "function"
-    ) {
+    if (isEventHandlerKey(key) && typeof w === "function" && typeof o === "function") {
       merged[key] = (...args: unknown[]) => {
         (o as (...a: unknown[]) => void)(...args);
         (w as (...a: unknown[]) => void)(...args);
@@ -85,10 +74,7 @@ export function mergeProps<W extends object, O extends object>(
 }
 
 /** Render a RenderProp with wiring props applied per the merge contract. */
-export function renderWithProps<P extends object>(
-  render: RenderProp<P>,
-  props: P,
-): ReactNode {
+export function renderWithProps<P extends object>(render: RenderProp<P>, props: P): ReactNode {
   if (typeof render === "function") {
     if (process.env.NODE_ENV !== "production" && /^[A-Z]/.test(render.name)) {
       console.error(
@@ -107,10 +93,7 @@ export function renderWithProps<P extends object>(
         : undefined;
     return cloneElement(
       render,
-      mergeProps(
-        props as AnyProps,
-        legacyRef === undefined ? own : { ...own, ref: legacyRef },
-      ),
+      mergeProps(props as AnyProps, legacyRef === undefined ? own : { ...own, ref: legacyRef }),
     );
   }
   return null;

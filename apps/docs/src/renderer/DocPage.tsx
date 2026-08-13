@@ -66,9 +66,7 @@ export function DocPage({ doc }: { doc: ComponentDoc }) {
               <div className={`${classes.guidance} ${classes.guidanceCols}`}>
                 {doc.whenToUse && (
                   <div className={classes.guidanceCard}>
-                    <p
-                      className={`${classes.guidanceHeading} ${classes.guidanceYes}`}
-                    >
+                    <p className={`${classes.guidanceHeading} ${classes.guidanceYes}`}>
                       When to use it
                     </p>
                     <ul className={classes.guidanceList}>
@@ -80,9 +78,7 @@ export function DocPage({ doc }: { doc: ComponentDoc }) {
                 )}
                 {doc.whenNotToUse && (
                   <div className={classes.guidanceCard}>
-                    <p
-                      className={`${classes.guidanceHeading} ${classes.guidanceNo}`}
-                    >
+                    <p className={`${classes.guidanceHeading} ${classes.guidanceNo}`}>
                       When not to
                     </p>
                     <ul className={classes.guidanceList}>
@@ -115,11 +111,7 @@ export function DocPage({ doc }: { doc: ComponentDoc }) {
           </h2>
           <div className={classes.demos}>
             {doc.howItWorks.map((entry) => (
-              <div
-                key={entry.title}
-                id={slugify(entry.title)}
-                className={classes.demo}
-              >
+              <div key={entry.title} id={slugify(entry.title)} className={classes.demo}>
                 <h3 className={classes.h3}>{entry.title}</h3>
                 <p className={classes.demoDesc}>{entry.body}</p>
                 {entry.code && entry.render && (
@@ -139,17 +131,13 @@ export function DocPage({ doc }: { doc: ComponentDoc }) {
             Error messages
           </h2>
           <p className={classes.usageNote}>
-            Say what happened and how to fix it, in the words of the question
-            itself — see the writing guidance{" "}
+            Say what happened and how to fix it, in the words of the question itself — see the
+            writing guidance{" "}
             {doc.slug === "field" ? (
               <>above.</>
             ) : (
               <>
-                on the{" "}
-                <a href="/docs/components/field#writing-error-messages">
-                  Field page
-                </a>
-                .
+                on the <a href="/docs/components/field#writing-error-messages">Field page</a>.
               </>
             )}
           </p>
@@ -181,21 +169,14 @@ export function DocPage({ doc }: { doc: ComponentDoc }) {
           Usage
         </h2>
         <p className={classes.usageNote}>
-          Every example has a <strong>CSS</strong> tab — that&rsquo;s the real,
-          complete stylesheet for the component. It&rsquo;s plain, static CSS:
-          nothing runs in the browser.
+          Every example has a <strong>CSS</strong> tab — that&rsquo;s the real, complete stylesheet
+          for the component. It&rsquo;s plain, static CSS: nothing runs in the browser.
         </p>
         <div className={classes.demos}>
           {doc.demos.map((demo) => (
-            <div
-              key={demo.title}
-              id={slugify(demo.title)}
-              className={classes.demo}
-            >
+            <div key={demo.title} id={slugify(demo.title)} className={classes.demo}>
               <h3 className={classes.h3}>{demo.title}</h3>
-              {demo.description && (
-                <p className={classes.demoDesc}>{demo.description}</p>
-              )}
+              {demo.description && <p className={classes.demoDesc}>{demo.description}</p>}
               <Preview code={demo.code} css={css}>
                 {demo.render()}
               </Preview>

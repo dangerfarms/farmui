@@ -1,10 +1,5 @@
 import type { ComponentContent } from "@/renderer/types";
-import {
-  ToastActionDemo,
-  ToastDemo,
-  ToastPersistentDemo,
-  ToastPriorityDemo,
-} from "./toast.client";
+import { ToastActionDemo, ToastDemo, ToastPersistentDemo, ToastPriorityDemo } from "./toast.client";
 
 const doc: ComponentContent = {
   slug: "toast",
@@ -155,8 +150,7 @@ const doc: ComponentContent = {
     {
       name: "Close",
       type: "toastId · button props",
-      description:
-        'A labelled dismiss button ("Dismiss notification") with a default × icon.',
+      description: 'A labelled dismiss button ("Dismiss notification") with a default × icon.',
     },
   ],
 };

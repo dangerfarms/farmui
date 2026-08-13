@@ -21,8 +21,7 @@ describe("Field composition wiring", () => {
 
     // Label htmlFor matches the control id.
     expect(input).toHaveAttribute("id");
-    const describedBy =
-      input.getAttribute("aria-describedby")?.split(" ") ?? [];
+    const describedBy = input.getAttribute("aria-describedby")?.split(" ") ?? [];
     expect(describedBy).toContain(description.id);
     expect(describedBy).toContain(error.id);
     // Error presence flips the invalid state.
@@ -62,9 +61,7 @@ describe("Field composition wiring", () => {
     render(
       <Field.Root>
         <Field.Label>Bio</Field.Label>
-        <Field.Control
-          render={(props) => <textarea {...props} data-custom="yes" />}
-        />
+        <Field.Control render={(props) => <textarea {...props} data-custom="yes" />} />
       </Field.Root>,
     );
 

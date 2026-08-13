@@ -77,11 +77,7 @@ describe("Popover.Trigger render merge", () => {
     const { Popover } = await import("../index");
     render(
       <Popover.Root>
-        <Popover.Trigger
-          render={<a href="#x" />}
-          className="mine"
-          onClick={spy}
-        >
+        <Popover.Trigger render={<a href="#x" />} className="mine" onClick={spy}>
           Go
         </Popover.Trigger>
       </Popover.Root>,
@@ -126,9 +122,7 @@ describe("renderWithProps", () => {
       return <button>x</button>;
     }
     render(<>{renderWithProps(MyButton as never, {})}</>);
-    expect(spy).toHaveBeenCalledWith(
-      expect.stringContaining("render={<MyButton />}"),
-    );
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("render={<MyButton />}"));
     spy.mockRestore();
   });
 });

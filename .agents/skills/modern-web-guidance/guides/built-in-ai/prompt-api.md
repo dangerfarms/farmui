@@ -138,7 +138,9 @@ const schema = {
 
 const result = await session.prompt(
   "Rate the following feedback: 'The food was great!'",
-  { responseConstraint: schema },
+  {
+    responseConstraint: schema,
+  },
 );
 
 const data = JSON.parse(result);

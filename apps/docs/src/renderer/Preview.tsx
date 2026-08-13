@@ -40,13 +40,13 @@ export function Preview({
     const target = tabs[next];
     if (!target) return;
     setTab(target);
-    listRef.current
-      ?.querySelectorAll<HTMLButtonElement>("[role=tab]")
-      [next]?.focus();
+    listRef.current?.querySelectorAll<HTMLButtonElement>("[role=tab]")[next]?.focus();
   };
 
   return (
     <div className={classes.wrap}>
+      {/* interactive-supports-focus is off for this file (.oxlintrc):
+          focus roves between the tabs; the list is never a stop */}
       <div
         className={classes.tabs}
         role="tablist"
@@ -72,16 +72,10 @@ export function Preview({
         ))}
       </div>
 
-      <div
-        role="tabpanel"
-        id={`${baseId}-panel-${tab}`}
-        aria-labelledby={`${baseId}-tab-${tab}`}
-      >
+      <div role="tabpanel" id={`${baseId}-panel-${tab}`} aria-labelledby={`${baseId}-tab-${tab}`}>
         {tab === "preview" && <div className={classes.stage}>{children}</div>}
         {tab === "code" && <CodeBlock code={code} className={classes.code} />}
-        {tab === "css" && css && (
-          <CodeBlock code={css} language="css" className={classes.code} />
-        )}
+        {tab === "css" && css && <CodeBlock code={css} language="css" className={classes.code} />}
       </div>
     </div>
   );

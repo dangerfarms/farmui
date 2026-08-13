@@ -64,9 +64,7 @@ export const WithDescription: Story = {
   render: () => (
     <Field.Root>
       <Field.Label>Username</Field.Label>
-      <Field.Description>
-        This is how your name appears to others.
-      </Field.Description>
+      <Field.Description>This is how your name appears to others.</Field.Description>
       <Input placeholder="jane_doe" />
     </Field.Root>
   ),
@@ -77,9 +75,7 @@ export const WithError: Story = {
     <Field.Root>
       <Field.Label>Email</Field.Label>
       <Input placeholder="you@example.com" defaultValue="not-an-email" />
-      <Field.Error>
-        Enter an email address in the correct format, like name@example.com
-      </Field.Error>
+      <Field.Error>Enter an email address in the correct format, like name@example.com</Field.Error>
     </Field.Root>
   ),
 };

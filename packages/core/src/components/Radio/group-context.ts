@@ -14,6 +14,4 @@ export interface RadioGroupContextValue {
   onSelect?: (value: string) => void;
 }
 
-export const RadioGroupContext = createContext<RadioGroupContextValue | null>(
-  null,
-);
+export const RadioGroupContext = createContext<RadioGroupContextValue | null>(null);

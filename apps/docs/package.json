@@ -8,7 +8,8 @@
     "prebuild": "node scripts/sync-css.mjs",
     "build": "next build",
     "start": "next start --port 3007",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "lint": "oxlint --config ../../.oxlintrc.json src && stylelint \"src/**/*.css\""
   },
   "dependencies": {
     "@farmui/core": "workspace:*",

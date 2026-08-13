@@ -193,7 +193,7 @@ const doc: ComponentContent = {
   howItWorks: [
     {
       title: "Buttons act, links navigate",
-      body: 'The element must match the behaviour, not the look. When a design wants button styling on a genuine navigation, keep real link semantics with render: <Button render={<a href="/signup" />}>Get started</Button> merges the Button\'s classes onto a real <a>, so right-click, middle-click, open-in-new-tab and link announcement all keep working. What render never justifies is the reverse: an <a> with an onClick that mutates data is still a button in disguise.',
+      body: 'The element must match the behaviour, not the look. When a design wants button styling on a genuine navigation, keep real link semantics with render: <Button render={<a href="/signup">Get started</a>} /> merges the Button\'s classes onto a real <a>, so right-click, middle-click, open-in-new-tab and link announcement all keep working. What render never justifies is the reverse: an <a> with an onClick that mutates data is still a button in disguise.',
     },
     {
       title: "Buttons don't submit by accident",
@@ -228,8 +228,7 @@ const doc: ComponentContent = {
       name: "type",
       type: `"button" | "submit" | "reset"`,
       default: `"button"`,
-      description:
-        "Unlike a native <button>, never a submit button unless you say so.",
+      description: "Unlike a native <button>, never a submit button unless you say so.",
     },
     {
       name: "...others",

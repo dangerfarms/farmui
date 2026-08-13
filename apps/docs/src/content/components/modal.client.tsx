@@ -32,8 +32,7 @@ export function ModalAlertDemo() {
       <Modal.Popup alert size="sm">
         <Modal.Title>Delete this file?</Modal.Title>
         <Modal.Description>
-          &ldquo;report-final-v2.pdf&rdquo; will be permanently deleted. This
-          cannot be undone.
+          &ldquo;report-final-v2.pdf&rdquo; will be permanently deleted. This cannot be undone.
         </Modal.Description>
         <div className="fui-cluster">
           <Modal.Close autoFocus>Cancel</Modal.Close>
@@ -54,9 +53,7 @@ export function ModalSizesDemo() {
           <Modal.Trigger>Open {size}</Modal.Trigger>
           <Modal.Popup size={size}>
             <Modal.Title>A {size} modal</Modal.Title>
-            <Modal.Description>
-              The panel width comes from the size prop.
-            </Modal.Description>
+            <Modal.Description>The panel width comes from the size prop.</Modal.Description>
             <Modal.Close>Close</Modal.Close>
           </Modal.Popup>
         </Modal.Root>

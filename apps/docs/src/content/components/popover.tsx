@@ -1,9 +1,5 @@
 import type { ComponentContent } from "@/renderer/types";
-import {
-  PopoverDemo,
-  PopoverFormDemo,
-  PopoverLinkTriggerDemo,
-} from "./popover.client";
+import { PopoverDemo, PopoverFormDemo, PopoverLinkTriggerDemo } from "./popover.client";
 
 const doc: ComponentContent = {
   slug: "popover",
@@ -52,9 +48,7 @@ const doc: ComponentContent = {
       description:
         "The built-in trigger is a FarmUI Button. To use a different element, pass it via render; the wiring (popovertarget, aria-expanded, anchor name) merges onto it. See the Composition guide for the full contract.",
       code: `<Popover.Root>
-  <Popover.Trigger render={<a href="#popover" />}>
-    A link as the trigger
-  </Popover.Trigger>
+  <Popover.Trigger render={<a href="#popover">A link as the trigger</a>} />
   <Popover.Popup>…</Popover.Popup>
 </Popover.Root>`,
       render: () => <PopoverLinkTriggerDemo />,
@@ -100,7 +94,7 @@ const doc: ComponentContent = {
       name: "Trigger",
       type: "render?: element | (props) => node",
       description:
-        "Renders a FarmUI Button wired as the popup's invoker (popovertarget, aria-expanded, anchor name); it adapts to context like any Button. Substitute any element via render (e.g. render={<a href=…/>}).",
+        "Renders a FarmUI Button wired as the popup's invoker (popovertarget, aria-expanded, anchor name); it adapts to context like any Button. Substitute any element via render (e.g. render={<a href=…>…</a>}).",
     },
     {
       name: "Popup",
@@ -111,8 +105,7 @@ const doc: ComponentContent = {
     {
       name: "Title / Description",
       type: "heading / paragraph props",
-      description:
-        "Optional parts that label and describe the popup for assistive technology.",
+      description: "Optional parts that label and describe the popup for assistive technology.",
     },
     {
       name: "Close",

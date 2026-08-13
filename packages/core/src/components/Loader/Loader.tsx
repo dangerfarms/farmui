@@ -2,10 +2,7 @@ import { forwardRef } from "react";
 import type { CSSProperties, HTMLAttributes } from "react";
 import { cx, type FarmUISize } from "../../utils";
 
-export interface LoaderProps extends Omit<
-  HTMLAttributes<HTMLSpanElement>,
-  "color"
-> {
+export interface LoaderProps extends Omit<HTMLAttributes<HTMLSpanElement>, "color"> {
   /** Overall size — a token or an explicit pixel number. @default "md" */
   size?: FarmUISize | number;
   /** Accessible label announced to assistive tech. @default "Loading" */

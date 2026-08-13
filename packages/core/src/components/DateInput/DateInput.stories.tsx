@@ -39,9 +39,7 @@ export const ErrorOnOnePart: Story = {
     <DateInput.Root name="membership-start">
       <DateInput.Legend>When did your membership start?</DateInput.Legend>
       <DateInput.Description>For example, 27 3 2019</DateInput.Description>
-      <DateInput.Error parts={["year"]}>
-        Membership start date must include a year
-      </DateInput.Error>
+      <DateInput.Error parts={["year"]}>Membership start date must include a year</DateInput.Error>
       <DateInput.Fields>
         <DateInput.Field part="day" defaultValue="27" />
         <DateInput.Field part="month" defaultValue="3" />

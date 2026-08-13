@@ -16,20 +16,20 @@ const meta = {
       <Accordion {...args}>
         <AccordionItem label="What is FarmUI?" defaultOpen>
           <p>
-            FarmUI is a themeable React component library built on native,
-            semantic HTML and modern CSS.
+            FarmUI is a themeable React component library built on native, semantic HTML and modern
+            CSS.
           </p>
         </AccordionItem>
         <AccordionItem label="How is it themed?">
           <p>
-            Every component reads from <code>--fui-*</code> CSS variables, so a
-            single token override restyles the whole set.
+            Every component reads from <code>--fui-*</code> CSS variables, so a single token
+            override restyles the whole set.
           </p>
         </AccordionItem>
         <AccordionItem label="Does it need JavaScript?">
           <p>
-            The accordion itself is built on <code>&lt;details&gt;</code>, so it
-            toggles with zero JavaScript.
+            The accordion itself is built on <code>&lt;details&gt;</code>, so it toggles with zero
+            JavaScript.
           </p>
         </AccordionItem>
       </Accordion>

@@ -14,12 +14,7 @@ const publicDir = join(here, "..", "public");
 
 mkdirSync(publicDir, { recursive: true });
 
-for (const [pkg, out] of [
-  ["core", "farmui-core.css"],
-]) {
-  copyFileSync(
-    join(repo, "packages", pkg, "dist", "styles.css"),
-    join(publicDir, out),
-  );
+for (const [pkg, out] of [["core", "farmui-core.css"]]) {
+  copyFileSync(join(repo, "packages", pkg, "dist", "styles.css"), join(publicDir, out));
 }
 console.log("sync-css: copied core stylesheet to public/");

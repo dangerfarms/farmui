@@ -14,19 +14,16 @@ export default function Composition() {
     <div className={prose.prose}>
       <h1>Composition</h1>
       <p className={prose.lead}>
-        FarmUI components compose: they are built from parts, every part renders
-        a sensible element by default, and one merge contract governs how your
-        props combine with the component&apos;s wiring. Learn it once — it works
-        the same everywhere.
+        FarmUI components compose: they are built from parts, every part renders a sensible element
+        by default, and one merge contract governs how your props combine with the component&apos;s
+        wiring. Learn it once — it works the same everywhere.
       </p>
 
       <h2>Parts and built-in elements</h2>
       <p>
-        Compound components expose their anatomy as parts you assemble in JSX.
-        Each part renders a real element suited to its role (a{" "}
-        <code>Popover.Trigger</code> is a FarmUI Button, a{" "}
-        <code>Breadcrumbs.Item</code> is a link), so the common case needs no
-        ceremony at all:
+        Compound components expose their anatomy as parts you assemble in JSX. Each part renders a
+        real element suited to its role (a <code>Popover.Trigger</code> is a FarmUI Button, a{" "}
+        <code>Breadcrumbs.Item</code> is a link), so the common case needs no ceremony at all:
       </p>
       <div className={prose.block}>
         <CodeBlock
@@ -42,25 +39,23 @@ export default function Composition() {
         />
       </div>
       <p>
-        Because the built-in trigger <em>is</em> a Button, it adapts to its
-        context like any Button; see the{" "}
-        <a href="/docs/contextualism">Contextualism guide</a>.
+        Because the built-in trigger <em>is</em> a Button, it adapts to its context like any Button;
+        see the <a href="/docs/contextualism">Contextualism guide</a>.
       </p>
 
       <h2>
         Substituting elements with <code>render</code>
       </h2>
       <p>
-        When you need a different element (a link styled as a button, your
-        router&apos;s <code>Link</code>, a component of your own), pass it via{" "}
-        <code>render</code>. The part&apos;s wiring (ids, ARIA, handlers, anchor
-        styles) merges onto the element you provide:
+        When you need a different element (a link styled as a button, your router&apos;s{" "}
+        <code>Link</code>, a component of your own), pass it via <code>render</code>. The
+        part&apos;s wiring (ids, ARIA, handlers, anchor styles) merges onto the element you provide:
       </p>
       <div className={prose.block}>
         <CodeBlock
           language="tsx"
           code={`// A link that opens the popover
-<Popover.Trigger render={<a href="/pricing" />}>See pricing</Popover.Trigger>
+<Popover.Trigger render={<a href="/pricing">See pricing</a>} />
 
 // Your framework's router link inside breadcrumbs
 <Breadcrumbs.Item render={<Link href="/settings" />}>Settings</Breadcrumbs.Item>
@@ -75,25 +70,22 @@ export default function Composition() {
         <strong>
           <code>render</code> is never required.
         </strong>{" "}
-        It exists only to substitute the built-in element. If you find yourself
-        writing <code>render</code> for an everyday case, there is usually a
-        simpler built-in form, or a gap you should report.
+        It exists only to substitute the built-in element. If you find yourself writing{" "}
+        <code>render</code> for an everyday case, there is usually a simpler built-in form, or a gap
+        you should report.
       </p>
       <p>
-        A dedicated <code>render</code> prop keeps <code>children</code>{" "}
-        unambiguous: always content, never secretly the element. The function
-        form gives you typed access to the wiring when you need it.
+        A dedicated <code>render</code> prop keeps <code>children</code> unambiguous: always
+        content, never secretly the element. The function form gives you typed access to the wiring
+        when you need it.
       </p>
 
       <h2>The merge contract</h2>
-      <p>
-        When wiring merges onto your element, the rules are always the same:
-      </p>
+      <p>When wiring merges onto your element, the rules are always the same:</p>
       <ul>
         <li>
-          <strong>Event handlers chain.</strong> Your handler runs first, the
-          component&apos;s wiring second. Both always run; neither can
-          accidentally disable the other.
+          <strong>Event handlers chain.</strong> Your handler runs first, the component&apos;s
+          wiring second. Both always run; neither can accidentally disable the other.
         </li>
         <li>
           <strong>
@@ -105,16 +97,15 @@ export default function Composition() {
           <strong>
             <code>style</code> merges, wiring wins on conflicts.
           </strong>{" "}
-          Wiring styles such as <code>anchorName</code> position the popup and
-          are load-bearing; everything else of yours passes through.
+          Wiring styles such as <code>anchorName</code> position the popup and are load-bearing;
+          everything else of yours passes through.
         </li>
         <li>
-          <strong>ARIA id lists concatenate.</strong> An existing{" "}
-          <code>aria-describedby</code> on your element is kept and extended.
+          <strong>ARIA id lists concatenate.</strong> An existing <code>aria-describedby</code> on
+          your element is kept and extended.
         </li>
         <li>
-          <strong>Refs compose.</strong> Your ref and the component&apos;s both
-          receive the node.
+          <strong>Refs compose.</strong> Your ref and the component&apos;s both receive the node.
         </li>
         <li>
           <strong>Everything else: your prop wins.</strong>
@@ -123,9 +114,9 @@ export default function Composition() {
 
       <h2>Styling open state</h2>
       <p>
-        Parts expose their state as data attributes: the same vocabulary on
-        every component, working identically whether the browser renders the
-        popup natively (top layer) or via the fallback path:
+        Parts expose their state as data attributes: the same vocabulary on every component, working
+        identically whether the browser renders the popup natively (top layer) or via the fallback
+        path:
       </p>
       <div className={prose.block}>
         <CodeBlock
@@ -147,12 +138,10 @@ export default function Composition() {
 
       <h2>Form controls and Field</h2>
       <p>
-        The text-like controls (<code>Input</code>, <code>Select</code>,{" "}
-        <code>Textarea</code>, <code>Slider</code>) are bare: compose them
-        inside a <code>Field</code> and they self-wire — id, described-by and
-        invalid state all flow from context, with <code>Field.Label</code>,{" "}
-        <code>Field.Description</code> and <code>Field.Error</code> as the
-        parts:
+        The text-like controls (<code>Input</code>, <code>Select</code>, <code>Textarea</code>,{" "}
+        <code>Slider</code>) are bare: compose them inside a <code>Field</code> and they self-wire —
+        id, described-by and invalid state all flow from context, with <code>Field.Label</code>,{" "}
+        <code>Field.Description</code> and <code>Field.Error</code> as the parts:
       </p>
       <div className={prose.block}>
         <CodeBlock
@@ -166,12 +155,10 @@ export default function Composition() {
         />
       </div>
       <p>
-        Inline controls (<code>Checkbox</code>, <code>Switch</code>,{" "}
-        <code>Radio</code>) keep a labelled convenience form (
-        <code>{`<Checkbox label="…" />`}</code>) because their anatomy is a row;
-        their bare parts (<code>CheckboxControl</code>,{" "}
-        <code>SwitchControl</code>, …) compose inside a <code>Field</code> the
-        same way. For an arbitrary element of your own,{" "}
+        Inline controls (<code>Checkbox</code>, <code>Switch</code>, <code>Radio</code>) keep a
+        labelled convenience form (<code>{`<Checkbox label="…" />`}</code>) because their anatomy is
+        a row; their bare parts (<code>CheckboxControl</code>, <code>SwitchControl</code>, …)
+        compose inside a <code>Field</code> the same way. For an arbitrary element of your own,{" "}
         <code>Field.Control render={`{…}`}</code> wires the same props onto it:
       </p>
       <div className={prose.block}>
@@ -188,21 +175,14 @@ export default function Composition() {
 
       <h2>Buttons anywhere</h2>
       <p>
-        <code>Button</code> itself takes <code>render</code>, so anything can
-        wear button styling, most usefully links:
+        <code>Button</code> itself takes <code>render</code>, so anything can wear button styling,
+        most usefully links:
       </p>
       <div className={prose.block}>
-        <CodeBlock
-          language="tsx"
-          code={`<Button render={<a href="/signup" />}>
-  Get started
-</Button>`}
-        />
+        <CodeBlock language="tsx" code={`<Button render={<a href="/signup">Get started</a>} />`} />
       </div>
       <div className={prose.block}>
-        <Button render={<a href="#composition" />}>
-          A link, dressed as a Button
-        </Button>
+        <Button render={<a href="#composition">A link, dressed as a Button</a>} />
       </div>
     </div>
   );

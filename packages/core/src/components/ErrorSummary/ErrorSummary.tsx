@@ -37,9 +37,7 @@ interface ErrorSummaryContextValue {
   titleId: string;
 }
 
-const ErrorSummaryContext = createContext<ErrorSummaryContextValue | null>(
-  null,
-);
+const ErrorSummaryContext = createContext<ErrorSummaryContextValue | null>(null);
 
 function useErrorSummaryContext(part: string): ErrorSummaryContextValue {
   const ctx = useContext(ErrorSummaryContext);
@@ -90,18 +88,10 @@ function ErrorSummaryRoot({
 
 export interface ErrorSummaryTitleProps extends HTMLAttributes<HTMLHeadingElement> {}
 
-function ErrorSummaryTitle({
-  className,
-  children,
-  ...rest
-}: ErrorSummaryTitleProps) {
+function ErrorSummaryTitle({ className, children, ...rest }: ErrorSummaryTitleProps) {
   const ctx = useErrorSummaryContext("ErrorSummary.Title");
   return (
-    <h2
-      id={ctx.titleId}
-      className={cx("fui-ErrorSummary-title", className)}
-      {...rest}
-    >
+    <h2 id={ctx.titleId} className={cx("fui-ErrorSummary-title", className)} {...rest}>
       {children ?? "There is a problem"}
     </h2>
   );
@@ -111,11 +101,7 @@ export interface ErrorSummaryListProps extends HTMLAttributes<HTMLUListElement> 
   children?: ReactNode;
 }
 
-function ErrorSummaryList({
-  className,
-  children,
-  ...rest
-}: ErrorSummaryListProps) {
+function ErrorSummaryList({ className, children, ...rest }: ErrorSummaryListProps) {
   return (
     <ul className={cx("fui-ErrorSummary-list", className)} {...rest}>
       {children}
@@ -123,23 +109,14 @@ function ErrorSummaryList({
   );
 }
 
-export interface ErrorSummaryItemProps extends Omit<
-  LiHTMLAttributes<HTMLLIElement>,
-  "onClick"
-> {
+export interface ErrorSummaryItemProps extends Omit<LiHTMLAttributes<HTMLLIElement>, "onClick"> {
   /** The target field's fragment (e.g. "#email"). */
   href: string;
   onClick?: (e: ReactMouseEvent<HTMLAnchorElement>) => void;
   children?: ReactNode;
 }
 
-function ErrorSummaryItem({
-  href,
-  onClick,
-  className,
-  children,
-  ...rest
-}: ErrorSummaryItemProps) {
+function ErrorSummaryItem({ href, onClick, className, children, ...rest }: ErrorSummaryItemProps) {
   // Fragment navigation scrolls to the field but does not focus it; move
   // focus so the user can start typing the correction immediately.
   const focusTarget = (e: ReactMouseEvent<HTMLAnchorElement>) => {

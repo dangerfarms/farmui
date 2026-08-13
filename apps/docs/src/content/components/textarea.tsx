@@ -1,9 +1,5 @@
 import type { ComponentContent } from "@/renderer/types";
-import {
-  TextareaBasicDemo,
-  TextareaDescriptionDemo,
-  TextareaErrorDemo,
-} from "./textarea.client";
+import { TextareaBasicDemo, TextareaDescriptionDemo, TextareaErrorDemo } from "./textarea.client";
 
 const doc: ComponentContent = {
   slug: "textarea",

@@ -2,10 +2,7 @@ import { forwardRef } from "react";
 import type { HTMLAttributes, ReactNode } from "react";
 import { cx, type FarmUISize } from "../../utils";
 
-export interface BadgeProps extends Omit<
-  HTMLAttributes<HTMLSpanElement>,
-  "color"
-> {
+export interface BadgeProps extends Omit<HTMLAttributes<HTMLSpanElement>, "color"> {
   /** Control size. @default "md" */
   size?: FarmUISize;
   /** Render a status dot before the label, colored by the context. */

@@ -134,8 +134,7 @@ const doc: ComponentContent = {
     {
       name: "dot",
       type: "boolean",
-      description:
-        "Show a status dot before the label, coloured by the context.",
+      description: "Show a status dot before the label, coloured by the context.",
     },
     {
       name: "size",

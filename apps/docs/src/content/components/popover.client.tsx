@@ -9,8 +9,7 @@ export function PopoverDemo() {
       <Popover.Popup>
         <Popover.Title>Anchored panel</Popover.Title>
         <Popover.Description>
-          Rendered in the browser&apos;s top layer — click outside or press
-          Escape to close.
+          Rendered in the browser&apos;s top layer — click outside or press Escape to close.
         </Popover.Description>
       </Popover.Popup>
     </Popover.Root>
@@ -20,13 +19,11 @@ export function PopoverDemo() {
 export function PopoverLinkTriggerDemo() {
   return (
     <Popover.Root>
-      <Popover.Trigger render={<a href="#popover" />}>
-        A link as the trigger
-      </Popover.Trigger>
+      <Popover.Trigger render={<a href="#popover">A link as the trigger</a>} />
       <Popover.Popup>
         <Popover.Description>
-          The Trigger&apos;s wiring merged onto the anchor — it opens the
-          popover, and its own href still works for open-in-new-tab.
+          The Trigger&apos;s wiring merged onto the anchor — it opens the popover, and its own href
+          still works for open-in-new-tab.
         </Popover.Description>
       </Popover.Popup>
     </Popover.Root>
@@ -38,10 +35,7 @@ export function PopoverFormDemo() {
     <Popover.Root>
       <Popover.Trigger>Add product</Popover.Trigger>
       <Popover.Popup>
-        <form
-          style={{ display: "grid", gap: "0.75rem" }}
-          onSubmit={(e) => e.preventDefault()}
-        >
+        <form style={{ display: "grid", gap: "0.75rem" }} onSubmit={(e) => e.preventDefault()}>
           <Field.Root>
             <Field.Label>Name</Field.Label>
             <Input placeholder="Wireless headphones" />

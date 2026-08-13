@@ -4,10 +4,7 @@ import { cx } from "../../utils";
 
 type AvatarSize = "sm" | "md" | "lg" | number;
 
-export interface AvatarProps extends Omit<
-  HTMLAttributes<HTMLSpanElement>,
-  "color"
-> {
+export interface AvatarProps extends Omit<HTMLAttributes<HTMLSpanElement>, "color"> {
   /** Image source. When set, renders an <img>. */
   src?: string;
   /** Alt text for the image (falls back to `name`). */
@@ -56,16 +53,13 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
   // With no name anywhere, an avatar is decorative — hide it rather than
   // expose an unnamed role="img" to assistive technology.
   const accessibleName = name ?? alt;
-  const consumerNamed =
-    rest["aria-label"] != null || rest["aria-labelledby"] != null;
+  const consumerNamed = rest["aria-label"] != null || rest["aria-labelledby"] != null;
 
   let content: ReactNode;
   if (children) {
     content = children;
   } else if (src) {
-    content = (
-      <img className="fui-Avatar-img" src={src} alt={alt ?? name ?? ""} />
-    );
+    content = <img className="fui-Avatar-img" src={src} alt={alt ?? name ?? ""} />;
   } else if (initials) {
     content = <span className="fui-Avatar-initials">{initials}</span>;
   } else {
@@ -102,20 +96,18 @@ export interface AvatarGroupProps extends HTMLAttributes<HTMLDivElement> {
 /**
  * Overlaps a row of avatars with a surface-colored ring.
  */
-export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
-  function AvatarGroup(
-    { spacing = "0.5rem", className, style, children, ...rest },
-    ref,
-  ) {
-    return (
-      <div
-        ref={ref}
-        className={cx("fui-Avatar-group", className)}
-        style={{ "--_overlap": spacing, ...style } as React.CSSProperties}
-        {...rest}
-      >
-        {children}
-      </div>
-    );
-  },
-);
+export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(function AvatarGroup(
+  { spacing = "0.5rem", className, style, children, ...rest },
+  ref,
+) {
+  return (
+    <div
+      ref={ref}
+      className={cx("fui-Avatar-group", className)}
+      style={{ "--_overlap": spacing, ...style } as React.CSSProperties}
+      {...rest}
+    >
+      {children}
+    </div>
+  );
+});

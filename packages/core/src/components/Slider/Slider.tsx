@@ -5,10 +5,7 @@ import type { InputHTMLAttributes } from "react";
 import { cx } from "../../utils";
 import { useFieldControlProps } from "../Field/Field";
 
-export interface SliderProps extends Omit<
-  InputHTMLAttributes<HTMLInputElement>,
-  "size" | "type"
-> {}
+export interface SliderProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "type"> {}
 
 /**
  * A styled `<input type="range">` for choosing a value from a range.

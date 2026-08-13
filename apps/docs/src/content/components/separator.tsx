@@ -8,8 +8,7 @@ const doc: ComponentContent = {
   demos: [
     {
       title: "Basic usage",
-      description:
-        "A real <hr>: the platform's separator role, no ARIA required.",
+      description: "A real <hr>: the platform's separator role, no ARIA required.",
       code: `<p>Account settings</p>
 <Separator />
 <p>Danger zone</p>`,

@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useId,
-  useMemo,
-  useState,
-} from "react";
+import { createContext, useCallback, useContext, useEffect, useId, useMemo, useState } from "react";
 import type { HTMLAttributes, LabelHTMLAttributes } from "react";
 import { cx } from "../../utils";
 import { renderWithProps } from "../../render";
@@ -102,10 +94,7 @@ function FieldRoot({ id, className, children, ...rest }: FieldRootProps) {
   const descriptionId = `${fieldId}-description`;
   const errorId = `${fieldId}-error`;
   const describedBy =
-    cx(
-      hasDescription ? descriptionId : undefined,
-      hasError ? errorId : undefined,
-    ) || undefined;
+    cx(hasDescription ? descriptionId : undefined, hasError ? errorId : undefined) || undefined;
 
   const value = useMemo<FieldContextValue>(
     () => ({
@@ -146,19 +135,10 @@ export interface FieldLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
   optional?: boolean;
 }
 
-function FieldLabel({
-  optional,
-  className,
-  children,
-  ...rest
-}: FieldLabelProps) {
+function FieldLabel({ optional, className, children, ...rest }: FieldLabelProps) {
   const ctx = useFieldContext("Field.Label");
   return (
-    <label
-      className={cx("fui-Field-label", className)}
-      htmlFor={ctx.fieldId}
-      {...rest}
-    >
+    <label className={cx("fui-Field-label", className)} htmlFor={ctx.fieldId} {...rest}>
       {children}
       {optional && <span className="fui-Field-optional"> (optional)</span>}
     </label>
@@ -167,20 +147,12 @@ function FieldLabel({
 
 export interface FieldDescriptionProps extends HTMLAttributes<HTMLParagraphElement> {}
 
-function FieldDescription({
-  className,
-  children,
-  ...rest
-}: FieldDescriptionProps) {
+function FieldDescription({ className, children, ...rest }: FieldDescriptionProps) {
   const ctx = useFieldContext("Field.Description");
   const { registerDescription } = ctx;
   useEffect(() => registerDescription(), [registerDescription]);
   return (
-    <p
-      className={cx("fui-Field-description", className)}
-      id={ctx.descriptionId}
-      {...rest}
-    >
+    <p className={cx("fui-Field-description", className)} id={ctx.descriptionId} {...rest}>
       {children}
     </p>
   );
@@ -199,12 +171,7 @@ function FieldError({ className, children, ...rest }: FieldErrorProps) {
 
   if (!hasContent) return null;
   return (
-    <p
-      className={cx("fui-Field-error", className)}
-      id={ctx.errorId}
-      role="alert"
-      {...rest}
-    >
+    <p className={cx("fui-Field-error", className)} id={ctx.errorId} role="alert" {...rest}>
       <span className="fui-Error-prefix">Error: </span>
       {children}
     </p>

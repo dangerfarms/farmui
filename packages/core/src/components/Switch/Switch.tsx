@@ -6,10 +6,7 @@ import { cx } from "../../utils";
 import { useFieldControlProps } from "../Field/Field";
 import { useUserInvalid } from "../../use-user-invalid";
 
-export interface SwitchProps extends Omit<
-  InputHTMLAttributes<HTMLInputElement>,
-  "size" | "type"
-> {
+export interface SwitchProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "type"> {
   /** Label rendered beside the toggle. */
   label?: ReactNode;
   /** Helper text rendered below the label. */
@@ -32,57 +29,53 @@ export type SwitchControlProps = Omit<
  * (`<Field.Label><SwitchControl /> …</Field.Label>`); otherwise it uses its
  * own props.
  */
-const SwitchControl = forwardRef<HTMLInputElement, SwitchControlProps>(
-  function SwitchControl(
-    {
-      id,
-      className,
-      disabled,
-      "aria-invalid": ariaInvalid,
-      "aria-describedby": ariaDescribedby,
-      onBlur,
-      onInvalid,
-      ...rest
-    },
-    ref,
-  ) {
-    const field = useFieldControlProps();
-
-    const { nativeInvalid, checkOnBlur, checkOnInvalid } = useUserInvalid();
-    const resolvedAriaInvalid =
-      ariaInvalid ?? field["aria-invalid"] ?? (nativeInvalid || undefined);
-
-    return (
-      <span
-        className="fui-Switch-control"
-        data-disabled={disabled || undefined}
-      >
-        <input
-          ref={ref}
-          id={id ?? field.id}
-          type="checkbox"
-          role="switch"
-          className={cx("fui-Switch-input", className)}
-          disabled={disabled}
-          {...rest}
-          aria-invalid={resolvedAriaInvalid}
-          aria-describedby={ariaDescribedby ?? field["aria-describedby"]}
-          onBlur={(e) => {
-            onBlur?.(e);
-            checkOnBlur(e);
-          }}
-          onInvalid={(e) => {
-            onInvalid?.(e);
-            checkOnInvalid(e);
-          }}
-        />
-        <span className="fui-Switch-track" aria-hidden>
-          <span className="fui-Switch-thumb" />
-        </span>
-      </span>
-    );
+const SwitchControl = forwardRef<HTMLInputElement, SwitchControlProps>(function SwitchControl(
+  {
+    id,
+    className,
+    disabled,
+    "aria-invalid": ariaInvalid,
+    "aria-describedby": ariaDescribedby,
+    onBlur,
+    onInvalid,
+    ...rest
   },
-);
+  ref,
+) {
+  const field = useFieldControlProps();
+
+  const { nativeInvalid, checkOnBlur, checkOnInvalid } = useUserInvalid();
+  const resolvedAriaInvalid = ariaInvalid ?? field["aria-invalid"] ?? (nativeInvalid || undefined);
+
+  return (
+    <span className="fui-Switch-control" data-disabled={disabled || undefined}>
+      {/* role-has-required-aria-props is off for this file (.oxlintrc):
+          the native checkbox's checkedness maps to aria-checked */}
+      <input
+        ref={ref}
+        id={id ?? field.id}
+        type="checkbox"
+        role="switch"
+        className={cx("fui-Switch-input", className)}
+        disabled={disabled}
+        {...rest}
+        aria-invalid={resolvedAriaInvalid}
+        aria-describedby={ariaDescribedby ?? field["aria-describedby"]}
+        onBlur={(e) => {
+          onBlur?.(e);
+          checkOnBlur(e);
+        }}
+        onInvalid={(e) => {
+          onInvalid?.(e);
+          checkOnInvalid(e);
+        }}
+      />
+      <span className="fui-Switch-track" aria-hidden>
+        <span className="fui-Switch-thumb" />
+      </span>
+    </span>
+  );
+});
 
 /**
  * An on/off toggle built on a native checkbox with `role="switch"`.
@@ -109,15 +102,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
   const autoId = useId();
 
   if (!label && !description) {
-    return (
-      <SwitchControl
-        ref={ref}
-        id={id}
-        disabled={disabled}
-        required={required}
-        {...control}
-      />
-    );
+    return <SwitchControl ref={ref} id={id} disabled={disabled} required={required} {...control} />;
   }
 
   const inputId = id ?? autoId;
@@ -125,10 +110,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
 
   const labelRow = (
     <label
-      className={cx(
-        "fui-Switch-wrapper",
-        !description ? wrapperClassName : undefined,
-      )}
+      className={cx("fui-Switch-wrapper", !description ? wrapperClassName : undefined)}
       htmlFor={inputId}
       data-label-position={labelPosition}
       data-disabled={disabled || undefined}
@@ -148,10 +130,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
   if (!description) return labelRow;
 
   return (
-    <div
-      className={cx("fui-Switch-field", wrapperClassName)}
-      data-disabled={disabled || undefined}
-    >
+    <div className={cx("fui-Switch-field", wrapperClassName)} data-disabled={disabled || undefined}>
       {labelRow}
       {description && (
         <span className="fui-Switch-description" id={descId}>

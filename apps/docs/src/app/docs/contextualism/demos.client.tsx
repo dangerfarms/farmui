@@ -9,9 +9,7 @@ export function DetectedErrorDemo() {
       <Field.Root>
         <Field.Label>Workspace name</Field.Label>
         <Input defaultValue="my workspace!" />
-        <Field.Error>
-          Names can only contain letters, numbers and dashes.
-        </Field.Error>
+        <Field.Error>Names can only contain letters, numbers and dashes.</Field.Error>
       </Field.Root>
     </div>
   );

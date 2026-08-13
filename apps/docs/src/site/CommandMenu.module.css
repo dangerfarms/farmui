@@ -1,5 +1,5 @@
 .trigger {
-  display: inline-flex;
+  display: inline flex;
   align-items: center;
   gap: 0.5rem;
   min-inline-size: 12rem;
@@ -12,13 +12,16 @@
   font-size: var(--fui-text-sm);
   transition: border-color var(--fui-duration-md) var(--fui-ease);
 }
+
 .trigger:hover {
   border-color: var(--fui-border-strong);
 }
+
 .triggerLabel {
   flex: 1;
   text-align: start;
 }
+
 .kbd {
   font-family: var(--fui-font);
   font-size: var(--fui-text-xs);
@@ -28,27 +31,25 @@
   background: var(--fui-surface);
 }
 
-.overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  display: grid;
-  place-items: start center;
-  padding-block-start: 12vb;
-  background: oklch(0 0 0 / 0.4);
-  backdrop-filter: blur(3px);
-}
-
 .panel {
   inline-size: min(100% - 2rem, 34rem);
+  margin-block-start: 12vb;
+  margin-inline: auto;
+  padding: 0;
   background: var(--fui-surface);
   border: 1px solid var(--fui-border);
   border-radius: var(--fui-radius-lg);
   box-shadow: var(--fui-shadow-lg);
   overflow: hidden;
 }
+
+.panel::backdrop {
+  background: oklch(0% 0 0deg / 40%);
+  backdrop-filter: blur(3px);
+}
+
 @media (prefers-reduced-motion: no-preference) {
-  .panel {
+  .panel[open] {
     animation: pop 120ms ease;
   }
 }
@@ -61,13 +62,14 @@
 }
 
 .searchRow {
-  display: flex;
+  display: block flex;
   align-items: center;
   gap: 0.6rem;
   padding: 0.85rem 1rem;
   border-block-end: 1px solid var(--fui-border);
   color: var(--fui-text-muted);
 }
+
 .input {
   flex: 1;
   border: none;
@@ -83,10 +85,11 @@
   margin: 0;
   padding: 0.4rem;
   max-block-size: 24rem;
-  overflow-y: auto;
+  overflow-block: auto;
 }
+
 .result {
-  display: flex;
+  display: block flex;
   align-items: center;
   justify-content: space-between;
   inline-size: 100%;
@@ -99,14 +102,17 @@
   cursor: pointer;
   text-align: start;
 }
+
 .result[data-active] {
   background: var(--fui-primary-soft);
-  color: color-mix(in oklch, var(--fui-primary) 88%, black);
+  color: color-mix(in oklch, var(--fui-primary) 88%, oklch(0% 0 0deg));
 }
+
 .hint {
   font-size: var(--fui-text-xs);
   color: var(--fui-text-dim);
 }
+
 .empty {
   padding: 1.5rem;
   text-align: center;

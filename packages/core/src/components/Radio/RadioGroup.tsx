@@ -75,13 +75,14 @@ export function RadioGroup({
   return (
     <RadioGroupContext.Provider value={ctx}>
       <Fieldset.Root
+        // radiogroup (not the fieldset's implicit group): the precise role,
+        // and the one ARIA allows aria-invalid on.
+        role="radiogroup"
         className={cx("fui-Radio-group", className)}
         aria-describedby={cx(descId, errId) || undefined}
         aria-invalid={invalid || undefined}
       >
-        {label && (
-          <Fieldset.Legend optional={optional}>{label}</Fieldset.Legend>
-        )}
+        {label && <Fieldset.Legend optional={optional}>{label}</Fieldset.Legend>}
         {description && (
           <span className="fui-Radio-groupDescription" id={descId}>
             {description}

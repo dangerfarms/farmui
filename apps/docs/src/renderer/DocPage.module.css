@@ -7,17 +7,20 @@
   margin-block-end: 2rem;
   border-block-end: 1px solid var(--fui-border);
 }
+
 .category {
   font-size: var(--fui-text-sm);
   font-weight: 600;
   color: var(--fui-primary);
 }
+
 .title {
   text-wrap: balance;
   font-size: clamp(1.9rem, 1.729rem + 0.8571vi, 2.5rem);
   font-weight: 800;
   margin-block: 0.25rem;
 }
+
 .lead {
   text-wrap: pretty;
   font-size: var(--fui-text-lg);
@@ -28,12 +31,14 @@
   margin-block-end: 3rem;
   scroll-margin-block-start: 5rem;
 }
+
 .h2 {
   font-size: var(--fui-text-xl);
   font-weight: 700;
   margin-block-end: 1rem;
   scroll-margin-block-start: 5rem;
 }
+
 .h3 {
   font-size: var(--fui-text-md);
   font-weight: 650;
@@ -52,22 +57,25 @@
 }
 
 .guidance {
-  display: grid;
+  display: block grid;
   gap: 1.5rem;
 }
+
 @media (width >= 40rem) {
   .guidanceCols {
     grid-template-columns: 1fr 1fr;
   }
 }
+
 .guidanceCard {
   padding: 1rem 1.25rem;
   background: var(--fui-surface);
   border: 1px solid var(--fui-border);
   border-radius: var(--fui-radius-lg);
 }
+
 .guidanceHeading {
-  display: flex;
+  display: block flex;
   gap: 0.4rem;
   align-items: center;
   margin-block-end: 0.6rem;
@@ -76,14 +84,17 @@
   text-transform: uppercase;
   letter-spacing: 0.03em;
 }
+
 .guidanceYes {
   color: var(--fui-primary);
 }
+
 .guidanceNo {
   color: var(--fui-danger);
 }
+
 .guidanceList {
-  display: flex;
+  display: block flex;
   flex-direction: column;
   gap: 0.5rem;
   margin: 0;
@@ -91,8 +102,9 @@
   font-size: var(--fui-text-sm);
   color: var(--fui-text-muted);
 }
+
 .a11yList {
-  display: flex;
+  display: block flex;
   flex-direction: column;
   gap: 0.6rem;
   margin: 0;
@@ -102,13 +114,15 @@
 }
 
 .demos {
-  display: flex;
+  display: block flex;
   flex-direction: column;
   gap: 2.5rem;
 }
+
 .demo {
   scroll-margin-block-start: 5rem;
 }
+
 .demoDesc {
   text-wrap: pretty;
   color: var(--fui-text-muted);

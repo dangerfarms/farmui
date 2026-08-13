@@ -95,9 +95,7 @@ function detectEnhanced(): boolean {
 function menuItems(popup: HTMLElement | null): HTMLElement[] {
   if (!popup) return [];
   return Array.from(
-    popup.querySelectorAll<HTMLElement>(
-      '[role="menuitem"]:not([aria-disabled="true"])',
-    ),
+    popup.querySelectorAll<HTMLElement>('[role="menuitem"]:not([aria-disabled="true"])'),
   );
 }
 
@@ -225,9 +223,7 @@ function MenuTrigger({ render, children, ...rest }: MenuTriggerProps) {
 
   return render ? (
     // Consumer props on the part must merge into the render element, not drop.
-    <>
-      {renderWithProps(render, mergeProps(triggerProps, { children, ...rest }))}
-    </>
+    <>{renderWithProps(render, mergeProps(triggerProps, { children, ...rest }))}</>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, triggerProps)}</>
   );
@@ -281,13 +277,9 @@ function MenuPopup({
     if (!el || was === open) return;
     if (open) {
       const items = menuItems(el);
-      const target =
-        ctx.focusOnOpen.current === "last" ? items[items.length - 1] : items[0];
+      const target = ctx.focusOnOpen.current === "last" ? items[items.length - 1] : items[0];
       (target ?? el).focus({ preventScroll: true });
-    } else if (
-      el.contains(document.activeElement) ||
-      document.activeElement === document.body
-    ) {
+    } else if (el.contains(document.activeElement) || document.activeElement === document.body) {
       ctx.triggerRef.current?.focus({ preventScroll: true });
     }
   }, [open, ctx.focusOnOpen, ctx.triggerRef, ref]);
@@ -347,8 +339,7 @@ function MenuPopup({
         const t = typeahead.current;
         t.query = (now - t.at < 500 ? t.query : "") + e.key.toLowerCase();
         t.at = now;
-        const from =
-          current >= 0 ? current + (t.query.length === 1 ? 1 : 0) : 0;
+        const from = current >= 0 ? current + (t.query.length === 1 ? 1 : 0) : 0;
         for (let i = 0; i < items.length; i++) {
           const item = items[(from + i) % items.length];
           if (item?.textContent?.trim().toLowerCase().startsWith(t.query)) {
@@ -390,10 +381,7 @@ export interface MenuItemRenderProps {
   onClick: (e: ReactMouseEvent<Element>) => void;
 }
 
-export interface MenuItemProps extends Omit<
-  HTMLAttributes<HTMLElement>,
-  "onClick"
-> {
+export interface MenuItemProps extends Omit<HTMLAttributes<HTMLElement>, "onClick"> {
   /** Renders the item as a link instead of a button. */
   href?: string;
   /** The action. Runs before the menu closes. */
@@ -501,11 +489,7 @@ function MenuGroupLabel({ className, children, ...rest }: MenuGroupLabelProps) {
   const { registerLabel } = group;
   useEffect(() => registerLabel(), [registerLabel]);
   return (
-    <div
-      id={group.labelId}
-      className={cx("fui-Menu-groupLabel", className)}
-      {...rest}
-    >
+    <div id={group.labelId} className={cx("fui-Menu-groupLabel", className)} {...rest}>
       {children}
     </div>
   );

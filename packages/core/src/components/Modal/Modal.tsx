@@ -92,10 +92,7 @@ function ModalRoot({
   const [titleCount, setTitleCount] = useState(0);
   // Feature-probe the element prototype, never window/document.
   const [invokers, setInvokers] = useState(false);
-  useEffect(
-    () => setInvokers("commandForElement" in HTMLButtonElement.prototype),
-    [],
-  );
+  useEffect(() => setInvokers("commandForElement" in HTMLButtonElement.prototype), []);
   const [descriptionCount, setDescriptionCount] = useState(0);
 
   const autoId = useId();
@@ -151,9 +148,7 @@ function ModalRoot({
     ],
   );
 
-  return (
-    <ModalContext.Provider value={value}>{children}</ModalContext.Provider>
-  );
+  return <ModalContext.Provider value={value}>{children}</ModalContext.Provider>;
 }
 
 /** Wiring the Trigger attaches to whatever it renders. */
@@ -197,18 +192,13 @@ function ModalTrigger({ render, children, ...rest }: ModalTriggerProps) {
 
   return render ? (
     // Consumer props on the part must merge into the render element, not drop.
-    <>
-      {renderWithProps(render, mergeProps(triggerProps, { children, ...rest }))}
-    </>
+    <>{renderWithProps(render, mergeProps(triggerProps, { children, ...rest }))}</>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, triggerProps)}</>
   );
 }
 
-export interface ModalPopupProps extends Omit<
-  DialogHTMLAttributes<HTMLDialogElement>,
-  "open"
-> {
+export interface ModalPopupProps extends Omit<DialogHTMLAttributes<HTMLDialogElement>, "open"> {
   /** Panel width. @default "md" */
   size?: "sm" | "md" | "lg";
   /**
@@ -221,13 +211,7 @@ export interface ModalPopupProps extends Omit<
   alert?: boolean;
 }
 
-function ModalPopup({
-  size = "md",
-  alert = false,
-  className,
-  children,
-  ...rest
-}: ModalPopupProps) {
+function ModalPopup({ size = "md", alert = false, className, children, ...rest }: ModalPopupProps) {
   const ctx = useModalContext("Modal.Popup");
   const { open, setOpen } = ctx;
   const ref = useRef<HTMLDialogElement>(null);
@@ -328,20 +312,12 @@ function ModalTitle({ className, children, ...rest }: ModalTitleProps) {
 
 export interface ModalDescriptionProps extends HTMLAttributes<HTMLParagraphElement> {}
 
-function ModalDescription({
-  className,
-  children,
-  ...rest
-}: ModalDescriptionProps) {
+function ModalDescription({ className, children, ...rest }: ModalDescriptionProps) {
   const ctx = useModalContext("Modal.Description");
   const { registerDescription } = ctx;
   useEffect(() => registerDescription(), [registerDescription]);
   return (
-    <p
-      className={cx("fui-Modal-description", className)}
-      id={ctx.descriptionId}
-      {...rest}
-    >
+    <p className={cx("fui-Modal-description", className)} id={ctx.descriptionId} {...rest}>
       {children}
     </p>
   );
@@ -375,9 +351,7 @@ function ModalClose({ render, children, ...rest }: ModalCloseProps) {
   };
   return render ? (
     // Consumer props on the part must merge into the render element, not drop.
-    <>
-      {renderWithProps(render, mergeProps(closeProps, { children, ...rest }))}
-    </>
+    <>{renderWithProps(render, mergeProps(closeProps, { children, ...rest }))}</>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, closeProps)}</>
   );

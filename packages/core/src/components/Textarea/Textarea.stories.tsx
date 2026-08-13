@@ -30,9 +30,7 @@ export const WithDescription: Story = {
   render: () => (
     <Field.Root>
       <Field.Label>Bio</Field.Label>
-      <Field.Description>
-        A short description shown on your public profile.
-      </Field.Description>
+      <Field.Description>A short description shown on your public profile.</Field.Description>
       <Textarea placeholder="Tell us about yourself…" />
     </Field.Root>
   ),

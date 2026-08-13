@@ -131,8 +131,7 @@ const doc: ComponentContent = {
     {
       name: "children",
       type: "ReactNode",
-      description:
-        "Native <option> / <optgroup> elements, passed straight through.",
+      description: "Native <option> / <optgroup> elements, passed straight through.",
     },
     {
       name: "...others",

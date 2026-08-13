@@ -5,11 +5,7 @@ import { Button, Toast, Toasts, useToast } from "@farmui/core";
 function SaveButton() {
   const toast = useToast();
   return (
-    <Button
-      onClick={() =>
-        toast.add({ title: "Saved", description: "Your changes are live." })
-      }
-    >
+    <Button onClick={() => toast.add({ title: "Saved", description: "Your changes are live." })}>
       Save changes
     </Button>
   );

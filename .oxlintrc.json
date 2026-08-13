@@ -1,6 +1,10 @@
 {
   "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/main/npm/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript"],
+  "plugins": [
+    "react",
+    "typescript",
+    "jsx-a11y"
+  ],
   "env": {
     "browser": true,
     "es2024": true
@@ -10,14 +14,83 @@
     "suspicious": "warn"
   },
   "rules": {
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "jsx-a11y/prefer-tag-over-role": "off",
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      {
+        "controlComponents": [
+          "CheckboxControl",
+          "SwitchControl",
+          "RadioControl",
+          "Input",
+          "Select",
+          "Textarea",
+          "Slider"
+        ],
+        "depth": 3
+      }
+    ]
   },
-  "ignorePatterns": ["dist", ".next", ".turbo", "node_modules", "storybook-static"],
+  "ignorePatterns": [
+    "dist",
+    ".next",
+    ".turbo",
+    "node_modules",
+    "storybook-static"
+  ],
   "overrides": [
     {
-      "files": ["**/*.test.tsx", "**/*.test.ts", "**/*.stories.tsx"],
+      "files": [
+        "**/*.test.tsx",
+        "**/*.test.ts",
+        "**/*.stories.tsx"
+      ],
       "rules": {
-        "react/jsx-key": "off"
+        "react/jsx-key": "off",
+        "jsx-a11y/no-autofocus": "off",
+        "jsx-a11y/control-has-associated-label": "off",
+        "jsx-a11y/anchor-has-content": "off"
+      }
+    },
+    {
+      "files": [
+        "**/Switch/Switch.tsx"
+      ],
+      "rules": {
+        "jsx-a11y/role-has-required-aria-props": "off"
+      }
+    },
+    {
+      "files": [
+        "**/Tabs/Tabs.tsx"
+      ],
+      "rules": {
+        "jsx-a11y/interactive-supports-focus": "off"
+      }
+    },
+    {
+      "files": [
+        "**/Toast/Toast.tsx"
+      ],
+      "rules": {
+        "jsx-a11y/no-noninteractive-element-interactions": "off"
+      }
+    },
+    {
+      "files": [
+        "**/modal.client.tsx"
+      ],
+      "rules": {
+        "jsx-a11y/no-autofocus": "off"
+      }
+    },
+    {
+      "files": [
+        "**/renderer/Preview.tsx"
+      ],
+      "rules": {
+        "jsx-a11y/interactive-supports-focus": "off"
       }
     }
   ]

@@ -21,14 +21,8 @@ export function useUserInvalid() {
     }
   }, []);
 
-  const checkOnBlur = useCallback(
-    (e: FocusEvent<Element>) => check(e.currentTarget),
-    [check],
-  );
-  const checkOnInvalid = useCallback(
-    (e: FormEvent<Element>) => check(e.currentTarget),
-    [check],
-  );
+  const checkOnBlur = useCallback((e: FocusEvent<Element>) => check(e.currentTarget), [check]);
+  const checkOnInvalid = useCallback((e: FormEvent<Element>) => check(e.currentTarget), [check]);
 
   return { nativeInvalid, checkOnBlur, checkOnInvalid };
 }

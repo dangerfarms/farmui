@@ -100,7 +100,7 @@
     outline-offset: 2px;
   }
 
-  .fui-Radio-input:is([aria-invalid="true"], :user-invalid) + :scope {
+  .fui-Radio-input:user-invalid + :scope {
     --fui-ring-color: var(--fui-danger-ring);
 
     border-color: var(--fui-danger);
@@ -142,6 +142,17 @@
 }
 
 /* ---- Group ---- (a Fieldset — reset/legend come from the Fieldset layer) */
+
+/* The group carries aria-invalid (ARIA allows it there, not on the
+   radios); every dot inside answers it. */
+@scope (.fui-Radio-group[aria-invalid="true"]) {
+  .fui-Radio-control {
+    --fui-ring-color: var(--fui-danger-ring);
+
+    border-color: var(--fui-danger);
+  }
+}
+
 @scope (.fui-Radio-group) {
   :scope {
     gap: var(--fui-space-xs);

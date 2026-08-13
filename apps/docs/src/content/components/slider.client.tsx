@@ -43,10 +43,7 @@ export function SliderValueDemo() {
     <div style={{ maxInlineSize: "22rem", inlineSize: "100%" }}>
       <Field.Root>
         <Field.Label>Volume: {volume}</Field.Label>
-        <Slider
-          value={volume}
-          onChange={(e) => setVolume(e.target.valueAsNumber)}
-        />
+        <Slider value={volume} onChange={(e) => setVolume(e.target.valueAsNumber)} />
       </Field.Root>
     </div>
   );

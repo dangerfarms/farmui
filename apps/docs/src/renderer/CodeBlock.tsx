@@ -13,8 +13,7 @@ function useIsDark() {
       const scheme = getComputedStyle(document.documentElement).colorScheme;
       const dark =
         scheme.includes("dark") &&
-        (!scheme.includes("light") ||
-          window.matchMedia("(prefers-color-scheme: dark)").matches);
+        (!scheme.includes("light") || window.matchMedia("(prefers-color-scheme: dark)").matches);
       setDark(dark);
     };
     read();
@@ -68,11 +67,7 @@ export function CodeBlock({
         {({ tokens, getLineProps, getTokenProps }) => (
           <pre className={classes.pre}>
             {tokens.map((line, i) => (
-              <span
-                key={i}
-                {...getLineProps({ line })}
-                className={classes.line}
-              >
+              <span key={i} {...getLineProps({ line })} className={classes.line}>
                 {line.map((token, key) => (
                   <span key={key} {...getTokenProps({ token })} />
                 ))}

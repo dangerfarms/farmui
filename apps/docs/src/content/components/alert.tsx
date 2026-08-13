@@ -69,11 +69,7 @@ const doc: ComponentContent = {
   </Alert>
 </div>`,
       render: () => (
-        <div
-          style={
-            { "--fui-context": "info", inlineSize: "100%" } as CSSProperties
-          }
-        >
+        <div style={{ "--fui-context": "info", inlineSize: "100%" } as CSSProperties}>
           <Alert icon={<span aria-hidden>ℹ</span>} title="Did you know?">
             You can theme every alert with a single CSS variable.
           </Alert>
@@ -87,11 +83,7 @@ const doc: ComponentContent = {
   <Alert title="All systems operational." />
 </div>`,
       render: () => (
-        <div
-          style={
-            { "--fui-context": "success", inlineSize: "100%" } as CSSProperties
-          }
-        >
+        <div style={{ "--fui-context": "success", inlineSize: "100%" } as CSSProperties}>
           <Alert title="All systems operational." />
         </div>
       ),

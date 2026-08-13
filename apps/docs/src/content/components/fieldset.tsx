@@ -1,9 +1,5 @@
 import type { ComponentContent } from "@/renderer/types";
-import {
-  FieldsetCheckboxDemo,
-  FieldsetOptionalDemo,
-  FieldsetRadioDemo,
-} from "./fieldset.client";
+import { FieldsetCheckboxDemo, FieldsetOptionalDemo, FieldsetRadioDemo } from "./fieldset.client";
 
 const doc: ComponentContent = {
   slug: "fieldset",
@@ -24,8 +20,7 @@ const doc: ComponentContent = {
     },
     {
       title: "Optional group",
-      description:
-        "Mark the whole group optional in words rather than with an asterisk.",
+      description: "Mark the whole group optional in words rather than with an asterisk.",
       code: `<Fieldset.Root>
   <Fieldset.Legend optional>Interests</Fieldset.Legend>
   <Checkbox label="Design" />
@@ -81,8 +76,7 @@ const doc: ComponentContent = {
     {
       name: "Fieldset.Legend",
       type: "{ optional?, ...legend }",
-      description:
-        "The accessible group label. `optional` appends an “(optional)” hint.",
+      description: "The accessible group label. `optional` appends an “(optional)” hint.",
     },
   ],
 };

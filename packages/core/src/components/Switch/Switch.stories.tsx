@@ -43,9 +43,7 @@ export const WithError: Story = {
   render: (args) => (
     <Field.Root>
       <Switch {...args} label="Two-factor authentication" />
-      <Field.Error>
-        Two-factor authentication must be on for admin accounts
-      </Field.Error>
+      <Field.Error>Two-factor authentication must be on for admin accounts</Field.Error>
     </Field.Root>
   ),
 };

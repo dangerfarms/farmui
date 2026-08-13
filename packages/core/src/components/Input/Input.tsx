@@ -6,10 +6,7 @@ import { cx } from "../../utils";
 import { useFieldControlProps } from "../Field/Field";
 import { useUserInvalid } from "../../use-user-invalid";
 
-export interface InputProps extends Omit<
-  InputHTMLAttributes<HTMLInputElement>,
-  "size"
-> {
+export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   /** Content rendered inside the field, before the input. */
   leftSection?: ReactNode;
   /** Content rendered inside the field, after the input. */
@@ -49,11 +46,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   const field = useFieldControlProps();
   const { nativeInvalid, checkOnBlur, checkOnInvalid } = useUserInvalid();
   return (
-    <div
-      className="fui-Input-field"
-      data-disabled={disabled || undefined}
-      style={style}
-    >
+    <div className="fui-Input-field" data-disabled={disabled || undefined} style={style}>
       {leftSection && <span className="fui-Input-section">{leftSection}</span>}
       <input
         ref={ref}
@@ -61,9 +54,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         disabled={disabled}
         id={id ?? field.id}
         {...rest}
-        aria-invalid={
-          ariaInvalid ?? field["aria-invalid"] ?? (nativeInvalid || undefined)
-        }
+        aria-invalid={ariaInvalid ?? field["aria-invalid"] ?? (nativeInvalid || undefined)}
         aria-describedby={ariaDescribedby ?? field["aria-describedby"]}
         onBlur={(e) => {
           onBlur?.(e);
@@ -74,9 +65,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           checkOnInvalid(e);
         }}
       />
-      {rightSection && (
-        <span className="fui-Input-section">{rightSection}</span>
-      )}
+      {rightSection && <span className="fui-Input-section">{rightSection}</span>}
     </div>
   );
 });

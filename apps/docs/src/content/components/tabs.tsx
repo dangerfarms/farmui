@@ -8,8 +8,7 @@ const doc: ComponentContent = {
   demos: [
     {
       title: "Basic",
-      description:
-        "Uncontrolled via defaultValue. Arrow keys move between tabs.",
+      description: "Uncontrolled via defaultValue. Arrow keys move between tabs.",
       code: `<Tabs defaultValue="account">
   <TabsList>
     <TabsTab value="account">Account</TabsTab>
@@ -28,15 +27,9 @@ const doc: ComponentContent = {
               <TabsTab value="security">Security</TabsTab>
               <TabsTab value="notifications">Notifications</TabsTab>
             </TabsList>
-            <TabsPanel value="account">
-              Update your name and email address.
-            </TabsPanel>
-            <TabsPanel value="security">
-              Change your password and enable 2FA.
-            </TabsPanel>
-            <TabsPanel value="notifications">
-              Choose how you want to be notified.
-            </TabsPanel>
+            <TabsPanel value="account">Update your name and email address.</TabsPanel>
+            <TabsPanel value="security">Change your password and enable 2FA.</TabsPanel>
+            <TabsPanel value="notifications">Choose how you want to be notified.</TabsPanel>
           </Tabs>
         </div>
       ),
@@ -84,15 +77,9 @@ const doc: ComponentContent = {
                 Settings
               </TabsTab>
             </TabsList>
-            <TabsPanel value="files">
-              All your documents in one place.
-            </TabsPanel>
-            <TabsPanel value="team">
-              Invite teammates and manage roles.
-            </TabsPanel>
-            <TabsPanel value="settings">
-              Configure your workspace preferences.
-            </TabsPanel>
+            <TabsPanel value="files">All your documents in one place.</TabsPanel>
+            <TabsPanel value="team">Invite teammates and manage roles.</TabsPanel>
+            <TabsPanel value="settings">Configure your workspace preferences.</TabsPanel>
           </Tabs>
         </div>
       ),

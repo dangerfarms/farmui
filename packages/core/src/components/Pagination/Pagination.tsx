@@ -3,10 +3,7 @@
 import type { HTMLAttributes } from "react";
 import { cx } from "../../utils";
 
-export interface PaginationProps extends Omit<
-  HTMLAttributes<HTMLElement>,
-  "onChange"
-> {
+export interface PaginationProps extends Omit<HTMLAttributes<HTMLElement>, "onChange"> {
   /** Total number of pages. */
   total: number;
   /** The active page (1-based). */
@@ -34,11 +31,7 @@ function range(start: number, end: number): number[] {
 }
 
 /** Build the list of page numbers with ellipsis gaps. */
-function getPaginationItems(
-  total: number,
-  active: number,
-  siblings: number,
-): PageItem[] {
+function getPaginationItems(total: number, active: number, siblings: number): PageItem[] {
   // Pages we always show plus the sibling window; if that's most of them,
   // just render every page.
   const totalToShow = siblings * 2 + 5; // first, last, active, 2 dots
@@ -76,9 +69,7 @@ function ChevronIcon({ dir }: { dir: "left" | "right" }) {
       strokeLinejoin="round"
       aria-hidden
     >
-      <polyline
-        points={dir === "left" ? "15 18 9 12 15 6" : "9 18 15 12 9 6"}
-      />
+      <polyline points={dir === "left" ? "15 18 9 12 15 6" : "9 18 15 12 9 6"} />
     </svg>
   );
 }
@@ -138,11 +129,7 @@ export function Pagination({
   };
 
   return (
-    <nav
-      aria-label={ariaLabel}
-      className={cx("fui-Pagination-root", className)}
-      {...rest}
-    >
+    <nav aria-label={ariaLabel} className={cx("fui-Pagination-root", className)} {...rest}>
       <ul className="fui-Pagination-list">
         {withEdges && (
           <li>

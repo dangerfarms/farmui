@@ -8,8 +8,7 @@ const doc: ComponentContent = {
   demos: [
     {
       title: "Basic group",
-      description:
-        "A RadioGroup shares one name so only one option can be selected.",
+      description: "A RadioGroup shares one name so only one option can be selected.",
       code: `<RadioGroup label="Theme" defaultValue="system">
   <Radio value="system" label="System" />
   <Radio value="light" label="Light" />
@@ -40,16 +39,8 @@ const doc: ComponentContent = {
 </RadioGroup>`,
       render: () => (
         <RadioGroup label="Delivery">
-          <Radio
-            value="standard"
-            label="Standard"
-            description="Arrives in 3-5 business days."
-          />
-          <Radio
-            value="express"
-            label="Express"
-            description="Guaranteed next-day delivery."
-          />
+          <Radio value="standard" label="Standard" description="Arrives in 3-5 business days." />
+          <Radio value="express" label="Express" description="Guaranteed next-day delivery." />
         </RadioGroup>
       ),
     },

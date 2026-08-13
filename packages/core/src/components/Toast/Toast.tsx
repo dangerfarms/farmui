@@ -90,10 +90,7 @@ interface ToastContextValue {
 const ToastContext = createContext<ToastContextValue | null>(null);
 
 /** Fire and dismiss toasts from anywhere under a Toast.Provider. */
-export function useToast(): Pick<
-  ToastContextValue,
-  "toasts" | "add" | "close"
-> {
+export function useToast(): Pick<ToastContextValue, "toasts" | "add" | "close"> {
   const ctx = useContext(ToastContext);
   if (!ctx) {
     throw new Error("useToast must be called inside <Toast.Provider>.");
@@ -111,11 +108,7 @@ export interface ToastProviderProps {
 
 let toastCounter = 0;
 
-function ToastProvider({
-  timeout = 5000,
-  limit = 3,
-  children,
-}: ToastProviderProps) {
+function ToastProvider({ timeout = 5000, limit = 3, children }: ToastProviderProps) {
   const [toasts, setToasts] = useState<ToastData[]>([]);
   // Mirror of `toasts` so `add` can compute the next list (and which toasts
   // get dropped) without side effects inside the state updater.
@@ -180,9 +173,7 @@ function ToastProvider({
 
   const schedule = useCallback(
     (id: string, remaining: number) => {
-      const handle = pausedRef.current
-        ? null
-        : setTimeout(() => close(id), remaining);
+      const handle = pausedRef.current ? null : setTimeout(() => close(id), remaining);
       timers.current.set(id, { handle, remaining, startedAt: Date.now() });
     },
     [close],
@@ -250,9 +241,7 @@ function ToastProvider({
     [toasts, exiting, add, close, pause, resume],
   );
 
-  return (
-    <ToastContext.Provider value={value}>{children}</ToastContext.Provider>
-  );
+  return <ToastContext.Provider value={value}>{children}</ToastContext.Provider>;
 }
 
 export interface ToastViewportProps extends HTMLAttributes<HTMLDivElement> {}
@@ -265,11 +254,7 @@ function ToastViewport({ className, children, ...rest }: ToastViewportProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [enhanced, setEnhanced] = useState(false);
   useEffect(
-    () =>
-      setEnhanced(
-        typeof HTMLElement !== "undefined" &&
-          "showPopover" in HTMLElement.prototype,
-      ),
+    () => setEnhanced(typeof HTMLElement !== "undefined" && "showPopover" in HTMLElement.prototype),
     [],
   );
 
@@ -306,6 +291,9 @@ function ToastViewport({ className, children, ...rest }: ToastViewportProps) {
       popover={enhanced ? "manual" : undefined}
       className={cx("fui-Toast-viewport", className)}
       data-empty={ctx.toasts.length === 0 || undefined}
+      // no-noninteractive-element-interactions is off for this file
+      // (.oxlintrc): hover/focus pause the timers (WCAG 2.2.1); the
+      // region is never clickable
       onPointerEnter={ctx.pause}
       onPointerLeave={ctx.resume}
       onFocus={ctx.pause}
@@ -351,11 +339,7 @@ function ToastTitle({ className, children, ...rest }: ToastTitleProps) {
 
 export interface ToastDescriptionProps extends HTMLAttributes<HTMLDivElement> {}
 
-function ToastDescription({
-  className,
-  children,
-  ...rest
-}: ToastDescriptionProps) {
+function ToastDescription({ className, children, ...rest }: ToastDescriptionProps) {
   return (
     <div className={cx("fui-Toast-description", className)} {...rest}>
       {children}
@@ -377,13 +361,7 @@ export interface ToastActionProps extends ButtonHTMLAttributes<HTMLButtonElement
   render?: RenderProp<ToastActionRenderProps>;
 }
 
-function ToastAction({
-  toastId,
-  onAction,
-  render,
-  children,
-  ...rest
-}: ToastActionProps) {
+function ToastAction({ toastId, onAction, render, children, ...rest }: ToastActionProps) {
   const ctx = useContext(ToastContext);
   if (!ctx) {
     throw new Error("Toast.Action must be rendered inside <Toast.Provider>.");
@@ -397,9 +375,7 @@ function ToastAction({
   };
   return render ? (
     // Consumer props on the part must merge into the render element, not drop.
-    <>
-      {renderWithProps(render, mergeProps(actionProps, { children, ...rest }))}
-    </>
+    <>{renderWithProps(render, mergeProps(actionProps, { children, ...rest }))}</>
   ) : (
     <>{renderWithProps(<Button {...rest}>{children}</Button>, actionProps)}</>
   );
@@ -410,12 +386,7 @@ export interface ToastCloseProps extends ButtonHTMLAttributes<HTMLButtonElement>
   toastId: string;
 }
 
-function ToastClose({
-  toastId,
-  className,
-  children,
-  ...rest
-}: ToastCloseProps) {
+function ToastClose({ toastId, className, children, ...rest }: ToastCloseProps) {
   const ctx = useContext(ToastContext);
   if (!ctx) {
     throw new Error("Toast.Close must be rendered inside <Toast.Provider>.");
@@ -455,9 +426,7 @@ export function Toasts() {
         <ToastRoot key={toast.id} toast={toast}>
           <div className="fui-Toast-content">
             {toast.title && <ToastTitle>{toast.title}</ToastTitle>}
-            {toast.description && (
-              <ToastDescription>{toast.description}</ToastDescription>
-            )}
+            {toast.description && <ToastDescription>{toast.description}</ToastDescription>}
           </div>
           {toast.action && (
             <ToastAction toastId={toast.id} onAction={toast.action.onClick}>

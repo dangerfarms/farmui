@@ -1,12 +1,6 @@
 import { describe, it, expect, afterEach, vi } from "vitest";
 import { useState } from "react";
-import {
-  render,
-  screen,
-  cleanup,
-  fireEvent,
-  waitFor,
-} from "@testing-library/react";
+import { render, screen, cleanup, fireEvent, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import {
@@ -72,10 +66,7 @@ describe("Tabs", () => {
     expect(screen.getByText("Security panel")).toBeVisible();
 
     await user.keyboard("{ArrowLeft}");
-    expect(screen.getByRole("tab", { name: "Account" })).toHaveAttribute(
-      "aria-selected",
-      "true",
-    );
+    expect(screen.getByRole("tab", { name: "Account" })).toHaveAttribute("aria-selected", "true");
   });
 });
 
@@ -126,9 +117,7 @@ describe("controlled overlays", () => {
     // A native close (Escape, backdrop) fires the dialog's close event; the
     // reconcile must report it upward instead of re-opening the dialog.
     fireEvent(screen.getByRole("dialog"), new Event("close"));
-    await waitFor(() =>
-      expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
-    );
+    await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
   });
 
   function ControlledPopover() {
@@ -154,9 +143,7 @@ describe("controlled overlays", () => {
     expect(trigger).toHaveAttribute("aria-expanded", "true");
 
     await user.click(screen.getByRole("button", { name: "Done" }));
-    await waitFor(() =>
-      expect(trigger).toHaveAttribute("aria-expanded", "false"),
-    );
+    await waitFor(() => expect(trigger).toHaveAttribute("aria-expanded", "false"));
   });
 });
 
@@ -223,9 +210,7 @@ describe("ErrorSummary", () => {
         <ErrorSummary.Root>
           <ErrorSummary.Title />
           <ErrorSummary.List>
-            <ErrorSummary.Item href="#email-field">
-              Enter your email address
-            </ErrorSummary.Item>
+            <ErrorSummary.Item href="#email-field">Enter your email address</ErrorSummary.Item>
           </ErrorSummary.List>
         </ErrorSummary.Root>
         <input id="email-field" aria-label="Email" />
@@ -233,12 +218,8 @@ describe("ErrorSummary", () => {
     );
     const region = screen.getByRole("group", { name: "There is a problem" });
     await waitFor(() => expect(region).toHaveFocus());
-    await user.click(
-      screen.getByRole("link", { name: "Enter your email address" }),
-    );
-    await waitFor(() =>
-      expect(screen.getByRole("textbox", { name: "Email" })).toHaveFocus(),
-    );
+    await user.click(screen.getByRole("link", { name: "Enter your email address" }));
+    await waitFor(() => expect(screen.getByRole("textbox", { name: "Email" })).toHaveFocus());
   });
 });
 
@@ -265,9 +246,7 @@ describe("Menu", () => {
     await user.click(screen.getByRole("button", { name: "Options" }));
     const menu = screen.getByRole("menu");
     expect(menu).toBeVisible();
-    await waitFor(() =>
-      expect(screen.getByRole("menuitem", { name: "Rename" })).toHaveFocus(),
-    );
+    await waitFor(() => expect(screen.getByRole("menuitem", { name: "Rename" })).toHaveFocus());
 
     await user.click(screen.getByRole("menuitem", { name: "Delete" }));
     expect(onDelete).toHaveBeenCalledOnce();
@@ -279,9 +258,7 @@ describe("Menu", () => {
     const user = userEvent.setup();
     renderMenu();
     await user.click(screen.getByRole("button", { name: "Options" }));
-    await waitFor(() =>
-      expect(screen.getByRole("menuitem", { name: "Rename" })).toHaveFocus(),
-    );
+    await waitFor(() => expect(screen.getByRole("menuitem", { name: "Rename" })).toHaveFocus());
 
     await user.keyboard("{ArrowDown}");
     expect(screen.getByRole("menuitem", { name: "Duplicate" })).toHaveFocus();
@@ -299,9 +276,7 @@ describe("Menu", () => {
     const user = userEvent.setup();
     renderMenu();
     await user.click(screen.getByRole("button", { name: "Options" }));
-    await waitFor(() =>
-      expect(screen.getByRole("menuitem", { name: "Rename" })).toHaveFocus(),
-    );
+    await waitFor(() => expect(screen.getByRole("menuitem", { name: "Rename" })).toHaveFocus());
     await user.keyboard("d");
     expect(screen.getByRole("menuitem", { name: "Duplicate" })).toHaveFocus();
   });
@@ -321,9 +296,7 @@ describe("Menu", () => {
     renderMenu();
     screen.getByRole("button", { name: "Options" }).focus();
     await user.keyboard("{ArrowUp}");
-    await waitFor(() =>
-      expect(screen.getByRole("menuitem", { name: "Delete" })).toHaveFocus(),
-    );
+    await waitFor(() => expect(screen.getByRole("menuitem", { name: "Delete" })).toHaveFocus());
   });
 
   it("skips disabled items when roving", async () => {
@@ -339,9 +312,7 @@ describe("Menu", () => {
       </Menu.Root>,
     );
     await user.click(screen.getByRole("button", { name: "Options" }));
-    await waitFor(() =>
-      expect(screen.getByRole("menuitem", { name: "One" })).toHaveFocus(),
-    );
+    await waitFor(() => expect(screen.getByRole("menuitem", { name: "One" })).toHaveFocus());
     await user.keyboard("{ArrowDown}");
     expect(screen.getByRole("menuitem", { name: "Three" })).toHaveFocus();
   });
@@ -351,11 +322,7 @@ describe("Toast", () => {
   function FireButton(props: { options?: Partial<ToastOptions> }) {
     const toast = useToast();
     return (
-      <Button
-        onClick={() =>
-          toast.add({ title: "Saved", description: "Done.", ...props.options })
-        }
-      >
+      <Button onClick={() => toast.add({ title: "Saved", description: "Done.", ...props.options })}>
         Fire
       </Button>
     );
@@ -372,9 +339,7 @@ describe("Toast", () => {
     await user.click(screen.getByRole("button", { name: "Fire" }));
     const status = screen.getByRole("status");
     expect(status).toHaveTextContent("Saved");
-    await user.click(
-      screen.getByRole("button", { name: "Dismiss notification" }),
-    );
+    await user.click(screen.getByRole("button", { name: "Dismiss notification" }));
     expect(screen.queryByRole("status")).not.toBeInTheDocument();
   });
 
@@ -400,9 +365,7 @@ describe("Toast", () => {
     );
     await user.click(screen.getByRole("button", { name: "Fire" }));
     expect(screen.getByRole("status")).toBeInTheDocument();
-    await waitFor(() =>
-      expect(screen.queryByRole("status")).not.toBeInTheDocument(),
-    );
+    await waitFor(() => expect(screen.queryByRole("status")).not.toBeInTheDocument());
   });
 
   it("pauses the dismiss timer while hovered and resumes with remaining time", async () => {
@@ -424,9 +387,7 @@ describe("Toast", () => {
 
     // Leaving resumes the countdown from the remaining time.
     fireEvent.pointerLeave(viewport);
-    await waitFor(() =>
-      expect(screen.queryByRole("status")).not.toBeInTheDocument(),
-    );
+    await waitFor(() => expect(screen.queryByRole("status")).not.toBeInTheDocument());
   });
 
   it("keeps a persistent toast (timeout: 0) until dismissed", async () => {
@@ -446,11 +407,7 @@ describe("Toast", () => {
     const user = userEvent.setup();
     function FireMany() {
       const toast = useToast();
-      return (
-        <Button onClick={() => toast.add({ description: "another" })}>
-          Fire
-        </Button>
-      );
+      return <Button onClick={() => toast.add({ description: "another" })}>Fire</Button>;
     }
     render(
       <Toast.Provider limit={2} timeout={0}>
@@ -516,9 +473,7 @@ describe("Modal (invoker commands)", () => {
         </Modal.Root>,
       );
       const trigger = screen.getByRole("button", { name: "Open" });
-      await waitFor(() =>
-        expect(trigger).toHaveAttribute("command", "show-modal"),
-      );
+      await waitFor(() => expect(trigger).toHaveAttribute("command", "show-modal"));
       const dialogId = trigger.getAttribute("commandfor");
       expect(dialogId).toBeTruthy();
       // The Close lives inside the (closed, hence aria-hidden) dialog.
@@ -526,8 +481,7 @@ describe("Modal (invoker commands)", () => {
       expect(done).toHaveAttribute("command", "close");
       expect(done).toHaveAttribute("commandfor", dialogId as string);
     } finally {
-      delete (HTMLButtonElement.prototype as { commandForElement?: unknown })
-        .commandForElement;
+      delete (HTMLButtonElement.prototype as { commandForElement?: unknown }).commandForElement;
     }
   });
 
@@ -547,9 +501,7 @@ describe("Modal (invoker commands)", () => {
     await user.click(trigger);
     expect(await screen.findByRole("dialog")).toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: "Done" }));
-    await waitFor(() =>
-      expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
-    );
+    await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
   });
 });
 
@@ -604,9 +556,7 @@ describe("Popover", () => {
     expect(screen.getByText("Popover body")).toHaveAttribute("data-open");
 
     await user.click(screen.getByRole("button", { name: "outside" }));
-    await waitFor(() =>
-      expect(screen.getByText("Popover body")).not.toBeVisible(),
-    );
+    await waitFor(() => expect(screen.getByText("Popover body")).not.toBeVisible());
     expect(trigger).not.toHaveAttribute("data-popup-open");
   });
 
@@ -617,9 +567,7 @@ describe("Popover", () => {
     expect(screen.getByText("Popover body")).toBeVisible();
 
     await user.keyboard("{Escape}");
-    await waitFor(() =>
-      expect(screen.getByText("Popover body")).not.toBeVisible(),
-    );
+    await waitFor(() => expect(screen.getByText("Popover body")).not.toBeVisible());
   });
 
   it("opens via a render-composed trigger and keeps focus restoration", async () => {
@@ -713,10 +661,7 @@ describe("Tooltip", () => {
     await user.tab();
     expect(screen.getByRole("button", { name: "Save" })).toHaveFocus();
     expect(bubble).toBeVisible();
-    expect(screen.getByRole("button", { name: "Save" })).toHaveAttribute(
-      "data-popup-open",
-      "true",
-    );
+    expect(screen.getByRole("button", { name: "Save" })).toHaveAttribute("data-popup-open", "true");
     expect(bubble).toHaveAttribute("data-open");
 
     await user.tab();

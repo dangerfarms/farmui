@@ -1,22 +1,12 @@
 {
-  "extends": [
-    "stylelint-config-standard",
-    "stylelint-config-modern"
-  ],
-  "plugins": [
-    "stylelint-order",
-    "stylelint-value-no-unknown-custom-properties"
-  ],
+  "extends": ["stylelint-config-standard", "stylelint-config-modern"],
+  "plugins": ["stylelint-order", "stylelint-value-no-unknown-custom-properties"],
   "rules": {
     "csstools/value-no-unknown-custom-properties": [
       true,
       {
-        "importFrom": [
-          "src/tokens.css"
-        ],
-        "ignoreProperties": [
-          "/^--_/"
-        ]
+        "importFrom": ["src/tokens.css"],
+        "ignoreProperties": ["/^--_/"]
       }
     ],
     "order/properties-order": [],
@@ -27,9 +17,7 @@
     "declaration-block-no-duplicate-properties": [
       true,
       {
-        "ignore": [
-          "consecutive-duplicates-with-different-values"
-        ]
+        "ignore": ["consecutive-duplicates-with-different-values"]
       }
     ],
     "no-descending-specificity": null

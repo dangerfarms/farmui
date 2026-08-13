@@ -4,13 +4,9 @@ import { forwardRef, useContext, useId } from "react";
 import type { ChangeEvent, InputHTMLAttributes, ReactNode } from "react";
 import { cx } from "../../utils";
 import { useFieldControlProps } from "../Field/Field";
-import { useUserInvalid } from "../../use-user-invalid";
 import { RadioGroupContext } from "./group-context";
 
-export interface RadioProps extends Omit<
-  InputHTMLAttributes<HTMLInputElement>,
-  "size" | "type"
-> {
+export interface RadioProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "type"> {
   /** Label rendered next to the control. */
   label?: ReactNode;
   /** Helper text rendered under the label. */
@@ -20,86 +16,62 @@ export interface RadioProps extends Omit<
 }
 
 /** The bare radio input + control dot, minus any label. */
-export type RadioControlProps = Omit<
-  RadioProps,
-  "label" | "description" | "wrapperClassName"
->;
+export type RadioControlProps = Omit<RadioProps, "label" | "description" | "wrapperClassName">;
 
 /**
  * The bare `<input type="radio">` + control dot. When rendered
  * inside a `Field` it reads its id / describedby / aria-invalid from context.
  */
-const RadioControl = forwardRef<HTMLInputElement, RadioControlProps>(
-  function RadioControl(
-    {
-      id,
-      className,
-      disabled,
-      "aria-invalid": ariaInvalid,
-      "aria-describedby": ariaDescribedby,
-      onBlur,
-      onInvalid,
-      ...rest
-    },
-    ref,
-  ) {
-    const field = useFieldControlProps();
-    const group = useContext(RadioGroupContext);
-    const { nativeInvalid, checkOnBlur, checkOnInvalid } = useUserInvalid();
-    const resolvedAriaInvalid =
-      ariaInvalid ?? field["aria-invalid"] ?? (nativeInvalid || undefined);
-    const resolvedId = id ?? field.id;
-    const describedBy = ariaDescribedby ?? field["aria-describedby"];
+const RadioControl = forwardRef<HTMLInputElement, RadioControlProps>(function RadioControl(
+  { id, className, disabled, "aria-describedby": ariaDescribedby, ...rest },
+  ref,
+) {
+  const field = useFieldControlProps();
+  const group = useContext(RadioGroupContext);
+  // No aria-invalid here: ARIA allows it on the radiogroup, not the
+  // radio, so the group's fieldset carries it and :user-invalid covers
+  // the native path per input.
+  const resolvedId = id ?? field.id;
+  const describedBy = ariaDescribedby ?? field["aria-describedby"];
 
-    // Group participation via context (no cloneElement): shared name and
-    // selection state, unless the Radio's own props say otherwise.
-    const optionValue = typeof rest.value === "string" ? rest.value : undefined;
-    const name = rest.name ?? group?.name;
-    const selection =
-      group && optionValue !== undefined && rest.checked === undefined
-        ? group.value !== undefined
-          ? { checked: optionValue === group.value }
-          : rest.defaultChecked === undefined &&
-              group.defaultValue !== undefined
-            ? { defaultChecked: optionValue === group.defaultValue }
-            : {}
-        : {};
-    const onChange =
-      group?.onSelect || rest.onChange
-        ? (e: ChangeEvent<HTMLInputElement>) => {
-            rest.onChange?.(e);
-            group?.onSelect?.(e.currentTarget.value);
-          }
-        : undefined;
+  // Group participation via context (no cloneElement): shared name and
+  // selection state, unless the Radio's own props say otherwise.
+  const optionValue = typeof rest.value === "string" ? rest.value : undefined;
+  const name = rest.name ?? group?.name;
+  const selection =
+    group && optionValue !== undefined && rest.checked === undefined
+      ? group.value !== undefined
+        ? { checked: optionValue === group.value }
+        : rest.defaultChecked === undefined && group.defaultValue !== undefined
+          ? { defaultChecked: optionValue === group.defaultValue }
+          : {}
+      : {};
+  const onChange =
+    group?.onSelect || rest.onChange
+      ? (e: ChangeEvent<HTMLInputElement>) => {
+          rest.onChange?.(e);
+          group?.onSelect?.(e.currentTarget.value);
+        }
+      : undefined;
 
-    return (
-      <>
-        <input
-          ref={ref}
-          id={resolvedId}
-          type="radio"
-          className={cx("fui-Radio-input", className)}
-          disabled={disabled}
-          {...rest}
-          aria-invalid={resolvedAriaInvalid}
-          aria-describedby={describedBy}
-          onBlur={(e) => {
-            onBlur?.(e);
-            checkOnBlur(e);
-          }}
-          onInvalid={(e) => {
-            onInvalid?.(e);
-            checkOnInvalid(e);
-          }}
-          name={name}
-          onChange={onChange}
-          {...selection}
-        />
-        <span className="fui-Radio-control" aria-hidden />
-      </>
-    );
-  },
-);
+  return (
+    <>
+      <input
+        ref={ref}
+        id={resolvedId}
+        type="radio"
+        className={cx("fui-Radio-input", className)}
+        disabled={disabled}
+        {...rest}
+        aria-describedby={describedBy}
+        name={name}
+        onChange={onChange}
+        {...selection}
+      />
+      <span className="fui-Radio-control" aria-hidden />
+    </>
+  );
+});
 
 /**
  * A single choice within a set of mutually exclusive options.

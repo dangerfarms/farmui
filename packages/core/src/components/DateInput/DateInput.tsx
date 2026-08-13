@@ -10,12 +10,7 @@ import {
   useMemo,
   useState,
 } from "react";
-import type {
-  FieldsetHTMLAttributes,
-  HTMLAttributes,
-  InputHTMLAttributes,
-  ReactNode,
-} from "react";
+import type { FieldsetHTMLAttributes, HTMLAttributes, InputHTMLAttributes, ReactNode } from "react";
 import { cx } from "../../utils";
 import { Fieldset } from "../Fieldset/Fieldset";
 import { Input } from "../Input/Input";
@@ -120,10 +115,8 @@ function DateInputRoot({
 
   const hasError = errorInfo.count > 0;
   const describedBy =
-    cx(
-      descriptionCount > 0 ? descriptionId : undefined,
-      hasError ? errorId : undefined,
-    ) || undefined;
+    cx(descriptionCount > 0 ? descriptionId : undefined, hasError ? errorId : undefined) ||
+    undefined;
 
   const value = useMemo<DateInputContextValue>(
     () => ({
@@ -166,20 +159,12 @@ function DateInputRoot({
 
 export interface DateInputDescriptionProps extends HTMLAttributes<HTMLParagraphElement> {}
 
-function DateInputDescription({
-  className,
-  children,
-  ...rest
-}: DateInputDescriptionProps) {
+function DateInputDescription({ className, children, ...rest }: DateInputDescriptionProps) {
   const ctx = useDateInputContext("DateInput.Description");
   const { registerDescription } = ctx;
   useEffect(() => registerDescription(), [registerDescription]);
   return (
-    <p
-      id={ctx.descriptionId}
-      className={cx("fui-DateInput-description", className)}
-      {...rest}
-    >
+    <p id={ctx.descriptionId} className={cx("fui-DateInput-description", className)} {...rest}>
       {children}
     </p>
   );
@@ -193,31 +178,19 @@ export interface DateInputErrorProps extends HTMLAttributes<HTMLParagraphElement
   parts?: DateInputPart[];
 }
 
-function DateInputError({
-  parts,
-  className,
-  children,
-  ...rest
-}: DateInputErrorProps) {
+function DateInputError({ parts, className, children, ...rest }: DateInputErrorProps) {
   const ctx = useDateInputContext("DateInput.Error");
   const { registerError } = ctx;
   const hasContent = children != null && children !== false;
   const partsKey = parts?.join(",") ?? "";
   useEffect(() => {
     if (!hasContent) return;
-    return registerError(
-      partsKey ? (partsKey.split(",") as DateInputPart[]) : null,
-    );
+    return registerError(partsKey ? (partsKey.split(",") as DateInputPart[]) : null);
   }, [hasContent, partsKey, registerError]);
 
   if (!hasContent) return null;
   return (
-    <p
-      id={ctx.errorId}
-      role="alert"
-      className={cx("fui-DateInput-error", className)}
-      {...rest}
-    >
+    <p id={ctx.errorId} role="alert" className={cx("fui-DateInput-error", className)} {...rest}>
       <span className="fui-Error-prefix">Error: </span>
       {children}
     </p>
@@ -226,11 +199,7 @@ function DateInputError({
 
 export interface DateInputFieldsProps extends HTMLAttributes<HTMLDivElement> {}
 
-function DateInputFields({
-  className,
-  children,
-  ...rest
-}: DateInputFieldsProps) {
+function DateInputFields({ className, children, ...rest }: DateInputFieldsProps) {
   return (
     <div className={cx("fui-DateInput-parts", className)} {...rest}>
       {children}
@@ -248,33 +217,32 @@ export interface DateInputFieldProps extends Omit<
   children?: ReactNode;
 }
 
-const DateInputField = forwardRef<HTMLInputElement, DateInputFieldProps>(
-  function DateInputField({ part, children, id, ...rest }, ref) {
-    const ctx = useDateInputContext("DateInput.Field");
-    const inputId = id ?? `${ctx.baseId}-${part}`;
-    const invalid = ctx.hasError && (ctx.errorParts?.includes(part) ?? true);
-    return (
-      <div className="fui-DateInput-part" data-part={part}>
-        <label className="fui-DateInput-label" htmlFor={inputId}>
-          {children ?? PART_LABELS[part]}
-        </label>
-        <Input
-          ref={ref}
-          // Day and year are numbers; the month accepts names ("jan",
-          // "january") as well as digits, so it keeps the full keyboard.
-          inputMode={part === "month" ? undefined : "numeric"}
-          name={ctx.name ? `${ctx.name}-${part}` : undefined}
-          autoComplete={
-            ctx.autoComplete === "bday" ? `bday-${part}` : undefined
-          }
-          aria-invalid={invalid || undefined}
-          {...rest}
-          id={inputId}
-        />
-      </div>
-    );
-  },
-);
+const DateInputField = forwardRef<HTMLInputElement, DateInputFieldProps>(function DateInputField(
+  { part, children, id, ...rest },
+  ref,
+) {
+  const ctx = useDateInputContext("DateInput.Field");
+  const inputId = id ?? `${ctx.baseId}-${part}`;
+  const invalid = ctx.hasError && (ctx.errorParts?.includes(part) ?? true);
+  return (
+    <div className="fui-DateInput-part" data-part={part}>
+      <label className="fui-DateInput-label" htmlFor={inputId}>
+        {children ?? PART_LABELS[part]}
+      </label>
+      <Input
+        ref={ref}
+        // Day and year are numbers; the month accepts names ("jan",
+        // "january") as well as digits, so it keeps the full keyboard.
+        inputMode={part === "month" ? undefined : "numeric"}
+        name={ctx.name ? `${ctx.name}-${part}` : undefined}
+        autoComplete={ctx.autoComplete === "bday" ? `bday-${part}` : undefined}
+        aria-invalid={invalid || undefined}
+        {...rest}
+        id={inputId}
+      />
+    </div>
+  );
+});
 
 export const DateInput = {
   Root: DateInputRoot,

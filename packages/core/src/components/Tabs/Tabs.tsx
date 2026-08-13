@@ -10,12 +10,7 @@ import {
   useRef,
   useState,
 } from "react";
-import type {
-  ButtonHTMLAttributes,
-  HTMLAttributes,
-  KeyboardEvent,
-  ReactNode,
-} from "react";
+import type { ButtonHTMLAttributes, HTMLAttributes, KeyboardEvent, ReactNode } from "react";
 import { cx } from "../../utils";
 
 interface TabsContextValue {
@@ -52,10 +47,7 @@ export interface TabsListProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
 }
 
-export interface TabsTabProps extends Omit<
-  ButtonHTMLAttributes<HTMLButtonElement>,
-  "value"
-> {
+export interface TabsTabProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "value"> {
   /** Unique value linking this tab to its panel. */
   value: string;
   children?: ReactNode;
@@ -82,9 +74,7 @@ function TabsBase({
   ...rest
 }: TabsProps) {
   const baseId = useId();
-  const [uncontrolled, setUncontrolled] = useState<string | null>(
-    defaultValue ?? null,
-  );
+  const [uncontrolled, setUncontrolled] = useState<string | null>(defaultValue ?? null);
   const isControlled = controlled !== undefined;
   const value = isControlled ? controlled : uncontrolled;
 
@@ -119,9 +109,7 @@ export function TabsList({ className, children, ...rest }: TabsListProps) {
     if (!keys.includes(event.key)) return;
 
     const tabs = Array.from(
-      listRef.current?.querySelectorAll<HTMLButtonElement>(
-        '[role="tab"]:not(:disabled)',
-      ) ?? [],
+      listRef.current?.querySelectorAll<HTMLButtonElement>('[role="tab"]:not(:disabled)') ?? [],
     );
     if (tabs.length === 0) return;
 
@@ -133,10 +121,7 @@ export function TabsList({ className, children, ...rest }: TabsListProps) {
         nextIndex = current < 0 ? 0 : (current + 1) % tabs.length;
         break;
       case "ArrowLeft":
-        nextIndex =
-          current < 0
-            ? tabs.length - 1
-            : (current - 1 + tabs.length) % tabs.length;
+        nextIndex = current < 0 ? tabs.length - 1 : (current - 1 + tabs.length) % tabs.length;
         break;
       case "Home":
         nextIndex = 0;
@@ -152,6 +137,8 @@ export function TabsList({ className, children, ...rest }: TabsListProps) {
   };
 
   return (
+    // interactive-supports-focus is off for this file (.oxlintrc):
+    // focus roves between the tabs; the list itself is never a stop
     <div
       ref={listRef}
       role="tablist"
@@ -165,14 +152,7 @@ export function TabsList({ className, children, ...rest }: TabsListProps) {
 }
 
 /** A single tab control. */
-export function TabsTab({
-  value,
-  disabled,
-  className,
-  children,
-  onClick,
-  ...rest
-}: TabsTabProps) {
+export function TabsTab({ value, disabled, className, children, onClick, ...rest }: TabsTabProps) {
   const { value: active, setValue, baseId } = useTabsContext("Tabs.Tab");
   const selected = active === value;
 
@@ -199,12 +179,7 @@ export function TabsTab({
 }
 
 /** The panel shown for its matching tab. */
-export function TabsPanel({
-  value,
-  className,
-  children,
-  ...rest
-}: TabsPanelProps) {
+export function TabsPanel({ value, className, children, ...rest }: TabsPanelProps) {
   const { value: active, setValue, baseId } = useTabsContext("Tabs.Panel");
   const selected = active === value;
   const ref = useRef<HTMLDivElement>(null);
@@ -212,9 +187,7 @@ export function TabsPanel({
   // hidden="until-found" lets find-in-page reach inactive panels;
   // `beforematch` activates the matched tab. React normalises `hidden` to a
   // boolean, so the attribute value must be set imperatively.
-  const untilFound =
-    typeof HTMLElement !== "undefined" &&
-    "onbeforematch" in HTMLElement.prototype;
+  const untilFound = typeof HTMLElement !== "undefined" && "onbeforematch" in HTMLElement.prototype;
   useEffect(() => {
     const el = ref.current;
     if (!el || !untilFound) return;

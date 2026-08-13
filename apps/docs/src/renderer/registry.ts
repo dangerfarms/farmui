@@ -82,16 +82,12 @@ const content: ComponentContent[] = [
 export const components: ComponentDoc[] = COMPONENTS.map((meta) => {
   const doc = content.find((c) => c.slug === meta.slug);
   if (!doc) {
-    throw new Error(
-      `"${meta.slug}" is in site/nav.ts but has no content file registered here.`,
-    );
+    throw new Error(`"${meta.slug}" is in site/nav.ts but has no content file registered here.`);
   }
   return { ...doc, ...meta };
 });
 
-const unlisted = content.filter(
-  (c) => !COMPONENTS.some((m) => m.slug === c.slug),
-);
+const unlisted = content.filter((c) => !COMPONENTS.some((m) => m.slug === c.slug));
 if (unlisted.length > 0) {
   throw new Error(
     `Content files missing from site/nav.ts: ${unlisted.map((c) => c.slug).join(", ")}.`,

@@ -8,7 +8,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
   /**
    * Render as a different element — e.g. a link that looks like a button:
-   * `<Button render={<a href="/signup" />}>Get started</Button>`. The
+   * `<Button render={<a href="/signup">Get started</a>} />`. The
    * Button's classes and attributes merge onto the element it renders.
    */
   render?: RenderProp<Record<string, unknown>>;
@@ -29,7 +29,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
  *   <Button>Delete</Button>                                  // danger region
  * </section>
  * <div data-fui-buttons="block"><Button>Save</Button></div>  // full-width hint
- * <Button render={<a href="/signup" />}>Get started</Button> // as a link
+ * <Button render={<a href="/signup">Get started</a>} /> // as a link
  * ```
  *
  * Size is fluid (container-relative tokens) — there is no size prop, and
@@ -40,31 +40,27 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
  * For a one-off colour set the public `--fui-button-color` property; for a
  * house style, wrap it (the SecondaryButton pattern).
  */
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  function Button({ render, className, children, ...rest }, ref) {
-    if (render) {
-      return (
-        <>
-          {renderWithProps(render, {
-            ref,
-            className: cx("fui-Button-root", className),
-            children,
-            ...rest,
-          })}
-        </>
-      );
-    }
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+  { render, className, children, ...rest },
+  ref,
+) {
+  if (render) {
     return (
-      // type="button" unless overridden: a bare <button> inside a form is a
-      // native submit, so "Cancel" buttons would submit the form.
-      <button
-        ref={ref}
-        type="button"
-        className={cx("fui-Button-root", className)}
-        {...rest}
-      >
-        {children}
-      </button>
+      <>
+        {renderWithProps(render, {
+          ref,
+          className: cx("fui-Button-root", className),
+          children,
+          ...rest,
+        })}
+      </>
     );
-  },
-);
+  }
+  return (
+    // type="button" unless overridden: a bare <button> inside a form is a
+    // native submit, so "Cancel" buttons would submit the form.
+    <button ref={ref} type="button" className={cx("fui-Button-root", className)} {...rest}>
+      {children}
+    </button>
+  );
+});

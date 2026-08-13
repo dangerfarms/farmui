@@ -6,7 +6,7 @@
 }
 
 .tabs {
-  display: flex;
+  display: block flex;
   gap: 0.25rem;
   padding: 0.4rem 0.5rem;
   border-block-end: 1px solid var(--fui-border);
@@ -26,9 +26,11 @@
     background var(--fui-duration-md) var(--fui-ease),
     color var(--fui-duration-md) var(--fui-ease);
 }
+
 .tab:hover {
   color: var(--fui-text);
 }
+
 .tab[data-active] {
   color: var(--fui-text);
   background: var(--fui-surface);
@@ -36,7 +38,7 @@
 }
 
 .stage {
-  display: flex;
+  display: block flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 1rem;
