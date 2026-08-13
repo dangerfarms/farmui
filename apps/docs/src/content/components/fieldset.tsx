@@ -25,7 +25,7 @@ const doc: ComponentContent = {
     {
       title: "Optional group",
       description:
-        "Mark the whole group optional in words rather than with an asterisk (GOV.UK).",
+        "Mark the whole group optional in words rather than with an asterisk.",
       code: `<Fieldset.Root>
   <Fieldset.Legend optional>Interests</Fieldset.Legend>
   <Checkbox label="Design" />
@@ -64,7 +64,7 @@ const doc: ComponentContent = {
     },
     {
       title: "One question per fieldset",
-      body: "Everything inside the fieldset is announced under the legend's name, so a fieldset holding two unrelated questions mislabels half its controls. Give each question its own fieldset, and avoid nesting them: a legend inside a legend multiplies what is read before every control. GOV.UK services go as far as one question per page with the legend as the page heading; the transferable core for a component library is the one-legend-one-question rule, not the page pattern.",
+      body: "Everything inside the fieldset is announced under the legend's name, so a fieldset holding two unrelated questions mislabels half its controls. Give each question its own fieldset, and avoid nesting them: a legend inside a legend multiplies what is read before every control. Some services go as far as one question per page with the legend as the page heading; the transferable core for a component library is the one-legend-one-question rule, not the page pattern.",
     },
   ],
   accessibility: [

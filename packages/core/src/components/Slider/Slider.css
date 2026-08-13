@@ -9,7 +9,7 @@
   /* Inside the labelled wrapper the wrapper does the disabled fade (the bare
      control's :not guard, in the input scope, stops the two compounding). */
   :scope[data-disabled] {
-    opacity: 0.6;
+    opacity: var(--fui-disabled-opacity);
   }
 
   .fui-Slider-label {
@@ -25,7 +25,7 @@
   /* Bare control fades itself; inside the labelled wrapper the wrapper does
      (the :not guard stops the two from compounding). */
   :scope[data-disabled]:where(:not(.fui-Slider-wrapper *)) {
-    opacity: 0.6;
+    opacity: var(--fui-disabled-opacity);
   }
 
   :scope {

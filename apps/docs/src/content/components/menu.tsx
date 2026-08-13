@@ -79,7 +79,7 @@ const doc: ComponentContent = {
   ],
   whenNotToUse: [
     "For choosing a value that persists, use Select, which has real selection semantics the menu role does not promise.",
-    "For navigation, prefer visible links; a menu hides destinations behind an extra interaction (GOV.UK: don't hide the things users need).",
+    "For navigation, prefer visible links; a menu hides destinations users need behind an extra interaction.",
     "For one or two actions: plain Buttons are simpler and one click fewer.",
   ],
   howItWorks: [

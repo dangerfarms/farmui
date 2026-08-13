@@ -13,7 +13,7 @@
   /* Inside the labelled wrapper the wrapper does the disabled fade (the bare
      control's :not guard, in the control scope, stops the two compounding). */
   :scope[data-disabled] {
-    opacity: 0.6;
+    opacity: var(--fui-disabled-opacity);
   }
 }
 
@@ -35,7 +35,7 @@
   /* Bare control fades itself; inside the labelled wrapper the wrapper does
      (the :not guard stops the two from compounding). */
   :scope[data-disabled]:where(:not(.fui-Switch-wrapper *)) {
-    opacity: 0.6;
+    opacity: var(--fui-disabled-opacity);
   }
 
   /* Visually hide the native control but keep it in the a11y tree &
@@ -106,6 +106,16 @@
     outline-offset: 2px;
   }
 
+  /* Invalid is detected from the input's own state, the family selector:
+     ARIA (from a composed Field.Error) or native :user-invalid. */
+  .fui-Switch-input:is([aria-invalid="true"], :user-invalid)
+    + .fui-Switch-track {
+    --fui-ring-color: var(--fui-danger-ring);
+
+    outline: 1px solid var(--fui-danger);
+    outline-offset: 0;
+  }
+
   /* Forced colors strips backgrounds — without this the switch is invisible.
      System colours keep the user's palette: ButtonText chrome, Highlight for
      the on state (thumb position still moves as the second signal). */
@@ -149,10 +159,5 @@
   .fui-Switch-description {
     font-size: var(--fui-text-xs);
     color: var(--fui-text-muted);
-  }
-
-  .fui-Switch-error {
-    font-size: var(--fui-text-xs);
-    color: var(--fui-danger);
   }
 }

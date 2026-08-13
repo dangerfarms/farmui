@@ -1,6 +1,7 @@
 "use client";
 
-import { Field, Input } from "@farmui/core";
+import { useState, type FormEvent } from "react";
+import { Button, Field, Input } from "@farmui/core";
 
 export function FieldComposeDemo() {
   return (
@@ -54,5 +55,43 @@ export function FieldCustomControlDemo() {
         />
       </Field.Root>
     </div>
+  );
+}
+
+export function FieldFormDemo() {
+  const [errors, setErrors] = useState<{ name?: string; email?: string }>({});
+
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    setErrors({
+      name: data.get("name") ? undefined : "Enter your full name",
+      email: data.get("email") ? undefined : "Enter your email address",
+    });
+  };
+
+  return (
+    <form
+      onSubmit={onSubmit}
+      noValidate
+      style={{ display: "grid", gap: "1rem", maxInlineSize: "22rem" }}
+    >
+      <Field.Root>
+        <Field.Label>Full name</Field.Label>
+        <Input name="name" autoComplete="name" />
+        <Field.Error>{errors.name}</Field.Error>
+      </Field.Root>
+      <Field.Root>
+        <Field.Label>Email address</Field.Label>
+        <Field.Description>
+          We&apos;ll only use this to reply.
+        </Field.Description>
+        <Input name="email" type="email" autoComplete="email" />
+        <Field.Error>{errors.email}</Field.Error>
+      </Field.Root>
+      <div>
+        <Button type="submit">Save and continue</Button>
+      </div>
+    </form>
   );
 }

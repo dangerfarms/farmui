@@ -36,10 +36,27 @@
   }
 }
 
+/* The screen-reader-only "Error: " prefix inside error messages:
+   role="alert" announces the text, and the prefix makes it unmistakable
+   out of context. Self-scoped; shared by every error renderer. */
+@scope (.fui-Error-prefix) {
+  :scope {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: clip;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
 /* Error state is detected, not declared: a field is invalid when it
    contains a rendered error message, or when the platform says so
    (:user-invalid after user interaction). */
-@scope (.fui-Field-root:has(.fui-Field-error, :user-invalid)) {
+@scope (.fui-Field-root:has(.fui-Field-error, :user-invalid, [aria-invalid="true"])) {
   .fui-Field-label {
     color: var(--fui-danger);
   }

@@ -205,6 +205,7 @@ function FieldError({ className, children, ...rest }: FieldErrorProps) {
       role="alert"
       {...rest}
     >
+      <span className="fui-Error-prefix">Error: </span>
       {children}
     </p>
   );

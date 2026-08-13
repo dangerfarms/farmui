@@ -322,7 +322,13 @@ describe("DateInput wiring", () => {
       const field = screen.getByLabelText(
         part.charAt(0).toUpperCase() + part.slice(1),
       );
-      expect(field).toHaveAttribute("inputmode", "numeric");
+      if (part === "month") {
+        // The month accepts names ("jan") as well as digits, so it keeps
+        // the full keyboard.
+        expect(field).not.toHaveAttribute("inputmode");
+      } else {
+        expect(field).toHaveAttribute("inputmode", "numeric");
+      }
       expect(field).toHaveAttribute("name", `date-of-birth-${part}`);
       expect(field).toHaveAttribute("autocomplete", `bday-${part}`);
     }

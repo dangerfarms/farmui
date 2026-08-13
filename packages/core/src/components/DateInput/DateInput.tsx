@@ -218,6 +218,7 @@ function DateInputError({
       className={cx("fui-DateInput-error", className)}
       {...rest}
     >
+      <span className="fui-Error-prefix">Error: </span>
       {children}
     </p>
   );
@@ -259,7 +260,9 @@ const DateInputField = forwardRef<HTMLInputElement, DateInputFieldProps>(
         </label>
         <Input
           ref={ref}
-          inputMode="numeric"
+          // Day and year are numbers; the month accepts names ("jan",
+          // "january") as well as digits, so it keeps the full keyboard.
+          inputMode={part === "month" ? undefined : "numeric"}
           name={ctx.name ? `${ctx.name}-${part}` : undefined}
           autoComplete={
             ctx.autoComplete === "bday" ? `bday-${part}` : undefined

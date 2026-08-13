@@ -599,7 +599,7 @@ describe("Popover", () => {
     await user.click(trigger);
     expect(screen.getByText("Popover body")).toBeVisible();
     expect(trigger).toHaveAttribute("aria-expanded", "true");
-    // Shared styling hooks (the Base UI state-attribute vocabulary).
+    // Shared styling hooks: the state-attribute contract.
     expect(trigger).toHaveAttribute("data-popup-open", "true");
     expect(screen.getByText("Popover body")).toHaveAttribute("data-open");
 

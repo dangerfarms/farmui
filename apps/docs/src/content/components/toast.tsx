@@ -87,7 +87,7 @@ const doc: ComponentContent = {
   ],
   whenNotToUse: [
     "For errors the user must fix: show the error where the problem is (Field errors, or an Alert in place); a message that disappears cannot be acted on.",
-    "As the only record of something important: toasts vanish, so anything the user may need later must also exist in the page (GOV.UK: don't rely on transient messages).",
+    "As the only record of something important: toasts vanish, so anything the user may need later must also exist in the page.",
     "For messages that require a decision, use Modal, which holds focus until the user answers.",
   ],
   howItWorks: [

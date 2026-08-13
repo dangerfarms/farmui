@@ -70,7 +70,7 @@ const CheckboxControl = forwardRef<HTMLInputElement, CheckboxControlProps>(
     const describedBy = ariaDescribedby ?? field["aria-describedby"];
 
     return (
-      <span className="fui-Checkbox-box">
+      <span className="fui-Checkbox-box" data-disabled={disabled || undefined}>
         <input
           ref={innerRef}
           id={resolvedId}

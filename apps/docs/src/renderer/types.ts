@@ -28,7 +28,7 @@ export interface HowItWorksEntry {
   render?: () => ReactNode;
 }
 
-/** An error-message template for one situation (GOV.UK-style). */
+/** An error-message template for one situation. */
 export interface ErrorTemplate {
   situation: string;
   message: string;

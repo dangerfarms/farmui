@@ -1,5 +1,6 @@
 import type { ComponentContent } from "@/renderer/types";
 import {
+  FieldFormDemo,
   FieldComposeDemo,
   FieldCustomControlDemo,
   FieldErrorDemo,
@@ -38,12 +39,32 @@ const doc: ComponentContent = {
     {
       title: "Optional field",
       description:
-        "Mark optional fields in words (GOV.UK guidance) rather than flagging required ones with an asterisk.",
+        "Mark optional fields in words rather than flagging required ones with an asterisk: most fields are required, so the exceptions are the useful signal.",
       code: `<Field.Root>
   <Field.Label optional>Company</Field.Label>
   <Input placeholder="Acme Inc." />
 </Field.Root>`,
       render: () => <FieldOptionalDemo />,
+    },
+    {
+      title: "A whole form",
+      description:
+        "Fields compose into a form with nothing extra: each control self-wires, each Field.Error appears where its field is, and submit is an ordinary button. For the summary that belongs at the top of a longer form, see ErrorSummary.",
+      code: `<form onSubmit={onSubmit} noValidate>
+  <Field.Root>
+    <Field.Label>Full name</Field.Label>
+    <Input name="name" autoComplete="name" />
+    <Field.Error>{errors.name}</Field.Error>
+  </Field.Root>
+  <Field.Root>
+    <Field.Label>Email address</Field.Label>
+    <Field.Description>We'll only use this to reply.</Field.Description>
+    <Input name="email" type="email" autoComplete="email" />
+    <Field.Error>{errors.email}</Field.Error>
+  </Field.Root>
+  <Button type="submit">Save and continue</Button>
+</form>`,
+      render: () => <FieldFormDemo />,
     },
     {
       title: "Custom controls via Field.Control",
@@ -72,6 +93,18 @@ const doc: ComponentContent = {
       body: "An error message says what happened and how to fix it, in the words of the question itself: if the label asks “How many hours do you work a week?”, the error is “Enter how many hours you work a week”, never “This field is required”. Use an instruction (“Enter your first name”) when the field is empty and a description (“Name must be 35 characters or fewer”) when the value breaks a rule. Write in plain, positive language: no “please” (it implies a choice), no “sorry” (it doesn't help), no “valid/invalid” (vague), no jargon or error codes, no humour. Keep the user's input on screen while showing the error: never clear the field.",
     },
     {
+      title: "Writing labels and hints",
+      body: "Labels are sentence case with no trailing colon, and name the thing the field asks for. A Field.Description is a single short sentence; never put links in it, because text reached through aria-describedby is announced, not focusable, so a link there is unreachable for the people it is read to.",
+    },
+    {
+      title: "When validation runs",
+      body: "Two paths, one timing rule. The native path needs no JS: constraint attributes (required, type, minlength) style the control via :user-invalid after the user has interacted, and the same verdict is mirrored to aria-invalid on blur and submit. The error path is render-time: the field is invalid exactly while a Field.Error with content is rendered, so async validation is just rendering the message when your check resolves. Neither path validates keystroke-by-keystroke; a field that complains mid-word teaches users to distrust the form.",
+    },
+    {
+      title: "Styling state from outside",
+      body: 'Everything the family knows about a field is expressed in selectors you can target: [aria-invalid="true"] and :user-invalid on the control, :has(.fui-Field-error) on the root, [data-disabled] on control boxes, and :focus-within on the field box. There are no state props to mirror; the DOM is the contract.',
+    },
+    {
       title: "One error, one place, one wording",
       body: 'The message renders once, inside the field, tied to the control by aria-describedby and announced by role="alert". The wiring is automatic when Field.Error has content. Keep the wording identical anywhere else it appears so it reads the same out of context.',
     },
@@ -97,7 +130,7 @@ const doc: ComponentContent = {
   accessibility: [
     "Field.Root generates one id and hands it to Field.Label (via htmlFor) and to the control, so label and control are always associated.",
     "Description and error ids are added to the control's aria-describedby only when those parts are present.",
-    'Any Field.Error with content sets aria-invalid on the control and is announced with role="alert".',
+    'Any Field.Error with content sets aria-invalid on the control and is announced with role="alert"; a visually hidden "Error: " prefix makes the announcement unmistakable out of context.',
     "The FarmUI controls read this wiring from context; Field.Control hands it to arbitrary elements, letting you keep semantic, native controls instead of re-implementing them.",
   ],
   props: [

@@ -57,6 +57,11 @@
     translate: 0 1px;
   }
 
+  :scope:focus-visible {
+    outline: var(--fui-ring-width) solid var(--fui-ring-color);
+    outline-offset: 2px;
+  }
+
   :scope:disabled {
     opacity: var(--fui-disabled-opacity);
   }

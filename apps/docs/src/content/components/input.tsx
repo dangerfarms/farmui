@@ -164,7 +164,7 @@ const doc: ComponentContent = {
     "Field.Description and Field.Error are linked via aria-describedby, and a rendered error also sets aria-invalid, announced together when the field gains focus.",
     'Field.Error uses role="alert" so the message is announced as it appears.',
     "leftSection / rightSection render your content beside the input but outside its accessible name. Mark visual content like currency symbols or icons aria-hidden, and carry the unit in the label or description so non-visual users get it too.",
-    "Following GOV.UK guidance, mark optional fields in words (Field.Label's optional prop) rather than asterisking required ones: required lives on the control as the native required attribute, which drives validation and :user-invalid styling.",
+    "Mark optional fields in words (Field.Label's optional prop) rather than asterisking required ones: required lives on the control as the native required attribute, which drives validation and :user-invalid styling.",
   ],
   props: [
     {

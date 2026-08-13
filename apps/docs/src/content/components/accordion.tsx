@@ -116,7 +116,7 @@ const doc: ComponentContent = {
     "As a single disclosure: one AccordionItem on its own is the platform's <details>/<summary> widget, the right home for 'advanced options' most people never need.",
   ],
   whenNotToUse: [
-    "When most users need the content: GOV.UK research found most users never open collapsed sections, so anything hidden by default may simply never be read. Put it on the page under headings.",
+    "When most users need the content: usability research consistently finds collapsed sections go unopened, so anything hidden by default may simply never be read. Put it on the page under headings.",
     "For small amounts of content: the click cost of opening outweighs the space saved; plain prose is simpler.",
     "Nested inside another accordion: stacked disclosure widgets make it unclear what is open, what is hidden, and how much content remains.",
   ],

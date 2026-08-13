@@ -117,7 +117,7 @@ const doc: ComponentContent = {
     },
     {
       title: "Accept how people write dates",
-      body: 'Users copy dates from documents that disagree about format. Accept a leading zero and its absence, and validate on submit rather than while typing: a field that complains about "3" before the user has finished "31" teaches them to distrust the form.',
+      body: 'Users copy dates from documents that disagree about format. The month field accepts names as well as digits ("jan", "january"), which measurably reduces errors, so only day and year raise the numeric keypad. Accept a leading zero and its absence, and validate on submit rather than while typing: a field that complains about "3" before the user has finished "31" teaches them to distrust the form.',
     },
   ],
   errors: [
@@ -146,7 +146,7 @@ const doc: ComponentContent = {
     "The group is a native <fieldset> named by its <legend>, so screen readers announce the question with each of the fields.",
     "Each Field has its own visible <label>: Day, Month, Year by default; pass children to swap them for other languages.",
     'The Description and Error are linked to the fieldset via aria-describedby, and the Error uses role="alert" so it is announced as it appears; invalid fields also set aria-invalid.',
-    'Each field uses inputMode="numeric": a number pad on touch devices without the scroll-wheel and silent-value-change hazards of type="number".',
+    'Day and year use inputMode="numeric" (a number pad without the hazards of type="number"); the month field keeps the full keyboard so names like "jan" can be typed.',
     "The fields are sized to their answers (two digits, four for the year); width is information about the expected length.",
   ],
   props: [

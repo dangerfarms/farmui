@@ -50,6 +50,10 @@ const doc: ComponentContent = {
       body: "List errors in the order the fields appear on the page, so fixing them top to bottom walks the form once.",
     },
     {
+      title: "Placement and the page title",
+      body: 'Render the summary at the top of the main content, above the page heading, so it is the first thing encountered after the failed submit. Prefix the document title with "Error: " as well; a reloaded or re-announced tab then states the failure before anything else.',
+    },
+    {
       title: "Multi-field controls",
       body: 'A control made of several fields, like DateInput, takes one item per error, linked to the first field that error applies to: give the DateInput.Root id="date-of-birth" and point the item at #date-of-birth-day, or straight at #date-of-birth-year when the error names the year.',
     },

@@ -76,7 +76,7 @@ const doc: ComponentContent = {
   ],
   whenNotToUse: [
     "For supplementary content or quick actions that don't need to block, use Popover.",
-    "For anything long-form or multi-step, navigate to a page instead (GOV.UK: keep interactions in the page flow where possible).",
+    "For anything long-form or multi-step, navigate to a page instead and keep the interaction in the page flow.",
     "For non-essential announcements, use Alert in the page.",
   ],
   howItWorks: [

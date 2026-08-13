@@ -14,10 +14,10 @@ export default function Composition() {
     <div className={prose.prose}>
       <h1>Composition</h1>
       <p className={prose.lead}>
-        FarmUI follows Base UI&apos;s composition model: components are built
-        from parts, every part renders a sensible element by default, and one
-        merge contract governs how your props combine with the component&apos;s
-        wiring. Learn it once — it works the same everywhere.
+        FarmUI components compose: they are built from parts, every part renders
+        a sensible element by default, and one merge contract governs how your
+        props combine with the component&apos;s wiring. Learn it once — it works
+        the same everywhere.
       </p>
 
       <h2>Parts and built-in elements</h2>
@@ -80,11 +80,9 @@ export default function Composition() {
         simpler built-in form, or a gap you should report.
       </p>
       <p>
-        (If you&apos;ve used Radix&apos;s <code>asChild</code>:{" "}
-        <code>render</code> is Base UI&apos;s successor to it. A dedicated prop
-        keeps <code>children</code> unambiguous: always content, never secretly
-        the element. The function form gives you typed access to the wiring when
-        you need it.)
+        A dedicated <code>render</code> prop keeps <code>children</code>{" "}
+        unambiguous: always content, never secretly the element. The function
+        form gives you typed access to the wiring when you need it.
       </p>
 
       <h2>The merge contract</h2>

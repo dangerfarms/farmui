@@ -8,7 +8,7 @@
   }
 
   :scope[data-disabled] {
-    opacity: 0.6;
+    opacity: var(--fui-disabled-opacity);
   }
 }
 
@@ -44,6 +44,12 @@
    or group ancestors) outside the scope root — allowed, since the subject
    (the control) stays in scope. */
 @scope (.fui-Radio-control) {
+  /* Bare control fades itself; the labelled wrapper's fade covers the
+     composed form (the :not guard stops the two from compounding). */
+  .fui-Radio-input:disabled + :scope:where(:not(.fui-Radio-wrapper *)) {
+    opacity: var(--fui-disabled-opacity);
+  }
+
   :scope {
     --_size: 1.3889em;
     --_dot: 0.5556em;

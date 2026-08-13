@@ -8,7 +8,7 @@
   }
 
   :scope[data-disabled] {
-    opacity: 0.7;
+    opacity: var(--fui-disabled-opacity);
   }
 
   .fui-Checkbox-control {
@@ -22,6 +22,12 @@
 /* The bare control — rendered with or without the labelled wrapper, so the
    box is the scope root for everything inside it. */
 @scope (.fui-Checkbox-box) {
+  /* Bare control fades itself; inside the labelled wrapper the wrapper
+     does (the :not guard stops the two from compounding). */
+  :scope[data-disabled]:where(:not(.fui-Checkbox-wrapper *)) {
+    opacity: var(--fui-disabled-opacity);
+  }
+
   :scope {
     --_box: 1.3889em;
 
@@ -136,10 +142,5 @@
   .fui-Checkbox-description {
     font-size: var(--fui-text-xs);
     color: var(--fui-text-muted);
-  }
-
-  .fui-Checkbox-error {
-    font-size: var(--fui-text-xs);
-    color: var(--fui-danger);
   }
 }

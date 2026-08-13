@@ -93,7 +93,7 @@ const doc: ComponentContent = {
     "When the options are familiar and the user doesn't need to compare them side by side.",
   ],
   whenNotToUse: [
-    "For a small set of options the user should see at once: use Radio (GOV.UK: avoid selects where radios fit).",
+    "For a small set of options the user should see at once: use Radio, which shows every choice up front.",
     "For yes/no or on/off: use Checkbox or Switch.",
     "For free-form input: use Input.",
   ],
@@ -108,7 +108,7 @@ const doc: ComponentContent = {
     },
     {
       title: "A select conceals its options",
-      body: "Until opened, the menu shows one value and hides every alternative, so users can't survey or compare the choices. That is the cost that makes RadioGroup the better control for small sets. Reserve Select for long lists of familiar answers users recognise rather than weigh up.",
+      body: "Until opened, the menu shows one value and hides every alternative, so users can't survey or compare the choices. The cost shows up in usability testing: people try to type into the closed control, mistake the focused option for a selected one, and struggle to operate the menu zoomed in. That is the cost that makes RadioGroup the better control for small sets. Reserve Select for long lists of familiar answers users recognise rather than weigh up.",
     },
   ],
   errors: [

@@ -25,6 +25,8 @@ export interface RadioGroupProps {
   defaultValue?: string;
   /** Fires with the newly selected value when a radio is chosen. */
   onChange?: (value: string) => void;
+  /** Mark the whole group optional in text rather than with an asterisk. */
+  optional?: boolean;
   /** Layout direction of the options. @default "vertical" */
   orientation?: "vertical" | "horizontal";
   /** `<Radio>` elements to render as the group's options. */
@@ -49,6 +51,7 @@ export function RadioGroup({
   value,
   defaultValue,
   onChange,
+  optional,
   orientation = "vertical",
   children,
   className,
@@ -76,7 +79,9 @@ export function RadioGroup({
         aria-describedby={cx(descId, errId) || undefined}
         aria-invalid={invalid || undefined}
       >
-        {label && <Fieldset.Legend>{label}</Fieldset.Legend>}
+        {label && (
+          <Fieldset.Legend optional={optional}>{label}</Fieldset.Legend>
+        )}
         {description && (
           <span className="fui-Radio-groupDescription" id={descId}>
             {description}
@@ -87,6 +92,7 @@ export function RadioGroup({
         </div>
         {error && (
           <span className="fui-Radio-error" id={errId} role="alert">
+            <span className="fui-Error-prefix">Error: </span>
             {error}
           </span>
         )}

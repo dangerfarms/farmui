@@ -57,7 +57,7 @@
 
   :scope[data-disabled] {
     background: var(--fui-bg-subtle);
-    opacity: 0.7;
+    opacity: var(--fui-disabled-opacity);
   }
 
   .fui-Input-input {

@@ -43,7 +43,7 @@ const doc: ComponentContent = {
     {
       title: "Composed inside a Field",
       description:
-        "The bare SwitchControl self-wires from Field context: label association and description linking come from the Field, the Base UI composition pattern shared by all form controls.",
+        "The bare SwitchControl self-wires from Field context: label association and description linking come from the Field, the same composition contract every form control shares.",
       code: `<Field.Root>
   <Field.Label>
     <SwitchControl defaultChecked /> Email notifications
@@ -58,7 +58,7 @@ const doc: ComponentContent = {
     "When the two states are clearly opposite and the control acts like a physical switch.",
   ],
   whenNotToUse: [
-    "When the change only applies after submitting a form. Use a Checkbox instead (Polaris).",
+    'When the change only applies after submitting a form. Use a Checkbox instead: its ticked state reads as "will apply when I submit".',
     "For selecting among more than two states. Use Radio or Select.",
   ],
   howItWorks: [

@@ -64,8 +64,16 @@ const doc: ComponentContent = {
       title: "Limits live in the description",
       body: "State a length limit up front in the Field.Description (“Your answer must be 200 characters or fewer”) rather than springing it as an error after the user has written too much. FarmUI does not ship a live character counter, so keep the validation message in exactly the words the description used: the rule then reads the same before and after the mistake.",
     },
+    {
+      title: "Never disable copy and paste",
+      body: "People draft long answers elsewhere and paste them in; blocking paste, or clearing the field on validation, punishes exactly the users taking the most care. The field keeps whatever arrives, and errors describe the rule the text broke.",
+    },
   ],
   errors: [
+    {
+      situation: "The text contains a disallowed character",
+      message: "[Label] must not include [characters]",
+    },
     {
       situation: "The field is empty",
       message: "Enter [whatever the label asks for]",
@@ -82,7 +90,7 @@ const doc: ComponentContent = {
   accessibility: [
     "Inside a Field.Root it self-wires, so the label, description and error share one accessible wiring (label tied by id, aria-describedby, aria-invalid). See the Field page.",
     'Field.Error uses role="alert" so the message is announced when it appears.',
-    "Resizes vertically only, so horizontal resize can't break the layout; give enough default rows to hint at the expected length (Polaris).",
+    "Resizes vertically only, so horizontal resize can't break the layout; give enough default rows to hint at the expected length.",
   ],
   props: [
     {

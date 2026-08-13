@@ -183,11 +183,11 @@ const doc: ComponentContent = {
   ],
   whenToUse: [
     "To trigger an action in the current context: submitting a form, opening a dialog, confirming a choice.",
-    "For the single most important action on a screen, put the region in a primary context (--fui-context: primary) and leave the rest neutral (Polaris: one primary action per section).",
+    "For the single most important action on a screen, put the region in a primary context (--fui-context: primary) and leave the rest neutral: one primary action per section keeps emphasis meaningful.",
     "Set intent with --fui-context on a container rather than repeating props on every button.",
   ],
   whenNotToUse: [
-    'To navigate to another page or URL: use a link. A button that navigates breaks right-click, middle-click and "open in new tab" (GOV.UK).',
+    'To navigate to another page or URL: use a link. A button that navigates breaks right-click, middle-click and "open in new tab".',
     "For many low-emphasis choices at once: consider a menu, tabs, or a segmented control instead of a row of equal buttons.",
   ],
   howItWorks: [
