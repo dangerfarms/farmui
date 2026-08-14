@@ -1,0 +1,45 @@
+.trigger {
+  display: none;
+  place-items: center;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  color: var(--fui-text-muted);
+  background: transparent;
+  border: 1px solid var(--fui-border);
+  border-radius: var(--fui-radius-md);
+  cursor: pointer;
+  transition:
+    color var(--fui-duration-md) var(--fui-ease),
+    border-color var(--fui-duration-md) var(--fui-ease),
+    background var(--fui-duration-md) var(--fui-ease);
+}
+
+.trigger:hover {
+  color: var(--fui-text);
+  border-color: var(--fui-border-strong);
+  background: var(--fui-surface-hover);
+}
+
+@media (width <= 62rem) {
+  .trigger {
+    display: block grid;
+  }
+}
+
+.nav {
+  display: block flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.srOnly {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: clip;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

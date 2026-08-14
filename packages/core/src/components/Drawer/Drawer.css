@@ -1,0 +1,122 @@
+@scope (.fui-Drawer-panel) {
+  :scope {
+    --_size: 24rem;
+    --_hidden: 0 0;
+
+    margin: 0;
+    padding: var(--fui-space-lg);
+    border: 0;
+    background: var(--fui-surface);
+    box-shadow: var(--fui-shadow-lg);
+    font-size: var(--fui-text-sm);
+    overflow: auto;
+    overscroll-behavior: contain;
+
+    &[data-size="sm"] {
+      --_size: 18rem;
+    }
+
+    &[data-size="lg"] {
+      --_size: 30rem;
+    }
+
+    &[data-side="start"],
+    &[data-side="end"] {
+      inset-block: 0;
+      block-size: auto;
+      max-block-size: 100dvb;
+      inline-size: min(var(--_size), 100dvi - var(--fui-space-xl));
+    }
+
+    &[data-side="start"] {
+      --_hidden: -100% 0;
+
+      inset-inline: 0 auto;
+      border-start-end-radius: var(--fui-radius-lg);
+      border-end-end-radius: var(--fui-radius-lg);
+    }
+
+    &[data-side="end"] {
+      --_hidden: 100% 0;
+
+      inset-inline: auto 0;
+      border-start-start-radius: var(--fui-radius-lg);
+      border-end-start-radius: var(--fui-radius-lg);
+    }
+
+    &[data-side="top"],
+    &[data-side="bottom"] {
+      inset-inline: 0;
+      inline-size: auto;
+      max-inline-size: 100dvi;
+      block-size: min(var(--_size), 100dvb - var(--fui-space-xl));
+    }
+
+    &[data-side="top"] {
+      --_hidden: 0 -100%;
+
+      inset-block: 0 auto;
+      border-end-start-radius: var(--fui-radius-lg);
+      border-end-end-radius: var(--fui-radius-lg);
+    }
+
+    &[data-side="bottom"] {
+      --_hidden: 0 100%;
+
+      inset-block: auto 0;
+      border-start-start-radius: var(--fui-radius-lg);
+      border-start-end-radius: var(--fui-radius-lg);
+    }
+
+    &::backdrop {
+      background: color-mix(in oklch, var(--fui-text) 45%, transparent);
+    }
+
+    @media (forced-colors: active) {
+      border: 1px solid;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      translate: 0 0;
+      transition:
+        translate var(--fui-duration-lg) var(--fui-ease),
+        display var(--fui-duration-lg) var(--fui-ease) allow-discrete,
+        overlay var(--fui-duration-lg) var(--fui-ease) allow-discrete;
+
+      @starting-style {
+        translate: var(--_hidden);
+      }
+
+      &:not([open]) {
+        translate: var(--_hidden);
+      }
+
+      &::backdrop {
+        opacity: 1;
+        transition:
+          opacity var(--fui-duration-lg) var(--fui-ease),
+          display var(--fui-duration-lg) var(--fui-ease) allow-discrete,
+          overlay var(--fui-duration-lg) var(--fui-ease) allow-discrete;
+
+        @starting-style {
+          opacity: 0;
+        }
+      }
+
+      &:not([open])::backdrop {
+        opacity: 0;
+      }
+    }
+  }
+
+  .fui-Drawer-title {
+    margin-block: 0 var(--fui-space-sm);
+    font-size: var(--fui-text-lg);
+    font-weight: 600;
+  }
+
+  .fui-Drawer-description {
+    margin-block: 0 var(--fui-space-md);
+    color: var(--fui-text-muted);
+  }
+}

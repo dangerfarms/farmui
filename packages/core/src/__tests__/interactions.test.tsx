@@ -15,6 +15,7 @@ import {
   ErrorSummary,
   Menu,
   Modal,
+  Drawer,
   Popover,
   Toast,
   Toasts,
@@ -190,6 +191,53 @@ describe("Modal", () => {
 
     // A native close (Escape / light dismiss / method="dialog" all funnel
     // here) must update React state, reflected in the trigger's hook.
+    dialog.close();
+    await waitFor(() => expect(trigger).not.toHaveAttribute("data-popup-open"));
+  });
+});
+
+describe("Drawer", () => {
+  function DrawerDemo() {
+    return (
+      <Drawer.Root>
+        <Drawer.Trigger>Open</Drawer.Trigger>
+        <Drawer.Panel side="end" size="sm">
+          <Drawer.Title>Filters</Drawer.Title>
+          <Drawer.Description>Drawer body</Drawer.Description>
+          <Drawer.Close>Done</Drawer.Close>
+        </Drawer.Panel>
+      </Drawer.Root>
+    );
+  }
+
+  it("opens from its trigger, reflecting side and size, and closes via Close", async () => {
+    const user = userEvent.setup();
+    render(<DrawerDemo />);
+    const trigger = screen.getByRole("button", { name: "Open" });
+    const dialog = document.querySelector("dialog")!;
+    expect(dialog.open).toBe(false);
+
+    await user.click(trigger);
+    expect(dialog.open).toBe(true);
+    expect(trigger).toHaveAttribute("data-popup-open", "true");
+    expect(dialog).toHaveAttribute("data-side", "end");
+    expect(dialog).toHaveAttribute("data-size", "sm");
+    expect(dialog).toHaveAccessibleName("Filters");
+    expect(dialog).toHaveAccessibleDescription("Drawer body");
+
+    await user.click(screen.getByRole("button", { name: "Done" }));
+    await waitFor(() => expect(dialog.open).toBe(false));
+    expect(trigger).not.toHaveAttribute("data-popup-open");
+  });
+
+  it("syncs native close events back into state", async () => {
+    const user = userEvent.setup();
+    render(<DrawerDemo />);
+    const trigger = screen.getByRole("button", { name: "Open" });
+    await user.click(trigger);
+    const dialog = document.querySelector("dialog")!;
+    expect(dialog.open).toBe(true);
+
     dialog.close();
     await waitFor(() => expect(trigger).not.toHaveAttribute("data-popup-open"));
   });
