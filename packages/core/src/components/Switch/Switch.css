@@ -71,7 +71,7 @@
     inline-size: calc(var(--_track-h) - 2 * var(--_gap));
     block-size: calc(var(--_track-h) - 2 * var(--_gap));
     border-radius: var(--fui-radius-full);
-    background: var(--fui-primary-contrast);
+    background: var(--fui-on-strong);
     box-shadow: var(--fui-shadow-sm);
     transition: translate var(--fui-duration-md) var(--fui-ease-elastic);
   }

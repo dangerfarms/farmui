@@ -67,7 +67,7 @@
   padding: 0.15rem 0.6rem;
   font-size: var(--fui-text-xs);
   font-weight: 700;
-  color: var(--fui-primary-contrast);
+  color: var(--fui-on-strong);
   background: var(--fui-primary);
   border-radius: var(--fui-radius-full);
 }
@@ -110,7 +110,7 @@
   padding-inline: 1.5rem;
   font-size: var(--fui-text-md);
   font-weight: 650;
-  color: var(--fui-primary-contrast);
+  color: var(--fui-on-strong);
   background: var(--fui-primary);
   border: 1px solid transparent;
   border-radius: var(--fui-radius-md);
@@ -555,7 +555,7 @@
   place-items: center;
   inline-size: 1.4rem;
   block-size: 1.4rem;
-  color: var(--fui-primary-contrast);
+  color: var(--fui-on-strong);
   background: var(--fui-primary);
   border-radius: var(--fui-radius-full);
 }

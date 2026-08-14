@@ -279,9 +279,9 @@ export function BrandButton(props: ButtonProps) {
       </div>
       <p>
         When the design wants stacked full-width actions in a wide container, that intent is still
-        declared on the region, not the buttons: <code>data-fui-buttons=&quot;block&quot;</code> (a
-        layout hint: the one channel where an attribute is right, because it&apos;s about
-        arrangement, not meaning).
+        declared on the region, not the buttons — and it is declared as actual layout: a grid (or
+        stacked flex) region stretches its buttons natively, so there is no attribute or prop to
+        remember. The arrangement is the declaration.
       </p>
 
       <h2>Detection, not declaration</h2>

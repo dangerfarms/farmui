@@ -28,7 +28,10 @@
   }
 
   .fui-ErrorSummary-item a {
-    color: var(--fui-danger);
+    color: light-dark(
+      color-mix(in oklab, var(--fui-danger) 70%, oklch(0% 0 0deg)),
+      color-mix(in oklab, var(--fui-danger) 55%, oklch(100% 0 0deg))
+    );
     font-size: var(--fui-text-sm);
     font-weight: 600;
     text-decoration: underline;

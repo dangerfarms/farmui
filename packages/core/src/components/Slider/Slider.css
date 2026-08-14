@@ -69,7 +69,7 @@
     inline-size: var(--_thumb);
     block-size: var(--_thumb);
     margin-block-start: calc((var(--_track-h) - var(--_thumb)) / 2);
-    border: 2px solid var(--fui-primary-contrast);
+    border: 2px solid var(--fui-on-strong);
     border-radius: var(--fui-radius-full);
     background: var(--fui-primary);
     box-shadow: var(--fui-shadow-sm);
@@ -84,7 +84,7 @@
   :scope::-moz-range-thumb {
     inline-size: var(--_thumb);
     block-size: var(--_thumb);
-    border: 2px solid var(--fui-primary-contrast);
+    border: 2px solid var(--fui-on-strong);
     border-radius: var(--fui-radius-full);
     background: var(--fui-primary);
     box-shadow: var(--fui-shadow-sm);

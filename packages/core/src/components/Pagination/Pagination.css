@@ -46,9 +46,9 @@
   }
 
   .fui-Pagination-page[data-active] {
-    background: var(--fui-primary);
+    background: var(--fui-primary-strong);
     border-color: var(--fui-primary);
-    color: var(--fui-primary-contrast);
+    color: var(--fui-on-strong);
     cursor: default;
   }
 

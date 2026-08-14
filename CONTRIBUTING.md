@@ -192,8 +192,9 @@ components inside it; never blur them:
   (Alert, Badge, Loader, Progress) have no variant or colour props — they
   consume the same context, typically as a one-element region declared on
   the component itself.
-- **Layout hints** (`data-fui-buttons="block"`) — how the region _arranges_
-  its contents.
+- **Layout** — how the region _arranges_ its contents. There is no layout
+  attribute or hint: a grid or stacked-flex region stretches its buttons to
+  full width natively, so arrangement is declared as actual layout.
 - **Containers** (`container-type: inline-size`) — how _big_ the region is;
   drives the fluid `cqi` tokens and Button's narrow-container full-width
   behaviour.

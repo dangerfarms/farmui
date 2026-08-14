@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useId, useMemo, useRef } from "react";
 import type { InputHTMLAttributes, ReactNode, Ref } from "react";
 import { cx } from "../../utils";
 import { composeRefs } from "../../render";
@@ -48,6 +48,9 @@ function CheckboxControl({
 }: CheckboxControlProps) {
   const field = useFieldControlProps();
   const innerRef = useRef<HTMLInputElement>(null);
+  // Memoised so React doesn't detach/re-attach the composed ref every
+  // render (a consumer's callback ref would fire twice per render).
+  const inputRef = useMemo(() => composeRefs(ref, innerRef), [ref]);
 
   useEffect(() => {
     if (innerRef.current) {
@@ -63,7 +66,7 @@ function CheckboxControl({
   return (
     <span className="fui-Checkbox-box" data-disabled={disabled || undefined}>
       <input
-        ref={composeRefs(ref, innerRef)}
+        ref={inputRef}
         id={resolvedId}
         type="checkbox"
         className={cx("fui-Checkbox-input", className)}

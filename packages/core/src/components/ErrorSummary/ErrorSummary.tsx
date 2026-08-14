@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useId, useRef } from "react";
+import { createContext, useContext, useEffect, useId, useRef, useMemo } from "react";
 import type {
   HTMLAttributes,
   LiHTMLAttributes,
@@ -61,6 +61,7 @@ function ErrorSummaryRoot({
   ...rest
 }: ErrorSummaryRootProps) {
   const titleId = `${useId()}-errorsummary`;
+  const ctxValue = useMemo(() => ({ titleId }), [titleId]);
   const ref = useRef<HTMLDivElement>(null);
 
   // Focus announces the region (labelled by the Title) the moment it
@@ -71,7 +72,7 @@ function ErrorSummaryRoot({
   }, [autoFocus]);
 
   return (
-    <ErrorSummaryContext value={{ titleId }}>
+    <ErrorSummaryContext value={ctxValue}>
       <div
         ref={ref}
         role="group"

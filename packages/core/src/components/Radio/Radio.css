@@ -77,7 +77,7 @@
     block-size: var(--_dot);
     translate: -50% -50%;
     border-radius: var(--fui-radius-full);
-    background: var(--fui-primary-contrast);
+    background: var(--fui-on-strong);
     scale: 0;
     transition: scale var(--fui-duration-md) var(--fui-ease);
   }

@@ -1,7 +1,7 @@
 @scope (.fui-Avatar-root) {
   :scope {
-    --_bg: var(--fui-primary);
-    --_fg: var(--fui-primary-contrast);
+    --_bg: var(--fui-primary-strong);
+    --_fg: var(--fui-on-strong);
 
     display: inline flex;
     align-items: center;
@@ -40,26 +40,25 @@
      same contract as every status-coloured component. */
   @container (style(--fui-context: danger)) {
     :scope {
-      --_bg: var(--fui-danger);
+      --_bg: var(--fui-danger-strong);
     }
   }
 
   @container (style(--fui-context: warning)) {
     :scope {
-      --_bg: var(--fui-warning);
-      --_fg: oklch(24% 0.02 80deg);
+      --_bg: var(--fui-warning-strong);
     }
   }
 
   @container (style(--fui-context: info)) {
     :scope {
-      --_bg: var(--fui-info);
+      --_bg: var(--fui-info-strong);
     }
   }
 
   @container (style(--fui-context: success)) {
     :scope {
-      --_bg: var(--fui-success);
+      --_bg: var(--fui-success-strong);
     }
   }
 

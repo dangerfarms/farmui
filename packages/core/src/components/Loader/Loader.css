@@ -1,6 +1,9 @@
 @scope (.fui-Loader-root) {
   :scope {
-    --_size: 1.5rem;
+    /* The hook is inherited, so a composing component can size a loader
+       from its own context (Button answers it with the same 1em its
+       icons get) without fighting this default's specificity. */
+    --_size: var(--fui-loader-size, 1.5rem);
 
     /* The brand token, so context remaps recolour the loader; parts draw
        with currentColor from here. */

@@ -22,4 +22,5 @@ jobs:
       - run: pnpm --filter @farmui/core exec tsc --noEmit
       - run: npx tsc --noEmit
         working-directory: apps/docs
+      - run: pnpm --filter @farmui/core audit:contrast
       - run: pnpm --filter @farmui/core test

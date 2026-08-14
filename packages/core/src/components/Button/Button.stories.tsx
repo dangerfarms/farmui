@@ -134,25 +134,20 @@ export const WithContent: Story = {
         </svg>
       </Button>
       <Button disabled>
-        <Loader size="sm" />
+        <Loader />
         Saving
       </Button>
     </div>
   ),
 };
 
-/** The explicit full-width layout hint, declared on the region. */
+/**
+ * Width comes from the parent's layout, not an attribute or prop: a grid
+ * (or stacked flex) region stretches its buttons natively.
+ */
 export const ContextualFullWidth: Story = {
   render: () => (
-    <div
-      data-fui-buttons="block"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "0.75rem",
-        maxWidth: 280,
-      }}
-    >
+    <div style={{ display: "grid", gap: "0.75rem", width: 280 }}>
       <Button>Save changes</Button>
       <Button>Cancel</Button>
     </div>

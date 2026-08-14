@@ -64,7 +64,7 @@ const doc: ComponentContent = {
   ],
   whenToUse: [
     "For waits of unknown duration where the shape of the outcome is also unknown: searching, saving, waiting on a third party.",
-    'For small inline busy states, composed as a child of the affected control: a Button showing <Loader size="sm" /> while it saves.',
+    "For small inline busy states, composed as a child of the affected control: a Button showing <Loader /> while it saves sizes it like an icon, no size prop needed.",
   ],
   whenNotToUse: [
     "When you know what the loaded content will look like: Skeleton holds the layout open and makes the swap calmer than a spinner in an empty region.",
@@ -91,8 +91,9 @@ const doc: ComponentContent = {
     {
       name: "size",
       type: `"sm" | "md" | "lg" | number`,
-      default: `"md"`,
-      description: "Overall size, as a token or an explicit pixel number.",
+      default: "—",
+      description:
+        "Overall size, as a token or an explicit pixel number. When omitted, the size comes from context: 1.5rem standalone, 1em inside a Button (like an icon).",
     },
     {
       name: "label",

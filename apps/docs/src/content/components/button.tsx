@@ -1,4 +1,4 @@
-import { Button, Loader } from "@farmui/core";
+import { Button, Checkbox, Loader } from "@farmui/core";
 import type { CSSProperties } from "react";
 import type { ComponentContent } from "@/renderer/types";
 
@@ -10,57 +10,29 @@ const doc: ComponentContent = {
     {
       title: "Contexts",
       description:
-        "Buttons are neutral by default. Declare --fui-context on a region and every button inside re-answers its colour; there are no variant props. See the Contextualism guide.",
+        "Buttons are neutral by default. Declare --fui-context on a region and the buttons inside re-answer their colour; there are no variant props. See the Contextualism guide.",
       code: `<Button>Neutral</Button>
 
 <div style={{ "--fui-context": "primary" }}>
-  <Button>Primary region</Button>
-</div>
-
-<div style={{ "--fui-context": "danger" }}>
-  <Button>Danger region</Button>
+  <Button>Save changes</Button>
 </div>`,
       render: () => (
-        <div style={{ display: "grid", gap: "0.75rem" }}>
-          <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-            <Button>Neutral</Button>
-          </div>
-          <div
-            style={
-              {
-                "--fui-context": "primary",
-                display: "flex",
-                gap: "0.75rem",
-                flexWrap: "wrap",
-              } as CSSProperties
-            }
-          >
-            <Button>Primary region</Button>
-            <Button>Also primary</Button>
-          </div>
-          <div
-            style={
-              {
-                "--fui-context": "danger",
-                display: "flex",
-                gap: "0.75rem",
-                flexWrap: "wrap",
-              } as CSSProperties
-            }
-          >
-            <Button>Delete account</Button>
-            <Button>Remove</Button>
+        <div style={{ display: "grid", gap: "0.75rem", justifyItems: "start" }}>
+          <Button>Neutral</Button>
+          <div style={{ "--fui-context": "primary" } as CSSProperties}>
+            <Button>Save changes</Button>
           </div>
         </div>
       ),
     },
     {
-      title: "Danger regions adapt everything",
+      title: "A region adapts every component",
       description:
-        "--fui-context isn't a button feature. Every FarmUI component in the region adapts: checkboxes, focus rings, carets. You declare intent once on the container instead of a colour prop on each control.",
+        "--fui-context isn't a button feature: everything in the region answers it. Here the checkbox's fill, the button's tint and the loader's stroke all take the danger colour, and focus rings inside follow. Intent is declared once on the container, not as a colour prop on each control.",
       code: `<div style={{ "--fui-context": "danger" }}>
+  <Checkbox label="Also delete backups" defaultChecked />
   <Button>Delete account</Button>
-  <Button>Discard</Button>
+  <Loader label="Deleting" />
 </div>`,
       render: () => (
         <div
@@ -68,23 +40,29 @@ const doc: ComponentContent = {
             {
               "--fui-context": "danger",
               display: "flex",
-              gap: "0.75rem",
+              gap: "1rem",
               flexWrap: "wrap",
+              alignItems: "center",
             } as CSSProperties
           }
         >
+          <Checkbox label="Also delete backups" defaultChecked />
           <Button>Delete account</Button>
-          <Button>Remove</Button>
-          <Button>Discard</Button>
+          <Loader label="Deleting" />
         </div>
       ),
     },
     {
-      title: "No size prop",
+      title: "Size and width from context",
       description:
-        "Padding and font are fluid (container-relative tokens), and in containers of 16rem or less a button takes the full width. Size is decided by the space the button lives in, not by a prop.",
+        "There are no size or fullWidth props. Padding and font are fluid (container-relative tokens), so the button is sized by the space it lives in. Width is the parent's decision: a container of 16rem or less makes a button span it, a grid or stacked-flex region stretches its buttons (that is the platform's own layout at work), and a flex row shrink-wraps them to their labels.",
       code: `<div style={{ containerType: "inline-size", inlineSize: "14rem" }}>
-  <Button>Full width in a narrow container</Button>
+  <Button>Narrow: full width</Button>
+</div>
+
+<div style={{ display: "grid", gap: "0.75rem", inlineSize: "18rem" }}>
+  <Button>Save changes</Button>
+  <Button>Cancel</Button>
 </div>`,
       render: () => (
         <div style={{ display: "grid", gap: "0.75rem" }}>
@@ -111,13 +89,17 @@ const doc: ComponentContent = {
           >
             <Button>Wide: natural width</Button>
           </div>
+          <div style={{ display: "grid", gap: "0.75rem", inlineSize: "min(100%, 18rem)" }}>
+            <Button>Save changes</Button>
+            <Button>Cancel</Button>
+          </div>
         </div>
       ),
     },
     {
-      title: "Icons & loading (composed as children)",
+      title: "Icons and loading, composed as children",
       description:
-        "Icons are detected: a button containing an svg gets flex layout, a gap, and 1em icon sizing via :has(svg). Icon-only is detected from the accessible name: add the aria-label the icon-only case requires anyway and the button becomes square. No leftSection / rightSection / loading props; compose a Loader for busy states.",
+        "There are no leftSection, rightSection or loading props. An svg child is detected via :has() and gets flex layout, a gap and 1em sizing. A composed Loader is detected and sized the same way. Icon-only is detected from the accessible name: add the aria-label the icon-only case requires anyway and the button becomes square.",
       code: `<Button>
   <svg viewBox="0 -0.5 25 25" fill="none" aria-hidden>
     <path d="M5.5 12.5L10.167 17L19.5 8" stroke="currentColor"
@@ -129,7 +111,7 @@ const doc: ComponentContent = {
   <svg>…</svg>
 </Button>
 <Button disabled>
-  <Loader size="sm" aria-hidden /> Saving
+  <Loader aria-hidden /> Saving
 </Button>`,
       render: () => (
         <>
@@ -157,43 +139,24 @@ const doc: ComponentContent = {
             </svg>
           </Button>
           <Button disabled>
-            <Loader size="sm" aria-hidden /> Saving
+            <Loader aria-hidden /> Saving
           </Button>
         </>
-      ),
-    },
-    {
-      title: "Contextual full width",
-      description:
-        'Mark a region data-fui-buttons="block" and its buttons stretch, the explicit layout hint for when the container is wide but the design wants stacked, full-width actions.',
-      code: `<div data-fui-buttons="block">
-  <Button>Save changes</Button>
-  <Button>Cancel</Button>
-</div>`,
-      render: () => (
-        <div
-          data-fui-buttons="block"
-          style={{ display: "grid", gap: "0.75rem", maxInlineSize: "18rem" }}
-        >
-          <Button>Save changes</Button>
-          <Button>Cancel</Button>
-        </div>
       ),
     },
   ],
   whenToUse: [
     "To trigger an action in the current context: submitting a form, opening a dialog, confirming a choice.",
-    "For the single most important action on a screen, put the region in a primary context (--fui-context: primary) and leave the rest neutral: one primary action per section keeps emphasis meaningful.",
-    "Set intent with --fui-context on a container rather than repeating props on every button.",
+    "For destructive or risky operations, inside a danger region, so the whole surrounding context signals the stakes rather than one red button.",
   ],
   whenNotToUse: [
     'To navigate to another page or URL: use a link. A button that navigates breaks right-click, middle-click and "open in new tab".',
-    "For many low-emphasis choices at once: consider a menu, tabs, or a segmented control instead of a row of equal buttons.",
+    "For many low-emphasis choices at once: consider a Menu or Tabs instead of a row of equal buttons.",
   ],
   howItWorks: [
     {
       title: "Buttons act, links navigate",
-      body: 'The element must match the behaviour, not the look. When a design wants button styling on a genuine navigation, keep real link semantics with render: <Button render={<a href="/signup">Get started</a>} /> merges the Button\'s classes onto a real <a>, so right-click, middle-click, open-in-new-tab and link announcement all keep working. What render never justifies is the reverse: an <a> with an onClick that mutates data is still a button in disguise.',
+      body: 'The element must match the behaviour, not the look. When a design wants button styling on a genuine navigation, keep real link semantics with render: <Button render={<a href="/signup">Get started</a>} /> merges the Button\'s classes onto a real <a>, so right-click, middle-click, open-in-new-tab and link announcement all keep working (the render pattern is covered in the Composition guide). What render never justifies is the reverse: an <a> with an onClick that mutates data is still a button in disguise.',
     },
     {
       title: "Buttons don't submit by accident",
@@ -248,11 +211,6 @@ const doc: ComponentContent = {
       default: "var(--fui-text)",
       description:
         "The button's single colour channel. Set it to recolour one instance or a wrapper component; background, border, hover and active are all derived from it.",
-    },
-    {
-      name: "data-fui-buttons",
-      type: `"block"`,
-      description: "Set on a container to make its buttons full width.",
     },
     {
       name: "--_radius",

@@ -2,7 +2,11 @@ import type { CSSProperties, HTMLAttributes, Ref } from "react";
 import { cx, type FarmUISize } from "../../utils";
 
 export interface LoaderProps extends Omit<HTMLAttributes<HTMLSpanElement>, "color"> {
-  /** Overall size — a token or an explicit pixel number. @default "md" */
+  /**
+   * Overall size — a token or an explicit pixel number. When omitted the
+   * size comes from context: 1.5rem standalone, or the composing
+   * component's answer (a Button sizes it at 1em, like its icons).
+   */
   size?: FarmUISize | number;
   /** Accessible label announced to assistive tech. @default "Loading" */
   label?: string;
@@ -22,17 +26,13 @@ const sizeVar: Record<FarmUISize, string> = {
  * with no prop; the parts draw with `currentColor`, so a plain `color:`
  * declaration on the loader (or an ancestor's channel) overrides.
  */
-export function Loader({
-  size = "md",
-  label = "Loading",
-  className,
-  style,
-  ref,
-  ...rest
-}: LoaderProps) {
-  const resolvedSize = typeof size === "number" ? `${size}px` : sizeVar[size];
+export function Loader({ size, label = "Loading", className, style, ref, ...rest }: LoaderProps) {
+  // Only an explicit size becomes an inline declaration — an inline var
+  // would out-rank the context sizing a composing component provides.
   const vars = {
-    "--_size": resolvedSize,
+    ...(size !== undefined && {
+      "--_size": typeof size === "number" ? `${size}px` : sizeVar[size],
+    }),
     ...style,
   } as CSSProperties;
 

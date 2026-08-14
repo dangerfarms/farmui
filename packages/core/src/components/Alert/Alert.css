@@ -90,8 +90,8 @@
        for light channels like warning. The icon and accent bar carry the
        raw channel — they are decorative, the title must read. */
     color: light-dark(
-      color-mix(in oklab, var(--_accent) 70%, black),
-      color-mix(in oklab, var(--_accent) 55%, white)
+      color-mix(in oklab, var(--_accent) 70%, oklch(0% 0 0deg)),
+      color-mix(in oklab, var(--_accent) 55%, oklch(100% 0 0deg))
     );
     font-weight: 600;
     font-size: var(--fui-text-sm);

@@ -21,7 +21,14 @@
       color-mix(in oklab, var(--_color), var(--fui-bg) 90%),
       color-mix(in oklab, var(--_color), var(--fui-bg) 75%)
     );
-    color: var(--_color);
+
+    /* Text is the channel's hue mixed for AA on the tint, the same
+       recipe as Badge and Alert; raw --_color sat below 4.5:1 on its
+       own background in six of eight scheme/status combinations. */
+    color: light-dark(
+      color-mix(in oklab, var(--_color) 70%, oklch(0% 0 0deg)),
+      color-mix(in oklab, var(--_color) 55%, oklch(100% 0 0deg))
+    );
     font-size: var(--fui-text-sm);
     font-weight: 600;
     line-height: 1.2;
@@ -106,7 +113,11 @@
     }
   }
 
-  :scope:has(svg) {
+  /* A composed Loader is an icon here: the same detection, layout and 1em
+     sizing (answered through the loader's inherited size hook). */
+  :scope:has(svg, .fui-Loader-root) {
+    --fui-loader-size: 1em;
+
     display: inline flex;
     gap: var(--fui-space-sm);
     align-items: center;
@@ -121,14 +132,7 @@
   /* Icon-only is detected from the accessible name, not DOM shape: an
      icon-only button MUST carry an aria-label, and `svg:only-child` can't
      tell "icon + bare text" from "icon alone" (text nodes aren't elements). */
-  :scope[aria-label]:has(svg) {
+  :scope[aria-label]:has(svg, .fui-Loader-root) {
     padding-inline: var(--fui-space-sm);
-  }
-
-  /* Explicit full-width hint (`data-fui-buttons="block"`) for when intent
-     shouldn't depend on container measurements. The region ancestor lives
-     outside the scope; the subject (the button) stays in scope. */
-  :scope:is([data-fui-buttons="block"] *) {
-    inline-size: 100%;
   }
 }

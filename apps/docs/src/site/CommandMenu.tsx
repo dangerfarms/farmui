@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { SearchIcon } from "./Icons";
 import { COMPONENTS, GETTING_STARTED } from "./nav";
@@ -39,16 +39,25 @@ export function CommandMenu() {
     return ALL.filter((r) => r.label.toLowerCase().includes(term));
   }, [q]);
 
+  // Stable (only state setters inside), so the window keydown listener can
+  // depend on it without re-subscribing per render.
+  const openPalette = useCallback(() => {
+    setQ("");
+    setActive(0);
+    setOpen(true);
+  }, []);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
-        setOpen((o) => !o);
+        if (dialogRef.current?.open) setOpen(false);
+        else openPalette();
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  }, [openPalette]);
 
   // Native <dialog>: showModal() brings focus containment, Escape and the
   // ::backdrop; the effect reconciles React state with the element.
@@ -57,8 +66,6 @@ export function CommandMenu() {
     if (!el) return;
     if (open && !el.open) {
       el.showModal();
-      setQ("");
-      setActive(0);
       inputRef.current?.focus();
     } else if (!open && el.open) {
       el.close();
@@ -77,8 +84,6 @@ export function CommandMenu() {
     el.addEventListener("click", onBackdropClick);
     return () => el.removeEventListener("click", onBackdropClick);
   }, []);
-
-  useEffect(() => setActive(0), [q]);
 
   const go = (href: string) => {
     setOpen(false);
@@ -103,7 +108,7 @@ export function CommandMenu() {
       <button
         type="button"
         className={classes.trigger}
-        onClick={() => setOpen(true)}
+        onClick={openPalette}
         aria-label="Search documentation"
       >
         <SearchIcon width={16} height={16} />
@@ -125,7 +130,10 @@ export function CommandMenu() {
             className={classes.input}
             placeholder="Search components and guides…"
             value={q}
-            onChange={(e) => setQ(e.target.value)}
+            onChange={(e) => {
+              setQ(e.target.value);
+              setActive(0);
+            }}
             onKeyDown={onKeyDown}
           />
         </div>

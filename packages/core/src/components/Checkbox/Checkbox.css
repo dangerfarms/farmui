@@ -44,7 +44,7 @@
     border: 1px solid var(--fui-border-strong);
     border-radius: var(--fui-radius-sm);
     background: var(--fui-surface);
-    color: var(--fui-primary-contrast);
+    color: var(--fui-on-strong);
     transition:
       background var(--fui-duration-sm) var(--fui-ease),
       border-color var(--fui-duration-sm) var(--fui-ease),

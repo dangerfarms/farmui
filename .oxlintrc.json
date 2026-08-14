@@ -16,6 +16,9 @@
   },
   "rules": {
     "react/react-in-jsx-scope": "off",
+    // The rule suggests native tags for ARIA-pattern roles; a component
+    // library implementing those patterns (tablist, switch on a native
+    // input) is exactly where the suggestions are wrong.
     "jsx-a11y/prefer-tag-over-role": "off",
     "jsx-a11y/label-has-associated-control": [
       "error",
@@ -49,6 +52,8 @@
     "storybook-static"
   ],
   "overrides": [
+    // Tests and stories render fixtures: static-array keys, focus probes,
+    // and bare interactive stubs are deliberate there.
     {
       "files": [
         "**/*.test.tsx",
@@ -62,6 +67,9 @@
         "jsx-a11y/anchor-has-content": "off"
       }
     },
+    // A native checkbox with role="switch" exposes its checked state as
+    // aria-checked through the host language; the rule can't see that
+    // mapping and would demand a redundant (and drift-prone) attribute.
     {
       "files": [
         "**/Switch/Switch.tsx"
@@ -70,14 +78,19 @@
         "jsx-a11y/role-has-required-aria-props": "off"
       }
     },
+    // Roving tabindex: the tablist element carries the keydown handler but
+    // is never itself a tab stop — the tabs inside it are.
     {
       "files": [
-        "**/Tabs/Tabs.tsx"
+        "**/Tabs/Tabs.tsx",
+        "**/renderer/Preview.tsx"
       ],
       "rules": {
         "jsx-a11y/interactive-supports-focus": "off"
       }
     },
+    // The toast region listens for hover/focus to pause dismissal timers —
+    // a convenience on a live region, not an interactive control.
     {
       "files": [
         "**/Toast/Toast.tsx"
@@ -86,6 +99,8 @@
         "jsx-a11y/no-noninteractive-element-interactions": "off"
       }
     },
+    // The modal example demonstrates initial-focus placement, which is
+    // what autofocus is for inside a just-opened dialog.
     {
       "files": [
         "**/modal.client.tsx"
@@ -94,14 +109,9 @@
         "jsx-a11y/no-autofocus": "off"
       }
     },
-    {
-      "files": [
-        "**/renderer/Preview.tsx"
-      ],
-      "rules": {
-        "jsx-a11y/interactive-supports-focus": "off"
-      }
-    },
+    // Highlighted code lines and pagination slots have no identity beyond
+    // their position, and both lists rebuild wholesale on change — index
+    // keys are the correct keys.
     {
       "files": [
         "**/renderer/CodeBlock.tsx",

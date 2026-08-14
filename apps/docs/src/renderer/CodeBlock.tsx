@@ -1,35 +1,49 @@
 "use client";
 
 import { Highlight, themes } from "prism-react-renderer";
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import classes from "./CodeBlock.module.css";
 
-function useIsDark() {
-  const [dark, setDark] = useState(false);
-  useEffect(() => {
-    const read = () => {
-      // color-scheme resolves to "dark", "light", or "light dark" (follow
-      // the OS) — the last one needs the media query to break the tie.
-      const scheme = getComputedStyle(document.documentElement).colorScheme;
-      const isDark =
-        scheme.includes("dark") &&
-        (!scheme.includes("light") || window.matchMedia("(prefers-color-scheme: dark)").matches);
-      setDark(isDark);
+// One store for every CodeBlock on the page: a single observer + media
+// query fan out to all subscribers, and the snapshot reads the data-theme
+// attribute (the site's only scheme override) rather than getComputedStyle,
+// which would force a style flush per block per render.
+const schemeListeners = new Set<() => void>();
+let teardownScheme: (() => void) | undefined;
+
+function subscribeScheme(onChange: () => void) {
+  schemeListeners.add(onChange);
+  if (!teardownScheme) {
+    const notify = () => {
+      for (const l of schemeListeners) l();
     };
-    read();
-    const obs = new MutationObserver(read);
+    const obs = new MutationObserver(notify);
     obs.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ["data-theme"],
     });
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    mq.addEventListener("change", read);
-    return () => {
+    mq.addEventListener("change", notify);
+    teardownScheme = () => {
       obs.disconnect();
-      mq.removeEventListener("change", read);
+      mq.removeEventListener("change", notify);
+      teardownScheme = undefined;
     };
-  }, []);
-  return dark;
+  }
+  return () => {
+    schemeListeners.delete(onChange);
+    if (schemeListeners.size === 0) teardownScheme?.();
+  };
+}
+
+function isDarkSnapshot(): boolean {
+  const pinned = document.documentElement.dataset.theme;
+  if (pinned === "dark" || pinned === "light") return pinned === "dark";
+  return window.matchMedia("(prefers-color-scheme: dark)").matches;
+}
+
+function useIsDark() {
+  return useSyncExternalStore(subscribeScheme, isDarkSnapshot, () => false);
 }
 
 export function CodeBlock({

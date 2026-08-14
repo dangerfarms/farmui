@@ -82,6 +82,12 @@ export default function Accessibility() {
           anatomy that keeps them comfortably above the minimum at every container width.
         </li>
         <li>
+          <strong>1.4.3 / 1.4.11 (Contrast)</strong>: the token palette is audited in CI: every text
+          pair at 4.5:1 or better, boundaries and focus rings at 3:1 or better, in both colour
+          schemes. Fills pair white text with darkened surfaces in light mode and dark text with raw
+          status colours in dark mode, because that is the only pairing every status passes.
+        </li>
+        <li>
           <strong>Focus visibility</strong>: every interactive element shows a brand{" "}
           <code>:focus-visible</code> outline offset from the control, so the true surface shows
           through the gap and the ring reads as separate on any background. Focus styling is never
@@ -152,10 +158,12 @@ export default function Accessibility() {
           cannot (native dialog focus, popovers, computed styles).
         </li>
         <li>
-          Colour contrast is checked in the browser-based Storybook tooling, not in the unit suite;
-          forced-colors rendering is verified with emulation; and no automated tool replaces testing
-          with actual screen readers. Treat this page as the contract, not a substitute for testing
-          your composed product.
+          Colour contrast is verified two ways: a CI audit computes the WCAG ratio of every token
+          pair the components actually use (text, placeholders, fills, borders, focus rings, both
+          schemes) and fails the build on regression, and Storybook&apos;s a11y addon checks
+          rendered output; forced-colors rendering is verified with emulation; and no automated tool
+          replaces testing with actual screen readers. Treat this page as the contract, not a
+          substitute for testing your composed product.
         </li>
       </ul>
     </div>

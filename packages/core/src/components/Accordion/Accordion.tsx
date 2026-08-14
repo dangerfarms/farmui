@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useId } from "react";
+import { createContext, useContext, useId, useMemo } from "react";
 import type { HTMLAttributes, ReactNode } from "react";
 import { cx } from "../../utils";
 
@@ -38,8 +38,10 @@ function AccordionBase({ multiple = false, className, children, ...rest }: Accor
   const autoName = useId();
   const name = multiple ? undefined : autoName;
 
+  const ctxValue = useMemo(() => ({ name }), [name]);
+
   return (
-    <AccordionContext value={{ name }}>
+    <AccordionContext value={ctxValue}>
       <div className={cx("fui-Accordion-root", className)} {...rest}>
         {children}
       </div>

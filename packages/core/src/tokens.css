@@ -35,12 +35,33 @@
     /* Primary (brand) — remap this one line to rebrand the whole library */
     --fui-primary: var(--fui-green-600);
     --fui-primary-soft: light-dark(var(--fui-green-50), oklch(30% 0.06 150deg));
-    --fui-primary-contrast: oklch(99% 0 0deg);
-    --fui-primary-ring: color-mix(
-      in oklch,
-      var(--fui-primary) 45%,
-      transparent
+
+    /* The one foreground that reads on every solid status fill: near-white
+       in light (where the fills darken), near-black in dark (where the
+       fills stay raw) — the only pairing all statuses hold AA with. */
+    --fui-on-strong: light-dark(oklch(99% 0 0deg), oklch(17% 0.01 160deg));
+
+    /* Solid-fill variants: AA for --fui-on-strong. In light the status
+       darkens 22%; in dark the raw status already carries dark text.
+       Audited pairs — see scripts/contrast-audit.mjs. */
+    --fui-primary-strong: light-dark(
+      color-mix(in oklab, var(--fui-primary), oklch(0% 0 0deg) 22%),
+      var(--fui-primary)
     );
+    --fui-danger-strong: light-dark(
+      color-mix(in oklab, var(--fui-danger), oklch(0% 0 0deg) 22%),
+      var(--fui-danger)
+    );
+    --fui-warning-strong: light-dark(
+      color-mix(in oklab, var(--fui-warning), oklch(0% 0 0deg) 22%),
+      var(--fui-warning)
+    );
+    --fui-info-strong: light-dark(
+      color-mix(in oklab, var(--fui-info), oklch(0% 0 0deg) 22%),
+      var(--fui-info)
+    );
+    --fui-success-strong: var(--fui-primary-strong);
+    --fui-primary-ring: var(--fui-primary-strong);
 
     /* Each status carries the same derived family as primary (base, hover,
        active, soft, ring) so a context region can remap the family
@@ -74,13 +95,13 @@
       oklch(72% 0.015 160deg)
     );
     --fui-text-dim: light-dark(
-      oklch(64% 0.015 160deg),
-      oklch(58% 0.012 160deg)
+      oklch(55% 0.015 160deg),
+      oklch(66% 0.012 160deg)
     );
     --fui-border: light-dark(oklch(91% 0.006 160deg), oklch(32% 0.01 160deg));
     --fui-border-strong: light-dark(
-      oklch(82% 0.01 160deg),
-      oklch(42% 0.012 160deg)
+      oklch(62% 0.012 160deg),
+      oklch(60% 0.014 160deg)
     );
 
     /* ── 3. Interaction & scales ───────────────────────────────────── */
@@ -90,19 +111,12 @@
     --fui-ring-width: 3px;
     --fui-ring-color: var(--fui-primary-ring);
 
-    /* Status focus rings — the same 40%-transparent mix for every status */
-    --fui-danger-ring: color-mix(in oklch, var(--fui-danger) 40%, transparent);
-    --fui-success-ring: color-mix(
-      in oklch,
-      var(--fui-success) 40%,
-      transparent
-    );
-    --fui-warning-ring: color-mix(
-      in oklch,
-      var(--fui-warning) 40%,
-      transparent
-    );
-    --fui-info-ring: color-mix(in oklch, var(--fui-info) 40%, transparent);
+    /* Status focus rings alias the solid fills — one audited family covers
+       both jobs, and an opaque ring holds its contrast on any surface. */
+    --fui-danger-ring: var(--fui-danger-strong);
+    --fui-success-ring: var(--fui-success-strong);
+    --fui-warning-ring: var(--fui-warning-strong);
+    --fui-info-ring: var(--fui-info-strong);
 
     /* Disabled controls — components may remap locally. */
     --fui-disabled-opacity: 0.55;
@@ -183,10 +197,12 @@
       --fui-primary-soft: var(--fui-danger-soft);
       --fui-primary-ring: var(--fui-danger-ring);
 
-      /* --fui-ring-color aliases --fui-primary-ring AT :root — custom
-         properties resolve var() where declared, so it must be re-answered
-         directly here or focus rings would stay brand-coloured. */
+      /* --fui-ring-color and --fui-primary-strong bake their var()s AT
+         :root — custom properties resolve var() where declared, so both
+         must be re-answered directly here or focus rings and solid fills
+         would stay brand-coloured. */
       --fui-ring-color: var(--fui-danger-ring);
+      --fui-primary-strong: var(--fui-danger-strong);
     }
   }
 
@@ -196,6 +212,7 @@
       --fui-primary-soft: var(--fui-success-soft);
       --fui-primary-ring: var(--fui-success-ring);
       --fui-ring-color: var(--fui-success-ring);
+      --fui-primary-strong: var(--fui-success-strong);
     }
   }
 
@@ -205,6 +222,7 @@
       --fui-primary-soft: var(--fui-warning-soft);
       --fui-primary-ring: var(--fui-warning-ring);
       --fui-ring-color: var(--fui-warning-ring);
+      --fui-primary-strong: var(--fui-warning-strong);
     }
   }
 
@@ -214,6 +232,7 @@
       --fui-primary-soft: var(--fui-info-soft);
       --fui-primary-ring: var(--fui-info-ring);
       --fui-ring-color: var(--fui-info-ring);
+      --fui-primary-strong: var(--fui-info-strong);
     }
   }
 }

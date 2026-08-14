@@ -29,8 +29,8 @@
     /* The fill IS the primary token — a `--fui-context` region re-answers
        it (see the Contexts section of tokens.css), so status needs no
        component code here. */
-    background: var(--fui-primary);
-    color: var(--fui-primary-contrast);
+    background: var(--fui-primary-strong);
+    color: var(--fui-on-strong);
     transition: inline-size var(--fui-duration-lg) var(--fui-ease);
   }
 
@@ -45,8 +45,8 @@
   .fui-Progress-bar[data-striped] {
     background-image: repeating-linear-gradient(
       45deg,
-      color-mix(in oklch, var(--fui-primary-contrast) 22%, transparent) 0,
-      color-mix(in oklch, var(--fui-primary-contrast) 22%, transparent) 0.5rem,
+      color-mix(in oklch, var(--fui-on-strong) 22%, transparent) 0,
+      color-mix(in oklch, var(--fui-on-strong) 22%, transparent) 0.5rem,
       transparent 0.5rem,
       transparent 1rem
     );

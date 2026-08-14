@@ -21,8 +21,8 @@
        mixing only desaturates, so the channel's hue survives. */
     background: color-mix(in oklab, var(--_color), var(--fui-bg) 85%);
     color: light-dark(
-      color-mix(in oklab, var(--_color) 70%, black),
-      color-mix(in oklab, var(--_color) 55%, white)
+      color-mix(in oklab, var(--_color) 70%, oklch(0% 0 0deg)),
+      color-mix(in oklab, var(--_color) 55%, oklch(100% 0 0deg))
     );
     font-size: var(--_fz, var(--fui-text-xs));
     font-weight: 600;

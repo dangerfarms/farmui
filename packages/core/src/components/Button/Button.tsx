@@ -28,12 +28,13 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
  * <section style={{ "--fui-context": "danger" }}>
  *   <Button>Delete</Button>                                  // danger region
  * </section>
- * <div data-fui-buttons="block"><Button>Save</Button></div>  // full-width hint
  * <Button render={<a href="/signup">Get started</a>} /> // as a link
  * ```
  *
  * Size is fluid (container-relative tokens) — there is no size prop, and
- * narrow containers make the button full width automatically. Icons are
+ * narrow containers make the button full width automatically. Width is the
+ * parent's decision: a grid or stacked-flex region stretches its buttons
+ * natively, a row shrink-wraps them. Icons are
  * detected (`:has(svg)`) — compose them as children, no slot props. An
  * icon-only button is detected from its accessible name: give it an
  * `aria-label` (required for accessibility anyway) and it becomes square.
