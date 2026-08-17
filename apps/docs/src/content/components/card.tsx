@@ -46,7 +46,8 @@ const doc: ComponentContent = {
     },
     {
       title: "Shadows",
-      description: "Four elevation levels, theme-aware via tokens.",
+      description:
+        'Three shadow levels over the flat default (shadow="none"), theme-aware via tokens.',
       code: `<Card shadow="sm">Small shadow</Card>
 <Card shadow="md">Medium shadow</Card>
 <Card shadow="lg">Large shadow</Card>`,

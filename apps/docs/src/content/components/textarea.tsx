@@ -98,7 +98,7 @@ const doc: ComponentContent = {
     {
       name: "...others",
       type: "TextareaHTMLAttributes",
-      description: "All native <textarea> props are forwarded.",
+      description: "All native <textarea> props are forwarded, except size (sizing is contextual).",
     },
   ],
 };

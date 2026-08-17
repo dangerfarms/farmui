@@ -7,7 +7,7 @@ import type { ComponentContent } from "@/renderer/types";
 
 const doc: ComponentContent = {
   slug: "breadcrumbs",
-  lead: "Show the path to the current page and let users step back up it.",
+  lead: "The path to the current page, with each ancestor a link back up the hierarchy.",
   importLine: `import { Breadcrumbs } from "@farmui/core";`,
   demos: [
     {
@@ -72,18 +72,36 @@ const doc: ComponentContent = {
     'The current page is marked aria-current="page", explicitly by the consumer, so truncated paths stay correct.',
     "Separators are CSS pseudo-content, invisible to screen readers: no aria-hidden bookkeeping in the DOM.",
   ],
-  props: [
+  parts: [
     {
-      name: "Root",
-      type: `separator?: string`,
-      description:
-        'The <nav> + list wrapper. separator sets the CSS-drawn glyph between items (default "/").',
+      name: "Breadcrumbs.Root",
+      description: "The <nav> + list wrapper; native <nav> props are forwarded.",
+      props: [
+        {
+          name: "separator",
+          type: "string",
+          default: `"/"`,
+          description: "The CSS-drawn glyph between items.",
+        },
+      ],
     },
     {
-      name: "Item",
-      type: "href?, current?, render?",
+      name: "Breadcrumbs.Item",
       description:
-        "One crumb: an <a> when href is given, plain text otherwise. current marks the page (aria-current). render substitutes the element (e.g. render={<Link href=…/>}).",
+        "One crumb: an <a> when href is given, plain text otherwise. Native <li> props are forwarded.",
+      props: [
+        { name: "href", type: "string", description: "Renders the crumb as a link." },
+        {
+          name: "current",
+          type: "boolean",
+          description: "Marks the current page (aria-current).",
+        },
+        {
+          name: "render",
+          type: "element | (props) => node",
+          description: "Substitute the element (e.g. render={<Link href=…/>}).",
+        },
+      ],
     },
   ],
 };

@@ -1,14 +1,22 @@
 import type { PropRow } from "./types";
 import classes from "./PropsTable.module.css";
 
-export function PropsTable({ rows }: { rows: PropRow[] }) {
+export function PropsTable({
+  rows,
+  nameLabel = "Prop",
+  typeLabel = "Type",
+}: {
+  rows: PropRow[];
+  nameLabel?: string;
+  typeLabel?: string;
+}) {
   return (
     <div className={classes.scroll}>
       <table className={classes.table}>
         <thead>
           <tr>
-            <th>Prop</th>
-            <th>Type</th>
+            <th>{nameLabel}</th>
+            <th>{typeLabel}</th>
             <th>Default</th>
             <th>Description</th>
           </tr>

@@ -4,7 +4,7 @@ import { SwitchFieldDemo } from "./switch.client";
 
 const doc: ComponentContent = {
   slug: "switch",
-  lead: "Toggle a single setting on or off.",
+  lead: "An on/off toggle for a single setting that takes effect immediately.",
   importLine: `import { Field, Switch, SwitchControl } from "@farmui/core";`,
   demos: [
     {
@@ -95,15 +95,21 @@ const doc: ComponentContent = {
       description: "Which side of the toggle the label sits on.",
     },
     {
-      name: "...others",
-      type: "InputHTMLAttributes",
-      description: 'All native <input type="checkbox"> props are forwarded.',
+      name: "wrapperClassName",
+      type: "string",
+      description: "Class for the label-row wrapper element (the input keeps className).",
     },
     {
+      name: "...others",
+      type: "InputHTMLAttributes",
+      description: 'All native <input type="checkbox"> props (except type and size) are forwarded.',
+    },
+  ],
+  parts: [
+    {
       name: "SwitchControl",
-      type: "component",
       description:
-        "The bare toggle without a label. It composes inside Field and reads its wiring (id, aria-describedby, aria-invalid) from context.",
+        "The bare toggle without a label, for composing inside a Field where the label lives on Field.Label. It reads its wiring (id, aria-describedby, aria-invalid) from the field context, and takes the same props as Switch minus label, description, labelPosition and wrapperClassName.",
     },
   ],
 };

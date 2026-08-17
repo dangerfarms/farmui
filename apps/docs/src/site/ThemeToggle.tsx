@@ -1,34 +1,57 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { SunIcon, MoonIcon } from "./Icons";
 import classes from "./ThemeToggle.module.css";
 
 type Theme = "light" | "dark";
 
-function systemTheme(): Theme {
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
+const listeners = new Set<() => void>();
+
+function subscribe(onChange: () => void) {
+  listeners.add(onChange);
+  const mq = window.matchMedia("(prefers-color-scheme: dark)");
+  mq.addEventListener("change", onChange);
+  // Cross-tab: another tab's toggle fires storage; same-tab writes go
+  // through the emitter below (storage never fires in its own tab).
+  window.addEventListener("storage", onChange);
+  return () => {
+    listeners.delete(onChange);
+    mq.removeEventListener("change", onChange);
+    window.removeEventListener("storage", onChange);
+  };
 }
 
-export function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme | null>(null);
+function themeSnapshot(): Theme {
+  const stored = localStorage.getItem("farmui-theme");
+  if (stored === "light" || stored === "dark") return stored;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
 
-  useEffect(() => {
-    const stored = localStorage.getItem("farmui-theme") as Theme | null;
-    setTheme(stored ?? systemTheme());
-  }, []);
+/**
+ * Two states: follow the system, or pin the opposite scheme. Toggling
+ * back to the scheme the system already shows clears the pin entirely,
+ * so the site tracks future OS changes instead of freezing today's
+ * value.
+ */
+export function ThemeToggle() {
+  const theme = useSyncExternalStore(subscribe, themeSnapshot, () => "light");
 
   const toggle = () => {
     const next: Theme = theme === "dark" ? "light" : "dark";
-    setTheme(next);
-    document.documentElement.dataset.theme = next;
+    const system = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
     try {
-      localStorage.setItem("farmui-theme", next);
+      if (next === system) {
+        delete document.documentElement.dataset.theme;
+        localStorage.removeItem("farmui-theme");
+      } else {
+        document.documentElement.dataset.theme = next;
+        localStorage.setItem("farmui-theme", next);
+      }
     } catch {
       /* ignore */
     }
+    for (const l of listeners) l();
   };
 
   return (
@@ -36,8 +59,8 @@ export function ThemeToggle() {
       type="button"
       className={classes.btn}
       onClick={toggle}
-      aria-label="Toggle color scheme"
-      title="Toggle color scheme"
+      aria-label={theme === "dark" ? "Switch to light" : "Switch to dark"}
+      title={theme === "dark" ? "Switch to light" : "Switch to dark"}
     >
       {theme === "dark" ? <MoonIcon /> : <SunIcon />}
     </button>

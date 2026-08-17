@@ -26,9 +26,9 @@ const doc: ComponentContent = {
       render: () => <InputBasicDemo />,
     },
     {
-      title: "No size prop",
+      title: "Size from context",
       description:
-        "Padding and font are fluid container-relative tokens: the control adapts to the space it lives in, and always height-aligns with Button, which shares the same derived anatomy. See the Contextualism guide.",
+        "There is no size prop. Padding and font are fluid container-relative tokens: the control adapts to the space it lives in, and always height-aligns with Button, which shares the same derived anatomy. See the Contextualism guide.",
       code: `<div style={{ containerType: "inline-size", inlineSize: "16rem" }}>
   <Field.Root>
     <Field.Label>In a narrow container</Field.Label>
@@ -67,7 +67,7 @@ const doc: ComponentContent = {
       render: () => <InputErrorDemo />,
     },
     {
-      title: "Native validation: no JS, no parts",
+      title: "Native validation",
       description:
         'Constraint validation is detected too: with required or type="email", the field styles itself via :user-invalid after you interact with it: no Field.Error, no state, nothing running in the browser. Try typing a non-email and tabbing away.',
       code: `<Field.Root>
@@ -180,7 +180,7 @@ const doc: ComponentContent = {
     {
       name: "...others",
       type: "InputHTMLAttributes",
-      description: "All native <input> props are forwarded.",
+      description: "All native <input> props are forwarded, except size (sizing is contextual).",
     },
   ],
 };

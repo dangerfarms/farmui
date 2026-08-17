@@ -83,34 +83,65 @@ const doc: ComponentContent = {
     "Trigger is a real <button> with aria-expanded; Popover.Title and Popover.Description automatically label the dialog via aria-labelledby / aria-describedby.",
     "Collision handling uses position-try flipping at viewport edges in supporting browsers; the fallback keeps the requested side.",
   ],
-  props: [
+  parts: [
     {
-      name: "Root",
-      type: "open?, defaultOpen?, onOpenChange?",
+      name: "Popover.Root",
       description:
         "Groups the parts and owns open state (controlled or uncontrolled). Renders an inline wrapper used by the fallback positioning.",
+      props: [
+        { name: "open", type: "boolean", description: "Controlled open state." },
+        {
+          name: "defaultOpen",
+          type: "boolean",
+          default: "false",
+          description: "Initial open state when uncontrolled.",
+        },
+        {
+          name: "onOpenChange",
+          type: "(open: boolean) => void",
+          description: "Called whenever the open state should change.",
+        },
+      ],
     },
     {
-      name: "Trigger",
-      type: "render?: element | (props) => node",
+      name: "Popover.Trigger",
       description:
-        "Renders a FarmUI Button wired as the popup's invoker (popovertarget, aria-expanded, anchor name); it adapts to context like any Button. Substitute any element via render (e.g. render={<a href=…>…</a>}).",
+        "A FarmUI Button wired as the popup's invoker (popovertarget, aria-expanded, anchor name); it adapts to context like any Button. All native <button> props are forwarded.",
+      props: [
+        {
+          name: "render",
+          type: "element | (props) => node",
+          description: "Substitute any element (e.g. render={<a href=…>…</a>}).",
+        },
+      ],
     },
     {
-      name: "Popup",
-      type: `position?: "bottom" | "top"`,
+      name: "Popover.Popup",
       description:
-        "The floating panel (role=dialog, popover attribute). position picks the side it opens toward.",
+        'The floating panel (role="dialog", popover attribute); native <div> props are forwarded.',
+      props: [
+        {
+          name: "position",
+          type: `"bottom" | "top"`,
+          default: `"bottom"`,
+          description: "Which side of the trigger the panel opens toward.",
+        },
+      ],
     },
     {
-      name: "Title / Description",
-      type: "heading / paragraph props",
-      description: "Optional parts that label and describe the popup for assistive technology.",
+      name: "Popover.Title",
+      description:
+        "Optional heading that labels the popup for assistive technology; native heading props are forwarded.",
     },
     {
-      name: "Close",
-      type: "button props",
-      description: "A button that closes the popup from inside.",
+      name: "Popover.Description",
+      description:
+        "Optional supporting text wired via aria-describedby; native <p> props are forwarded.",
+    },
+    {
+      name: "Popover.Close",
+      description:
+        "A button that closes the popup from inside; native <button> props are forwarded.",
     },
   ],
 };

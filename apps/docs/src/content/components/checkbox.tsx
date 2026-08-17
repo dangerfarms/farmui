@@ -4,7 +4,7 @@ import type { ComponentContent } from "@/renderer/types";
 const doc: ComponentContent = {
   slug: "checkbox",
   lead: "A styled checkbox with an adjacent label and description.",
-  importLine: `import { Checkbox } from "@farmui/core";`,
+  importLine: `import { Checkbox, CheckboxControl } from "@farmui/core";`,
   demos: [
     {
       title: "Basic usage",
@@ -104,15 +104,21 @@ const doc: ComponentContent = {
       description: "Render the partially-checked (dash) visual state.",
     },
     {
-      name: "...others",
-      type: "InputHTMLAttributes",
-      description: "All native <input> props (except type) are forwarded.",
+      name: "wrapperClassName",
+      type: "string",
+      description: "Class for the label-row wrapper element (the input keeps className).",
     },
     {
+      name: "...others",
+      type: "InputHTMLAttributes",
+      description: "All native <input> props (except type and size) are forwarded.",
+    },
+  ],
+  parts: [
+    {
       name: "CheckboxControl",
-      type: "component",
       description:
-        "The bare box without a label. It composes inside Field and reads its wiring (id, aria-describedby, aria-invalid) from context.",
+        "The bare box without a label, for composing inside a Field where the label lives on Field.Label. It reads its wiring (id, aria-describedby, aria-invalid) from the field context, and takes the same props as Checkbox minus label, description and wrapperClassName.",
     },
   ],
 };

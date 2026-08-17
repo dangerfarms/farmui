@@ -3,7 +3,7 @@ import type { ComponentContent } from "@/renderer/types";
 
 const doc: ComponentContent = {
   slug: "tabs",
-  lead: "Switch between related panels of content in the same view.",
+  lead: "One visible panel from a related set, chosen from a tab list in the same view.",
   importLine: `import { Tabs, TabsList, TabsTab, TabsPanel } from "@farmui/core";`,
   demos: [
     {
@@ -37,7 +37,7 @@ const doc: ComponentContent = {
     {
       title: "With icons (composed as children)",
       description:
-        "No leftSection prop: an svg child is detected via :has(svg) and gets a gap and 1em sizing, exactly like Button. Compose the icon before the label and mark it aria-hidden.",
+        "No leftSection prop: an svg child is detected via :has(svg) and gets a gap and label-relative sizing, the same detection Button uses. Compose the icon before the label and mark it aria-hidden.",
       code: `<Tabs defaultValue="files">
   <TabsList>
     <TabsTab value="files">
@@ -162,24 +162,44 @@ const doc: ComponentContent = {
       description: "Called with the new value when the active tab changes.",
     },
     {
-      name: "TabsTab value",
-      type: "string",
-      description: "Unique value linking a tab to its panel (required).",
-    },
-    {
-      name: "TabsTab disabled",
-      type: "boolean",
-      description: "Disable the tab and skip it in keyboard navigation.",
-    },
-    {
-      name: "TabsPanel value",
-      type: "string",
-      description: "Value of the tab this panel belongs to (required).",
-    },
-    {
       name: "...others",
-      type: "HTMLAttributes",
-      description: "All native <div>/<button> props are forwarded.",
+      type: "HTMLAttributes<HTMLDivElement>",
+      description: "All native <div> props are forwarded.",
+    },
+  ],
+  parts: [
+    {
+      name: "TabsList",
+      description:
+        'The tab strip (role="tablist") that owns the roving tabindex and arrow-key behaviour; all native <div> props are forwarded.',
+    },
+    {
+      name: "TabsTab",
+      description: "One tab button; all native <button> props are forwarded.",
+      props: [
+        {
+          name: "value",
+          type: "string",
+          description: "Unique value linking this tab to its panel (required).",
+        },
+        {
+          name: "disabled",
+          type: "boolean",
+          description: "Disable the tab and skip it in keyboard navigation.",
+        },
+      ],
+    },
+    {
+      name: "TabsPanel",
+      description:
+        "The content shown while its tab is active; all native <div> props are forwarded.",
+      props: [
+        {
+          name: "value",
+          type: "string",
+          description: "Value of the tab this panel belongs to (required).",
+        },
+      ],
     },
   ],
 };

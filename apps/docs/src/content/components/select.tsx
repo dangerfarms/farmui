@@ -136,7 +136,7 @@ const doc: ComponentContent = {
     {
       name: "...others",
       type: "SelectHTMLAttributes",
-      description: "All native <select> props are forwarded.",
+      description: "All native <select> props are forwarded, except size (sizing is contextual).",
     },
   ],
 };

@@ -159,8 +159,8 @@ export default function Contextualism() {
         Notice the checkbox: <code>--fui-context</code> is not a button feature. The region remaps
         the semantic colour tokens for <em>every</em> FarmUI component inside: checked states, focus
         rings, carets, text selection. No component contains context code; the cascade does the
-        work. A single dangerous button is just a one-element region, a wrapper around the button,
-        because a style query is answered by ancestors, never by the declaring element itself:
+        work. And since the declaration must sit on an ancestor (see above), a single dangerous
+        button is just a one-element region, a wrapper around the button:
       </p>
       <div className={prose.block}>
         <CodeBlock
@@ -203,7 +203,13 @@ export default function Contextualism() {
     color-mix(in oklab, var(--_color), var(--fui-bg) 90%),
     color-mix(in oklab, var(--_color), var(--fui-bg) 75%)
   );
-  color: var(--_color);
+
+  /* text is the channel deepened for contrast — the raw channel
+     can't hold 4.5:1 on its own tint */
+  color: light-dark(
+    color-mix(in oklab, var(--_color) 70%, oklch(0% 0 0deg)),
+    color-mix(in oklab, var(--_color) 55%, oklch(100% 0 0deg))
+  );
 }`}
         />
       </div>
@@ -361,8 +367,9 @@ export function BrandButton(props: ButtonProps) {
         shipped them. In older browsers, contexts degrade to the neutral defaults: everything stays
         functional and accessible; per our{" "}
         <a href="https://github.com/dangerfarms/farmui/blob/main/CONTRIBUTING.md">browser policy</a>{" "}
-        there are no polyfills. <code>:has()</code>, <code>color-mix()</code>, relative colour and
-        container size queries are all Baseline Widely Available.
+        there are no polyfills. <code>:has()</code>, <code>color-mix()</code> and container size
+        queries are Baseline Widely Available; relative colour is Newly Available (in every engine
+        since mid-2024).
       </p>
     </div>
   );

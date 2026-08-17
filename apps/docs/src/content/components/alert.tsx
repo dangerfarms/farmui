@@ -116,7 +116,7 @@ const doc: ComponentContent = {
     'For dynamic messages that are not urgent, pass role="status": forwarded props are spread after the default, so your role wins and the announcement becomes polite instead of interrupting.',
     "The status colour is never announced: write the title so the meaning survives in words (“Deploy failed”, not “Error” on a red tint); the border and tint are visual-only.",
     "The icon slot is rendered aria-hidden. Icons are decoration here, so any meaning they carry must also be in the text.",
-    "Title text is not the raw status colour: it is mixed toward black (light scheme) or white (dark) so it keeps AA contrast on the tint even for light channels like warning; only decorative parts (the icon, the border) carry the raw channel.",
+    "Title text is not the raw status colour: it is mixed toward black (light scheme) or white (dark) so it keeps AA contrast on the tint even for light channels like warning; only the decorative icon carries the raw channel (the border is a softer tint of it).",
   ],
   props: [
     {
@@ -137,16 +137,10 @@ const doc: ComponentContent = {
     {
       name: "...others",
       type: "HTMLAttributes<HTMLDivElement>",
-      description:
-        "All native <div> props are forwarded, including style for the custom property below.",
-    },
-    {
-      name: "--fui-context",
-      type: `"primary" | "danger" | "success" | "warning" | "info"`,
-      description:
-        "The alert's status. Declare it on an ancestor (a one-element wrapper for a single alert, or any region) because a style query is answered by ancestors, not by the declaring element; the property inherits.",
+      description: "All native <div> props are forwarded.",
     },
   ],
+  contextual: true,
 };
 
 export default doc;

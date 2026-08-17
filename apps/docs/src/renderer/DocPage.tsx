@@ -185,12 +185,82 @@ export function DocPage({ doc }: { doc: ComponentDoc }) {
         </div>
       </section>
 
-      <section className={classes.section}>
-        <h2 id="props" className={classes.h2}>
-          Props
-        </h2>
-        <PropsTable rows={doc.props} />
-      </section>
+      {doc.props && doc.props.length > 0 && (
+        <section className={classes.section}>
+          <h2 id="props" className={classes.h2}>
+            Props
+          </h2>
+          {doc.contextual && (
+            <p className={classes.demoDesc}>
+              Status is not a prop: it comes from the surrounding <code>--fui-context</code> region.
+              See the <a href="/docs/contextualism">Contextualism guide</a>.
+            </p>
+          )}
+          <PropsTable rows={doc.props} />
+        </section>
+      )}
+
+      {doc.parts && doc.parts.length > 0 && (
+        <section className={classes.section}>
+          <h2 id="parts" className={classes.h2}>
+            Parts
+          </h2>
+          <div className={classes.demos}>
+            {doc.parts.map((part) => (
+              <div key={part.name} id={slugify(part.name)} className={classes.demo}>
+                <h3 className={classes.h3}>
+                  <code className={tableClasses.name}>{part.name}</code>
+                </h3>
+                <p className={classes.demoDesc}>{part.description}</p>
+                {part.props && part.props.length > 0 && <PropsTable rows={part.props} />}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {doc.cssProps && doc.cssProps.length > 0 && (
+        <section className={classes.section}>
+          <h2 id="custom-properties" className={classes.h2}>
+            Custom properties
+          </h2>
+          <PropsTable
+            nameLabel="Property"
+            typeLabel="Syntax"
+            rows={doc.cssProps.map((p) => ({
+              name: p.name,
+              type: p.syntax,
+              default: p.default,
+              description: p.description,
+            }))}
+          />
+        </section>
+      )}
+
+      {doc.hooks && doc.hooks.length > 0 && (
+        <section className={classes.section}>
+          <h2 id="hooks" className={classes.h2}>
+            Hooks
+          </h2>
+          <div className={classes.demos}>
+            {doc.hooks.map((hook) => (
+              <div key={hook.name} id={slugify(hook.name)} className={classes.demo}>
+                <h3 className={classes.h3}>
+                  <code className={tableClasses.name}>{hook.name}</code>
+                </h3>
+                <p className={classes.demoDesc}>{hook.description}</p>
+                <CodeBlock code={hook.signature} />
+                {hook.options && (
+                  <>
+                    <p className={classes.demoDesc}>{hook.options.title}</p>
+                    <PropsTable nameLabel="Option" rows={hook.options.rows} />
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
     </article>
   );
 }

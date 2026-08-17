@@ -16,7 +16,7 @@
        the near-achromatic page background rotates the channel's hue;
        cartesian mixing only desaturates, so the hue survives. */
     border: 1px solid color-mix(in oklab, var(--_color), var(--fui-bg) 80%);
-    border-radius: var(--_radius, var(--fui-radius-md));
+    border-radius: var(--fui-button-radius, var(--fui-radius-md));
     background: light-dark(
       color-mix(in oklab, var(--_color), var(--fui-bg) 90%),
       color-mix(in oklab, var(--_color), var(--fui-bg) 75%)

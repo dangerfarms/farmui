@@ -67,16 +67,23 @@ const doc: ComponentContent = {
     'This is preferred over a <div role="group"> with aria-labelledby: the native semantics are better supported.',
     "The browser's default fieldset border, margin and padding are reset so it composes cleanly with FarmUI's layout.",
   ],
-  props: [
+  parts: [
     {
       name: "Fieldset.Root",
-      type: "{ ...fieldset }",
-      description: "Renders a native <fieldset> grouping the controls.",
+      description:
+        "Renders a native <fieldset> grouping the controls; native <fieldset> props are forwarded.",
     },
     {
       name: "Fieldset.Legend",
-      type: "{ optional?, ...legend }",
-      description: "The accessible group label. `optional` appends an “(optional)” hint.",
+      description: "The accessible group label; native <legend> props are forwarded.",
+      props: [
+        {
+          name: "optional",
+          type: "boolean",
+          default: "false",
+          description: 'Appends "(optional)" — optional is marked in words, not with an asterisk.',
+        },
+      ],
     },
   ],
 };

@@ -31,16 +31,23 @@ const doc: ComponentContent = {
       title: "Alert dialog (confirmation)",
       description:
         'alert renders role="alertdialog": the backdrop doesn\'t light-dismiss (closedby="closerequest"; Escape still works), and autoFocus belongs on the least-destructive action so it is the default answer. Use for destructive or irreversible confirmations only.',
-      code: `<Modal.Popup alert size="sm">
-  <Modal.Title>Delete this file?</Modal.Title>
-  <Modal.Description>This cannot be undone.</Modal.Description>
-  <div className="fui-cluster">
-    <Modal.Close autoFocus>Cancel</Modal.Close>
-    <span style={{ "--fui-context": "danger" }}>
-      <Modal.Close>Delete</Modal.Close>
-    </span>
-  </div>
-</Modal.Popup>`,
+      code: `<Modal.Root>
+  <span style={{ "--fui-context": "danger" }}>
+    <Modal.Trigger>Delete file</Modal.Trigger>
+  </span>
+  <Modal.Popup alert size="sm">
+    <Modal.Title>Delete this file?</Modal.Title>
+    <Modal.Description>
+      "report-final-v2.pdf" will be permanently deleted. This cannot be undone.
+    </Modal.Description>
+    <div className="fui-cluster">
+      <Modal.Close autoFocus>Cancel</Modal.Close>
+      <span style={{ "--fui-context": "danger" }}>
+        <Modal.Close>Delete</Modal.Close>
+      </span>
+    </div>
+  </Modal.Popup>
+</Modal.Root>`,
       render: () => <ModalAlertDemo />,
     },
     {
@@ -55,13 +62,16 @@ const doc: ComponentContent = {
       title: "Header with a close button",
       description:
         "A header row with an × is a composition pattern, not configuration: compose Modal.Title and Modal.Close however your design needs.",
-      code: `<Modal.Popup>
-  <div className="header-row">
-    <Modal.Title>Settings</Modal.Title>
-    <Modal.Close aria-label="Close">×</Modal.Close>
-  </div>
-  <Modal.Description>Manage your workspace settings.</Modal.Description>
-</Modal.Popup>`,
+      code: `<Modal.Root>
+  <Modal.Trigger>Open settings</Modal.Trigger>
+  <Modal.Popup>
+    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <Modal.Title style={{ margin: 0 }}>Settings</Modal.Title>
+      <Modal.Close aria-label="Close">×</Modal.Close>
+    </div>
+    <Modal.Description>Manage your workspace settings.</Modal.Description>
+  </Modal.Popup>
+</Modal.Root>`,
       render: () => <ModalHeaderCloseDemo />,
     },
   ],
@@ -98,35 +108,80 @@ const doc: ComponentContent = {
     "Light dismiss (clicking the backdrop) uses the closedby attribute where supported, with a small feature-detected coordinate-check fallback elsewhere: no polyfills, per the browser support policy.",
     "Body scroll is locked while open.",
   ],
-  props: [
+  parts: [
     {
-      name: "Root",
-      type: "open?, defaultOpen?, onOpenChange?",
+      name: "Modal.Root",
       description:
-        "Groups the parts and owns open state (controlled or uncontrolled). Renders no element of its own.",
+        "Groups the parts and owns the open state (controlled or uncontrolled). Renders no element of its own.",
+      props: [
+        { name: "open", type: "boolean", description: "Controlled open state." },
+        {
+          name: "defaultOpen",
+          type: "boolean",
+          default: "false",
+          description: "Initial open state when uncontrolled.",
+        },
+        {
+          name: "onOpenChange",
+          type: "(open: boolean) => void",
+          description: "Called whenever the open state should change.",
+        },
+      ],
     },
     {
-      name: "Trigger",
-      type: "button props · render?: element | (props) => node",
+      name: "Modal.Trigger",
       description:
-        "Renders a FarmUI Button that opens the dialog; style it directly, or substitute your own element via render.",
+        "A FarmUI Button that opens the dialog; all native <button> props are forwarded.",
+      props: [
+        {
+          name: "render",
+          type: "element | (props) => node",
+          description:
+            "Substitute your own element as the trigger; it receives the invoker wiring.",
+        },
+      ],
     },
     {
-      name: "Popup",
-      type: `size?: "sm" | "md" | "lg" · alert?: boolean`,
+      name: "Modal.Popup",
       description:
-        'The native <dialog>. size sets the panel width (24/32/44rem); alert renders role="alertdialog" with no light dismiss (Escape still closes) for destructive confirmations.',
+        "The native <dialog>, opened with showModal(); all native <dialog> props are forwarded.",
+      props: [
+        {
+          name: "size",
+          type: `"sm" | "md" | "lg"`,
+          default: `"md"`,
+          description: "Panel width (24/32/44rem).",
+        },
+        {
+          name: "alert",
+          type: "boolean",
+          default: "false",
+          description:
+            'Renders role="alertdialog" with no light dismiss (Escape still closes), for destructive confirmations.',
+        },
+      ],
     },
     {
-      name: "Title / Description",
-      type: "heading / paragraph props",
-      description: "Label and describe the dialog for assistive technology.",
+      name: "Modal.Title",
+      description:
+        "The dialog's heading (an <h2>), wired to the dialog via aria-labelledby; native heading props are forwarded.",
     },
     {
-      name: "Close",
-      type: "button props · render?",
+      name: "Modal.Description",
       description:
-        "A FarmUI Button that closes the dialog; compose as many as you need (confirm, cancel, ×).",
+        "Supporting text, wired to the dialog via aria-describedby; native <p> props are forwarded.",
+    },
+    {
+      name: "Modal.Close",
+      description:
+        "A FarmUI Button that closes the dialog; compose as many as you need (confirm, cancel, ×). Native <button> props are forwarded.",
+      props: [
+        {
+          name: "render",
+          type: "element | (props) => node",
+          description: "Substitute your own element; it receives the close wiring.",
+        },
+      ],
     },
   ],
 };

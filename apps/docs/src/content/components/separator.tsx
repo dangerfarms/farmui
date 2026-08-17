@@ -24,10 +24,12 @@ const doc: ComponentContent = {
       title: "Vertical",
       description:
         'Divides items in a row; adds aria-orientation="vertical" and stretches to the row\'s height.',
-      code: `<div style={{ display: "flex", gap: "0.75rem" }}>
+      code: `<div style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
   <span>Cut</span>
   <Separator orientation="vertical" />
   <span>Copy</span>
+  <Separator orientation="vertical" />
+  <span>Paste</span>
 </div>`,
       render: () => (
         <div style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>

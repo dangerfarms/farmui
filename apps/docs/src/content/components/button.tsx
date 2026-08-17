@@ -4,7 +4,7 @@ import type { ComponentContent } from "@/renderer/types";
 
 const doc: ComponentContent = {
   slug: "button",
-  lead: "Trigger an action or event with a single click.",
+  lead: "A native button whose appearance is decided by its context, not by props.",
   importLine: `import { Button } from "@farmui/core";`,
   demos: [
     {
@@ -196,29 +196,25 @@ const doc: ComponentContent = {
     {
       name: "...others",
       type: "ButtonHTMLAttributes",
-      description:
-        "All native <button> props are forwarded, including style for the custom properties below.",
+      description: "All native <button> props are forwarded.",
     },
-    {
-      name: "--fui-context",
-      type: `"primary" | "danger" | "success" | "warning" | "info"`,
-      description:
-        'Declare on any ancestor (it inherits) to give the region semantic meaning: every FarmUI component inside adapts. For a single button, use a one-element wrapper (<span style={{ "--fui-context": "danger" }}><Button>…</Button></span>). A style query is answered by ancestors, never by the element that declares the property.',
-    },
+  ],
+  cssProps: [
     {
       name: "--fui-button-color",
-      type: "CSS color",
+      syntax: "CSS color",
       default: "var(--fui-text)",
       description:
         "The button's single colour channel. Set it to recolour one instance or a wrapper component; background, border, hover and active are all derived from it.",
     },
     {
-      name: "--_radius",
-      type: "CSS length",
+      name: "--fui-button-radius",
+      syntax: "CSS length",
       default: "var(--fui-radius-md)",
-      description: "Override via style or a token to change the corner radius.",
+      description: "Corner rounding; set it per instance or on a wrapper component.",
     },
   ],
+  contextual: true,
 };
 
 export default doc;

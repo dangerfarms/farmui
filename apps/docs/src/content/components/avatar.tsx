@@ -120,18 +120,32 @@ const doc: ComponentContent = {
       description: "Size token or explicit pixel size.",
     },
     {
-      name: "...others",
-      type: "SpanHTMLAttributes",
-      description:
-        "All native <span> props are forwarded, including style for the custom property below.",
+      name: "children",
+      type: "ReactNode",
+      description: "Custom content; overrides the derived image/initials/glyph.",
     },
     {
-      name: "--fui-context",
-      type: `"primary" | "danger" | "success" | "warning" | "info"`,
-      description:
-        "Colours the initials/fallback background. Declare it on an ancestor (a one-element span wrapper for a single avatar, or any region) because a style query is answered by ancestors, not by the declaring element; the property inherits.",
+      name: "...others",
+      type: "SpanHTMLAttributes",
+      description: "All native <span> props are forwarded.",
     },
   ],
+  parts: [
+    {
+      name: "AvatarGroup",
+      description:
+        "Overlaps a row of avatars with a surface-coloured ring; all native <div> props are forwarded.",
+      props: [
+        {
+          name: "spacing",
+          type: "string",
+          default: `"0.5rem"`,
+          description: "How far each avatar overlaps the previous one.",
+        },
+      ],
+    },
+  ],
+  contextual: true,
 };
 
 export default doc;

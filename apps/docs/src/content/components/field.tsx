@@ -133,33 +133,52 @@ const doc: ComponentContent = {
     'Any Field.Error with content sets aria-invalid on the control and is announced with role="alert"; a visually hidden "Error: " prefix makes the announcement unmistakable out of context.',
     "The FarmUI controls read this wiring from context; Field.Control hands it to arbitrary elements, letting you keep semantic, native controls instead of re-implementing them.",
   ],
-  props: [
+  parts: [
     {
       name: "Field.Root",
-      type: "{ id?, ...div }",
       description:
-        "Wraps a field and provides context. The invalid state is detected: it is true exactly when a Field.Error with content is rendered.",
+        "Wraps a field and provides context. The invalid state is detected: it is true exactly when a Field.Error with content is rendered. Native <div> props are forwarded.",
+      props: [
+        {
+          name: "id",
+          type: "string",
+          description: "Base id for the control; auto-generated when omitted.",
+        },
+      ],
     },
     {
       name: "Field.Label",
-      type: "{ optional?, ...label }",
-      description: "Label tied to the control. `optional` appends an “(optional)” hint.",
+      description: "Label tied to the control; native <label> props are forwarded.",
+      props: [
+        {
+          name: "optional",
+          type: "boolean",
+          default: "false",
+          description: 'Appends "(optional)" — optional is marked in words, not with an asterisk.',
+        },
+      ],
     },
     {
       name: "Field.Description",
-      type: "{ ...p }",
-      description: "Helper text, linked via aria-describedby.",
+      description: "Helper text, linked via aria-describedby; native <p> props are forwarded.",
     },
     {
       name: "Field.Control",
-      type: "{ render }",
       description:
-        "Wires id, aria-describedby and aria-invalid onto an arbitrary element (an element to clone or a function). The FarmUI controls self-wire from the field and don't need it.",
+        "Wires id, aria-describedby and aria-invalid onto an arbitrary element. The FarmUI controls self-wire from the field and don't need it.",
+      props: [
+        {
+          name: "render",
+          type: "element | (props) => node",
+          description:
+            "The element to wire: an element to clone, or a function receiving the props.",
+        },
+      ],
     },
     {
       name: "Field.Error",
-      type: "{ ...p }",
-      description: 'Error message with role="alert"; sets the invalid state when it has content.',
+      description:
+        'Error message with role="alert"; sets the invalid state when it has content. Native <p> props are forwarded.',
     },
   ],
 };

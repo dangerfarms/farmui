@@ -64,23 +64,39 @@ const doc: ComponentContent = {
     "Items are real links: right-click, open-in-new-tab and AT link lists all behave; activation focuses the field so the correction can start immediately.",
     "Keep the user's failed input in the fields: never clear values when showing errors.",
   ],
-  props: [
+  parts: [
     {
-      name: "Root",
-      type: "autoFocus?: boolean · div props",
-      description:
-        "The focusable group. autoFocus (default true) moves keyboard focus to the summary when it mounts.",
+      name: "ErrorSummary.Root",
+      description: "The focusable group; native <div> props are forwarded.",
+      props: [
+        {
+          name: "autoFocus",
+          type: "boolean",
+          default: "true",
+          description: "Moves keyboard focus to the summary when it mounts.",
+        },
+      ],
     },
     {
-      name: "Title",
-      type: "heading props",
-      description: 'An <h2> labelling the region. Children default to "There is a problem".',
+      name: "ErrorSummary.Title",
+      description:
+        'An <h2> labelling the region; children default to "There is a problem". Native heading props are forwarded.',
     },
     {
-      name: "List / Item",
-      type: "Item: href (required) · li props",
+      name: "ErrorSummary.List",
+      description: "The list of errors; native <ul> props are forwarded.",
+    },
+    {
+      name: "ErrorSummary.Item",
       description:
-        "Item renders a real link to the field's fragment and focuses the target on activation.",
+        "One error: a real link to the field's fragment that focuses the target on activation. Native <li> props are forwarded.",
+      props: [
+        {
+          name: "href",
+          type: "string",
+          description: "Fragment link to the field the error belongs to (required).",
+        },
+      ],
     },
   ],
 };

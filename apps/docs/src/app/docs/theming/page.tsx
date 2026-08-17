@@ -18,17 +18,18 @@ export default function Theming() {
         <code>ThemeProvider</code>, no JavaScript.
       </p>
 
-      <h2>Rebrand in one line</h2>
+      <h2>Rebrand in two lines</h2>
       <p>
-        The single most important token is <code>--fui-primary</code>. It is genuinely one line.
-        Hover and active states are <em>derived</em> from it, so there are no companion tokens to
-        keep in sync:
+        Two tokens carry the brand: <code>--fui-primary</code> and its soft tint{" "}
+        <code>--fui-primary-soft</code>. Everything else — hover, active, solid fills, focus rings —
+        is <em>derived</em> from them, so there is nothing else to keep in sync:
       </p>
       <div className={prose.block}>
         <CodeBlock
           language="css"
           code={`:root {
-  --fui-primary: oklch(0.62 0.2 275); /* violet */
+  --fui-primary: light-dark(oklch(0.62 0.2 275), oklch(0.72 0.17 275)); /* violet */
+  --fui-primary-soft: light-dark(oklch(0.95 0.03 275), oklch(0.32 0.06 275));
 }`}
         />
       </div>
@@ -46,7 +47,11 @@ export default function Theming() {
   <Button>Default brand</Button>   {/* --fui-primary resolves at :root */}
 </div>
 
-<div style={{ "--fui-primary": "oklch(0.62 0.2 275)", "--fui-context": "primary" }}>
+<div style={{
+  "--fui-primary": "light-dark(oklch(0.62 0.2 275), oklch(0.72 0.17 275))",
+  "--fui-primary-soft": "light-dark(oklch(0.95 0.03 275), oklch(0.32 0.06 275))",
+  "--fui-context": "primary",
+}}>
   <Button>Violet brand</Button>    {/* …resolves here instead */}
 </div>`}
         />
@@ -103,6 +108,14 @@ export default function Theming() {
         <code>light-dark()</code> token re-resolves there). Remove the attribute to follow the OS
         preference again.
       </p>
+      <p>
+        The same mechanism gives you an inverted &ldquo;on-dark&rdquo; section: set{" "}
+        <code>data-theme=&quot;dark&quot;</code> on the region (or <code>color-scheme: dark</code>{" "}
+        in its CSS; the attribute is just a setter for it) and every <code>light-dark()</code> token
+        flips. One caveat: colours already resolved on an ancestor inherit as resolved values and
+        don&rsquo;t re-resolve, so the inverted region must also re-declare <code>color</code> (e.g.{" "}
+        <code>color: var(--fui-text)</code>) for descendants to pick up the flipped value.
+      </p>
       <div className={prose.callout}>
         This is one instance of FarmUI&apos;s baseline posture:{" "}
         <strong>the user&apos;s stated preferences are the default.</strong> Colour scheme is
@@ -115,9 +128,11 @@ export default function Theming() {
       <h2>Contexts</h2>
       <p>
         A <strong>context</strong> declares what a region <em>means</em>, as a custom property (
-        <code>--fui-context</code>) read by container style queries, and every FarmUI component
-        inside adopts it. No component contains context code; the cascade does the work (see the{" "}
-        <a href="/docs/contextualism">Contextualism guide</a>):
+        <code>--fui-context</code>) that every FarmUI component inside adopts. The mechanics — the
+        vocabulary, one-element regions, why the property lives on an ancestor — are the{" "}
+        <a href="/docs/contextualism">Contextualism guide</a>&apos;s subject; what matters for
+        theming is that a context remaps <em>semantic colour tokens only</em>, so it composes with
+        everything on this page:
       </p>
       <div className={prose.block}>
         <div
@@ -162,27 +177,6 @@ export default function Theming() {
 </section>`}
         />
       </div>
-      <p>
-        Contexts remap <em>semantic colour tokens only</em>: never spacing, sizing, or layout. The
-        vocabulary is <code>primary</code>, <code>danger</code>, <code>success</code>,{" "}
-        <code>warning</code> and <code>info</code>, and no component has a variant or colour prop —
-        anywhere. The status components (Alert, Badge, Loader, Progress) declare their meaning the
-        same way as everything else.
-      </p>
-      <p>
-        A single danger button is a one-element region: a wrapper (
-        <code>{`<span style={{ "--fui-context": "danger" }}><Button>Delete</Button></span>`}</code>
-        ), because a style query is answered by ancestors, never by the element that declares the
-        property. The property inherits, so the nearest ancestor that sets it wins.
-      </p>
-      <p>
-        An inverted &ldquo;on-dark&rdquo; section needs no context at all: set{" "}
-        <code>data-theme=&quot;dark&quot;</code> on the region (or <code>color-scheme: dark</code>{" "}
-        in its CSS; the attribute is just a setter for it) and every <code>light-dark()</code> token
-        flips. One caveat: colours already resolved on an ancestor inherit as resolved values and
-        don&rsquo;t re-resolve, so the inverted region must also re-declare <code>color</code> (e.g.{" "}
-        <code>color: var(--fui-text)</code>) for descendants to pick up the flipped value.
-      </p>
       <div className={prose.callout}>
         Theme, context, and instance are one mechanism at three scopes: remap tokens on{" "}
         <code>:root</code> to set a brand, declare a context on a region to give it meaning, set a

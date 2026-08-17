@@ -134,16 +134,10 @@ const doc: ComponentContent = {
     {
       name: "...others",
       type: "HTMLAttributes<HTMLDivElement>",
-      description:
-        "All native <div> props are forwarded, including style for the custom property below.",
-    },
-    {
-      name: "--fui-context",
-      type: `"primary" | "danger" | "success" | "warning" | "info"`,
-      description:
-        "The bar's status colour. Declare it on an ancestor (a one-element wrapper for a single bar, or any region) because a style query is answered by ancestors, not by the declaring element; the property inherits.",
+      description: "All native <div> props are forwarded.",
     },
   ],
+  contextual: true,
 };
 
 export default doc;

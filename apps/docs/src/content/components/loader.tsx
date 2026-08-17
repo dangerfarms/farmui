@@ -91,7 +91,6 @@ const doc: ComponentContent = {
     {
       name: "size",
       type: `"sm" | "md" | "lg" | number`,
-      default: "—",
       description:
         "Overall size, as a token or an explicit pixel number. When omitted, the size comes from context: 1.5rem standalone, 1em inside a Button (like an icon).",
     },
@@ -104,16 +103,10 @@ const doc: ComponentContent = {
     {
       name: "...others",
       type: "HTMLAttributes<HTMLSpanElement>",
-      description:
-        "All native <span> props are forwarded, including style for the custom property below.",
-    },
-    {
-      name: "--fui-context",
-      type: `"primary" | "danger" | "success" | "warning" | "info"`,
-      description:
-        "The loader's status colour. Declare it on an ancestor (a one-element span wrapper for a single loader, or any region) because a style query is answered by ancestors, not by the declaring element; the property inherits.",
+      description: "All native <span> props are forwarded.",
     },
   ],
+  contextual: true,
 };
 
 export default doc;

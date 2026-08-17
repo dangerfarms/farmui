@@ -1,15 +1,23 @@
 {
-  "extends": ["stylelint-config-standard", "stylelint-config-modern"],
-  "plugins": ["stylelint-order", "stylelint-value-no-unknown-custom-properties"],
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-modern"
+  ],
+  "plugins": [
+    "stylelint-value-no-unknown-custom-properties"
+  ],
   "rules": {
     "csstools/value-no-unknown-custom-properties": [
       true,
       {
-        "importFrom": ["src/tokens.css"],
-        "ignoreProperties": ["/^--_/"]
+        "importFrom": [
+          "src/tokens.css"
+        ],
+        "ignoreProperties": [
+          "/^--_/"
+        ]
       }
     ],
-    "order/properties-order": [],
     "custom-property-pattern": null,
     "color-named": null,
     "selector-class-pattern": null,
@@ -17,9 +25,19 @@
     "declaration-block-no-duplicate-properties": [
       true,
       {
-        "ignore": ["consecutive-duplicates-with-different-values"]
+        "ignore": [
+          "consecutive-duplicates-with-different-values"
+        ]
       }
     ],
-    "no-descending-specificity": null
+    "no-descending-specificity": null,
+    "media-feature-range-notation": "context",
+    "unit-disallowed-list": [
+      [
+        "vw",
+        "vh"
+      ]
+    ],
+    "declaration-no-important": true
   }
 }

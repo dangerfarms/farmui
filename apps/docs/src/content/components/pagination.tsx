@@ -98,6 +98,12 @@ const doc: ComponentContent = {
       description: "Show first/last page buttons at the edges.",
     },
     {
+      name: "aria-label",
+      type: "string",
+      default: `"Pagination"`,
+      description: "The navigation landmark's accessible name.",
+    },
+    {
       name: "...others",
       type: "HTMLAttributes",
       description: "All native <nav> props are forwarded.",

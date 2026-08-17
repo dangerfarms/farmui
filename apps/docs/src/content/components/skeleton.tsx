@@ -60,11 +60,11 @@ const doc: ComponentContent = {
     {
       title: "Custom sizes",
       description:
-        "Use width and height for cards or thumbnails; shape comes from --_radius or circle.",
+        "Use width and height for cards or thumbnails; shape comes from --fui-skeleton-radius or circle.",
       code: `<Skeleton
   width="8rem"
   height="8rem"
-  style={{ "--_radius": "var(--fui-radius-lg)" }}
+  style={{ "--fui-skeleton-radius": "var(--fui-radius-lg)" }}
 />
 <Skeleton width="8rem" height="8rem" circle />`,
       render: () => (
@@ -72,7 +72,7 @@ const doc: ComponentContent = {
           <Skeleton
             width="8rem"
             height="8rem"
-            style={{ "--_radius": "var(--fui-radius-lg)" } as React.CSSProperties}
+            style={{ "--fui-skeleton-radius": "var(--fui-radius-lg)" } as React.CSSProperties}
           />
           <Skeleton width="8rem" height="8rem" circle />
         </>
@@ -146,6 +146,14 @@ const doc: ComponentContent = {
       name: "...others",
       type: "HTMLAttributes<HTMLDivElement>",
       description: "All native <div> props are forwarded.",
+    },
+  ],
+  cssProps: [
+    {
+      name: "--fui-skeleton-radius",
+      syntax: "CSS length",
+      default: "var(--fui-radius-md)",
+      description: "Corner rounding of the placeholder; set per instance or on a region.",
     },
   ],
 };

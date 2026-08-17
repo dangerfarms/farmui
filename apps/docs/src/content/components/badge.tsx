@@ -150,16 +150,10 @@ const doc: ComponentContent = {
     {
       name: "...others",
       type: "SpanHTMLAttributes",
-      description:
-        "All native <span> props are forwarded, including style for the custom property below.",
-    },
-    {
-      name: "--fui-context",
-      type: `"primary" | "danger" | "success" | "warning" | "info"`,
-      description:
-        "The badge's status. Declare it on an ancestor (a one-element span wrapper for a single badge, or any region) because a style query is answered by ancestors, not by the declaring element; the property inherits.",
+      description: "All native <span> props are forwarded.",
     },
   ],
+  contextual: true,
 };
 
 export default doc;

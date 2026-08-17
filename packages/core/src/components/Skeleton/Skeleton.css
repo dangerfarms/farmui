@@ -4,7 +4,9 @@
     display: block flow;
     inline-size: var(--_w, 100%);
     block-size: var(--_h, 1lh);
-    border-radius: var(--_radius, var(--fui-radius-md));
+
+    /* Public shape hook — consumers may set it per instance or region. */
+    border-radius: var(--fui-skeleton-radius, var(--fui-radius-md));
     overflow: clip;
     user-select: none;
     pointer-events: none;

@@ -32,7 +32,8 @@
 
     /* ── 2. Semantic colour — theme-aware via light-dark() ─────────── */
 
-    /* Primary (brand) — remap this one line to rebrand the whole library */
+    /* Primary (brand) — remap these two lines (the colour and its soft
+       tint) to rebrand the whole library; everything else derives. */
     --fui-primary: var(--fui-green-600);
     --fui-primary-soft: light-dark(var(--fui-green-50), oklch(30% 0.06 150deg));
 

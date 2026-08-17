@@ -3,7 +3,7 @@ import type { ComponentContent } from "@/renderer/types";
 
 const doc: ComponentContent = {
   slug: "radio",
-  lead: "Choose a single option from a mutually exclusive set.",
+  lead: "A single choice from a small set of visible, mutually exclusive options.",
   importLine: `import { Radio, RadioGroup } from "@farmui/core";`,
   demos: [
     {
@@ -115,64 +115,89 @@ const doc: ComponentContent = {
   accessibility: [
     "RadioGroup renders a native <fieldset> with a <legend>, the accessible way to name a group: screen readers announce the legend when a radio is focused.",
     "Radios share one name so the browser enforces single-selection and arrow-key navigation natively.",
-    "A group error sets aria-describedby and aria-invalid on the fieldset and reflects on the radios' invalid state.",
+    'A group error sets aria-describedby and aria-invalid on the fieldset, which carries role="radiogroup" — the one place ARIA allows aria-invalid for radios. The individual radios never claim it; their danger borders are pure CSS answering the group state.',
   ],
   props: [
     {
       name: "label",
       type: "ReactNode",
-      description: "Radio: label rendered next to the control.",
+      description: "Label rendered next to the control.",
     },
     {
       name: "description",
       type: "ReactNode",
-      description: "Radio: helper text rendered under the label.",
+      description: "Helper text rendered under the label.",
     },
     {
-      name: "RadioGroup.label",
-      type: "ReactNode",
-      description: "Group label (wired via aria-labelledby).",
-    },
-    {
-      name: "RadioGroup.description",
-      type: "ReactNode",
-      description: "Helper text rendered under the group label.",
-    },
-    {
-      name: "RadioGroup.error",
-      type: "ReactNode",
-      description: "Error message; marks the group invalid.",
-    },
-    {
-      name: "RadioGroup.name",
+      name: "wrapperClassName",
       type: "string",
-      description: "Shared name for all radios (auto-generated if omitted).",
-    },
-    {
-      name: "RadioGroup.value",
-      type: "string",
-      description: "Controlled selected value (pair with onChange).",
-    },
-    {
-      name: "RadioGroup.defaultValue",
-      type: "string",
-      description: "Initial selected value for uncontrolled usage.",
-    },
-    {
-      name: "RadioGroup.onChange",
-      type: "(value: string) => void",
-      description: "Fires with the newly selected value.",
-    },
-    {
-      name: "RadioGroup.orientation",
-      type: `"vertical" | "horizontal"`,
-      default: `"vertical"`,
-      description: "Layout direction of the options.",
+      description: "Class for the label-row wrapper element (the input keeps className).",
     },
     {
       name: "...others",
       type: "InputHTMLAttributes",
-      description: 'All native <input type="radio"> props are forwarded.',
+      description: 'All native <input type="radio"> props (except type and size) are forwarded.',
+    },
+  ],
+  parts: [
+    {
+      name: "RadioGroup",
+      description:
+        'The group fieldset: legend, helper text, shared name and single-selection state for the <Radio> options inside it. Renders role="radiogroup" and carries the group error.',
+      props: [
+        {
+          name: "label",
+          type: "ReactNode",
+          description: "Group legend (wired via aria-labelledby).",
+        },
+        {
+          name: "description",
+          type: "ReactNode",
+          description: "Helper text rendered under the group legend.",
+        },
+        {
+          name: "error",
+          type: "ReactNode",
+          description: "Error message; marks the group invalid.",
+        },
+        {
+          name: "name",
+          type: "string",
+          description: "Shared name for all radios (auto-generated if omitted).",
+        },
+        {
+          name: "value",
+          type: "string",
+          description: "Controlled selected value (pair with onChange).",
+        },
+        {
+          name: "defaultValue",
+          type: "string",
+          description: "Initial selected value for uncontrolled usage.",
+        },
+        {
+          name: "onChange",
+          type: "(value: string) => void",
+          description: "Fires with the newly selected value.",
+        },
+        {
+          name: "orientation",
+          type: `"vertical" | "horizontal"`,
+          default: `"vertical"`,
+          description: "Layout direction of the options.",
+        },
+        {
+          name: "optional",
+          type: "boolean",
+          default: "false",
+          description: 'Appends "(optional)" to the group legend — optional is marked in words.',
+        },
+      ],
+    },
+    {
+      name: "RadioControl",
+      description:
+        "The bare input + dot without a label row, for composing inside a Field where the label lives on Field.Label. Takes the same props as Radio minus label, description and wrapperClassName.",
     },
   ],
 };

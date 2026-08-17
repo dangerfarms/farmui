@@ -14,7 +14,7 @@ const doc: ComponentContent = {
     {
       title: "Basic usage",
       description:
-        "A memorable date is typed, not picked: day, month and year are separate fields in a fieldset named by the legend, each raising a numeric keypad on touch devices.",
+        "A memorable date is typed, not picked: day, month and year are separate fields in a fieldset named by the legend. Day and year raise a numeric keypad on touch devices; the month keeps the full keyboard so names like Mar are accepted too.",
       code: `<DateInput.Root name="date-of-birth" autoComplete="bday">
   <DateInput.Legend>Date of birth</DateInput.Legend>
   <DateInput.Description>For example, 27 3 2007</DateInput.Description>
@@ -149,35 +149,75 @@ const doc: ComponentContent = {
     'Day and year use inputMode="numeric" (a number pad without the hazards of type="number"); the month field keeps the full keyboard so names like "jan" can be typed.',
     "The fields are sized to their answers (two digits, four for the year); width is information about the expected length.",
   ],
-  props: [
+  parts: [
     {
-      name: "Root",
-      type: 'name? · autoComplete?: "bday" · fieldset props',
-      description:
-        'The fieldset and the wiring. name prefixes each field\'s submitted name ({name}-day…); autoComplete="bday" wires date-of-birth autofill.',
+      name: "DateInput.Root",
+      description: "The fieldset and the wiring; native <fieldset> props are forwarded.",
+      props: [
+        {
+          name: "name",
+          type: "string",
+          description:
+            "Prefix for each field's submitted name: {name}-day, {name}-month, {name}-year.",
+        },
+        {
+          name: "autoComplete",
+          type: `"bday"`,
+          description: "Wires browser date-of-birth autofill (WCAG 1.3.5).",
+        },
+      ],
     },
     {
-      name: "Legend",
-      type: "optional?: boolean · legend props",
+      name: "DateInput.Legend",
       description:
-        "Names the group (this is Fieldset.Legend). optional marks the whole question optional in text.",
+        "Names the group (this is Fieldset.Legend); native <legend> props are forwarded.",
+      props: [
+        {
+          name: "optional",
+          type: "boolean",
+          default: "false",
+          description: "Marks the whole question optional in text.",
+        },
+      ],
     },
     {
-      name: "Description",
-      type: "p props",
-      description: "Helper text linked to the group. Give an example date.",
+      name: "DateInput.Description",
+      description:
+        "Helper text linked to the group — give an example date. Native <p> props are forwarded.",
     },
     {
-      name: "Error",
-      type: 'parts?: ("day" | "month" | "year")[] · p props',
-      description:
-        'Error message announced via role="alert". parts narrows the invalid state to the fields it names; default is all of them.',
+      name: "DateInput.Error",
+      description: 'Error message announced via role="alert"; native <p> props are forwarded.',
+      props: [
+        {
+          name: "parts",
+          type: `("day" | "month" | "year")[]`,
+          description:
+            "Narrows the invalid state to the fields the error names; default is all of them.",
+        },
+      ],
     },
     {
-      name: "Fields / Field",
-      type: "Field: part (required) · children (label) · input props",
+      name: "DateInput.Fields",
+      description: "Lays out the row of fields; native <div> props are forwarded.",
+    },
+    {
+      name: "DateInput.Field",
       description:
-        "Fields lays out the row; each Field is a labelled numeric input. All native <input> props are forwarded: value, onChange, maxLength, refs.",
+        "One labelled date field. All native <input> props are forwarded: value, onChange, maxLength, refs.",
+      props: [
+        {
+          name: "part",
+          type: `"day" | "month" | "year"`,
+          description: "Which date part this field asks for (required).",
+        },
+        {
+          name: "children",
+          type: "ReactNode",
+          default: `"Day" / "Month" / "Year"`,
+          description: "The visible field label.",
+        },
+      ],
     },
   ],
 };

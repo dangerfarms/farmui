@@ -84,26 +84,26 @@ const doc: ComponentContent = {
       description: "With multiple, any number of items can be open at once.",
       code: `<Accordion multiple>
   <AccordionItem label="Performance">
-    Lazy-load routes to cut initial bundle size by up to 40%.
+    Lazy-load routes so each page ships only the code it needs.
   </AccordionItem>
   <AccordionItem label="Accessibility">
     Every component ships with keyboard and screen-reader support.
   </AccordionItem>
   <AccordionItem label="Theming">
-    Override CSS variables to match your brand in minutes.
+    Override CSS variables to restyle components from your own stylesheet.
   </AccordionItem>
 </Accordion>`,
       render: () => (
         <div style={{ inlineSize: "100%", maxInlineSize: "30rem" }}>
           <Accordion multiple>
             <AccordionItem label="Performance">
-              Lazy-load routes to cut initial bundle size by up to 40%.
+              Lazy-load routes so each page ships only the code it needs.
             </AccordionItem>
             <AccordionItem label="Accessibility">
               Every component ships with keyboard and screen-reader support.
             </AccordionItem>
             <AccordionItem label="Theming">
-              Override CSS variables to match your brand in minutes.
+              Override CSS variables to restyle components from your own stylesheet.
             </AccordionItem>
           </Accordion>
         </div>
@@ -150,19 +150,29 @@ const doc: ComponentContent = {
         "Allow more than one item open at once. When false, items are mutually exclusive.",
     },
     {
-      name: "AccordionItem label",
-      type: "ReactNode",
-      description: "The summary label shown in the always-visible header.",
-    },
-    {
-      name: "AccordionItem defaultOpen",
-      type: "boolean",
-      description: "Open this item by default.",
-    },
-    {
       name: "...others",
-      type: "HTMLAttributes",
-      description: "Native <div> / <details> props are forwarded respectively.",
+      type: "HTMLAttributes<HTMLDivElement>",
+      description: "All native <div> props are forwarded.",
+    },
+  ],
+  parts: [
+    {
+      name: "AccordionItem",
+      description:
+        "One disclosure row, rendered as a real <details>/<summary>; all native <details> props are forwarded.",
+      props: [
+        {
+          name: "label",
+          type: "ReactNode",
+          description: "The summary label shown in the always-visible header.",
+        },
+        {
+          name: "defaultOpen",
+          type: "boolean",
+          default: "false",
+          description: "Open this item by default (maps to the native open attribute).",
+        },
+      ],
     },
   ],
 };

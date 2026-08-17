@@ -110,47 +110,125 @@ const doc: ComponentContent = {
     'The viewport renders with popover="manual": the browser\'s top layer places it above every dialog and popover with no z-index war, and nothing can light-dismiss it.',
     'The default dismiss button carries an explicit aria-label ("Dismiss notification").',
   ],
-  props: [
+  parts: [
     {
-      name: "Provider",
-      type: "timeout?: number · limit?: number",
-      description:
-        "Owns the toast queue; mount once near the app root. timeout is the default auto-dismiss delay in ms (5000); limit caps how many toasts show at once (3); the oldest closes first.",
+      name: "Toast.Provider",
+      description: "Owns the toast queue; mount once near the app root.",
+      props: [
+        {
+          name: "timeout",
+          type: "number",
+          default: "5000",
+          description: "Default auto-dismiss delay in ms.",
+        },
+        {
+          name: "limit",
+          type: "number",
+          default: "3",
+          description: "Most toasts shown at once; the oldest closes first.",
+        },
+      ],
     },
     {
-      name: "useToast()",
-      type: "() => { toasts, add, close }",
+      name: "Toast.Toasts",
       description:
-        "Fire and dismiss toasts from anywhere under the Provider. add(options) returns the toast's id, and adding again with the same id updates in place; close(id?) dismisses one toast, or all when omitted.",
+        "The ready-made viewport: renders every active toast with title, description, action and a dismiss button. Compose the parts below yourself only when this layout doesn't fit.",
     },
     {
-      name: "add() options",
-      type: "title?, description?, action?, priority?, timeout?, id?",
+      name: "Toast.Viewport",
       description:
-        'The toast\'s content: action is { label, onClick }; priority is "normal" | "high"; timeout overrides the Provider default (0 keeps the toast until dismissed).',
+        "The top-layer notifications region for a custom layout; all native <div> props are forwarded.",
     },
     {
-      name: "Toasts",
-      type: "—",
+      name: "Toast.Root",
       description:
-        "The ready-made viewport: renders every active toast with title, description, action and a dismiss button. Compose the parts yourself only when this layout doesn't fit.",
+        "Renders one toast; its live-region role comes from the toast's priority. Native <div> props are forwarded.",
+      props: [
+        {
+          name: "toast",
+          type: "ToastData",
+          description: "The toast being rendered (from useToast().toasts).",
+        },
+      ],
     },
     {
-      name: "Viewport / Root / Title / Description",
-      type: "div props · Root: toast: ToastData",
-      description:
-        "Parts for composing your own viewport: Viewport is the top-layer notifications region; Root renders one toast (its live-region role comes from the toast's priority).",
+      name: "Toast.Title",
+      description: "The toast's heading; native <div> props are forwarded.",
     },
     {
-      name: "Action",
-      type: "toastId · onAction? · render?",
-      description:
-        "A FarmUI Button inside a toast; activating it runs onAction and dismisses that toast. Substitute your own element via render.",
+      name: "Toast.Description",
+      description: "The toast's message body; native <div> props are forwarded.",
     },
     {
-      name: "Close",
-      type: "toastId · button props",
-      description: 'A labelled dismiss button ("Dismiss notification") with a default × icon.',
+      name: "Toast.Action",
+      description:
+        "A FarmUI Button inside a toast; activating it runs onAction and dismisses that toast. Native <button> props are forwarded.",
+      props: [
+        {
+          name: "toastId",
+          type: "string",
+          description: "Which toast the action belongs to.",
+        },
+        {
+          name: "onAction",
+          type: "() => void",
+          description: "Runs before the toast dismisses.",
+        },
+        {
+          name: "render",
+          type: "element | (props) => node",
+          description: "Substitute your own element; it receives the action wiring.",
+        },
+      ],
+    },
+    {
+      name: "Toast.Close",
+      description:
+        'A labelled dismiss button ("Dismiss notification") with a default × icon. Native <button> props are forwarded.',
+      props: [
+        {
+          name: "toastId",
+          type: "string",
+          description: "Which toast to dismiss.",
+        },
+      ],
+    },
+  ],
+  hooks: [
+    {
+      name: "useToast",
+      signature: "const { toasts, add, close } = useToast();",
+      description:
+        "Fire and dismiss toasts from anywhere under the Provider. add(options) returns the toast's id, and adding again with the same id updates in place; close(id) dismisses one toast, or all when the id is omitted.",
+      options: {
+        title: "Options accepted by add():",
+        rows: [
+          { name: "title", type: "ReactNode", description: "Short heading." },
+          { name: "description", type: "ReactNode", description: "The message body." },
+          {
+            name: "action",
+            type: "{ label, onClick }",
+            description: "Optional action rendered as a button, e.g. Undo.",
+          },
+          {
+            name: "priority",
+            type: `"normal" | "high"`,
+            default: `"normal"`,
+            description:
+              'high announces assertively (role="alert"); reserve it for urgent, time-sensitive messages.',
+          },
+          {
+            name: "timeout",
+            type: "number",
+            description: "Overrides the Provider default; 0 keeps the toast until dismissed.",
+          },
+          {
+            name: "id",
+            type: "string",
+            description: "Stable id — adding again with the same id updates the toast in place.",
+          },
+        ],
+      },
     },
   ],
 };

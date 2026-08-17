@@ -102,41 +102,89 @@ const doc: ComponentContent = {
     "Disabled items use aria-disabled rather than disabled, so they remain visible to assistive technology while roving focus skips them.",
     "Where the popover attribute and anchor positioning are both supported, the browser provides top-layer rendering, light dismiss and Escape; other browsers get a wrapper-anchored fallback with the same behavior re-implemented, the deliberate no-polyfill trade-off (see the browser support policy in CONTRIBUTING).",
   ],
-  props: [
+  parts: [
     {
-      name: "Root",
-      type: "open?, defaultOpen?, onOpenChange?",
+      name: "Menu.Root",
       description:
         "Groups the parts and owns open state (controlled or uncontrolled). Renders an inline wrapper used by the fallback positioning.",
+      props: [
+        { name: "open", type: "boolean", description: "Controlled open state." },
+        {
+          name: "defaultOpen",
+          type: "boolean",
+          default: "false",
+          description: "Initial open state when uncontrolled.",
+        },
+        {
+          name: "onOpenChange",
+          type: "(open: boolean) => void",
+          description: "Called whenever the open state should change.",
+        },
+      ],
     },
     {
-      name: "Trigger",
-      type: "button props · render?: element | (props) => node",
+      name: "Menu.Trigger",
       description:
-        "Renders a FarmUI Button wired as the menu button (aria-haspopup, aria-expanded, anchor name, arrow-key opening); it adapts to context like any Button. Substitute any element via render.",
+        "A FarmUI Button wired as the menu button (aria-haspopup, aria-expanded, anchor name, arrow-key opening); it adapts to context like any Button. All native <button> props are forwarded.",
+      props: [
+        {
+          name: "render",
+          type: "element | (props) => node",
+          description: "Substitute your own element; it receives the wiring props.",
+        },
+      ],
     },
     {
-      name: "Popup",
-      type: `position?: "bottom" | "top"`,
+      name: "Menu.Popup",
       description:
-        "The floating list (role=menu, popover attribute). position picks the side it opens toward; it flips at viewport edges in supporting browsers.",
+        'The floating list (role="menu", popover attribute); it flips at viewport edges in supporting browsers. Native <div> props are forwarded.',
+      props: [
+        {
+          name: "position",
+          type: `"bottom" | "top"`,
+          default: `"bottom"`,
+          description: "Which side of the trigger the menu opens toward.",
+        },
+      ],
     },
     {
-      name: "Item",
-      type: "href?, onClick?, closeOnClick?, disabled?, render?",
+      name: "Menu.Item",
       description:
-        "One action (role=menuitem). Renders a <button>, or a real <a> when href is set; substitute your own element (e.g. a router Link) via render. Activation runs onClick, then closes the menu unless closeOnClick={false}.",
+        'One action (role="menuitem"). Renders a <button>, or a real <a> when href is set. Activation runs onClick, then closes the menu unless closeOnClick={false}.',
+      props: [
+        { name: "href", type: "string", description: "Renders the item as a real link." },
+        { name: "onClick", type: "(e) => void", description: "Runs on activation." },
+        {
+          name: "closeOnClick",
+          type: "boolean",
+          default: "true",
+          description: "Close the menu after activation.",
+        },
+        {
+          name: "disabled",
+          type: "boolean",
+          description: "aria-disabled; skipped by keyboard navigation.",
+        },
+        {
+          name: "render",
+          type: "element | (props) => node",
+          description: "Substitute your own element (e.g. a router Link).",
+        },
+      ],
     },
     {
-      name: "Group / GroupLabel",
-      type: "div props",
+      name: "Menu.Group",
       description:
-        "Group related items (role=group); a GroupLabel inside labels the group via aria-labelledby.",
+        'Groups related items (role="group"); a GroupLabel inside labels the group via aria-labelledby. Native <div> props are forwarded.',
     },
     {
-      name: "Separator",
-      type: "hr props",
-      description: "A real <hr> between items, the platform's separator role.",
+      name: "Menu.GroupLabel",
+      description: "The group's label; native <div> props are forwarded.",
+    },
+    {
+      name: "Menu.Separator",
+      description:
+        "A real <hr> between items, the platform's separator role; native <hr> props are forwarded.",
     },
   ],
 };

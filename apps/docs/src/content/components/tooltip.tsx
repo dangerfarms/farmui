@@ -71,33 +71,72 @@ const doc: ComponentContent = {
     "Hover and keyboard focus are tracked independently, so a pointer passing over a focused trigger cannot steal the bubble away.",
     "Rendered with the native popover attribute (hint where the browser supports it, detected explicitly) and CSS anchor positioning where supported, with a wrapper-anchored fallback elsewhere: no polyfills, per the browser support policy.",
   ],
-  props: [
+  parts: [
     {
-      name: "Provider",
-      type: "delay?: number",
+      name: "Tooltip.Provider",
       description:
-        "Optional. Shares one hover delay (default 600ms) across a group, with instant opens between adjacent triggers.",
+        "Optional. Shares one hover delay across a group, with instant opens between adjacent triggers.",
+      props: [
+        {
+          name: "delay",
+          type: "number",
+          default: "600",
+          description: "Hover delay in ms for all tooltips underneath.",
+        },
+      ],
     },
     {
-      name: "Root",
-      type: "delay?, open?, defaultOpen?, onOpenChange?",
-      description: "Groups the parts and owns open state, timers, and Escape handling.",
-    },
-    {
-      name: "Trigger",
-      type: "button props · render?: element | (props) => node",
+      name: "Tooltip.Root",
       description:
-        "Renders a FarmUI Button wired with hover/focus handlers and aria-describedby; style it directly, or substitute your own element via render.",
+        "Groups the parts and owns open state, timers, and Escape handling. Native <span> props are forwarded.",
+      props: [
+        {
+          name: "delay",
+          type: "number",
+          default: "600",
+          description: "Hover delay in ms; overrides the Provider.",
+        },
+        { name: "open", type: "boolean", description: "Controlled open state." },
+        {
+          name: "defaultOpen",
+          type: "boolean",
+          default: "false",
+          description: "Initial open state when uncontrolled.",
+        },
+        {
+          name: "onOpenChange",
+          type: "(open: boolean) => void",
+          description: "Called whenever the open state should change.",
+        },
+      ],
     },
     {
-      name: "Popup",
-      type: `position?: "top" | "bottom" | "left" | "right"`,
-      description: "The bubble (role=tooltip). position picks the side.",
+      name: "Tooltip.Trigger",
+      description:
+        "A FarmUI Button wired with hover/focus handlers and aria-describedby; all native <button> props are forwarded.",
+      props: [
+        {
+          name: "render",
+          type: "element | (props) => node",
+          description: "Substitute your own interactive element; it receives the wiring props.",
+        },
+      ],
     },
     {
-      name: "Arrow",
-      type: "span props",
-      description: "Optional pointer arrow toward the trigger.",
+      name: "Tooltip.Popup",
+      description: 'The bubble (role="tooltip"); native <span> props are forwarded.',
+      props: [
+        {
+          name: "position",
+          type: `"top" | "bottom" | "left" | "right"`,
+          default: `"top"`,
+          description: "Which side of the trigger the bubble appears on.",
+        },
+      ],
+    },
+    {
+      name: "Tooltip.Arrow",
+      description: "Optional pointer arrow toward the trigger; native <span> props are forwarded.",
     },
   ],
 };

@@ -10,12 +10,43 @@ export interface Demo {
   render: () => ReactNode;
 }
 
-/** One row in a component's props table. */
+/** One row in a props table. */
 export interface PropRow {
   name: string;
   type: string;
   default?: string;
   description: string;
+}
+
+/**
+ * A composable part or companion component, documented with its own
+ * props table so the reference mirrors the anatomy.
+ */
+export interface PartDoc {
+  /** As written in code: "Modal.Trigger", "RadioGroup", "CheckboxControl". */
+  name: string;
+  /** What the part is and renders. */
+  description: string;
+  props?: PropRow[];
+}
+
+/** A public CSS custom property — the styling channel, not a prop. */
+export interface CssPropRow {
+  name: string;
+  /** Accepted value space, e.g. "CSS length" or "CSS color". */
+  syntax: string;
+  default?: string;
+  description: string;
+}
+
+/** A hook shipped alongside the component. */
+export interface HookDoc {
+  name: string;
+  /** The signature, shown as code. */
+  signature: string;
+  description: string;
+  /** A table of options for the hook's main call, when it takes any. */
+  options?: { title: string; rows: PropRow[] };
 }
 
 /** A titled passage of usage judgment, optionally with its own example. */
@@ -49,7 +80,19 @@ export interface ComponentContent {
   /** Import statement shown at the top of the page. */
   importLine: string;
   demos: Demo[];
-  props: PropRow[];
+  /** The component's own props (plus the forwarded-natives row). */
+  props?: PropRow[];
+  /** Composable parts / companion components, each with its own table. */
+  parts?: PartDoc[];
+  /** Public CSS custom properties — the styling channel. */
+  cssProps?: CssPropRow[];
+  /** Hooks shipped with the component. */
+  hooks?: HookDoc[];
+  /**
+   * The component answers the surrounding `--fui-context` region. Renders
+   * the standard status note once, instead of a per-page pseudo-prop row.
+   */
+  contextual?: boolean;
   /** When this component is the right choice. */
   whenToUse?: string[];
   /** When to reach for something else instead. */
