@@ -1,0 +1,41 @@
+name: Docs
+on:
+  push:
+    branches: [main]
+  # Publish any branch on demand (Actions → Docs → Run workflow) — used to
+  # put a review build up without waiting for a merge to main.
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm -r build
+        env:
+          PAGES: "true"
+          BASE_PATH: /farmui
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/docs/out
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
