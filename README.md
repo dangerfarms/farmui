@@ -1,7 +1,7 @@
 # FarmUI
 
 **Beautiful React components, fast & accessible.** A component library rebuilt
-on native modern CSS — zero-runtime styling, WCAG-compliant by
+on native modern CSS — zero-runtime styling, accessibility-audited by
 default, and tiny bundles.
 
 [![npm](https://img.shields.io/npm/v/@farmui/core.svg)](https://www.npmjs.com/package/@farmui/core)
@@ -63,3 +63,10 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
 ## License
 
 [MIT](./LICENSE) © Danger Farms
+
+## Requirements
+
+- React 19.
+- The package is ESM-only — there is no CommonJS build.
+- Styling targets Baseline Newly Available CSS with graceful degradation;
+  the full browser-support policy is in [CONTRIBUTING](CONTRIBUTING.md).
