@@ -28,6 +28,7 @@ import {
   Tooltip,
   Menu,
   Modal,
+  Drawer,
   Popover,
   Toast,
   Tabs,
@@ -265,6 +266,20 @@ describe("accessibility (axe)", () => {
           <Modal.Close>Close</Modal.Close>
         </Modal.Popup>
       </Modal.Root>,
+    );
+    expect(await axe(document.body, axeOptions)).toHaveNoViolations();
+  });
+
+  it("Drawer (open dialog) has no axe violations", async () => {
+    render(
+      <Drawer.Root defaultOpen>
+        <Drawer.Trigger>Menu</Drawer.Trigger>
+        <Drawer.Panel side="start">
+          <Drawer.Title>Navigation</Drawer.Title>
+          <Drawer.Description>Jump to a section.</Drawer.Description>
+          <Drawer.Close>Close</Drawer.Close>
+        </Drawer.Panel>
+      </Drawer.Root>,
     );
     expect(await axe(document.body, axeOptions)).toHaveNoViolations();
   });

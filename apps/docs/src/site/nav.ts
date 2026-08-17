@@ -180,6 +180,12 @@ export const COMPONENTS: NavItem[] = [
     description: "A focused dialog over the page.",
   },
   {
+    name: "Drawer",
+    slug: "drawer",
+    category: "Overlays",
+    description: "An edge-anchored panel that slides in.",
+  },
+  {
     name: "Popover",
     slug: "popover",
     category: "Overlays",

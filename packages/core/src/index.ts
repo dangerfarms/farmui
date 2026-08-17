@@ -34,6 +34,7 @@ export * from "./components/Toast/index";
 // Overlays
 export * from "./components/Tooltip/index";
 export * from "./components/Modal/index";
+export * from "./components/Drawer/index";
 export * from "./components/Popover/index";
 export * from "./components/Menu/index";
 

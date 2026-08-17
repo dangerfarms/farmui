@@ -3,6 +3,7 @@ import { FIRST_COMPONENT_HREF } from "@/site/nav";
 import { Logo } from "./Logo";
 import { ThemeToggle } from "./ThemeToggle";
 import { CommandMenu } from "./CommandMenu";
+import { MobileNav } from "./MobileNav";
 import { GitHubIcon } from "./Icons";
 import classes from "./Header.module.css";
 
@@ -13,6 +14,7 @@ export function Header() {
     <header className={classes.header}>
       <div className={classes.inner}>
         <div className={classes.left}>
+          <MobileNav />
           <Logo />
           <nav className={classes.nav} aria-label="Primary">
             <Link href={FIRST_COMPONENT_HREF}>Components</Link>

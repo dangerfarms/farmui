@@ -32,6 +32,7 @@ import toast from "@/content/components/toast";
 // Overlays
 import tooltip from "@/content/components/tooltip";
 import modal from "@/content/components/modal";
+import drawer from "@/content/components/drawer";
 import popover from "@/content/components/popover";
 import menu from "@/content/components/menu";
 
@@ -69,6 +70,7 @@ const content: ComponentContent[] = [
   toast,
   tooltip,
   modal,
+  drawer,
   popover,
   menu,
   tabs,
