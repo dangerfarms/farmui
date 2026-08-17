@@ -1,17 +1,14 @@
 import { Tabs, TabsList, TabsTab, TabsPanel } from "@farmui/core";
-import type { ComponentDoc } from "@/docs/types";
+import type { ComponentContent } from "@/renderer/types";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "tabs",
-  name: "Tabs",
-  category: "Navigation",
-  description: "Switch between related panels of content in the same view.",
-  importLine: `import { Tabs } from "@farmui/core";`,
+  lead: "One visible panel from a related set, chosen from a tab list in the same view.",
+  importLine: `import { Tabs, TabsList, TabsTab, TabsPanel } from "@farmui/core";`,
   demos: [
     {
       title: "Basic",
-      description:
-        "Uncontrolled via defaultValue. Arrow keys move between tabs.",
+      description: "Uncontrolled via defaultValue. Arrow keys move between tabs.",
       code: `<Tabs defaultValue="account">
   <TabsList>
     <TabsTab value="account">Account</TabsTab>
@@ -30,28 +27,28 @@ const doc: ComponentDoc = {
               <TabsTab value="security">Security</TabsTab>
               <TabsTab value="notifications">Notifications</TabsTab>
             </TabsList>
-            <TabsPanel value="account">
-              Update your name and email address.
-            </TabsPanel>
-            <TabsPanel value="security">
-              Change your password and enable 2FA.
-            </TabsPanel>
-            <TabsPanel value="notifications">
-              Choose how you want to be notified.
-            </TabsPanel>
+            <TabsPanel value="account">Update your name and email address.</TabsPanel>
+            <TabsPanel value="security">Change your password and enable 2FA.</TabsPanel>
+            <TabsPanel value="notifications">Choose how you want to be notified.</TabsPanel>
           </Tabs>
         </div>
       ),
     },
     {
-      title: "With icons",
+      title: "With icons (composed as children)",
       description:
-        "Use leftSection to place an icon or emoji before the label.",
+        "No leftSection prop: an svg child is detected via :has(svg) and gets a gap and label-relative sizing, the same detection Button uses. Compose the icon before the label and mark it aria-hidden.",
       code: `<Tabs defaultValue="files">
   <TabsList>
-    <TabsTab value="files" leftSection={<span aria-hidden>📄</span>}>Files</TabsTab>
-    <TabsTab value="team" leftSection={<span aria-hidden>👥</span>}>Team</TabsTab>
-    <TabsTab value="settings" leftSection={<span aria-hidden>⚙️</span>}>Settings</TabsTab>
+    <TabsTab value="files">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+        <path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0
+          2-2V8l-6-6H6Zm7 1.5L18.5 9H13V3.5Z" />
+      </svg>
+      Files
+    </TabsTab>
+    <TabsTab value="team"><svg>…</svg> Team</TabsTab>
+    <TabsTab value="settings"><svg>…</svg> Settings</TabsTab>
   </TabsList>
   <TabsPanel value="files">All your documents in one place.</TabsPanel>
   <TabsPanel value="team">Invite teammates and manage roles.</TabsPanel>
@@ -61,28 +58,28 @@ const doc: ComponentDoc = {
         <div style={{ inlineSize: "100%", maxInlineSize: "28rem" }}>
           <Tabs defaultValue="files">
             <TabsList>
-              <TabsTab value="files" leftSection={<span aria-hidden>📄</span>}>
+              <TabsTab value="files">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                  <path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6Zm7 1.5L18.5 9H13V3.5Z" />
+                </svg>
                 Files
               </TabsTab>
-              <TabsTab value="team" leftSection={<span aria-hidden>👥</span>}>
+              <TabsTab value="team">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                  <path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-4.42 0-8 2.69-8 6v1a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-1c0-3.31-3.58-6-8-6Z" />
+                </svg>
                 Team
               </TabsTab>
-              <TabsTab
-                value="settings"
-                leftSection={<span aria-hidden>⚙️</span>}
-              >
+              <TabsTab value="settings">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                  <path d="M19.43 12.98a7.8 7.8 0 0 0 0-1.96l2.03-1.58-1.92-3.32-2.39.96a7.6 7.6 0 0 0-1.7-.98L15.1 3.5h-3.84l-.35 2.54a7.6 7.6 0 0 0-1.7.98l-2.39-.96-1.92 3.32 2.03 1.58a7.8 7.8 0 0 0 0 1.96l-2.03 1.58 1.92 3.32 2.39-.96c.52.4 1.09.73 1.7.98l.35 2.54h3.84l.35-2.54a7.6 7.6 0 0 0 1.7-.98l2.39.96 1.92-3.32-2.03-1.58ZM12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z" />
+                </svg>
                 Settings
               </TabsTab>
             </TabsList>
-            <TabsPanel value="files">
-              All your documents in one place.
-            </TabsPanel>
-            <TabsPanel value="team">
-              Invite teammates and manage roles.
-            </TabsPanel>
-            <TabsPanel value="settings">
-              Configure your workspace preferences.
-            </TabsPanel>
+            <TabsPanel value="files">All your documents in one place.</TabsPanel>
+            <TabsPanel value="team">Invite teammates and manage roles.</TabsPanel>
+            <TabsPanel value="settings">Configure your workspace preferences.</TabsPanel>
           </Tabs>
         </div>
       ),
@@ -118,6 +115,36 @@ const doc: ComponentDoc = {
       ),
     },
   ],
+  whenToUse: [
+    "For parallel views of the same thing: Account / Security / Notifications are alternative facets of one settings object, and users need only one at a time.",
+    "To keep related panels in one place without a page navigation, when switching views must not lose the surrounding context.",
+  ],
+  whenNotToUse: [
+    "For steps in a sequence: tabs imply no order and let users jump anywhere, so a flow with dependencies belongs on separate pages with visible progress.",
+    "As primary navigation: switching a tab changes no URL and creates no history entry, so tabbed 'pages' can't be linked, bookmarked or reached with the back button.",
+    "When users need to read or compare everything: content in an unselected tab may never be seen; stack it on the page under headings instead.",
+  ],
+  howItWorks: [
+    {
+      title: "Parallel views, not steps",
+      body: "Tabs present alternative views of one subject; the order of the tab list carries no meaning and users can activate any tab at any moment. If the content is a sequence, where step two only makes sense after step one, tabs actively work against you, because they advertise that jumping ahead is fine. Use separate pages and show progress instead.",
+    },
+    {
+      title: "A hidden tab is optional reading",
+      body: "Many users never open a second tab, so nothing that everyone must see can live in one. Anything required (warnings, costs, prerequisites) goes above or outside the tabs, and the first tab gets the most-needed content because it is the only panel guaranteed to be read.",
+    },
+    {
+      title: "View state stays out of the URL",
+      body: "Switching a tab updates React state, not the URL; reloading returns to defaultValue and the back button ignores tab changes. When a view should be linkable, use the controlled form (value/onChange) and mirror the value in the query string yourself; if every view deserves its own URL, you want pages with links, not tabs.",
+    },
+  ],
+  accessibility: [
+    "The tab list uses a roving tabindex: only the active tab sits in the Tab order (tabIndex 0, the rest -1), so keyboard users cross the whole list in one Tab press instead of stepping through every tab.",
+    "Arrow Left/Right move through the tabs and wrap at the ends, Home/End jump to the first and last, and disabled tabs are skipped; moving focus also selects: the newly focused tab is activated immediately, so no separate Enter press is needed.",
+    'Inactive panels are hidden with hidden="until-found" where the browser supports it, so find-in-page can match text inside a closed tab; a beforematch event then activates that tab. Browsers without support fall back to plain hidden.',
+    'The wiring is generated from one id: role="tablist"/"tab"/"tabpanel" with aria-selected, aria-controls on each tab and aria-labelledby on each panel, so assistive technology announces which tab is active and what it controls.',
+    "Each panel has tabIndex 0, so a panel whose content contains no focusable element can still be reached and scrolled by keyboard.",
+  ],
   props: [
     {
       name: "defaultValue",
@@ -135,29 +162,44 @@ const doc: ComponentDoc = {
       description: "Called with the new value when the active tab changes.",
     },
     {
-      name: "TabsTab value",
-      type: "string",
-      description: "Unique value linking a tab to its panel (required).",
-    },
-    {
-      name: "TabsTab leftSection",
-      type: "ReactNode",
-      description: "Content (icon/emoji) rendered before the tab label.",
-    },
-    {
-      name: "TabsTab disabled",
-      type: "boolean",
-      description: "Disable the tab and skip it in keyboard navigation.",
-    },
-    {
-      name: "TabsPanel value",
-      type: "string",
-      description: "Value of the tab this panel belongs to (required).",
-    },
-    {
       name: "...others",
-      type: "HTMLAttributes",
-      description: "All native <div>/<button> props are forwarded.",
+      type: "HTMLAttributes<HTMLDivElement>",
+      description: "All native <div> props are forwarded.",
+    },
+  ],
+  parts: [
+    {
+      name: "TabsList",
+      description:
+        'The tab strip (role="tablist") that owns the roving tabindex and arrow-key behaviour; all native <div> props are forwarded.',
+    },
+    {
+      name: "TabsTab",
+      description: "One tab button; all native <button> props are forwarded.",
+      props: [
+        {
+          name: "value",
+          type: "string",
+          description: "Unique value linking this tab to its panel (required).",
+        },
+        {
+          name: "disabled",
+          type: "boolean",
+          description: "Disable the tab and skip it in keyboard navigation.",
+        },
+      ],
+    },
+    {
+      name: "TabsPanel",
+      description:
+        "The content shown while its tab is active; all native <div> props are forwarded.",
+      props: [
+        {
+          name: "value",
+          type: "string",
+          description: "Value of the tab this panel belongs to (required).",
+        },
+      ],
     },
   ],
 };

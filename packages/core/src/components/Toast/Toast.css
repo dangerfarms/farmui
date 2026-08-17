@@ -1,0 +1,106 @@
+/* The viewport lives in the top layer (popover="manual"), so it carries its
+   own scope; toasts stack from the block-end corner. */
+@scope (.fui-Toast-viewport) {
+  :scope {
+    position: fixed;
+
+    /* Clear the UA's [popover] inset/size defaults. */
+    inset: auto;
+    inset-block-end: var(--fui-space-lg);
+    inset-inline-end: var(--fui-space-lg);
+    display: block flex;
+    flex-direction: column;
+    gap: var(--fui-space-sm);
+    inline-size: min(22rem, calc(100vi - 2 * var(--fui-space-lg)));
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    overflow: visible;
+    outline: none;
+  }
+
+  /* No toasts: don't intercept clicks in the corner. */
+  :scope[data-empty] {
+    pointer-events: none;
+  }
+
+  @supports not selector(:popover-open) {
+    :scope {
+      z-index: 100;
+    }
+  }
+
+  .fui-Toast-root {
+    display: block flex;
+    align-items: flex-start;
+    gap: var(--fui-space-sm);
+    padding: var(--fui-space-md);
+    border: 1px solid var(--fui-border);
+    border-radius: var(--fui-radius-md);
+    background: var(--fui-surface);
+    box-shadow: var(--fui-shadow-lg);
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition:
+        opacity var(--fui-duration-lg) var(--fui-ease),
+        translate var(--fui-duration-lg) var(--fui-ease);
+
+      @starting-style {
+        opacity: 0;
+        translate: 0 0.5rem;
+      }
+    }
+  }
+
+  /* Exit: the provider marks the toast, plays this, then removes it. */
+  .fui-Toast-root[data-exiting] {
+    opacity: 0;
+    translate: 0 0.5rem;
+  }
+
+  .fui-Toast-content {
+    flex: 1;
+    min-inline-size: 0;
+  }
+
+  .fui-Toast-title {
+    font-size: var(--fui-text-sm);
+    font-weight: 600;
+  }
+
+  .fui-Toast-description {
+    font-size: var(--fui-text-sm);
+    color: var(--fui-text-muted);
+    overflow-wrap: break-word;
+  }
+
+  .fui-Toast-title + .fui-Toast-description {
+    margin-block-start: var(--fui-space-xs);
+  }
+
+  .fui-Toast-close {
+    display: inline grid;
+    place-items: center;
+    flex-shrink: 0;
+    inline-size: 1.5rem;
+    block-size: 1.5rem;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: var(--fui-radius-sm);
+    background: none;
+    color: var(--fui-text-muted);
+    cursor: pointer;
+
+    svg {
+      inline-size: 1em;
+      block-size: 1em;
+    }
+
+    &:hover {
+      background: var(--fui-bg-subtle);
+      color: var(--fui-text);
+    }
+  }
+}

@@ -1,64 +1,94 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Input } from "../../index";
+import { Field, Input } from "../../index";
 
 const meta = {
   title: "Inputs/Input",
   component: Input,
   tags: ["autodocs"],
   args: {
-    label: "Email",
     placeholder: "you@example.com",
-    size: "md",
-    radius: "md",
     disabled: false,
-    withAsterisk: false,
   },
-  argTypes: {
-    size: { control: "inline-radio", options: ["sm", "md", "lg"] },
-    radius: {
-      control: "select",
-      options: ["sm", "md", "lg", "xl", "full"],
-    },
-  },
+  render: (args) => (
+    <Field.Root>
+      <Field.Label>Email</Field.Label>
+      <Input {...args} />
+    </Field.Root>
+  ),
 } satisfies Meta<typeof Input>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Live playground — tweak props in the Controls panel. */
 export const Playground: Story = {};
 
-export const Sizes: Story = {
-  render: (args) => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-      <Input {...args} size="sm" label="Small" />
-      <Input {...args} size="md" label="Medium" />
-      <Input {...args} size="lg" label="Large" />
+/**
+ * There is no size prop: padding and font are fluid container-relative
+ * tokens, so the control adapts to the space it lives in — and always
+ * height-aligns with Button, which shares the same derived anatomy.
+ */
+export const FluidSizing: Story = {
+  render: () => (
+    <div style={{ display: "grid", gap: "1rem" }}>
+      <div
+        style={{
+          containerType: "inline-size",
+          inlineSize: "16rem",
+          padding: "1rem",
+          border: "1px dashed var(--fui-border)",
+        }}
+      >
+        <Field.Root>
+          <Field.Label>In a narrow container</Field.Label>
+          <Input placeholder="you@example.com" />
+        </Field.Root>
+      </div>
+      <div
+        style={{
+          containerType: "inline-size",
+          inlineSize: "32rem",
+          padding: "1rem",
+          border: "1px dashed var(--fui-border)",
+        }}
+      >
+        <Field.Root>
+          <Field.Label>In a wide one</Field.Label>
+          <Input placeholder="you@example.com" />
+        </Field.Root>
+      </div>
     </div>
   ),
 };
 
 export const WithDescription: Story = {
-  args: {
-    label: "Username",
-    description: "This is how your name appears to others.",
-    placeholder: "jane_doe",
-  },
+  render: () => (
+    <Field.Root>
+      <Field.Label>Username</Field.Label>
+      <Field.Description>This is how your name appears to others.</Field.Description>
+      <Input placeholder="jane_doe" />
+    </Field.Root>
+  ),
 };
 
 export const WithError: Story = {
-  args: {
-    label: "Email",
-    placeholder: "you@example.com",
-    error: "Please enter a valid email address.",
-    defaultValue: "not-an-email",
-  },
+  render: () => (
+    <Field.Root>
+      <Field.Label>Email</Field.Label>
+      <Input placeholder="you@example.com" defaultValue="not-an-email" />
+      <Field.Error>Enter an email address in the correct format, like name@example.com</Field.Error>
+    </Field.Root>
+  ),
 };
 
 export const Required: Story = {
-  args: { label: "Full name", withAsterisk: true, placeholder: "Jane Doe" },
+  render: () => (
+    <Field.Root>
+      <Field.Label>Full name</Field.Label>
+      <Input required placeholder="Jane Doe" />
+    </Field.Root>
+  ),
 };
 
 export const Disabled: Story = {
-  args: { label: "Email", placeholder: "you@example.com", disabled: true },
+  args: { disabled: true },
 };

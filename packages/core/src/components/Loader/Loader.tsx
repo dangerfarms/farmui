@@ -1,19 +1,16 @@
-import { forwardRef } from "react";
-import type { CSSProperties, HTMLAttributes } from "react";
+import type { CSSProperties, HTMLAttributes, Ref } from "react";
 import { cx, type FarmUISize } from "../../utils";
 
-export interface LoaderProps extends Omit<
-  HTMLAttributes<HTMLSpanElement>,
-  "color"
-> {
-  /** Overall size — a token or an explicit pixel number. @default "md" */
+export interface LoaderProps extends Omit<HTMLAttributes<HTMLSpanElement>, "color"> {
+  /**
+   * Overall size — a token or an explicit pixel number. When omitted the
+   * size comes from context: 1.5rem standalone, or the composing
+   * component's answer (a Button sizes it at 1em, like its icons).
+   */
   size?: FarmUISize | number;
-  /** Semantic color. @default "primary" */
-  color?: "primary" | "info" | "success" | "warning" | "danger";
-  /** Animation style. @default "spinner" */
-  variant?: "spinner" | "dots" | "bars";
   /** Accessible label announced to assistive tech. @default "Loading" */
   label?: string;
+  ref?: Ref<HTMLSpanElement>;
 }
 
 const sizeVar: Record<FarmUISize, string> = {
@@ -22,33 +19,20 @@ const sizeVar: Record<FarmUISize, string> = {
   lg: "2.25rem",
 };
 
-const colorVar: Record<NonNullable<LoaderProps["color"]>, string> = {
-  primary: "var(--fui-primary)",
-  info: "var(--fui-info)",
-  success: "var(--fui-success)",
-  warning: "var(--fui-warning)",
-  danger: "var(--fui-danger)",
-};
-
 /**
- * Loader — an animated indicator for pending, indeterminate work.
+ * An animated indicator for pending, indeterminate work.
+ *
+ * Coloured by the brand token, so a `--fui-context` region recolours it
+ * with no prop; the parts draw with `currentColor`, so a plain `color:`
+ * declaration on the loader (or an ancestor's channel) overrides.
  */
-export const Loader = forwardRef<HTMLSpanElement, LoaderProps>(function Loader(
-  {
-    size = "md",
-    color = "primary",
-    variant = "spinner",
-    label = "Loading",
-    className,
-    style,
-    ...rest
-  },
-  ref,
-) {
-  const resolvedSize = typeof size === "number" ? `${size}px` : sizeVar[size];
+export function Loader({ size, label = "Loading", className, style, ref, ...rest }: LoaderProps) {
+  // Only an explicit size becomes an inline declaration — an inline var
+  // would out-rank the context sizing a composing component provides.
   const vars = {
-    "--_size": resolvedSize,
-    "--_color": colorVar[color],
+    ...(size !== undefined && {
+      "--_size": typeof size === "number" ? `${size}px` : sizeVar[size],
+    }),
     ...style,
   } as CSSProperties;
 
@@ -58,28 +42,11 @@ export const Loader = forwardRef<HTMLSpanElement, LoaderProps>(function Loader(
       role="status"
       aria-label={label}
       className={cx("fui-Loader-root", className)}
-      data-variant={variant}
       style={vars}
       {...rest}
     >
-      {variant === "spinner" && (
-        <span className={"fui-Loader-spinner"} aria-hidden />
-      )}
-      {variant === "dots" && (
-        <span className={"fui-Loader-dots"} aria-hidden>
-          <span className={"fui-Loader-dot"} />
-          <span className={"fui-Loader-dot"} />
-          <span className={"fui-Loader-dot"} />
-        </span>
-      )}
-      {variant === "bars" && (
-        <span className={"fui-Loader-bars"} aria-hidden>
-          <span className={"fui-Loader-bar"} />
-          <span className={"fui-Loader-bar"} />
-          <span className={"fui-Loader-bar"} />
-        </span>
-      )}
-      <span className={"fui-Loader-srOnly"}>{label}</span>
+      <span className="fui-Loader-spinner" aria-hidden />
+      <span className="fui-Loader-srOnly">{label}</span>
     </span>
   );
-});
+}

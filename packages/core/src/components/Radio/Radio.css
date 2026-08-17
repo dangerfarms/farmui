@@ -1,43 +1,60 @@
-@layer farmui.components {
-  /* ---- Single radio ---- */
-  .fui-Radio-wrapper {
-    --_size: 1.25rem;
-    --_dot: 0.5rem;
-
-    display: inline-flex;
-    align-items: flex-start;
+/* ---- Single radio ---- */
+@scope (.fui-Radio-wrapper) {
+  :scope {
+    display: inline flex;
     gap: var(--fui-space-sm);
-    font-family: var(--fui-font);
-    color: var(--fui-text);
+    align-items: flex-start;
     cursor: pointer;
   }
-  .fui-Radio-wrapper[data-size="sm"] {
-    --_size: 1rem;
-    --_dot: 0.375rem;
-  }
-  .fui-Radio-wrapper[data-size="lg"] {
-    --_size: 1.5rem;
-    --_dot: 0.625rem;
-  }
-  .fui-Radio-wrapper[data-disabled] {
-    cursor: not-allowed;
-    opacity: 0.6;
-  }
 
-  /* Visually hide the native input but keep it accessible & focusable. */
-  .fui-Radio-input {
+  :scope[data-disabled] {
+    opacity: var(--fui-disabled-opacity);
+  }
+}
+
+/* The bare form renders a fragment — input + control as siblings with no
+   wrapper element — so the input scopes to itself. */
+@scope (.fui-Radio-input) {
+  /* Visually hide the native input but keep it accessible & focusable.
+     Radio keeps the 1px clip recipe (rather than the centred hit-area
+     overlay Checkbox and Switch use): its bare form is a fragment — input +
+     control as siblings with no wrapper — so there is no guaranteed
+     positioning context for an overlay. */
+  :scope {
     position: absolute;
     inline-size: 1px;
     block-size: 1px;
     padding: 0;
     margin: -1px;
-    overflow: hidden;
+    overflow: clip;
     clip-path: inset(50%);
     white-space: nowrap;
     border: 0;
   }
 
-  .fui-Radio-control {
+  /* The ring belongs on the visible control (see the control scope); the 1px
+     hidden input would otherwise paint the elements-layer outline as a
+     stray dot. */
+  :scope:focus-visible {
+    outline: none;
+  }
+}
+
+/* The control dot. State rules reference the sibling input (and the wrapper
+   or group ancestors) outside the scope root — allowed, since the subject
+   (the control) stays in scope. */
+@scope (.fui-Radio-control) {
+  /* Bare control fades itself; the labelled wrapper's fade covers the
+     composed form (the :not guard stops the two from compounding). */
+  .fui-Radio-input:disabled + :scope:where(:not(.fui-Radio-wrapper *)) {
+    opacity: var(--fui-disabled-opacity);
+  }
+
+  :scope {
+    --_size: 1.3889em;
+    --_dot: 0.5556em;
+
+    font-size: var(--fui-text-sm);
     position: relative;
     flex-shrink: 0;
     inline-size: var(--_size);
@@ -47,11 +64,12 @@
     border-radius: var(--fui-radius-full);
     background: var(--fui-surface);
     transition:
-      border-color var(--fui-transition),
-      background var(--fui-transition),
-      box-shadow var(--fui-transition);
+      border-color var(--fui-duration-sm) var(--fui-ease),
+      background var(--fui-duration-sm) var(--fui-ease),
+      box-shadow var(--fui-duration-md) var(--fui-ease);
   }
-  .fui-Radio-control::after {
+
+  :scope::after {
     content: "";
     position: absolute;
     inset: 50%;
@@ -59,77 +77,104 @@
     block-size: var(--_dot);
     translate: -50% -50%;
     border-radius: var(--fui-radius-full);
-    background: var(--fui-primary-contrast);
+    background: var(--fui-on-strong);
     scale: 0;
-    transition: scale var(--fui-transition);
+    transition: scale var(--fui-duration-md) var(--fui-ease);
   }
 
-  .fui-Radio-wrapper:hover
-    .fui-Radio-input:not(:disabled)
-    + .fui-Radio-control {
+  .fui-Radio-wrapper:hover .fui-Radio-input:not(:disabled) + :scope {
     border-color: var(--fui-primary);
   }
-  .fui-Radio-input:checked + .fui-Radio-control {
+
+  .fui-Radio-input:checked + :scope {
     border-color: var(--fui-primary);
     background: var(--fui-primary);
   }
-  .fui-Radio-input:checked + .fui-Radio-control::after {
+
+  .fui-Radio-input:checked + :scope::after {
     scale: 1;
   }
-  .fui-Radio-input:focus-visible + .fui-Radio-control {
-    outline: none;
-    box-shadow: 0 0 0 3px var(--fui-primary-ring);
+
+  .fui-Radio-input:focus-visible + :scope {
+    outline: var(--fui-ring-width) solid var(--fui-ring-color);
+    outline-offset: 2px;
   }
 
+  .fui-Radio-input:user-invalid + :scope {
+    --fui-ring-color: var(--fui-danger-ring);
+
+    border-color: var(--fui-danger);
+  }
+
+  .fui-Radio-group:has(.fui-Radio-error) :scope {
+    --fui-ring-color: var(--fui-danger-ring);
+
+    border-color: var(--fui-danger);
+  }
+
+  /* Forced colors: the selected dot is background-painted and would vanish;
+     CanvasText guarantees contrast on the forced Canvas fill. */
+  @media (forced-colors: active) {
+    :scope::after {
+      forced-color-adjust: none;
+      background: CanvasText;
+    }
+  }
+}
+
+@scope (.fui-Radio-wrapper) {
   .fui-Radio-body {
-    display: flex;
+    display: block flex;
     flex-direction: column;
     gap: 0.1rem;
     line-height: 1.35;
   }
+
   .fui-Radio-label {
     font-size: var(--fui-text-sm);
     font-weight: 500;
   }
-  .fui-Radio-wrapper[data-size="lg"] .fui-Radio-label {
-    font-size: var(--fui-text-md);
-  }
+
   .fui-Radio-description {
     font-size: var(--fui-text-xs);
     color: var(--fui-text-muted);
   }
+}
 
-  /* ---- Group ---- */
-  .fui-Radio-group {
-    display: flex;
-    flex-direction: column;
+/* ---- Group ---- (a Fieldset — reset/legend come from the Fieldset layer) */
+
+/* The group carries aria-invalid (ARIA allows it there, not on the
+   radios); every dot inside answers it. */
+@scope (.fui-Radio-group[aria-invalid="true"]) {
+  .fui-Radio-control {
+    --fui-ring-color: var(--fui-danger-ring);
+
+    border-color: var(--fui-danger);
+  }
+}
+
+@scope (.fui-Radio-group) {
+  :scope {
     gap: var(--fui-space-xs);
-    font-family: var(--fui-font);
   }
-  .fui-Radio-groupLabel {
-    font-size: var(--fui-text-sm);
-    font-weight: 550;
-    color: var(--fui-text);
-  }
-  .fui-Radio-required {
-    color: var(--fui-danger);
-    margin-inline-start: 0.15em;
-  }
+
   .fui-Radio-groupDescription {
     font-size: var(--fui-text-xs);
     color: var(--fui-text-muted);
   }
+
   .fui-Radio-options {
-    display: flex;
+    display: block flex;
     flex-direction: column;
     gap: var(--fui-space-sm);
     margin-block-start: var(--fui-space-xs);
   }
+
   .fui-Radio-options[data-orientation="horizontal"] {
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
     gap: var(--fui-space-lg);
   }
+
   .fui-Radio-error {
     font-size: var(--fui-text-xs);
     color: var(--fui-danger);

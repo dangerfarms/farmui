@@ -1,87 +1,64 @@
-import { forwardRef } from "react";
-import type { ButtonHTMLAttributes, ReactNode } from "react";
-import { cx, type FarmUISize } from "../../utils";
+import type { ButtonHTMLAttributes, ReactNode, Ref } from "react";
+import { cx } from "../../utils";
+import { renderWithProps } from "../../render";
+import type { RenderProp } from "../../render";
 
-export interface ButtonProps extends Omit<
-  ButtonHTMLAttributes<HTMLButtonElement>,
-  "color"
-> {
-  /** Visual style. @default "filled" */
-  variant?: "filled" | "light" | "outline" | "subtle";
-  /** Control size. @default "md" */
-  size?: FarmUISize;
-  /** Semantic color. @default "primary" */
-  color?: "primary" | "danger";
-  /** Border radius token. @default "md" */
-  radius?: "sm" | "md" | "lg" | "xl" | "full";
-  /** Stretch to fill the container width. */
-  fullWidth?: boolean;
-  /** Show a spinner and disable interaction. */
-  loading?: boolean;
-  /** Content rendered before the label. */
-  leftSection?: ReactNode;
-  /** Content rendered after the label. */
-  rightSection?: ReactNode;
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
+  /**
+   * Render as a different element — e.g. a link that looks like a button:
+   * `<Button render={<a href="/signup">Get started</a>} />`. The
+   * Button's classes and attributes merge onto the element it renders.
+   */
+  render?: RenderProp<Record<string, unknown>>;
+  ref?: Ref<HTMLButtonElement>;
 }
 
-const radiusVar: Record<NonNullable<ButtonProps["radius"]>, string> = {
-  sm: "var(--fui-radius-sm)",
-  md: "var(--fui-radius-md)",
-  lg: "var(--fui-radius-lg)",
-  xl: "var(--fui-radius-xl)",
-  full: "var(--fui-radius-full)",
-};
-
 /**
- * Button — the primary way to trigger an action.
+ * The primary way to trigger an action.
+ *
+ * Intentionally minimal: it renders a native `<button>` and takes children.
+ * Appearance is decided by CONTEXT, not props (see the Contextualism guide):
+ *
+ * ```tsx
+ * <Button>Neutral by default</Button>
+ * <p style={{ "--fui-context": "primary" }}>
+ *   <Button>The main action of this region</Button>
+ * </p>
+ * <section style={{ "--fui-context": "danger" }}>
+ *   <Button>Delete</Button>                                  // danger region
+ * </section>
+ * <Button render={<a href="/signup">Get started</a>} /> // as a link
+ * ```
+ *
+ * Size is fluid (container-relative tokens) — there is no size prop, and
+ * narrow containers make the button full width automatically. Width is the
+ * parent's decision: a grid or stacked-flex region stretches its buttons
+ * natively, a row shrink-wraps them. Icons are
+ * detected (`:has(svg)`) — compose them as children, no slot props. An
+ * icon-only button is detected from its accessible name: give it an
+ * `aria-label` (required for accessibility anyway) and it becomes square.
+ * For a one-off colour set the public `--fui-button-color` property; for a
+ * house style, wrap it (the SecondaryButton pattern).
  */
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  function Button(
-    {
-      variant = "filled",
-      size = "md",
-      color = "primary",
-      radius = "md",
-      fullWidth,
-      loading,
-      leftSection,
-      rightSection,
-      disabled,
-      className,
-      style,
-      children,
-      ...rest
-    },
-    ref,
-  ) {
+export function Button({ render, className, children, ref, ...rest }: ButtonProps) {
+  if (render) {
     return (
-      <button
-        ref={ref}
-        className={cx("fui-Button-root", className)}
-        data-variant={variant}
-        data-size={size}
-        data-color={color}
-        data-full={fullWidth || undefined}
-        data-loading={loading || undefined}
-        disabled={disabled || loading}
-        style={
-          { "--_radius": radiusVar[radius], ...style } as React.CSSProperties
-        }
-        {...rest}
-      >
-        {loading ? (
-          <span className={"fui-Button-spinner"} aria-hidden />
-        ) : (
-          leftSection && (
-            <span className={"fui-Button-section"}>{leftSection}</span>
-          )
-        )}
-        {children}
-        {rightSection && !loading && (
-          <span className={"fui-Button-section"}>{rightSection}</span>
-        )}
-      </button>
+      <>
+        {renderWithProps(render, {
+          ref,
+          className: cx("fui-Button-root", className),
+          children,
+          ...rest,
+        })}
+      </>
     );
-  },
-);
+  }
+  return (
+    // type="button" unless overridden: a bare <button> inside a form is a
+    // native submit, so "Cancel" buttons would submit the form.
+    <button ref={ref} type="button" className={cx("fui-Button-root", className)} {...rest}>
+      {children}
+    </button>
+  );
+}

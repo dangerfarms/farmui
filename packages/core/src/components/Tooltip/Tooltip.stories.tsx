@@ -1,42 +1,34 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, userEvent, within } from "storybook/test";
-import { Button, Tooltip } from "../../index";
+import { expect, userEvent, waitFor, within } from "storybook/test";
+import { Tooltip } from "../../index";
 
 const meta = {
   title: "Overlays/Tooltip",
-  component: Tooltip,
+  component: Tooltip.Root,
   tags: ["autodocs"],
-  args: {
-    label: "Saves your changes",
-    position: "top",
-    withArrow: false,
-    children: <Button variant="light">Hover or focus me</Button>,
-  },
-  argTypes: {
-    label: { control: "text" },
-    position: {
-      control: "inline-radio",
-      options: ["top", "bottom", "left", "right"],
-    },
-    withArrow: { control: "boolean" },
-    children: { control: false },
-  },
-  render: (args) => (
+  render: () => (
     <div style={{ display: "flex", justifyContent: "center", padding: "3rem" }}>
-      <Tooltip {...args} />
+      <Tooltip.Root>
+        <Tooltip.Trigger>Hover or focus me</Tooltip.Trigger>
+        <Tooltip.Popup>Saves your changes</Tooltip.Popup>
+      </Tooltip.Root>
     </div>
   ),
-} satisfies Meta<typeof Tooltip>;
+} satisfies Meta<typeof Tooltip.Root>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Live playground — tweak the label, position, and arrow in the Controls panel. */
+/**
+ * Compose from parts: the Trigger wires hover/focus and `aria-describedby`
+ * onto the element it renders; the Popup is the bubble. Opens after a 600ms
+ * delay on hover, immediately on keyboard focus.
+ */
 export const Playground: Story = {};
 
-/** The tooltip can point at any of the four sides of its target. */
+/** The bubble can point at any of the four sides of its target. */
 export const Positions: Story = {
-  render: (args) => (
+  render: () => (
     <div
       style={{
         display: "flex",
@@ -46,55 +38,133 @@ export const Positions: Story = {
         padding: "3rem",
       }}
     >
-      <Tooltip {...args} position="top" label="Top">
-        <Button variant="light">Top</Button>
-      </Tooltip>
-      <Tooltip {...args} position="bottom" label="Bottom">
-        <Button variant="light">Bottom</Button>
-      </Tooltip>
-      <Tooltip {...args} position="left" label="Left">
-        <Button variant="light">Left</Button>
-      </Tooltip>
-      <Tooltip {...args} position="right" label="Right">
-        <Button variant="light">Right</Button>
-      </Tooltip>
+      {(["top", "bottom", "left", "right"] as const).map((position) => (
+        <Tooltip.Root key={position} delay={0}>
+          <Tooltip.Trigger>{position}</Tooltip.Trigger>
+          <Tooltip.Popup position={position}>
+            {position} <Tooltip.Arrow />
+          </Tooltip.Popup>
+        </Tooltip.Root>
+      ))}
     </div>
   ),
 };
 
-/** Add a small pointer arrow toward the target with `withArrow`. */
+/** Add a pointer arrow toward the target by composing `Tooltip.Arrow`. */
 export const WithArrow: Story = {
-  args: { withArrow: true, label: "Now with a pointer" },
+  render: () => (
+    <div style={{ display: "flex", justifyContent: "center", padding: "3rem" }}>
+      <Tooltip.Root>
+        <Tooltip.Trigger>Hover me</Tooltip.Trigger>
+        <Tooltip.Popup>
+          Now with a pointer <Tooltip.Arrow />
+        </Tooltip.Popup>
+      </Tooltip.Root>
+    </div>
+  ),
 };
 
 /**
- * Interaction test: the tooltip is revealed on hover and on keyboard focus,
- * and the target is linked to it via `aria-describedby` while open.
+ * `Tooltip.Provider` shares one delay across a group: after the first bubble
+ * shows, moving between adjacent triggers opens instantly.
  */
-export const RevealsOnHoverAndFocus: Story = {
+export const ProviderGroup: Story = {
+  render: () => (
+    <Tooltip.Provider>
+      <div
+        style={{
+          display: "flex",
+          gap: "1rem",
+          justifyContent: "center",
+          padding: "3rem",
+        }}
+      >
+        {["Cut", "Copy", "Paste"].map((label) => (
+          <Tooltip.Root key={label}>
+            <Tooltip.Trigger>{label}</Tooltip.Trigger>
+            <Tooltip.Popup>{label} the selection</Tooltip.Popup>
+          </Tooltip.Root>
+        ))}
+      </div>
+    </Tooltip.Provider>
+  ),
+};
+
+/**
+ * Forced flip: the trigger sits at the viewport's top edge while requesting
+ * `position="top"`, so `position-try` flips the bubble below — and in
+ * browsers with anchored container queries (Chrome 143+) the arrow follows,
+ * moving to the bubble's top edge and pointing back up at the trigger.
+ */
+export const FlipsAtViewportEdge: Story = {
+  parameters: { layout: "fullscreen" },
+  render: () => (
+    <div style={{ blockSize: "16rem", position: "relative" }}>
+      <div
+        style={{
+          position: "fixed",
+          insetBlockStart: 0,
+          insetInlineStart: "50%",
+          translate: "-50% 0",
+        }}
+      >
+        <Tooltip.Root defaultOpen>
+          <Tooltip.Trigger>Near the top edge</Tooltip.Trigger>
+          <Tooltip.Popup position="top">
+            Flipped below — arrow points up <Tooltip.Arrow />
+          </Tooltip.Popup>
+        </Tooltip.Root>
+      </div>
+    </div>
+  ),
+};
+
+/** Statically open (defaultOpen) — for visual/a11y review of the open state. */
+export const OpenByDefault: Story = {
+  render: () => (
+    <div style={{ display: "flex", justifyContent: "center", padding: "4rem" }}>
+      <Tooltip.Root defaultOpen>
+        <Tooltip.Trigger>Hover or focus me</Tooltip.Trigger>
+        <Tooltip.Popup>
+          Should sit centred above the trigger <Tooltip.Arrow />
+        </Tooltip.Popup>
+      </Tooltip.Root>
+    </div>
+  ),
+};
+
+/**
+ * Interaction test: revealed on hover (delay 0 for determinism) and keyboard
+ * focus; Escape dismisses without moving focus (WCAG 1.4.13); the trigger is
+ * permanently linked via `aria-describedby`.
+ */
+export const RevealsAndDismisses: Story = {
+  render: () => (
+    <div style={{ display: "flex", justifyContent: "center", padding: "3rem" }}>
+      <Tooltip.Root delay={0}>
+        <Tooltip.Trigger>Hover or focus me</Tooltip.Trigger>
+        <Tooltip.Popup>Saves your changes</Tooltip.Popup>
+      </Tooltip.Root>
+    </div>
+  ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-
     const trigger = canvas.getByRole("button", { name: /hover or focus me/i });
-    const tooltip = canvas.getByRole("tooltip");
+    const tooltip = document.getElementById(
+      trigger.getAttribute("aria-describedby")!.split(" ").pop()!,
+    )!;
 
-    // Hidden (data-open unset) and not yet described before interaction.
-    await expect(tooltip).not.toHaveAttribute("data-open");
-    await expect(trigger).not.toHaveAttribute("aria-describedby");
+    await expect(tooltip).not.toBeVisible();
 
-    // Hover reveals the tooltip and wires up aria-describedby.
     await userEvent.hover(trigger);
-    await expect(tooltip).toHaveAttribute("data-open", "true");
-    await expect(trigger).toHaveAttribute("aria-describedby", tooltip.id);
+    await waitFor(() => expect(tooltip).toBeVisible());
 
-    // Moving the pointer away hides it again.
+    await userEvent.keyboard("{Escape}");
+    await waitFor(() => expect(tooltip).not.toBeVisible());
+
     await userEvent.unhover(trigger);
-    await expect(tooltip).not.toHaveAttribute("data-open");
-
-    // Keyboard focus also reveals it (accessible for non-pointer users).
     await userEvent.tab();
     await expect(trigger).toHaveFocus();
-    await expect(tooltip).toHaveAttribute("data-open", "true");
-    await expect(trigger).toHaveAttribute("aria-describedby", tooltip.id);
+    await waitFor(() => expect(tooltip).toBeVisible());
   },
 };

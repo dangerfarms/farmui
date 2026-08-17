@@ -1,79 +1,142 @@
-import type { ComponentDoc } from "@/docs/types";
-import {
-  TooltipArrow,
-  TooltipOnText,
-  TooltipPositions,
-} from "./tooltip.client";
+import type { ComponentContent } from "@/renderer/types";
+import { TooltipArrow, TooltipGroup, TooltipPositions } from "./tooltip.client";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "tooltip",
-  name: "Tooltip",
-  category: "Overlays",
-  description: "A small floating label revealed on hover and keyboard focus.",
+  lead: "A small floating label revealed on hover and keyboard focus, composed from parts.",
   importLine: `import { Tooltip } from "@farmui/core";`,
   demos: [
     {
       title: "Positions",
       description:
-        "Place the tooltip on any side of its target with the position prop.",
-      code: `<Tooltip label="Above the button" position="top">
-  <Button variant="light">Top</Button>
-</Tooltip>
-<Tooltip label="Below the button" position="bottom">
-  <Button variant="light">Bottom</Button>
-</Tooltip>
-<Tooltip label="Left of the button" position="left">
-  <Button variant="light">Left</Button>
-</Tooltip>
-<Tooltip label="Right of the button" position="right">
-  <Button variant="light">Right</Button>
-</Tooltip>`,
+        "Place the bubble on any side of its target with the Popup's position prop. It opens after a short delay on hover, immediately on keyboard focus.",
+      code: `<Tooltip.Root>
+  <Tooltip.Trigger>Top</Tooltip.Trigger>
+  <Tooltip.Popup position="top">On the top</Tooltip.Popup>
+</Tooltip.Root>`,
       render: () => <TooltipPositions />,
     },
     {
       title: "With arrow",
-      description: "Add a pointer arrow toward the target with withArrow.",
-      code: `<Tooltip label="Saved just now" withArrow>
-  <Button>Hover or focus me</Button>
-</Tooltip>`,
+      description: "Compose Tooltip.Arrow inside the Popup for a pointer.",
+      code: `<Tooltip.Root>
+  <Tooltip.Trigger>Hover or focus me</Tooltip.Trigger>
+  <Tooltip.Popup>
+    Saved just now <Tooltip.Arrow />
+  </Tooltip.Popup>
+</Tooltip.Root>`,
       render: () => <TooltipArrow />,
     },
     {
-      title: "On inline text",
+      title: "Grouped with a Provider",
       description:
-        "Wrap a focusable inline element to explain a term in place.",
-      code: `<p>
-  Every component is fully{" "}
-  <Tooltip label="Meets WCAG 2.1 AA out of the box" withArrow>
-    <button type="button" className="term">accessible</button>
-  </Tooltip>{" "}
-  right out of the box.
-</p>`,
-      render: () => <TooltipOnText />,
+        "Tooltip.Provider shares the hover delay across a group: after the first bubble opens, moving between adjacent triggers reveals instantly.",
+      code: `<Tooltip.Provider>
+  <Tooltip.Root>
+    <Tooltip.Trigger>Cut</Tooltip.Trigger>
+    <Tooltip.Popup>Cut the selection</Tooltip.Popup>
+  </Tooltip.Root>
+  {/* …adjacent tooltips share the delay… */}
+</Tooltip.Provider>`,
+      render: () => <TooltipGroup />,
     },
   ],
-  props: [
+  whenToUse: [
+    "To label icon-only buttons or clarify what a control does: short, redundant, visual-only text.",
+    "To expand an abbreviation or term in place for pointer and keyboard users.",
+  ],
+  whenNotToUse: [
+    "For information the user needs in order to proceed: hover does not exist on touch devices, so essential content must be visible in the page.",
+    "For interactive content (links, buttons), use Popover, which is click-invoked and keyboard-operable.",
+    "As a replacement for a visible label on a form field, use Field.Label.",
+  ],
+  howItWorks: [
     {
-      name: "label",
-      type: "ReactNode",
-      description: "The floating label shown on hover and focus.",
+      title: "Tooltips repeat, they never reveal",
+      body: "A tooltip may only say what the page already makes knowable: the label of an icon button, the expansion of an abbreviation. Touch devices have no hover, so content that exists only in a tooltip does not exist for a large share of users.",
     },
     {
-      name: "position",
-      type: `"top" | "bottom" | "left" | "right"`,
-      default: `"top"`,
-      description: "Which side of the target the tooltip appears on.",
+      title: "Same words as the accessible name",
+      body: "On an icon-only button, the aria-label and the tooltip should say the same thing. If the tooltip wants to say more than the name, the extra is content: put it in the page or a Popover, not appended to a hover bubble.",
     },
     {
-      name: "withArrow",
-      type: "boolean",
-      description: "Render a small pointer arrow toward the target.",
+      title: "Nothing interactive inside",
+      body: 'The bubble is role="tooltip" and never receives focus: a link or button inside it is unreachable by keyboard. The moment a tooltip needs a control, it is a Popover.',
     },
+  ],
+  accessibility: [
+    "The trigger is permanently linked to the bubble via aria-describedby, so screen readers announce the text with the control whether or not it is visually shown.",
+    "Escape dismisses the bubble without moving pointer or focus, the bubble stays open while hovered, and it persists until hover/focus leaves: the three requirements of WCAG 1.4.13 (Content on Hover or Focus).",
+    "Opens immediately on visible (keyboard) focus with no hover delay; hover-open and tap-focus-open are both suppressed for touch pointers, where hover does not exist.",
+    "Hover and keyboard focus are tracked independently, so a pointer passing over a focused trigger cannot steal the bubble away.",
+    "Rendered with the native popover attribute (hint where the browser supports it, detected explicitly) and CSS anchor positioning where supported, with a wrapper-anchored fallback elsewhere: no polyfills, per the browser support policy.",
+  ],
+  parts: [
     {
-      name: "children",
-      type: "ReactElement",
+      name: "Tooltip.Provider",
       description:
-        "The single element the tooltip describes (receives aria-describedby).",
+        "Optional. Shares one hover delay across a group, with instant opens between adjacent triggers.",
+      props: [
+        {
+          name: "delay",
+          type: "number",
+          default: "600",
+          description: "Hover delay in ms for all tooltips underneath.",
+        },
+      ],
+    },
+    {
+      name: "Tooltip.Root",
+      description:
+        "Groups the parts and owns open state, timers, and Escape handling. Native <span> props are forwarded.",
+      props: [
+        {
+          name: "delay",
+          type: "number",
+          default: "600",
+          description: "Hover delay in ms; overrides the Provider.",
+        },
+        { name: "open", type: "boolean", description: "Controlled open state." },
+        {
+          name: "defaultOpen",
+          type: "boolean",
+          default: "false",
+          description: "Initial open state when uncontrolled.",
+        },
+        {
+          name: "onOpenChange",
+          type: "(open: boolean) => void",
+          description: "Called whenever the open state should change.",
+        },
+      ],
+    },
+    {
+      name: "Tooltip.Trigger",
+      description:
+        "A FarmUI Button wired with hover/focus handlers and aria-describedby; all native <button> props are forwarded.",
+      props: [
+        {
+          name: "render",
+          type: "element | (props) => node",
+          description: "Substitute your own interactive element; it receives the wiring props.",
+        },
+      ],
+    },
+    {
+      name: "Tooltip.Popup",
+      description: 'The bubble (role="tooltip"); native <span> props are forwarded.',
+      props: [
+        {
+          name: "position",
+          type: `"top" | "bottom" | "left" | "right"`,
+          default: `"top"`,
+          description: "Which side of the trigger the bubble appears on.",
+        },
+      ],
+    },
+    {
+      name: "Tooltip.Arrow",
+      description: "Optional pointer arrow toward the trigger; native <span> props are forwarded.",
     },
   ],
 };

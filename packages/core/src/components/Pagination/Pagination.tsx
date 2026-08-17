@@ -3,13 +3,10 @@
 import type { HTMLAttributes } from "react";
 import { cx } from "../../utils";
 
-export interface PaginationProps extends Omit<
-  HTMLAttributes<HTMLElement>,
-  "onChange"
-> {
+export interface PaginationProps extends Omit<HTMLAttributes<HTMLElement>, "onChange"> {
   /** Total number of pages. */
   total: number;
-  /** Currently active page (1-based). */
+  /** The active page (1-based). */
   value: number;
   /** Called with the new page when a control is activated. */
   onChange: (page: number) => void;
@@ -34,11 +31,7 @@ function range(start: number, end: number): number[] {
 }
 
 /** Build the list of page numbers with ellipsis gaps. */
-function getPaginationItems(
-  total: number,
-  active: number,
-  siblings: number,
-): PageItem[] {
+function getPaginationItems(total: number, active: number, siblings: number): PageItem[] {
   // Pages we always show plus the sibling window; if that's most of them,
   // just render every page.
   const totalToShow = siblings * 2 + 5; // first, last, active, 2 dots
@@ -76,9 +69,7 @@ function ChevronIcon({ dir }: { dir: "left" | "right" }) {
       strokeLinejoin="round"
       aria-hidden
     >
-      <polyline
-        points={dir === "left" ? "15 18 9 12 15 6" : "9 18 15 12 9 6"}
-      />
+      <polyline points={dir === "left" ? "15 18 9 12 15 6" : "9 18 15 12 9 6"} />
     </svg>
   );
 }
@@ -112,7 +103,7 @@ function EdgeIcon({ dir }: { dir: "first" | "last" }) {
 }
 
 /**
- * Pagination — controlled page navigator.
+ * Controlled page navigator.
  *
  * Renders previous/next controls (plus optional first/last edges) and numbered
  * page buttons with ellipsis gaps. The active page carries `aria-current="page"`.
@@ -138,17 +129,13 @@ export function Pagination({
   };
 
   return (
-    <nav
-      aria-label={ariaLabel}
-      className={cx("fui-Pagination-root", className)}
-      {...rest}
-    >
-      <ul className={"fui-Pagination-list"}>
+    <nav aria-label={ariaLabel} className={cx("fui-Pagination-root", className)} {...rest}>
+      <ul className="fui-Pagination-list">
         {withEdges && (
           <li>
             <button
               type="button"
-              className={"fui-Pagination-control"}
+              className="fui-Pagination-control"
               onClick={() => go(1)}
               disabled={atStart}
               aria-label="First page"
@@ -160,7 +147,7 @@ export function Pagination({
         <li>
           <button
             type="button"
-            className={"fui-Pagination-control"}
+            className="fui-Pagination-control"
             onClick={() => go(active - 1)}
             disabled={atStart}
             aria-label="Previous page"
@@ -173,7 +160,7 @@ export function Pagination({
           if (item === DOTS) {
             return (
               <li key={`dots-${index}`} aria-hidden="true">
-                <span className={"fui-Pagination-dots"}>…</span>
+                <span className="fui-Pagination-dots">…</span>
               </li>
             );
           }
@@ -182,7 +169,7 @@ export function Pagination({
             <li key={item}>
               <button
                 type="button"
-                className={"fui-Pagination-page"}
+                className="fui-Pagination-page"
                 data-active={isActive || undefined}
                 aria-current={isActive ? "page" : undefined}
                 aria-label={`Page ${item}`}
@@ -197,7 +184,7 @@ export function Pagination({
         <li>
           <button
             type="button"
-            className={"fui-Pagination-control"}
+            className="fui-Pagination-control"
             onClick={() => go(active + 1)}
             disabled={atEnd}
             aria-label="Next page"
@@ -209,7 +196,7 @@ export function Pagination({
           <li>
             <button
               type="button"
-              className={"fui-Pagination-control"}
+              className="fui-Pagination-control"
               onClick={() => go(total)}
               disabled={atEnd}
               aria-label="Last page"

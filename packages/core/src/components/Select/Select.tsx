@@ -1,157 +1,88 @@
-import { forwardRef, useId } from "react";
-import type { SelectHTMLAttributes, ReactNode } from "react";
-import { cx, type FarmUISize } from "../../utils";
+"use client";
 
-/** An option in a Select — either a bare string or a value/label pair. */
-export type SelectItem = string | { value: string; label: string };
+import type { Ref, SelectHTMLAttributes } from "react";
+import { cx } from "../../utils";
+import { useFieldControlProps } from "../Field/Field";
+import { useUserInvalid } from "../../use-user-invalid";
 
-export interface SelectProps extends Omit<
-  SelectHTMLAttributes<HTMLSelectElement>,
-  "size"
-> {
-  /** Field label rendered above the select. */
-  label?: ReactNode;
-  /** Helper text rendered below the label. */
-  description?: ReactNode;
-  /** Error message; also puts the field in an invalid state. */
-  error?: ReactNode;
-  /** Control size. @default "md" */
-  size?: FarmUISize;
-  /** Border radius token. @default "md" */
-  radius?: "sm" | "md" | "lg" | "xl" | "full";
-  /** Mark the field as required (adds a red asterisk). */
-  withAsterisk?: boolean;
+export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, "size"> {
   /** Non-selectable prompt shown as the first, empty-valued option. */
   placeholder?: string;
-  /** The options to render. */
-  data?: SelectItem[];
-  /** Root wrapper class. */
-  wrapperClassName?: string;
+  ref?: Ref<HTMLSelectElement>;
 }
 
-const radiusVar: Record<NonNullable<SelectProps["radius"]>, string> = {
-  sm: "var(--fui-radius-sm)",
-  md: "var(--fui-radius-md)",
-  lg: "var(--fui-radius-lg)",
-  xl: "var(--fui-radius-xl)",
-  full: "var(--fui-radius-full)",
-};
-
 /**
- * Select — a styled wrapper around a native `<select>`; accessible and zero-JS.
+ * A native `<select>` in the shared control box, with a fluid chevron.
+ * Options are children (`<option>` / `<optgroup>`), exactly as the
+ * platform defines them. Label it by composing {@link Field}; the control
+ * reads its wiring from the surrounding `Field.Root`.
  */
-export const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  function Select(
-    {
-      label,
-      description,
-      error,
-      size = "md",
-      radius = "md",
-      withAsterisk,
-      placeholder,
-      data = [],
-      disabled,
-      required,
-      id,
-      className,
-      wrapperClassName,
-      children,
-      defaultValue,
-      value,
-      ...rest
-    },
-    ref,
-  ) {
-    const autoId = useId();
-    const fieldId = id ?? autoId;
-    const descId = description ? `${fieldId}-desc` : undefined;
-    const errId = error ? `${fieldId}-err` : undefined;
-    const invalid = Boolean(error);
-    // With a placeholder and no explicit value, default to the empty option.
-    const isControlled = value !== undefined;
-    const resolvedDefault =
-      !isControlled && defaultValue === undefined && placeholder
-        ? ""
-        : defaultValue;
+export function Select({
+  placeholder,
+  disabled,
+  className,
+  style,
+  children,
+  defaultValue,
+  value,
+  id,
+  "aria-invalid": ariaInvalid,
+  "aria-describedby": ariaDescribedby,
+  onBlur,
+  onInvalid,
+  ref,
+  ...rest
+}: SelectProps) {
+  const field = useFieldControlProps();
+  const { nativeInvalid, checkOnBlur, checkOnInvalid } = useUserInvalid();
+  const isControlled = value !== undefined;
+  const resolvedDefault =
+    !isControlled && defaultValue === undefined && placeholder ? "" : defaultValue;
 
-    return (
-      <div className={cx("fui-Select-wrapper", wrapperClassName)}>
-        {label && (
-          <label className={"fui-Select-label"} htmlFor={fieldId}>
-            {label}
-            {(withAsterisk || required) && (
-              <span className={"fui-Select-required"} aria-hidden>
-                *
-              </span>
-            )}
-          </label>
+  return (
+    <div className="fui-Select-field" data-disabled={disabled || undefined} style={style}>
+      <select
+        ref={ref}
+        className={cx("fui-Select-select", className)}
+        disabled={disabled}
+        value={value}
+        defaultValue={resolvedDefault}
+        id={id ?? field.id}
+        {...rest}
+        aria-invalid={ariaInvalid ?? field["aria-invalid"] ?? (nativeInvalid || undefined)}
+        aria-describedby={ariaDescribedby ?? field["aria-describedby"]}
+        onBlur={(e) => {
+          onBlur?.(e);
+          checkOnBlur(e);
+        }}
+        onInvalid={(e) => {
+          onInvalid?.(e);
+          checkOnInvalid(e);
+        }}
+      >
+        {placeholder && (
+          <option value="" disabled>
+            {placeholder}
+          </option>
         )}
-        {description && (
-          <span className={"fui-Select-description"} id={descId}>
-            {description}
-          </span>
-        )}
-        <div
-          className={"fui-Select-field"}
-          data-size={size}
-          data-invalid={invalid || undefined}
-          data-disabled={disabled || undefined}
-          style={{ "--_radius": radiusVar[radius] } as React.CSSProperties}
-        >
-          <select
-            ref={ref}
-            id={fieldId}
-            className={cx("fui-Select-select", className)}
-            disabled={disabled}
-            required={required}
-            aria-invalid={invalid || undefined}
-            aria-describedby={cx(descId, errId) || undefined}
-            value={value}
-            defaultValue={resolvedDefault}
-            {...rest}
-          >
-            {placeholder && (
-              <option value="" disabled>
-                {placeholder}
-              </option>
-            )}
-            {children ??
-              data.map((item) => {
-                const opt =
-                  typeof item === "string"
-                    ? { value: item, label: item }
-                    : item;
-                return (
-                  <option key={opt.value} value={opt.value}>
-                    {opt.label}
-                  </option>
-                );
-              })}
-          </select>
-          <svg
-            className={"fui-Select-chevron"}
-            viewBox="0 0 16 16"
-            width="16"
-            height="16"
-            fill="none"
-            aria-hidden
-          >
-            <path
-              d="M4 6l4 4 4-4"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
-        {error && (
-          <span className={"fui-Select-error"} id={errId} role="alert">
-            {error}
-          </span>
-        )}
-      </div>
-    );
-  },
-);
+        {children}
+      </select>
+      <svg
+        className="fui-Select-chevron"
+        viewBox="0 0 16 16"
+        width="16"
+        height="16"
+        fill="none"
+        aria-hidden
+      >
+        <path
+          d="M4 6l4 4 4-4"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </div>
+  );
+}

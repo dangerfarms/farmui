@@ -1,10 +1,14 @@
-@layer farmui.components {
-  .fui-Pagination-root {
-    font-family: var(--fui-font);
+@scope (.fui-Pagination-root) {
+  :scope {
+    /* Derived control height (the Button anatomy, incl. 1px borders) —
+       keeps square min-width and the dots cell in step with the pages. */
+    --_control-h: calc(
+      1.2 * var(--fui-text-sm) + 2 * var(--fui-space-sm) + 2px
+    );
   }
 
   .fui-Pagination-list {
-    display: flex;
+    display: block flex;
     flex-wrap: wrap;
     align-items: center;
     gap: var(--fui-space-xs);
@@ -15,26 +19,24 @@
 
   .fui-Pagination-page,
   .fui-Pagination-control {
-    display: inline-flex;
+    display: inline flex;
     align-items: center;
     justify-content: center;
-    min-inline-size: var(--fui-control-height-md);
-    block-size: var(--fui-control-height-md);
+    min-inline-size: var(--_control-h);
+    padding-block: var(--fui-space-sm);
     padding-inline: var(--fui-space-sm);
     border: 1px solid var(--fui-border);
     border-radius: var(--fui-radius-md);
     background: var(--fui-surface);
-    color: var(--fui-text);
     font-family: inherit;
     font-size: var(--fui-text-sm);
     font-weight: 600;
-    line-height: 1;
-    cursor: pointer;
+    line-height: 1.2;
     transition:
-      background var(--fui-transition),
-      border-color var(--fui-transition),
-      color var(--fui-transition),
-      box-shadow var(--fui-transition);
+      background var(--fui-duration-sm) var(--fui-ease),
+      border-color var(--fui-duration-sm) var(--fui-ease),
+      color var(--fui-duration-sm) var(--fui-ease),
+      box-shadow var(--fui-duration-md) var(--fui-ease);
   }
 
   .fui-Pagination-page:hover:not([data-active]),
@@ -43,21 +45,14 @@
     border-color: var(--fui-border-strong);
   }
 
-  .fui-Pagination-page:focus-visible,
-  .fui-Pagination-control:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 3px var(--fui-primary-ring);
-  }
-
   .fui-Pagination-page[data-active] {
-    background: var(--fui-primary);
+    background: var(--fui-primary-strong);
     border-color: var(--fui-primary);
-    color: var(--fui-primary-contrast);
+    color: var(--fui-on-strong);
     cursor: default;
   }
 
   .fui-Pagination-control:disabled {
-    cursor: not-allowed;
     opacity: 0.45;
     color: var(--fui-text-dim);
   }
@@ -68,12 +63,23 @@
   }
 
   .fui-Pagination-dots {
-    display: inline-flex;
+    display: inline flex;
     align-items: center;
     justify-content: center;
-    min-inline-size: var(--fui-control-height-md);
-    block-size: var(--fui-control-height-md);
+    min-inline-size: var(--_control-h);
+    block-size: var(--_control-h);
     color: var(--fui-text-dim);
     user-select: none;
+  }
+
+  /* Forced colors: the active page's brand fill is stripped, leaving it
+     identical to its neighbours. */
+  @media (forced-colors: active) {
+    .fui-Pagination-page[data-active] {
+      forced-color-adjust: none;
+      background: Highlight;
+      border-color: Highlight;
+      color: HighlightText;
+    }
   }
 }

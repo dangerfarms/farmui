@@ -1,58 +1,72 @@
-@layer farmui.components {
-  .fui-Alert-root {
-    /* Per-color channels — remapped by [data-color] below */
-    --_accent: var(--fui-info);
-    --_soft: var(--fui-info-soft);
+/*
+ * Everything here derives from a single --_accent channel (the same
+ * derivation scheme as Button's --_color).
+ * There is no color prop; the surrounding --fui-context region picks the
+ * accent. The message stays
+ * --fui-text-based so long copy remains readable on the tint.
+ */
+@scope (.fui-Alert-root) {
+  :scope {
+    --_accent: var(--fui-text);
 
-    display: flex;
+    display: block flex;
     align-items: flex-start;
     gap: var(--fui-space-md);
     padding-block: var(--fui-space-md);
     padding-inline: var(--fui-space-lg);
-    border: 1px solid transparent;
-    border-inline-start: 3px solid var(--_accent);
+
+    /* Tints mix in oklab (cartesian), not oklch: hue interpolation against
+       the near-achromatic page background rotates the channel's hue (the
+       declared hue of an achromatic colour still interpolates); cartesian
+       mixing only desaturates, so the channel's hue survives. */
+    border: 1px solid color-mix(in oklab, var(--_accent), var(--fui-bg) 55%);
     border-radius: var(--fui-radius-md);
-    background: var(--_soft);
-    color: var(--fui-text);
-    font-family: var(--fui-font);
+
+    /* The dark tint mixes less background in — the dark page background is
+       far from the channel, so an 88% mix would read near-black (same
+       compensation as Button's 90%/75%). */
+    background: light-dark(
+      color-mix(in oklab, var(--_accent), var(--fui-bg) 88%),
+      color-mix(in oklab, var(--_accent), var(--fui-bg) 70%)
+    );
     font-size: var(--fui-text-sm);
-    line-height: 1.5;
   }
 
-  /* Colors */
-  .fui-Alert-root[data-color="info"] {
-    --_accent: var(--fui-info);
-    --_soft: var(--fui-info-soft);
-  }
-  .fui-Alert-root[data-color="success"] {
-    --_accent: var(--fui-success);
-    --_soft: var(--fui-success-soft);
-  }
-  .fui-Alert-root[data-color="warning"] {
-    --_accent: var(--fui-warning);
-    --_soft: var(--fui-warning-soft);
-  }
-  .fui-Alert-root[data-color="danger"] {
-    --_accent: var(--fui-danger);
-    --_soft: var(--fui-danger-soft);
+  /* Context: within a status region — the channel takes the status colour.
+     (Even though the region also remaps --fui-primary, the alert keys its
+     own channel because its rest state is neutral text, not primary.) */
+  @container (style(--fui-context: primary)) {
+    :scope {
+      --_accent: var(--fui-primary);
+    }
   }
 
-  /* Variant: outline — no fill, full border in the accent color */
-  .fui-Alert-root[data-variant="outline"] {
-    background: transparent;
-    border-color: var(--_accent);
-    border-inline-start-width: 3px;
+  @container (style(--fui-context: success)) {
+    :scope {
+      --_accent: var(--fui-success);
+    }
   }
 
-  /* Variant: filled — solid accent background, contrasting text */
-  .fui-Alert-root[data-variant="filled"] {
-    background: var(--_accent);
-    border-color: transparent;
-    color: var(--fui-primary-contrast);
+  @container (style(--fui-context: warning)) {
+    :scope {
+      --_accent: var(--fui-warning);
+    }
+  }
+
+  @container (style(--fui-context: info)) {
+    :scope {
+      --_accent: var(--fui-info);
+    }
+  }
+
+  @container (style(--fui-context: danger)) {
+    :scope {
+      --_accent: var(--fui-danger);
+    }
   }
 
   .fui-Alert-icon {
-    display: inline-flex;
+    display: inline flex;
     align-items: center;
     justify-content: center;
     flex: none;
@@ -62,32 +76,35 @@
     color: var(--_accent);
     font-size: var(--fui-text-md);
   }
-  .fui-Alert-root[data-variant="filled"] .fui-Alert-icon {
-    color: inherit;
-  }
 
   .fui-Alert-body {
-    display: flex;
+    display: block flex;
     flex-direction: column;
     gap: var(--fui-space-xs);
     min-inline-size: 0;
   }
 
   .fui-Alert-title {
+    /* The title is TEXT in the channel's hue, not a swatch: mixed toward
+       black (light) / white (dark) so it keeps AA contrast on the tint even
+       for light channels like warning. Only the decorative icon carries the
+       raw channel — the title must read. */
+    color: light-dark(
+      color-mix(in oklab, var(--_accent) 70%, oklch(0% 0 0deg)),
+      color-mix(in oklab, var(--_accent) 55%, oklch(100% 0 0deg))
+    );
     font-weight: 600;
     font-size: var(--fui-text-sm);
     line-height: 1.4;
   }
 
+  /* The message carries full-strength text; next to a title it recedes to
+     muted so the accent-coloured heading leads. */
   .fui-Alert-message {
-    color: inherit;
+    color: var(--fui-text);
   }
-  .fui-Alert-root[data-variant="light"] .fui-Alert-message,
-  .fui-Alert-root[data-variant="outline"] .fui-Alert-message {
+
+  :scope:has(.fui-Alert-title) .fui-Alert-message {
     color: var(--fui-text-muted);
-  }
-  /* When there's no title, the message carries full-strength text */
-  .fui-Alert-root:not(:has(.fui-Alert-title)) .fui-Alert-message {
-    color: inherit;
   }
 }

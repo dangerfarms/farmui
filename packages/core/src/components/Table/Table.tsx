@@ -1,5 +1,4 @@
-import { forwardRef } from "react";
-import type { TableHTMLAttributes, ReactNode } from "react";
+import type { TableHTMLAttributes, ReactNode, Ref } from "react";
 import { cx } from "../../utils";
 
 export interface TableProps extends TableHTMLAttributes<HTMLTableElement> {
@@ -13,26 +12,25 @@ export interface TableProps extends TableHTMLAttributes<HTMLTableElement> {
   captionSide?: "top" | "bottom";
   /** Standard thead/tbody/tr/th/td markup. */
   children?: ReactNode;
+  ref?: Ref<HTMLTableElement>;
 }
 
 /**
- * Table — a styled data table. Compose with native
+ * A styled data table. Compose with native
  * thead/tbody/tr/th/td. Scrolls horizontally on overflow.
  */
-export const Table = forwardRef<HTMLTableElement, TableProps>(function Table(
-  {
-    striped,
-    highlightOnHover,
-    withColumnBorders,
-    captionSide = "top",
-    className,
-    children,
-    ...rest
-  },
+export function Table({
+  striped,
+  highlightOnHover,
+  withColumnBorders,
+  captionSide = "top",
+  className,
+  children,
   ref,
-) {
+  ...rest
+}: TableProps) {
   return (
-    <div className={"fui-Table-scroll"}>
+    <div className="fui-Table-scroll">
       <table
         ref={ref}
         className={cx("fui-Table-root", className)}
@@ -46,4 +44,4 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(function Table(
       </table>
     </div>
   );
-});
+}

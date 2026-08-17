@@ -1,70 +1,60 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Textarea } from "../../index";
+import { Field, Textarea } from "../../index";
 
 const meta = {
   title: "Inputs/Textarea",
   component: Textarea,
   tags: ["autodocs"],
   args: {
-    label: "Message",
     placeholder: "Write your message…",
-    size: "md",
-    radius: "md",
     rows: 3,
     disabled: false,
-    withAsterisk: false,
   },
   argTypes: {
-    size: { control: "inline-radio", options: ["sm", "md", "lg"] },
-    radius: {
-      control: "select",
-      options: ["sm", "md", "lg", "xl", "full"],
-    },
     rows: { control: { type: "number", min: 1, max: 12 } },
   },
+  render: (args) => (
+    <Field.Root>
+      <Field.Label>Message</Field.Label>
+      <Textarea {...args} />
+    </Field.Root>
+  ),
 } satisfies Meta<typeof Textarea>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Live playground — tweak props in the Controls panel. */
 export const Playground: Story = {};
 
-export const Sizes: Story = {
-  render: (args) => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-      <Textarea {...args} size="sm" label="Small" />
-      <Textarea {...args} size="md" label="Medium" />
-      <Textarea {...args} size="lg" label="Large" />
-    </div>
+export const WithDescription: Story = {
+  render: () => (
+    <Field.Root>
+      <Field.Label>Bio</Field.Label>
+      <Field.Description>A short description shown on your public profile.</Field.Description>
+      <Textarea placeholder="Tell us about yourself…" />
+    </Field.Root>
   ),
 };
 
-export const WithDescription: Story = {
-  args: {
-    label: "Bio",
-    description: "A short description shown on your public profile.",
-    placeholder: "Tell us about yourself…",
-  },
-};
-
 export const WithError: Story = {
-  args: {
-    label: "Message",
-    placeholder: "Write your message…",
-    error: "Message must be at least 20 characters.",
-    defaultValue: "Too short",
-  },
+  render: () => (
+    <Field.Root>
+      <Field.Label>Message</Field.Label>
+      <Textarea placeholder="Write your message…" defaultValue="Too short" />
+      <Field.Error>Message must be at least 20 characters.</Field.Error>
+    </Field.Root>
+  ),
 };
 
 export const Required: Story = {
-  args: { label: "Feedback", withAsterisk: true },
+  render: () => (
+    <Field.Root>
+      <Field.Label>Feedback</Field.Label>
+      <Textarea required />
+    </Field.Root>
+  ),
 };
 
 export const Disabled: Story = {
-  args: {
-    label: "Message",
-    placeholder: "Write your message…",
-    disabled: true,
-  },
+  args: { disabled: true },
 };

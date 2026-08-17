@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useId } from "react";
+import { createContext, useContext, useId, useMemo } from "react";
 import type { HTMLAttributes, ReactNode } from "react";
 import { cx } from "../../utils";
 
@@ -20,10 +20,7 @@ export interface AccordionProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
 }
 
-export interface AccordionItemProps extends Omit<
-  HTMLAttributes<HTMLDetailsElement>,
-  "title"
-> {
+export interface AccordionItemProps extends Omit<HTMLAttributes<HTMLDetailsElement>, "title"> {
   /** The summary label shown in the always-visible header. */
   label: ReactNode;
   /** Open this item by default. */
@@ -32,26 +29,23 @@ export interface AccordionItemProps extends Omit<
 }
 
 /**
- * Accordion — vertically stacked, expandable sections.
+ * Vertically stacked, expandable sections.
  *
  * Built on native `<details>/<summary>` for zero-JS toggling. In single mode
  * (the default) items share an HTML `name`, so opening one closes the others.
  */
-export function Accordion({
-  multiple = false,
-  className,
-  children,
-  ...rest
-}: AccordionProps) {
+function AccordionBase({ multiple = false, className, children, ...rest }: AccordionProps) {
   const autoName = useId();
   const name = multiple ? undefined : autoName;
 
+  const ctxValue = useMemo(() => ({ name }), [name]);
+
   return (
-    <AccordionContext.Provider value={{ name }}>
+    <AccordionContext value={ctxValue}>
       <div className={cx("fui-Accordion-root", className)} {...rest}>
         {children}
       </div>
-    </AccordionContext.Provider>
+    </AccordionContext>
   );
 }
 
@@ -72,10 +66,10 @@ export function AccordionItem({
       open={defaultOpen}
       {...rest}
     >
-      <summary className={"fui-Accordion-summary"}>
-        <span className={"fui-Accordion-label"}>{label}</span>
+      <summary className="fui-Accordion-summary">
+        <span className="fui-Accordion-label">{label}</span>
         <svg
-          className={"fui-Accordion-chevron"}
+          className="fui-Accordion-chevron"
           viewBox="0 0 24 24"
           width="18"
           height="18"
@@ -89,9 +83,11 @@ export function AccordionItem({
           <polyline points="6 9 12 15 18 9" />
         </svg>
       </summary>
-      <div className={"fui-Accordion-content"}>{children}</div>
+      <div className="fui-Accordion-content">{children}</div>
     </details>
   );
 }
 
-Accordion.Item = AccordionItem;
+export const Accordion = Object.assign(AccordionBase, {
+  Item: AccordionItem,
+});

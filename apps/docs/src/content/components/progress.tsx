@@ -1,11 +1,10 @@
 import { Progress } from "@farmui/core";
-import type { ComponentDoc } from "@/docs/types";
+import type { CSSProperties } from "react";
+import type { ComponentContent } from "@/renderer/types";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "progress",
-  name: "Progress",
-  category: "Feedback",
-  description: "A horizontal bar showing completion of a task.",
+  lead: "A horizontal bar showing completion of a task.",
   importLine: `import { Progress } from "@farmui/core";`,
   demos: [
     {
@@ -34,19 +33,31 @@ const doc: ComponentDoc = {
       ),
     },
     {
-      title: "Colors",
-      code: `<Progress value={50} color="primary" />
-<Progress value={50} color="info" />
-<Progress value={50} color="success" />
-<Progress value={50} color="warning" />
-<Progress value={50} color="danger" />`,
+      title: "Contexts",
+      description:
+        "There is no color prop. Declare --fui-context on a one-element wrapper region (a style query is answered by ancestors, never by the declaring element itself), or let it inherit from a region that already means something. See the Contextualism guide.",
+      code: `<Progress value={50} />
+<div style={{ "--fui-context": "warning" }}>
+  <Progress value={88} />
+</div>
+<div style={{ "--fui-context": "danger" }}>
+  <Progress value={98} />
+</div>
+<div style={{ "--fui-context": "success" }}>
+  <Progress value={100} />
+</div>`,
       render: () => (
         <div style={{ display: "grid", gap: "0.75rem", inlineSize: "100%" }}>
-          <Progress value={50} color="primary" />
-          <Progress value={50} color="info" />
-          <Progress value={50} color="success" />
-          <Progress value={50} color="warning" />
-          <Progress value={50} color="danger" />
+          <Progress value={50} />
+          <div style={{ "--fui-context": "warning" } as CSSProperties}>
+            <Progress value={88} />
+          </div>
+          <div style={{ "--fui-context": "danger" } as CSSProperties}>
+            <Progress value={98} />
+          </div>
+          <div style={{ "--fui-context": "success" } as CSSProperties}>
+            <Progress value={100} />
+          </div>
         </div>
       ),
     },
@@ -54,14 +65,43 @@ const doc: ComponentDoc = {
       title: "Striped & animated",
       description: "Stripes convey ongoing, indeterminate-feeling work.",
       code: `<Progress value={65} striped />
-<Progress value={65} animated color="info" />`,
+<Progress value={65} animated />`,
       render: () => (
         <div style={{ display: "grid", gap: "0.75rem", inlineSize: "100%" }}>
           <Progress value={65} striped />
-          <Progress value={65} animated color="info" />
+          <Progress value={65} animated />
         </div>
       ),
     },
+  ],
+  whenToUse: [
+    "When completion is genuinely measurable (bytes uploaded, records processed, steps finished) and you can supply a truthful 0–100 value.",
+    "To show position in a multi-step flow, deriving value from the step count so the bar moves exactly when the user does.",
+  ],
+  whenNotToUse: [
+    "For waits of unknown duration. A bar that crawls to 90% and stalls teaches users to distrust every bar in your product. Use Loader, or Skeleton when the shape of the coming content is known.",
+    'To display a static quantity such as storage used: role="progressbar" tells assistive tech a task is under way, which a measurement is not.',
+  ],
+  howItWorks: [
+    {
+      title: "Tell the truth",
+      body: "The value must map to something real. Never animate a fake percentage to make a wait feel shorter: when the fiction stalls, the user notices, and the component loses its meaning for every future use. If you cannot measure progress, you do not have determinate progress; reach for Loader instead.",
+    },
+    {
+      title: "Name what is progressing",
+      body: "The bar exposes its value but not its subject. Pass aria-label (“Uploading photos”) or aria-labelledby pointing at a visible heading (both forward to the root), because “progressbar, 45%” on its own tells a screen-reader user nothing about what is at 45%. Sighted users need the same context: keep visible text near the bar.",
+    },
+    {
+      title: "Stripes are decoration",
+      body: "striped and animated add texture, not information, and the stripe animation is removed entirely under prefers-reduced-motion: reduce. Anything the stripes were saying must therefore also be said by the value and the surrounding text.",
+    },
+  ],
+  accessibility: [
+    'Renders role="progressbar" with aria-valuenow (rounded), aria-valuemin={0} and aria-valuemax={100}; the value is clamped, so an out-of-range number can never produce an invalid ARIA state.',
+    "No accessible name is wired for you: pass aria-label or aria-labelledby naming the task; both are forwarded to the root element.",
+    "The stripe animation and the fill transition are collapsed under prefers-reduced-motion: reduce by the library-wide reset, so motion never carries information.",
+    "Under forced colors (Windows High Contrast) the fill paints with Highlight via forced-color-adjust: none and the track gains a CanvasText border, so the bar stays visible where background paint is normally stripped.",
+    "The inline label only renders once the value reaches 8%, so the text never overflows a nearly-empty bar; if the number must always be readable, render it as text outside the bar as well.",
   ],
   props: [
     {
@@ -71,22 +111,10 @@ const doc: ComponentDoc = {
       description: "Fill amount, 0–100 (clamped).",
     },
     {
-      name: "color",
-      type: `"primary" | "info" | "success" | "warning" | "danger"`,
-      default: `"primary"`,
-      description: "Semantic color of the filled bar.",
-    },
-    {
       name: "size",
       type: `"sm" | "md" | "lg"`,
       default: `"md"`,
       description: "Track thickness.",
-    },
-    {
-      name: "radius",
-      type: `"sm" | "md" | "lg" | "xl" | "full"`,
-      default: `"full"`,
-      description: "Border radius token.",
     },
     {
       name: "striped",
@@ -109,6 +137,7 @@ const doc: ComponentDoc = {
       description: "All native <div> props are forwarded.",
     },
   ],
+  contextual: true,
 };
 
 export default doc;

@@ -1,65 +1,52 @@
-import { forwardRef, useId } from "react";
-import type { InputHTMLAttributes, ReactNode } from "react";
-import { cx, type FarmUISize } from "../../utils";
+"use client";
 
-export interface SliderProps extends Omit<
-  InputHTMLAttributes<HTMLInputElement>,
-  "size" | "type"
-> {
-  /** Field label rendered above the track. */
-  label?: ReactNode;
-  /** Control size. @default "md" */
-  size?: FarmUISize;
-  /** Root wrapper class. */
-  wrapperClassName?: string;
+import type { InputHTMLAttributes, Ref } from "react";
+import { cx } from "../../utils";
+import { useFieldControlProps } from "../Field/Field";
+
+export interface SliderProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "type"> {
+  ref?: Ref<HTMLInputElement>;
 }
 
 /**
- * Slider — a styled `<input type="range">` for choosing a value from a range.
+ * A styled `<input type="range">` for choosing a value from a range.
  *
- * Server-safe: no state is held here. Use it uncontrolled (`defaultValue`) or
- * drive it with `value` + `onChange`.
+ * Label it by composing {@link Field}; the control reads its id,
+ * description and error wiring from the surrounding `Field.Root`. No
+ * state is held here: uncontrolled via `defaultValue`, or controlled
+ * with `value` + `onChange`.
  */
-export const Slider = forwardRef<HTMLInputElement, SliderProps>(function Slider(
-  {
-    label,
-    size = "md",
-    min = 0,
-    max = 100,
-    step = 1,
-    disabled,
-    id,
-    className,
-    wrapperClassName,
-    ...rest
-  },
+export function Slider({
+  min = 0,
+  max = 100,
+  step = 1,
+  id,
+  className,
+  disabled,
+  "aria-invalid": ariaInvalid,
+  "aria-describedby": ariaDescribedby,
   ref,
-) {
-  const autoId = useId();
-  const inputId = id ?? autoId;
+  ...rest
+}: SliderProps) {
+  const field = useFieldControlProps();
 
   return (
-    <div
-      className={cx("fui-Slider-wrapper", wrapperClassName)}
-      data-size={size}
+    <input
+      ref={ref}
+      id={id ?? field.id}
+      type="range"
+      className={cx("fui-Slider-input", className)}
       data-disabled={disabled || undefined}
-    >
-      {label && (
-        <label className={"fui-Slider-label"} htmlFor={inputId}>
-          {label}
-        </label>
-      )}
-      <input
-        ref={ref}
-        id={inputId}
-        type="range"
-        className={cx("fui-Slider-input", className)}
-        min={min}
-        max={max}
-        step={step}
-        disabled={disabled}
-        {...rest}
-      />
-    </div>
+      min={min}
+      max={max}
+      step={step}
+      disabled={disabled}
+      // No useUserInvalid here: a range input can never be :user-invalid —
+      // every thumb position is a valid value — so only a Field error can
+      // mark it invalid.
+      aria-invalid={ariaInvalid ?? field["aria-invalid"]}
+      aria-describedby={ariaDescribedby ?? field["aria-describedby"]}
+      {...rest}
+    />
   );
-});
+}

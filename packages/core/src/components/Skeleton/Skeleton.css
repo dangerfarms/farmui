@@ -1,52 +1,74 @@
-@layer farmui.components {
-  .fui-Skeleton-root {
+@scope (.fui-Skeleton-root) {
+  :scope {
     position: relative;
-    display: block;
+    display: block flow;
     inline-size: var(--_w, 100%);
-    block-size: var(--_h, 1rem);
-    border-radius: var(--_radius, var(--fui-radius-md));
-    overflow: hidden;
-    /* Hide any real children placed inside while the skeleton is visible. */
-    color: transparent;
+    block-size: var(--_h, 1lh);
+
+    /* Public shape hook — consumers may set it per instance or region. */
+    border-radius: var(--fui-skeleton-radius, var(--fui-radius-md));
+    overflow: clip;
     user-select: none;
     pointer-events: none;
+
+    /* Bare text children have no box for the child rule below to hide. */
+    color: transparent;
   }
 
-  /* Base tint + moving shimmer highlight */
-  .fui-Skeleton-root::after {
+  /* Wrapped children size the box: measured, not declared. */
+  :scope:has(> *) {
+    inline-size: var(--_w, fit-content);
+    block-size: var(--_h, auto);
+  }
+
+  /* Element children keep their layout but paint nothing — visibility
+     also hides backgrounds, which a transparent color cannot. */
+  :scope > * {
+    visibility: hidden;
+  }
+
+  /* After the :has() rule so the circle wins at equal specificity.
+     2.5rem matches Avatar's md, the shape this exists to stand in for. */
+  :scope[data-circle] {
+    inline-size: var(--_size, 2.5rem);
+    block-size: auto;
+    aspect-ratio: 1;
+    border-radius: var(--fui-radius-full);
+  }
+
+  /* The tint is a weak mix of the text colour: text is guaranteed to
+     contrast with any surface, so the skeleton stays visible on cards,
+     stages and the page in both schemes. The gradient is static by
+     default; the moving shimmer is opt-in motion (below), so
+     reduced-motion users need no override. */
+  :scope::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(
+    background-color: color-mix(in oklab, var(--fui-text) 8%, transparent);
+    background-image: linear-gradient(
       90deg,
-      color-mix(in oklch, var(--fui-bg-subtle) 100%, transparent) 0%,
-      color-mix(in oklch, var(--fui-surface) 60%, var(--fui-bg-subtle)) 50%,
-      color-mix(in oklch, var(--fui-bg-subtle) 100%, transparent) 100%
+      transparent 0%,
+      color-mix(in oklab, var(--fui-text) 7%, transparent) 50%,
+      transparent 100%
     );
-    background-color: var(--fui-bg-subtle);
-    background-size: 200% 100%;
-    animation: fui-Skeleton-skeleton-shimmer 1.4s ease-in-out infinite;
   }
 
-  @keyframes fui-Skeleton-skeleton-shimmer {
-    from {
-      background-position: 200% 0;
-    }
-    to {
-      background-position: -200% 0;
+  @media (prefers-reduced-motion: no-preference) {
+    :scope::after {
+      background-size: 200% 100%;
+      animation: fui-Skeleton-shimmer 1.4s ease-in-out infinite;
     }
   }
+}
 
-  @media (prefers-reduced-motion: reduce) {
-    .fui-Skeleton-root::after {
-      animation: fui-Skeleton-skeleton-pulse 1.6s ease-in-out infinite;
-      background: var(--fui-bg-subtle);
-    }
+/* Keyframes are not scope-able; they stay at the top level. */
+@keyframes fui-Skeleton-shimmer {
+  from {
+    background-position: 200% 0;
   }
 
-  @keyframes fui-Skeleton-skeleton-pulse {
-    50% {
-      opacity: 0.55;
-    }
+  to {
+    background-position: -200% 0;
   }
 }

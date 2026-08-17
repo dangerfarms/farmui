@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Avatar, Badge, Button, Input, Switch } from "@farmui/core";
+import type { CSSProperties } from "react";
+import { Avatar, Badge, Button, Field, Input, Switch } from "@farmui/core";
 import classes from "./home.module.css";
 
 export function InstallSnippet() {
@@ -39,36 +40,48 @@ export function HeroShowcase() {
           <div className={classes.showcaseName}>Jamie Rivera</div>
           <div className={classes.showcaseHandle}>Product designer</div>
         </div>
-        <div style={{ marginInlineStart: "auto" }}>
-          <Badge variant="light">Pro</Badge>
+        <div
+          style={
+            {
+              marginInlineStart: "auto",
+              "--fui-context": "primary",
+            } as CSSProperties
+          }
+        >
+          <Badge>Pro</Badge>
         </div>
       </div>
 
-      <Input
-        label="Work email"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
+      <Field.Root>
+        <Field.Label>Work email</Field.Label>
+        <Input value={name} onChange={(e) => setName(e.target.value)} />
+      </Field.Root>
 
       <div className={classes.showcaseRow}>
-        <span className={classes.showcaseLabel}>Email notifications</span>
         <Switch
+          label="Email notifications"
+          labelPosition="start"
+          wrapperClassName={classes.showcaseSwitch}
           checked={notify}
           onChange={(e) => setNotify(e.currentTarget.checked)}
         />
       </div>
       <div className={classes.showcaseRow}>
-        <span className={classes.showcaseLabel}>Plan</span>
-        <Badge variant="outline" color="primary">
-          {notify ? "Notifications on" : "Muted"}
-        </Badge>
+        <span className={classes.showcaseLabel}>Notifications</span>
+        <span
+          style={
+            {
+              "--fui-context": notify ? "primary" : undefined,
+            } as CSSProperties
+          }
+        >
+          <Badge dot>{notify ? "Notifications on" : "Muted"}</Badge>
+        </span>
       </div>
 
-      <div
-        style={{ display: "flex", gap: "0.6rem", marginBlockStart: "0.25rem" }}
-      >
-        <Button fullWidth>Save changes</Button>
-        <Button variant="light">Cancel</Button>
+      <div style={{ display: "flex", gap: "0.6rem", marginBlockStart: "0.25rem" }}>
+        <Button>Save changes</Button>
+        <Button>Cancel</Button>
       </div>
     </div>
   );

@@ -1,56 +1,42 @@
 "use client";
 
-import { Button, Tooltip } from "@farmui/core";
+import { Tooltip } from "@farmui/core";
 
 export function TooltipPositions() {
   return (
     <>
-      <Tooltip label="Above the button" position="top">
-        <Button variant="light">Top</Button>
-      </Tooltip>
-      <Tooltip label="Below the button" position="bottom">
-        <Button variant="light">Bottom</Button>
-      </Tooltip>
-      <Tooltip label="Left of the button" position="left">
-        <Button variant="light">Left</Button>
-      </Tooltip>
-      <Tooltip label="Right of the button" position="right">
-        <Button variant="light">Right</Button>
-      </Tooltip>
+      {(["top", "bottom", "left", "right"] as const).map((position) => (
+        <Tooltip.Root key={position}>
+          <Tooltip.Trigger style={{ textTransform: "capitalize" }}>{position}</Tooltip.Trigger>
+          <Tooltip.Popup position={position}>On the {position}</Tooltip.Popup>
+        </Tooltip.Root>
+      ))}
     </>
   );
 }
 
 export function TooltipArrow() {
   return (
-    <Tooltip label="Saved just now" withArrow>
-      <Button>Hover or focus me</Button>
-    </Tooltip>
+    <Tooltip.Root>
+      <Tooltip.Trigger>Hover or focus me</Tooltip.Trigger>
+      <Tooltip.Popup>
+        Saved just now <Tooltip.Arrow />
+      </Tooltip.Popup>
+    </Tooltip.Root>
   );
 }
 
-export function TooltipOnText() {
+export function TooltipGroup() {
   return (
-    <p style={{ maxInlineSize: "24rem", lineHeight: 1.6 }}>
-      Every component is fully{" "}
-      <Tooltip label="Meets WCAG 2.1 AA out of the box" withArrow>
-        <button
-          type="button"
-          style={{
-            border: "none",
-            background: "transparent",
-            padding: 0,
-            font: "inherit",
-            color: "var(--fui-primary)",
-            textDecoration: "underline dotted",
-            textUnderlineOffset: "2px",
-            cursor: "help",
-          }}
-        >
-          accessible
-        </button>
-      </Tooltip>{" "}
-      right out of the box.
-    </p>
+    <Tooltip.Provider>
+      {["Cut", "Copy", "Paste"].map((label) => (
+        <Tooltip.Root key={label}>
+          <Tooltip.Trigger>{label}</Tooltip.Trigger>
+          <Tooltip.Popup>
+            {label} the selection <Tooltip.Arrow />
+          </Tooltip.Popup>
+        </Tooltip.Root>
+      ))}
+    </Tooltip.Provider>
   );
 }

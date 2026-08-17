@@ -2,3 +2,6 @@ dist
 .next
 .turbo
 pnpm-lock.yaml
+out
+storybook-static
+apps/docs/public/farmui-core.css

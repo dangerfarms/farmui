@@ -1,126 +1,137 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, userEvent, within } from "storybook/test";
-import { useState } from "react";
-import { Button, Modal } from "../../index";
-import type { ModalProps } from "../../index";
-
-/**
- * The Modal is controlled — it has no uncontrolled mode. This wrapper holds the
- * `opened` state and wires a button to open it, so the story is interactive.
- */
-function ModalDemo({
-  title = "Invite a teammate",
-  size,
-  withCloseButton,
-  children,
-}: Partial<ModalProps>) {
-  const [opened, setOpened] = useState(false);
-  return (
-    <>
-      <Button onClick={() => setOpened(true)}>Open modal</Button>
-      <Modal
-        opened={opened}
-        onClose={() => setOpened(false)}
-        title={title}
-        size={size}
-        withCloseButton={withCloseButton}
-      >
-        {children ?? (
-          <>
-            <p style={{ marginTop: 0 }}>
-              Send an invitation and they&apos;ll get access to this workspace.
-            </p>
-            <div
-              style={{ display: "flex", gap: "0.75rem", marginTop: "1.5rem" }}
-            >
-              <Button onClick={() => setOpened(false)}>Send invite</Button>
-              <Button variant="subtle" onClick={() => setOpened(false)}>
-                Cancel
-              </Button>
-            </div>
-          </>
-        )}
-      </Modal>
-    </>
-  );
-}
+import type { CSSProperties } from "react";
+import { expect, userEvent, waitFor, within } from "storybook/test";
+import { Modal } from "../../index";
 
 const meta = {
   title: "Overlays/Modal",
-  component: Modal,
+  component: Modal.Root,
   tags: ["autodocs"],
-  args: {
-    // `opened`/`onClose` are owned by the ModalDemo wrapper's local state; these
-    // satisfy the required props for the type but the render below ignores them.
-    opened: false,
-    onClose: () => {},
-    title: "Invite a teammate",
-    size: "md",
-    withCloseButton: true,
-  },
-  argTypes: {
-    title: { control: "text" },
-    size: { control: "inline-radio", options: ["sm", "md", "lg"] },
-    withCloseButton: { control: "boolean" },
-    opened: { control: false },
-    onClose: { control: false },
-  },
-  render: (args) => (
-    <ModalDemo
-      title={args.title}
-      size={args.size}
-      withCloseButton={args.withCloseButton}
-    />
+  render: () => (
+    <Modal.Root>
+      <Modal.Trigger>Invite a teammate</Modal.Trigger>
+      <Modal.Popup>
+        <Modal.Title>Invite a teammate</Modal.Title>
+        <Modal.Description>
+          They&apos;ll receive an email invitation to join your workspace.
+        </Modal.Description>
+        <div className="fui-cluster">
+          <span style={{ "--fui-context": "primary" } as CSSProperties}>
+            <Modal.Close>Send invite</Modal.Close>
+          </span>
+          <Modal.Close>Cancel</Modal.Close>
+        </div>
+      </Modal.Popup>
+    </Modal.Root>
   ),
-} satisfies Meta<typeof Modal>;
+} satisfies Meta<typeof Modal.Root>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Live playground — click the button to open, then tweak props in Controls. */
+/**
+ * Compose the dialog from parts. The Popup is a native `<dialog>` opened
+ * with `showModal()` — top layer, backdrop, focus containment, Escape and
+ * focus restore all come from the browser.
+ */
 export const Playground: Story = {};
 
-/** Panels come in three widths via the `size` prop. */
+/**
+ * `alert` renders `role="alertdialog"`: no light dismiss (Escape still
+ * closes), initial focus on the least-destructive action via autoFocus.
+ */
+export const AlertDialog: Story = {
+  render: () => (
+    <Modal.Root>
+      <span style={{ "--fui-context": "danger" } as CSSProperties}>
+        <Modal.Trigger>Delete file</Modal.Trigger>
+      </span>
+      <Modal.Popup alert size="sm">
+        <Modal.Title>Delete this file?</Modal.Title>
+        <Modal.Description>This cannot be undone.</Modal.Description>
+        <div className="fui-cluster">
+          <Modal.Close autoFocus>Cancel</Modal.Close>
+          <span style={{ "--fui-context": "danger" } as CSSProperties}>
+            <Modal.Close>Delete</Modal.Close>
+          </span>
+        </div>
+      </Modal.Popup>
+    </Modal.Root>
+  ),
+};
+
+/** Panel widths via the Popup's size prop. */
 export const Sizes: Story = {
   render: () => (
-    <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-      <ModalDemo title="Small dialog" size="sm" />
-      <ModalDemo title="Medium dialog" size="md" />
-      <ModalDemo title="Large dialog" size="lg" />
+    <div className="fui-cluster">
+      {(["sm", "md", "lg"] as const).map((size) => (
+        <Modal.Root key={size}>
+          <Modal.Trigger>Open {size}</Modal.Trigger>
+          <Modal.Popup size={size}>
+            <Modal.Title>A {size} modal</Modal.Title>
+            <Modal.Description>The panel width comes from the size prop.</Modal.Description>
+            <Modal.Close>Close</Modal.Close>
+          </Modal.Popup>
+        </Modal.Root>
+      ))}
     </div>
   ),
 };
 
-/** Hide the header close (×) button; the modal still closes on Escape or overlay click. */
-export const WithoutCloseButton: Story = {
-  render: () => <ModalDemo title="No close button" withCloseButton={false} />,
+/** A header row with an × close button — a composition pattern, not API. */
+export const WithHeaderClose: Story = {
+  render: () => (
+    <Modal.Root>
+      <Modal.Trigger>Open settings</Modal.Trigger>
+      <Modal.Popup>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBlockEnd: "var(--fui-space-sm)",
+          }}
+        >
+          <Modal.Title style={{ margin: 0 }}>Settings</Modal.Title>
+          <Modal.Close aria-label="Close">×</Modal.Close>
+        </div>
+        <Modal.Description>Manage your workspace settings.</Modal.Description>
+      </Modal.Popup>
+    </Modal.Root>
+  ),
+};
+
+/** Statically open (defaultOpen) — for visual/a11y review of the open state. */
+export const OpenByDefault: Story = {
+  render: () => (
+    <Modal.Root defaultOpen>
+      <Modal.Trigger>Invite a teammate</Modal.Trigger>
+      <Modal.Popup>
+        <Modal.Title>Invite a teammate</Modal.Title>
+        <Modal.Description>Should sit centred over a dimmed backdrop.</Modal.Description>
+        <Modal.Close>Close</Modal.Close>
+      </Modal.Popup>
+    </Modal.Root>
+  ),
 };
 
 /**
- * Interaction test: clicking the trigger opens the dialog (portalled to
- * `document.body`), and the close button dismisses it. Because the Modal
- * renders through a portal, we query `document.body`, not the story canvas.
+ * Interaction test — real-browser coverage for the native behaviors jsdom
+ * can't exercise: Escape closing and focus restoration to the trigger.
  */
-export const OpensAndCloses: Story = {
+export const OpensAndDismisses: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const body = within(document.body);
+    const trigger = canvas.getByRole("button", { name: /invite a teammate/i });
 
-    // No dialog before opening.
-    await expect(body.queryByRole("dialog")).toBeNull();
+    await userEvent.click(trigger);
+    const dialog = document.querySelector("dialog")!;
+    await expect(dialog.open).toBe(true);
+    await expect(trigger).toHaveAttribute("data-popup-open", "true");
 
-    // Open it.
-    await userEvent.click(canvas.getByRole("button", { name: /open modal/i }));
-
-    const dialog = await body.findByRole("dialog");
-    await expect(dialog).toBeInTheDocument();
-    await expect(dialog).toHaveAttribute("aria-modal", "true");
-    await expect(
-      body.getByRole("heading", { name: /invite a teammate/i }),
-    ).toBeInTheDocument();
-
-    // Close via the header × button.
-    await userEvent.click(body.getByRole("button", { name: /close/i }));
-    await expect(body.queryByRole("dialog")).toBeNull();
+    await userEvent.keyboard("{Escape}");
+    await waitFor(() => expect(dialog.open).toBe(false));
+    await waitFor(() => expect(trigger).not.toHaveAttribute("data-popup-open"));
+    await expect(trigger).toHaveFocus();
   },
 };

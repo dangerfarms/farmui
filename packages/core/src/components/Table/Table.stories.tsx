@@ -76,7 +76,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Live playground — tweak props in the Controls panel. */
 export const Playground: Story = {};
 
 export const Striped: Story = { args: { striped: true } };

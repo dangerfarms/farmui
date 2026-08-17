@@ -1,10 +1,9 @@
 import type { Preview, Decorator } from "@storybook/react-vite";
 import { useEffect } from "react";
 
-// FarmUI's tokens/reset + every component's static CSS (the classes the
-// components reference live in per-component .css files).
+// The stylesheet entry orchestrates everything: layer order, tokens, reset,
+// element defaults, and layered imports of every component's CSS.
 import "../src/styles.css";
-import.meta.glob("../src/components/**/*.css", { eager: true });
 
 const withTheme: Decorator = (Story, ctx) => {
   const theme = (ctx.globals.theme as string) ?? "light";

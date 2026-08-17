@@ -1,12 +1,11 @@
-@layer farmui.components {
-  .fui-Breadcrumbs-root {
-    font-family: var(--fui-font);
+@scope (.fui-Breadcrumbs-root) {
+  :scope {
     font-size: var(--fui-text-sm);
     color: var(--fui-text-muted);
   }
 
   .fui-Breadcrumbs-list {
-    display: flex;
+    display: block flex;
     flex-wrap: wrap;
     align-items: center;
     gap: var(--fui-space-sm);
@@ -14,39 +13,41 @@
     padding: 0;
     list-style: none;
   }
+}
 
-  .fui-Breadcrumbs-item {
-    display: inline-flex;
+/*
+ * Items are scoped to their own root: an <li class="fui-Breadcrumbs-item"> is
+ * rendered by the standalone Item component, without the root class on it.
+ */
+@scope (.fui-Breadcrumbs-item) {
+  :scope {
+    display: inline flex;
     align-items: center;
     min-inline-size: 0;
   }
 
-  /* Links inside a breadcrumb */
-  .fui-Breadcrumbs-item :where(a) {
+  :scope:not(:first-child)::before {
+    content: var(--_separator, "/");
+    margin-inline-end: var(--fui-space-sm);
+    color: var(--fui-text-dim);
+    user-select: none;
+  }
+
+  :scope :where(a) {
     color: var(--fui-text-muted);
     text-decoration: none;
     border-radius: var(--fui-radius-sm);
     padding-inline: 2px;
-    transition: color var(--fui-transition);
+    transition: color var(--fui-duration-md) var(--fui-ease);
   }
-  .fui-Breadcrumbs-item :where(a):hover {
+
+  :scope :where(a):hover {
     color: var(--fui-primary);
     text-decoration: underline;
   }
-  .fui-Breadcrumbs-item :where(a):focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 3px var(--fui-primary-ring);
-  }
 
-  .fui-Breadcrumbs-item[data-current] {
+  :scope[data-current] {
     color: var(--fui-text);
     font-weight: 600;
-  }
-
-  .fui-Breadcrumbs-separator {
-    display: inline-flex;
-    align-items: center;
-    color: var(--fui-text-dim);
-    user-select: none;
   }
 }

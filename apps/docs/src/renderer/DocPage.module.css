@@ -1,0 +1,131 @@
+.page {
+  max-inline-size: 48rem;
+}
+
+.header {
+  padding-block-end: 1.5rem;
+  margin-block-end: 2rem;
+  border-block-end: 1px solid var(--fui-border);
+}
+
+.category {
+  font-size: var(--fui-text-sm);
+  font-weight: 600;
+  color: var(--fui-primary);
+}
+
+.title {
+  text-wrap: balance;
+  font-size: clamp(1.9rem, 1.729rem + 0.8571vi, 2.5rem);
+  font-weight: 800;
+  margin-block: 0.25rem;
+}
+
+.lead {
+  text-wrap: pretty;
+  font-size: var(--fui-text-lg);
+  color: var(--fui-text-muted);
+}
+
+.section {
+  margin-block-end: 3rem;
+  scroll-margin-block-start: 5rem;
+}
+
+.h2 {
+  font-size: var(--fui-text-xl);
+  font-weight: 700;
+  margin-block-end: 1rem;
+  scroll-margin-block-start: 5rem;
+}
+
+.h3 {
+  font-size: var(--fui-text-md);
+  font-weight: 650;
+  margin-block-end: 0.35rem;
+}
+
+.usageNote {
+  margin-block-end: 1.5rem;
+  padding: 0.75rem 1rem;
+  font-size: var(--fui-text-sm);
+  color: var(--fui-text-muted);
+  background: var(--fui-primary-soft);
+  border: 1px solid
+    color-mix(in oklab, var(--fui-primary), var(--fui-border) 55%);
+  border-radius: var(--fui-radius-md);
+}
+
+.guidance {
+  display: block grid;
+  gap: 1.5rem;
+}
+
+@media (width >= 40rem) {
+  .guidanceCols {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.guidanceCard {
+  padding: 1rem 1.25rem;
+  background: var(--fui-surface);
+  border: 1px solid var(--fui-border);
+  border-radius: var(--fui-radius-lg);
+}
+
+.guidanceHeading {
+  display: block flex;
+  gap: 0.4rem;
+  align-items: center;
+  margin-block-end: 0.6rem;
+  font-size: var(--fui-text-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.guidanceYes {
+  color: var(--fui-primary);
+}
+
+.guidanceNo {
+  color: var(--fui-danger);
+}
+
+.guidanceList {
+  display: block flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+  padding-inline-start: 1.1rem;
+  font-size: var(--fui-text-sm);
+  color: var(--fui-text-muted);
+}
+
+.a11yList {
+  display: block flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 0;
+  padding-inline-start: 1.1rem;
+  font-size: var(--fui-text-sm);
+  color: var(--fui-text);
+}
+
+.demos {
+  display: block flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.demo {
+  scroll-margin-block-start: 5rem;
+}
+
+.demoDesc {
+  text-wrap: pretty;
+  color: var(--fui-text-muted);
+  font-size: var(--fui-text-sm);
+  margin-block-end: 0.75rem;
+}

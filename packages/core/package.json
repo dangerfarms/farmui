@@ -2,36 +2,36 @@
   "name": "@farmui/core",
   "version": "1.0.0",
   "description": "Beautiful React components, fast & accessible — zero-runtime, built on native modern CSS.",
+  "keywords": [
+    "a11y",
+    "accessible",
+    "component-library",
+    "components",
+    "css",
+    "dark-mode",
+    "design-system",
+    "modern-css",
+    "react",
+    "ui",
+    "zero-runtime"
+  ],
+  "homepage": "https://farmui.dev",
+  "bugs": {
+    "url": "https://github.com/dangerfarms/farmui/issues"
+  },
   "license": "MIT",
   "author": "Danger Farms",
-  "homepage": "https://farmui.dev",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dangerfarms/farmui.git",
     "directory": "packages/core"
   },
-  "bugs": {
-    "url": "https://github.com/dangerfarms/farmui/issues"
-  },
-  "keywords": [
-    "react",
-    "components",
-    "component-library",
-    "ui",
-    "design-system",
-    "css",
-    "zero-runtime",
-    "accessible",
-    "a11y",
-    "modern-css",
-    "dark-mode"
+  "files": [
+    "dist"
   ],
   "type": "module",
   "sideEffects": [
     "**/*.css"
-  ],
-  "files": [
-    "dist"
   ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -51,15 +51,15 @@
     "build": "tsup && node scripts/build-css.mjs",
     "dev": "tsup --watch",
     "check-types": "tsc --noEmit",
+    "lint": "oxlint --config ../../.oxlintrc.json src && stylelint \"src/**/*.css\"",
+    "lint:css": "stylelint \"src/**/*.css\"",
+    "lint:fix": "oxlint --config ../../.oxlintrc.json --fix src && stylelint \"src/**/*.css\" --fix",
     "clean": "rm -rf dist",
     "test": "vitest run",
     "test:watch": "vitest",
     "storybook": "storybook dev -p 6006 --no-open",
-    "build-storybook": "storybook build"
-  },
-  "peerDependencies": {
-    "react": ">=18",
-    "react-dom": ">=18"
+    "build-storybook": "storybook build",
+    "audit:contrast": "node scripts/contrast-audit.mjs"
   },
   "devDependencies": {
     "@storybook/addon-a11y": "^10.4.2",
@@ -72,6 +72,7 @@
     "@types/react-dom": "19.2.2",
     "@vitejs/plugin-react": "^4.3.4",
     "jsdom": "^25.0.1",
+    "postcss": "^8.5.26",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "storybook": "^10.4.2",
@@ -80,5 +81,9 @@
     "vite": "^6.0.0",
     "vitest": "^3.0.0",
     "vitest-axe": "^0.1.0"
+  },
+  "peerDependencies": {
+    "react": ">=19",
+    "react-dom": ">=19"
   }
 }

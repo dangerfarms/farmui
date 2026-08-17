@@ -1,114 +1,359 @@
 "use client";
 
-import { useEffect, useId, useRef } from "react";
-import { createPortal } from "react-dom";
-import type { ReactNode } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import type {
+  RefObject,
+  ButtonHTMLAttributes,
+  DialogHTMLAttributes,
+  HTMLAttributes,
+  MouseEvent as ReactMouseEvent,
+  ReactNode,
+  Ref,
+} from "react";
 import { cx } from "../../utils";
+import { usePresence } from "../../use-presence";
+import { mergeProps, renderWithProps } from "../../render";
+import type { RenderProp } from "../../render";
 
-export interface ModalProps {
-  /** Whether the modal is visible. */
-  opened: boolean;
-  /** Called when the user requests to close (overlay click, Escape, close button). */
-  onClose: () => void;
-  /** Heading rendered in the modal header. */
-  title?: ReactNode;
-  /** Panel width. @default "md" */
-  size?: "sm" | "md" | "lg";
-  /** Render the header close (×) button. @default true */
-  withCloseButton?: boolean;
-  /** Extra class for the panel. */
-  className?: string;
-  /** Body content. */
+import { Button } from "../Button/Button";
+
+/**
+ * A blocking dialog for must-complete tasks, composed from parts.
+ *
+ * The Popup renders a native `<dialog>` opened with `showModal()`, so the
+ * top layer, `::backdrop`, focus containment, Escape handling and
+ * focus-restore-to-opener all come from the browser. Light dismiss uses the
+ * `closedby` attribute where supported, with a small coordinate-check
+ * fallback elsewhere.
+ *
+ * ```tsx
+ * <Modal.Root>
+ *   <Modal.Trigger>Invite teammate</Modal.Trigger>
+ *   <Modal.Popup>
+ *     <Modal.Title>Invite a teammate</Modal.Title>
+ *     <Modal.Description>They'll get an email invitation.</Modal.Description>
+ *     <Modal.Close>Cancel</Modal.Close>
+ *   </Modal.Popup>
+ * </Modal.Root>
+ * ```
+ */
+
+interface ModalContextValue {
+  open: boolean;
+  /** True once the Invoker Commands API is confirmed (commandfor/command). */
+  invokers: boolean;
+  setOpen: (open: boolean) => void;
+  /** The Trigger's element (native dialog close restores focus to it). */
+  triggerRef: RefObject<HTMLButtonElement | null>;
+  dialogId: string;
+  titleId: string;
+  descriptionId: string;
+  hasTitle: boolean;
+  hasDescription: boolean;
+  registerTitle: () => () => void;
+  registerDescription: () => () => void;
+}
+
+const ModalContext = createContext<ModalContextValue | null>(null);
+
+function useModalContext(part: string): ModalContextValue {
+  const ctx = useContext(ModalContext);
+  if (!ctx) {
+    throw new Error(`${part} must be rendered inside <Modal.Root>.`);
+  }
+  return ctx;
+}
+
+export interface ModalRootProps {
+  /** Controlled open state. */
+  open?: boolean;
+  /** Initial open state when uncontrolled. */
+  defaultOpen?: boolean;
+  /** Called whenever the open state should change (either path). */
+  onOpenChange?: (open: boolean) => void;
   children?: ReactNode;
 }
 
-/**
- * Modal — a controlled, focus-trapping dialog rendered in a portal.
- *
- * Closes on overlay click and Escape, locks body scroll while open, and
- * moves focus into the panel so keyboard users land inside the dialog.
- */
-export function Modal({
-  opened,
-  onClose,
-  title,
-  size = "md",
-  withCloseButton = true,
-  className,
+function ModalRoot({
+  open: openProp,
+  defaultOpen = false,
+  onOpenChange,
   children,
-}: ModalProps) {
-  const panelRef = useRef<HTMLDivElement>(null);
-  const titleId = useId();
+}: ModalRootProps) {
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);
+  const open = openProp ?? uncontrolledOpen;
+  const [hasTitle, registerTitle] = usePresence();
+  // Feature-probe the element prototype, never window/document.
+  const [invokers, setInvokers] = useState(false);
+  useEffect(() => setInvokers("commandForElement" in HTMLButtonElement.prototype), []);
+  const [hasDescription, registerDescription] = usePresence();
 
-  // Escape to close.
+  const autoId = useId();
+  const dialogId = `${autoId}-modal`;
+
+  const openRef = useRef(open);
+  openRef.current = open;
+  const controlledRef = useRef(false);
+  controlledRef.current = openProp !== undefined;
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const setOpen = useCallback(
+    (next: boolean) => {
+      if (next === openRef.current) return;
+      // In controlled mode the parent owns the state; we only propose.
+      if (!controlledRef.current) setUncontrolledOpen(next);
+      onOpenChange?.(next);
+    },
+    [onOpenChange],
+  );
+
+  const value = useMemo<ModalContextValue>(
+    () => ({
+      open,
+      setOpen,
+      invokers,
+      triggerRef,
+      dialogId,
+      titleId: `${dialogId}-title`,
+      descriptionId: `${dialogId}-description`,
+      hasTitle,
+      hasDescription,
+      registerTitle,
+      registerDescription,
+    }),
+    [
+      open,
+      setOpen,
+      invokers,
+      dialogId,
+      hasTitle,
+      hasDescription,
+      registerTitle,
+      registerDescription,
+    ],
+  );
+
+  return <ModalContext value={value}>{children}</ModalContext>;
+}
+
+/** Wiring the Trigger attaches to whatever it renders. */
+export interface ModalTriggerRenderProps {
+  type: "button";
+  /** Declarative invoker wiring (Invoker Commands API) where supported. */
+  commandfor: string | undefined;
+  command: "show-modal" | undefined;
+  "aria-haspopup": "dialog";
+  /** Styling hook — present while the modal is open. */
+  "data-popup-open": "true" | undefined;
+  onClick: (e: ReactMouseEvent<Element>) => void;
+  ref: Ref<HTMLButtonElement>;
+}
+
+export interface ModalTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  /**
+   * Substitute your own element as the trigger (`render={<a href="…" />}`)
+   * or pass a function receiving the wiring props. Without it, the Trigger
+   * renders a FarmUI Button.
+   */
+  render?: RenderProp<ModalTriggerRenderProps>;
+}
+
+function ModalTrigger({ render, children, ...rest }: ModalTriggerProps) {
+  const ctx = useModalContext("Modal.Trigger");
+
+  const triggerProps: ModalTriggerRenderProps = {
+    ref: ctx.triggerRef,
+    type: "button",
+    // Enhanced: the browser owns open — a server-rendered trigger works
+    // before (and without) hydration. The dialog's toggle event syncs state.
+    commandfor: ctx.invokers ? ctx.dialogId : undefined,
+    command: ctx.invokers ? "show-modal" : undefined,
+    "aria-haspopup": "dialog",
+    "data-popup-open": ctx.open ? "true" : undefined,
+    onClick: () => {
+      if (!ctx.invokers) ctx.setOpen(true);
+    },
+  };
+
+  return render ? (
+    <>{renderWithProps(render, mergeProps(triggerProps, { children, ...rest }))}</>
+  ) : (
+    <>{renderWithProps(<Button {...rest}>{children}</Button>, triggerProps)}</>
+  );
+}
+
+export interface ModalPopupProps extends Omit<DialogHTMLAttributes<HTMLDialogElement>, "open"> {
+  /** Panel width. @default "md" */
+  size?: "sm" | "md" | "lg";
+  /**
+   * Renders an alert dialog (`role="alertdialog"`): a confirmation that
+   * interrupts the user and cannot be light-dismissed — clicking the
+   * backdrop does nothing, only Escape or an explicit choice closes it.
+   * Pair with a Title and Description, and put `autoFocus` on the
+   * least-destructive action so it is the default answer.
+   */
+  alert?: boolean;
+}
+
+function ModalPopup({ size = "md", alert = false, className, children, ...rest }: ModalPopupProps) {
+  const ctx = useModalContext("Modal.Popup");
+  const { open, setOpen } = ctx;
+  const ref = useRef<HTMLDialogElement>(null);
+
+  // Reconcile React state with the native dialog. No dependency array — a
+  // controlled parent may reject a close reported by the `close` event, and
+  // only an every-render reconcile converges the DOM back.
   useEffect(() => {
-    if (!opened) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+    const el = ref.current;
+    if (!el) return;
+    if (open && !el.open) el.showModal();
+    else if (!open && el.open) el.close();
+  });
+
+  // Native closes (Escape, closedby light dismiss, form method="dialog")
+  // flow back into state via the `close` event; a native invoker open
+  // (command="show-modal") flows in via `toggle`.
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const onClose = () => setOpen(false);
+    const onToggle = (e: Event) => {
+      if ((e as ToggleEvent).newState === "open") setOpen(true);
     };
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [opened, onClose]);
+    el.addEventListener("close", onClose);
+    el.addEventListener("toggle", onToggle);
+    return () => {
+      el.removeEventListener("close", onClose);
+      el.removeEventListener("toggle", onToggle);
+    };
+  }, [setOpen]);
 
-  // Lock body scroll while open.
+  // Light-dismiss fallback for browsers without `closedby` (Safari): a click
+  // whose target is the dialog but whose coordinates fall outside its content
+  // rect landed on the backdrop. Alert dialogs never light-dismiss.
   useEffect(() => {
-    if (!opened) return;
+    const el = ref.current;
+    if (!el || alert || "closedBy" in HTMLDialogElement.prototype) return;
+    const onClick = (e: MouseEvent) => {
+      if (e.target !== el) return;
+      const rect = el.getBoundingClientRect();
+      const inside =
+        rect.top <= e.clientY &&
+        e.clientY <= rect.bottom &&
+        rect.left <= e.clientX &&
+        e.clientX <= rect.right;
+      if (!inside) el.close();
+    };
+    el.addEventListener("click", onClick);
+    return () => el.removeEventListener("click", onClick);
+  }, [alert]);
+
+  // Lock body scroll while open (showModal doesn't; the CSS-only
+  // `body:has(dialog:modal)` route would restyle the host page).
+  useEffect(() => {
+    if (!open) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = prev;
     };
-  }, [opened]);
+  }, [open]);
 
-  // Move focus into the panel on open.
-  useEffect(() => {
-    if (opened) panelRef.current?.focus();
-  }, [opened]);
-
-  if (!opened || typeof document === "undefined") return null;
-
-  return createPortal(
-    <div
-      className={"fui-Modal-overlay"}
-      data-open
-      onMouseDown={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
+  return (
+    // rest cannot override what follows: the dialog wiring (id, open
+    // reconciliation, closedby) must win.
+    <dialog
+      {...rest}
+      ref={ref}
+      id={ctx.dialogId}
+      // Missing from React's typings; lowercase passes through as an attribute.
+      // "closerequest" = Escape closes, backdrop clicks don't — the native
+      // spelling of an alert dialog's dismissal contract.
+      {...({ closedby: alert ? "closerequest" : "any" } as object)}
+      role={alert ? "alertdialog" : undefined}
+      aria-labelledby={ctx.hasTitle ? ctx.titleId : undefined}
+      aria-describedby={ctx.hasDescription ? ctx.descriptionId : undefined}
+      className={cx("fui-Modal-popup", className)}
+      data-size={size}
+      data-open={open || undefined}
     >
-      <div
-        ref={panelRef}
-        className={cx("fui-Modal-panel", className)}
-        data-size={size}
-        data-open
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={title ? titleId : undefined}
-        tabIndex={-1}
-      >
-        {(title || withCloseButton) && (
-          <header className={"fui-Modal-header"}>
-            {title ? (
-              <h2 id={titleId} className={"fui-Modal-title"}>
-                {title}
-              </h2>
-            ) : (
-              <span />
-            )}
-            {withCloseButton && (
-              <button
-                type="button"
-                className={"fui-Modal-close"}
-                onClick={onClose}
-                aria-label="Close"
-              >
-                <span aria-hidden>×</span>
-              </button>
-            )}
-          </header>
-        )}
-        <div className={"fui-Modal-body"}>{children}</div>
-      </div>
-    </div>,
-    document.body,
+      {children}
+    </dialog>
   );
 }
+
+export interface ModalTitleProps extends HTMLAttributes<HTMLHeadingElement> {}
+
+function ModalTitle({ className, children, ...rest }: ModalTitleProps) {
+  const ctx = useModalContext("Modal.Title");
+  const { registerTitle } = ctx;
+  useEffect(() => registerTitle(), [registerTitle]);
+  return (
+    <h2 className={cx("fui-Modal-title", className)} id={ctx.titleId} {...rest}>
+      {children}
+    </h2>
+  );
+}
+
+export interface ModalDescriptionProps extends HTMLAttributes<HTMLParagraphElement> {}
+
+function ModalDescription({ className, children, ...rest }: ModalDescriptionProps) {
+  const ctx = useModalContext("Modal.Description");
+  const { registerDescription } = ctx;
+  useEffect(() => registerDescription(), [registerDescription]);
+  return (
+    <p className={cx("fui-Modal-description", className)} id={ctx.descriptionId} {...rest}>
+      {children}
+    </p>
+  );
+}
+
+/** Wiring the Close part attaches to whatever it renders. */
+export interface ModalCloseRenderProps {
+  type: "button";
+  /** Declarative invoker wiring (Invoker Commands API) where supported. */
+  commandfor: string | undefined;
+  command: "close" | undefined;
+  onClick: (e: ReactMouseEvent<Element>) => void;
+}
+
+export interface ModalCloseProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Substitute your own element; defaults to a FarmUI Button. */
+  render?: RenderProp<ModalCloseRenderProps>;
+}
+
+function ModalClose({ render, children, ...rest }: ModalCloseProps) {
+  const ctx = useModalContext("Modal.Close");
+  const closeProps: ModalCloseRenderProps = {
+    type: "button",
+    commandfor: ctx.invokers ? ctx.dialogId : undefined,
+    command: ctx.invokers ? "close" : undefined,
+    onClick: () => {
+      // Enhanced path: command="close" closes natively; the dialog's close
+      // event syncs state (same flow as Escape/light dismiss).
+      if (!ctx.invokers) ctx.setOpen(false);
+    },
+  };
+  return render ? (
+    <>{renderWithProps(render, mergeProps(closeProps, { children, ...rest }))}</>
+  ) : (
+    <>{renderWithProps(<Button {...rest}>{children}</Button>, closeProps)}</>
+  );
+}
+
+export const Modal = {
+  Root: ModalRoot,
+  Trigger: ModalTrigger,
+  Popup: ModalPopup,
+  Title: ModalTitle,
+  Description: ModalDescription,
+  Close: ModalClose,
+};

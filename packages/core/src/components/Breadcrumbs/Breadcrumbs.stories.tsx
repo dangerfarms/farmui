@@ -3,7 +3,7 @@ import { Breadcrumbs } from "../../index";
 
 const meta = {
   title: "Navigation/Breadcrumbs",
-  component: Breadcrumbs,
+  component: Breadcrumbs.Root,
   tags: ["autodocs"],
   args: {
     separator: "/",
@@ -12,22 +12,21 @@ const meta = {
     separator: { control: "text" },
   },
   render: (args) => (
-    <Breadcrumbs {...args}>
-      <a href="#root">Home</a>
-      <a href="#crops">Crops</a>
-      <a href="#wheat">Wheat</a>
-      <span>Winter varieties</span>
-    </Breadcrumbs>
+    <Breadcrumbs.Root {...args}>
+      <Breadcrumbs.Item href="#root">Home</Breadcrumbs.Item>
+      <Breadcrumbs.Item href="#crops">Crops</Breadcrumbs.Item>
+      <Breadcrumbs.Item href="#wheat">Wheat</Breadcrumbs.Item>
+      <Breadcrumbs.Item current>Winter varieties</Breadcrumbs.Item>
+    </Breadcrumbs.Root>
   ),
-} satisfies Meta<typeof Breadcrumbs>;
+} satisfies Meta<typeof Breadcrumbs.Root>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Live playground — change the separator in the Controls panel. */
 export const Playground: Story = {};
 
-/** A custom separator node between each item. */
+/** A custom separator glyph, drawn by CSS between items. */
 export const CustomSeparator: Story = {
   args: { separator: "›" },
 };
@@ -35,20 +34,33 @@ export const CustomSeparator: Story = {
 /** A short two-level trail. */
 export const ShortTrail: Story = {
   render: (args) => (
-    <Breadcrumbs {...args}>
-      <a href="#root">Home</a>
-      <span>Dashboard</span>
-    </Breadcrumbs>
+    <Breadcrumbs.Root {...args}>
+      <Breadcrumbs.Item href="#root">Home</Breadcrumbs.Item>
+      <Breadcrumbs.Item current>Dashboard</Breadcrumbs.Item>
+    </Breadcrumbs.Root>
   ),
 };
 
-/** The final item is marked as the current page even when it is a link. */
-export const AllLinks: Story = {
+/** The current page can itself be a link (aria-current stays correct). */
+export const CurrentAsLink: Story = {
   render: (args) => (
-    <Breadcrumbs {...args}>
-      <a href="#root">Home</a>
-      <a href="#fields">Fields</a>
-      <a href="#north">North paddock</a>
-    </Breadcrumbs>
+    <Breadcrumbs.Root {...args}>
+      <Breadcrumbs.Item href="#root">Home</Breadcrumbs.Item>
+      <Breadcrumbs.Item href="#fields">Fields</Breadcrumbs.Item>
+      <Breadcrumbs.Item href="#north" current>
+        North paddock
+      </Breadcrumbs.Item>
+    </Breadcrumbs.Root>
+  ),
+};
+
+/** A truncated path — `current` is explicit, so it needn't be last. */
+export const Truncated: Story = {
+  render: (args) => (
+    <Breadcrumbs.Root {...args}>
+      <Breadcrumbs.Item href="#root">Home</Breadcrumbs.Item>
+      <Breadcrumbs.Item aria-hidden>…</Breadcrumbs.Item>
+      <Breadcrumbs.Item current>Billing</Breadcrumbs.Item>
+    </Breadcrumbs.Root>
   ),
 };

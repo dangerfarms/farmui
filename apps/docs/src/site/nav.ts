@@ -1,17 +1,25 @@
-// Plain navigation index (no JSX) shared by the sidebar and command menu.
-// Kept in sync with src/docs/registry.ts.
+// The component manifest: each component's identity (name, slug, category,
+// description) lives here once, in curated sidebar order. The registry
+// joins page content onto these entries by slug. JSX-free, so the sidebar
+// and command menu can import it without pulling in demo code.
+
+import type { Category } from "@/renderer/types";
 
 export interface NavItem {
   name: string;
   slug: string;
-  category: string;
+  category: Category;
   description: string;
 }
 
 export const GETTING_STARTED: { name: string; href: string }[] = [
   { name: "Introduction", href: "/docs" },
   { name: "Installation", href: "/docs/installation" },
+  { name: "Composition", href: "/docs/composition" },
+  { name: "Contextualism", href: "/docs/contextualism" },
+  { name: "Layout", href: "/docs/layout" },
   { name: "Theming", href: "/docs/theming" },
+  { name: "Accessibility", href: "/docs/accessibility" },
 ];
 
 export const CATEGORY_ORDER = [
@@ -20,12 +28,28 @@ export const CATEGORY_ORDER = [
   "Feedback",
   "Overlays",
   "Navigation",
-  "Layout",
-  "Blocks",
 ] as const;
 
 export const COMPONENTS: NavItem[] = [
   // Inputs
+  {
+    name: "Field",
+    slug: "field",
+    category: "Inputs",
+    description: "Composable form-field primitive.",
+  },
+  {
+    name: "Fieldset",
+    slug: "fieldset",
+    category: "Inputs",
+    description: "Group controls under a semantic label.",
+  },
+  {
+    name: "ErrorSummary",
+    slug: "error-summary",
+    category: "Inputs",
+    description: "List form errors as links to their fields.",
+  },
   {
     name: "Button",
     slug: "button",
@@ -49,6 +73,12 @@ export const COMPONENTS: NavItem[] = [
     slug: "select",
     category: "Inputs",
     description: "Choose one option from a list.",
+  },
+  {
+    name: "DateInput",
+    slug: "date-input",
+    category: "Inputs",
+    description: "Labelled fields for a memorable date.",
   },
   {
     name: "Checkbox",
@@ -100,10 +130,10 @@ export const COMPONENTS: NavItem[] = [
     description: "Display rows and columns of data.",
   },
   {
-    name: "Kbd",
-    slug: "kbd",
+    name: "Separator",
+    slug: "separator",
     category: "Data display",
-    description: "Render a keyboard key.",
+    description: "A rule between groups of content.",
   },
   // Feedback
   {
@@ -130,6 +160,12 @@ export const COMPONENTS: NavItem[] = [
     category: "Feedback",
     description: "Indicate an ongoing process.",
   },
+  {
+    name: "Toast",
+    slug: "toast",
+    category: "Feedback",
+    description: "Transient notifications.",
+  },
   // Overlays
   {
     name: "Tooltip",
@@ -148,6 +184,12 @@ export const COMPONENTS: NavItem[] = [
     slug: "popover",
     category: "Overlays",
     description: "Floating content anchored to a trigger.",
+  },
+  {
+    name: "Menu",
+    slug: "menu",
+    category: "Overlays",
+    description: "A list of actions opened from a trigger.",
   },
   // Navigation
   {
@@ -174,128 +216,6 @@ export const COMPONENTS: NavItem[] = [
     category: "Navigation",
     description: "Navigate between pages of content.",
   },
-  // Layout
-  {
-    name: "Container",
-    slug: "container",
-    category: "Layout",
-    description: "Constrain and center page content.",
-  },
-  {
-    name: "Grid",
-    slug: "grid",
-    category: "Layout",
-    description: "Responsive 12-column layout.",
-  },
-  {
-    name: "SimpleGrid",
-    slug: "simple-grid",
-    category: "Layout",
-    description: "Equal-width, responsive columns.",
-  },
-  {
-    name: "Stack",
-    slug: "stack",
-    category: "Layout",
-    description: "Vertical spacing between elements.",
-  },
-  {
-    name: "Group",
-    slug: "group",
-    category: "Layout",
-    description: "Horizontal spacing between elements.",
-  },
-  {
-    name: "Flex",
-    slug: "flex",
-    category: "Layout",
-    description: "A prop-driven flexbox wrapper.",
-  },
-  {
-    name: "Center",
-    slug: "center",
-    category: "Layout",
-    description: "Center content on both axes.",
-  },
-  {
-    name: "Space",
-    slug: "space",
-    category: "Layout",
-    description: "Add empty space between elements.",
-  },
-  {
-    name: "AspectRatio",
-    slug: "aspect-ratio",
-    category: "Layout",
-    description: "Constrain content to a fixed ratio.",
-  },
-  // Blocks
-  {
-    name: "Hero",
-    slug: "hero",
-    category: "Blocks",
-    description: "Headline section with actions and media.",
-  },
-  {
-    name: "FeatureGrid",
-    slug: "feature-grid",
-    category: "Blocks",
-    description: "A responsive grid of features.",
-  },
-  {
-    name: "BentoGrid",
-    slug: "bento-grid",
-    category: "Blocks",
-    description: "An asymmetric bento card layout.",
-  },
-  {
-    name: "StatsGroup",
-    slug: "stats-group",
-    category: "Blocks",
-    description: "A row of big-number stats.",
-  },
-  {
-    name: "LogoWall",
-    slug: "logo-wall",
-    category: "Blocks",
-    description: "A cloud of partner or customer logos.",
-  },
-  {
-    name: "Testimonials",
-    slug: "testimonials",
-    category: "Blocks",
-    description: "A grid of customer quotes.",
-  },
-  {
-    name: "PricingTable",
-    slug: "pricing-table",
-    category: "Blocks",
-    description: "Pricing tiers with a call-to-action.",
-  },
-  {
-    name: "CTASection",
-    slug: "cta-section",
-    category: "Blocks",
-    description: "A focused call-to-action band.",
-  },
-  {
-    name: "FAQ",
-    slug: "faq",
-    category: "Blocks",
-    description: "Frequently asked questions (accordion).",
-  },
-  {
-    name: "Newsletter",
-    slug: "newsletter",
-    category: "Blocks",
-    description: "An email signup section.",
-  },
-  {
-    name: "Footer",
-    slug: "footer",
-    category: "Blocks",
-    description: "A multi-column site footer.",
-  },
 ];
 
 export function componentsByCategory() {
@@ -304,3 +224,6 @@ export function componentsByCategory() {
     items: COMPONENTS.filter((c) => c.category === category),
   })).filter((g) => g.items.length > 0);
 }
+
+/** The canonical "browse components" destination: the first item in nav order. */
+export const FIRST_COMPONENT_HREF = `/docs/components/${COMPONENTS[0]?.slug ?? ""}`;

@@ -1,25 +1,54 @@
-@layer farmui.components {
-  .fui-Accordion-root {
-    display: flex;
+@scope (.fui-Accordion-root) {
+  :scope {
+    display: block flex;
     flex-direction: column;
     inline-size: 100%;
     border: 1px solid var(--fui-border);
     border-radius: var(--fui-radius-md);
     background: var(--fui-surface);
-    font-family: var(--fui-font);
-    color: var(--fui-text);
-    overflow: hidden;
+    overflow: clip;
+  }
+}
+
+/* Items are scoped to their own root: AccordionItem is exported standalone,
+   so item styles must not depend on the .fui-Accordion-root wrapper. */
+@scope (.fui-Accordion-item) {
+  /* Open/close height animation on the platform's own content slot.
+     interpolate-size is required for the 0 → auto interpolation and is not
+     yet Baseline, so the whole recipe gates on it (elsewhere: today's
+     instant toggle). Declared on the item, never :root — a library must not
+     leak keyword interpolation into the host page. */
+  @supports (interpolate-size: allow-keywords) {
+    :scope {
+      interpolate-size: allow-keywords;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      :scope::details-content {
+        block-size: 0;
+        overflow-block: clip;
+        transition:
+          block-size var(--fui-duration-md) var(--fui-ease),
+          content-visibility var(--fui-duration-md) var(--fui-ease)
+            allow-discrete;
+      }
+
+      :scope[open]::details-content {
+        block-size: auto;
+      }
+    }
   }
 
-  .fui-Accordion-item {
+  :scope {
     border-block-end: 1px solid var(--fui-border);
   }
-  .fui-Accordion-item:last-child {
+
+  :scope:last-child {
     border-block-end: none;
   }
 
   .fui-Accordion-summary {
-    display: flex;
+    display: block flex;
     align-items: center;
     justify-content: space-between;
     gap: var(--fui-space-md);
@@ -31,7 +60,7 @@
     cursor: pointer;
     user-select: none;
     list-style: none;
-    transition: background var(--fui-transition);
+    transition: background var(--fui-duration-md) var(--fui-ease);
   }
 
   .fui-Accordion-summary::-webkit-details-marker {
@@ -42,12 +71,7 @@
     background: var(--fui-surface-hover);
   }
 
-  .fui-Accordion-summary:focus-visible {
-    outline: none;
-    box-shadow: inset 0 0 0 3px var(--fui-primary-ring);
-  }
-
-  .fui-Accordion-item[open] > .fui-Accordion-summary {
+  :scope[open] > .fui-Accordion-summary {
     color: var(--fui-primary);
   }
 
@@ -58,11 +82,12 @@
   .fui-Accordion-chevron {
     flex: none;
     color: var(--fui-text-muted);
-    transition: transform var(--fui-transition);
+    rotate: 0deg;
+    transition: rotate var(--fui-duration-md) var(--fui-ease);
   }
 
-  .fui-Accordion-item[open] > .fui-Accordion-summary .fui-Accordion-chevron {
-    transform: rotate(180deg);
+  :scope[open] > .fui-Accordion-summary .fui-Accordion-chevron {
+    rotate: 180deg;
     color: var(--fui-primary);
   }
 

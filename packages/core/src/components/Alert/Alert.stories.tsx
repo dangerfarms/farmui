@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { CSSProperties } from "react";
 import { Alert } from "../../index";
 
 const meta = {
@@ -8,17 +9,15 @@ const meta = {
   args: {
     title: "Heads up",
     children: "Your changes have been saved to the draft.",
-    color: "info",
-    variant: "light",
   },
-  argTypes: {
-    color: {
-      control: "inline-radio",
-      options: ["info", "success", "warning", "danger"],
-    },
-    variant: {
-      control: "inline-radio",
-      options: ["light", "filled", "outline"],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Neutral by default; the surrounding region sets the status " +
+          "(`--fui-context` on an ancestor region — a wrapper for a " +
+          "single alert), not by props.",
+      },
     },
   },
 } satisfies Meta<typeof Alert>;
@@ -26,51 +25,45 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Live playground — tweak props in the Controls panel. */
-export const Playground: Story = {};
+/** Neutral by default — there is no variant or color prop. */
+export const Default: Story = {};
 
-export const Colors: Story = {
-  render: (args) => (
+/**
+ * Declare `--fui-context` on a region — any ancestor; a one-element region
+ * is a wrapper — and the whole look (tint, border, accent, title) derives
+ * from that status's colour.
+ */
+export const Contexts: Story = {
+  render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-      <Alert {...args} color="info" title="Info">
-        A neutral, informational message.
-      </Alert>
-      <Alert {...args} color="success" title="Success">
-        Your payment went through.
-      </Alert>
-      <Alert {...args} color="warning" title="Warning">
-        Your trial ends in three days.
-      </Alert>
-      <Alert {...args} color="danger" title="Error">
-        We couldn&apos;t reach the server.
-      </Alert>
-    </div>
-  ),
-};
-
-export const Variants: Story = {
-  render: (args) => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-      <Alert {...args} variant="light" title="Light">
-        A soft, tinted background.
-      </Alert>
-      <Alert {...args} variant="filled" title="Filled">
-        A bold, solid background.
-      </Alert>
-      <Alert {...args} variant="outline" title="Outline">
-        A bordered, transparent style.
-      </Alert>
+      <Alert title="Neutral">A plain, unopinionated notice.</Alert>
+      <div style={{ "--fui-context": "info" } as CSSProperties}>
+        <Alert title="Info">A neutral, informational message.</Alert>
+      </div>
+      <div style={{ "--fui-context": "success" } as CSSProperties}>
+        <Alert title="Success">Your payment went through.</Alert>
+      </div>
+      <div style={{ "--fui-context": "warning" } as CSSProperties}>
+        <Alert title="Warning">Your trial ends in three days.</Alert>
+      </div>
+      <div style={{ "--fui-context": "danger" } as CSSProperties}>
+        <Alert title="Error">We couldn&apos;t reach the server.</Alert>
+      </div>
     </div>
   ),
 };
 
 export const WithIcon: Story = {
   args: {
-    color: "success",
     title: "Deployed",
     children: "Your site is live at farmui.dev.",
     icon: <span aria-hidden>✅</span>,
   },
+  render: (args) => (
+    <div style={{ "--fui-context": "success" } as CSSProperties}>
+      <Alert {...args} />
+    </div>
+  ),
 };
 
 export const MessageOnly: Story = {

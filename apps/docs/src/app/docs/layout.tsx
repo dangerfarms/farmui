@@ -1,11 +1,7 @@
 import { Sidebar } from "@/site/Sidebar";
 import classes from "./layout.module.css";
 
-export default function DocsLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function DocsLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className={classes.shell}>
       <aside className={classes.aside}>

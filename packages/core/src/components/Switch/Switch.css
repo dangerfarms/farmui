@@ -1,45 +1,56 @@
-@layer farmui.components {
-  .fui-Switch-wrapper {
-    --_track-w: 2.5rem;
-    --_track-h: 1.375rem;
-    --_gap: 0.1875rem;
-
-    display: inline-flex;
+@scope (.fui-Switch-wrapper) {
+  :scope {
+    display: inline flex;
     align-items: center;
     gap: var(--fui-space-sm);
-    font-family: var(--fui-font);
-    color: var(--fui-text);
     cursor: pointer;
   }
-  .fui-Switch-wrapper[data-size="sm"] {
-    --_track-w: 2rem;
-    --_track-h: 1.125rem;
-    --_gap: 0.15rem;
-  }
-  .fui-Switch-wrapper[data-size="lg"] {
-    --_track-w: 3rem;
-    --_track-h: 1.625rem;
-    --_gap: 0.21875rem;
-  }
-  .fui-Switch-wrapper[data-label-position="start"] {
+
+  :scope[data-label-position="start"] {
     flex-direction: row-reverse;
   }
-  .fui-Switch-wrapper[data-disabled] {
-    cursor: not-allowed;
-    opacity: 0.6;
+
+  /* Inside the labelled wrapper the wrapper does the disabled fade (the bare
+     control's :not guard, in the control scope, stops the two compounding). */
+  :scope[data-disabled] {
+    opacity: var(--fui-disabled-opacity);
+  }
+}
+
+/* Size variables live on the control so the bare SwitchControl (composed
+   inside a Field) sizes itself without the labelled wrapper. */
+@scope (.fui-Switch-control) {
+  :scope {
+    --_track-w: 2.7778em;
+    --_track-h: 1.5278em;
+    --_gap: 0.2083em;
+
+    font-size: var(--fui-text-sm);
+    position: relative;
+    display: inline flex;
+    align-items: center;
+    cursor: pointer;
   }
 
-  /* Visually hide the native input but keep it accessible & focusable. */
+  /* Bare control fades itself; inside the labelled wrapper the wrapper does
+     (the :not guard stops the two from compounding). */
+  :scope[data-disabled]:where(:not(.fui-Switch-wrapper *)) {
+    opacity: var(--fui-disabled-opacity);
+  }
+
+  /* Visually hide the native control but keep it in the a11y tree &
+     focusable. The hit area is at least 24px (WCAG 2.5.8) even when the
+     visible track is smaller — centred, invisible, no layout impact. */
   .fui-Switch-input {
     position: absolute;
-    inline-size: 1px;
-    block-size: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-    border: 0;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    translate: -50% -50%;
+    inline-size: max(100%, 24px);
+    block-size: max(100%, 24px);
+    margin: 0;
+    opacity: 0;
+    cursor: inherit;
   }
 
   .fui-Switch-track {
@@ -51,21 +62,23 @@
     border-radius: var(--fui-radius-full);
     background: var(--fui-border-strong);
     transition:
-      background var(--fui-transition),
-      box-shadow var(--fui-transition);
+      background var(--fui-duration-sm) var(--fui-ease),
+      box-shadow var(--fui-duration-md) var(--fui-ease);
   }
 
   .fui-Switch-thumb {
-    display: block;
+    display: block flow;
     inline-size: calc(var(--_track-h) - 2 * var(--_gap));
     block-size: calc(var(--_track-h) - 2 * var(--_gap));
     border-radius: var(--fui-radius-full);
-    background: var(--fui-primary-contrast);
+    background: var(--fui-on-strong);
     box-shadow: var(--fui-shadow-sm);
-    transition: translate var(--fui-transition);
+    transition: translate var(--fui-duration-md) var(--fui-ease-elastic);
   }
 
-  .fui-Switch-wrapper:hover
+  /* The wrapper ancestor sits outside the scope root; the subject (the
+     track) stays in scope. */
+  :is(.fui-Switch-wrapper, :scope):hover
     .fui-Switch-input:not(:disabled)
     + .fui-Switch-track {
     background: color-mix(
@@ -74,23 +87,77 @@
       var(--fui-primary)
     );
   }
+
   .fui-Switch-input:checked + .fui-Switch-track {
     background: var(--fui-primary);
   }
+
   .fui-Switch-input:checked + .fui-Switch-track .fui-Switch-thumb {
     translate: calc(var(--_track-w) - var(--_track-h)) 0;
   }
-  .fui-Switch-input:focus-visible + .fui-Switch-track {
+
+  /* The ring belongs on the track, not on the invisible hit-area input. */
+  .fui-Switch-input:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px var(--fui-primary-ring);
   }
 
+  .fui-Switch-input:focus-visible + .fui-Switch-track {
+    outline: var(--fui-ring-width) solid var(--fui-ring-color);
+    outline-offset: 2px;
+  }
+
+  /* Invalid is detected from the input's own state, the family selector:
+     ARIA (from a composed Field.Error) or native :user-invalid. */
+  .fui-Switch-input:is([aria-invalid="true"], :user-invalid)
+    + .fui-Switch-track {
+    --fui-ring-color: var(--fui-danger-ring);
+
+    outline: 1px solid var(--fui-danger);
+    outline-offset: 0;
+  }
+
+  /* Forced colors strips backgrounds — without this the switch is invisible.
+     System colours keep the user's palette: ButtonText chrome, Highlight for
+     the on state (thumb position still moves as the second signal). */
+  @media (forced-colors: active) {
+    .fui-Switch-track {
+      border: 1px solid ButtonText;
+    }
+
+    .fui-Switch-thumb {
+      forced-color-adjust: none;
+      background: ButtonText;
+    }
+
+    .fui-Switch-input:checked + .fui-Switch-track {
+      forced-color-adjust: none;
+      background: Highlight;
+      border-color: Highlight;
+    }
+
+    .fui-Switch-input:checked + .fui-Switch-track .fui-Switch-thumb {
+      background: HighlightText;
+    }
+  }
+}
+
+@scope (.fui-Switch-wrapper) {
   .fui-Switch-label {
     font-size: var(--fui-text-sm);
     font-weight: 500;
     line-height: 1.35;
   }
-  .fui-Switch-wrapper[data-size="lg"] .fui-Switch-label {
-    font-size: var(--fui-text-md);
+}
+
+@scope (.fui-Switch-field) {
+  :scope {
+    display: block flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+  }
+
+  .fui-Switch-description {
+    font-size: var(--fui-text-xs);
+    color: var(--fui-text-muted);
   }
 }

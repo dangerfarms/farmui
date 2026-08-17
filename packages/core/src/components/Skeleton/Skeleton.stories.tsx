@@ -7,7 +7,6 @@ const meta = {
   tags: ["autodocs"],
   args: {
     width: "100%",
-    height: "1rem",
     circle: false,
     visible: true,
   },
@@ -20,7 +19,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Live playground — tweak props in the Controls panel. */
 export const Playground: Story = {
   render: (args) => (
     <div style={{ maxInlineSize: "20rem" }}>

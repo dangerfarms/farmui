@@ -1,22 +1,29 @@
-@layer farmui.components {
-  .fui-Tabs-root {
-    display: flex;
+@scope (.fui-Tabs-root) {
+  :scope {
+    display: block flex;
     flex-direction: column;
     gap: var(--fui-space-lg);
     inline-size: 100%;
-    font-family: var(--fui-font);
-    color: var(--fui-text);
   }
+}
 
-  .fui-Tabs-list {
-    display: flex;
+/*
+ * The list is scoped to its own root: Tabs.List renders without the
+ * .fui-Tabs-root class on it (and, unlike Tab/Panel, is not context-guarded).
+ */
+@scope (.fui-Tabs-list) {
+  :scope {
+    display: block flex;
     gap: var(--fui-space-xs);
     border-block-end: 1px solid var(--fui-border);
   }
+}
 
+/* Tab and Panel can only render inside <Tabs> (their context throws outside). */
+@scope (.fui-Tabs-root) {
   .fui-Tabs-tab {
     position: relative;
-    display: inline-flex;
+    display: inline flex;
     align-items: center;
     gap: var(--fui-space-sm);
     padding-block: var(--fui-space-md);
@@ -30,11 +37,10 @@
     font-size: var(--fui-text-sm);
     font-weight: 600;
     line-height: 1;
-    cursor: pointer;
     transition:
-      color var(--fui-transition),
-      border-color var(--fui-transition),
-      background var(--fui-transition);
+      color var(--fui-duration-sm) var(--fui-ease),
+      border-color var(--fui-duration-sm) var(--fui-ease),
+      background var(--fui-duration-sm) var(--fui-ease);
   }
 
   .fui-Tabs-tab:hover:not(:disabled) {
@@ -43,13 +49,10 @@
   }
 
   .fui-Tabs-tab:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 3px var(--fui-primary-ring);
     border-radius: var(--fui-radius-sm) var(--fui-radius-sm) 0 0;
   }
 
   .fui-Tabs-tab:disabled {
-    cursor: not-allowed;
     opacity: 0.5;
   }
 
@@ -58,26 +61,38 @@
     border-block-end-color: var(--fui-primary);
   }
 
-  .fui-Tabs-section {
-    display: inline-flex;
+  /* Forced colors: guarantee the active underline with a system colour.
+     Must come after the base rule — same specificity, order decides. */
+  @media (forced-colors: active) {
+    .fui-Tabs-tab[data-active] {
+      border-block-end-color: Highlight;
+    }
+  }
+
+  /* Icons compose as children and are detected, exactly as in Button. */
+  .fui-Tabs-tab:has(svg) {
+    display: inline flex;
     align-items: center;
-    font-size: 1.1em;
-    line-height: 0;
+    gap: 0.45em;
+
+    svg {
+      inline-size: 1.1em;
+      block-size: 1.1em;
+    }
   }
 
   .fui-Tabs-panel {
-    color: var(--fui-text);
     font-size: var(--fui-text-md);
     line-height: 1.55;
   }
 
   .fui-Tabs-panel:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 3px var(--fui-primary-ring);
     border-radius: var(--fui-radius-sm);
   }
 
-  .fui-Tabs-panel[hidden] {
+  /* Boolean hidden only — [hidden="until-found"] must keep the UA's
+     content-visibility treatment or find-in-page reveal breaks. */
+  .fui-Tabs-panel[hidden]:not([hidden="until-found"]) {
     display: none;
   }
 }

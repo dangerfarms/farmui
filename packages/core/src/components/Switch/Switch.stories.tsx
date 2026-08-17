@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Switch } from "../../index";
+import { Field, Switch } from "../../index";
 
 const meta = {
   title: "Inputs/Switch",
@@ -7,13 +7,11 @@ const meta = {
   tags: ["autodocs"],
   args: {
     label: "Enable irrigation",
-    size: "md",
     labelPosition: "end",
     defaultChecked: false,
     disabled: false,
   },
   argTypes: {
-    size: { control: "inline-radio", options: ["sm", "md", "lg"] },
     labelPosition: { control: "inline-radio", options: ["start", "end"] },
     defaultChecked: { control: "boolean" },
     disabled: { control: "boolean" },
@@ -23,18 +21,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Live playground — tweak props in the Controls panel. */
 export const Playground: Story = {};
-
-export const Sizes: Story = {
-  render: (args) => (
-    <div style={{ display: "flex", gap: "1.5rem", alignItems: "center" }}>
-      <Switch {...args} size="sm" label="Small" />
-      <Switch {...args} size="md" label="Medium" />
-      <Switch {...args} size="lg" label="Large" />
-    </div>
-  ),
-};
 
 export const LabelPosition: Story = {
   render: (args) => (
@@ -43,6 +30,26 @@ export const LabelPosition: Story = {
       <Switch {...args} labelPosition="start" label="Label before control" />
     </div>
   ),
+};
+
+export const WithDescription: Story = {
+  args: {
+    label: "Auto-renew",
+    description: "Charges the card on file at the end of each cycle.",
+  },
+};
+
+export const WithError: Story = {
+  render: (args) => (
+    <Field.Root>
+      <Switch {...args} label="Two-factor authentication" />
+      <Field.Error>Two-factor authentication must be on for admin accounts</Field.Error>
+    </Field.Root>
+  ),
+};
+
+export const Required: Story = {
+  args: { label: "Accept audit logging", required: true },
 };
 
 export const States: Story = {

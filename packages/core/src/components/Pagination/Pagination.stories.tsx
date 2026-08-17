@@ -15,9 +15,7 @@ function PaginationDemo({
   ...props
 }: Partial<PaginationProps> & { initialPage?: number }) {
   const [page, setPage] = useState(initialPage);
-  return (
-    <Pagination {...props} total={total} value={page} onChange={setPage} />
-  );
+  return <Pagination {...props} total={total} value={page} onChange={setPage} />;
 }
 
 const meta = {
@@ -49,7 +47,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Live playground — tweak total/siblings/edges in the Controls panel. */
 export const Playground: Story = {};
 
 /** First/last edge buttons enabled via `withEdges`. */
@@ -76,17 +73,14 @@ export const NavigatesPages: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    // Page 1 starts active.
     const page1 = canvas.getByRole("button", { name: "Page 1" });
     await expect(page1).toHaveAttribute("aria-current", "page");
 
-    // Click "Next page" → page 2 becomes active.
     await userEvent.click(canvas.getByRole("button", { name: "Next page" }));
     const page2 = canvas.getByRole("button", { name: "Page 2" });
     await expect(page2).toHaveAttribute("aria-current", "page");
     await expect(page1).not.toHaveAttribute("aria-current");
 
-    // Jump directly to page 4 by clicking its number.
     await userEvent.click(canvas.getByRole("button", { name: "Page 4" }));
     const page4 = canvas.getByRole("button", { name: "Page 4" });
     await expect(page4).toHaveAttribute("aria-current", "page");

@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Avatar, AvatarGroup } from "../../index";
 
@@ -8,26 +9,15 @@ const meta = {
   args: {
     name: "Ada Lovelace",
     size: "md",
-    radius: "full",
-    color: "primary",
   },
   argTypes: {
     size: { control: "inline-radio", options: ["sm", "md", "lg"] },
-    radius: {
-      control: "select",
-      options: ["sm", "md", "lg", "xl", "full"],
-    },
-    color: {
-      control: "inline-radio",
-      options: ["primary", "gray", "danger", "warning", "info"],
-    },
   },
 } satisfies Meta<typeof Avatar>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Live playground — tweak props in the Controls panel. */
 export const Playground: Story = {};
 
 export const Image: Story = {
@@ -38,12 +28,20 @@ export const Image: Story = {
   },
 };
 
-export const Initials: Story = {
+/**
+ * The initials background answers the surrounding `--fui-context` region;
+ * there is no color prop.
+ */
+export const Contexts: Story = {
   render: (args) => (
     <div style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
       <Avatar {...args} name="Ada Lovelace" />
-      <Avatar {...args} name="Grace Hopper" color="info" />
-      <Avatar {...args} name="Alan Turing" color="danger" />
+      <span style={{ "--fui-context": "info" } as CSSProperties}>
+        <Avatar {...args} name="Grace Hopper" />
+      </span>
+      <span style={{ "--fui-context": "danger" } as CSSProperties}>
+        <Avatar {...args} name="Alan Turing" />
+      </span>
     </div>
   ),
 };
@@ -67,10 +65,10 @@ export const Group: Story = {
   render: (args) => (
     <AvatarGroup>
       <Avatar {...args} name="Ada Lovelace" />
-      <Avatar {...args} name="Grace Hopper" color="info" />
-      <Avatar {...args} name="Alan Turing" color="danger" />
-      <Avatar {...args} name="Katherine Johnson" color="warning" />
-      <Avatar {...args} name="+3 more" color="gray" />
+      <Avatar {...args} name="Grace Hopper" />
+      <Avatar {...args} name="Alan Turing" />
+      <Avatar {...args} name="Katherine Johnson" />
+      <Avatar {...args} name="+3 more" />
     </AvatarGroup>
   ),
 };

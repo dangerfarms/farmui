@@ -1,9 +1,9 @@
-@layer farmui.components {
-  .fui-Avatar-root {
-    --_bg: var(--fui-primary);
-    --_fg: var(--fui-primary-contrast);
+@scope (.fui-Avatar-root) {
+  :scope {
+    --_bg: var(--fui-primary-strong);
+    --_fg: var(--fui-on-strong);
 
-    display: inline-flex;
+    display: inline flex;
     align-items: center;
     justify-content: center;
     inline-size: var(--_size, 2.5rem);
@@ -11,51 +11,62 @@
     border-radius: var(--_radius, var(--fui-radius-full));
     background: var(--_bg);
     color: var(--_fg);
-    font-family: var(--fui-font);
     font-weight: 600;
     line-height: 1;
-    overflow: hidden;
+    overflow: clip;
     user-select: none;
     flex: none;
+
+    &[data-size="sm"] {
+      --_size: 2rem;
+
+      font-size: var(--fui-text-xs);
+    }
+
+    &[data-size="md"] {
+      --_size: 2.5rem;
+
+      font-size: var(--fui-text-sm);
+    }
+
+    &[data-size="lg"] {
+      --_size: 3.25rem;
+
+      font-size: var(--fui-text-lg);
+    }
   }
 
-  /* Sizes */
-  .fui-Avatar-root[data-size="sm"] {
-    --_size: 2rem;
-    font-size: var(--fui-text-xs);
-  }
-  .fui-Avatar-root[data-size="md"] {
-    --_size: 2.5rem;
-    font-size: var(--fui-text-sm);
-  }
-  .fui-Avatar-root[data-size="lg"] {
-    --_size: 3.25rem;
-    font-size: var(--fui-text-lg);
+  /* The initials background answers the surrounding context region, the
+     same contract as every status-coloured component. */
+  @container (style(--fui-context: danger)) {
+    :scope {
+      --_bg: var(--fui-danger-strong);
+    }
   }
 
-  /* Colors — used for initials / glyph background */
-  .fui-Avatar-root[data-color="gray"] {
-    --_bg: var(--fui-bg-subtle);
-    --_fg: var(--fui-text-muted);
+  @container (style(--fui-context: warning)) {
+    :scope {
+      --_bg: var(--fui-warning-strong);
+    }
   }
-  .fui-Avatar-root[data-color="danger"] {
-    --_bg: var(--fui-danger);
-    --_fg: var(--fui-primary-contrast);
+
+  @container (style(--fui-context: info)) {
+    :scope {
+      --_bg: var(--fui-info-strong);
+    }
   }
-  .fui-Avatar-root[data-color="warning"] {
-    --_bg: var(--fui-warning);
-    --_fg: oklch(0.24 0.02 80);
-  }
-  .fui-Avatar-root[data-color="info"] {
-    --_bg: var(--fui-info);
-    --_fg: var(--fui-primary-contrast);
+
+  @container (style(--fui-context: success)) {
+    :scope {
+      --_bg: var(--fui-success-strong);
+    }
   }
 
   .fui-Avatar-img {
     inline-size: 100%;
     block-size: 100%;
     object-fit: cover;
-    display: block;
+    display: block flow;
   }
 
   .fui-Avatar-initials {
@@ -68,23 +79,31 @@
     block-size: 65%;
     opacity: 0.9;
   }
+}
 
-  /* Group — overlap children with a surface ring */
-  .fui-Avatar-group {
-    display: inline-flex;
+/* Group — overlap children with a surface ring */
+@scope (.fui-Avatar-group) {
+  :scope {
+    display: inline flex;
     align-items: center;
   }
-  .fui-Avatar-group > * {
+
+  :scope > * {
     border: 2px solid var(--fui-surface);
     box-sizing: content-box;
     margin-inline-start: calc(-1 * var(--_overlap, 0.5rem));
-    transition: transform var(--fui-transition);
+
+    /* Identity at rest — the hover lift transitions both ways. */
+    translate: 0 0;
+    transition: translate var(--fui-duration-md) var(--fui-ease);
   }
-  .fui-Avatar-group > *:first-child {
+
+  :scope > *:first-child {
     margin-inline-start: 0;
   }
-  .fui-Avatar-group > *:hover {
-    transform: translateY(-2px);
+
+  :scope > *:hover {
+    translate: 0 -2px;
     z-index: 1;
   }
 }

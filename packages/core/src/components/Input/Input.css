@@ -1,96 +1,106 @@
-@layer farmui.components {
-  .fui-Input-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: var(--fui-space-xs);
-    inline-size: var(--_w, 100%);
-    font-family: var(--fui-font);
-  }
-
-  .fui-Input-label {
-    font-size: var(--fui-text-sm);
-    font-weight: 550;
-    color: var(--fui-text);
-  }
-  .fui-Input-required {
-    color: var(--fui-danger);
-    margin-inline-start: 0.15em;
-  }
-
-  .fui-Input-description {
-    font-size: var(--fui-text-xs);
-    color: var(--fui-text-muted);
-  }
-
-  .fui-Input-field {
-    display: flex;
+@scope (.fui-Input-field) {
+  :scope {
+    display: block flex;
     align-items: center;
     gap: var(--fui-space-sm);
-    block-size: var(--_h, var(--fui-control-height-md));
-    padding-inline: var(--_px, 0.75rem);
+
+    /* Height is derived, not declared: same stack as Button (padding-block
+       space-sm + text-sm × 1.2 + 1px border), so inputs and buttons align
+       by construction at every container width. */
+    padding-block: var(--fui-space-sm);
+    padding-inline: var(--fui-space-md);
+    font-size: var(--fui-text-sm);
+    line-height: 1.2;
     border: 1px solid var(--fui-border-strong);
     border-radius: var(--_radius, var(--fui-radius-md));
     background: var(--fui-surface);
-    color: var(--fui-text);
     transition:
-      border-color var(--fui-transition),
-      box-shadow var(--fui-transition);
-  }
-  .fui-Input-field:focus-within {
-    border-color: var(--fui-primary);
-    box-shadow: 0 0 0 3px var(--fui-primary-ring);
-  }
-  .fui-Input-field[data-invalid] {
-    border-color: var(--fui-danger);
-  }
-  .fui-Input-field[data-invalid]:focus-within {
-    box-shadow: 0 0 0 3px
-      color-mix(in oklch, var(--fui-danger) 40%, transparent);
-  }
-  .fui-Input-field[data-disabled] {
-    background: var(--fui-bg-subtle);
-    opacity: 0.7;
-    cursor: not-allowed;
+      border-color var(--fui-duration-sm) var(--fui-ease),
+      box-shadow var(--fui-duration-md) var(--fui-ease);
   }
 
-  .fui-Input-field[data-size="sm"] {
-    --_h: var(--fui-control-height-sm);
-    --_px: 0.625rem;
+  :scope:focus-within {
+    border-color: var(--fui-primary);
+    outline: var(--fui-ring-width) solid var(--fui-ring-color);
+    outline-offset: 2px;
   }
-  .fui-Input-field[data-size="lg"] {
-    --_h: var(--fui-control-height-lg);
-    --_px: 0.875rem;
+
+  /* Autofilled: the wrapper border carries the signal (the input itself
+     paints the tint — see below). :autofill and :-webkit-autofill must stay
+     in separate blocks — one unsupported selector invalidates a shared
+     list. Declared before the error state so danger wins at equal
+     specificity. */
+  :scope:has(.fui-Input-input:autofill) {
+    border-color: color-mix(
+      in oklab,
+      var(--fui-primary) 50%,
+      var(--fui-border-strong)
+    );
+  }
+
+  :scope:has(.fui-Input-input:-webkit-autofill) {
+    border-color: color-mix(
+      in oklab,
+      var(--fui-primary) 50%,
+      var(--fui-border-strong)
+    );
+  }
+
+  /* Error state is detected from the input's own state: ARIA (from a
+     rendered error message) or the platform's native constraint validation
+     (:user-invalid) — the latter needs no JS and no props at all. */
+  :scope:has(.fui-Input-input:is([aria-invalid="true"], :user-invalid)) {
+    --fui-ring-color: var(--fui-danger-ring);
+
+    border-color: var(--fui-danger);
+  }
+
+  :scope[data-disabled] {
+    background: var(--fui-bg-subtle);
+    opacity: var(--fui-disabled-opacity);
   }
 
   .fui-Input-input {
     flex: 1;
     min-inline-size: 0;
+
+    /* UA inputs carry 1-2px default padding; with a derived (auto) height
+       that would break the Button alignment, so zero it explicitly. */
+    padding: 0;
     border: none;
     outline: none;
     background: transparent;
     color: inherit;
     font: inherit;
-    font-size: var(--_fz, var(--fui-text-sm));
   }
+
   .fui-Input-input::placeholder {
     color: var(--fui-text-dim);
   }
-  .fui-Input-input:disabled {
-    cursor: not-allowed;
+
+  /* background-color cannot be overridden on an autofilled field; an inset
+     shadow wider than the control paints the tint instead. Separate blocks —
+     see the wrapper rules above. */
+  .fui-Input-input:autofill {
+    box-shadow: inset 0 0 0 100px
+      color-mix(in oklab, var(--fui-primary) 8%, var(--fui-surface));
   }
-  .fui-Input-field[data-size="lg"] .fui-Input-input {
-    --_fz: var(--fui-text-md);
+
+  .fui-Input-input:-webkit-autofill {
+    box-shadow: inset 0 0 0 100px
+      color-mix(in oklab, var(--fui-primary) 8%, var(--fui-surface));
   }
 
   .fui-Input-section {
-    display: inline-flex;
+    display: inline flex;
+    flex-shrink: 0;
     align-items: center;
     color: var(--fui-text-muted);
-    flex-shrink: 0;
-  }
 
-  .fui-Input-error {
-    font-size: var(--fui-text-xs);
-    color: var(--fui-danger);
+    /* Sections must not stretch the derived height. */
+    svg {
+      inline-size: 1.125em;
+      block-size: auto;
+    }
   }
 }

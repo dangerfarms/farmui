@@ -1,10 +1,11 @@
-import { Children, cloneElement, isValidElement, useId } from "react";
-import type { ChangeEventHandler, ReactNode } from "react";
-import { cx, type FarmUISize } from "../../utils";
-import { Radio, type RadioProps } from "./Radio";
+"use client";
 
-/** One option when building a group from a `data` array. */
-export type RadioGroupItem = string | { value: string; label?: ReactNode };
+import { useId, useMemo } from "react";
+import type { ReactNode } from "react";
+import { cx } from "../../utils";
+import { Fieldset } from "../Fieldset/Fieldset";
+import { RadioGroupContext } from "./group-context";
+import type { RadioGroupContextValue } from "./group-context";
 
 export interface RadioGroupProps {
   /** Group label rendered above the options. */
@@ -24,14 +25,10 @@ export interface RadioGroupProps {
   defaultValue?: string;
   /** Fires with the newly selected value when a radio is chosen. */
   onChange?: (value: string) => void;
-  /** Size applied to every radio in the group. @default "md" */
-  size?: FarmUISize;
+  /** Mark the whole group optional in text rather than with an asterisk. */
+  optional?: boolean;
   /** Layout direction of the options. @default "vertical" */
   orientation?: "vertical" | "horizontal";
-  /** Build the options from an array instead of `<Radio>` children. */
-  data?: RadioGroupItem[];
-  /** Mark the group as required (adds a red asterisk). */
-  withAsterisk?: boolean;
   /** `<Radio>` elements to render as the group's options. */
   children?: ReactNode;
   /** Root wrapper class. */
@@ -39,11 +36,12 @@ export interface RadioGroupProps {
 }
 
 /**
- * RadioGroup — labels and lays out a set of mutually exclusive {@link Radio}
+ * Labels and lays out a set of mutually exclusive {@link Radio}
  * options, sharing a single `name` so native inputs enforce exclusivity.
  *
- * Server-safe: no state is held here. Use uncontrolled (`defaultValue`) for a
- * zero-JS group, or drive it with `value` + `onChange`.
+ * Options participate via context (not element cloning), so `<Radio>`s work
+ * at any nesting depth inside the group. Holds no state: use uncontrolled
+ * (`defaultValue`) or drive it with `value` + `onChange`.
  */
 export function RadioGroup({
   label,
@@ -53,89 +51,53 @@ export function RadioGroup({
   value,
   defaultValue,
   onChange,
-  size = "md",
+  optional,
   orientation = "vertical",
-  data,
-  withAsterisk,
   children,
   className,
 }: RadioGroupProps) {
   const autoId = useId();
   const groupName = name ?? autoId;
-  const labelId = label ? `${autoId}-label` : undefined;
   const descId = description ? `${autoId}-desc` : undefined;
   const errId = error ? `${autoId}-err` : undefined;
   const invalid = Boolean(error);
 
-  const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    onChange?.(event.currentTarget.value);
-  };
-
-  const controlled = value !== undefined;
-
-  const sharedProps = (optionValue: string | undefined) => ({
-    name: groupName,
-    size,
-    onChange: onChange ? handleChange : undefined,
-    ...(controlled
-      ? { checked: optionValue !== undefined && optionValue === value }
-      : optionValue !== undefined
-        ? { defaultChecked: optionValue === defaultValue }
-        : {}),
-  });
-
-  const options = data
-    ? data.map((item) => {
-        const optValue = typeof item === "string" ? item : item.value;
-        const optLabel =
-          typeof item === "string" ? item : (item.label ?? item.value);
-        return (
-          <Radio
-            key={optValue}
-            value={optValue}
-            label={optLabel}
-            {...sharedProps(optValue)}
-          />
-        );
-      })
-    : Children.map(children, (child) => {
-        if (!isValidElement<RadioProps>(child)) return child;
-        const optValue =
-          typeof child.props.value === "string" ? child.props.value : undefined;
-        return cloneElement(child, sharedProps(optValue));
-      });
+  const ctx = useMemo<RadioGroupContextValue>(
+    () => ({
+      name: groupName,
+      value,
+      defaultValue,
+      onSelect: onChange,
+    }),
+    [groupName, value, defaultValue, onChange],
+  );
 
   return (
-    <div
-      className={cx("fui-Radio-group", className)}
-      role="radiogroup"
-      aria-labelledby={labelId}
-      aria-describedby={cx(descId, errId) || undefined}
-      aria-invalid={invalid || undefined}
-    >
-      {label && (
-        <span className={"fui-Radio-groupLabel"} id={labelId}>
-          {label}
-          {withAsterisk && (
-            <span className={"fui-Radio-required"} aria-hidden>
-              *
-            </span>
-          )}
-        </span>
-      )}
-      {description && (
-        <span className={"fui-Radio-groupDescription"} id={descId}>
-          {description}
-        </span>
-      )}
-      <div className={"fui-Radio-options"} data-orientation={orientation}>
-        {options}
-      </div>
-      {error && (
-        <span className={"fui-Radio-error"} id={errId} role="alert">
-          {error}
-        </span>
-      )}
-    </div>
+    <RadioGroupContext value={ctx}>
+      <Fieldset.Root
+        // radiogroup (not the fieldset's implicit group): the precise role,
+        // and the one ARIA allows aria-invalid on.
+        role="radiogroup"
+        className={cx("fui-Radio-group", className)}
+        aria-describedby={cx(descId, errId) || undefined}
+        aria-invalid={invalid || undefined}
+      >
+        {label && <Fieldset.Legend optional={optional}>{label}</Fieldset.Legend>}
+        {description && (
+          <span className="fui-Radio-groupDescription" id={descId}>
+            {description}
+          </span>
+        )}
+        <div className="fui-Radio-options" data-orientation={orientation}>
+          {children}
+        </div>
+        {error && (
+          <span className="fui-Radio-error" id={errId} role="alert">
+            <span className="fui-Error-prefix">Error: </span>
+            {error}
+          </span>
+        )}
+      </Fieldset.Root>
+    </RadioGroupContext>
   );
 }

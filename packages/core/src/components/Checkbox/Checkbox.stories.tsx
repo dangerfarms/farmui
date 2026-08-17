@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Checkbox } from "../../index";
+import { Checkbox, Field } from "../../index";
 
 const meta = {
   title: "Inputs/Checkbox",
@@ -7,34 +7,23 @@ const meta = {
   tags: ["autodocs"],
   args: {
     label: "I accept the terms and conditions",
-    size: "md",
     indeterminate: false,
     disabled: false,
     defaultChecked: false,
-  },
-  argTypes: {
-    size: { control: "inline-radio", options: ["sm", "md", "lg"] },
   },
 } satisfies Meta<typeof Checkbox>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Live playground — tweak props in the Controls panel. */
 export const Playground: Story = {};
-
-export const Sizes: Story = {
-  render: (args) => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-      <Checkbox {...args} size="sm" label="Small" />
-      <Checkbox {...args} size="md" label="Medium" />
-      <Checkbox {...args} size="lg" label="Large" />
-    </div>
-  ),
-};
 
 export const Checked: Story = {
   args: { label: "Subscribe to the newsletter", defaultChecked: true },
+};
+
+export const Required: Story = {
+  args: { label: "Accept the terms", required: true },
 };
 
 export const Indeterminate: Story = {
@@ -49,10 +38,12 @@ export const WithDescription: Story = {
 };
 
 export const WithError: Story = {
-  args: {
-    label: "I accept the terms and conditions",
-    error: "You must accept the terms to continue.",
-  },
+  render: (args) => (
+    <Field.Root>
+      <Checkbox {...args} label="I accept the terms and conditions" />
+      <Field.Error>You must accept the terms to continue.</Field.Error>
+    </Field.Root>
+  ),
 };
 
 export const Disabled: Story = {

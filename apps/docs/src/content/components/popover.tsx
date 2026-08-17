@@ -1,60 +1,147 @@
-import type { ComponentDoc } from "@/docs/types";
-import { PopoverDemo, PopoverFormDemo } from "./popover.client";
+import type { ComponentContent } from "@/renderer/types";
+import { PopoverDemo, PopoverFormDemo, PopoverLinkTriggerDemo } from "./popover.client";
 
-const doc: ComponentDoc = {
+const doc: ComponentContent = {
   slug: "popover",
-  name: "Popover",
-  category: "Overlays",
-  description:
-    "A click-triggered floating panel anchored to a trigger element.",
-  importLine: `import { Popover } from "@farmui/core";`,
+  lead: "A click-triggered floating panel, composed from parts and rendered in the browser's top layer via the native popover attribute.",
+  importLine: `import { Button, Field, Input, Popover } from "@farmui/core";`,
   demos: [
     {
       title: "Basic usage",
       description:
-        "Click the trigger to toggle the panel; click outside or press Escape to close.",
-      code: `<Popover trigger={<Button>Toggle</Button>}>
-  <p>This panel is anchored to the button.</p>
-</Popover>`,
+        "Compose the panel from parts. In browsers with the popover attribute and anchor positioning, the top layer, light dismiss and Escape come from the browser: no z-index, no portal, no document listeners; elsewhere a lean wrapper-anchored fallback re-implements the same behavior.",
+      code: `<Popover.Root>
+  <Popover.Trigger>Toggle</Popover.Trigger>
+  <Popover.Popup>
+    <Popover.Title>Anchored panel</Popover.Title>
+    <Popover.Description>
+      Rendered in the browser's top layer — click outside or press Escape to close.
+    </Popover.Description>
+  </Popover.Popup>
+</Popover.Root>`,
       render: () => <PopoverDemo />,
     },
     {
       title: "With form content",
       description:
-        "Popovers can hold interactive content like inputs and buttons.",
-      code: `<Popover trigger={<Button variant="light">Add product</Button>} width={260}>
-  <form style={{ display: "grid", gap: "0.75rem" }}>
-    <Input label="Name" placeholder="Wireless headphones" size="sm" />
-    <Input label="Price" placeholder="49.00" size="sm" />
-    <Button type="submit" size="sm" fullWidth>Save</Button>
-  </form>
-</Popover>`,
+        "Popovers can hold interactive content. Compose freely: parts can be reordered, styled, or omitted.",
+      code: `<Popover.Root>
+  <Popover.Trigger>Add product</Popover.Trigger>
+  <Popover.Popup>
+    <form>
+      <Field.Root>
+        <Field.Label>Name</Field.Label>
+        <Input placeholder="Wireless headphones" />
+      </Field.Root>
+      <Field.Root>
+        <Field.Label>Price</Field.Label>
+        <Input inputMode="decimal" placeholder="49.00" />
+      </Field.Root>
+      <Button type="submit">Save</Button>
+    </form>
+  </Popover.Popup>
+</Popover.Root>`,
       render: () => <PopoverFormDemo />,
     },
+    {
+      title: "Substituting the trigger element",
+      description:
+        "The built-in trigger is a FarmUI Button. To use a different element, pass it via render; the wiring (popovertarget, aria-expanded, anchor name) merges onto it. See the Composition guide for the full contract.",
+      code: `<Popover.Root>
+  <Popover.Trigger render={<a href="#popover">A link as the trigger</a>} />
+  <Popover.Popup>…</Popover.Popup>
+</Popover.Root>`,
+      render: () => <PopoverLinkTriggerDemo />,
+    },
   ],
-  props: [
+  whenToUse: [
+    "For small, contextual panels of supplementary content or actions anchored to a trigger: filters, quick settings, action menus.",
+    "When the user should be able to dismiss casually (click away) without losing surrounding page context.",
+  ],
+  whenNotToUse: [
+    "For blocking, must-complete tasks or destructive confirmations, use Modal, which traps focus.",
+    "For a short text label describing a control, use Tooltip.",
+    "For disclosure of inline page content, use the native <details> element via Accordion, or plain layout.",
+  ],
+  howItWorks: [
     {
-      name: "trigger",
-      type: "ReactElement",
+      title: "Light dismiss is the contract",
+      body: "A popover closes on outside click and Escape; that is what distinguishes it from Modal. Never put an action with consequences inside one: a surface the user can dismiss by accident must only ever hold things that are safe to abandon.",
+    },
+    {
+      title: "The trigger announces what it opens",
+      body: 'Popover.Trigger renders aria-haspopup="dialog" and aria-expanded, and closing returns focus to it. Keep the trigger a real button: moving the popover behind a hover or a bare span breaks the promise those attributes make to screen-reader users.',
+    },
+    {
+      title: "Card-sized at most",
+      body: "A popover earns its place when it holds a handful of controls: a filter set, a quick form. When the content wants headings or scrolling, it stops being glanceable and starts being a page in the wrong place; move it to a Modal or the page itself.",
+    },
+  ],
+  accessibility: [
+    "Where the popover attribute and anchor positioning are both supported, the browser provides top-layer rendering, light dismiss and Escape; other browsers get a wrapper-anchored fallback with the same behavior re-implemented in a few lines of JS, a deliberate no-polyfill, progressive-enhancement trade-off (see the browser support policy in CONTRIBUTING).",
+    'Dialog semantics match what aria-haspopup="dialog" promises screen-reader users: opening moves focus into the panel and closing returns it to the trigger.',
+    "Trigger is a real <button> with aria-expanded; Popover.Title and Popover.Description automatically label the dialog via aria-labelledby / aria-describedby.",
+    "Collision handling uses position-try flipping at viewport edges in supporting browsers; the fallback keeps the requested side.",
+  ],
+  parts: [
+    {
+      name: "Popover.Root",
       description:
-        "Element that toggles the panel (gets aria-expanded / aria-haspopup wired on).",
+        "Groups the parts and owns open state (controlled or uncontrolled). Renders an inline wrapper used by the fallback positioning.",
+      props: [
+        { name: "open", type: "boolean", description: "Controlled open state." },
+        {
+          name: "defaultOpen",
+          type: "boolean",
+          default: "false",
+          description: "Initial open state when uncontrolled.",
+        },
+        {
+          name: "onOpenChange",
+          type: "(open: boolean) => void",
+          description: "Called whenever the open state should change.",
+        },
+      ],
     },
     {
-      name: "position",
-      type: `"bottom" | "top"`,
-      default: `"bottom"`,
-      description: "Which side the panel opens toward.",
-    },
-    {
-      name: "width",
-      type: "string | number",
+      name: "Popover.Trigger",
       description:
-        "Fixed panel width (any CSS length). Defaults to fit-content.",
+        "A FarmUI Button wired as the popup's invoker (popovertarget, aria-expanded, anchor name); it adapts to context like any Button. All native <button> props are forwarded.",
+      props: [
+        {
+          name: "render",
+          type: "element | (props) => node",
+          description: "Substitute any element (e.g. render={<a href=…>…</a>}).",
+        },
+      ],
     },
     {
-      name: "children",
-      type: "ReactNode",
-      description: "Content rendered inside the dropdown panel.",
+      name: "Popover.Popup",
+      description:
+        'The floating panel (role="dialog", popover attribute); native <div> props are forwarded.',
+      props: [
+        {
+          name: "position",
+          type: `"bottom" | "top"`,
+          default: `"bottom"`,
+          description: "Which side of the trigger the panel opens toward.",
+        },
+      ],
+    },
+    {
+      name: "Popover.Title",
+      description:
+        "Optional heading that labels the popup for assistive technology; native heading props are forwarded.",
+    },
+    {
+      name: "Popover.Description",
+      description:
+        "Optional supporting text wired via aria-describedby; native <p> props are forwarded.",
+    },
+    {
+      name: "Popover.Close",
+      description:
+        "A button that closes the popup from inside; native <button> props are forwarded.",
     },
   ],
 };

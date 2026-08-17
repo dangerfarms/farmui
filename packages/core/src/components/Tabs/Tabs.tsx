@@ -4,17 +4,13 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useId,
   useMemo,
   useRef,
   useState,
 } from "react";
-import type {
-  ButtonHTMLAttributes,
-  HTMLAttributes,
-  KeyboardEvent,
-  ReactNode,
-} from "react";
+import type { ButtonHTMLAttributes, HTMLAttributes, KeyboardEvent, ReactNode } from "react";
 import { cx } from "../../utils";
 
 interface TabsContextValue {
@@ -29,7 +25,7 @@ const TabsContext = createContext<TabsContextValue | null>(null);
 function useTabsContext(component: string): TabsContextValue {
   const ctx = useContext(TabsContext);
   if (!ctx) {
-    throw new Error(`${component} must be used within <Tabs>.`);
+    throw new Error(`${component} must be rendered inside <Tabs>.`);
   }
   return ctx;
 }
@@ -51,14 +47,9 @@ export interface TabsListProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
 }
 
-export interface TabsTabProps extends Omit<
-  ButtonHTMLAttributes<HTMLButtonElement>,
-  "value"
-> {
+export interface TabsTabProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "value"> {
   /** Unique value linking this tab to its panel. */
   value: string;
-  /** Content rendered before the label (icon/emoji). */
-  leftSection?: ReactNode;
   children?: ReactNode;
 }
 
@@ -69,12 +60,12 @@ export interface TabsPanelProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * Tabs — switch between related panels of content.
+ * Switch between related panels of content.
  *
  * Supports uncontrolled (`defaultValue`) and controlled (`value`/`onChange`)
  * usage. Compose with `Tabs.List`, `Tabs.Tab` and `Tabs.Panel`.
  */
-export function Tabs({
+function TabsBase({
   defaultValue,
   value: controlled,
   onChange,
@@ -83,9 +74,7 @@ export function Tabs({
   ...rest
 }: TabsProps) {
   const baseId = useId();
-  const [uncontrolled, setUncontrolled] = useState<string | null>(
-    defaultValue ?? null,
-  );
+  const [uncontrolled, setUncontrolled] = useState<string | null>(defaultValue ?? null);
   const isControlled = controlled !== undefined;
   const value = isControlled ? controlled : uncontrolled;
 
@@ -103,11 +92,11 @@ export function Tabs({
   );
 
   return (
-    <TabsContext.Provider value={ctx}>
+    <TabsContext value={ctx}>
       <div className={cx("fui-Tabs-root", className)} {...rest}>
         {children}
       </div>
-    </TabsContext.Provider>
+    </TabsContext>
   );
 }
 
@@ -120,9 +109,7 @@ export function TabsList({ className, children, ...rest }: TabsListProps) {
     if (!keys.includes(event.key)) return;
 
     const tabs = Array.from(
-      listRef.current?.querySelectorAll<HTMLButtonElement>(
-        '[role="tab"]:not(:disabled)',
-      ) ?? [],
+      listRef.current?.querySelectorAll<HTMLButtonElement>('[role="tab"]:not(:disabled)') ?? [],
     );
     if (tabs.length === 0) return;
 
@@ -134,10 +121,7 @@ export function TabsList({ className, children, ...rest }: TabsListProps) {
         nextIndex = current < 0 ? 0 : (current + 1) % tabs.length;
         break;
       case "ArrowLeft":
-        nextIndex =
-          current < 0
-            ? tabs.length - 1
-            : (current - 1 + tabs.length) % tabs.length;
+        nextIndex = current < 0 ? tabs.length - 1 : (current - 1 + tabs.length) % tabs.length;
         break;
       case "Home":
         nextIndex = 0;
@@ -153,6 +137,8 @@ export function TabsList({ className, children, ...rest }: TabsListProps) {
   };
 
   return (
+    // interactive-supports-focus is off for this file (.oxlintrc):
+    // focus roves between the tabs; the list itself is never a stop
     <div
       ref={listRef}
       role="tablist"
@@ -166,15 +152,7 @@ export function TabsList({ className, children, ...rest }: TabsListProps) {
 }
 
 /** A single tab control. */
-export function TabsTab({
-  value,
-  leftSection,
-  disabled,
-  className,
-  children,
-  onClick,
-  ...rest
-}: TabsTabProps) {
+export function TabsTab({ value, disabled, className, children, onClick, ...rest }: TabsTabProps) {
   const { value: active, setValue, baseId } = useTabsContext("Tabs.Tab");
   const selected = active === value;
 
@@ -190,33 +168,47 @@ export function TabsTab({
       className={cx("fui-Tabs-tab", className)}
       data-active={selected || undefined}
       onClick={(event) => {
-        setValue(value);
         onClick?.(event);
+        setValue(value);
       }}
       {...rest}
     >
-      {leftSection && <span className={"fui-Tabs-section"}>{leftSection}</span>}
       {children}
     </button>
   );
 }
 
 /** The panel shown for its matching tab. */
-export function TabsPanel({
-  value,
-  className,
-  children,
-  ...rest
-}: TabsPanelProps) {
-  const { value: active, baseId } = useTabsContext("Tabs.Panel");
+export function TabsPanel({ value, className, children, ...rest }: TabsPanelProps) {
+  const { value: active, setValue, baseId } = useTabsContext("Tabs.Panel");
   const selected = active === value;
+  const ref = useRef<HTMLDivElement>(null);
+
+  // hidden="until-found" lets find-in-page reach inactive panels;
+  // `beforematch` activates the matched tab. React normalises `hidden` to a
+  // boolean, so the attribute value must be set imperatively.
+  const untilFound = typeof HTMLElement !== "undefined" && "onbeforematch" in HTMLElement.prototype;
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || !untilFound) return;
+    if (selected) el.removeAttribute("hidden");
+    else el.setAttribute("hidden", "until-found");
+  }, [selected, untilFound]);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || !untilFound) return;
+    const onBeforeMatch = () => setValue(value);
+    el.addEventListener("beforematch", onBeforeMatch);
+    return () => el.removeEventListener("beforematch", onBeforeMatch);
+  }, [untilFound, setValue, value]);
 
   return (
     <div
+      ref={ref}
       role="tabpanel"
       id={`${baseId}-panel-${value}`}
       aria-labelledby={`${baseId}-tab-${value}`}
-      hidden={!selected}
+      hidden={untilFound ? undefined : !selected}
       tabIndex={0}
       className={cx("fui-Tabs-panel", className)}
       {...rest}
@@ -226,6 +218,8 @@ export function TabsPanel({
   );
 }
 
-Tabs.List = TabsList;
-Tabs.Tab = TabsTab;
-Tabs.Panel = TabsPanel;
+export const Tabs = Object.assign(TabsBase, {
+  List: TabsList,
+  Tab: TabsTab,
+  Panel: TabsPanel,
+});

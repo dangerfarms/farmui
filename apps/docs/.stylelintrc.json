@@ -1,0 +1,36 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-modern"
+  ],
+  "rules": {
+    "selector-class-pattern": null,
+    "custom-property-pattern": null,
+    "no-descending-specificity": null,
+    "keyframes-name-pattern": null,
+    "media-feature-range-notation": "context",
+    "unit-disallowed-list": [
+      [
+        "vw",
+        "vh"
+      ]
+    ],
+    "declaration-no-important": true,
+    "csstools/value-no-unknown-custom-properties": [
+      true,
+      {
+        "importFrom": [
+          "../../packages/core/src/tokens.css",
+          "src/app/globals.css"
+        ],
+        "ignoreProperties": [
+          "/^--_/",
+          "/^--site-/"
+        ]
+      }
+    ]
+  },
+  "plugins": [
+    "stylelint-value-no-unknown-custom-properties"
+  ]
+}

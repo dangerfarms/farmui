@@ -1,14 +1,18 @@
-@layer farmui.components {
-  .fui-Loader-root {
-    --_size: 1.5rem;
-    --_color: var(--fui-primary);
+@scope (.fui-Loader-root) {
+  :scope {
+    /* The hook is inherited, so a composing component can size a loader
+       from its own context (Button answers it with the same 1em its
+       icons get) without fighting this default's specificity. */
+    --_size: var(--fui-loader-size, 1.5rem);
 
-    display: inline-flex;
+    /* The brand token, so context remaps recolour the loader; parts draw
+       with currentColor from here. */
+    color: var(--fui-primary);
+    display: inline flex;
     align-items: center;
     justify-content: center;
     inline-size: var(--_size);
     block-size: var(--_size);
-    color: var(--_color);
     vertical-align: middle;
   }
 
@@ -19,7 +23,7 @@
     padding: 0;
     margin: -1px;
     border: 0;
-    overflow: hidden;
+    overflow: clip;
     clip-path: inset(50%);
     white-space: nowrap;
   }
@@ -29,84 +33,15 @@
     inline-size: 100%;
     block-size: 100%;
     border: max(2px, calc(var(--_size) * 0.12)) solid
-      color-mix(in oklch, currentColor 25%, transparent);
-    border-block-start-color: currentColor;
+      color-mix(in oklch, currentcolor 25%, transparent);
+    border-block-start-color: currentcolor;
     border-radius: var(--fui-radius-full);
-    animation: fui-Loader-loader-spin 0.65s linear infinite;
+    animation: fui-Loader-spin 0.65s linear infinite;
   }
-  @keyframes fui-Loader-loader-spin {
-    to {
-      transform: rotate(1turn);
-    }
-  }
+}
 
-  /* Dots — three pulsing dots */
-  .fui-Loader-dots {
-    display: inline-flex;
-    align-items: center;
-    gap: calc(var(--_size) * 0.18);
-    inline-size: 100%;
-    block-size: 100%;
-    justify-content: center;
-  }
-  .fui-Loader-dot {
-    inline-size: calc(var(--_size) * 0.26);
-    block-size: calc(var(--_size) * 0.26);
-    border-radius: var(--fui-radius-full);
-    background: currentColor;
-    animation: fui-Loader-loader-dot 1.2s ease-in-out infinite;
-  }
-  .fui-Loader-dot:nth-child(2) {
-    animation-delay: 0.15s;
-  }
-  .fui-Loader-dot:nth-child(3) {
-    animation-delay: 0.3s;
-  }
-  @keyframes fui-Loader-loader-dot {
-    0%,
-    80%,
-    100% {
-      opacity: 0.3;
-      transform: scale(0.75);
-    }
-    40% {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  /* Bars — three scaling bars */
-  .fui-Loader-bars {
-    display: inline-flex;
-    align-items: center;
-    gap: calc(var(--_size) * 0.16);
-    inline-size: 100%;
-    block-size: 100%;
-    justify-content: center;
-  }
-  .fui-Loader-bar {
-    inline-size: calc(var(--_size) * 0.18);
-    block-size: 100%;
-    border-radius: var(--fui-radius-sm);
-    background: currentColor;
-    transform-origin: center;
-    animation: fui-Loader-loader-bar 1s ease-in-out infinite;
-  }
-  .fui-Loader-bar:nth-child(2) {
-    animation-delay: 0.15s;
-  }
-  .fui-Loader-bar:nth-child(3) {
-    animation-delay: 0.3s;
-  }
-  @keyframes fui-Loader-loader-bar {
-    0%,
-    100% {
-      transform: scaleY(0.4);
-      opacity: 0.5;
-    }
-    50% {
-      transform: scaleY(1);
-      opacity: 1;
-    }
+@keyframes fui-Loader-spin {
+  to {
+    transform: rotate(1turn);
   }
 }

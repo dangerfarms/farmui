@@ -1,46 +1,36 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, userEvent, within } from "storybook/test";
-import { Button, Popover } from "../../index";
+import { expect, userEvent, waitFor, within } from "storybook/test";
+import { Popover } from "../../index";
 
 const meta = {
   title: "Overlays/Popover",
-  component: Popover,
+  component: Popover.Root,
   tags: ["autodocs"],
-  args: {
-    position: "bottom",
-    width: 240,
-    trigger: <Button variant="light">Open popover</Button>,
-    children: (
-      <div style={{ padding: "0.5rem" }}>
-        <p style={{ margin: "0 0 0.5rem" }}>
-          A floating panel anchored to its trigger.
-        </p>
-        <p style={{ margin: 0 }}>Click outside or press Escape to dismiss.</p>
-      </div>
-    ),
-  },
-  argTypes: {
-    position: { control: "inline-radio", options: ["bottom", "top"] },
-    width: { control: "text" },
-    trigger: { control: false },
-    children: { control: false },
-  },
-  render: (args) => (
+  render: () => (
     <div style={{ display: "flex", justifyContent: "center", padding: "4rem" }}>
-      <Popover {...args} />
+      <Popover.Root>
+        <Popover.Trigger>Open popover</Popover.Trigger>
+        <Popover.Popup>
+          <Popover.Title>Anchored panel</Popover.Title>
+          <Popover.Description>
+            Rendered in the top layer via the native popover attribute — click outside or press
+            Escape to dismiss.
+          </Popover.Description>
+        </Popover.Popup>
+      </Popover.Root>
     </div>
   ),
-} satisfies Meta<typeof Popover>;
+} satisfies Meta<typeof Popover.Root>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Live playground — click the trigger to reveal the panel, then tweak Controls. */
+/** Compose a panel from parts: Trigger, Popup, Title, Description, Close. */
 export const Playground: Story = {};
 
 /** The panel can open toward the bottom (default) or the top of its trigger. */
 export const Positions: Story = {
-  render: (args) => (
+  render: () => (
     <div
       style={{
         display: "flex",
@@ -49,82 +39,100 @@ export const Positions: Story = {
         padding: "5rem 3rem",
       }}
     >
-      <Popover
-        {...args}
-        position="bottom"
-        trigger={<Button variant="light">Opens down</Button>}
-      >
-        <div style={{ padding: "0.5rem" }}>Anchored below the trigger.</div>
-      </Popover>
-      <Popover
-        {...args}
-        position="top"
-        trigger={<Button variant="light">Opens up</Button>}
-      >
-        <div style={{ padding: "0.5rem" }}>Anchored above the trigger.</div>
-      </Popover>
+      <Popover.Root>
+        <Popover.Trigger>Opens down</Popover.Trigger>
+        <Popover.Popup position="bottom">Anchored below.</Popover.Popup>
+      </Popover.Root>
+      <Popover.Root>
+        <Popover.Trigger>Opens up</Popover.Trigger>
+        <Popover.Popup position="top">Anchored above.</Popover.Popup>
+      </Popover.Root>
     </div>
   ),
 };
 
-/** A richer panel — for example, a small menu of actions. */
-export const WithMenu: Story = {
-  render: (args) => (
+/** An explicit Close part inside the panel. */
+export const WithClose: Story = {
+  render: () => (
     <div style={{ display: "flex", justifyContent: "center", padding: "4rem" }}>
-      <Popover {...args} trigger={<Button variant="light">Actions</Button>}>
-        <ul style={{ listStyle: "none", margin: 0, padding: "0.25rem" }}>
-          <li>
-            <Button variant="subtle" fullWidth>
-              Edit
-            </Button>
-          </li>
-          <li>
-            <Button variant="subtle" fullWidth>
-              Duplicate
-            </Button>
-          </li>
-          <li>
-            <Button variant="subtle" color="danger" fullWidth>
-              Delete
-            </Button>
-          </li>
-        </ul>
-      </Popover>
+      <Popover.Root>
+        <Popover.Trigger>Quick settings</Popover.Trigger>
+        <Popover.Popup>
+          <Popover.Title>Settings</Popover.Title>
+          <Popover.Description>A couple of preferences.</Popover.Description>
+          <Popover.Close>Done</Popover.Close>
+        </Popover.Popup>
+      </Popover.Root>
     </div>
   ),
 };
 
 /**
- * Interaction test: clicking the trigger toggles the panel open and wires up
- * `aria-expanded`; an outside click dismisses it. The trigger is anchored in
- * the story canvas, so we query it there, but assert the panel is present in
- * the document.
+ * The panel escapes ancestor overflow clipping: the trigger sits inside an
+ * `overflow: hidden` box, yet the popup renders fully via the top layer.
+ * (In fallback browsers this story degrades to a clipped panel — that is the
+ * documented trade-off of the no-polyfill policy.)
  */
-export const TogglesAndClosesOnOutsideClick: Story = {
+export const EscapesOverflowClipping: Story = {
+  render: () => (
+    <div
+      style={{
+        overflow: "hidden",
+        blockSize: "5rem",
+        border: "1px dashed var(--fui-border)",
+        padding: "1rem",
+        margin: "3rem",
+      }}
+    >
+      <Popover.Root>
+        <Popover.Trigger>Inside overflow:hidden</Popover.Trigger>
+        <Popover.Popup>
+          <Popover.Description>
+            Top-layer rendering means this panel is not clipped by the dashed box.
+          </Popover.Description>
+        </Popover.Popup>
+      </Popover.Root>
+    </div>
+  ),
+};
+
+/** Statically open (defaultOpen) — for visual/a11y review of the open state. */
+export const OpenByDefault: Story = {
+  render: () => (
+    <div style={{ display: "flex", justifyContent: "center", padding: "4rem" }}>
+      <Popover.Root defaultOpen>
+        <Popover.Trigger>Open popover</Popover.Trigger>
+        <Popover.Popup>
+          <Popover.Title>Anchored panel</Popover.Title>
+          <Popover.Description>Should render directly beneath the trigger.</Popover.Description>
+        </Popover.Popup>
+      </Popover.Root>
+    </div>
+  ),
+};
+
+/**
+ * Interaction test: clicking the trigger toggles the panel and wires
+ * `aria-expanded`; light dismiss (outside click) and Escape both close it.
+ */
+export const TogglesAndDismisses: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const body = within(document.body);
-
     const trigger = canvas.getByRole("button", { name: /open popover/i });
 
-    // Closed initially.
     await expect(trigger).toHaveAttribute("aria-expanded", "false");
-    await expect(
-      body.queryByText(/a floating panel anchored to its trigger/i),
-    ).toBeNull();
 
-    // Click opens the panel.
     await userEvent.click(trigger);
     await expect(trigger).toHaveAttribute("aria-expanded", "true");
-    await expect(
-      await body.findByText(/a floating panel anchored to its trigger/i),
-    ).toBeInTheDocument();
+    const popup = await within(document.body).findByRole("dialog");
+    await expect(popup).toBeVisible();
 
-    // Clicking outside (on the document body) closes it.
     await userEvent.click(document.body);
-    await expect(trigger).toHaveAttribute("aria-expanded", "false");
-    await expect(
-      body.queryByText(/a floating panel anchored to its trigger/i),
-    ).toBeNull();
+    await waitFor(() => expect(trigger).toHaveAttribute("aria-expanded", "false"));
+
+    await userEvent.click(trigger);
+    await expect(trigger).toHaveAttribute("aria-expanded", "true");
+    await userEvent.keyboard("{Escape}");
+    await waitFor(() => expect(trigger).toHaveAttribute("aria-expanded", "false"));
   },
 };

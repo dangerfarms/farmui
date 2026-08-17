@@ -1,0 +1,61 @@
+/* The legend comes from the Fieldset primitive and each part reuses
+   Input, so borders, focus rings and the aria-invalid danger state
+   are Input's own. Only the description/error text and the part layout
+   live here. */
+@scope (.fui-DateInput-root) {
+  .fui-DateInput-description {
+    margin: 0;
+    font-size: var(--fui-text-sm);
+    color: var(--fui-text-muted);
+  }
+
+  .fui-DateInput-error {
+    margin: 0;
+    font-size: var(--fui-text-sm);
+    color: var(--fui-danger);
+  }
+
+  .fui-DateInput-parts {
+    display: block flex;
+    flex-wrap: wrap;
+    gap: var(--fui-space-md);
+  }
+
+  .fui-DateInput-part {
+    display: block flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+
+    /* Width is information: the input is sized to its answer (two digits,
+       four for the year, plus a character of editing slack) and the box
+       shrink-wraps it — the control's padding and borders are never
+       restated here. */
+    > .fui-Input-field {
+      inline-size: fit-content;
+    }
+
+    &:not([data-part="year"]) .fui-Input-input {
+      flex: none;
+      inline-size: 3ch;
+    }
+
+    &[data-part="year"] .fui-Input-input {
+      flex: none;
+      inline-size: 5ch;
+    }
+  }
+
+  .fui-DateInput-label {
+    font-size: var(--fui-text-sm);
+    font-weight: 500;
+  }
+}
+
+/* Invalid is detected, not declared: the legend goes danger exactly when a
+   rendered error message is present — the same rule Field applies to its
+   label. */
+@scope (.fui-DateInput-root:has(.fui-DateInput-error)) {
+  .fui-Fieldset-legend {
+    color: var(--fui-danger);
+  }
+}

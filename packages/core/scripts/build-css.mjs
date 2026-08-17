@@ -1,11 +1,9 @@
-// Concatenate the base stylesheet (tokens + reset + layer order) with every
-// component's plain CSS into a single, importable dist/styles.css.
-import {
-  readFileSync,
-  writeFileSync,
-  readdirSync,
-  mkdirSync,
-} from "node:fs";
+// Build dist/styles.css: the cascade-layer order, then the base files
+// (tokens, reset, elements — each declaring its own layer), then every
+// component's CSS wrapped into `farmui.components` here. Component source
+// files contain no `@layer` — the layer is assigned at build time (and by
+// the src/styles.css orchestrator's `layer()` imports during dev).
+import { readFileSync, writeFileSync, readdirSync, mkdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -14,33 +12,48 @@ const src = join(pkgRoot, "src");
 const componentsDir = join(src, "components");
 
 const header = `/*!\n * FarmUI — @farmui/core\n * The complete, static stylesheet. Import once at your app root:\n *   import "@farmui/core/styles.css";\n * Nothing runs at runtime — no CSS-in-JS.\n */\n\n`;
+const layerOrder =
+  "@layer farmui.reset, farmui.tokens, farmui.elements, farmui.layout, farmui.components;\n";
 
-let out = header + readFileSync(join(src, "styles.css"), "utf8").trim() + "\n";
+let out = header + layerOrder;
+for (const base of ["tokens.css", "reset.css", "elements.css", "layout.css"]) {
+  out += "\n" + readFileSync(join(src, base), "utf8").trim() + "\n";
+}
 
 const names = readdirSync(componentsDir, { withFileTypes: true })
   .filter((e) => e.isDirectory())
   .map((e) => e.name)
   .sort();
 
+const orchestrator = readFileSync(join(src, "styles.css"), "utf8");
+
 let count = 0;
 for (const name of names) {
   const cssPath = join(componentsDir, name, `${name}.css`);
+  let css;
   try {
-    const css = readFileSync(cssPath, "utf8").trim();
-    if (css) {
-      out += `\n/* ${name} */\n${css}\n`;
-      count++;
-    }
+    css = readFileSync(cssPath, "utf8").trim();
   } catch {
-    // component has no stylesheet — skip
+    continue; // component has no stylesheet
   }
+  if (!css) continue;
+  if (css.includes("@layer")) {
+    throw new Error(
+      `${name}.css declares @layer — component files must not; the layer is assigned by the build and the orchestrator.`,
+    );
+  }
+  if (!orchestrator.includes(`/${name}/${name}.css`)) {
+    console.warn(
+      `build-css: WARNING — src/styles.css is missing the import for ${name}.css (Storybook/dev won't load it)`,
+    );
+  }
+  out += `\n/* ${name} */\n@layer farmui.components {\n${css}\n}\n`;
+  count++;
 }
 
 mkdirSync(join(pkgRoot, "dist"), { recursive: true });
 writeFileSync(join(pkgRoot, "dist", "styles.css"), out);
-console.log(
-  `build-css: wrote dist/styles.css (${count} components, ${out.length} bytes)`,
-);
+console.log(`build-css: wrote dist/styles.css (${count} components, ${out.length} bytes)`);
 
 // FarmUI ships as a client-safe package (like @mantine/core): prepend the
 // "use client" directive so every component can be imported directly from a
@@ -51,4 +64,3 @@ if (!js.startsWith('"use client"')) {
   writeFileSync(entry, `"use client";\n${js}`);
   console.log('build-css: prepended "use client" to dist/index.js');
 }
-

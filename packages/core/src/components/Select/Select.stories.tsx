@@ -1,77 +1,84 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Select } from "../../index";
+import { Field, Select } from "../../index";
 
-const FRAMEWORKS = [
-  { value: "react", label: "React" },
-  { value: "vue", label: "Vue" },
-  { value: "svelte", label: "Svelte" },
-  { value: "solid", label: "Solid" },
-];
+const frameworkOptions = (
+  <>
+    <option value="react">React</option>
+    <option value="vue">Vue</option>
+    <option value="svelte">Svelte</option>
+    <option value="solid">Solid</option>
+  </>
+);
 
 const meta = {
   title: "Inputs/Select",
   component: Select,
   tags: ["autodocs"],
   args: {
-    label: "Framework",
     placeholder: "Pick one",
-    data: FRAMEWORKS,
-    size: "md",
-    radius: "md",
+    children: frameworkOptions,
     disabled: false,
-    withAsterisk: false,
   },
-  argTypes: {
-    size: { control: "inline-radio", options: ["sm", "md", "lg"] },
-    radius: {
-      control: "select",
-      options: ["sm", "md", "lg", "xl", "full"],
-    },
-  },
+  render: (args) => (
+    <Field.Root>
+      <Field.Label>Framework</Field.Label>
+      <Select {...args} />
+    </Field.Root>
+  ),
 } satisfies Meta<typeof Select>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Live playground — tweak props in the Controls panel. */
 export const Playground: Story = {};
 
-export const Sizes: Story = {
-  render: (args) => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-      <Select {...args} size="sm" label="Small" />
-      <Select {...args} size="md" label="Medium" />
-      <Select {...args} size="lg" label="Large" />
-    </div>
+export const Grouped: Story = {
+  render: () => (
+    <Field.Root>
+      <Field.Label>Instrument</Field.Label>
+      <Select placeholder="Pick one">
+        <optgroup label="Strings">
+          <option>Violin</option>
+          <option>Cello</option>
+        </optgroup>
+        <optgroup label="Brass">
+          <option>Trumpet</option>
+          <option disabled>Tuba (unavailable)</option>
+        </optgroup>
+      </Select>
+    </Field.Root>
   ),
 };
 
-export const StringData: Story = {
-  args: {
-    label: "Fruit",
-    placeholder: "Pick a fruit",
-    data: ["Apple", "Banana", "Cherry"],
-  },
-};
-
 export const WithDescription: Story = {
-  args: {
-    label: "Framework",
-    description: "You can change this later in settings.",
-  },
+  render: (args) => (
+    <Field.Root>
+      <Field.Label>Framework</Field.Label>
+      <Field.Description>You can change this later in settings.</Field.Description>
+      <Select {...args} />
+    </Field.Root>
+  ),
 };
 
 export const WithError: Story = {
-  args: {
-    label: "Framework",
-    error: "Please choose a framework.",
-  },
+  render: (args) => (
+    <Field.Root>
+      <Field.Label>Framework</Field.Label>
+      <Select {...args} />
+      <Field.Error>Select a framework</Field.Error>
+    </Field.Root>
+  ),
 };
 
 export const Required: Story = {
-  args: { label: "Framework", withAsterisk: true },
+  render: (args) => (
+    <Field.Root>
+      <Field.Label>Framework</Field.Label>
+      <Select {...args} required />
+    </Field.Root>
+  ),
 };
 
 export const Disabled: Story = {
-  args: { label: "Framework", defaultValue: "react", disabled: true },
+  args: { defaultValue: "react", disabled: true },
 };

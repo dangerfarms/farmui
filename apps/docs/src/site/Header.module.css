@@ -8,7 +8,7 @@
 }
 
 .inner {
-  display: flex;
+  display: block flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
@@ -19,60 +19,56 @@
 
 .left,
 .right {
-  display: flex;
+  display: block flex;
   align-items: center;
   gap: 1.25rem;
 }
 
 .nav {
-  display: flex;
+  display: block flex;
   gap: 1.25rem;
   font-size: var(--fui-text-sm);
   font-weight: 550;
   color: var(--fui-text-muted);
 }
+
 .nav a {
-  transition: color var(--fui-transition);
+  transition: color var(--fui-duration-md) var(--fui-ease);
 }
+
 .nav a:hover {
   color: var(--fui-text);
 }
 
+/* Matches ThemeToggle's .btn box so the icon buttons read as a set. */
 .stars {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.4rem 0.7rem;
-  font-size: var(--fui-text-sm);
-  font-weight: 600;
-  color: var(--fui-text);
+  display: block grid;
+  place-items: center;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  color: var(--fui-text-muted);
   border: 1px solid var(--fui-border);
   border-radius: var(--fui-radius-md);
   transition:
-    border-color var(--fui-transition),
-    background var(--fui-transition);
+    color var(--fui-duration-md) var(--fui-ease),
+    border-color var(--fui-duration-md) var(--fui-ease),
+    background var(--fui-duration-md) var(--fui-ease);
 }
+
 .stars:hover {
+  color: var(--fui-text);
   border-color: var(--fui-border-strong);
   background: var(--fui-surface-hover);
 }
-.starCount {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  color: var(--fui-primary);
-}
 
-@media (max-width: 62rem) {
+@media (width <= 62rem) {
   .nav {
     display: none;
   }
 }
-@media (max-width: 48rem) {
+
+@media (width <= 48rem) {
   .search {
-    display: none;
-  }
-  .starCount {
     display: none;
   }
 }
