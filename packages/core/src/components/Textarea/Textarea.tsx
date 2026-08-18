@@ -1,7 +1,6 @@
 "use client";
 
 import type { Ref, TextareaHTMLAttributes } from "react";
-import { cx } from "../../utils";
 import { useFieldControlProps } from "../Field/Field";
 import { useUserInvalid } from "../../use-user-invalid";
 
@@ -35,7 +34,7 @@ export function Textarea({
     <div className="fui-Textarea-field" data-disabled={disabled || undefined} style={style}>
       <textarea
         ref={ref}
-        className={cx("fui-Textarea-textarea", className)}
+        className={className}
         rows={rows}
         disabled={disabled}
         id={id ?? field.id}

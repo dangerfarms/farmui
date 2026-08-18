@@ -84,15 +84,13 @@ export function RadioGroup({
       >
         {label && <Fieldset.Legend optional={optional}>{label}</Fieldset.Legend>}
         {description && (
-          <span className="fui-Radio-groupDescription" id={descId}>
+          <span className="description" id={descId}>
             {description}
           </span>
         )}
-        <div className="fui-Radio-options" data-orientation={orientation}>
-          {children}
-        </div>
+        <div data-orientation={orientation}>{children}</div>
         {error && (
-          <span className="fui-Radio-error" id={errId} role="alert">
+          <span className="error" id={errId} role="alert">
             <span className="fui-Error-prefix">Error: </span>
             {error}
           </span>

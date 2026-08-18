@@ -109,13 +109,13 @@
     }
   }
 
-  .fui-Drawer-title {
+  h2.title {
     margin-block: 0 var(--fui-space-sm);
     font-size: var(--fui-text-lg);
     font-weight: 600;
   }
 
-  .fui-Drawer-description {
+  p.description {
     margin-block: 0 var(--fui-space-md);
     color: var(--fui-text-muted);
   }

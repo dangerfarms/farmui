@@ -116,10 +116,10 @@ export function Radio({
         aria-describedby={descId}
         {...control}
       />
-      <span className="fui-Radio-body">
-        {label && <span className="fui-Radio-label">{label}</span>}
+      <span className="body">
+        {label && <span className="label">{label}</span>}
         {description && (
-          <span className="fui-Radio-description" id={descId}>
+          <span className="description" id={descId}>
             {description}
           </span>
         )}

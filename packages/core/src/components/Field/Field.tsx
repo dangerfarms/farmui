@@ -79,7 +79,7 @@ function FieldRoot({ id, className, children, ...rest }: FieldRootProps) {
 
   // Invalid is never declared, only detected: the field is invalid exactly
   // when a Field.Error with content is rendered. CSS detects the same thing
-  // with :has(.fui-Field-error).
+  // with :has(> p.error).
   const invalid = hasError;
   const descriptionId = `${fieldId}-description`;
   const errorId = `${fieldId}-error`;
@@ -113,7 +113,7 @@ function FieldRoot({ id, className, children, ...rest }: FieldRootProps) {
 
   return (
     <FieldContext value={value}>
-      <div className={cx("fui-Field-root", className)} {...rest}>
+      <div className={cx("fui-Field", className)} {...rest}>
         {children}
       </div>
     </FieldContext>
@@ -128,9 +128,9 @@ export interface FieldLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
 function FieldLabel({ optional, className, children, ...rest }: FieldLabelProps) {
   const ctx = useFieldContext("Field.Label");
   return (
-    <label className={cx("fui-Field-label", className)} htmlFor={ctx.fieldId} {...rest}>
+    <label className={className} htmlFor={ctx.fieldId} {...rest}>
       {children}
-      {optional && <span className="fui-Field-optional"> (optional)</span>}
+      {optional && <span className="optional"> (optional)</span>}
     </label>
   );
 }
@@ -142,7 +142,7 @@ function FieldDescription({ className, children, ...rest }: FieldDescriptionProp
   const { registerDescription } = ctx;
   useEffect(() => registerDescription(), [registerDescription]);
   return (
-    <p className={cx("fui-Field-description", className)} id={ctx.descriptionId} {...rest}>
+    <p className={cx("description", className)} id={ctx.descriptionId} {...rest}>
       {children}
     </p>
   );
@@ -161,7 +161,7 @@ function FieldError({ className, children, ...rest }: FieldErrorProps) {
 
   if (!hasContent) return null;
   return (
-    <p className={cx("fui-Field-error", className)} id={ctx.errorId} role="alert" {...rest}>
+    <p className={cx("error", className)} id={ctx.errorId} role="alert" {...rest}>
       <span className="fui-Error-prefix">Error: </span>
       {children}
     </p>

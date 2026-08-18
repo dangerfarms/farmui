@@ -1,4 +1,4 @@
-@scope (.fui-Tabs-root) {
+@scope (.fui-Tabs) {
   :scope {
     display: block flex;
     flex-direction: column;
@@ -9,7 +9,7 @@
 
 /*
  * The list is scoped to its own root: Tabs.List renders without the
- * .fui-Tabs-root class on it (and, unlike Tab/Panel, is not context-guarded).
+ * .fui-Tabs class on it (and, unlike Tab/Panel, is not context-guarded).
  */
 @scope (.fui-Tabs-list) {
   :scope {
@@ -20,8 +20,8 @@
 }
 
 /* Tab and Panel can only render inside <Tabs> (their context throws outside). */
-@scope (.fui-Tabs-root) {
-  .fui-Tabs-tab {
+@scope (.fui-Tabs) {
+  button.tab {
     position: relative;
     display: inline flex;
     align-items: center;
@@ -43,20 +43,20 @@
       background var(--fui-duration-sm) var(--fui-ease);
   }
 
-  .fui-Tabs-tab:hover:not(:disabled) {
+  button.tab:hover:not(:disabled) {
     color: var(--fui-text);
     background: color-mix(in oklch, var(--fui-primary-soft) 50%, transparent);
   }
 
-  .fui-Tabs-tab:focus-visible {
+  button.tab:focus-visible {
     border-radius: var(--fui-radius-sm) var(--fui-radius-sm) 0 0;
   }
 
-  .fui-Tabs-tab:disabled {
+  button.tab:disabled {
     opacity: 0.5;
   }
 
-  .fui-Tabs-tab[data-active] {
+  button.tab[data-active] {
     color: var(--fui-primary);
     border-block-end-color: var(--fui-primary);
   }
@@ -64,13 +64,13 @@
   /* Forced colors: guarantee the active underline with a system colour.
      Must come after the base rule — same specificity, order decides. */
   @media (forced-colors: active) {
-    .fui-Tabs-tab[data-active] {
+    button.tab[data-active] {
       border-block-end-color: Highlight;
     }
   }
 
   /* Icons compose as children and are detected, exactly as in Button. */
-  .fui-Tabs-tab:has(svg) {
+  button.tab:has(svg) {
     display: inline flex;
     align-items: center;
     gap: 0.45em;
@@ -81,18 +81,18 @@
     }
   }
 
-  .fui-Tabs-panel {
+  div.panel {
     font-size: var(--fui-text-md);
     line-height: 1.55;
   }
 
-  .fui-Tabs-panel:focus-visible {
+  div.panel:focus-visible {
     border-radius: var(--fui-radius-sm);
   }
 
   /* Boolean hidden only — [hidden="until-found"] must keep the UA's
      content-visibility treatment or find-in-page reveal breaks. */
-  .fui-Tabs-panel[hidden]:not([hidden="until-found"]) {
+  div.panel[hidden]:not([hidden="until-found"]) {
     display: none;
   }
 }

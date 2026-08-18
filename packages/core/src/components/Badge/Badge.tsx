@@ -21,14 +21,8 @@ export interface BadgeProps extends Omit<HTMLAttributes<HTMLSpanElement>, "color
  */
 export function Badge({ size = "md", dot, className, style, children, ref, ...rest }: BadgeProps) {
   return (
-    <span
-      ref={ref}
-      className={cx("fui-Badge-root", className)}
-      data-size={size}
-      style={style}
-      {...rest}
-    >
-      {dot && <span className="fui-Badge-dot" aria-hidden />}
+    <span ref={ref} className={cx("fui-Badge", className)} data-size={size} style={style} {...rest}>
+      {dot && <span className="dot" aria-hidden />}
       {children}
     </span>
   );

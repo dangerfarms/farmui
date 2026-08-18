@@ -1,5 +1,5 @@
 /* ---- Single radio ---- */
-@scope (.fui-Radio-wrapper) {
+@scope (.fui-Radio-wrapper) to ([class*="fui-"]) {
   :scope {
     display: inline flex;
     gap: var(--fui-space-sm);
@@ -106,7 +106,7 @@
     border-color: var(--fui-danger);
   }
 
-  .fui-Radio-group:has(.fui-Radio-error) :scope {
+  .fui-Radio-group:has(span.error) :scope {
     --fui-ring-color: var(--fui-danger-ring);
 
     border-color: var(--fui-danger);
@@ -122,20 +122,20 @@
   }
 }
 
-@scope (.fui-Radio-wrapper) {
-  .fui-Radio-body {
+@scope (.fui-Radio-wrapper) to ([class*="fui-"]) {
+  span.body {
     display: block flex;
     flex-direction: column;
     gap: 0.1rem;
     line-height: 1.35;
   }
 
-  .fui-Radio-label {
+  span.label {
     font-size: var(--fui-text-sm);
     font-weight: 500;
   }
 
-  .fui-Radio-description {
+  span.description {
     font-size: var(--fui-text-xs);
     color: var(--fui-text-muted);
   }
@@ -153,29 +153,29 @@
   }
 }
 
-@scope (.fui-Radio-group) {
+@scope (.fui-Radio-group) to ([class*="fui-"]) {
   :scope {
     gap: var(--fui-space-xs);
   }
 
-  .fui-Radio-groupDescription {
+  span.description {
     font-size: var(--fui-text-xs);
     color: var(--fui-text-muted);
   }
 
-  .fui-Radio-options {
+  [data-orientation] {
     display: block flex;
     flex-direction: column;
     gap: var(--fui-space-sm);
     margin-block-start: var(--fui-space-xs);
   }
 
-  .fui-Radio-options[data-orientation="horizontal"] {
+  [data-orientation="horizontal"] {
     flex-flow: row wrap;
     gap: var(--fui-space-lg);
   }
 
-  .fui-Radio-error {
+  span.error {
     font-size: var(--fui-text-xs);
     color: var(--fui-danger);
     margin-block-start: var(--fui-space-xs);

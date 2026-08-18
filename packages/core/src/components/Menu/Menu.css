@@ -1,4 +1,4 @@
-@scope (.fui-Menu-root) {
+@scope (.fui-Menu) {
   :scope {
     position: relative;
     display: inline flow-root;
@@ -88,7 +88,7 @@
     }
   }
 
-  .fui-Menu-item {
+  .item {
     display: block flex;
     align-items: center;
     gap: var(--fui-space-sm);
@@ -125,7 +125,7 @@
     }
   }
 
-  .fui-Menu-groupLabel {
+  div.group-label {
     padding-block: var(--fui-space-xs);
     padding-inline: var(--fui-space-sm);
     font-size: var(--fui-text-xs);
@@ -135,7 +135,7 @@
     color: var(--fui-text-muted);
   }
 
-  .fui-Menu-separator {
+  hr {
     margin-block: var(--fui-space-xs);
     margin-inline: calc(-1 * var(--fui-space-xs));
     border: 0;
@@ -145,13 +145,13 @@
   /* Forced colors: the roving highlight is background-only, and
      aria-disabled (unlike :disabled) gets no automatic GrayText. */
   @media (forced-colors: active) {
-    .fui-Menu-item:is(:hover, :focus):not([aria-disabled="true"]) {
+    .item:is(:hover, :focus):not([aria-disabled="true"]) {
       forced-color-adjust: none;
       background: Highlight;
       color: HighlightText;
     }
 
-    .fui-Menu-item[aria-disabled="true"] {
+    .item[aria-disabled="true"] {
       color: GrayText;
     }
   }

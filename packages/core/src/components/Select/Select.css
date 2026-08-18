@@ -27,7 +27,7 @@
      in separate blocks — one unsupported selector invalidates a shared
      list. Declared before the error state so danger wins at equal
      specificity. */
-  :scope:has(.fui-Select-select:autofill) {
+  :scope:has(select:autofill) {
     border-color: color-mix(
       in oklab,
       var(--fui-primary) 50%,
@@ -35,7 +35,7 @@
     );
   }
 
-  :scope:has(.fui-Select-select:-webkit-autofill) {
+  :scope:has(select:-webkit-autofill) {
     border-color: color-mix(
       in oklab,
       var(--fui-primary) 50%,
@@ -43,7 +43,7 @@
     );
   }
 
-  :scope:has(.fui-Select-select:is([aria-invalid="true"], :user-invalid)) {
+  :scope:has(select:is([aria-invalid="true"], :user-invalid)) {
     --fui-ring-color: var(--fui-danger-ring);
 
     border-color: var(--fui-danger);
@@ -54,7 +54,7 @@
     opacity: var(--fui-disabled-opacity);
   }
 
-  .fui-Select-select {
+  select {
     flex: 1;
     min-inline-size: 0;
 
@@ -73,24 +73,24 @@
   }
 
   /* Empty placeholder value renders dimmed like a real placeholder. */
-  .fui-Select-select:has(option[value=""]:checked) {
+  select:has(option[value=""]:checked) {
     color: var(--fui-text-dim);
   }
 
   /* background-color cannot be overridden on an autofilled field; an inset
      shadow wider than the control paints the tint instead. Separate blocks —
      see the wrapper rules above. */
-  .fui-Select-select:autofill {
+  select:autofill {
     box-shadow: inset 0 0 0 100px
       color-mix(in oklab, var(--fui-primary) 8%, var(--fui-surface));
   }
 
-  .fui-Select-select:-webkit-autofill {
+  select:-webkit-autofill {
     box-shadow: inset 0 0 0 100px
       color-mix(in oklab, var(--fui-primary) 8%, var(--fui-surface));
   }
 
-  .fui-Select-chevron {
+  svg.chevron {
     position: absolute;
     inset-inline-end: var(--fui-space-md);
 

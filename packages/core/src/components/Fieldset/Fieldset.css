@@ -2,7 +2,7 @@
  * Fieldset — native <fieldset>/<legend>, styled with @scope. The browser's
  * default fieldset border/margin/padding are reset so it composes cleanly.
  */
-@scope (.fui-Fieldset-root) {
+@scope (.fui-Fieldset) to ([class*="fui-"]) {
   :scope {
     display: block flex;
     flex-direction: column;
@@ -13,13 +13,13 @@
     border: 0;
   }
 
-  .fui-Fieldset-legend {
+  legend {
     padding: 0;
     font-size: var(--fui-text-sm);
     font-weight: 500;
   }
 
-  .fui-Fieldset-optional {
+  span.optional {
     font-weight: 400;
     color: var(--fui-text-muted);
   }

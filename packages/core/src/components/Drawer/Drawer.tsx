@@ -302,7 +302,7 @@ function DrawerTitle({ className, children, ...rest }: DrawerTitleProps) {
   const { registerTitle } = ctx;
   useEffect(() => registerTitle(), [registerTitle]);
   return (
-    <h2 className={cx("fui-Drawer-title", className)} id={ctx.titleId} {...rest}>
+    <h2 className={cx("title", className)} id={ctx.titleId} {...rest}>
       {children}
     </h2>
   );
@@ -315,7 +315,7 @@ function DrawerDescription({ className, children, ...rest }: DrawerDescriptionPr
   const { registerDescription } = ctx;
   useEffect(() => registerDescription(), [registerDescription]);
   return (
-    <p className={cx("fui-Drawer-description", className)} id={ctx.descriptionId} {...rest}>
+    <p className={cx("description", className)} id={ctx.descriptionId} {...rest}>
       {children}
     </p>
   );

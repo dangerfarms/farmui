@@ -41,12 +41,12 @@ export function Loader({ size, label = "Loading", className, style, ref, ...rest
       ref={ref}
       role="status"
       aria-label={label}
-      className={cx("fui-Loader-root", className)}
+      className={cx("fui-Loader", className)}
       style={vars}
       {...rest}
     >
-      <span className="fui-Loader-spinner" aria-hidden />
-      <span className="fui-Loader-srOnly">{label}</span>
+      <span className="spinner" aria-hidden />
+      <span className="sr-only">{label}</span>
     </span>
   );
 }

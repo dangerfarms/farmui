@@ -1,4 +1,4 @@
-@scope (.fui-Popover-root) {
+@scope (.fui-Popover) {
   :scope {
     position: relative;
     display: inline flow-root;
@@ -88,22 +88,22 @@
     }
   }
 
-  .fui-Popover-title {
+  h2.title {
     margin: 0;
     font-size: var(--fui-text-md);
     font-weight: 600;
   }
 
-  .fui-Popover-description {
+  p.description {
     margin-block-end: 0;
     margin-inline: 0;
     color: var(--fui-text-muted);
 
-    &:not(.fui-Popover-title + *) {
+    &:not(h2.title + *) {
       margin-block-start: 0;
     }
 
-    .fui-Popover-title + & {
+    h2.title + & {
       margin-block-start: var(--fui-space-xs);
     }
   }

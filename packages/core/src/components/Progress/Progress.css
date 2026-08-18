@@ -1,4 +1,4 @@
-@scope (.fui-Progress-root) {
+@scope (.fui-Progress) {
   :scope {
     --_h: 0.625rem;
 
@@ -18,7 +18,7 @@
     }
   }
 
-  .fui-Progress-bar {
+  div.bar {
     display: block flex;
     align-items: center;
     justify-content: flex-end;
@@ -34,7 +34,7 @@
     transition: inline-size var(--fui-duration-lg) var(--fui-ease);
   }
 
-  .fui-Progress-label {
+  span.label {
     padding-inline: var(--fui-space-sm);
     font-size: var(--fui-text-xs);
     font-weight: 600;
@@ -42,7 +42,7 @@
     white-space: nowrap;
   }
 
-  .fui-Progress-bar[data-striped] {
+  div.bar[data-striped] {
     background-image: repeating-linear-gradient(
       45deg,
       color-mix(in oklch, var(--fui-on-strong) 22%, transparent) 0,
@@ -53,7 +53,7 @@
     background-size: 1.414rem 1.414rem;
   }
 
-  .fui-Progress-bar[data-animated] {
+  div.bar[data-animated] {
     animation: fui-Progress-progress-stripes 1s linear infinite;
   }
 
@@ -63,7 +63,7 @@
       border: 1px solid CanvasText;
     }
 
-    .fui-Progress-bar {
+    div.bar {
       forced-color-adjust: none;
       background: Highlight;
     }

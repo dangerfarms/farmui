@@ -31,7 +31,7 @@
     }
   }
 
-  .fui-Toast-root {
+  div.toast {
     display: block flex;
     align-items: flex-start;
     gap: var(--fui-space-sm);
@@ -54,32 +54,32 @@
   }
 
   /* Exit: the provider marks the toast, plays this, then removes it. */
-  .fui-Toast-root[data-exiting] {
+  div.toast[data-exiting] {
     opacity: 0;
     translate: 0 0.5rem;
   }
 
-  .fui-Toast-content {
+  div.content {
     flex: 1;
     min-inline-size: 0;
   }
 
-  .fui-Toast-title {
+  div.title {
     font-size: var(--fui-text-sm);
     font-weight: 600;
   }
 
-  .fui-Toast-description {
+  div.description {
     font-size: var(--fui-text-sm);
     color: var(--fui-text-muted);
     overflow-wrap: break-word;
   }
 
-  .fui-Toast-title + .fui-Toast-description {
+  div.title + div.description {
     margin-block-start: var(--fui-space-xs);
   }
 
-  .fui-Toast-close {
+  button.close {
     display: inline grid;
     place-items: center;
     flex-shrink: 0;

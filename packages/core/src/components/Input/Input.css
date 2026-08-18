@@ -1,4 +1,4 @@
-@scope (.fui-Input-field) {
+@scope (.fui-Input-field) to ([class*="fui-"]) {
   :scope {
     display: block flex;
     align-items: center;
@@ -30,7 +30,7 @@
      in separate blocks — one unsupported selector invalidates a shared
      list. Declared before the error state so danger wins at equal
      specificity. */
-  :scope:has(.fui-Input-input:autofill) {
+  :scope:has(input:autofill) {
     border-color: color-mix(
       in oklab,
       var(--fui-primary) 50%,
@@ -38,7 +38,7 @@
     );
   }
 
-  :scope:has(.fui-Input-input:-webkit-autofill) {
+  :scope:has(input:-webkit-autofill) {
     border-color: color-mix(
       in oklab,
       var(--fui-primary) 50%,
@@ -49,7 +49,7 @@
   /* Error state is detected from the input's own state: ARIA (from a
      rendered error message) or the platform's native constraint validation
      (:user-invalid) — the latter needs no JS and no props at all. */
-  :scope:has(.fui-Input-input:is([aria-invalid="true"], :user-invalid)) {
+  :scope:has(input:is([aria-invalid="true"], :user-invalid)) {
     --fui-ring-color: var(--fui-danger-ring);
 
     border-color: var(--fui-danger);
@@ -60,7 +60,7 @@
     opacity: var(--fui-disabled-opacity);
   }
 
-  .fui-Input-input {
+  input {
     flex: 1;
     min-inline-size: 0;
 
@@ -74,24 +74,24 @@
     font: inherit;
   }
 
-  .fui-Input-input::placeholder {
+  input::placeholder {
     color: var(--fui-text-dim);
   }
 
   /* background-color cannot be overridden on an autofilled field; an inset
      shadow wider than the control paints the tint instead. Separate blocks —
      see the wrapper rules above. */
-  .fui-Input-input:autofill {
+  input:autofill {
     box-shadow: inset 0 0 0 100px
       color-mix(in oklab, var(--fui-primary) 8%, var(--fui-surface));
   }
 
-  .fui-Input-input:-webkit-autofill {
+  input:-webkit-autofill {
     box-shadow: inset 0 0 0 100px
       color-mix(in oklab, var(--fui-primary) 8%, var(--fui-surface));
   }
 
-  .fui-Input-section {
+  span.section {
     display: inline flex;
     flex-shrink: 0;
     align-items: center;

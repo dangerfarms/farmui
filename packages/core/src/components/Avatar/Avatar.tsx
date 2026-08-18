@@ -29,13 +29,7 @@ function initialsFrom(name: string): string {
 /** Fallback user glyph shown when there is no image or name. */
 function UserGlyph() {
   return (
-    <svg
-      className="fui-Avatar-glyph"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden
-      focusable="false"
-    >
+    <svg className="glyph" viewBox="0 0 24 24" fill="currentColor" aria-hidden focusable="false">
       <path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-4.42 0-8 2.69-8 6v1a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-1c0-3.31-3.58-6-8-6Z" />
     </svg>
   );
@@ -66,9 +60,9 @@ export function Avatar({
   if (children) {
     content = children;
   } else if (src) {
-    content = <img className="fui-Avatar-img" src={src} alt={alt ?? name ?? ""} />;
+    content = <img className="image" src={src} alt={alt ?? name ?? ""} />;
   } else if (initials) {
-    content = <span className="fui-Avatar-initials">{initials}</span>;
+    content = <span className="initials">{initials}</span>;
   } else {
     content = <UserGlyph />;
   }
@@ -76,7 +70,7 @@ export function Avatar({
   return (
     <span
       ref={ref}
-      className={cx("fui-Avatar-root", className)}
+      className={cx("fui-Avatar", className)}
       data-size={numericSize ? undefined : size}
       role={src || (!accessibleName && !consumerNamed) ? undefined : "img"}
       aria-label={src ? undefined : accessibleName}

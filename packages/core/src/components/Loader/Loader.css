@@ -1,4 +1,4 @@
-@scope (.fui-Loader-root) {
+@scope (.fui-Loader) {
   :scope {
     /* The hook is inherited, so a composing component can size a loader
        from its own context (Button answers it with the same 1em its
@@ -16,7 +16,7 @@
     vertical-align: middle;
   }
 
-  .fui-Loader-srOnly {
+  span.sr-only {
     position: absolute;
     inline-size: 1px;
     block-size: 1px;
@@ -29,7 +29,7 @@
   }
 
   /* Spinner — rotating ring */
-  .fui-Loader-spinner {
+  span.spinner {
     inline-size: 100%;
     block-size: 100%;
     border: max(2px, calc(var(--_size) * 0.12)) solid

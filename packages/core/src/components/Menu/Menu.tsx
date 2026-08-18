@@ -157,7 +157,7 @@ function MenuRoot({
 
   return (
     <MenuContext value={value}>
-      <span className={cx("fui-Menu-root", className)} {...rest}>
+      <span className={cx("fui-Menu", className)} {...rest}>
         {children}
       </span>
     </MenuContext>
@@ -279,7 +279,7 @@ function MenuPopup({
   useEffect(() => {
     if (enhanced || !open) return;
     const onPointer = (e: MouseEvent) => {
-      const root = ref.current?.closest(".fui-Menu-root");
+      const root = ref.current?.closest(".fui-Menu");
       if (root && !root.contains(e.target as Node)) setOpen(false);
     };
     const onKey = (e: KeyboardEvent) => {
@@ -419,7 +419,7 @@ function MenuItem({
     (href !== undefined ? (
       <a
         href={href}
-        className={cx("fui-Menu-item", className)}
+        className={cx("item", className)}
         {...(rest as AnchorHTMLAttributes<HTMLAnchorElement>)}
       >
         {children}
@@ -427,7 +427,7 @@ function MenuItem({
     ) : (
       <button
         type="button"
-        className={cx("fui-Menu-item", className)}
+        className={cx("item", className)}
         {...(rest as ButtonHTMLAttributes<HTMLButtonElement>)}
       >
         {children}
@@ -463,7 +463,7 @@ function MenuGroup({ className, children, ...rest }: MenuGroupProps) {
       <div
         role="group"
         aria-labelledby={labelCount > 0 ? labelId : undefined}
-        className={cx("fui-Menu-group", className)}
+        className={className}
         {...rest}
       >
         {children}
@@ -482,7 +482,7 @@ function MenuGroupLabel({ className, children, ...rest }: MenuGroupLabelProps) {
   const { registerLabel } = group;
   useEffect(() => registerLabel(), [registerLabel]);
   return (
-    <div id={group.labelId} className={cx("fui-Menu-groupLabel", className)} {...rest}>
+    <div id={group.labelId} className={cx("group-label", className)} {...rest}>
       {children}
     </div>
   );
@@ -492,7 +492,7 @@ export interface MenuSeparatorProps extends HTMLAttributes<HTMLHRElement> {}
 
 function MenuSeparator({ className, ...rest }: MenuSeparatorProps) {
   // A real <hr> — the platform's separator role, no ARIA needed.
-  return <hr className={cx("fui-Menu-separator", className)} {...rest} />;
+  return <hr className={className} {...rest} />;
 }
 
 export const Menu = {

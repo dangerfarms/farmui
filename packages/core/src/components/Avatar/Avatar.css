@@ -1,4 +1,4 @@
-@scope (.fui-Avatar-root) {
+@scope (.fui-Avatar) to ([class*="fui-"]) {
   :scope {
     --_bg: var(--fui-primary-strong);
     --_fg: var(--fui-on-strong);
@@ -62,19 +62,19 @@
     }
   }
 
-  .fui-Avatar-img {
+  img.image {
     inline-size: 100%;
     block-size: 100%;
     object-fit: cover;
     display: block flow;
   }
 
-  .fui-Avatar-initials {
+  span.initials {
     font-size: 0.85em;
     letter-spacing: 0.02em;
   }
 
-  .fui-Avatar-glyph {
+  svg.glyph {
     inline-size: 65%;
     block-size: 65%;
     opacity: 0.9;

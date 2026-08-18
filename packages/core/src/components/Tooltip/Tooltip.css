@@ -1,4 +1,4 @@
-@scope (.fui-Tooltip-root) {
+@scope (.fui-Tooltip) {
   :scope {
     position: relative;
     display: inline flow-root;
@@ -140,7 +140,7 @@
   }
 
   /* Arrow — points back toward the trigger for the requested side. */
-  .fui-Tooltip-arrow {
+  span.arrow {
     position: absolute;
     inline-size: 0;
     block-size: 0;

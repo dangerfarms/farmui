@@ -3,7 +3,7 @@
  * the page background, with the text pushed toward black or white so the
  * label always reads on its own tint. The accent is the region's.
  */
-@scope (.fui-Badge-root) {
+@scope (.fui-Badge) {
   :scope {
     --_color: var(--fui-text);
 
@@ -90,7 +90,7 @@
   }
 
   /* The status dot carries the raw channel — a swatch, not text. */
-  .fui-Badge-dot {
+  span.dot {
     inline-size: 0.5em;
     block-size: 0.5em;
     border-radius: var(--fui-radius-full);

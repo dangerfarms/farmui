@@ -1,4 +1,4 @@
-@scope (.fui-Card-root) {
+@scope (.fui-Card) {
   :scope {
     display: block flow;
     border: 1px solid transparent;

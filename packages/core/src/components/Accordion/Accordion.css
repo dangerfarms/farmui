@@ -1,4 +1,4 @@
-@scope (.fui-Accordion-root) {
+@scope (.fui-Accordion) {
   :scope {
     display: block flex;
     flex-direction: column;
@@ -11,7 +11,7 @@
 }
 
 /* Items are scoped to their own root: AccordionItem is exported standalone,
-   so item styles must not depend on the .fui-Accordion-root wrapper. */
+   so item styles must not depend on the .fui-Accordion wrapper. */
 @scope (.fui-Accordion-item) {
   /* Open/close height animation on the platform's own content slot.
      interpolate-size is required for the 0 → auto interpolation and is not
@@ -47,7 +47,7 @@
     border-block-end: none;
   }
 
-  .fui-Accordion-summary {
+  :scope > summary {
     display: block flex;
     align-items: center;
     justify-content: space-between;
@@ -63,35 +63,35 @@
     transition: background var(--fui-duration-md) var(--fui-ease);
   }
 
-  .fui-Accordion-summary::-webkit-details-marker {
+  :scope > summary::-webkit-details-marker {
     display: none;
   }
 
-  .fui-Accordion-summary:hover {
+  :scope > summary:hover {
     background: var(--fui-surface-hover);
   }
 
-  :scope[open] > .fui-Accordion-summary {
+  :scope[open] > summary {
     color: var(--fui-primary);
   }
 
-  .fui-Accordion-label {
+  span.label {
     min-inline-size: 0;
   }
 
-  .fui-Accordion-chevron {
+  svg.chevron {
     flex: none;
     color: var(--fui-text-muted);
     rotate: 0deg;
     transition: rotate var(--fui-duration-md) var(--fui-ease);
   }
 
-  :scope[open] > .fui-Accordion-summary .fui-Accordion-chevron {
+  :scope[open] > summary svg.chevron {
     rotate: 180deg;
     color: var(--fui-primary);
   }
 
-  .fui-Accordion-content {
+  div.content {
     padding-block: 0 var(--fui-space-lg);
     padding-inline: var(--fui-space-lg);
     color: var(--fui-text-muted);

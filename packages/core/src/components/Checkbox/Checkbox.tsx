@@ -69,7 +69,7 @@ function CheckboxControl({
         ref={inputRef}
         id={resolvedId}
         type="checkbox"
-        className={cx("fui-Checkbox-input", className)}
+        className={className}
         disabled={disabled}
         {...rest}
         aria-invalid={resolvedAriaInvalid}
@@ -83,9 +83,9 @@ function CheckboxControl({
           checkOnInvalid(e);
         }}
       />
-      <svg className="fui-Checkbox-check" viewBox="0 0 16 16" fill="none" aria-hidden>
+      <svg className="check" viewBox="0 0 16 16" fill="none" aria-hidden>
         <path
-          className="fui-Checkbox-tick"
+          className="tick"
           d="M3.5 8.5l3 3 6-6.5"
           stroke="currentColor"
           strokeWidth="2"
@@ -93,7 +93,7 @@ function CheckboxControl({
           strokeLinejoin="round"
         />
         <path
-          className="fui-Checkbox-dash"
+          className="dash"
           d="M4 8h8"
           stroke="currentColor"
           strokeWidth="2"
@@ -137,7 +137,7 @@ export function Checkbox({
       className={cx("fui-Checkbox-wrapper", wrapperClassName)}
       data-disabled={disabled || undefined}
     >
-      <label className="fui-Checkbox-control" htmlFor={fieldId}>
+      <label htmlFor={fieldId}>
         <CheckboxControl
           ref={ref}
           id={fieldId}
@@ -146,10 +146,10 @@ export function Checkbox({
           aria-describedby={descId}
           {...control}
         />
-        <span className="fui-Checkbox-body">
-          {label && <span className="fui-Checkbox-label">{label}</span>}
+        <span className="body">
+          {label && <span className="label">{label}</span>}
           {description && (
-            <span className="fui-Checkbox-description" id={descId}>
+            <span className="description" id={descId}>
               {description}
             </span>
           )}

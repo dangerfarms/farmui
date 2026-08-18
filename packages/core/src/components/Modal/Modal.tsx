@@ -297,7 +297,7 @@ function ModalTitle({ className, children, ...rest }: ModalTitleProps) {
   const { registerTitle } = ctx;
   useEffect(() => registerTitle(), [registerTitle]);
   return (
-    <h2 className={cx("fui-Modal-title", className)} id={ctx.titleId} {...rest}>
+    <h2 className={cx("title", className)} id={ctx.titleId} {...rest}>
       {children}
     </h2>
   );
@@ -310,7 +310,7 @@ function ModalDescription({ className, children, ...rest }: ModalDescriptionProp
   const { registerDescription } = ctx;
   useEffect(() => registerDescription(), [registerDescription]);
   return (
-    <p className={cx("fui-Modal-description", className)} id={ctx.descriptionId} {...rest}>
+    <p className={cx("description", className)} id={ctx.descriptionId} {...rest}>
       {children}
     </p>
   );

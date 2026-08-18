@@ -78,7 +78,7 @@ function ErrorSummaryRoot({
         role="group"
         aria-labelledby={titleId}
         tabIndex={-1}
-        className={cx("fui-ErrorSummary-root", className)}
+        className={cx("fui-ErrorSummary", className)}
         {...rest}
       >
         {children}
@@ -92,7 +92,7 @@ export interface ErrorSummaryTitleProps extends HTMLAttributes<HTMLHeadingElemen
 function ErrorSummaryTitle({ className, children, ...rest }: ErrorSummaryTitleProps) {
   const ctx = useErrorSummaryContext("ErrorSummary.Title");
   return (
-    <h2 id={ctx.titleId} className={cx("fui-ErrorSummary-title", className)} {...rest}>
+    <h2 id={ctx.titleId} className={className} {...rest}>
       {children ?? "There is a problem"}
     </h2>
   );
@@ -104,7 +104,7 @@ export interface ErrorSummaryListProps extends HTMLAttributes<HTMLUListElement> 
 
 function ErrorSummaryList({ className, children, ...rest }: ErrorSummaryListProps) {
   return (
-    <ul className={cx("fui-ErrorSummary-list", className)} {...rest}>
+    <ul className={className} {...rest}>
       {children}
     </ul>
   );
@@ -130,7 +130,7 @@ function ErrorSummaryItem({ href, onClick, className, children, ...rest }: Error
   };
 
   return (
-    <li className={cx("fui-ErrorSummary-item", className)} {...rest}>
+    <li className={className} {...rest}>
       <a href={href} onClick={focusTarget}>
         {children}
       </a>

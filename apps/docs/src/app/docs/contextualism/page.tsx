@@ -89,7 +89,7 @@ export default function Contextualism() {
           language="css"
           code={`/* the library reads context like this */
 @container (style(--fui-context: danger)) {
-  .fui-Button-root {
+  .fui-Button {
     --_color: var(--fui-danger);
   }
 }`}
@@ -195,7 +195,7 @@ export default function Contextualism() {
       <div className={prose.block}>
         <CodeBlock
           language="css"
-          code={`.fui-Button-root {
+          code={`.fui-Button {
   --_color: var(--fui-button-color, var(--fui-text));
 
   border: 1px solid color-mix(in oklab, var(--_color), var(--fui-bg) 80%);
@@ -305,7 +305,7 @@ export function BrandButton(props: ButtonProps) {
       <div className={prose.block}>
         <CodeBlock
           language="css"
-          code={`.fui-Button-root:has(svg) {
+          code={`.fui-Button:has(svg) {
   display: inline flex;
   gap: var(--fui-space-sm);
 
@@ -323,12 +323,14 @@ export function BrandButton(props: ButtonProps) {
         <CodeBlock
           language="css"
           code={`/* the label tints when an error is present */
-.fui-Field-root:has(.fui-Field-error) .fui-Field-label {
-  color: var(--fui-danger);
+@scope (.fui-Field:has(> p.error)) to ([class*="fui-"]) {
+  label {
+    color: var(--fui-danger);
+  }
 }
 
 /* the box keys off the control's own accessibility state */
-.fui-Input-field:has(.fui-Input-input[aria-invalid="true"]) {
+.fui-Input-field:has(input[aria-invalid="true"]) {
   border-color: var(--fui-danger);
 }`}
         />

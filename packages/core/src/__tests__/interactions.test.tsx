@@ -629,7 +629,7 @@ describe("Popover", () => {
       </Popover.Root>,
     );
     const trigger = screen.getByRole("button", { name: "Menu" });
-    expect(trigger).toHaveClass("fui-Button-root");
+    expect(trigger).toHaveClass("fui-Button");
     expect(trigger).toHaveAttribute("aria-haspopup", "dialog");
 
     await user.click(trigger);

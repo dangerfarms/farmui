@@ -1,10 +1,10 @@
-@scope (.fui-Breadcrumbs-root) {
+@scope (.fui-Breadcrumbs) {
   :scope {
     font-size: var(--fui-text-sm);
     color: var(--fui-text-muted);
   }
 
-  .fui-Breadcrumbs-list {
+  ol {
     display: block flex;
     flex-wrap: wrap;
     align-items: center;

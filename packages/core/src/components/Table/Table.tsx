@@ -33,7 +33,7 @@ export function Table({
     <div className="fui-Table-scroll">
       <table
         ref={ref}
-        className={cx("fui-Table-root", className)}
+        className={cx("fui-Table", className)}
         data-striped={striped || undefined}
         data-hover={highlightOnHover || undefined}
         data-col-borders={withColumnBorders || undefined}

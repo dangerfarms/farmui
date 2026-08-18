@@ -288,7 +288,7 @@ describe("accessibility (axe)", () => {
 describe("Avatar naming", () => {
   it("is decorative when it has no name from any source", () => {
     const { container } = render(<Avatar />);
-    const root = container.querySelector(".fui-Avatar-root");
+    const root = container.querySelector(".fui-Avatar");
     expect(root).toHaveAttribute("aria-hidden", "true");
     expect(root).not.toHaveAttribute("role");
   });

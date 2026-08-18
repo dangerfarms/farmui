@@ -47,7 +47,7 @@ export function Button({ render, className, children, ref, ...rest }: ButtonProp
       <>
         {renderWithProps(render, {
           ref,
-          className: cx("fui-Button-root", className),
+          className: cx("fui-Button", className),
           children,
           ...rest,
         })}
@@ -57,7 +57,7 @@ export function Button({ render, className, children, ref, ...rest }: ButtonProp
   return (
     // type="button" unless overridden: a bare <button> inside a form is a
     // native submit, so "Cancel" buttons would submit the form.
-    <button ref={ref} type="button" className={cx("fui-Button-root", className)} {...rest}>
+    <button ref={ref} type="button" className={cx("fui-Button", className)} {...rest}>
       {children}
     </button>
   );

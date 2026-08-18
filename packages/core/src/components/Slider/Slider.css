@@ -1,30 +1,7 @@
-@scope (.fui-Slider-wrapper) {
-  :scope {
-    display: block flex;
-    flex-direction: column;
-    gap: var(--fui-space-xs);
-    inline-size: 100%;
-  }
-
-  /* Inside the labelled wrapper the wrapper does the disabled fade (the bare
-     control's :not guard, in the input scope, stops the two compounding). */
-  :scope[data-disabled] {
-    opacity: var(--fui-disabled-opacity);
-  }
-
-  .fui-Slider-label {
-    font-size: var(--fui-text-sm);
-    font-weight: 500;
-    line-height: 1.35;
-  }
-}
-
 /* The bare control is the `<input type="range">` itself — no wrapper element
    in that form — so the input is its own scope root. */
-@scope (.fui-Slider-input) {
-  /* Bare control fades itself; inside the labelled wrapper the wrapper does
-     (the :not guard stops the two from compounding). */
-  :scope[data-disabled]:where(:not(.fui-Slider-wrapper *)) {
+@scope (.fui-Slider) {
+  :scope[data-disabled] {
     opacity: var(--fui-disabled-opacity);
   }
 

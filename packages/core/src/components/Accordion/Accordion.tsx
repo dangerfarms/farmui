@@ -42,7 +42,7 @@ function AccordionBase({ multiple = false, className, children, ...rest }: Accor
 
   return (
     <AccordionContext value={ctxValue}>
-      <div className={cx("fui-Accordion-root", className)} {...rest}>
+      <div className={cx("fui-Accordion", className)} {...rest}>
         {children}
       </div>
     </AccordionContext>
@@ -66,10 +66,10 @@ export function AccordionItem({
       open={defaultOpen}
       {...rest}
     >
-      <summary className="fui-Accordion-summary">
-        <span className="fui-Accordion-label">{label}</span>
+      <summary>
+        <span className="label">{label}</span>
         <svg
-          className="fui-Accordion-chevron"
+          className="chevron"
           viewBox="0 0 24 24"
           width="18"
           height="18"
@@ -83,7 +83,7 @@ export function AccordionItem({
           <polyline points="6 9 12 15 18 9" />
         </svg>
       </summary>
-      <div className="fui-Accordion-content">{children}</div>
+      <div className="content">{children}</div>
     </details>
   );
 }

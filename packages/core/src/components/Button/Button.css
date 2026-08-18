@@ -4,7 +4,7 @@
  * props. The one instance-level escape hatch is the public
  * --fui-button-color property (registered in reset.css).
  */
-@scope (.fui-Button-root) {
+@scope (.fui-Button) {
   :scope {
     --_color: var(--fui-button-color, var(--fui-text));
 
@@ -115,7 +115,7 @@
 
   /* A composed Loader is an icon here: the same detection, layout and 1em
      sizing (answered through the loader's inherited size hook). */
-  :scope:has(svg, .fui-Loader-root) {
+  :scope:has(svg, .fui-Loader) {
     --fui-loader-size: 1em;
 
     display: inline flex;
@@ -132,7 +132,7 @@
   /* Icon-only is detected from the accessible name, not DOM shape: an
      icon-only button MUST carry an aria-label, and `svg:only-child` can't
      tell "icon + bare text" from "icon alone" (text nodes aren't elements). */
-  :scope[aria-label]:has(svg, .fui-Loader-root) {
+  :scope[aria-label]:has(svg, .fui-Loader) {
     padding-inline: var(--fui-space-sm);
   }
 }

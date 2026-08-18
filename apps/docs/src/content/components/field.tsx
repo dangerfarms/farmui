@@ -102,7 +102,7 @@ const doc: ComponentContent = {
     },
     {
       title: "Styling state from outside",
-      body: 'Everything the family knows about a field is expressed in selectors you can target: [aria-invalid="true"] and :user-invalid on the control, :has(.fui-Field-error) on the root, [data-disabled] on control boxes, and :focus-within on the field box. There are no state props to mirror; the DOM is the contract.',
+      body: 'Everything the family knows about a field is expressed in selectors you can target: [aria-invalid="true"] and :user-invalid on the control, :has(> p.error) on the .fui-Field root, [data-disabled] on control boxes, and :focus-within on the field box. There are no state props to mirror; the DOM is the contract.',
     },
     {
       title: "One error, one place, one wording",

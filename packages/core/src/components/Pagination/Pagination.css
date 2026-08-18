@@ -1,4 +1,4 @@
-@scope (.fui-Pagination-root) {
+@scope (.fui-Pagination) {
   :scope {
     /* Derived control height (the Button anatomy, incl. 1px borders) —
        keeps square min-width and the dots cell in step with the pages. */
@@ -7,7 +7,7 @@
     );
   }
 
-  .fui-Pagination-list {
+  ul {
     display: block flex;
     flex-wrap: wrap;
     align-items: center;
@@ -17,8 +17,7 @@
     list-style: none;
   }
 
-  .fui-Pagination-page,
-  .fui-Pagination-control {
+  button {
     display: inline flex;
     align-items: center;
     justify-content: center;
@@ -39,30 +38,29 @@
       box-shadow var(--fui-duration-md) var(--fui-ease);
   }
 
-  .fui-Pagination-page:hover:not([data-active]),
-  .fui-Pagination-control:hover:not(:disabled) {
+  button:hover:not([data-active], :disabled) {
     background: var(--fui-surface-hover);
     border-color: var(--fui-border-strong);
   }
 
-  .fui-Pagination-page[data-active] {
+  button[data-active] {
     background: var(--fui-primary-strong);
     border-color: var(--fui-primary);
     color: var(--fui-on-strong);
     cursor: default;
   }
 
-  .fui-Pagination-control:disabled {
+  button:disabled {
     opacity: 0.45;
     color: var(--fui-text-dim);
   }
 
-  .fui-Pagination-control :where(svg) {
+  button :where(svg) {
     inline-size: 1.125em;
     block-size: 1.125em;
   }
 
-  .fui-Pagination-dots {
+  span.dots {
     display: inline flex;
     align-items: center;
     justify-content: center;
@@ -75,7 +73,7 @@
   /* Forced colors: the active page's brand fill is stripped, leaving it
      identical to its neighbours. */
   @media (forced-colors: active) {
-    .fui-Pagination-page[data-active] {
+    button[data-active] {
       forced-color-adjust: none;
       background: Highlight;
       border-color: Highlight;

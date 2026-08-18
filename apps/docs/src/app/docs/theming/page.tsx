@@ -243,8 +243,9 @@ export default function Theming() {
 
       <h3>1. Target the class names</h3>
       <p>
-        Every element has a stable, prefixed class: <code>.fui-Button-root</code>,{" "}
-        <code>.fui-Input-field</code>, <code>.fui-Card-root</code>, and so on. Because
+        Every component's scope root has a stable, prefixed class: <code>.fui-Button</code>,{" "}
+        <code>.fui-Card</code>, <code>.fui-Input-field</code>, and so on — the parts inside are
+        plain elements and short classes, shown in each component&rsquo;s CSS tab. Because
         FarmUI&rsquo;s styles live inside a CSS <code>@layer</code>, any rule you write{" "}
         <em>outside</em> a layer automatically beats them; you never fight specificity:
       </p>
@@ -252,12 +253,12 @@ export default function Theming() {
         <CodeBlock
           language="css"
           code={`/* Unlayered CSS always wins over FarmUI's layered CSS — no !important */
-.fui-Button-root {
+.fui-Button {
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
 
-.fui-Card-root {
+.fui-Card {
   box-shadow: 0 10px 40px -12px rgb(0 0 0 / 0.25);
 }`}
         />
@@ -295,7 +296,7 @@ export default function Theming() {
   farmui.components, app;
 
 @layer app {
-  .fui-Tabs-tab {
+  .fui-Tabs .tab {
     font-weight: 600;
   }
 }`}
@@ -303,9 +304,8 @@ export default function Theming() {
       </div>
 
       <div className={prose.callout}>
-        The class names (<code>.fui-&lt;Component&gt;-&lt;part&gt;</code>) are a stable, documented
-        API; you&rsquo;ll find the full stylesheet for each component under the <strong>CSS</strong>{" "}
-        tab on its docs page.
+        The class names are a stable, documented API; the exact selectors for every component are in
+        its real stylesheet, under the <strong>CSS</strong> tab on its docs page.
       </div>
     </div>
   );

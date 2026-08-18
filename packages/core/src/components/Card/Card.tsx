@@ -28,7 +28,7 @@ export function Card({
   return (
     <div
       ref={ref}
-      className={cx("fui-Card-root", className)}
+      className={cx("fui-Card", className)}
       data-padding={padding}
       data-shadow={shadow}
       data-border={withBorder || undefined}

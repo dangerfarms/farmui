@@ -129,17 +129,11 @@ export function Pagination({
   };
 
   return (
-    <nav aria-label={ariaLabel} className={cx("fui-Pagination-root", className)} {...rest}>
-      <ul className="fui-Pagination-list">
+    <nav aria-label={ariaLabel} className={cx("fui-Pagination", className)} {...rest}>
+      <ul>
         {withEdges && (
           <li>
-            <button
-              type="button"
-              className="fui-Pagination-control"
-              onClick={() => go(1)}
-              disabled={atStart}
-              aria-label="First page"
-            >
+            <button type="button" onClick={() => go(1)} disabled={atStart} aria-label="First page">
               <EdgeIcon dir="first" />
             </button>
           </li>
@@ -147,7 +141,6 @@ export function Pagination({
         <li>
           <button
             type="button"
-            className="fui-Pagination-control"
             onClick={() => go(active - 1)}
             disabled={atStart}
             aria-label="Previous page"
@@ -160,7 +153,7 @@ export function Pagination({
           if (item === DOTS) {
             return (
               <li key={`dots-${index}`} aria-hidden="true">
-                <span className="fui-Pagination-dots">…</span>
+                <span className="dots">…</span>
               </li>
             );
           }
@@ -169,7 +162,6 @@ export function Pagination({
             <li key={item}>
               <button
                 type="button"
-                className="fui-Pagination-page"
                 data-active={isActive || undefined}
                 aria-current={isActive ? "page" : undefined}
                 aria-label={`Page ${item}`}
@@ -184,7 +176,6 @@ export function Pagination({
         <li>
           <button
             type="button"
-            className="fui-Pagination-control"
             onClick={() => go(active + 1)}
             disabled={atEnd}
             aria-label="Next page"
@@ -194,13 +185,7 @@ export function Pagination({
         </li>
         {withEdges && (
           <li>
-            <button
-              type="button"
-              className="fui-Pagination-control"
-              onClick={() => go(total)}
-              disabled={atEnd}
-              aria-label="Last page"
-            >
+            <button type="button" onClick={() => go(total)} disabled={atEnd} aria-label="Last page">
               <EdgeIcon dir="last" />
             </button>
           </li>

@@ -1,4 +1,3 @@
-import { Button } from "@farmui/core";
 import { CodeBlock } from "@/renderer/CodeBlock";
 import prose from "../prose.module.css";
 import { StateAttrDemo } from "./demos.client";
@@ -171,18 +170,6 @@ export default function Composition() {
   <Field.Description>Sent at most once a day.</Field.Description>
 </Field.Root>`}
         />
-      </div>
-
-      <h2>Buttons anywhere</h2>
-      <p>
-        <code>Button</code> itself takes <code>render</code>, so anything can wear button styling,
-        most usefully links:
-      </p>
-      <div className={prose.block}>
-        <CodeBlock language="tsx" code={`<Button render={<a href="/signup">Get started</a>} />`} />
-      </div>
-      <div className={prose.block}>
-        <Button render={<a href="#composition">A link, dressed as a Button</a>} />
       </div>
     </div>
   );

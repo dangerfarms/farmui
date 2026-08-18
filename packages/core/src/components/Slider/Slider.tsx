@@ -35,7 +35,7 @@ export function Slider({
       ref={ref}
       id={id ?? field.id}
       type="range"
-      className={cx("fui-Slider-input", className)}
+      className={cx("fui-Slider", className)}
       data-disabled={disabled || undefined}
       min={min}
       max={max}
