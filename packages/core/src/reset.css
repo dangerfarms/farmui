@@ -8,8 +8,8 @@
    (Card, Input, …). Without inherits: false it would cascade into every
    component nested inside them. */
 @property --_radius {
-  syntax: "*";
   inherits: false;
+  syntax: "*";
 }
 
 /* The contextualism channel: declare `--fui-context: danger` (etc.) on any
@@ -17,14 +17,14 @@
    `@container style()` queries. Inherits by design — nearest ancestor that
    sets it wins. */
 @property --fui-context {
-  syntax: "*";
   inherits: true;
+  syntax: "*";
 }
 
 /* Public instance escape hatch for Button's colour channel. */
 @property --fui-button-color {
-  syntax: "*";
   inherits: true;
+  syntax: "*";
 }
 
 @layer farmui.reset {
@@ -34,8 +34,8 @@
   }
 
   :where(button[class*="fui-"]) {
-    font-family: inherit;
     cursor: pointer;
+    font-family: inherit;
   }
 
   /* Reduced-motion safety net: put large motion inside
@@ -49,11 +49,13 @@
     :where([class*="fui-"] *)::before,
     :where([class*="fui-"] *)::after {
       /* stylelint-disable-next-line declaration-no-important --
+         reduced-motion kill-switch: a user preference must out-rank any
+         consumer specificity. */
+      animation: none !important;
+      /* stylelint-disable-next-line declaration-no-important --
          the one sanctioned !important: a user preference must out-rank
          any consumer specificity. */
       transition-duration: 0.01ms !important;
-      /* stylelint-disable-next-line declaration-no-important */
-      animation: none !important;
     }
   }
 }

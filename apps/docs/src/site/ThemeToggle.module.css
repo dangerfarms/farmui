@@ -1,21 +1,21 @@
 .btn {
-  display: block grid;
-  place-items: center;
-  inline-size: 2.25rem;
-  block-size: 2.25rem;
-  color: var(--fui-text-muted);
   background: transparent;
+  block-size: 2.25rem;
   border: 1px solid var(--fui-border);
   border-radius: var(--fui-radius-md);
+  color: var(--fui-text-muted);
   cursor: pointer;
+  display: block grid;
+  inline-size: 2.25rem;
+  place-items: center;
   transition:
     color var(--fui-duration-md) var(--fui-ease),
     border-color var(--fui-duration-md) var(--fui-ease),
     background var(--fui-duration-md) var(--fui-ease);
-}
 
-.btn:hover {
-  color: var(--fui-text);
-  border-color: var(--fui-border-strong);
-  background: var(--fui-surface-hover);
+  &:hover {
+    background: var(--fui-surface-hover);
+    border-color: var(--fui-border-strong);
+    color: var(--fui-text);
+  }
 }

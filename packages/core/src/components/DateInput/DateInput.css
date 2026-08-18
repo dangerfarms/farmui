@@ -4,15 +4,15 @@
    live here. The donut stops this scope at the composed Inputs. */
 @scope (.fui-DateInput) to ([class*="fui-"]) {
   p.description {
-    margin: 0;
-    font-size: var(--fui-text-sm);
     color: var(--fui-text-muted);
+    font-size: var(--fui-text-sm);
+    margin: 0;
   }
 
   p.error {
-    margin: 0;
-    font-size: var(--fui-text-sm);
     color: var(--fui-danger);
+    font-size: var(--fui-text-sm);
+    margin: 0;
   }
 
   div.parts {
@@ -43,14 +43,14 @@
     inline-size: fit-content;
   }
 
-  [data-part]:not([data-part="year"]) .fui-Input-field input {
-    flex: none;
-    inline-size: 3ch;
-  }
-
   [data-part="year"] .fui-Input-field input {
     flex: none;
     inline-size: 5ch;
+  }
+
+  [data-part]:not([data-part="year"]) .fui-Input-field input {
+    flex: none;
+    inline-size: 3ch;
   }
 }
 

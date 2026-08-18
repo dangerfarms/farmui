@@ -54,8 +54,8 @@
 
   :where([class*="fui-"]) :where(input, select, textarea),
   :where(input, select, textarea)[class*="fui-"] {
-    caret-color: var(--fui-primary);
     accent-color: var(--fui-primary);
+    caret-color: var(--fui-primary);
   }
 
   :where([class*="fui-"]) ::selection {
@@ -64,8 +64,8 @@
 
   /* Form controls otherwise reset their typography and color to the UA font. */
   :where([class*="fui-"]) :is(button, input, select, textarea, optgroup) {
-    font: inherit;
     color: inherit;
+    font: inherit;
     letter-spacing: inherit;
   }
 

@@ -1,11 +1,11 @@
 @scope (.fui-Card) {
   :scope {
-    display: block flow;
+    background: var(--fui-surface);
     border: 1px solid transparent;
     border-radius: var(--_radius, var(--fui-radius-lg));
-    padding: var(--_p, var(--fui-space-lg));
-    background: var(--fui-surface);
     box-shadow: var(--_shadow, none);
+    display: block flow;
+    padding: var(--_p, var(--fui-space-lg));
     transition:
       border-color var(--fui-duration-sm) var(--fui-ease),
       box-shadow var(--fui-duration-md) var(--fui-ease);

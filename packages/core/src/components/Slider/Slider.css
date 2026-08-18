@@ -1,55 +1,54 @@
 /* The bare control is the `<input type="range">` itself — no wrapper element
    in that form — so the input is its own scope root. */
 @scope (.fui-Slider) {
-  :scope[data-disabled] {
-    opacity: var(--fui-disabled-opacity);
-  }
-
   :scope {
     --_track-h: 0.4167em;
     --_thumb: 1.25em;
 
+    /* accent-color paints the filled portion + thumb robustly cross-browser. */
+    accent-color: var(--fui-primary);
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
     font-size: var(--fui-text-sm);
     inline-size: 100%;
     margin: 0;
 
-    /* accent-color paints the filled portion + thumb robustly cross-browser. */
-    accent-color: var(--fui-primary);
-    background: transparent;
-    cursor: pointer;
-    appearance: none;
+    &[data-disabled] {
+      opacity: var(--fui-disabled-opacity);
+    }
   }
 
   /* ---- Track ---- */
   :scope::-webkit-slider-runnable-track {
+    background: var(--fui-border-strong);
     block-size: var(--_track-h);
     border-radius: var(--fui-radius-full);
-    background: var(--fui-border-strong);
   }
 
   :scope::-moz-range-track {
+    background: var(--fui-border-strong);
     block-size: var(--_track-h);
     border-radius: var(--fui-radius-full);
-    background: var(--fui-border-strong);
   }
 
   /* Firefox paints the filled portion explicitly. */
   :scope::-moz-range-progress {
+    background: var(--fui-primary);
     block-size: var(--_track-h);
     border-radius: var(--fui-radius-full);
-    background: var(--fui-primary);
   }
 
   /* ---- Thumb ---- */
   :scope::-webkit-slider-thumb {
     appearance: none;
-    inline-size: var(--_thumb);
+    background: var(--fui-primary);
     block-size: var(--_thumb);
-    margin-block-start: calc((var(--_track-h) - var(--_thumb)) / 2);
     border: 2px solid var(--fui-on-strong);
     border-radius: var(--fui-radius-full);
-    background: var(--fui-primary);
     box-shadow: var(--fui-shadow-sm);
+    inline-size: var(--_thumb);
+    margin-block-start: calc((var(--_track-h) - var(--_thumb)) / 2);
 
     /* Identity at rest — the hover grow transitions both ways. */
     scale: 1;
@@ -59,26 +58,18 @@
   }
 
   :scope::-moz-range-thumb {
-    inline-size: var(--_thumb);
+    background: var(--fui-primary);
     block-size: var(--_thumb);
     border: 2px solid var(--fui-on-strong);
     border-radius: var(--fui-radius-full);
-    background: var(--fui-primary);
     box-shadow: var(--fui-shadow-sm);
+    inline-size: var(--_thumb);
 
     /* Identity at rest — the hover grow transitions both ways. */
     scale: 1;
     transition:
       scale var(--fui-duration-md) var(--fui-ease),
       box-shadow var(--fui-duration-md) var(--fui-ease);
-  }
-
-  :scope:hover:not(:disabled)::-webkit-slider-thumb {
-    scale: 1.08;
-  }
-
-  :scope:hover:not(:disabled)::-moz-range-thumb {
-    scale: 1.08;
   }
 
   /* The ring belongs on the thumb (pseudo-element, box-shadow — outline is
@@ -95,34 +86,42 @@
     box-shadow: 0 0 0 var(--fui-ring-width) var(--fui-ring-color);
   }
 
+  :scope:hover:not(:disabled)::-webkit-slider-thumb {
+    scale: 1.08;
+  }
+
+  :scope:hover:not(:disabled)::-moz-range-thumb {
+    scale: 1.08;
+  }
+
   /* Forced colors: the custom track and thumb are background-painted and
      would vanish (appearance: none opts out of native painting). */
   @media (forced-colors: active) {
     :scope::-webkit-slider-runnable-track {
-      forced-color-adjust: none;
       background: ButtonText;
+      forced-color-adjust: none;
     }
 
     :scope::-moz-range-track {
-      forced-color-adjust: none;
       background: ButtonText;
+      forced-color-adjust: none;
     }
 
     :scope::-moz-range-progress {
-      forced-color-adjust: none;
       background: Highlight;
+      forced-color-adjust: none;
     }
 
     :scope::-webkit-slider-thumb {
-      forced-color-adjust: none;
       background: Highlight;
       border-color: Canvas;
+      forced-color-adjust: none;
     }
 
     :scope::-moz-range-thumb {
-      forced-color-adjust: none;
       background: Highlight;
       border-color: Canvas;
+      forced-color-adjust: none;
     }
   }
 }

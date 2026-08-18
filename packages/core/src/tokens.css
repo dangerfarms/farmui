@@ -7,8 +7,6 @@
 
 @layer farmui.tokens {
   :root {
-    color-scheme: light dark;
-
     /* ── 1. Primitives ─────────────────────────────────────────────── */
 
     /* Font stacks */
@@ -171,6 +169,8 @@
     --fui-duration-lg: 300ms;
     --fui-ease: cubic-bezier(0.4, 0, 0.2, 1);
     --fui-ease-elastic: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    color-scheme: light dark;
 
     /* No control-sizing tokens: inputs and buttons align by a shared derived
        anatomy (padding-block --fui-space-sm + --fui-text-sm × 1.2 + 1px

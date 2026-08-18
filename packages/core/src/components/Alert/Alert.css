@@ -9,18 +9,7 @@
   :scope {
     --_accent: var(--fui-text);
 
-    display: block flex;
     align-items: flex-start;
-    gap: var(--fui-space-md);
-    padding-block: var(--fui-space-md);
-    padding-inline: var(--fui-space-lg);
-
-    /* Tints mix in oklab (cartesian), not oklch: hue interpolation against
-       the near-achromatic page background rotates the channel's hue (the
-       declared hue of an achromatic colour still interpolates); cartesian
-       mixing only desaturates, so the channel's hue survives. */
-    border: 1px solid color-mix(in oklab, var(--_accent), var(--fui-bg) 55%);
-    border-radius: var(--fui-radius-md);
 
     /* The dark tint mixes less background in — the dark page background is
        far from the channel, so an 88% mix would read near-black (same
@@ -29,7 +18,61 @@
       color-mix(in oklab, var(--_accent), var(--fui-bg) 88%),
       color-mix(in oklab, var(--_accent), var(--fui-bg) 70%)
     );
+
+    /* Tints mix in oklab (cartesian), not oklch: hue interpolation against
+       the near-achromatic page background rotates the channel's hue (the
+       declared hue of an achromatic colour still interpolates); cartesian
+       mixing only desaturates, so the channel's hue survives. */
+    border: 1px solid color-mix(in oklab, var(--_accent), var(--fui-bg) 55%);
+    border-radius: var(--fui-radius-md);
+    display: block flex;
     font-size: var(--fui-text-sm);
+    gap: var(--fui-space-md);
+    padding-block: var(--fui-space-md);
+    padding-inline: var(--fui-space-lg);
+  }
+
+  span.icon {
+    align-items: center;
+    block-size: 1.25em;
+    color: var(--_accent);
+    display: inline flex;
+    flex: none;
+    font-size: var(--fui-text-md);
+    inline-size: 1.25em;
+    justify-content: center;
+    margin-block-start: 0.05em;
+  }
+
+  div.body {
+    display: block flex;
+    flex-direction: column;
+    gap: var(--fui-space-xs);
+    min-inline-size: 0;
+  }
+
+  div.title {
+    /* The title is TEXT in the channel's hue, not a swatch: mixed toward
+       black (light) / white (dark) so it keeps AA contrast on the tint even
+       for light channels like warning. Only the decorative icon carries the
+       raw channel — the title must read. */
+    color: light-dark(
+      color-mix(in oklab, var(--_accent) 70%, oklch(0% 0 0deg)),
+      color-mix(in oklab, var(--_accent) 55%, oklch(100% 0 0deg))
+    );
+    font-size: var(--fui-text-sm);
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  /* The message carries full-strength text; next to a title it recedes to
+     muted so the accent-coloured heading leads. */
+  div.message {
+    color: var(--fui-text);
+
+    :scope:has(> div.body > div.title) > div.body > & {
+      color: var(--fui-text-muted);
+    }
   }
 
   /* Context: within a status region — the channel takes the status colour.
@@ -63,48 +106,5 @@
     :scope {
       --_accent: var(--fui-danger);
     }
-  }
-
-  span.icon {
-    display: inline flex;
-    align-items: center;
-    justify-content: center;
-    flex: none;
-    inline-size: 1.25em;
-    block-size: 1.25em;
-    margin-block-start: 0.05em;
-    color: var(--_accent);
-    font-size: var(--fui-text-md);
-  }
-
-  div.body {
-    display: block flex;
-    flex-direction: column;
-    gap: var(--fui-space-xs);
-    min-inline-size: 0;
-  }
-
-  div.title {
-    /* The title is TEXT in the channel's hue, not a swatch: mixed toward
-       black (light) / white (dark) so it keeps AA contrast on the tint even
-       for light channels like warning. Only the decorative icon carries the
-       raw channel — the title must read. */
-    color: light-dark(
-      color-mix(in oklab, var(--_accent) 70%, oklch(0% 0 0deg)),
-      color-mix(in oklab, var(--_accent) 55%, oklch(100% 0 0deg))
-    );
-    font-weight: 600;
-    font-size: var(--fui-text-sm);
-    line-height: 1.4;
-  }
-
-  /* The message carries full-strength text; next to a title it recedes to
-     muted so the accent-coloured heading leads. */
-  div.message {
-    color: var(--fui-text);
-  }
-
-  :scope:has(> div.body > div.title) > div.body > div.message {
-    color: var(--fui-text-muted);
   }
 }

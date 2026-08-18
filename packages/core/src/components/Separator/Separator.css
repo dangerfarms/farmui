@@ -1,16 +1,16 @@
 @scope (.fui-Separator) {
   :scope {
     align-self: stretch;
-    margin: 0;
     border: 0;
     border-block-start: 1px solid var(--fui-border);
-  }
+    margin: 0;
 
-  :scope[data-orientation="vertical"] {
-    inline-size: 0;
-    block-size: auto;
-    min-block-size: 1em;
-    border-block-start: 0;
-    border-inline-start: 1px solid var(--fui-border);
+    &[data-orientation="vertical"] {
+      block-size: auto;
+      border-block-start: 0;
+      border-inline-start: 1px solid var(--fui-border);
+      inline-size: 0;
+      min-block-size: 1em;
+    }
   }
 }

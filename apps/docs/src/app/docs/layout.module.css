@@ -1,23 +1,23 @@
 .shell {
+  align-items: start;
   display: block grid;
-  grid-template-columns: 16rem minmax(0, 1fr);
   gap: 2.5rem;
+  grid-template-columns: 16rem minmax(0, 1fr);
   inline-size: min(100% - 2.5rem, 82rem);
   margin-inline: auto;
-  align-items: start;
 }
 
 .aside {
-  position: sticky;
-  inset-block-start: var(--site-nav-h);
   block-size: calc(100dvb - var(--site-nav-h));
+  inset-block-start: var(--site-nav-h);
   overflow: hidden;
+  position: sticky;
 }
 
 .asideInner {
   block-size: 100%;
-  overflow-block: auto;
   border-inline-end: 1px solid var(--fui-border);
+  overflow-block: auto;
 }
 
 .content {

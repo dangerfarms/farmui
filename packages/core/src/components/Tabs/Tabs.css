@@ -13,52 +13,79 @@
  */
 @scope (.fui-Tabs-list) {
   :scope {
+    border-block-end: 1px solid var(--fui-border);
     display: block flex;
     gap: var(--fui-space-xs);
-    border-block-end: 1px solid var(--fui-border);
   }
 }
 
 /* Tab and Panel can only render inside <Tabs> (their context throws outside). */
 @scope (.fui-Tabs) {
   button.tab {
-    position: relative;
-    display: inline flex;
     align-items: center;
-    gap: var(--fui-space-sm);
-    padding-block: var(--fui-space-md);
-    padding-inline: var(--fui-space-lg);
-    margin-block-end: -1px;
+    background: transparent;
     border: none;
     border-block-end: 2px solid transparent;
-    background: transparent;
     color: var(--fui-text-muted);
+    display: inline flex;
     font-family: inherit;
     font-size: var(--fui-text-sm);
     font-weight: 600;
+    gap: var(--fui-space-sm);
     line-height: 1;
+    margin-block-end: -1px;
+    padding-block: var(--fui-space-md);
+    padding-inline: var(--fui-space-lg);
+    position: relative;
     transition:
       color var(--fui-duration-sm) var(--fui-ease),
       border-color var(--fui-duration-sm) var(--fui-ease),
       background var(--fui-duration-sm) var(--fui-ease);
+
+    &:hover:not(:disabled) {
+      background: color-mix(in oklch, var(--fui-primary-soft) 50%, transparent);
+      color: var(--fui-text);
+    }
+
+    &:focus-visible {
+      border-radius: var(--fui-radius-sm) var(--fui-radius-sm) 0 0;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+    }
+
+    &[data-active] {
+      border-block-end-color: var(--fui-primary);
+      color: var(--fui-primary);
+    }
   }
 
-  button.tab:hover:not(:disabled) {
-    color: var(--fui-text);
-    background: color-mix(in oklch, var(--fui-primary-soft) 50%, transparent);
+  /* Icons compose as children and are detected, exactly as in Button. */
+  button.tab:has(svg) {
+    align-items: center;
+    display: inline flex;
+    gap: 0.45em;
+
+    svg {
+      block-size: 1.1em;
+      inline-size: 1.1em;
+    }
   }
 
-  button.tab:focus-visible {
-    border-radius: var(--fui-radius-sm) var(--fui-radius-sm) 0 0;
+  div.panel {
+    font-size: var(--fui-text-md);
+    line-height: 1.55;
+
+    &:focus-visible {
+      border-radius: var(--fui-radius-sm);
+    }
   }
 
-  button.tab:disabled {
-    opacity: 0.5;
-  }
-
-  button.tab[data-active] {
-    color: var(--fui-primary);
-    border-block-end-color: var(--fui-primary);
+  /* Boolean hidden only — [hidden="until-found"] must keep the UA's
+     content-visibility treatment or find-in-page reveal breaks. */
+  div.panel[hidden]:not([hidden="until-found"]) {
+    display: none;
   }
 
   /* Forced colors: guarantee the active underline with a system colour.
@@ -67,32 +94,5 @@
     button.tab[data-active] {
       border-block-end-color: Highlight;
     }
-  }
-
-  /* Icons compose as children and are detected, exactly as in Button. */
-  button.tab:has(svg) {
-    display: inline flex;
-    align-items: center;
-    gap: 0.45em;
-
-    svg {
-      inline-size: 1.1em;
-      block-size: 1.1em;
-    }
-  }
-
-  div.panel {
-    font-size: var(--fui-text-md);
-    line-height: 1.55;
-  }
-
-  div.panel:focus-visible {
-    border-radius: var(--fui-radius-sm);
-  }
-
-  /* Boolean hidden only — [hidden="until-found"] must keep the UA's
-     content-visibility treatment or find-in-page reveal breaks. */
-  div.panel[hidden]:not([hidden="until-found"]) {
-    display: none;
   }
 }

@@ -1,71 +1,73 @@
 @scope (.fui-Table-scroll) {
   :scope {
+    border-radius: var(--fui-radius-md);
     inline-size: 100%;
     overflow-inline: auto;
-    border-radius: var(--fui-radius-md);
   }
 }
 
 @scope (.fui-Table) {
   :scope {
-    inline-size: 100%;
     border-collapse: collapse;
     font-size: var(--fui-text-sm);
+    inline-size: 100%;
 
     &[data-caption-side="top"] {
-      /* caption-side has no logical equivalent; physical values are correct. */
-      /* stylelint-disable-next-line value-keyword-layout-mappings */
+      /* stylelint-disable-next-line value-keyword-layout-mappings --
+         caption-side has no logical equivalent; the physical keyword is
+         the only form. */
       caption-side: top;
     }
 
     &[data-caption-side="bottom"] {
-      /* stylelint-disable-next-line value-keyword-layout-mappings */
+      /* stylelint-disable-next-line value-keyword-layout-mappings --
+         see above: no logical equivalent exists. */
       caption-side: bottom;
     }
-  }
 
-  :scope caption {
-    padding-block: var(--fui-space-sm);
-    color: var(--fui-text-muted);
-    font-size: var(--fui-text-xs);
-    text-align: start;
-  }
+    caption {
+      color: var(--fui-text-muted);
+      font-size: var(--fui-text-xs);
+      padding-block: var(--fui-space-sm);
+      text-align: start;
+    }
 
-  :scope :where(th, td) {
-    padding-block: var(--fui-space-md);
-    padding-inline: var(--fui-space-lg);
-    text-align: start;
-    vertical-align: middle;
-    border-block-end: 1px solid var(--fui-border);
-  }
+    :where(th, td) {
+      border-block-end: 1px solid var(--fui-border);
+      padding-block: var(--fui-space-md);
+      padding-inline: var(--fui-space-lg);
+      text-align: start;
+      vertical-align: middle;
+    }
 
-  :scope :where(thead th) {
-    color: var(--fui-text-muted);
-    font-weight: 600;
-    font-size: var(--fui-text-xs);
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    border-block-end: 1px solid var(--fui-border-strong);
-    white-space: nowrap;
-  }
+    :where(thead th) {
+      border-block-end: 1px solid var(--fui-border-strong);
+      color: var(--fui-text-muted);
+      font-size: var(--fui-text-xs);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
 
-  :scope :where(tbody tr:last-child) :where(td) {
-    border-block-end: none;
-  }
+    :where(tbody tr:last-child) :where(td) {
+      border-block-end: none;
+    }
 
-  :scope[data-col-borders] :where(th, td):not(:last-child) {
-    border-inline-end: 1px solid var(--fui-border);
-  }
+    &[data-col-borders] :where(th, td):not(:last-child) {
+      border-inline-end: 1px solid var(--fui-border);
+    }
 
-  :scope[data-striped] :where(tbody tr:nth-child(even)) {
-    background: var(--fui-bg-subtle);
-  }
+    &[data-striped] :where(tbody tr:nth-child(even)) {
+      background: var(--fui-bg-subtle);
+    }
 
-  :scope[data-hover] :where(tbody tr) {
-    transition: background var(--fui-duration-md) var(--fui-ease);
-  }
+    &[data-hover] :where(tbody tr) {
+      transition: background var(--fui-duration-md) var(--fui-ease);
+    }
 
-  :scope[data-hover] :where(tbody tr:hover) {
-    background: var(--fui-surface-hover);
+    &[data-hover] :where(tbody tr:hover) {
+      background: var(--fui-surface-hover);
+    }
   }
 }

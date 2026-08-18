@@ -1,24 +1,24 @@
 @scope (.fui-Skeleton) {
   :scope {
-    position: relative;
-    display: block flow;
-    inline-size: var(--_w, 100%);
     block-size: var(--_h, 1lh);
 
     /* Public shape hook — consumers may set it per instance or region. */
     border-radius: var(--fui-skeleton-radius, var(--fui-radius-md));
-    overflow: clip;
-    user-select: none;
-    pointer-events: none;
 
     /* Bare text children have no box for the child rule below to hide. */
     color: transparent;
+    display: block flow;
+    inline-size: var(--_w, 100%);
+    overflow: clip;
+    pointer-events: none;
+    position: relative;
+    user-select: none;
   }
 
   /* Wrapped children size the box: measured, not declared. */
   :scope:has(> *) {
-    inline-size: var(--_w, fit-content);
     block-size: var(--_h, auto);
+    inline-size: var(--_w, fit-content);
   }
 
   /* Element children keep their layout but paint nothing — visibility
@@ -30,10 +30,10 @@
   /* After the :has() rule so the circle wins at equal specificity.
      2.5rem matches Avatar's md, the shape this exists to stand in for. */
   :scope[data-circle] {
-    inline-size: var(--_size, 2.5rem);
-    block-size: auto;
     aspect-ratio: 1;
+    block-size: auto;
     border-radius: var(--fui-radius-full);
+    inline-size: var(--_size, 2.5rem);
   }
 
   /* The tint is a weak mix of the text colour: text is guaranteed to
@@ -42,9 +42,6 @@
      default; the moving shimmer is opt-in motion (below), so
      reduced-motion users need no override. */
   :scope::after {
-    content: "";
-    position: absolute;
-    inset: 0;
     background-color: color-mix(in oklab, var(--fui-text) 8%, transparent);
     background-image: linear-gradient(
       90deg,
@@ -52,18 +49,19 @@
       color-mix(in oklab, var(--fui-text) 7%, transparent) 50%,
       transparent 100%
     );
-  }
+    content: "";
+    inset: 0;
+    position: absolute;
 
-  @media (prefers-reduced-motion: no-preference) {
-    :scope::after {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: fui-skeleton-shimmer 1.4s ease-in-out infinite;
       background-size: 200% 100%;
-      animation: fui-Skeleton-shimmer 1.4s ease-in-out infinite;
     }
   }
 }
 
 /* Keyframes are not scope-able; they stay at the top level. */
-@keyframes fui-Skeleton-shimmer {
+@keyframes fui-skeleton-shimmer {
   from {
     background-position: 200% 0;
   }

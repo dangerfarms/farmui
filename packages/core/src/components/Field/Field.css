@@ -14,28 +14,28 @@
   }
 
   label {
-    display: block flex;
-    gap: var(--fui-space-sm);
     align-items: center;
+    display: block flex;
     font-size: var(--fui-text-sm);
     font-weight: 500;
+    gap: var(--fui-space-sm);
   }
 
   span.optional {
-    font-weight: 400;
     color: var(--fui-text-muted);
+    font-weight: 400;
   }
 
   p.description {
-    margin: 0;
-    font-size: var(--fui-text-sm);
     color: var(--fui-text-muted);
+    font-size: var(--fui-text-sm);
+    margin: 0;
   }
 
   p.error {
-    margin: 0;
-    font-size: var(--fui-text-sm);
     color: var(--fui-danger);
+    font-size: var(--fui-text-sm);
+    margin: 0;
   }
 }
 
@@ -44,14 +44,14 @@
    out of context. Self-scoped; shared by every error renderer. */
 @scope (.fui-Error-prefix) {
   :scope {
-    position: absolute;
-    inline-size: 1px;
     block-size: 1px;
-    margin: -1px;
-    padding: 0;
     border: 0;
-    overflow: clip;
     clip-path: inset(50%);
+    inline-size: 1px;
+    margin: -1px;
+    overflow: clip;
+    padding: 0;
+    position: absolute;
     white-space: nowrap;
   }
 }

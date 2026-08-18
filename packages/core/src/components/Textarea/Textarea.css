@@ -1,22 +1,22 @@
 @scope (.fui-Textarea-field) {
   :scope {
-    display: block flex;
-    padding-block: var(--fui-space-sm);
-    padding-inline: var(--fui-space-md);
-    font-size: var(--fui-text-sm);
-    line-height: 1.2;
+    background: var(--fui-surface);
     border: 1px solid var(--fui-border-strong);
     border-radius: var(--_radius, var(--fui-radius-md));
-    background: var(--fui-surface);
+    display: block flex;
+    font-size: var(--fui-text-sm);
+    line-height: 1.2;
+    padding-block: var(--fui-space-sm);
+    padding-inline: var(--fui-space-md);
     transition:
       border-color var(--fui-duration-sm) var(--fui-ease),
       box-shadow var(--fui-duration-md) var(--fui-ease);
-  }
 
-  :scope:focus-within {
-    border-color: var(--fui-primary);
-    outline: var(--fui-ring-width) solid var(--fui-ring-color);
-    outline-offset: 2px;
+    &:focus-within {
+      border-color: var(--fui-primary);
+      outline: var(--fui-ring-width) solid var(--fui-ring-color);
+      outline-offset: 2px;
+    }
   }
 
   /* Autofilled: the wrapper border carries the signal (the textarea itself
@@ -52,28 +52,19 @@
   }
 
   textarea {
+    background: transparent;
+    border: none;
+    color: inherit;
     flex: 1;
-    min-inline-size: 0;
+    font: inherit;
 
     /* Floor in lh so it rides the fluid font; `rows` in the markup is the
        semantic fallback where lh is unsupported. */
     min-block-size: 3.5lh;
-    padding: 0;
-    border: none;
+    min-inline-size: 0;
     outline: none;
-    background: transparent;
-    color: inherit;
-    font: inherit;
+    padding: 0;
     resize: block;
-  }
-
-  /* Native auto-grow where the platform provides it; the floor above still
-     applies. */
-  @supports (field-sizing: content) {
-    textarea {
-      field-sizing: content;
-      max-block-size: 10lh;
-    }
   }
 
   textarea::placeholder {
@@ -95,5 +86,14 @@
 
   textarea:disabled {
     resize: none;
+  }
+
+  /* Native auto-grow where the platform provides it; the floor above still
+     applies. */
+  @supports (field-sizing: content) {
+    textarea {
+      field-sizing: content;
+      max-block-size: 10lh;
+    }
   }
 }

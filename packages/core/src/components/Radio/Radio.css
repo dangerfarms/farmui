@@ -1,14 +1,14 @@
 /* ---- Single radio ---- */
 @scope (.fui-Radio-wrapper) to ([class*="fui-"]) {
   :scope {
-    display: inline flex;
-    gap: var(--fui-space-sm);
     align-items: flex-start;
     cursor: pointer;
-  }
+    display: inline flex;
+    gap: var(--fui-space-sm);
 
-  :scope[data-disabled] {
-    opacity: var(--fui-disabled-opacity);
+    &[data-disabled] {
+      opacity: var(--fui-disabled-opacity);
+    }
   }
 }
 
@@ -21,15 +21,15 @@
      control as siblings with no wrapper — so there is no guaranteed
      positioning context for an overlay. */
   :scope {
-    position: absolute;
-    inline-size: 1px;
     block-size: 1px;
-    padding: 0;
+    border: 0;
+    clip-path: inset(50%);
+    inline-size: 1px;
     margin: -1px;
     overflow: clip;
-    clip-path: inset(50%);
+    padding: 0;
+    position: absolute;
     white-space: nowrap;
-    border: 0;
   }
 
   /* The ring belongs on the visible control (see the control scope); the 1px
@@ -54,15 +54,15 @@
     --_size: 1.3889em;
     --_dot: 0.5556em;
 
-    font-size: var(--fui-text-sm);
-    position: relative;
-    flex-shrink: 0;
-    inline-size: var(--_size);
+    background: var(--fui-surface);
     block-size: var(--_size);
-    margin-block-start: 0.05em;
     border: 1px solid var(--fui-border-strong);
     border-radius: var(--fui-radius-full);
-    background: var(--fui-surface);
+    flex-shrink: 0;
+    font-size: var(--fui-text-sm);
+    inline-size: var(--_size);
+    margin-block-start: 0.05em;
+    position: relative;
     transition:
       border-color var(--fui-duration-sm) var(--fui-ease),
       background var(--fui-duration-sm) var(--fui-ease),
@@ -70,16 +70,16 @@
   }
 
   :scope::after {
-    content: "";
-    position: absolute;
-    inset: 50%;
-    inline-size: var(--_dot);
-    block-size: var(--_dot);
-    translate: -50% -50%;
-    border-radius: var(--fui-radius-full);
     background: var(--fui-on-strong);
+    block-size: var(--_dot);
+    border-radius: var(--fui-radius-full);
+    content: "";
+    inline-size: var(--_dot);
+    inset: 50%;
+    position: absolute;
     scale: 0;
     transition: scale var(--fui-duration-md) var(--fui-ease);
+    translate: -50% -50%;
   }
 
   .fui-Radio-wrapper:hover .fui-Radio-input:not(:disabled) + :scope {
@@ -87,8 +87,8 @@
   }
 
   .fui-Radio-input:checked + :scope {
-    border-color: var(--fui-primary);
     background: var(--fui-primary);
+    border-color: var(--fui-primary);
   }
 
   .fui-Radio-input:checked + :scope::after {
@@ -116,8 +116,8 @@
      CanvasText guarantees contrast on the forced Canvas fill. */
   @media (forced-colors: active) {
     :scope::after {
-      forced-color-adjust: none;
       background: CanvasText;
+      forced-color-adjust: none;
     }
   }
 }
@@ -136,8 +136,8 @@
   }
 
   span.description {
-    font-size: var(--fui-text-xs);
     color: var(--fui-text-muted);
+    font-size: var(--fui-text-xs);
   }
 }
 
@@ -159,8 +159,8 @@
   }
 
   span.description {
-    font-size: var(--fui-text-xs);
     color: var(--fui-text-muted);
+    font-size: var(--fui-text-xs);
   }
 
   [data-orientation] {
@@ -176,8 +176,8 @@
   }
 
   span.error {
-    font-size: var(--fui-text-xs);
     color: var(--fui-danger);
+    font-size: var(--fui-text-xs);
     margin-block-start: var(--fui-space-xs);
   }
 }

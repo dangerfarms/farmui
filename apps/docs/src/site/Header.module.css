@@ -1,64 +1,64 @@
 .header {
-  position: sticky;
-  inset-block-start: 0;
-  z-index: 50;
-  border-block-end: 1px solid var(--fui-border);
-  background: color-mix(in oklch, var(--fui-bg) 82%, transparent);
   backdrop-filter: blur(12px) saturate(1.4);
+  background: color-mix(in oklch, var(--fui-bg) 82%, transparent);
+  border-block-end: 1px solid var(--fui-border);
+  inset-block-start: 0;
+  position: sticky;
+  z-index: 50;
 }
 
 .inner {
-  display: block flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
   block-size: var(--site-nav-h);
+  display: block flex;
+  gap: 1rem;
   inline-size: min(100% - 2.5rem, 90rem);
+  justify-content: space-between;
   margin-inline: auto;
 }
 
 .left,
 .right {
-  display: block flex;
   align-items: center;
+  display: block flex;
   gap: 1.25rem;
 }
 
 .nav {
+  color: var(--fui-text-muted);
   display: block flex;
-  gap: 1.25rem;
   font-size: var(--fui-text-sm);
   font-weight: 550;
-  color: var(--fui-text-muted);
-}
+  gap: 1.25rem;
 
-.nav a {
-  transition: color var(--fui-duration-md) var(--fui-ease);
-}
+  a {
+    transition: color var(--fui-duration-md) var(--fui-ease);
 
-.nav a:hover {
-  color: var(--fui-text);
+    &:hover {
+      color: var(--fui-text);
+    }
+  }
 }
 
 /* Matches ThemeToggle's .btn box so the icon buttons read as a set. */
 .stars {
-  display: block grid;
-  place-items: center;
-  inline-size: 2.25rem;
   block-size: 2.25rem;
-  color: var(--fui-text-muted);
   border: 1px solid var(--fui-border);
   border-radius: var(--fui-radius-md);
+  color: var(--fui-text-muted);
+  display: block grid;
+  inline-size: 2.25rem;
+  place-items: center;
   transition:
     color var(--fui-duration-md) var(--fui-ease),
     border-color var(--fui-duration-md) var(--fui-ease),
     background var(--fui-duration-md) var(--fui-ease);
-}
 
-.stars:hover {
-  color: var(--fui-text);
-  border-color: var(--fui-border-strong);
-  background: var(--fui-surface-hover);
+  &:hover {
+    background: var(--fui-surface-hover);
+    border-color: var(--fui-border-strong);
+    color: var(--fui-text);
+  }
 }
 
 @media (width <= 62rem) {

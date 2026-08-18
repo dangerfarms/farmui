@@ -1,54 +1,54 @@
 .wrap {
+  background: var(--fui-surface);
   border: 1px solid var(--fui-border);
   border-radius: var(--fui-radius-lg);
   overflow: hidden;
-  background: var(--fui-surface);
 }
 
 .tabs {
+  background: var(--fui-bg-subtle);
+  border-block-end: 1px solid var(--fui-border);
   display: block flex;
   gap: 0.25rem;
   padding: 0.4rem 0.5rem;
-  border-block-end: 1px solid var(--fui-border);
-  background: var(--fui-bg-subtle);
 }
 
 .tab {
-  padding: 0.3rem 0.75rem;
-  font-size: var(--fui-text-sm);
-  font-weight: 550;
-  color: var(--fui-text-muted);
   background: transparent;
   border: none;
   border-radius: var(--fui-radius-sm);
+  color: var(--fui-text-muted);
   cursor: pointer;
+  font-size: var(--fui-text-sm);
+  font-weight: 550;
+  padding: 0.3rem 0.75rem;
   transition:
     background var(--fui-duration-md) var(--fui-ease),
     color var(--fui-duration-md) var(--fui-ease);
-}
 
-.tab:hover {
-  color: var(--fui-text);
-}
+  &:hover {
+    color: var(--fui-text);
+  }
 
-.tab[data-active] {
-  color: var(--fui-text);
-  background: var(--fui-surface);
-  box-shadow: var(--fui-shadow-sm);
+  &[data-active] {
+    background: var(--fui-surface);
+    box-shadow: var(--fui-shadow-sm);
+    color: var(--fui-text);
+  }
 }
 
 .stage {
-  display: block flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: 1rem;
-  padding: clamp(1.5rem, 1.071rem + 2.143vi, 3rem);
   background: radial-gradient(
     circle at 1px 1px,
     var(--fui-border) 1px,
     transparent 0
   );
   background-size: 1.25rem 1.25rem;
+  display: block flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: clamp(1.5rem, 1.071rem + 2.143vi, 3rem);
 }
 
 .code {

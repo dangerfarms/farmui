@@ -3,19 +3,19 @@
     --_bg: var(--fui-primary-strong);
     --_fg: var(--fui-on-strong);
 
-    display: inline flex;
     align-items: center;
-    justify-content: center;
-    inline-size: var(--_size, 2.5rem);
+    background: var(--_bg);
     block-size: var(--_size, 2.5rem);
     border-radius: var(--_radius, var(--fui-radius-full));
-    background: var(--_bg);
     color: var(--_fg);
+    display: inline flex;
+    flex: none;
     font-weight: 600;
+    inline-size: var(--_size, 2.5rem);
+    justify-content: center;
     line-height: 1;
     overflow: clip;
     user-select: none;
-    flex: none;
 
     &[data-size="sm"] {
       --_size: 2rem;
@@ -34,6 +34,24 @@
 
       font-size: var(--fui-text-lg);
     }
+  }
+
+  img.image {
+    block-size: 100%;
+    display: block flow;
+    inline-size: 100%;
+    object-fit: cover;
+  }
+
+  span.initials {
+    font-size: 0.85em;
+    letter-spacing: 0.02em;
+  }
+
+  svg.glyph {
+    block-size: 65%;
+    inline-size: 65%;
+    opacity: 0.9;
   }
 
   /* The initials background answers the surrounding context region, the
@@ -61,49 +79,31 @@
       --_bg: var(--fui-success-strong);
     }
   }
-
-  img.image {
-    inline-size: 100%;
-    block-size: 100%;
-    object-fit: cover;
-    display: block flow;
-  }
-
-  span.initials {
-    font-size: 0.85em;
-    letter-spacing: 0.02em;
-  }
-
-  svg.glyph {
-    inline-size: 65%;
-    block-size: 65%;
-    opacity: 0.9;
-  }
 }
 
 /* Group — overlap children with a surface ring */
 @scope (.fui-Avatar-group) {
   :scope {
-    display: inline flex;
     align-items: center;
-  }
+    display: inline flex;
 
-  :scope > * {
-    border: 2px solid var(--fui-surface);
-    box-sizing: content-box;
-    margin-inline-start: calc(-1 * var(--_overlap, 0.5rem));
+    > * {
+      border: 2px solid var(--fui-surface);
+      box-sizing: content-box;
+      margin-inline-start: calc(-1 * var(--_overlap, 0.5rem));
+      transition: translate var(--fui-duration-md) var(--fui-ease);
 
-    /* Identity at rest — the hover lift transitions both ways. */
-    translate: 0 0;
-    transition: translate var(--fui-duration-md) var(--fui-ease);
-  }
+      /* Identity at rest — the hover lift transitions both ways. */
+      translate: 0 0;
+    }
 
-  :scope > *:first-child {
-    margin-inline-start: 0;
-  }
+    > *:first-child {
+      margin-inline-start: 0;
+    }
 
-  :scope > *:hover {
-    translate: 0 -2px;
-    z-index: 1;
+    > *:hover {
+      translate: 0 -2px;
+      z-index: 1;
+    }
   }
 }

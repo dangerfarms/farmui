@@ -1,28 +1,28 @@
 @scope (.fui-Input-field) to ([class*="fui-"]) {
   :scope {
-    display: block flex;
     align-items: center;
+    background: var(--fui-surface);
+    border: 1px solid var(--fui-border-strong);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    display: block flex;
+    font-size: var(--fui-text-sm);
     gap: var(--fui-space-sm);
+    line-height: 1.2;
 
     /* Height is derived, not declared: same stack as Button (padding-block
        space-sm + text-sm × 1.2 + 1px border), so inputs and buttons align
        by construction at every container width. */
     padding-block: var(--fui-space-sm);
     padding-inline: var(--fui-space-md);
-    font-size: var(--fui-text-sm);
-    line-height: 1.2;
-    border: 1px solid var(--fui-border-strong);
-    border-radius: var(--_radius, var(--fui-radius-md));
-    background: var(--fui-surface);
     transition:
       border-color var(--fui-duration-sm) var(--fui-ease),
       box-shadow var(--fui-duration-md) var(--fui-ease);
-  }
 
-  :scope:focus-within {
-    border-color: var(--fui-primary);
-    outline: var(--fui-ring-width) solid var(--fui-ring-color);
-    outline-offset: 2px;
+    &:focus-within {
+      border-color: var(--fui-primary);
+      outline: var(--fui-ring-width) solid var(--fui-ring-color);
+      outline-offset: 2px;
+    }
   }
 
   /* Autofilled: the wrapper border carries the signal (the input itself
@@ -61,17 +61,17 @@
   }
 
   input {
+    background: transparent;
+    border: none;
+    color: inherit;
     flex: 1;
+    font: inherit;
     min-inline-size: 0;
+    outline: none;
 
     /* UA inputs carry 1-2px default padding; with a derived (auto) height
        that would break the Button alignment, so zero it explicitly. */
     padding: 0;
-    border: none;
-    outline: none;
-    background: transparent;
-    color: inherit;
-    font: inherit;
   }
 
   input::placeholder {
@@ -92,15 +92,15 @@
   }
 
   span.section {
-    display: inline flex;
-    flex-shrink: 0;
     align-items: center;
     color: var(--fui-text-muted);
+    display: inline flex;
+    flex-shrink: 0;
 
     /* Sections must not stretch the derived height. */
     svg {
-      inline-size: 1.125em;
       block-size: auto;
+      inline-size: 1.125em;
     }
   }
 }

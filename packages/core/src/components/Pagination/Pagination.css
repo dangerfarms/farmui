@@ -8,65 +8,65 @@
   }
 
   ul {
+    align-items: center;
     display: block flex;
     flex-wrap: wrap;
-    align-items: center;
     gap: var(--fui-space-xs);
+    list-style: none;
     margin: 0;
     padding: 0;
-    list-style: none;
   }
 
   button {
-    display: inline flex;
     align-items: center;
-    justify-content: center;
-    min-inline-size: var(--_control-h);
-    padding-block: var(--fui-space-sm);
-    padding-inline: var(--fui-space-sm);
+    background: var(--fui-surface);
     border: 1px solid var(--fui-border);
     border-radius: var(--fui-radius-md);
-    background: var(--fui-surface);
+    display: inline flex;
     font-family: inherit;
     font-size: var(--fui-text-sm);
     font-weight: 600;
+    justify-content: center;
     line-height: 1.2;
+    min-inline-size: var(--_control-h);
+    padding-block: var(--fui-space-sm);
+    padding-inline: var(--fui-space-sm);
     transition:
       background var(--fui-duration-sm) var(--fui-ease),
       border-color var(--fui-duration-sm) var(--fui-ease),
       color var(--fui-duration-sm) var(--fui-ease),
       box-shadow var(--fui-duration-md) var(--fui-ease);
-  }
 
-  button:hover:not([data-active], :disabled) {
-    background: var(--fui-surface-hover);
-    border-color: var(--fui-border-strong);
-  }
+    &:hover:not([data-active], :disabled) {
+      background: var(--fui-surface-hover);
+      border-color: var(--fui-border-strong);
+    }
 
-  button[data-active] {
-    background: var(--fui-primary-strong);
-    border-color: var(--fui-primary);
-    color: var(--fui-on-strong);
-    cursor: default;
-  }
+    &[data-active] {
+      background: var(--fui-primary-strong);
+      border-color: var(--fui-primary);
+      color: var(--fui-on-strong);
+      cursor: default;
+    }
 
-  button:disabled {
-    opacity: 0.45;
-    color: var(--fui-text-dim);
-  }
+    &:disabled {
+      color: var(--fui-text-dim);
+      opacity: 0.45;
+    }
 
-  button :where(svg) {
-    inline-size: 1.125em;
-    block-size: 1.125em;
+    :where(svg) {
+      block-size: 1.125em;
+      inline-size: 1.125em;
+    }
   }
 
   span.dots {
-    display: inline flex;
     align-items: center;
-    justify-content: center;
-    min-inline-size: var(--_control-h);
     block-size: var(--_control-h);
     color: var(--fui-text-dim);
+    display: inline flex;
+    justify-content: center;
+    min-inline-size: var(--_control-h);
     user-select: none;
   }
 
@@ -74,10 +74,10 @@
      identical to its neighbours. */
   @media (forced-colors: active) {
     button[data-active] {
-      forced-color-adjust: none;
       background: Highlight;
       border-color: Highlight;
       color: HighlightText;
+      forced-color-adjust: none;
     }
   }
 }

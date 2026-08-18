@@ -1,25 +1,25 @@
 @scope (.fui-Select-field) {
   :scope {
-    position: relative;
-    display: block flex;
     align-items: center;
+    background: var(--fui-surface);
+    border: 1px solid var(--fui-border-strong);
+    border-radius: var(--_radius, var(--fui-radius-md));
+    display: block flex;
 
     /* Height is derived from the select's own padding + font (the Button
        anatomy); the field contributes only the 1px border. */
     font-size: var(--fui-text-sm);
     line-height: 1.2;
-    border: 1px solid var(--fui-border-strong);
-    border-radius: var(--_radius, var(--fui-radius-md));
-    background: var(--fui-surface);
+    position: relative;
     transition:
       border-color var(--fui-duration-sm) var(--fui-ease),
       box-shadow var(--fui-duration-md) var(--fui-ease);
-  }
 
-  :scope:focus-within {
-    border-color: var(--fui-primary);
-    outline: var(--fui-ring-width) solid var(--fui-ring-color);
-    outline-offset: 2px;
+    &:focus-within {
+      border-color: var(--fui-primary);
+      outline: var(--fui-ring-width) solid var(--fui-ring-color);
+      outline-offset: 2px;
+    }
   }
 
   /* Autofilled: the wrapper border carries the signal (the select itself
@@ -55,26 +55,21 @@
   }
 
   select {
+    appearance: none;
+    background: transparent;
+    border: none;
+    color: inherit;
+    cursor: pointer;
     flex: 1;
+    font: inherit;
     min-inline-size: 0;
+    outline: none;
 
     /* Padding lives on the <select> so its whole face stays clickable. */
     padding-block: var(--fui-space-sm);
 
     /* Leave room for the chevron on the trailing side. */
     padding-inline: var(--fui-space-md) 2.25rem;
-    border: none;
-    outline: none;
-    background: transparent;
-    color: inherit;
-    font: inherit;
-    cursor: pointer;
-    appearance: none;
-  }
-
-  /* Empty placeholder value renders dimmed like a real placeholder. */
-  select:has(option[value=""]:checked) {
-    color: var(--fui-text-dim);
   }
 
   /* background-color cannot be overridden on an autofilled field; an inset
@@ -90,17 +85,22 @@
       color-mix(in oklab, var(--fui-primary) 8%, var(--fui-surface));
   }
 
+  /* Empty placeholder value renders dimmed like a real placeholder. */
+  select:has(option[value=""]:checked) {
+    color: var(--fui-text-dim);
+  }
+
   svg.chevron {
-    position: absolute;
-    inset-inline-end: var(--fui-space-md);
+    block-size: 1.125em;
+    color: var(--fui-text-muted);
+    flex-shrink: 0;
 
     /* Fluid: overrides the SVG's 16px width/height attributes. */
     inline-size: 1.125em;
-    block-size: 1.125em;
     inset-block-start: 50%;
-    flex-shrink: 0;
-    color: var(--fui-text-muted);
+    inset-inline-end: var(--fui-space-md);
     pointer-events: none;
+    position: absolute;
     translate: 0 -50%;
   }
 }

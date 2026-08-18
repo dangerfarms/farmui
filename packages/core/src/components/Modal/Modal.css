@@ -2,16 +2,17 @@
   :scope {
     --_max: 32rem;
 
+    background: var(--fui-surface);
+    border: 0;
+    border-radius: var(--fui-radius-lg);
+    box-shadow: var(--fui-shadow-lg);
+    font-size: var(--fui-text-sm);
+
     /* UA centering (fixed + auto margins) is kept; we only size and skin. */
     inline-size: min(100% - 2 * var(--fui-space-lg), var(--_max));
     max-block-size: calc(100dvb - 2 * var(--fui-space-xl));
-    padding: var(--fui-space-lg);
     overflow-block: auto;
-    border: 0;
-    border-radius: var(--fui-radius-lg);
-    background: var(--fui-surface);
-    box-shadow: var(--fui-shadow-lg);
-    font-size: var(--fui-text-sm);
+    padding: var(--fui-space-lg);
 
     &[data-size="sm"] {
       --_max: 24rem;
@@ -27,7 +28,6 @@
 
     @media (prefers-reduced-motion: no-preference) {
       opacity: 1;
-      translate: 0 0;
       scale: 1;
       transition:
         opacity var(--fui-duration-lg) var(--fui-ease),
@@ -35,20 +35,15 @@
         scale var(--fui-duration-lg) var(--fui-ease),
         display var(--fui-duration-lg) var(--fui-ease) allow-discrete,
         overlay var(--fui-duration-lg) var(--fui-ease) allow-discrete;
-
-      @starting-style {
-        opacity: 0;
-        translate: 0 0.5rem;
-        scale: 0.98;
-      }
+      translate: 0 0;
 
       /* Exit is the transition BACK to the closed state — without these the
          dialog would sit fully opaque for the whole duration, then vanish
          (display/overlay flip discretely at the end). */
       &:not([open]) {
         opacity: 0;
-        translate: 0 0.5rem;
         scale: 0.98;
+        translate: 0 0.5rem;
       }
 
       &::backdrop {
@@ -66,17 +61,23 @@
       &:not([open])::backdrop {
         opacity: 0;
       }
+
+      @starting-style {
+        opacity: 0;
+        scale: 0.98;
+        translate: 0 0.5rem;
+      }
     }
   }
 
   h2.title {
-    margin-block: 0 var(--fui-space-sm);
     font-size: var(--fui-text-lg);
     font-weight: 600;
+    margin-block: 0 var(--fui-space-sm);
   }
 
   p.description {
-    margin-block: 0 var(--fui-space-md);
     color: var(--fui-text-muted);
+    margin-block: 0 var(--fui-space-md);
   }
 }

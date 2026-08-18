@@ -1,20 +1,20 @@
 @scope (.fui-ErrorSummary) {
   :scope {
-    padding: var(--fui-space-lg);
+    background: var(--fui-danger-soft);
     border: 2px solid var(--fui-danger);
     border-radius: var(--fui-radius-md);
-    background: var(--fui-danger-soft);
-  }
+    padding: var(--fui-space-lg);
 
-  :scope:focus-visible {
-    outline: var(--fui-ring-width) solid var(--fui-danger-ring);
-    outline-offset: 2px;
+    &:focus-visible {
+      outline: var(--fui-ring-width) solid var(--fui-danger-ring);
+      outline-offset: 2px;
+    }
   }
 
   h2 {
-    margin: 0;
     font-size: var(--fui-text-md);
     font-weight: 700;
+    margin: 0;
     text-wrap: balance;
   }
 

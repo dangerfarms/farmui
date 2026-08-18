@@ -7,32 +7,32 @@
   :scope {
     --_color: var(--fui-text);
 
-    display: inline flex;
     align-items: center;
-    gap: var(--_gap, var(--fui-space-xs));
-    inline-size: fit-content;
-    block-size: var(--_h, 1.375rem);
-    padding-inline: var(--_px, 0.625rem);
-    border-radius: var(--_radius, var(--fui-radius-full));
 
     /* Tints mix in oklab (cartesian), not oklch: hue interpolation against
        the near-achromatic page background rotates the channel's hue (the
        declared hue of an achromatic colour still interpolates); cartesian
        mixing only desaturates, so the channel's hue survives. */
     background: color-mix(in oklab, var(--_color), var(--fui-bg) 85%);
+    block-size: var(--_h, 1.375rem);
+    border-radius: var(--_radius, var(--fui-radius-full));
     color: light-dark(
       color-mix(in oklab, var(--_color) 70%, oklch(0% 0 0deg)),
       color-mix(in oklab, var(--_color) 55%, oklch(100% 0 0deg))
     );
+    display: inline flex;
     font-size: var(--_fz, var(--fui-text-xs));
     font-weight: 600;
-    line-height: 1;
+    gap: var(--_gap, var(--fui-space-xs));
+    inline-size: fit-content;
     letter-spacing: 0.01em;
-    white-space: nowrap;
-    user-select: none;
+    line-height: 1;
+    padding-inline: var(--_px, 0.625rem);
     transition:
       background var(--fui-duration-md) var(--fui-ease),
       color var(--fui-duration-md) var(--fui-ease);
+    user-select: none;
+    white-space: nowrap;
 
     &[data-size="sm"] {
       --_h: 1.125rem;
@@ -45,6 +45,25 @@
       --_px: 0.8125rem;
       --_fz: var(--fui-text-sm);
       --_gap: var(--fui-space-sm);
+    }
+  }
+
+  /* The status dot carries the raw channel — a swatch, not text. */
+  span.dot {
+    background: var(--_color);
+    block-size: 0.5em;
+    border-radius: var(--fui-radius-full);
+    flex: none;
+    inline-size: 0.5em;
+  }
+
+  :scope:has(svg) {
+    gap: var(--_gap, var(--fui-space-xs));
+
+    svg {
+      block-size: auto;
+      flex: none;
+      inline-size: 1em;
     }
   }
 
@@ -86,25 +105,6 @@
   @supports (text-box: trim-both cap alphabetic) {
     :scope {
       text-box: trim-both cap alphabetic;
-    }
-  }
-
-  /* The status dot carries the raw channel — a swatch, not text. */
-  span.dot {
-    inline-size: 0.5em;
-    block-size: 0.5em;
-    border-radius: var(--fui-radius-full);
-    background: var(--_color);
-    flex: none;
-  }
-
-  :scope:has(svg) {
-    gap: var(--_gap, var(--fui-space-xs));
-
-    svg {
-      inline-size: 1em;
-      block-size: auto;
-      flex: none;
     }
   }
 }

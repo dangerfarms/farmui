@@ -5,17 +5,17 @@
     display: block flex;
     flex-direction: column;
     gap: var(--fui-space-xs);
-  }
 
-  :scope[data-disabled] {
-    opacity: var(--fui-disabled-opacity);
+    &[data-disabled] {
+      opacity: var(--fui-disabled-opacity);
+    }
   }
 
   label {
-    display: block flex;
     align-items: flex-start;
-    gap: var(--fui-space-sm);
     cursor: pointer;
+    display: block flex;
+    gap: var(--fui-space-sm);
   }
 }
 
@@ -24,46 +24,47 @@
 @scope (.fui-Checkbox-box) {
   /* Bare control fades itself; inside the labelled wrapper the wrapper
      does (the :not guard stops the two from compounding). */
-  :scope[data-disabled]:where(:not(.fui-Checkbox-wrapper *)) {
-    opacity: var(--fui-disabled-opacity);
-  }
 
   :scope {
     --_box: 1.3889em;
 
-    position: relative;
+    background: var(--fui-surface);
+    block-size: var(--_box);
+    border: 1px solid var(--fui-border-strong);
+    border-radius: var(--fui-radius-sm);
+    color: var(--fui-on-strong);
     display: inline grid;
     flex-shrink: 0;
-    place-items: center;
     font-size: var(--fui-text-sm);
     inline-size: var(--_box);
-    block-size: var(--_box);
 
     /* Nudge to optically align with the first line of label text. */
     margin-block-start: 0.1em;
-    border: 1px solid var(--fui-border-strong);
-    border-radius: var(--fui-radius-sm);
-    background: var(--fui-surface);
-    color: var(--fui-on-strong);
+    place-items: center;
+    position: relative;
     transition:
       background var(--fui-duration-sm) var(--fui-ease),
       border-color var(--fui-duration-sm) var(--fui-ease),
       box-shadow var(--fui-duration-md) var(--fui-ease);
+
+    &[data-disabled]:where(:not(.fui-Checkbox-wrapper *)) {
+      opacity: var(--fui-disabled-opacity);
+    }
   }
 
   /* Visually hide the native control but keep it in the a11y tree &
      focusable. The hit area is at least 24px (WCAG 2.5.8) even when the
      visible box is smaller — centred, invisible, no layout impact. */
   input {
-    position: absolute;
+    block-size: max(100%, 24px);
+    cursor: inherit;
+    inline-size: max(100%, 24px);
     inset-block-start: 50%;
     inset-inline-start: 50%;
-    translate: -50% -50%;
-    inline-size: max(100%, 24px);
-    block-size: max(100%, 24px);
     margin: 0;
     opacity: 0;
-    cursor: inherit;
+    position: absolute;
+    translate: -50% -50%;
   }
 
   /* No forced-colors block is needed for the checked state: the tick/dash
@@ -101,8 +102,8 @@
   }
 
   svg.check {
-    inline-size: 80%;
     block-size: 80%;
+    inline-size: 80%;
     pointer-events: none;
   }
 
@@ -118,10 +119,6 @@
 
   :scope:has(input:indeterminate) path.dash {
     opacity: 1;
-  }
-
-  :scope:has(input:indeterminate) path.tick {
-    opacity: 0;
   }
 }
 
@@ -139,7 +136,7 @@
   }
 
   span.description {
-    font-size: var(--fui-text-xs);
     color: var(--fui-text-muted);
+    font-size: var(--fui-text-xs);
   }
 }

@@ -5,42 +5,43 @@
        icons get) without fighting this default's specificity. */
     --_size: var(--fui-loader-size, 1.5rem);
 
+    align-items: center;
+    block-size: var(--_size);
+
     /* The brand token, so context remaps recolour the loader; parts draw
        with currentColor from here. */
     color: var(--fui-primary);
     display: inline flex;
-    align-items: center;
-    justify-content: center;
     inline-size: var(--_size);
-    block-size: var(--_size);
+    justify-content: center;
     vertical-align: middle;
   }
 
   span.sr-only {
-    position: absolute;
-    inline-size: 1px;
     block-size: 1px;
-    padding: 0;
-    margin: -1px;
     border: 0;
-    overflow: clip;
     clip-path: inset(50%);
+    inline-size: 1px;
+    margin: -1px;
+    overflow: clip;
+    padding: 0;
+    position: absolute;
     white-space: nowrap;
   }
 
   /* Spinner — rotating ring */
   span.spinner {
-    inline-size: 100%;
+    animation: fui-loader-spin 0.65s linear infinite;
     block-size: 100%;
     border: max(2px, calc(var(--_size) * 0.12)) solid
       color-mix(in oklch, currentcolor 25%, transparent);
     border-block-start-color: currentcolor;
     border-radius: var(--fui-radius-full);
-    animation: fui-Loader-spin 0.65s linear infinite;
+    inline-size: 100%;
   }
 }
 
-@keyframes fui-Loader-spin {
+@keyframes fui-loader-spin {
   to {
     transform: rotate(1turn);
   }

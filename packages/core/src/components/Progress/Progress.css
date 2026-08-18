@@ -2,11 +2,11 @@
   :scope {
     --_h: 0.625rem;
 
-    display: block flow;
-    inline-size: 100%;
+    background: var(--fui-bg-subtle);
     block-size: var(--_h);
     border-radius: var(--_radius, var(--fui-radius-full));
-    background: var(--fui-bg-subtle);
+    display: block flow;
+    inline-size: 100%;
     overflow: clip;
 
     &[data-size="sm"] {
@@ -19,26 +19,26 @@
   }
 
   div.bar {
-    display: block flex;
     align-items: center;
-    justify-content: flex-end;
-    block-size: 100%;
-    inline-size: 0;
-    border-radius: inherit;
 
     /* The fill IS the primary token — a `--fui-context` region re-answers
        it (see the Contexts section of tokens.css), so status needs no
        component code here. */
     background: var(--fui-primary-strong);
+    block-size: 100%;
+    border-radius: inherit;
     color: var(--fui-on-strong);
+    display: block flex;
+    inline-size: 0;
+    justify-content: flex-end;
     transition: inline-size var(--fui-duration-lg) var(--fui-ease);
   }
 
   span.label {
-    padding-inline: var(--fui-space-sm);
     font-size: var(--fui-text-xs);
     font-weight: 600;
     line-height: 1;
+    padding-inline: var(--fui-space-sm);
     white-space: nowrap;
   }
 
@@ -54,7 +54,7 @@
   }
 
   div.bar[data-animated] {
-    animation: fui-Progress-progress-stripes 1s linear infinite;
+    animation: fui-progress-stripes 1s linear infinite;
   }
 
   /* Forced colors: track and fill are background-painted and would vanish. */
@@ -64,13 +64,13 @@
     }
 
     div.bar {
-      forced-color-adjust: none;
       background: Highlight;
+      forced-color-adjust: none;
     }
   }
 }
 
-@keyframes fui-Progress-progress-stripes {
+@keyframes fui-progress-stripes {
   from {
     background-position: 0 0;
   }

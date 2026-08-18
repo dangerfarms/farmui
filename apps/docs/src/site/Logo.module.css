@@ -1,21 +1,21 @@
 .logo {
-  display: inline flex;
   align-items: center;
-  gap: 0.55rem;
-  font-weight: 800;
+  display: inline flex;
   font-size: var(--fui-text-lg);
+  font-weight: 800;
+  gap: 0.55rem;
   letter-spacing: -0.03em;
 }
 
 .mark {
-  display: block grid;
-  place-items: center;
-  inline-size: 2rem;
+  background: var(--site-gradient);
   block-size: 2rem;
   border-radius: var(--fui-radius-md);
-  background: var(--site-gradient);
-  color: oklch(100% 0 0deg);
   box-shadow: var(--fui-shadow-sm);
+  color: oklch(100% 0 0deg);
+  display: block grid;
+  inline-size: 2rem;
+  place-items: center;
 }
 
 .word {
