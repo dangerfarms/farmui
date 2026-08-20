@@ -365,13 +365,14 @@ export function BrandButton(props: ButtonProps) {
 
       <h2>Browser support</h2>
       <p>
-        Container style queries ship in Chromium (111+) and Safari (18+); Firefox has not yet
-        shipped them. In older browsers, contexts degrade to the neutral defaults: everything stays
-        functional and accessible; per our{" "}
+        Everything contextualism uses is Baseline. Container style queries — the mechanism behind{" "}
+        <code>--fui-context</code> — became Baseline Newly Available in May 2026, when the last
+        engine shipped them. Container size queries, <code>:has()</code> and{" "}
+        <code>color-mix()</code> are Baseline Widely Available; relative colour syntax has been
+        Newly Available since 2024. In a browser that predates a feature, contexts degrade to the
+        neutral defaults — everything stays functional and accessible — and per our{" "}
         <a href="https://github.com/dangerfarms/farmui/blob/main/CONTRIBUTING.md">browser policy</a>{" "}
-        there are no polyfills. <code>:has()</code>, <code>color-mix()</code> and container size
-        queries are Baseline Widely Available; relative colour is Newly Available (in every engine
-        since mid-2024).
+        there are no polyfills.
       </p>
     </div>
   );

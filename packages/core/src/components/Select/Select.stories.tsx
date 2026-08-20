@@ -36,7 +36,7 @@ export const Grouped: Story = {
   render: () => (
     <Field.Root>
       <Field.Label>Instrument</Field.Label>
-      <Select placeholder="Pick one">
+      <Select>
         <optgroup label="Strings">
           <option>Violin</option>
           <option>Cello</option>
@@ -64,8 +64,8 @@ export const WithError: Story = {
   render: (args) => (
     <Field.Root>
       <Field.Label>Framework</Field.Label>
-      <Select {...args} />
       <Field.Error>Select a framework</Field.Error>
+      <Select {...args} />
     </Field.Root>
   ),
 };

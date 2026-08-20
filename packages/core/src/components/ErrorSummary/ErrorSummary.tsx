@@ -81,7 +81,9 @@ function ErrorSummaryRoot({
         className={cx("fui-ErrorSummary", className)}
         {...rest}
       >
-        {children}
+        {/* role="alert" announces on render even without autoFocus; the
+            outer group stays the focus target. */}
+        <div role="alert">{children}</div>
       </div>
     </ErrorSummaryContext>
   );

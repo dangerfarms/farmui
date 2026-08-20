@@ -68,7 +68,7 @@ export default function Page() {
       <div className={prose.callout}>
         That&rsquo;s the whole setup. No provider, no config. See the{" "}
         <Link href="/docs/installation">installation guide</Link> for framework specifics, or jump
-        into <Link href="/docs/theming">theming</Link>.
+        into <Link href="/docs/tokens">the tokens</Link>.
       </div>
 
       <h2>Next steps</h2>
@@ -78,7 +78,8 @@ export default function Page() {
           and more.
         </li>
         <li>
-          <Link href="/docs/theming">Theming</Link>: rebrand FarmUI with CSS variables.
+          <Link href="/docs/tokens">Tokens</Link>: the token surface, and the theming that falls out
+          of it.
         </li>
         <li>
           <Link href="/docs/components/button">Browse components</Link>: live examples and props for

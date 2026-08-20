@@ -31,7 +31,10 @@
     display: block flex;
     inline-size: 0;
     justify-content: flex-end;
-    transition: inline-size var(--fui-duration-lg) var(--fui-ease);
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition: inline-size var(--fui-duration-lg) var(--fui-ease);
+    }
   }
 
   span.label {
@@ -54,7 +57,9 @@
   }
 
   div.bar[data-animated] {
-    animation: fui-progress-stripes 1s linear infinite;
+    @media (prefers-reduced-motion: no-preference) {
+      animation: fui-progress-stripes 1s linear infinite;
+    }
   }
 
   /* Forced colors: track and fill are background-painted and would vanish. */

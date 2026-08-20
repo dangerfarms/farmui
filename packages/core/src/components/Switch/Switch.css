@@ -5,6 +5,10 @@
     display: inline flex;
     gap: var(--fui-space-sm);
 
+    &:has(input:disabled) {
+      cursor: not-allowed;
+    }
+
     &[data-label-position="start"] {
       flex-direction: row-reverse;
     }
@@ -73,7 +77,10 @@
     box-shadow: var(--fui-shadow-sm);
     display: block flow;
     inline-size: calc(var(--_track-h) - 2 * var(--_gap));
-    transition: translate var(--fui-duration-md) var(--fui-ease-elastic);
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition: translate var(--fui-duration-md) var(--fui-ease-elastic);
+    }
   }
 
   input:checked + span.track {
@@ -99,18 +106,19 @@
   input:is([aria-invalid="true"], :user-invalid) + span.track {
     --fui-ring-color: var(--fui-danger-ring);
 
-    outline: 1px solid var(--fui-danger);
-    outline-offset: 0;
+    box-shadow: inset 0 0 0 1px var(--fui-danger);
   }
 
   /* The wrapper ancestor sits outside the scope root; the subject (the
      track) stays in scope. */
-  :is(.fui-Switch-wrapper, :scope):hover input:not(:disabled) + span.track {
-    background: color-mix(
-      in oklch,
-      var(--fui-border-strong) 80%,
-      var(--fui-primary)
-    );
+  @media (hover: hover) {
+    :is(.fui-Switch-wrapper, :scope):hover input:not(:disabled) + span.track {
+      background: color-mix(
+        in oklch,
+        var(--fui-border-strong) 80%,
+        var(--fui-primary)
+      );
+    }
   }
 
   /* Forced colors strips backgrounds — without this the switch is invisible.

@@ -40,7 +40,7 @@ export const FluidSizing: Story = {
       >
         <Field.Root>
           <Field.Label>In a narrow container</Field.Label>
-          <Input placeholder="you@example.com" />
+          <Input />
         </Field.Root>
       </div>
       <div
@@ -53,7 +53,7 @@ export const FluidSizing: Story = {
       >
         <Field.Root>
           <Field.Label>In a wide one</Field.Label>
-          <Input placeholder="you@example.com" />
+          <Input />
         </Field.Root>
       </div>
     </div>
@@ -65,7 +65,7 @@ export const WithDescription: Story = {
     <Field.Root>
       <Field.Label>Username</Field.Label>
       <Field.Description>This is how your name appears to others.</Field.Description>
-      <Input placeholder="jane_doe" />
+      <Input />
     </Field.Root>
   ),
 };
@@ -74,8 +74,8 @@ export const WithError: Story = {
   render: () => (
     <Field.Root>
       <Field.Label>Email</Field.Label>
-      <Input placeholder="you@example.com" defaultValue="not-an-email" />
       <Field.Error>Enter an email address in the correct format, like name@example.com</Field.Error>
+      <Input defaultValue="not-an-email" />
     </Field.Root>
   ),
 };
@@ -84,7 +84,7 @@ export const Required: Story = {
   render: () => (
     <Field.Root>
       <Field.Label>Full name</Field.Label>
-      <Input required placeholder="Jane Doe" />
+      <Input required />
     </Field.Root>
   ),
 };

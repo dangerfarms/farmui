@@ -19,8 +19,8 @@ import type { RenderProp } from "../../render";
  * <Field.Root>
  *   <Field.Label>Email</Field.Label>
  *   <Field.Description>We'll never share it.</Field.Description>
- *   <Field.Control render={<Input />} />
  *   <Field.Error>{errorMessage}</Field.Error>
+ *   <Field.Control render={<Input />} />
  * </Field.Root>
  * ```
  */

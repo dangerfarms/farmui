@@ -4,9 +4,9 @@ import { Field, Select } from "@farmui/core";
 
 const countryOptions = (
   <>
-    <option>United States</option>
     <option>Canada</option>
     <option>United Kingdom</option>
+    <option>United States</option>
   </>
 );
 
@@ -27,9 +27,9 @@ export function SelectPlaceholderDemo() {
       <Field.Root>
         <Field.Label>Country</Field.Label>
         <Select placeholder="Pick a country">
-          <option value="us">United States</option>
           <option value="ca">Canada</option>
           <option value="uk">United Kingdom</option>
+          <option value="us">United States</option>
         </Select>
       </Field.Root>
     </div>
@@ -61,8 +61,8 @@ export function SelectErrorDemo() {
     <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
       <Field.Root>
         <Field.Label>Country</Field.Label>
-        <Select placeholder="Pick a country">{countryOptions}</Select>
         <Field.Error>Select a country</Field.Error>
+        <Select placeholder="Pick a country">{countryOptions}</Select>
       </Field.Root>
     </div>
   );

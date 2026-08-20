@@ -103,6 +103,18 @@ function resolve(expr, scheme) {
     if (!(v[1] in decls)) throw new Error(`unknown token ${v[1]}`);
     return resolve(decls[v[1]], scheme);
   }
+  // Relative colour, the reference derivation idiom: pinned L and C,
+  // source hue kept — oklch(from <colour> <L>% <C> h). Only this shape is
+  // supported; anything fancier (calc channels, alpha) throws loudly.
+  const rel = expr.match(/^oklch\(from\s+([\s\S]+?)\s+([\d.]+)%\s+([\d.]+)\s+h\)$/);
+  if (rel) {
+    const srcRgb = resolve(rel[1], scheme);
+    const [, a0, b0] = srgbToOklab(srcRgb);
+    const hue = Math.atan2(b0, a0);
+    const L = +rel[2] / 100;
+    const C = +rel[3];
+    return oklabToSrgb([L, C * Math.cos(hue), C * Math.sin(hue)]);
+  }
   const ok = expr.match(/^oklch\(([\d.]+)%\s+([\d.]+)\s+([\d.]+)deg(\s*\/\s*[\d.]+%?)?\)$/);
   if (ok) {
     if (ok[4]) throw new Error(`translucent colour in an audited chain: ${expr} — contrast depends on what shows through, which this audit cannot know`);
@@ -142,7 +154,7 @@ const T = (name, scheme) => resolve(`var(${name})`, scheme);
 // the weights out of each file: change a weight and the changed pair is
 // what gets audited.
 function labelWeights(file, channel) {
-  const text = readFileSync(src("components", file), "utf8");
+  const text = readFileSync(src(file), "utf8");
   const re = new RegExp(
     String.raw`light-dark\(\s*color-mix\(in oklab,\s*var\(${channel}\)\s+([\d.]+)%,\s*oklch\(0% 0 0deg\)\s*\),\s*color-mix\(in oklab,\s*var\(${channel}\)\s+([\d.]+)%,\s*oklch\(100% 0 0deg\)\s*\)\s*\)`,
   );
@@ -151,14 +163,16 @@ function labelWeights(file, channel) {
   return { light: +m[1] / 100, dark: +m[2] / 100 };
 }
 const labelRecipes = [
-  labelWeights("Button/Button.css", "--_color"),
-  labelWeights("Badge/Badge.css", "--_color"),
-  labelWeights("Alert/Alert.css", "--_accent"),
-  labelWeights("ErrorSummary/ErrorSummary.css", "--fui-danger"),
+  labelWeights("components/Button/Button.css", "--_color"),
+  labelWeights("components/Badge/Badge.css", "--_color"),
+  labelWeights("components/Alert/Alert.css", "--_accent"),
+  labelWeights("components/ErrorSummary/ErrorSummary.css", "--fui-danger"),
+  labelWeights("elements.css", "--fui-text"),
+  labelWeights("components/Pagination/Pagination.css", "--fui-text"),
 ];
 for (const r of labelRecipes.slice(1)) {
   if (r.light !== labelRecipes[0].light || r.dark !== labelRecipes[0].dark) {
-    throw new Error("label recipes have drifted apart across Button/Badge/Alert/ErrorSummary");
+    throw new Error("label recipes have drifted apart across Button/Badge/Alert/ErrorSummary/elements/Pagination");
   }
 }
 const LABEL = labelRecipes[0];
@@ -170,15 +184,24 @@ const mixedLabel = (colour, scheme) =>
 // Button's rest-state background tint (the first light-dark background in
 // the file; the hover tint below it is darker, so rest is the worst case
 // for the label).
-function buttonTintWeights() {
-  const text = readFileSync(src("components", "Button", "Button.css"), "utf8");
-  const m = text.match(
-    /light-dark\(\s*color-mix\(in oklab,\s*var\(--_color\),\s*var\(--fui-bg\)\s+([\d.]+)%\s*\),\s*color-mix\(in oklab,\s*var\(--_color\),\s*var\(--fui-bg\)\s+([\d.]+)%\s*\)\s*\)/,
+function tintWeights(file, channel) {
+  const text = readFileSync(src(file), "utf8");
+  const re = new RegExp(
+    String.raw`light-dark\(\s*color-mix\(in oklab,\s*var\(${channel}\),\s*var\(--fui-bg\)\s+([\d.]+)%\s*\),\s*color-mix\(in oklab,\s*var\(${channel}\),\s*var\(--fui-bg\)\s+([\d.]+)%\s*\)\s*\)`,
   );
-  if (!m) throw new Error("Button tint recipe not found — update this audit alongside the recipe");
+  const m = text.match(re);
+  if (!m) throw new Error(`tint recipe not found in ${file} — update this audit alongside the recipe`);
   return { light: +m[1] / 100, dark: +m[2] / 100 };
 }
-const TINT = buttonTintWeights();
+const TINT = tintWeights("components/Button/Button.css", "--_color");
+const elementsTint = tintWeights("elements.css", "--fui-text");
+if (elementsTint.light !== TINT.light || elementsTint.dark !== TINT.dark) {
+  throw new Error("native button tint in elements.css has drifted from Button.css");
+}
+const paginationTint = tintWeights("components/Pagination/Pagination.css", "--fui-text");
+if (paginationTint.light !== TINT.light || paginationTint.dark !== TINT.dark) {
+  throw new Error("Pagination control tint has drifted from Button.css");
+}
 
 // ---- the audited pairs ----------------------------------------------
 const failures = [];
@@ -192,6 +215,8 @@ function check(name, scheme, fg, bg, need) {
 for (const scheme of ["light", "dark"]) {
   const t = (n) => T(n, scheme);
   check("text on bg", scheme, t("--fui-text"), t("--fui-bg"), 4.5);
+  check("text-strong (headings) on bg", scheme, t("--fui-text-strong"), t("--fui-bg"), 4.5);
+  check("text-strong (headings) on surface", scheme, t("--fui-text-strong"), t("--fui-surface"), 4.5);
   check("text-muted on bg", scheme, t("--fui-text-muted"), t("--fui-bg"), 4.5);
   check("text-dim (placeholder) on surface", scheme, t("--fui-text-dim"), t("--fui-surface"), 4.5);
   check("danger text (Field.Error) on bg", scheme, t("--fui-danger"), t("--fui-bg"), 4.5);
@@ -204,6 +229,12 @@ for (const scheme of ["light", "dark"]) {
     const colour = t(`--fui-${s}`);
     const tint = mixOklab(colour, t("--fui-bg"), scheme === "light" ? TINT.light : TINT.dark);
     check(`button ${s} text on its tint`, scheme, mixedLabel(colour, scheme), tint, 4.5);
+  }
+  {
+    // The elements layer's native button: neutral text channel on its tint.
+    const colour = t("--fui-text");
+    const tint = mixOklab(colour, t("--fui-bg"), scheme === "light" ? TINT.light : TINT.dark);
+    check("native button text on its tint", scheme, mixedLabel(colour, scheme), tint, 4.5);
   }
   check("input border-strong vs surface", scheme, t("--fui-border-strong"), t("--fui-surface"), 3.0);
   // Checked Checkbox/Radio/Switch/Slider paint their glyph (tick, dot,

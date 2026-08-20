@@ -23,6 +23,7 @@
   background: var(--fui-surface);
   border: 1px solid var(--fui-border);
   border-radius: var(--fui-radius-sm);
+  box-shadow: none;
   color: var(--fui-text-muted);
   cursor: pointer;
   font-size: var(--fui-text-xs);

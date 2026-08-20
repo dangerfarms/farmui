@@ -1,4 +1,4 @@
-@scope (.fui-Modal-popup) {
+@scope (.fui-Modal-popup) to ([class*="fui-"]) {
   :scope {
     --_max: 32rem;
 

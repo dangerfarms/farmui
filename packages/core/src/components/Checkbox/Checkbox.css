@@ -16,6 +16,10 @@
     cursor: pointer;
     display: block flex;
     gap: var(--fui-space-sm);
+
+    &:has(input:disabled) {
+      cursor: not-allowed;
+    }
   }
 }
 

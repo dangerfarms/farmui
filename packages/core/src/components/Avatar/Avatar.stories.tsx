@@ -8,10 +8,6 @@ const meta = {
   tags: ["autodocs"],
   args: {
     name: "Ada Lovelace",
-    size: "md",
-  },
-  argTypes: {
-    size: { control: "inline-radio", options: ["sm", "md", "lg"] },
   },
 } satisfies Meta<typeof Avatar>;
 
@@ -48,17 +44,6 @@ export const Contexts: Story = {
 
 export const Fallback: Story = {
   args: { name: undefined, alt: "Unknown user" },
-};
-
-export const Sizes: Story = {
-  render: (args) => (
-    <div style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
-      <Avatar {...args} size="sm" />
-      <Avatar {...args} size="md" />
-      <Avatar {...args} size="lg" />
-      <Avatar {...args} size={64} />
-    </div>
-  ),
 };
 
 export const Group: Story = {

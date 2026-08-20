@@ -1,37 +1,9 @@
-@scope (.fui-Card) {
+@scope (.fui-Card) to ([class*="fui-"]) {
   :scope {
     background: var(--fui-surface);
-    border: 1px solid transparent;
+    border: 1px solid var(--fui-border);
     border-radius: var(--_radius, var(--fui-radius-lg));
-    box-shadow: var(--_shadow, none);
     display: block flow;
-    padding: var(--_p, var(--fui-space-lg));
-    transition:
-      border-color var(--fui-duration-sm) var(--fui-ease),
-      box-shadow var(--fui-duration-md) var(--fui-ease);
-
-    &[data-padding="sm"] {
-      --_p: var(--fui-space-md);
-    }
-
-    &[data-padding="lg"] {
-      --_p: var(--fui-space-xl);
-    }
-
-    &[data-border] {
-      border-color: var(--fui-border);
-    }
-
-    &[data-shadow="sm"] {
-      --_shadow: var(--fui-shadow-sm);
-    }
-
-    &[data-shadow="md"] {
-      --_shadow: var(--fui-shadow-md);
-    }
-
-    &[data-shadow="lg"] {
-      --_shadow: var(--fui-shadow-lg);
-    }
+    padding: var(--fui-space-lg);
   }
 }

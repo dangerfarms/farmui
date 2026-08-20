@@ -15,7 +15,7 @@ import {
   Radio,
   RadioGroup,
   Switch,
-  Slider,
+  Range,
   Badge,
   Card,
   Avatar,
@@ -23,6 +23,8 @@ import {
   Alert,
   Progress,
   Separator,
+  SignpostLink,
+  SkipLink,
   Skeleton,
   Loader,
   Tooltip,
@@ -35,8 +37,7 @@ import {
   TabsList,
   TabsTab,
   TabsPanel,
-  Accordion,
-  AccordionItem,
+  Details,
   Breadcrumbs,
   Pagination,
 } from "../index";
@@ -106,10 +107,10 @@ const cases: Array<[string, ReactElement]> = [
   ],
   ["Switch", <Switch label="Email notifications" />],
   [
-    "Slider",
+    "Range",
     <Field.Root>
       <Field.Label>Volume</Field.Label>
-      <Slider defaultValue={50} />
+      <Range defaultValue={50} />
     </Field.Root>,
   ],
   ["Badge", <Badge>New</Badge>],
@@ -152,6 +153,8 @@ const cases: Array<[string, ReactElement]> = [
   ],
   ["Progress", <Progress value={40} aria-label="Upload progress" />],
   ["Separator", <Separator />],
+  ["SignpostLink", <SignpostLink href="#apply">Start your application</SignpostLink>],
+  ["SkipLink", <SkipLink href="#content" />],
   [
     "ErrorSummary",
     <ErrorSummary.Root autoFocus={false}>
@@ -230,10 +233,11 @@ const cases: Array<[string, ReactElement]> = [
     </Tabs>,
   ],
   [
-    "Accordion",
-    <Accordion>
-      <AccordionItem label="What is FarmUI?">A component library.</AccordionItem>
-    </Accordion>,
+    "Details",
+    <Details.Root>
+      <Details.Summary>What is FarmUI?</Details.Summary>
+      <Details.Content>A component library.</Details.Content>
+    </Details.Root>,
   ],
   [
     "Breadcrumbs",

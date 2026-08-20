@@ -163,7 +163,7 @@ export interface DrawerTriggerRenderProps {
 
 export interface DrawerTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * Substitute your own element as the trigger (`render={<a href="…" />}`)
+   * Substitute your own element as the trigger (`render={<MyIconButton />}`) — triggers act, so keep them buttons
    * or pass a function receiving the wiring props. Without it, the Trigger
    * renders a FarmUI Button.
    */

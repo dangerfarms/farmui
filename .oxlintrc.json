@@ -20,6 +20,7 @@
     // library implementing those patterns (tablist, switch on a native
     // input) is exactly where the suggestions are wrong.
     "jsx-a11y/prefer-tag-over-role": "off",
+    "jsx-a11y/no-noninteractive-tabindex": ["error", { "roles": ["tabpanel", "region"] }],
     "jsx-a11y/label-has-associated-control": [
       "error",
       {
@@ -30,7 +31,7 @@
           "Input",
           "Select",
           "Textarea",
-          "Slider"
+          "Range"
         ],
         "depth": 3
       }

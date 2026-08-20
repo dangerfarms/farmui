@@ -38,36 +38,20 @@ const doc: ComponentContent = {
       ),
     },
     {
-      title: "Sizes",
-      description: "Use a token or an explicit pixel number.",
-      code: `<Avatar name="Jane Doe" size="sm" />
-<Avatar name="Jane Doe" size="md" />
-<Avatar name="Jane Doe" size="lg" />
-<Avatar name="Jane Doe" size={72} />`,
-      render: () => (
-        <>
-          <Avatar name="Jane Doe" size="sm" />
-          <Avatar name="Jane Doe" size="md" />
-          <Avatar name="Jane Doe" size="lg" />
-          <Avatar name="Jane Doe" size={72} />
-        </>
-      ),
-    },
-    {
       title: "Group",
       description: "AvatarGroup overlaps children with a surface-colored ring.",
       code: `<AvatarGroup>
   <Avatar name="Jane Doe" />
   <Avatar name="Sam Reed" />
   <Avatar name="Amara Okafor" />
-  <Avatar name="+5" />
+  <Avatar name="+5" aria-label="5 more people" />
 </AvatarGroup>`,
       render: () => (
         <AvatarGroup>
           <Avatar name="Jane Doe" />
           <Avatar name="Sam Reed" />
           <Avatar name="Amara Okafor" />
-          <Avatar name="+5" />
+          <Avatar name="+5" aria-label="5 more people" />
         </AvatarGroup>
       ),
     },
@@ -114,12 +98,6 @@ const doc: ComponentContent = {
       description: "Person's name; used for initials and as image alt.",
     },
     {
-      name: "size",
-      type: `"sm" | "md" | "lg" | number`,
-      default: `"md"`,
-      description: "Size token or explicit pixel size.",
-    },
-    {
       name: "children",
       type: "ReactNode",
       description: "Custom content; overrides the derived image/initials/glyph.",
@@ -135,14 +113,6 @@ const doc: ComponentContent = {
       name: "AvatarGroup",
       description:
         "Overlaps a row of avatars with a surface-coloured ring; all native <div> props are forwarded.",
-      props: [
-        {
-          name: "spacing",
-          type: "string",
-          default: `"0.5rem"`,
-          description: "How far each avatar overlaps the previous one.",
-        },
-      ],
     },
   ],
   contextual: true,

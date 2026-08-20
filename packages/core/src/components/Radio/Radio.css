@@ -6,6 +6,10 @@
     display: inline flex;
     gap: var(--fui-space-sm);
 
+    &:has(input:disabled) {
+      cursor: not-allowed;
+    }
+
     &[data-disabled] {
       opacity: var(--fui-disabled-opacity);
     }
@@ -78,12 +82,11 @@
     inset: 50%;
     position: absolute;
     scale: 0;
-    transition: scale var(--fui-duration-md) var(--fui-ease);
     translate: -50% -50%;
-  }
 
-  .fui-Radio-wrapper:hover .fui-Radio-input:not(:disabled) + :scope {
-    border-color: var(--fui-primary);
+    @media (prefers-reduced-motion: no-preference) {
+      transition: scale var(--fui-duration-md) var(--fui-ease);
+    }
   }
 
   .fui-Radio-input:checked + :scope {
@@ -110,6 +113,12 @@
     --fui-ring-color: var(--fui-danger-ring);
 
     border-color: var(--fui-danger);
+  }
+
+  @media (hover: hover) {
+    .fui-Radio-wrapper:hover .fui-Radio-input:not(:disabled) + :scope {
+      border-color: var(--fui-primary);
+    }
   }
 
   /* Forced colors: the selected dot is background-painted and would vanish;

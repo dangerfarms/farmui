@@ -70,6 +70,10 @@
 
     /* Leave room for the chevron on the trailing side. */
     padding-inline: var(--fui-space-md) 2.25rem;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
 
   /* background-color cannot be overridden on an autofilled field; an inset
@@ -85,9 +89,10 @@
       color-mix(in oklab, var(--fui-primary) 8%, var(--fui-surface));
   }
 
-  /* Empty placeholder value renders dimmed like a real placeholder. */
+  /* The unanswered prompt stays muted but AA-readable: it is the
+     control's visible value until answered, i.e. instruction text. */
   select:has(option[value=""]:checked) {
-    color: var(--fui-text-dim);
+    color: var(--fui-text-muted);
   }
 
   svg.chevron {

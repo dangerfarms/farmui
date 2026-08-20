@@ -20,12 +20,14 @@
 }
 
 /* Tab and Panel can only render inside <Tabs> (their context throws outside). */
-@scope (.fui-Tabs) {
+@scope (.fui-Tabs) to ([class*="fui-"]) {
   button.tab {
     align-items: center;
     background: transparent;
     border: none;
     border-block-end: 2px solid transparent;
+    border-radius: var(--fui-radius-sm) var(--fui-radius-sm) 0 0;
+    box-shadow: none;
     color: var(--fui-text-muted);
     display: inline flex;
     font-family: inherit;
@@ -42,11 +44,6 @@
       border-color var(--fui-duration-sm) var(--fui-ease),
       background var(--fui-duration-sm) var(--fui-ease);
 
-    &:hover:not(:disabled) {
-      background: color-mix(in oklch, var(--fui-primary-soft) 50%, transparent);
-      color: var(--fui-text);
-    }
-
     &:focus-visible {
       border-radius: var(--fui-radius-sm) var(--fui-radius-sm) 0 0;
     }
@@ -58,6 +55,17 @@
     &[data-active] {
       border-block-end-color: var(--fui-primary);
       color: var(--fui-primary);
+    }
+
+    @media (hover: hover) {
+      &:hover:not(:disabled) {
+        background: color-mix(
+          in oklch,
+          var(--fui-primary-soft) 50%,
+          transparent
+        );
+        color: var(--fui-text);
+      }
     }
   }
 

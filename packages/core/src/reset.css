@@ -1,7 +1,8 @@
 /**
  * FarmUI — minimal scoped reset (the `farmui.reset` layer).
  *
- * Touches only elements FarmUI renders — never the host page.
+ * Element styles are one of the library's primitives: importing the
+ * stylesheet opts the page in (everything stays layer-overridable).
  */
 
 /* The per-instance radius channel is set inline by several components
@@ -28,12 +29,13 @@
 }
 
 @layer farmui.reset {
-  :where([class*="fui-"]),
-  :where([class*="fui-"] *) {
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
   }
 
-  :where(button[class*="fui-"]) {
+  :where(button) {
     cursor: pointer;
     font-family: inherit;
   }

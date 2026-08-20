@@ -1,0 +1,34 @@
+@scope (.fui-SkipLink) {
+  /* Fixed placement keeps the link out of flow in both states, so
+     appearing on focus never shifts the page; z-index above every
+     overlay. */
+  :scope {
+    background: var(--fui-surface);
+    border: 1px solid var(--fui-border-strong);
+    border-radius: var(--fui-radius-md);
+    box-shadow: var(--fui-shadow-lg);
+    color: var(--fui-text);
+    font-size: var(--fui-text-sm);
+    font-weight: 600;
+    inset-block-start: var(--fui-space-sm);
+    inset-inline-start: var(--fui-space-sm);
+    padding-block: var(--fui-space-sm);
+    padding-inline: var(--fui-space-lg);
+    position: fixed;
+    text-decoration: none;
+    z-index: 110;
+
+    /* Hidden is the unfocused state — :focus, not :focus-visible, because
+       assistive tech can focus without the keyboard heuristics and the
+       link must appear for every focus. */
+    &:not(:focus) {
+      block-size: 1px;
+      border: 0;
+      clip-path: inset(50%);
+      inline-size: 1px;
+      overflow: clip;
+      padding: 0;
+      white-space: nowrap;
+    }
+  }
+}

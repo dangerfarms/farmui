@@ -10,8 +10,7 @@ import {
   TabsList,
   TabsTab,
   TabsPanel,
-  Accordion,
-  AccordionItem,
+  Details,
   ErrorSummary,
   Menu,
   Modal,
@@ -22,6 +21,7 @@ import {
   useToast,
   Tooltip,
   Button,
+  SignpostLink,
 } from "../index";
 import type { ToastOptions } from "../index";
 
@@ -71,18 +71,38 @@ describe("Tabs", () => {
   });
 });
 
-describe("Accordion", () => {
-  it("expands an item on summary click", async () => {
+describe("Details", () => {
+  it("expands on summary click", async () => {
     const user = userEvent.setup();
     render(
-      <Accordion>
-        <AccordionItem label="Question">Answer text</AccordionItem>
-      </Accordion>,
+      <Details.Root>
+        <Details.Summary>Question</Details.Summary>
+        <Details.Content>Answer text</Details.Content>
+      </Details.Root>,
     );
     const details = screen.getByText("Question").closest("details")!;
     expect(details.open).toBe(false);
     await user.click(screen.getByText("Question"));
     expect(details.open).toBe(true);
+  });
+
+  it("a shared name reaches the native attribute (the browser owns exclusivity)", () => {
+    // jsdom does not model exclusive <details name>; asserting the
+    // attribute is wired is the testable part.
+    render(
+      <>
+        <Details.Root name="set" defaultOpen>
+          <Details.Summary>First</Details.Summary>
+          <Details.Content>one</Details.Content>
+        </Details.Root>
+        <Details.Root name="set">
+          <Details.Summary>Second</Details.Summary>
+          <Details.Content>two</Details.Content>
+        </Details.Root>
+      </>,
+    );
+    expect(screen.getByText("First").closest("details")).toHaveAttribute("name", "set");
+    expect(screen.getByText("Second").closest("details")).toHaveAttribute("name", "set");
   });
 });
 
@@ -758,5 +778,25 @@ describe("Tooltip", () => {
     expect(trigger).toHaveFocus();
     // The description link survives dismissal.
     expect(trigger).toHaveAttribute("aria-describedby", bubble.id);
+  });
+});
+
+describe("SignpostLink", () => {
+  it("render substitutes the element and merges the class and children", () => {
+    render(
+      <SignpostLink render={<a href="/apply" data-router-link />}>
+        Start your application
+      </SignpostLink>,
+    );
+    const link = screen.getByRole("link", { name: "Start your application" });
+    expect(link).toHaveAttribute("data-router-link");
+    expect(link).toHaveClass("fui-SignpostLink");
+  });
+
+  it("a label on the substituted element is wrapped in the arrow anatomy", () => {
+    render(<SignpostLink render={<a href="/apply">Start your application</a>} />);
+    const link = screen.getByRole("link", { name: "Start your application" });
+    expect(link.querySelector("span.icon svg")).not.toBeNull();
+    expect(link.querySelector("span.label")).toHaveTextContent("Start your application");
   });
 });

@@ -3,7 +3,7 @@
  * the page background, with the text pushed toward black or white so the
  * label always reads on its own tint. The accent is the region's.
  */
-@scope (.fui-Badge) {
+@scope (.fui-Badge) to ([class*="fui-"]) {
   :scope {
     --_color: var(--fui-text);
 

@@ -48,17 +48,15 @@
     inline-size: 5ch;
   }
 
-  [data-part]:not([data-part="year"]) .fui-Input-field input {
+  [data-part="day"] .fui-Input-field input {
     flex: none;
     inline-size: 3ch;
   }
-}
 
-/* Invalid is detected, not declared: the legend goes danger exactly when a
-   rendered error message is present — the same rule Field applies to its
-   label. */
-@scope (.fui-DateInput:has(> p.error)) to ([class*="fui-"]) {
-  legend {
-    color: var(--fui-danger);
+  /* The month takes names ("Mar") as well as numbers — give the answer
+     room to be typed. */
+  [data-part="month"] .fui-Input-field input {
+    flex: none;
+    inline-size: 4ch;
   }
 }

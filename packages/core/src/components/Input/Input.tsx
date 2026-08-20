@@ -21,8 +21,8 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
  * ```tsx
  * <Field.Root>
  *   <Field.Label>Email</Field.Label>
- *   <Input type="email" autoComplete="email" />
  *   <Field.Error>{error}</Field.Error>
+ *   <Input type="email" autoComplete="email" />
  * </Field.Root>
  * ```
  */

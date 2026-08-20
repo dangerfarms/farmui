@@ -6,7 +6,7 @@
   }
 }
 
-@scope (.fui-Table) {
+@scope (.fui-Table) to ([class*="fui-"]) {
   :scope {
     border-collapse: collapse;
     font-size: var(--fui-text-sm);
@@ -66,8 +66,10 @@
       transition: background var(--fui-duration-md) var(--fui-ease);
     }
 
-    &[data-hover] :where(tbody tr:hover) {
-      background: var(--fui-surface-hover);
+    @media (hover: hover) {
+      &[data-hover] :where(tbody tr:hover) {
+        background: var(--fui-surface-hover);
+      }
     }
   }
 }

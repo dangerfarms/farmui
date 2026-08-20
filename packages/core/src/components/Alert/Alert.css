@@ -5,7 +5,7 @@
  * accent. The message stays
  * --fui-text-based so long copy remains readable on the tint.
  */
-@scope (.fui-Alert) {
+@scope (.fui-Alert) to ([class*="fui-"]) {
   :scope {
     --_accent: var(--fui-text);
 

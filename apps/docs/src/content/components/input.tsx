@@ -21,7 +21,7 @@ const doc: ComponentContent = {
         "Wrap the control in Field.Root and add a Field.Label: the input reads its id from the field, so the label is wired without any props.",
       code: `<Field.Root>
   <Field.Label>Email</Field.Label>
-  <Input placeholder="you@example.com" />
+  <Input />
 </Field.Root>`,
       render: () => <InputBasicDemo />,
     },
@@ -32,14 +32,14 @@ const doc: ComponentContent = {
       code: `<div style={{ containerType: "inline-size", inlineSize: "16rem" }}>
   <Field.Root>
     <Field.Label>In a narrow container</Field.Label>
-    <Input placeholder="you@example.com" />
+    <Input />
   </Field.Root>
 </div>
 
 <div style={{ containerType: "inline-size", inlineSize: "30rem" }}>
   <Field.Root>
     <Field.Label>In a wide one</Field.Label>
-    <Input placeholder="you@example.com" />
+    <Input />
   </Field.Root>
 </div>`,
       render: () => <InputContainersDemo />,
@@ -49,7 +49,7 @@ const doc: ComponentContent = {
       code: `<Field.Root>
   <Field.Label>Username</Field.Label>
   <Field.Description>This will be your public handle.</Field.Description>
-  <Input placeholder="ada_lovelace" required />
+  <Input required />
 </Field.Root>`,
       render: () => <InputDescriptionDemo />,
     },
@@ -59,10 +59,10 @@ const doc: ComponentContent = {
         "A Field.Error after the control marks the field invalid and is announced: no error prop, the message's presence is the state.",
       code: `<Field.Root>
   <Field.Label>Email</Field.Label>
-  <Input defaultValue="not-an-email" />
   <Field.Error>
     Enter an email address in the correct format, like name@example.com
   </Field.Error>
+  <Input defaultValue="not-an-email" />
 </Field.Root>`,
       render: () => <InputErrorDemo />,
     },
@@ -82,12 +82,12 @@ const doc: ComponentContent = {
         "Sections sit inside the field but outside the accessible name, so the Field.Label still does the naming — a placeholder alone never can.",
       code: `<Field.Root>
   <Field.Label>Handle</Field.Label>
-  <Input leftSection="@" placeholder="handle" />
+  <Input leftSection="@" />
 </Field.Root>
 
 <Field.Root>
   <Field.Label>Site name</Field.Label>
-  <Input rightSection=".dev" placeholder="yoursite" />
+  <Input rightSection=".dev" />
 </Field.Root>`,
       render: () => <InputSectionsDemo />,
     },
@@ -130,7 +130,7 @@ const doc: ComponentContent = {
     },
     {
       title: "Placeholders are not labels",
-      body: "A placeholder vanishes the moment the user types, is skipped by some assistive technology, and its dimmed colour fails contrast as instruction text. Field.Label is for what the field is; format hints go in Field.Description, which stays visible and is announced. Reserve placeholder for a genuinely disposable example.",
+      body: "A placeholder vanishes the moment the user types, is skipped by some assistive technology, and its dimmed colour fails contrast as instruction text. Field.Label is for what the field is; format hints go in Field.Description, which stays visible and is announced. These docs use none at all: the example lives in Field.Description, where it survives typing.",
     },
     {
       title: "Width belongs to the container",

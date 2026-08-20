@@ -1,6 +1,6 @@
 /* The bare control is the `<input type="range">` itself — no wrapper element
    in that form — so the input is its own scope root. */
-@scope (.fui-Slider) {
+@scope (.fui-Range) {
   :scope {
     --_track-h: 0.4167em;
     --_thumb: 1.25em;
@@ -14,8 +14,16 @@
     inline-size: 100%;
     margin: 0;
 
+    &[aria-invalid="true"] {
+      accent-color: var(--fui-danger);
+    }
+
     &[data-disabled] {
       opacity: var(--fui-disabled-opacity);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
     }
   }
 
@@ -52,9 +60,12 @@
 
     /* Identity at rest — the hover grow transitions both ways. */
     scale: 1;
-    transition:
-      scale var(--fui-duration-md) var(--fui-ease),
-      box-shadow var(--fui-duration-md) var(--fui-ease);
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition:
+        scale var(--fui-duration-md) var(--fui-ease),
+        box-shadow var(--fui-duration-md) var(--fui-ease);
+    }
   }
 
   :scope::-moz-range-thumb {
@@ -67,9 +78,12 @@
 
     /* Identity at rest — the hover grow transitions both ways. */
     scale: 1;
-    transition:
-      scale var(--fui-duration-md) var(--fui-ease),
-      box-shadow var(--fui-duration-md) var(--fui-ease);
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition:
+        scale var(--fui-duration-md) var(--fui-ease),
+        box-shadow var(--fui-duration-md) var(--fui-ease);
+    }
   }
 
   /* The ring belongs on the thumb (pseudo-element, box-shadow — outline is
@@ -86,12 +100,16 @@
     box-shadow: 0 0 0 var(--fui-ring-width) var(--fui-ring-color);
   }
 
-  :scope:hover:not(:disabled)::-webkit-slider-thumb {
-    scale: 1.08;
+  @media (hover: hover) {
+    :scope:hover:not(:disabled)::-webkit-slider-thumb {
+      scale: 1.08;
+    }
   }
 
-  :scope:hover:not(:disabled)::-moz-range-thumb {
-    scale: 1.08;
+  @media (hover: hover) {
+    :scope:hover:not(:disabled)::-moz-range-thumb {
+      scale: 1.08;
+    }
   }
 
   /* Forced colors: the custom track and thumb are background-painted and

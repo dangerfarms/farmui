@@ -6,9 +6,9 @@ import type { RenderProp } from "../../render";
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
   /**
-   * Render as a different element — e.g. a link that looks like a button:
-   * `<Button render={<a href="/signup">Get started</a>} />`. The
-   * Button's classes and attributes merge onto the element it renders.
+   * Render as a different element. The Button's classes and attributes
+   * merge onto the element it renders. Not for navigation — a
+   * call-to-action that goes somewhere is a `SignpostLink`.
    */
   render?: RenderProp<Record<string, unknown>>;
   ref?: Ref<HTMLButtonElement>;
@@ -28,7 +28,6 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
  * <section style={{ "--fui-context": "danger" }}>
  *   <Button>Delete</Button>                                  // danger region
  * </section>
- * <Button render={<a href="/signup">Get started</a>} /> // as a link
  * ```
  *
  * Size is fluid (container-relative tokens) — there is no size prop, and

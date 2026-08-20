@@ -133,7 +133,12 @@ export function Pagination({
       <ul>
         {withEdges && (
           <li>
-            <button type="button" onClick={() => go(1)} disabled={atStart} aria-label="First page">
+            <button
+              type="button"
+              onClick={() => !atStart && go(1)}
+              aria-disabled={atStart || undefined}
+              aria-label="First page"
+            >
               <EdgeIcon dir="first" />
             </button>
           </li>
@@ -141,8 +146,8 @@ export function Pagination({
         <li>
           <button
             type="button"
-            onClick={() => go(active - 1)}
-            disabled={atStart}
+            onClick={() => !atStart && go(active - 1)}
+            aria-disabled={atStart || undefined}
             aria-label="Previous page"
           >
             <ChevronIcon dir="left" />
@@ -176,8 +181,8 @@ export function Pagination({
         <li>
           <button
             type="button"
-            onClick={() => go(active + 1)}
-            disabled={atEnd}
+            onClick={() => !atEnd && go(active + 1)}
+            aria-disabled={atEnd || undefined}
             aria-label="Next page"
           >
             <ChevronIcon dir="right" />
@@ -185,7 +190,12 @@ export function Pagination({
         </li>
         {withEdges && (
           <li>
-            <button type="button" onClick={() => go(total)} disabled={atEnd} aria-label="Last page">
+            <button
+              type="button"
+              onClick={() => !atEnd && go(total)}
+              aria-disabled={atEnd || undefined}
+              aria-label="Last page"
+            >
               <EdgeIcon dir="last" />
             </button>
           </li>

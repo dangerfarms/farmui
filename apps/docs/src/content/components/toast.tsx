@@ -130,7 +130,7 @@ const doc: ComponentContent = {
       ],
     },
     {
-      name: "Toast.Toasts",
+      name: "Toasts",
       description:
         "The ready-made viewport: renders every active toast with title, description, action and a dismiss button. Compose the parts below yourself only when this layout doesn't fit.",
     },

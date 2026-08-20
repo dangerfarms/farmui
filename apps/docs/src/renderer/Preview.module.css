@@ -17,6 +17,7 @@
   background: transparent;
   border: none;
   border-radius: var(--fui-radius-sm);
+  box-shadow: none;
   color: var(--fui-text-muted);
   cursor: pointer;
   font-size: var(--fui-text-sm);

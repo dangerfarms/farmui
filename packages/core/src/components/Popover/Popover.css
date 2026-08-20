@@ -7,7 +7,7 @@
 
 /* The popup escapes the wrapper into the top layer when enhanced, so it
    carries its own scope. */
-@scope (.fui-Popover-popup) {
+@scope (.fui-Popover-popup) to ([class*="fui-"]) {
   :scope {
     background: var(--fui-surface);
     border: 1px solid var(--fui-border);

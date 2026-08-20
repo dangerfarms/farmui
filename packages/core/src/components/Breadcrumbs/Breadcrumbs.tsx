@@ -33,7 +33,10 @@ function BreadcrumbsRoot({ separator, className, style, children, ...rest }: Bre
       className={cx("fui-Breadcrumbs", className)}
       style={
         separator !== undefined
-          ? ({ ...style, "--_separator": `"${separator}"` } as CSSProperties)
+          ? ({
+              ...style,
+              "--_separator": `"${separator.replaceAll("\\", "\\\\").replaceAll('"', '\\"')}"`,
+            } as CSSProperties)
           : style
       }
       {...rest}
@@ -47,6 +50,7 @@ function BreadcrumbsRoot({ separator, className, style, children, ...rest }: Bre
 export interface BreadcrumbsItemRenderProps {
   "aria-current": "page" | undefined;
   children?: ReactNode;
+  className?: string;
 }
 
 export interface BreadcrumbsItemProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -74,7 +78,7 @@ function BreadcrumbsItem({
   };
 
   const content = render ? (
-    renderWithProps(render, wiring)
+    renderWithProps(render, { ...rest, ...wiring, className })
   ) : href !== undefined ? (
     <a href={href} className={className} {...rest} {...wiring}>
       {children}

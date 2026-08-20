@@ -18,6 +18,7 @@
        cartesian mixing only desaturates, so the hue survives. */
     border: 1px solid color-mix(in oklab, var(--_color), var(--fui-bg) 80%);
     border-radius: var(--fui-button-radius, var(--fui-radius-md));
+    box-shadow: var(--fui-shadow-raised);
 
     /* Text is the channel's hue mixed for AA on the tint, the same
        recipe as Badge and Alert; raw --_color sat below 4.5:1 on its
@@ -37,39 +38,51 @@
     transition:
       background var(--fui-duration-sm) var(--fui-ease),
       border-color var(--fui-duration-sm) var(--fui-ease),
-      color var(--fui-duration-sm) var(--fui-ease),
-      box-shadow var(--fui-duration-md) var(--fui-ease),
-      translate var(--fui-duration-md) var(--fui-ease);
+      color var(--fui-duration-sm) var(--fui-ease);
 
     /* Identity at rest — the pressed shift transitions both ways. */
     translate: 0 0;
     user-select: none;
     white-space: nowrap;
 
-    &:hover:not(:disabled),
     &:active:not(:disabled) {
       background: light-dark(
         color-mix(in oklab, var(--_color), var(--fui-bg) 85%),
         color-mix(in oklab, var(--_color), var(--fui-bg) 70%)
       );
+      box-shadow: var(--fui-shadow-sm);
       color: light-dark(
         oklch(from var(--_color) calc(l - 0.2) c h),
         oklch(from var(--_color) calc(l + 0.2) c h)
       );
-    }
-
-    &:active:not(:disabled) {
-      box-shadow: var(--fui-shadow-sm);
       translate: 0 1px;
-    }
-
-    &:focus-visible {
-      outline: var(--fui-ring-width) solid var(--fui-ring-color);
-      outline-offset: 2px;
     }
 
     &:disabled {
       opacity: var(--fui-disabled-opacity);
+    }
+
+    @media (hover: hover) {
+      &:hover:not(:disabled) {
+        background: light-dark(
+          color-mix(in oklab, var(--_color), var(--fui-bg) 85%),
+          color-mix(in oklab, var(--_color), var(--fui-bg) 70%)
+        );
+        color: light-dark(
+          oklch(from var(--_color) calc(l - 0.2) c h),
+          oklch(from var(--_color) calc(l + 0.2) c h)
+        );
+      }
+    }
+
+    /* The pressed shift and shadow drop are motion — opt-in only. */
+    @media (prefers-reduced-motion: no-preference) {
+      transition:
+        background var(--fui-duration-sm) var(--fui-ease),
+        border-color var(--fui-duration-sm) var(--fui-ease),
+        color var(--fui-duration-sm) var(--fui-ease),
+        box-shadow var(--fui-duration-md) var(--fui-ease),
+        translate var(--fui-duration-md) var(--fui-ease);
     }
   }
 

@@ -88,13 +88,13 @@ export function RadioGroup({
             {description}
           </span>
         )}
-        <div data-orientation={orientation}>{children}</div>
         {error && (
           <span className="error" id={errId} role="alert">
             <span className="fui-Error-prefix">Error: </span>
             {error}
           </span>
         )}
+        <div data-orientation={orientation}>{children}</div>
       </Fieldset.Root>
     </RadioGroupContext>
   );

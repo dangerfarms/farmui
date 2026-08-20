@@ -15,10 +15,12 @@ export interface NavItem {
 export const GETTING_STARTED: { name: string; href: string }[] = [
   { name: "Introduction", href: "/docs" },
   { name: "Installation", href: "/docs/installation" },
-  { name: "Composition", href: "/docs/composition" },
+  { name: "Tokens", href: "/docs/tokens" },
+  { name: "Element styles", href: "/docs/element-styles" },
   { name: "Contextualism", href: "/docs/contextualism" },
+  { name: "Composition", href: "/docs/composition" },
+  { name: "Gatekeeping", href: "/docs/gatekeeping" },
   { name: "Layout", href: "/docs/layout" },
-  { name: "Theming", href: "/docs/theming" },
   { name: "Accessibility", href: "/docs/accessibility" },
 ];
 
@@ -99,8 +101,8 @@ export const COMPONENTS: NavItem[] = [
     description: "An on/off toggle switch.",
   },
   {
-    name: "Slider",
-    slug: "slider",
+    name: "Range",
+    slug: "range",
     category: "Inputs",
     description: "Pick a numeric value from a range.",
   },
@@ -128,6 +130,12 @@ export const COMPONENTS: NavItem[] = [
     slug: "table",
     category: "Data display",
     description: "Display rows and columns of data.",
+  },
+  {
+    name: "Details",
+    slug: "details",
+    category: "Data display",
+    description: "Native disclosure for secondary content.",
   },
   {
     name: "Separator",
@@ -205,10 +213,16 @@ export const COMPONENTS: NavItem[] = [
     description: "Switch between related views.",
   },
   {
-    name: "Accordion",
-    slug: "accordion",
+    name: "SignpostLink",
+    slug: "signpost-link",
     category: "Navigation",
-    description: "Collapsible stacked sections.",
+    description: "Signpost the way into a task.",
+  },
+  {
+    name: "SkipLink",
+    slug: "skip-link",
+    category: "Navigation",
+    description: "Jump straight to the main content.",
   },
   {
     name: "Breadcrumbs",

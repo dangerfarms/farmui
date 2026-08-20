@@ -46,17 +46,16 @@ const doc: ComponentContent = {
     },
     {
       title: "Horizontal",
-      description: "Lay the options out in a row when they are few and short.",
-      code: `<RadioGroup label="Portion size" orientation="horizontal">
-  <Radio value="s" label="Small" />
-  <Radio value="m" label="Medium" />
-  <Radio value="l" label="Large" />
+      description:
+        "Lay the options out in a row only when there are two, short options — more than that, or longer labels, read better stacked.",
+      code: `<RadioGroup label="Contact preference" orientation="horizontal">
+  <Radio value="email" label="Email" />
+  <Radio value="phone" label="Phone" />
 </RadioGroup>`,
       render: () => (
-        <RadioGroup label="Portion size" orientation="horizontal">
-          <Radio value="s" label="Small" />
-          <Radio value="m" label="Medium" />
-          <Radio value="l" label="Large" />
+        <RadioGroup label="Contact preference" orientation="horizontal">
+          <Radio value="email" label="Email" />
+          <Radio value="phone" label="Phone" />
         </RadioGroup>
       ),
     },
@@ -90,8 +89,12 @@ const doc: ComponentContent = {
   ],
   howItWorks: [
     {
+      title: "The native tier underneath",
+      body: 'A plain <input type="radio"> is already styled page-wide by the elements layer (accent-color, focus ring), so simple cases need no component at all. The component adds the label anatomy, group wiring and context adaptation on top.',
+    },
+    {
       title: "Never pre-select",
-      body: "A group with a defaultValue lets users miss the question entirely and submit an answer they never gave, and once any radio is selected, the group can never be returned to unanswered. Omit defaultValue so the first selection is always a deliberate choice; reserve a default for the rare setting with one safe, overwhelmingly common value.",
+      body: "A group with a defaultValue lets users miss the question entirely and submit an answer they never gave, and once any radio is selected, the group can never be returned to unanswered — so when every option might be wrong, offer an explicit 'None of the above' option rather than leaving the user stuck. Omit defaultValue so the first selection is always a deliberate choice; reserve a default for the rare setting with one safe, overwhelmingly common value.",
     },
     {
       title: "Order the options",

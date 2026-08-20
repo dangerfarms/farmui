@@ -54,6 +54,10 @@ const doc: ComponentContent = {
   ],
   howItWorks: [
     {
+      title: "The native tier underneath",
+      body: 'A plain <input type="checkbox"> is already styled page-wide by the elements layer (accent-color, focus ring), so simple cases need no component at all. The component adds the anatomy on top: a 24px hit target, the label/description wiring, indeterminate, and context adaptation.',
+    },
+    {
       title: "One box or a group",
       body: "A single checkbox is for one self-contained agreement or opt-in whose label is a complete statement (“Agree to the terms of service”). Several related options belong in a Fieldset whose legend asks the question. Because checkboxes and radios look alike, say in the legend or description that users can select all that apply.",
     },

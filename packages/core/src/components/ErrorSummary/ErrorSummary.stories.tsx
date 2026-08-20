@@ -26,13 +26,13 @@ export const Default: Story = {
       </ErrorSummary.Root>
       <Field.Root id="es-name">
         <Field.Label>Full name</Field.Label>
-        <Input />
         <Field.Error>Enter your full name</Field.Error>
+        <Input />
       </Field.Root>
       <Field.Root id="es-email">
         <Field.Label>Email address</Field.Label>
-        <Input />
         <Field.Error>Enter your email address</Field.Error>
+        <Input />
       </Field.Root>
       <div>
         <Button>Save and continue</Button>

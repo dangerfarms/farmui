@@ -55,7 +55,7 @@ const doc: ComponentContent = {
       description:
         "A header row with an × is a composition pattern, not configuration: compose Drawer.Title and Drawer.Close however your design needs.",
       code: `<Drawer.Panel side="end">
-  <div className="header-row">
+  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
     <Drawer.Title>Filters</Drawer.Title>
     <Drawer.Close aria-label="Close">×</Drawer.Close>
   </div>
@@ -99,35 +99,69 @@ const doc: ComponentContent = {
     "The slide transition lives inside prefers-reduced-motion: no-preference, so users who ask for reduced motion get an instant open with no movement.",
     "A forced-colors border keeps the panel edge visible when background colours are overridden; body scroll is locked while open.",
   ],
-  props: [
+  parts: [
     {
-      name: "Root",
-      type: "open?, defaultOpen?, onOpenChange?",
+      name: "Drawer.Root",
       description:
         "Groups the parts and owns open state (controlled or uncontrolled). Renders no element of its own.",
+      props: [
+        { name: "open", type: "boolean", description: "Controlled open state." },
+        {
+          name: "defaultOpen",
+          type: "boolean",
+          default: "false",
+          description: "Uncontrolled initial state.",
+        },
+        {
+          name: "onOpenChange",
+          type: "(open: boolean) => void",
+          description: "Fires when the drawer opens or closes.",
+        },
+      ],
     },
     {
-      name: "Trigger",
-      type: "button props · render?: element | (props) => node",
+      name: "Drawer.Trigger",
+      description: "A FarmUI Button that opens the drawer.",
+      props: [
+        {
+          name: "render",
+          type: "RenderProp",
+          description: "Substitute your own action element (an icon button); the wiring merges on.",
+        },
+        {
+          name: "...others",
+          type: "ButtonHTMLAttributes",
+          description: "Forwarded to the button.",
+        },
+      ],
+    },
+    {
+      name: "Drawer.Panel",
       description:
-        "Renders a FarmUI Button that opens the drawer; style it directly, or substitute your own element (an icon button) via render.",
+        "The native <dialog>. side anchors it to an edge and sets the slide direction; size sets the short-axis extent (width for start/end, height for top/bottom).",
+      props: [
+        {
+          name: "side",
+          type: '"start" | "end" | "top" | "bottom"',
+          default: '"start"',
+          description: "Edge to anchor to.",
+        },
+        {
+          name: "size",
+          type: '"sm" | "md" | "lg"',
+          default: '"md"',
+          description: "Short-axis extent.",
+        },
+      ],
     },
     {
-      name: "Panel",
-      type: `side?: "start" | "end" | "top" | "bottom" · size?: "sm" | "md" | "lg"`,
-      description:
-        "The native <dialog>. side anchors it to an edge and sets the slide direction (default start); size sets the short-axis extent — width for start/end, height for top/bottom (default md).",
-    },
-    {
-      name: "Title / Description",
-      type: "heading / paragraph props",
+      name: "Drawer.Title / Drawer.Description",
       description: "Label and describe the dialog for assistive technology.",
     },
     {
-      name: "Close",
-      type: "button props · render?",
+      name: "Drawer.Close",
       description:
-        "A FarmUI Button that closes the drawer; compose as many as you need (a footer action, a header ×).",
+        "A FarmUI Button that closes the drawer; compose as many as you need (a footer action, a header ×). Supports render like the Trigger.",
     },
   ],
 };

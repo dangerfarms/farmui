@@ -60,6 +60,10 @@ const doc: ComponentContent = {
   <Button>Narrow: full width</Button>
 </div>
 
+<div style={{ containerType: "inline-size", inlineSize: "24rem" }}>
+  <Button>Wide: natural width</Button>
+</div>
+
 <div style={{ display: "grid", gap: "0.75rem", inlineSize: "18rem" }}>
   <Button>Save changes</Button>
   <Button>Cancel</Button>
@@ -156,7 +160,7 @@ const doc: ComponentContent = {
   howItWorks: [
     {
       title: "Buttons act, links navigate",
-      body: 'The element must match the behaviour, not the look. When a design wants button styling on a genuine navigation, keep real link semantics with render: <Button render={<a href="/signup">Get started</a>} /> merges the Button\'s classes onto a real <a>, so right-click, middle-click, open-in-new-tab and link announcement all keep working (the render pattern is covered in the Composition guide). What render never justifies is the reverse: an <a> with an onClick that mutates data is still a button in disguise.',
+      body: "The element must match the behaviour, not the look. When a design wants a button-sized call-to-action that navigates, do not dress a Button as a link: use SignpostLink, which keeps real link semantics (right-click, middle-click, open-in-new-tab, link announcement) with the prominence the design asks for. The reverse holds too: an <a> with an onClick that mutates data is still a button in disguise.",
     },
     {
       title: "Buttons don't submit by accident",
@@ -192,6 +196,12 @@ const doc: ComponentContent = {
       type: `"button" | "submit" | "reset"`,
       default: `"button"`,
       description: "Unlike a native <button>, never a submit button unless you say so.",
+    },
+    {
+      name: "render",
+      type: "RenderProp",
+      description:
+        "Substitute the rendered element; the Button's classes and wiring merge onto yours (see the Composition guide). Not for navigation: a call-to-action that goes somewhere is a SignpostLink.",
     },
     {
       name: "...others",

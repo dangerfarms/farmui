@@ -12,7 +12,7 @@ const doc: ComponentContent = {
         "Wrap the control in Field.Root and add a Field.Label: the textarea reads its id from the field, so the label is wired without any props.",
       code: `<Field.Root>
   <Field.Label>Notes</Field.Label>
-  <Textarea placeholder="Anything to add?" />
+  <Textarea />
 </Field.Root>`,
       render: () => <TextareaBasicDemo />,
     },
@@ -23,7 +23,7 @@ const doc: ComponentContent = {
   <Field.Description>
     A short description for your public profile.
   </Field.Description>
-  <Textarea placeholder="Tell us about yourself…" required />
+  <Textarea required />
 </Field.Root>`,
       render: () => <TextareaDescriptionDemo />,
     },
@@ -33,8 +33,8 @@ const doc: ComponentContent = {
         "A Field.Error after the control marks the field invalid and is announced: the message's presence is the state.",
       code: `<Field.Root>
   <Field.Label>Message</Field.Label>
-  <Textarea defaultValue="Too short" />
   <Field.Error>Message must be 20 characters or more</Field.Error>
+  <Textarea defaultValue="Too short" />
 </Field.Root>`,
       render: () => <TextareaErrorDemo />,
     },

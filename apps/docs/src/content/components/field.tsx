@@ -15,11 +15,11 @@ const doc: ComponentContent = {
     {
       title: "Composing a field",
       description:
-        "Assemble the parts in order: label, description, control, error. Field.Root links the label to the control and gathers the description and error into aria-describedby; the FarmUI controls (Input, Select, Textarea, Slider) self-wire from the surrounding field, so no extra part is needed around them.",
+        "Assemble the parts in order: label, description, error, control — the message sits above the control so it is read before the answer is given. Field.Root links the label to the control and gathers the description and error into aria-describedby; the FarmUI controls (Input, Select, Textarea, Range) self-wire from the surrounding field, so no extra part is needed around them.",
       code: `<Field.Root>
   <Field.Label>Email</Field.Label>
   <Field.Description>We'll only use this to reply.</Field.Description>
-  <Input placeholder="you@example.com" />
+  <Input />
 </Field.Root>`,
       render: () => <FieldComposeDemo />,
     },
@@ -29,10 +29,10 @@ const doc: ComponentContent = {
         'A Field.Error with content flips the field to invalid and is announced via role="alert".',
       code: `<Field.Root>
   <Field.Label>Email</Field.Label>
-  <Input defaultValue="not-an-email" />
   <Field.Error>
     Enter an email address in the correct format, like name@example.com
   </Field.Error>
+  <Input defaultValue="not-an-email" />
 </Field.Root>`,
       render: () => <FieldErrorDemo />,
     },
@@ -42,7 +42,7 @@ const doc: ComponentContent = {
         "Mark optional fields in words rather than flagging required ones with an asterisk: most fields are required, so the exceptions are the useful signal.",
       code: `<Field.Root>
   <Field.Label optional>Company</Field.Label>
-  <Input placeholder="Acme Inc." />
+  <Input />
 </Field.Root>`,
       render: () => <FieldOptionalDemo />,
     },
@@ -53,14 +53,14 @@ const doc: ComponentContent = {
       code: `<form onSubmit={onSubmit} noValidate>
   <Field.Root>
     <Field.Label>Full name</Field.Label>
-    <Input name="name" autoComplete="name" />
     <Field.Error>{errors.name}</Field.Error>
+    <Input name="name" autoComplete="name" />
   </Field.Root>
   <Field.Root>
     <Field.Label>Email address</Field.Label>
     <Field.Description>We'll only use this to reply.</Field.Description>
-    <Input name="email" type="email" autoComplete="email" />
     <Field.Error>{errors.email}</Field.Error>
+    <Input name="email" type="email" autoComplete="email" />
   </Field.Root>
   <Button type="submit">Save and continue</Button>
 </form>`,
@@ -72,6 +72,7 @@ const doc: ComponentContent = {
         "Field.Control wires the field's id, aria-describedby and aria-invalid onto any element: an element to clone, or a function receiving the typed props. The built-in controls never need it; reach for it when bringing your own.",
       code: `<Field.Root>
   <Field.Label>Amount</Field.Label>
+  <Field.Description>A bare native input, not a FarmUI control.</Field.Description>
   <Field.Control
     render={(props) => <input {...props} inputMode="decimal" />}
   />
@@ -80,7 +81,7 @@ const doc: ComponentContent = {
     },
   ],
   whenToUse: [
-    "For every labelled form control: wrap Input, Select, Textarea or Slider in Field.Root and add Field.Label, Field.Description and Field.Error as needed — the control wires itself to the field.",
+    "For every labelled form control: wrap Input, Select, Textarea or Range in Field.Root and add Field.Label, Field.Description and Field.Error as needed — the control wires itself to the field.",
     "To give a custom or third-party control the same accessible label/description/error wiring, via Field.Control.",
   ],
   whenNotToUse: [

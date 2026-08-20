@@ -1,24 +1,13 @@
-@scope (.fui-Accordion) {
+/* The native disclosure, standalone: each Details is its own boxed
+   surface. A set sharing a `name` needs no wrapper — the browser owns
+   the exclusivity. */
+@scope (.fui-Details) to ([class*="fui-"]) {
   :scope {
     background: var(--fui-surface);
     border: 1px solid var(--fui-border);
     border-radius: var(--fui-radius-md);
-    display: block flex;
-    flex-direction: column;
     inline-size: 100%;
     overflow: clip;
-  }
-}
-
-/* Items are scoped to their own root: AccordionItem is exported standalone,
-   so item styles must not depend on the .fui-Accordion wrapper. */
-@scope (.fui-Accordion-item) {
-  :scope {
-    border-block-end: 1px solid var(--fui-border);
-
-    &:last-child {
-      border-block-end: none;
-    }
 
     > summary {
       align-items: center;
@@ -39,10 +28,6 @@
 
   :scope > summary::-webkit-details-marker {
     display: none;
-  }
-
-  :scope > summary:hover {
-    background: var(--fui-surface-hover);
   }
 
   :scope[open] > summary {
@@ -71,6 +56,12 @@
     line-height: 1.55;
     padding-block: 0 var(--fui-space-lg);
     padding-inline: var(--fui-space-lg);
+  }
+
+  @media (hover: hover) {
+    :scope > summary:hover {
+      background: var(--fui-surface-hover);
+    }
   }
 
   /* Open/close height animation on the platform's own content slot.

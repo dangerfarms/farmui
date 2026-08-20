@@ -4,6 +4,10 @@
     font-size: var(--fui-text-sm);
   }
 
+  li {
+    margin-block: 0;
+  }
+
   ol {
     align-items: center;
     display: block flex;
@@ -19,7 +23,7 @@
  * Items are scoped to their own root: an <li class="fui-Breadcrumbs-item"> is
  * rendered by the standalone Item component, without the root class on it.
  */
-@scope (.fui-Breadcrumbs-item) {
+@scope (.fui-Breadcrumbs-item) to ([class*="fui-"]) {
   :scope {
     align-items: center;
     display: inline flex;
@@ -28,7 +32,9 @@
 
   :scope:not(:first-child)::before {
     color: var(--fui-text-dim);
-    content: var(--_separator, "/");
+
+    /* The empty alt keeps the glyph out of the accessibility tree. */
+    content: var(--_separator, "/") / "";
     margin-inline-end: var(--fui-space-sm);
     user-select: none;
   }
@@ -40,9 +46,11 @@
     text-decoration: none;
     transition: color var(--fui-duration-md) var(--fui-ease);
 
-    &:hover {
-      color: var(--fui-primary);
-      text-decoration: underline;
+    @media (hover: hover) {
+      &:hover {
+        color: var(--fui-primary);
+        text-decoration: underline;
+      }
     }
   }
 

@@ -1,6 +1,6 @@
 /* The viewport lives in the top layer (popover="manual"), so it carries its
    own scope; toasts stack from the block-end corner. */
-@scope (.fui-Toast-viewport) {
+@scope (.fui-Toast-viewport) to ([class*="fui-"]) {
   :scope {
     background: none;
     border: 0;
@@ -78,6 +78,7 @@
     block-size: 1.5rem;
     border: 0;
     border-radius: var(--fui-radius-sm);
+    box-shadow: none;
     color: var(--fui-text-muted);
     cursor: pointer;
     display: inline grid;
@@ -92,9 +93,11 @@
       inline-size: 1em;
     }
 
-    &:hover {
-      background: var(--fui-bg-subtle);
-      color: var(--fui-text);
+    @media (hover: hover) {
+      &:hover {
+        background: var(--fui-bg-subtle);
+        color: var(--fui-text);
+      }
     }
   }
 

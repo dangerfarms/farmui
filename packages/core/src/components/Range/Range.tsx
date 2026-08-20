@@ -4,7 +4,7 @@ import type { InputHTMLAttributes, Ref } from "react";
 import { cx } from "../../utils";
 import { useFieldControlProps } from "../Field/Field";
 
-export interface SliderProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "type"> {
+export interface RangeProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "type"> {
   ref?: Ref<HTMLInputElement>;
 }
 
@@ -16,7 +16,7 @@ export interface SliderProps extends Omit<InputHTMLAttributes<HTMLInputElement>,
  * state is held here: uncontrolled via `defaultValue`, or controlled
  * with `value` + `onChange`.
  */
-export function Slider({
+export function Range({
   min = 0,
   max = 100,
   step = 1,
@@ -27,7 +27,7 @@ export function Slider({
   "aria-describedby": ariaDescribedby,
   ref,
   ...rest
-}: SliderProps) {
+}: RangeProps) {
   const field = useFieldControlProps();
 
   return (
@@ -35,7 +35,7 @@ export function Slider({
       ref={ref}
       id={id ?? field.id}
       type="range"
-      className={cx("fui-Slider", className)}
+      className={cx("fui-Range", className)}
       data-disabled={disabled || undefined}
       min={min}
       max={max}

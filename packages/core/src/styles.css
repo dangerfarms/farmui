@@ -11,7 +11,10 @@
 @import url("./reset.css");
 @import url("./elements.css");
 @import url("./layout.css");
-@import url("./components/Accordion/Accordion.css") layer(farmui.components);
+@import url("./components/Details/Details.css") layer(farmui.components);
+@import url("./components/SignpostLink/SignpostLink.css")
+layer(farmui.components);
+@import url("./components/SkipLink/SkipLink.css") layer(farmui.components);
 @import url("./components/Alert/Alert.css") layer(farmui.components);
 @import url("./components/Avatar/Avatar.css") layer(farmui.components);
 @import url("./components/Badge/Badge.css") layer(farmui.components);
@@ -36,7 +39,7 @@ layer(farmui.components);
 @import url("./components/Select/Select.css") layer(farmui.components);
 @import url("./components/Separator/Separator.css") layer(farmui.components);
 @import url("./components/Skeleton/Skeleton.css") layer(farmui.components);
-@import url("./components/Slider/Slider.css") layer(farmui.components);
+@import url("./components/Range/Range.css") layer(farmui.components);
 @import url("./components/Switch/Switch.css") layer(farmui.components);
 @import url("./components/Table/Table.css") layer(farmui.components);
 @import url("./components/Tabs/Tabs.css") layer(farmui.components);

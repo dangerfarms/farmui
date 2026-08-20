@@ -7,7 +7,7 @@ export function TextareaBasicDemo() {
     <div style={{ maxInlineSize: "24rem", inlineSize: "100%" }}>
       <Field.Root>
         <Field.Label>Notes</Field.Label>
-        <Textarea placeholder="Anything to add?" />
+        <Textarea />
       </Field.Root>
     </div>
   );
@@ -19,7 +19,7 @@ export function TextareaDescriptionDemo() {
       <Field.Root>
         <Field.Label>Bio</Field.Label>
         <Field.Description>A short description for your public profile.</Field.Description>
-        <Textarea placeholder="Tell us about yourself…" required />
+        <Textarea required />
       </Field.Root>
     </div>
   );
@@ -30,8 +30,8 @@ export function TextareaErrorDemo() {
     <div style={{ maxInlineSize: "24rem", inlineSize: "100%" }}>
       <Field.Root>
         <Field.Label>Message</Field.Label>
-        <Textarea defaultValue="Too short" />
         <Field.Error>Message must be 20 characters or more</Field.Error>
+        <Textarea defaultValue="Too short" />
       </Field.Root>
     </div>
   );

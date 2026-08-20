@@ -55,13 +55,3 @@
     white-space: nowrap;
   }
 }
-
-/* Error state is detected, not declared: a field is invalid when it
-   contains a rendered error message, or when the platform says so
-   (:user-invalid after user interaction). Same donut: only the field's
-   own label tints, never a composed control's. */
-@scope (.fui-Field:has(> p.error, :user-invalid, [aria-invalid="true"])) to ([class*="fui-"]) {
-  label {
-    color: var(--fui-danger);
-  }
-}

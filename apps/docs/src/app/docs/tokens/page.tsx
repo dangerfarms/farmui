@@ -1,35 +1,46 @@
 import { Button, Checkbox } from "@farmui/core";
 import { CodeBlock } from "@/renderer/CodeBlock";
 import prose from "../prose.module.css";
+import { ComputedTokens } from "./tokens.client";
 
 export const metadata = {
-  title: "Theming & styling",
+  title: "Tokens",
   description:
-    "Rebrand FarmUI with CSS variables, and override anything by targeting its layered class names.",
+    "The token primitive: a handful of semantic decisions, everything else derived — and the theming that falls out of it.",
 };
 
-export default function Theming() {
+export default function Tokens() {
   return (
     <div className={prose.prose}>
-      <h1>Theming</h1>
+      <h1>Tokens</h1>
       <p className={prose.lead}>
-        FarmUI is themed entirely with CSS custom properties. Override <code>--fui-*</code> tokens
-        on <code>:root</code>, or any scope, and every component updates. No{" "}
+        The first of FarmUI&apos;s three primitives: a handful of semantic custom properties that
+        every component reads. Four hues, eight neutrals, and fluid scales — everything else is
+        derived by recipe, so theming is overriding <code>--fui-*</code> values at any scope. No{" "}
         <code>ThemeProvider</code>, no JavaScript.
       </p>
 
-      <h2>Rebrand in two lines</h2>
+      <h2>The surface</h2>
       <p>
-        Two tokens carry the brand: <code>--fui-primary</code> and its soft tint{" "}
-        <code>--fui-primary-soft</code>. Everything else — hover, active, solid fills, focus rings —
-        is <em>derived</em> from them, so there is nothing else to keep in sync:
+        Small enough to read in full. A component library that mints thousands of tokens makes every
+        one a decision nobody can audit; here the decisions are the hues and neutrals, and the rest
+        is arithmetic:
+      </p>
+      <div className={prose.block}>
+        <ComputedTokens />
+      </div>
+
+      <h2>Rebrand in one line</h2>
+      <p>
+        One token carries the brand: <code>--fui-primary</code>. Everything else — the soft tint,
+        hover, active, solid fills, focus rings — is <em>derived</em> from it by recipe, so there is
+        nothing else to keep in sync:
       </p>
       <div className={prose.block}>
         <CodeBlock
           language="css"
           code={`:root {
   --fui-primary: light-dark(oklch(0.62 0.2 275), oklch(0.72 0.17 275)); /* violet */
-  --fui-primary-soft: light-dark(oklch(0.95 0.03 275), oklch(0.32 0.06 275));
 }`}
         />
       </div>
@@ -49,7 +60,6 @@ export default function Theming() {
 
 <div style={{
   "--fui-primary": "light-dark(oklch(0.62 0.2 275), oklch(0.72 0.17 275))",
-  "--fui-primary-soft": "light-dark(oklch(0.95 0.03 275), oklch(0.32 0.06 275))",
   "--fui-context": "primary",
 }}>
   <Button>Violet brand</Button>    {/* …resolves here instead */}
@@ -74,7 +84,6 @@ export default function Theming() {
             style={
               {
                 "--fui-primary": "light-dark(oklch(0.62 0.2 275), oklch(0.72 0.17 275))",
-                "--fui-primary-soft": "light-dark(oklch(0.95 0.03 275), oklch(0.32 0.06 275))",
                 "--fui-context": "primary",
                 padding: "1.5rem",
                 border: "1px solid var(--fui-border)",
@@ -183,12 +192,12 @@ export default function Theming() {
         property on an instance to override one control.
       </div>
 
-      <h2>Token reference</h2>
-      <p>The most useful tokens to override:</p>
+      <h2>Most useful to override</h2>
+      <p>Start here when theming:</p>
       <ul>
         <li>
-          <code>--fui-primary</code> / <code>--fui-primary-soft</code>: brand colour and its soft
-          tint (hover/active are derived; there is nothing else to sync)
+          <code>--fui-primary</code>: the brand colour (the soft tint, solid fill, focus ring and
+          hover/active states all derive; there is nothing else to sync)
         </li>
         <li>
           <code>--fui-bg</code>, <code>--fui-surface</code>, <code>--fui-text</code>,{" "}

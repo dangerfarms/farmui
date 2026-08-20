@@ -163,7 +163,8 @@ export function TabsTab({ value, disabled, className, children, onClick, ...rest
       id={`${baseId}-tab-${value}`}
       aria-selected={selected}
       aria-controls={`${baseId}-panel-${value}`}
-      tabIndex={selected ? 0 : -1}
+      // With no selection there is no roving stop — every tab stays tabbable.
+      tabIndex={selected || active == null ? 0 : -1}
       disabled={disabled}
       className={cx("tab", className)}
       data-active={selected || undefined}

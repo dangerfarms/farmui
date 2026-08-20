@@ -18,6 +18,10 @@
     text-wrap: balance;
   }
 
+  li {
+    margin-block: 0;
+  }
+
   ul {
     display: block flex;
     flex-direction: column;

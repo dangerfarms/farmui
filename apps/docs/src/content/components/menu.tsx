@@ -27,7 +27,7 @@ const doc: ComponentContent = {
       code: `<Menu.Root>
   <Menu.Trigger>Workspace</Menu.Trigger>
   <Menu.Popup>
-    <Menu.Item>Rename</Menu.Item>
+    <Menu.Item onClick={() => {}}>Rename</Menu.Item>
     <Menu.Item>Duplicate</Menu.Item>
     <Menu.Separator />
     <Menu.Group style={{ "--fui-context": "danger" }}>
@@ -45,7 +45,7 @@ const doc: ComponentContent = {
       code: `<Menu.Root>
   <Menu.Trigger>Project</Menu.Trigger>
   <Menu.Popup>
-    <Menu.Item>Rename</Menu.Item>
+    <Menu.Item onClick={() => {}}>Rename</Menu.Item>
     <Menu.Separator />
     <Menu.Item href="#settings">Settings</Menu.Item>
     <Menu.Item href="#export">Export…</Menu.Item>

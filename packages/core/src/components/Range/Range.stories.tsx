@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Field, Slider } from "../../index";
+import { Field, Range } from "../../index";
 
 const meta = {
-  title: "Inputs/Slider",
-  component: Slider,
+  title: "Inputs/Range",
+  component: Range,
   tags: ["autodocs"],
   args: {
     min: 0,
@@ -21,10 +21,10 @@ const meta = {
   render: (args) => (
     <Field.Root>
       <Field.Label>Irrigation level</Field.Label>
-      <Slider {...args} />
+      <Range {...args} />
     </Field.Root>
   ),
-} satisfies Meta<typeof Slider>;
+} satisfies Meta<typeof Range>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -36,7 +36,7 @@ export const Steps: Story = {
   render: (args) => (
     <Field.Root>
       <Field.Label>Field count</Field.Label>
-      <Slider {...args} />
+      <Range {...args} />
     </Field.Root>
   ),
 };

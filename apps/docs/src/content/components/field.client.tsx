@@ -9,7 +9,7 @@ export function FieldComposeDemo() {
       <Field.Root>
         <Field.Label>Email</Field.Label>
         <Field.Description>We&apos;ll only use this to reply.</Field.Description>
-        <Input placeholder="you@example.com" />
+        <Input />
       </Field.Root>
     </div>
   );
@@ -20,10 +20,10 @@ export function FieldErrorDemo() {
     <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
       <Field.Root>
         <Field.Label>Email</Field.Label>
-        <Input defaultValue="not-an-email" />
         <Field.Error>
           Enter an email address in the correct format, like name@example.com
         </Field.Error>
+        <Input defaultValue="not-an-email" />
       </Field.Root>
     </div>
   );
@@ -34,7 +34,7 @@ export function FieldOptionalDemo() {
     <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
       <Field.Root>
         <Field.Label optional>Company</Field.Label>
-        <Input placeholder="Acme Inc." />
+        <Input />
       </Field.Root>
     </div>
   );
@@ -72,14 +72,14 @@ export function FieldFormDemo() {
     >
       <Field.Root>
         <Field.Label>Full name</Field.Label>
-        <Input name="name" autoComplete="name" />
         <Field.Error>{errors.name}</Field.Error>
+        <Input name="name" autoComplete="name" />
       </Field.Root>
       <Field.Root>
         <Field.Label>Email address</Field.Label>
         <Field.Description>We&apos;ll only use this to reply.</Field.Description>
-        <Input name="email" type="email" autoComplete="email" />
         <Field.Error>{errors.email}</Field.Error>
+        <Input name="email" type="email" autoComplete="email" />
       </Field.Root>
       <div>
         <Button type="submit">Save and continue</Button>

@@ -1,4 +1,4 @@
-@scope (.fui-Drawer-panel) {
+@scope (.fui-Drawer-panel) to ([class*="fui-"]) {
   :scope {
     --_size: 24rem;
     --_hidden: 0 0;

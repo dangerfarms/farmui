@@ -70,7 +70,7 @@
     /* Signature marketing gradient — brand green → teal */
     --site-gradient: linear-gradient(
       135deg,
-      var(--fui-green-500),
+      oklch(68% 0.16 149deg),
       oklch(72% 0.13 190deg)
     );
   }
@@ -128,24 +128,6 @@
     padding: 0;
     position: absolute;
     white-space: nowrap;
-  }
-}
-
-/* Visually hidden until keyboard-focused, then a real control. */
-.skip-link {
-  background: var(--fui-surface);
-  border: 1px solid var(--fui-border-strong);
-  border-radius: var(--fui-radius-md);
-  font-weight: 600;
-  inset-block-start: 0.5rem;
-  inset-inline-start: 0.5rem;
-  padding: 0.5rem 1rem;
-  position: absolute;
-  transform: translateY(calc(-100% - 1rem));
-  z-index: 100;
-
-  &:focus-visible {
-    transform: none;
   }
 }
 

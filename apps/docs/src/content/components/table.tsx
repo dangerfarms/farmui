@@ -97,9 +97,9 @@ const doc: ComponentContent = {
             <caption>Recent invoices by status</caption>
             <thead>
               <tr>
-                <th>Invoice</th>
-                <th>Status</th>
-                <th>Amount</th>
+                <th scope="col">Invoice</th>
+                <th scope="col">Status</th>
+                <th scope="col">Amount</th>
               </tr>
             </thead>
             <tbody>

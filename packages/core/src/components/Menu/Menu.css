@@ -7,7 +7,7 @@
 
 /* The popup escapes the wrapper into the top layer when enhanced, so it
    carries its own scope (same engine as Popover). */
-@scope (.fui-Menu-popup) {
+@scope (.fui-Menu-popup) to ([class*="fui-"]) {
   :scope {
     background: var(--fui-surface);
     border: 1px solid var(--fui-border);
@@ -92,6 +92,7 @@
     background: none;
     border: 0;
     border-radius: var(--fui-radius-sm);
+    box-shadow: none;
     color: var(--fui-text);
     cursor: default;
     display: block flex;
@@ -107,9 +108,11 @@
     padding-inline: var(--fui-space-sm);
     text-align: start;
     text-decoration: none;
+    transition: background var(--fui-duration-sm) var(--fui-ease);
+    user-select: none;
     white-space: nowrap;
 
-    &:is(:hover, :focus):not([aria-disabled="true"]) {
+    &:focus:not([aria-disabled="true"]) {
       background: var(--fui-primary-soft);
     }
 
@@ -121,6 +124,12 @@
       block-size: auto;
       flex-shrink: 0;
       inline-size: 1em;
+    }
+
+    @media (hover: hover) {
+      &:hover:not([aria-disabled="true"]) {
+        background: var(--fui-primary-soft);
+      }
     }
   }
 
@@ -144,7 +153,8 @@
   /* Forced colors: the roving highlight is background-only, and
      aria-disabled (unlike :disabled) gets no automatic GrayText. */
   @media (forced-colors: active) {
-    .item:is(:hover, :focus):not([aria-disabled="true"]) {
+    .item:focus:not([aria-disabled="true"]),
+    .item:hover:not([aria-disabled="true"]) {
       background: Highlight;
       color: HighlightText;
       forced-color-adjust: none;

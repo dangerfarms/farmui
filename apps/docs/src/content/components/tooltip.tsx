@@ -34,7 +34,9 @@ const doc: ComponentContent = {
       code: `<Tooltip.Provider>
   <Tooltip.Root>
     <Tooltip.Trigger>Cut</Tooltip.Trigger>
-    <Tooltip.Popup>Cut the selection</Tooltip.Popup>
+    <Tooltip.Popup>
+      Cut the selection <Tooltip.Arrow />
+    </Tooltip.Popup>
   </Tooltip.Root>
   {/* …adjacent tooltips share the delay… */}
 </Tooltip.Provider>`,

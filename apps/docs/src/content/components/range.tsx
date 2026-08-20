@@ -1,25 +1,20 @@
-import { Slider } from "@farmui/core";
+import { Range } from "@farmui/core";
 import type { ComponentContent } from "@/renderer/types";
-import {
-  SliderDisabledDemo,
-  SliderFieldDemo,
-  SliderStepsDemo,
-  SliderValueDemo,
-} from "./slider.client";
+import { RangeDisabledDemo, RangeFieldDemo, RangeStepsDemo, RangeValueDemo } from "./range.client";
 
 const doc: ComponentContent = {
-  slug: "slider",
+  slug: "range",
   lead: "Pick a numeric value from a continuous range. Compose it inside a Field for its label, description and error.",
-  importLine: `import { Field, Slider } from "@farmui/core";`,
+  importLine: `import { Field, Range } from "@farmui/core";`,
   demos: [
     {
       title: "Basic usage",
       description:
         "Rendered bare, the control needs an aria-label; a Field.Label (below) is the usual way to name it.",
-      code: `<Slider defaultValue={40} aria-label="Value" />`,
+      code: `<Range defaultValue={40} aria-label="Value" />`,
       render: () => (
         <div style={{ maxInlineSize: "22rem", inlineSize: "100%" }}>
-          <Slider defaultValue={40} aria-label="Value" />
+          <Range defaultValue={40} aria-label="Value" />
         </div>
       ),
     },
@@ -30,26 +25,26 @@ const doc: ComponentContent = {
       code: `<Field.Root>
   <Field.Label>Volume</Field.Label>
   <Field.Description>Applies to alerts only.</Field.Description>
-  <Slider defaultValue={70} />
+  <Range defaultValue={70} />
 </Field.Root>`,
-      render: () => <SliderFieldDemo />,
+      render: () => <RangeFieldDemo />,
     },
     {
       title: "Steps",
       description: "Snap to increments with the step prop.",
       code: `<Field.Root>
   <Field.Label>Fertiliser (kg)</Field.Label>
-  <Slider min={0} max={100} step={10} defaultValue={30} />
+  <Range min={0} max={100} step={10} defaultValue={30} />
 </Field.Root>`,
-      render: () => <SliderStepsDemo />,
+      render: () => <RangeStepsDemo />,
     },
     {
       title: "Disabled",
       code: `<Field.Root>
   <Field.Label>Locked</Field.Label>
-  <Slider defaultValue={50} disabled />
+  <Range defaultValue={50} disabled />
 </Field.Root>`,
-      render: () => <SliderDisabledDemo />,
+      render: () => <RangeDisabledDemo />,
     },
   ],
   whenToUse: [
@@ -68,12 +63,12 @@ const doc: ComponentContent = {
 
 <Field.Root>
   <Field.Label>Volume: {volume}</Field.Label>
-  <Slider
+  <Range
     value={volume}
     onChange={(e) => setVolume(e.target.valueAsNumber)}
   />
 </Field.Root>`,
-      render: () => <SliderValueDemo />,
+      render: () => <RangeValueDemo />,
     },
     {
       title: "Steps match the precision users care about",

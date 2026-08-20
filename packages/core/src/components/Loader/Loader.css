@@ -31,13 +31,16 @@
 
   /* Spinner — rotating ring */
   span.spinner {
-    animation: fui-loader-spin 0.65s linear infinite;
     block-size: 100%;
     border: max(2px, calc(var(--_size) * 0.12)) solid
       color-mix(in oklch, currentcolor 25%, transparent);
     border-block-start-color: currentcolor;
     border-radius: var(--fui-radius-full);
     inline-size: 100%;
+
+    @media (prefers-reduced-motion: no-preference) {
+      animation: fui-loader-spin 0.65s linear infinite;
+    }
   }
 }
 

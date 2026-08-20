@@ -7,7 +7,7 @@
 
 /* The bubble escapes into the top layer when enhanced, so it carries its
    own scope. */
-@scope (.fui-Tooltip-popup) {
+@scope (.fui-Tooltip-popup) to ([class*="fui-"]) {
   :scope {
     --_gap: var(--fui-space-xs);
     --_arrow: 0.3125rem;
