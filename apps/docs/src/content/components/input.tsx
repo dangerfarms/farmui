@@ -178,6 +178,11 @@ const doc: ComponentContent = {
       description: "Content inside the field, after the input.",
     },
     {
+      name: "wrapperClassName",
+      type: "string",
+      description: "Class for the bordered field wrapper; className goes to the control itself.",
+    },
+    {
       name: "...others",
       type: "InputHTMLAttributes",
       description: "All native <input> props are forwarded, except size (sizing is contextual).",

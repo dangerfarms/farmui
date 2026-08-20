@@ -800,3 +800,37 @@ describe("SignpostLink", () => {
     expect(link.querySelector("span.label")).toHaveTextContent("Start your application");
   });
 });
+
+describe("composition contract regressions", () => {
+  it("Menu.Item render merges children, className and rest", async () => {
+    const user = userEvent.setup();
+    render(
+      <Menu.Root defaultOpen>
+        <Menu.Trigger>Options</Menu.Trigger>
+        <Menu.Popup>
+          <Menu.Item render={<a href="/settings" data-router-link />} className="danger">
+            Settings
+          </Menu.Item>
+        </Menu.Popup>
+      </Menu.Root>,
+    );
+    const item = screen.getByRole("menuitem", { name: "Settings" });
+    expect(item).toHaveAttribute("data-router-link");
+    expect(item).toHaveAttribute("href", "/settings");
+    expect(item.className).toContain("danger");
+    expect(item.className).toContain("item");
+    void user;
+  });
+
+  it("Popover.Popup forwards a consumer ref", () => {
+    const ref = { current: null as HTMLDivElement | null };
+    render(
+      <Popover.Root defaultOpen>
+        <Popover.Trigger>Open</Popover.Trigger>
+        <Popover.Popup ref={ref}>Panel</Popover.Popup>
+      </Popover.Root>,
+    );
+    expect(ref.current).not.toBeNull();
+    expect(ref.current?.getAttribute("role")).toBe("dialog");
+  });
+});

@@ -18,10 +18,11 @@ import type {
   HTMLAttributes,
   PointerEvent as ReactPointerEvent,
   ReactNode,
+  Ref,
 } from "react";
 import { cx } from "../../utils";
 import { cssSafeId, supportsAnchoredPopover } from "../../anchor";
-import { mergeProps, renderWithProps } from "../../render";
+import { mergeProps, renderWithProps, composeRefs } from "../../render";
 import type { RenderProp } from "../../render";
 
 import { Button } from "../Button/Button";
@@ -349,6 +350,7 @@ function TooltipTrigger({ render, children, ...rest }: TooltipTriggerProps) {
 }
 
 export interface TooltipPopupProps extends HTMLAttributes<HTMLSpanElement> {
+  ref?: Ref<HTMLSpanElement>;
   /** Which side of the trigger the bubble appears on. @default "top" */
   position?: "top" | "bottom" | "left" | "right";
 }
@@ -360,11 +362,13 @@ function TooltipPopup({
   style,
   onPointerEnter,
   onPointerLeave,
+  ref: refProp,
   ...rest
 }: TooltipPopupProps) {
   const ctx = useTooltipContext("Tooltip.Popup");
   const { open, enhanced, hideNow } = ctx;
   const ref = useRef<HTMLSpanElement>(null);
+  const composedRef = useMemo(() => composeRefs(refProp, ref), [refProp]);
 
   // No dependency array — see Popover.Popup: a controlled parent may reject a
   // toggle-reported change, and only an every-render reconcile converges.
@@ -394,7 +398,7 @@ function TooltipPopup({
     // consumer handlers rather than replacing them.
     <span
       {...rest}
-      ref={ref}
+      ref={composedRef}
       id={ctx.bubbleId}
       role="tooltip"
       popover={enhanced ? ctx.popoverKind : undefined}

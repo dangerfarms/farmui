@@ -21,7 +21,7 @@ import type {
 } from "react";
 import { cx } from "../../utils";
 import { usePresence } from "../../use-presence";
-import { mergeProps, renderWithProps } from "../../render";
+import { mergeProps, renderWithProps, composeRefs } from "../../render";
 import type { RenderProp } from "../../render";
 
 import { Button } from "../Button/Button";
@@ -191,6 +191,7 @@ function ModalTrigger({ render, children, ...rest }: ModalTriggerProps) {
 }
 
 export interface ModalPopupProps extends Omit<DialogHTMLAttributes<HTMLDialogElement>, "open"> {
+  ref?: Ref<HTMLDialogElement>;
   /** Panel width. @default "md" */
   size?: "sm" | "md" | "lg";
   /**
@@ -203,10 +204,18 @@ export interface ModalPopupProps extends Omit<DialogHTMLAttributes<HTMLDialogEle
   alert?: boolean;
 }
 
-function ModalPopup({ size = "md", alert = false, className, children, ...rest }: ModalPopupProps) {
+function ModalPopup({
+  size = "md",
+  alert = false,
+  className,
+  children,
+  ref: refProp,
+  ...rest
+}: ModalPopupProps) {
   const ctx = useModalContext("Modal.Popup");
   const { open, setOpen } = ctx;
   const ref = useRef<HTMLDialogElement>(null);
+  const composedRef = useMemo(() => composeRefs(refProp, ref), [refProp]);
 
   // Reconcile React state with the native dialog. No dependency array — a
   // controlled parent may reject a close reported by the `close` event, and
@@ -272,7 +281,7 @@ function ModalPopup({ size = "md", alert = false, className, children, ...rest }
     // reconciliation, closedby) must win.
     <dialog
       {...rest}
-      ref={ref}
+      ref={composedRef}
       id={ctx.dialogId}
       // Missing from React's typings; lowercase passes through as an attribute.
       // "closerequest" = Escape closes, backdrop clicks don't — the native

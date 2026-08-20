@@ -96,6 +96,11 @@ const doc: ComponentContent = {
       description: "Number of visible text rows.",
     },
     {
+      name: "wrapperClassName",
+      type: "string",
+      description: "Class for the bordered field wrapper; className goes to the control itself.",
+    },
+    {
       name: "...others",
       type: "TextareaHTMLAttributes",
       description: "All native <textarea> props are forwarded, except size (sizing is contextual).",

@@ -10,8 +10,9 @@ import {
   useRef,
   useState,
 } from "react";
-import type { ButtonHTMLAttributes, HTMLAttributes, KeyboardEvent, ReactNode } from "react";
+import type { ButtonHTMLAttributes, HTMLAttributes, KeyboardEvent, ReactNode, Ref } from "react";
 import { cx } from "../../utils";
+import { composeRefs } from "../../render";
 
 interface TabsContextValue {
   value: string | null;
@@ -54,6 +55,7 @@ export interface TabsTabProps extends Omit<ButtonHTMLAttributes<HTMLButtonElemen
 }
 
 export interface TabsPanelProps extends HTMLAttributes<HTMLDivElement> {
+  ref?: Ref<HTMLDivElement>;
   /** Value of the tab this panel belongs to. */
   value: string;
   children?: ReactNode;
@@ -140,11 +142,11 @@ export function TabsList({ className, children, ...rest }: TabsListProps) {
     // interactive-supports-focus is off for this file (.oxlintrc):
     // focus roves between the tabs; the list itself is never a stop
     <div
+      {...rest}
       ref={listRef}
       role="tablist"
       className={cx("fui-Tabs-list", className)}
       onKeyDown={onKeyDown}
-      {...rest}
     >
       {children}
     </div>
@@ -158,6 +160,7 @@ export function TabsTab({ value, disabled, className, children, onClick, ...rest
 
   return (
     <button
+      {...rest}
       type="button"
       role="tab"
       id={`${baseId}-tab-${value}`}
@@ -172,7 +175,6 @@ export function TabsTab({ value, disabled, className, children, onClick, ...rest
         onClick?.(event);
         setValue(value);
       }}
-      {...rest}
     >
       {children}
     </button>
@@ -180,10 +182,11 @@ export function TabsTab({ value, disabled, className, children, onClick, ...rest
 }
 
 /** The panel shown for its matching tab. */
-export function TabsPanel({ value, className, children, ...rest }: TabsPanelProps) {
+export function TabsPanel({ value, className, children, ref: refProp, ...rest }: TabsPanelProps) {
   const { value: active, setValue, baseId } = useTabsContext("Tabs.Panel");
   const selected = active === value;
   const ref = useRef<HTMLDivElement>(null);
+  const composedRef = useMemo(() => composeRefs(refProp, ref), [refProp]);
 
   // hidden="until-found" lets find-in-page reach inactive panels;
   // `beforematch` activates the matched tab. React normalises `hidden` to a
@@ -205,14 +208,14 @@ export function TabsPanel({ value, className, children, ...rest }: TabsPanelProp
 
   return (
     <div
-      ref={ref}
+      {...rest}
+      ref={composedRef}
       role="tabpanel"
       id={`${baseId}-panel-${value}`}
       aria-labelledby={`${baseId}-tab-${value}`}
       hidden={untilFound ? undefined : !selected}
       tabIndex={0}
       className={cx("panel", className)}
-      {...rest}
     >
       {children}
     </div>

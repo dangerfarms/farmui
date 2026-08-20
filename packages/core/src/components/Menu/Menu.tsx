@@ -23,7 +23,7 @@ import type {
 } from "react";
 import { cx } from "../../utils";
 import { cssSafeId, supportsAnchoredPopover } from "../../anchor";
-import { mergeProps, renderWithProps } from "../../render";
+import { composeRefs, mergeProps, renderWithProps } from "../../render";
 import type { RenderProp } from "../../render";
 
 import { Button } from "../Button/Button";
@@ -222,6 +222,7 @@ function MenuTrigger({ render, children, ...rest }: MenuTriggerProps) {
 }
 
 export interface MenuPopupProps extends HTMLAttributes<HTMLDivElement> {
+  ref?: Ref<HTMLDivElement>;
   /** Which side of the trigger the menu opens toward. @default "bottom" */
   position?: "bottom" | "top";
 }
@@ -232,11 +233,13 @@ function MenuPopup({
   children,
   style,
   onKeyDown,
+  ref: refProp,
   ...rest
 }: MenuPopupProps) {
   const ctx = useMenuContext("Menu.Popup");
   const { open, setOpen, enhanced } = ctx;
   const ref = ctx.popupRef;
+  const composedRef = useMemo(() => composeRefs(refProp, ref), [refProp, ref]);
   const typeahead = useRef({ query: "", at: 0 });
 
   // Enhanced path: reconcile React state with the native popover state (see
@@ -349,7 +352,7 @@ function MenuPopup({
     // the typeahead handlers are the menu pattern itself.
     <div
       {...rest}
-      ref={ref}
+      ref={composedRef}
       id={ctx.popupId}
       role="menu"
       tabIndex={-1}
@@ -372,6 +375,8 @@ export interface MenuItemRenderProps {
   tabIndex: -1;
   "aria-disabled": true | undefined;
   onClick: (e: ReactMouseEvent<Element>) => void;
+  children?: ReactNode;
+  className?: string;
 }
 
 export interface MenuItemProps extends Omit<HTMLAttributes<HTMLElement>, "onClick"> {
@@ -433,7 +438,20 @@ function MenuItem({
         {children}
       </button>
     ));
-  return <>{renderWithProps(target, itemProps)}</>;
+  // The render path must honor the same merge contract as the built-ins:
+  // consumer children/className/rest ride along with the wiring.
+  return (
+    <>
+      {render
+        ? renderWithProps(render, {
+            ...rest,
+            ...itemProps,
+            children,
+            className: cx("item", className),
+          })
+        : renderWithProps(target, itemProps)}
+    </>
+  );
 }
 
 interface MenuGroupContextValue {

@@ -3,8 +3,11 @@
 import type { Ref, TextareaHTMLAttributes } from "react";
 import { useFieldControlProps } from "../Field/Field";
 import { useUserInvalid } from "../../use-user-invalid";
+import { cx } from "../../utils";
 
 export interface TextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "size"> {
+  /** Class for the bordered field wrapper (className goes to the control itself). */
+  wrapperClassName?: string;
   /** Number of visible text rows. @default 3 */
   rows?: number;
   ref?: Ref<HTMLTextAreaElement>;
@@ -19,6 +22,7 @@ export function Textarea({
   rows = 3,
   disabled,
   className,
+  wrapperClassName,
   style,
   id,
   "aria-invalid": ariaInvalid,
@@ -31,7 +35,11 @@ export function Textarea({
   const field = useFieldControlProps();
   const { nativeInvalid, checkOnBlur, checkOnInvalid } = useUserInvalid();
   return (
-    <div className="fui-Textarea-field" data-disabled={disabled || undefined} style={style}>
+    <div
+      className={cx("fui-Textarea-field", wrapperClassName)}
+      data-disabled={disabled || undefined}
+      style={style}
+    >
       <textarea
         ref={ref}
         className={className}

@@ -2,12 +2,15 @@
 
 import { createContext, useContext, useEffect, useId, useRef, useMemo } from "react";
 import type {
+  AnchorHTMLAttributes,
   HTMLAttributes,
-  LiHTMLAttributes,
   MouseEvent as ReactMouseEvent,
   ReactNode,
+  Ref,
 } from "react";
 import { cx } from "../../utils";
+import { composeRefs, renderWithProps } from "../../render";
+import type { RenderProp } from "../../render";
 
 /**
  * The form-level error pattern: a box at the top of the form
@@ -48,6 +51,7 @@ function useErrorSummaryContext(part: string): ErrorSummaryContextValue {
 }
 
 export interface ErrorSummaryRootProps extends HTMLAttributes<HTMLDivElement> {
+  ref?: Ref<HTMLDivElement>;
   /**
    * Move keyboard focus to the summary when it appears. @default true
    */
@@ -58,11 +62,13 @@ function ErrorSummaryRoot({
   autoFocus = true,
   className,
   children,
+  ref: refProp,
   ...rest
 }: ErrorSummaryRootProps) {
   const titleId = `${useId()}-errorsummary`;
   const ctxValue = useMemo(() => ({ titleId }), [titleId]);
   const ref = useRef<HTMLDivElement>(null);
+  const composedRef = useMemo(() => composeRefs(refProp, ref), [refProp]);
 
   // Focus announces the region (labelled by the Title) the moment it
   // appears — the user starts at the list of problems, not the top of the
@@ -74,12 +80,12 @@ function ErrorSummaryRoot({
   return (
     <ErrorSummaryContext value={ctxValue}>
       <div
-        ref={ref}
+        {...rest}
+        ref={composedRef}
         role="group"
         aria-labelledby={titleId}
         tabIndex={-1}
         className={cx("fui-ErrorSummary", className)}
-        {...rest}
       >
         {/* role="alert" announces on render even without autoFocus; the
             outer group stays the focus target. */}
@@ -112,14 +118,37 @@ function ErrorSummaryList({ className, children, ...rest }: ErrorSummaryListProp
   );
 }
 
-export interface ErrorSummaryItemProps extends Omit<LiHTMLAttributes<HTMLLIElement>, "onClick"> {
+/** Wiring the Item attaches to whatever it renders. */
+export interface ErrorSummaryItemRenderProps {
+  href: string;
+  onClick: (e: ReactMouseEvent<HTMLAnchorElement>) => void;
+  children?: ReactNode;
+  className?: string;
+}
+
+export interface ErrorSummaryItemProps extends Omit<
+  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href">,
+  "onClick"
+> {
+  /**
+   * Substitute the built-in <a> — e.g. a router link; the wiring
+   * (href, focus handling, children) merges onto it.
+   */
+  render?: RenderProp<ErrorSummaryItemRenderProps>;
   /** The target field's fragment (e.g. "#email"). */
   href: string;
   onClick?: (e: ReactMouseEvent<HTMLAnchorElement>) => void;
   children?: ReactNode;
 }
 
-function ErrorSummaryItem({ href, onClick, className, children, ...rest }: ErrorSummaryItemProps) {
+function ErrorSummaryItem({
+  href,
+  onClick,
+  render,
+  className,
+  children,
+  ...rest
+}: ErrorSummaryItemProps) {
   // Fragment navigation scrolls to the field but does not focus it; move
   // focus so the user can start typing the correction immediately.
   const focusTarget = (e: ReactMouseEvent<HTMLAnchorElement>) => {
@@ -131,11 +160,16 @@ function ErrorSummaryItem({ href, onClick, className, children, ...rest }: Error
     }
   };
 
+  const wiring = { href, onClick: focusTarget, children, className };
   return (
-    <li className={className} {...rest}>
-      <a href={href} onClick={focusTarget}>
-        {children}
-      </a>
+    <li>
+      {render ? (
+        renderWithProps(render, { ...rest, ...wiring })
+      ) : (
+        <a {...rest} href={href} onClick={focusTarget} className={className}>
+          {children}
+        </a>
+      )}
     </li>
   );
 }

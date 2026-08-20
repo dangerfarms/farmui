@@ -134,6 +134,11 @@ const doc: ComponentContent = {
       description: "Native <option> / <optgroup> elements, passed straight through.",
     },
     {
+      name: "wrapperClassName",
+      type: "string",
+      description: "Class for the bordered field wrapper; className goes to the control itself.",
+    },
+    {
       name: "...others",
       type: "SelectHTMLAttributes",
       description: "All native <select> props are forwarded, except size (sizing is contextual).",

@@ -3,8 +3,11 @@
 import type { InputHTMLAttributes, ReactNode, Ref } from "react";
 import { useFieldControlProps } from "../Field/Field";
 import { useUserInvalid } from "../../use-user-invalid";
+import { cx } from "../../utils";
 
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
+  /** Class for the bordered field wrapper (className goes to the control itself). */
+  wrapperClassName?: string;
   /** Content rendered inside the field, before the input. */
   leftSection?: ReactNode;
   /** Content rendered inside the field, after the input. */
@@ -31,6 +34,7 @@ export function Input({
   rightSection,
   disabled,
   className,
+  wrapperClassName,
   style,
   id,
   "aria-invalid": ariaInvalid,
@@ -43,7 +47,11 @@ export function Input({
   const field = useFieldControlProps();
   const { nativeInvalid, checkOnBlur, checkOnInvalid } = useUserInvalid();
   return (
-    <div className="fui-Input-field" data-disabled={disabled || undefined} style={style}>
+    <div
+      className={cx("fui-Input-field", wrapperClassName)}
+      data-disabled={disabled || undefined}
+      style={style}
+    >
       {leftSection && <span className="section">{leftSection}</span>}
       <input
         ref={ref}

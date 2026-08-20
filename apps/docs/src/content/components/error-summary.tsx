@@ -95,6 +95,12 @@ const doc: ComponentContent = {
         "One error: a real link to the field's fragment that focuses the target on activation. Native <li> props are forwarded.",
       props: [
         {
+          name: "render",
+          type: "RenderProp",
+          description:
+            "Substitute the built-in <a> — e.g. a router link; the wiring (href, focus handling) merges onto it.",
+        },
+        {
           name: "href",
           type: "string",
           description: "Fragment link to the field the error belongs to (required).",

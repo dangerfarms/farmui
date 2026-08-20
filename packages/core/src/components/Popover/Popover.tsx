@@ -21,7 +21,7 @@ import type {
 import { cx } from "../../utils";
 import { cssSafeId, supportsAnchoredPopover } from "../../anchor";
 import { usePresence } from "../../use-presence";
-import { mergeProps, renderWithProps } from "../../render";
+import { mergeProps, renderWithProps, composeRefs } from "../../render";
 import type { RenderProp } from "../../render";
 
 import { Button } from "../Button/Button";
@@ -214,6 +214,7 @@ function PopoverTrigger({ render, children, ...rest }: PopoverTriggerProps) {
 }
 
 export interface PopoverPopupProps extends HTMLAttributes<HTMLDivElement> {
+  ref?: Ref<HTMLDivElement>;
   /** Which side of the trigger the panel opens toward. @default "bottom" */
   position?: "bottom" | "top";
 }
@@ -223,11 +224,13 @@ function PopoverPopup({
   className,
   children,
   style,
+  ref: refProp,
   ...rest
 }: PopoverPopupProps) {
   const ctx = usePopoverContext("Popover.Popup");
   const { open, setOpen, enhanced } = ctx;
   const ref = useRef<HTMLDivElement>(null);
+  const composedRef = useMemo(() => composeRefs(refProp, ref), [refProp]);
 
   // Reconcile React state with the native popover state. Deliberately no
   // dependency array: a controlled parent may reject a toggle-reported change,
@@ -288,7 +291,7 @@ function PopoverPopup({
     // what makes the panel a popover at all.
     <div
       {...rest}
-      ref={ref}
+      ref={composedRef}
       id={ctx.popupId}
       role="dialog"
       tabIndex={-1}

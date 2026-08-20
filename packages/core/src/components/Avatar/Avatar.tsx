@@ -1,4 +1,7 @@
+"use client";
+
 import type { HTMLAttributes, ReactNode, Ref } from "react";
+import { useState } from "react";
 import { cx } from "../../utils";
 
 export interface AvatarProps extends Omit<HTMLAttributes<HTMLSpanElement>, "color"> {
@@ -35,6 +38,8 @@ function UserGlyph() {
  * An image, initials, or fallback glyph representing a user.
  */
 export function Avatar({ src, alt, name, className, style, children, ref, ...rest }: AvatarProps) {
+  // A failed image falls back to initials instead of the broken-image glyph.
+  const [imageFailed, setImageFailed] = useState(false);
   const initials = name ? initialsFrom(name) : "";
   // With no name anywhere, an avatar is decorative — hide it rather than
   // expose an unnamed role="img" to assistive technology.
@@ -44,8 +49,15 @@ export function Avatar({ src, alt, name, className, style, children, ref, ...res
   let content: ReactNode;
   if (children) {
     content = children;
-  } else if (src) {
-    content = <img className="image" src={src} alt={alt ?? name ?? ""} />;
+  } else if (src && !imageFailed) {
+    content = (
+      <img
+        className="image"
+        src={src}
+        alt={alt ?? name ?? ""}
+        onError={() => setImageFailed(true)}
+      />
+    );
   } else if (initials) {
     content = <span className="initials">{initials}</span>;
   } else {

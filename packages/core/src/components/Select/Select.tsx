@@ -3,8 +3,11 @@
 import type { Ref, SelectHTMLAttributes } from "react";
 import { useFieldControlProps } from "../Field/Field";
 import { useUserInvalid } from "../../use-user-invalid";
+import { cx } from "../../utils";
 
 export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, "size"> {
+  /** Class for the bordered field wrapper (className goes to the control itself). */
+  wrapperClassName?: string;
   /** Non-selectable prompt shown as the first, empty-valued option. */
   placeholder?: string;
   ref?: Ref<HTMLSelectElement>;
@@ -20,6 +23,7 @@ export function Select({
   placeholder,
   disabled,
   className,
+  wrapperClassName,
   style,
   children,
   defaultValue,
@@ -39,7 +43,11 @@ export function Select({
     !isControlled && defaultValue === undefined && placeholder ? "" : defaultValue;
 
   return (
-    <div className="fui-Select-field" data-disabled={disabled || undefined} style={style}>
+    <div
+      className={cx("fui-Select-field", wrapperClassName)}
+      data-disabled={disabled || undefined}
+      style={style}
+    >
       <select
         ref={ref}
         className={className}

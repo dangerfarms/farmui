@@ -21,7 +21,7 @@ import type {
 } from "react";
 import { cx } from "../../utils";
 import { usePresence } from "../../use-presence";
-import { mergeProps, renderWithProps } from "../../render";
+import { mergeProps, renderWithProps, composeRefs } from "../../render";
 import type { RenderProp } from "../../render";
 
 import { Button } from "../Button/Button";
@@ -198,6 +198,7 @@ function DrawerTrigger({ render, children, ...rest }: DrawerTriggerProps) {
 export type DrawerSide = "start" | "end" | "top" | "bottom";
 
 export interface DrawerPanelProps extends Omit<DialogHTMLAttributes<HTMLDialogElement>, "open"> {
+  ref?: Ref<HTMLDialogElement>;
   /** Edge the panel slides in from. @default "start" */
   side?: DrawerSide;
   /** Panel extent on its short axis (width for start/end, height for top/bottom). @default "md" */
@@ -209,11 +210,13 @@ function DrawerPanel({
   size = "md",
   className,
   children,
+  ref: refProp,
   ...rest
 }: DrawerPanelProps) {
   const ctx = useDrawerContext("Drawer.Panel");
   const { open, setOpen } = ctx;
   const ref = useRef<HTMLDialogElement>(null);
+  const composedRef = useMemo(() => composeRefs(refProp, ref), [refProp]);
 
   // Reconcile React state with the native dialog. No dependency array — a
   // controlled parent may reject a close reported by the `close` event, and
@@ -279,7 +282,7 @@ function DrawerPanel({
     // reconciliation, closedby) must win.
     <dialog
       {...rest}
-      ref={ref}
+      ref={composedRef}
       id={ctx.dialogId}
       // Missing from React's typings; lowercase passes through as an attribute.
       {...({ closedby: "any" } as object)}

@@ -290,10 +290,10 @@ function ToastViewport({ className, children, ...rest }: ToastViewportProps) {
 
   return (
     <div
+      aria-label="Notifications"
       {...rest}
       ref={ref}
       role="region"
-      aria-label="Notifications"
       tabIndex={-1}
       popover={enhanced ? "manual" : undefined}
       className={cx("fui-Toast-viewport", className)}
