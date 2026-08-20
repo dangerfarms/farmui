@@ -57,7 +57,7 @@ export const DangerContext: Story = {
           <SwitchControl defaultChecked /> Also delete backups
         </label>
         <Range defaultValue={70} aria-label="Retention days" />
-        <Input placeholder="Type the workspace name to confirm" />
+        <Input aria-label="Workspace name" />
         <div style={{ display: "flex", gap: "0.75rem" }}>
           <Button>Delete</Button>
           <Button>Remove members</Button>

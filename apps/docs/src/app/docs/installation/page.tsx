@@ -42,7 +42,7 @@ export function SignIn() {
     <form>
       <Field.Root>
         <Field.Label>Email</Field.Label>
-        <Input type="email" placeholder="you@acme.com" />
+        <Input type="email" autoComplete="email" />
       </Field.Root>
       <Button type="submit">Sign in</Button>
     </form>

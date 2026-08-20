@@ -20,9 +20,30 @@ pnpm dev        # runs the docs site
 ## Project layout
 
 - `packages/core` — the `@farmui/core` component library. Each component lives in
-  `src/components/<Name>/` as a `.tsx` file plus a plain `.css` file using static,
-  prefixed class names (`.fui-<Name>-<part>`) inside `@layer farmui.components`.
+  `src/components/<Name>/` as a `.tsx` file plus a plain `.css` file inside
+  `@layer farmui.components`. Each scope root keeps one prefixed class
+  (`.fui-<Name>`, or a semantic root name like `.fui-Input-field` where a
+  component has several roots); parts inside the scope are type selectors or
+  short classes (`label`, `p.description`) — the encapsulation is `@scope`'s
+  job, not the class name's.
 - `apps/docs` — the Next.js marketing + documentation site.
+
+## Framing
+
+The one-line identity, in priority order — use it in the homepage, when
+prioritising navigation, and when writing any docs:
+
+- **Primary:** FarmUI — modern UI primitives for agent-assisted
+  developers.
+- **Secondary:** Contextual tokens, element styles and React components
+  based on Google's Modern Web Guidelines for quickly building bespoke
+  UIs that are accessible, adaptable and fast.
+- **Tertiary:** Steeped in UX best practices and inspired by Base UI's
+  component composition architecture.
+
+Keyword priority: modern, UI primitives, agent-assisted,
+contextual/adaptable, bespoke, accessible, fast. Never lead with
+"beautiful, fast, accessible" — every library says that.
 
 ## CSS authoring standard
 
@@ -48,8 +69,8 @@ properties; `oklch()` / `light-dark()` / `color-mix()`; container queries; and
 
 **Stylesheet anatomy** (mirrors ModernCSS's site convention): `src/styles.css`
 is the entry and only orchestrates — the cascade-layer order plus `layer()`
-imports; `src/tokens.css` holds every design token (three bands: primitives →
-semantic colour → interaction & scales, with Utopia calculator URLs committed
+imports; `src/tokens.css` holds every design token (four bands: inputs →
+neutrals → derived → scales, with Utopia calculator URLs committed
 above the fluid scales); `src/reset.css` and `src/elements.css` are their
 layers' contents. **Component CSS files contain no `@layer`** — the layer is
 assigned by the orchestrator's imports in dev and by `scripts/build-css.mjs`
@@ -127,7 +148,7 @@ Button). The `render` prop exists only to _substitute_ that element
 common case needs `render`, the part has the wrong default element. The
 exception is `Field.Control`, whose entire purpose is wiring an arbitrary
 element into the field — the FarmUI controls (`Input`, `Select`, `Textarea`,
-`Slider`) self-wire from Field context when rendered inside `Field.Root`, so
+`Range`) self-wire from Field context when rendered inside `Field.Root`, so
 they never go through it.
 
 **One merge contract** (`src/render.ts`, used by every part): event handlers
@@ -145,7 +166,7 @@ chain — the element's own handler runs first, wiring second, both always run;
   `Object.assign(Convenience, { Root, … })` so both `<Alert title=…>` and
   `<Alert.Root>` work
 - Form controls → bare controls that self-wire from Field context via
-  `useFieldControlProps()` (`Input`, `Select`, `Textarea`, `Slider`): no
+  `useFieldControlProps()` (`Input`, `Select`, `Textarea`, `Range`): no
   label/description/error props — composition inside `Field.Root` supplies
   them. Inline controls whose anatomy is a row (Checkbox, Switch, Radio)
   keep the labelled convenience form plus a bare `XControl` part
@@ -161,20 +182,20 @@ Any JSX that uses compound parts (docs demos included) must live in a
 **State attributes** — the shared styling vocabulary, identical on every
 component (never invent synonyms):
 
-| Attribute                     | Where                                                    | Meaning                                                                                                 |
-| ----------------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `data-popup-open`             | trigger                                                  | its popup/bubble is open                                                                                |
-| `data-open`                   | popup/panel                                              | open — uniform across enhanced & fallback                                                               |
-| `data-disabled`               | wrapper/control                                          | disabled styling hook                                                                                   |
-| `data-current`                | nav item                                                 | current page/location                                                                                   |
-| `data-size` / `data-position` | some display components (Badge, Avatar, Progress, Modal) | instance styling hooks read by the stylesheet — form controls have no size hooks: their sizing is fluid |
+| Attribute                     | Where                                            | Meaning                                                                                                 |
+| ----------------------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------- |
+| `data-popup-open`             | trigger                                          | its popup/bubble is open                                                                                |
+| `data-open`                   | popup/panel                                      | open — uniform across enhanced & fallback                                                               |
+| `data-disabled`               | wrapper/control                                  | disabled styling hook                                                                                   |
+| `data-current`                | nav item                                         | current page/location                                                                                   |
+| `data-size` / `data-position` | some display components (Badge, Progress, Modal) | instance styling hooks read by the stylesheet — form controls have no size hooks: their sizing is fluid |
 
 Components built on native state use the platform's hook instead (e.g.
-Accordion styles `details[open]`). **Prefer detection over declaration**:
+Details styles `details[open]`). **Prefer detection over declaration**:
 when the DOM already expresses a state, style it with `:has()` / ARIA
 selectors instead of minting an attribute. Field error state is the model —
 a field is invalid exactly when it contains a rendered error message
-(`.fui-Field-root:has(.fui-Field-error)`), and controls key off their own
+(`.fui-Field:has(> p.error)`), and controls key off their own
 `[aria-invalid="true"]`; there are no `invalid` props and no `data-invalid`
 attributes.
 
@@ -205,7 +226,7 @@ derived anatomy — `padding-block: var(--fui-space-sm)` +
 height-align by construction at every container width. There are no
 control-height tokens and no size props on form controls; a control that
 must match this height adopts the same stack (see Pagination, Newsletter).
-Glyph controls (Checkbox, Radio, Switch, Slider) size their geometry in `em`
+Glyph controls (Checkbox, Radio, Switch, Range) size their geometry in `em`
 on a `font-size: var(--fui-text-sm)` basis, so glyphs ride the same fluid
 scale as their labels.
 

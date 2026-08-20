@@ -53,7 +53,7 @@ const cases: Array<[string, ReactElement]> = [
     "Input",
     <Field.Root>
       <Field.Label>Email</Field.Label>
-      <Input placeholder="you@example.com" />
+      <Input type="email" autoComplete="email" />
     </Field.Root>,
   ],
   [

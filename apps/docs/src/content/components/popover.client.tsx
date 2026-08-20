@@ -44,11 +44,11 @@ export function PopoverFormDemo() {
         <form style={{ display: "grid", gap: "0.75rem" }} onSubmit={(e) => e.preventDefault()}>
           <Field.Root>
             <Field.Label>Name</Field.Label>
-            <Input placeholder="Wireless headphones" />
+            <Input />
           </Field.Root>
           <Field.Root>
             <Field.Label>Price</Field.Label>
-            <Input inputMode="decimal" placeholder="49.00" />
+            <Input inputMode="decimal" />
           </Field.Root>
           <Button type="submit">Save</Button>
         </form>

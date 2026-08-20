@@ -64,7 +64,7 @@ export default function ElementStyles() {
       <div className={prose.block}>
         <form style={{ ...stage, display: "grid", gap: "0.75rem", maxInlineSize: "24rem" }}>
           <label htmlFor="es-name">Full name</label>
-          <input id="es-name" type="text" placeholder="Alex Farmer" />
+          <input id="es-name" type="text" autoComplete="name" />
           <label htmlFor="es-region">Region</label>
           <select id="es-region">
             <option>Europe</option>
