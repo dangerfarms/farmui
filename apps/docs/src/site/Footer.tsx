@@ -43,7 +43,7 @@ export function Footer() {
         <div className={classes.brand}>
           <Logo />
           <p className={classes.tagline}>
-            Three primitives for agent-assisted development. Open source and MIT-licensed.
+            Modern UI primitives for agent-assisted developers. Open source and MIT-licensed.
           </p>
           <a
             className={classes.gh}

@@ -9,11 +9,11 @@ import { SkipLink } from "@farmui/core";
 
 export const metadata: Metadata = {
   title: {
-    default: "FarmUI — The React library for agent-assisted development",
+    default: "FarmUI — Modern UI primitives for agent-assisted developers",
     template: "%s · FarmUI",
   },
   description:
-    "Three primitives — tokens, element styles, and a small set of contextually styled components — that agents and the humans directing them use to build bespoke interfaces that are fast and accessible.",
+    "Contextual tokens, element styles and React components, built on Google's Modern Web Guidelines for quickly building bespoke UIs that are accessible, adaptable and fast.",
 };
 
 // Renders <meta name="color-scheme" content="light dark"> — the UA needs the

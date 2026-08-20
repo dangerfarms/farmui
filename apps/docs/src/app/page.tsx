@@ -53,7 +53,7 @@ const PRIMITIVES = [
   {
     title: "Element styles",
     href: "/docs/element-styles",
-    body: "Enhanced default styles for native HTML, page-wide: fluid type, computed line-heights, link affordances, styled form controls. Plain markup is presentable before any component appears.",
+    body: "Enhanced default styles for native HTML, page-wide — responsive, accessible, and respecting the reader's light or dark preference. Plain markup is presentable before any component appears.",
   },
   {
     title: "Components",
@@ -153,12 +153,12 @@ export default function HomePage() {
               Three primitives, deterministically gatekept
             </span>
             <h1 className={c.title}>
-              The React library for <span className="brandText">agent-assisted development.</span>
+              Modern UI primitives for <span className="brandText">agent-assisted developers.</span>
             </h1>
             <p className={c.subtitle}>
-              Tokens, element styles and a small set of components — three primitives that agents
-              and the humans directing them use to build bespoke interfaces that are fast and
-              accessible.
+              Contextual tokens, element styles and React components, built on Google&rsquo;s Modern
+              Web Guidelines for quickly building bespoke UIs that are accessible, adaptable and
+              fast.
             </p>
             <div className={c.ctaRow}>
               <SignpostLink render={<Link href="/docs" />}>Get started</SignpostLink>
@@ -200,8 +200,8 @@ export default function HomePage() {
           <h2 className={c.sectionTitle}>Built on Google&rsquo;s Modern Web Guidance.</h2>
           <p className={c.sectionSub}>
             Every primitive follows the Chrome team&rsquo;s guidance for the modern web — the reason
-            interfaces built with FarmUI are fast and accessible. Three tenets run through
-            everything:
+            interfaces built with FarmUI are fast and accessible, and the combination no other
+            library offers. Three tenets run through everything:
           </p>
         </div>
         <div className={c.features}>
@@ -285,8 +285,9 @@ export default function HomePage() {
           <span className="eyebrow">Distilled UX practice</span>
           <h2 className={c.sectionTitle}>The hard-earned rules, already in the components.</h2>
           <p className={c.sectionSub}>
-            Decades of user research distilled into defaults and guidance: every component page says
-            when to use it, when not to, and why — so the judgment ships with the code.
+            Steeped in UX best practices: decades of user research distilled into defaults and
+            guidance. Every component page says when to use it, when not to, and why — so the
+            judgment ships with the code.
           </p>
         </div>
         <ul className={c.shouts}>
@@ -346,9 +347,10 @@ export default function HomePage() {
             <span className="eyebrow">Composition</span>
             <h2 className={c.sectionTitle}>Compose, don&rsquo;t configure.</h2>
             <p className={c.sectionSub}>
-              Compound components expose their parts; element substitution goes through{" "}
-              <code>render</code>; icons are detected children, not slot props. Bespoke variants are
-              compositions in your codebase — not configuration in the library.
+              Inspired by Base UI&rsquo;s composition architecture: compound components expose their
+              parts, element substitution goes through <code>render</code>, and icons are detected
+              children, not slot props. Bespoke variants are compositions in your codebase — not
+              configuration in the library.
             </p>
             <ul className={c.splitList}>
               {[
