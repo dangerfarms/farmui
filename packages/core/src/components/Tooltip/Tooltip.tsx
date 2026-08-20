@@ -300,7 +300,7 @@ function TooltipRoot({
 
   return (
     <TooltipContext value={value}>
-      <span className={cx("fui-Tooltip-root", className)} {...rest}>
+      <span className={cx("fui-Tooltip", className)} {...rest}>
         {children}
       </span>
     </TooltipContext>
@@ -422,7 +422,7 @@ export interface TooltipArrowProps extends HTMLAttributes<HTMLSpanElement> {}
 
 function TooltipArrow({ className, ...rest }: TooltipArrowProps) {
   useTooltipContext("Tooltip.Arrow");
-  return <span aria-hidden="true" className={cx("fui-Tooltip-arrow", className)} {...rest} />;
+  return <span aria-hidden="true" className={cx("arrow", className)} {...rest} />;
 }
 
 export const Tooltip = {

@@ -325,7 +325,7 @@ function ToastRoot({ toast, className, children, ...rest }: ToastRootProps) {
       // A live region: role="status" announces politely on insertion;
       // role="alert" interrupts — reserved for priority: "high".
       role={toast.priority === "high" ? "alert" : "status"}
-      className={cx("fui-Toast-root", className)}
+      className={cx("toast", className)}
       data-exiting={ctx?.exiting.has(toast.id) || undefined}
       {...rest}
     >
@@ -338,7 +338,7 @@ export interface ToastTitleProps extends HTMLAttributes<HTMLDivElement> {}
 
 function ToastTitle({ className, children, ...rest }: ToastTitleProps) {
   return (
-    <div className={cx("fui-Toast-title", className)} {...rest}>
+    <div className={cx("title", className)} {...rest}>
       {children}
     </div>
   );
@@ -348,7 +348,7 @@ export interface ToastDescriptionProps extends HTMLAttributes<HTMLDivElement> {}
 
 function ToastDescription({ className, children, ...rest }: ToastDescriptionProps) {
   return (
-    <div className={cx("fui-Toast-description", className)} {...rest}>
+    <div className={cx("description", className)} {...rest}>
       {children}
     </div>
   );
@@ -401,7 +401,7 @@ function ToastClose({ toastId, className, children, ...rest }: ToastCloseProps) 
     <button
       type="button"
       aria-label="Dismiss notification"
-      className={cx("fui-Toast-close", className)}
+      className={cx("close", className)}
       onClick={() => ctx.close(toastId)}
       {...rest}
     >
@@ -430,7 +430,7 @@ export function Toasts() {
     <ToastViewport>
       {toasts.map((toast) => (
         <ToastRoot key={toast.id} toast={toast}>
-          <div className="fui-Toast-content">
+          <div className="content">
             {toast.title && <ToastTitle>{toast.title}</ToastTitle>}
             {toast.description && <ToastDescription>{toast.description}</ToastDescription>}
           </div>

@@ -120,6 +120,7 @@ const doc: ComponentContent = {
     "To keep related panels in one place without a page navigation, when switching views must not lose the surrounding context.",
   ],
   whenNotToUse: [
+    "On narrow screens where the tab strip no longer fits: stack the content under plain headings instead — a horizontally scrolling tab strip hides panels behind an interaction most users never find.",
     "For steps in a sequence: tabs imply no order and let users jump anywhere, so a flow with dependencies belongs on separate pages with visible progress.",
     "As primary navigation: switching a tab changes no URL and creates no history entry, so tabbed 'pages' can't be linked, bookmarked or reached with the back button.",
     "When users need to read or compare everything: content in an unselected tab may never be seen; stack it on the page under headings instead.",

@@ -17,8 +17,9 @@ export function Header() {
           <MobileNav />
           <Logo />
           <nav className={classes.nav} aria-label="Primary">
+            <Link href="/docs/tokens">Tokens</Link>
+            <Link href="/docs/element-styles">Element styles</Link>
             <Link href={FIRST_COMPONENT_HREF}>Components</Link>
-            <Link href="/docs/theming">Theming</Link>
           </nav>
         </div>
 

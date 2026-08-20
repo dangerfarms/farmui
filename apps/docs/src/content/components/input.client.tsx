@@ -7,7 +7,7 @@ export function InputBasicDemo() {
     <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
       <Field.Root>
         <Field.Label>Email</Field.Label>
-        <Input placeholder="you@example.com" />
+        <Input />
       </Field.Root>
     </div>
   );
@@ -28,7 +28,7 @@ export function InputContainersDemo() {
       >
         <Field.Root>
           <Field.Label>In a narrow container</Field.Label>
-          <Input placeholder="you@example.com" />
+          <Input />
         </Field.Root>
       </div>
       <div
@@ -43,7 +43,7 @@ export function InputContainersDemo() {
       >
         <Field.Root>
           <Field.Label>In a wide one</Field.Label>
-          <Input placeholder="you@example.com" />
+          <Input />
         </Field.Root>
       </div>
     </div>
@@ -56,7 +56,7 @@ export function InputDescriptionDemo() {
       <Field.Root>
         <Field.Label>Username</Field.Label>
         <Field.Description>This will be your public handle.</Field.Description>
-        <Input placeholder="ada_lovelace" required />
+        <Input required />
       </Field.Root>
     </div>
   );
@@ -67,10 +67,10 @@ export function InputErrorDemo() {
     <div style={{ maxInlineSize: "20rem", inlineSize: "100%" }}>
       <Field.Root>
         <Field.Label>Email</Field.Label>
-        <Input defaultValue="not-an-email" />
         <Field.Error>
           Enter an email address in the correct format, like name@example.com
         </Field.Error>
+        <Input defaultValue="not-an-email" />
       </Field.Root>
     </div>
   );
@@ -121,11 +121,11 @@ export function InputSectionsDemo() {
     >
       <Field.Root>
         <Field.Label>Handle</Field.Label>
-        <Input leftSection="@" placeholder="handle" />
+        <Input leftSection="@" />
       </Field.Root>
       <Field.Root>
         <Field.Label>Site name</Field.Label>
-        <Input rightSection=".dev" placeholder="yoursite" />
+        <Input rightSection=".dev" />
       </Field.Root>
     </div>
   );

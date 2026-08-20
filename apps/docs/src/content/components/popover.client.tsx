@@ -19,11 +19,17 @@ export function PopoverDemo() {
 export function PopoverLinkTriggerDemo() {
   return (
     <Popover.Root>
-      <Popover.Trigger render={<a href="#popover">A link as the trigger</a>} />
+      <Popover.Trigger
+        render={
+          <button type="button" aria-label="Filters" style={{ padding: "0.5rem 0.75rem" }}>
+            ⚙
+          </button>
+        }
+      />
       <Popover.Popup>
         <Popover.Description>
-          The Trigger&apos;s wiring merged onto the anchor — it opens the popover, and its own href
-          still works for open-in-new-tab.
+          The Trigger&apos;s wiring merged onto your own button — it opens the popover and carries
+          the aria-expanded state.
         </Popover.Description>
       </Popover.Popup>
     </Popover.Root>

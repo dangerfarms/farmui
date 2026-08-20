@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from "vitest";
 import { cleanup, render, screen } from "@testing-library/react";
-import { Field, Fieldset, Checkbox, Radio, RadioGroup, SwitchControl, Slider } from "../index";
+import { Field, Fieldset, Checkbox, Radio, RadioGroup, SwitchControl, Range } from "../index";
 
 afterEach(cleanup);
 
@@ -55,12 +55,12 @@ describe("Inline controls composed inside Field", () => {
     expect(sw.getAttribute("aria-describedby")).toBe(screen.getByText(/once a day/).id);
   });
 
-  it("wires a Slider through Field.Control (stacked field)", () => {
+  it("wires a Range through Field.Control (stacked field)", () => {
     render(
       <Field.Root>
         <Field.Label>Volume</Field.Label>
         <Field.Description>Between 0 and 100.</Field.Description>
-        <Field.Control render={<Slider />} />
+        <Field.Control render={<Range />} />
       </Field.Root>,
     );
 
@@ -69,12 +69,12 @@ describe("Inline controls composed inside Field", () => {
     expect(slider.getAttribute("aria-describedby")).toBe(screen.getByText(/Between 0 and 100/).id);
   });
 
-  it("keeps standalone Switch and Slider working with their own labels", () => {
+  it("keeps standalone Switch and Range working with their own labels", () => {
     render(
       <>
         <Field.Root>
           <Field.Label>Brightness</Field.Label>
-          <Slider defaultValue={40} />
+          <Range defaultValue={40} />
         </Field.Root>
       </>,
     );

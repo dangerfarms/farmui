@@ -25,7 +25,7 @@ export const Playground: Story = {
     <Field.Root style={{ maxWidth: 320 }}>
       <Field.Label>Email</Field.Label>
       <Field.Description>We&apos;ll only use this to reply.</Field.Description>
-      <Field.Control render={<Input placeholder="you@example.com" />} />
+      <Field.Control render={<Input />} />
     </Field.Root>
   ),
 };
@@ -34,8 +34,8 @@ export const WithError: Story = {
   render: () => (
     <Field.Root style={{ maxWidth: 320 }}>
       <Field.Label>Email</Field.Label>
-      <Field.Control render={<Input defaultValue="not-an-email" />} />
       <Field.Error>Enter a valid email address.</Field.Error>
+      <Field.Control render={<Input defaultValue="not-an-email" />} />
     </Field.Root>
   ),
 };
@@ -44,7 +44,7 @@ export const Optional: Story = {
   render: () => (
     <Field.Root style={{ maxWidth: 320 }}>
       <Field.Label optional>Company</Field.Label>
-      <Field.Control render={<Input placeholder="Acme Inc." />} />
+      <Field.Control render={<Input />} />
     </Field.Root>
   ),
 };
@@ -52,7 +52,7 @@ export const Optional: Story = {
 export const ReorderedParts: Story = {
   render: () => (
     <Field.Root style={{ maxWidth: 320 }}>
-      <Field.Control render={<Input placeholder="Search" />} />
+      <Field.Control render={<Input />} />
       <Field.Label>Search</Field.Label>
       <Field.Description>Description below the control.</Field.Description>
     </Field.Root>

@@ -7,7 +7,7 @@ export interface AlertRootProps extends Omit<HTMLAttributes<HTMLDivElement>, "co
 
 function AlertRoot({ className, children, ref, ...rest }: AlertRootProps) {
   return (
-    <div ref={ref} role="alert" className={cx("fui-Alert-root", className)} {...rest}>
+    <div ref={ref} role="alert" className={cx("fui-Alert", className)} {...rest}>
       {children}
     </div>
   );
@@ -17,7 +17,7 @@ export interface AlertPartProps extends HTMLAttributes<HTMLElement> {}
 
 function AlertIcon({ className, children, ...rest }: AlertPartProps) {
   return (
-    <span className={cx("fui-Alert-icon", className)} aria-hidden {...rest}>
+    <span className={cx("icon", className)} aria-hidden {...rest}>
       {children}
     </span>
   );
@@ -25,7 +25,7 @@ function AlertIcon({ className, children, ...rest }: AlertPartProps) {
 
 function AlertBody({ className, children, ...rest }: AlertPartProps) {
   return (
-    <div className={cx("fui-Alert-body", className)} {...rest}>
+    <div className={cx("body", className)} {...rest}>
       {children}
     </div>
   );
@@ -33,7 +33,7 @@ function AlertBody({ className, children, ...rest }: AlertPartProps) {
 
 function AlertTitle({ className, children, ...rest }: AlertPartProps) {
   return (
-    <div className={cx("fui-Alert-title", className)} {...rest}>
+    <div className={cx("title", className)} {...rest}>
       {children}
     </div>
   );
@@ -41,7 +41,7 @@ function AlertTitle({ className, children, ...rest }: AlertPartProps) {
 
 function AlertMessage({ className, children, ...rest }: AlertPartProps) {
   return (
-    <div className={cx("fui-Alert-message", className)} {...rest}>
+    <div className={cx("message", className)} {...rest}>
       {children}
     </div>
   );

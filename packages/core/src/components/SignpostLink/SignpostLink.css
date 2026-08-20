@@ -1,0 +1,74 @@
+@scope (.fui-SignpostLink) to ([class*="fui-"]) {
+  :scope {
+    align-items: center;
+    border-radius: var(--fui-radius-sm);
+    color: var(--fui-text-strong);
+    display: inline flex;
+    font-size: var(--fui-text-md);
+    font-weight: 600;
+    gap: var(--fui-space-sm);
+    max-inline-size: fit-content;
+    text-decoration: none;
+  }
+
+  /* The underline is always drawn with a transparent colour, so colour,
+     thickness and offset can each transition. */
+  span.label {
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: max(0.08em, 1px);
+    text-underline-offset: 0.15em;
+
+    :scope:active & {
+      text-decoration-color: var(--fui-primary-strong);
+      text-decoration-thickness: max(0.16em, 2px);
+      text-underline-offset: 0.15em;
+      transition: none;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition:
+        text-decoration-color var(--fui-duration-md) var(--fui-ease),
+        text-decoration-thickness var(--fui-duration-md) var(--fui-ease),
+        text-underline-offset var(--fui-duration-md) var(--fui-ease-elastic);
+    }
+  }
+
+  /* The circled arrow rides the font size, so the signpost rescales as one
+     piece wherever a consumer changes it. Solid fill on the -strong family
+     with on-strong — the audited pairing — and a context region recolours
+     it by re-answering the token. */
+  span.icon {
+    background: var(--fui-primary-strong);
+    block-size: 1.5em;
+    border-radius: var(--fui-radius-full);
+    color: var(--fui-on-strong);
+    display: inline grid;
+    flex-shrink: 0;
+    inline-size: 1.5em;
+    place-items: center;
+
+    svg {
+      block-size: 65%;
+      inline-size: 65%;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition: translate var(--fui-duration-md) var(--fui-ease-elastic);
+    }
+  }
+
+  @media (hover: hover) {
+    :scope:hover span.label {
+      text-decoration-color: var(--fui-primary);
+      text-decoration-thickness: max(0.16em, 2px);
+      text-underline-offset: 0.3em;
+    }
+  }
+
+  @media (hover: hover) {
+    :scope:hover span.icon {
+      translate: 0.15em 0;
+    }
+  }
+}

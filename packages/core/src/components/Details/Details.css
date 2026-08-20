@@ -1,0 +1,92 @@
+/* The native disclosure, standalone: each Details is its own boxed
+   surface. A set sharing a `name` needs no wrapper — the browser owns
+   the exclusivity. */
+@scope (.fui-Details) to ([class*="fui-"]) {
+  :scope {
+    background: var(--fui-surface);
+    border: 1px solid var(--fui-border);
+    border-radius: var(--fui-radius-md);
+    inline-size: 100%;
+    overflow: clip;
+
+    > summary {
+      align-items: center;
+      cursor: pointer;
+      display: block flex;
+      font-size: var(--fui-text-md);
+      font-weight: 600;
+      gap: var(--fui-space-md);
+      justify-content: space-between;
+      line-height: 1.4;
+      list-style: none;
+      padding-block: var(--fui-space-md);
+      padding-inline: var(--fui-space-lg);
+      transition: background var(--fui-duration-md) var(--fui-ease);
+      user-select: none;
+    }
+  }
+
+  :scope > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  :scope[open] > summary {
+    color: var(--fui-primary);
+  }
+
+  span.label {
+    min-inline-size: 0;
+  }
+
+  svg.chevron {
+    color: var(--fui-text-muted);
+    flex: none;
+    rotate: 0deg;
+    transition: rotate var(--fui-duration-md) var(--fui-ease);
+
+    :scope[open] > summary & {
+      color: var(--fui-primary);
+      rotate: 180deg;
+    }
+  }
+
+  div.content {
+    color: var(--fui-text-muted);
+    font-size: var(--fui-text-sm);
+    line-height: 1.55;
+    padding-block: 0 var(--fui-space-lg);
+    padding-inline: var(--fui-space-lg);
+  }
+
+  @media (hover: hover) {
+    :scope > summary:hover {
+      background: var(--fui-surface-hover);
+    }
+  }
+
+  /* Open/close height animation on the platform's own content slot.
+     interpolate-size is required for the 0 → auto interpolation and is not
+     yet Baseline, so the whole recipe gates on it (elsewhere: today's
+     instant toggle). Declared on the item, never :root — a library must not
+     leak keyword interpolation into the host page. */
+  @supports (interpolate-size: allow-keywords) {
+    :scope {
+      interpolate-size: allow-keywords;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      :scope::details-content {
+        block-size: 0;
+        overflow-block: clip;
+        transition:
+          block-size var(--fui-duration-md) var(--fui-ease),
+          content-visibility var(--fui-duration-md) var(--fui-ease)
+            allow-discrete;
+      }
+
+      :scope[open]::details-content {
+        block-size: auto;
+      }
+    }
+  }
+}

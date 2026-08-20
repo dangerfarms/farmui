@@ -144,7 +144,7 @@ function DateInputRoot({
     <DateInputContext value={value}>
       <Fieldset.Root
         id={id}
-        className={cx("fui-DateInput-root", className)}
+        className={cx("fui-DateInput", className)}
         aria-describedby={describedBy}
         {...rest}
       >
@@ -161,7 +161,7 @@ function DateInputDescription({ className, children, ...rest }: DateInputDescrip
   const { registerDescription } = ctx;
   useEffect(() => registerDescription(), [registerDescription]);
   return (
-    <p id={ctx.descriptionId} className={cx("fui-DateInput-description", className)} {...rest}>
+    <p id={ctx.descriptionId} className={cx("description", className)} {...rest}>
       {children}
     </p>
   );
@@ -187,7 +187,7 @@ function DateInputError({ parts, className, children, ...rest }: DateInputErrorP
 
   if (!hasContent) return null;
   return (
-    <p id={ctx.errorId} role="alert" className={cx("fui-DateInput-error", className)} {...rest}>
+    <p id={ctx.errorId} role="alert" className={cx("error", className)} {...rest}>
       <span className="fui-Error-prefix">Error: </span>
       {children}
     </p>
@@ -198,7 +198,7 @@ export interface DateInputFieldsProps extends HTMLAttributes<HTMLDivElement> {}
 
 function DateInputFields({ className, children, ...rest }: DateInputFieldsProps) {
   return (
-    <div className={cx("fui-DateInput-parts", className)} {...rest}>
+    <div className={cx("parts", className)} {...rest}>
       {children}
     </div>
   );
@@ -220,10 +220,8 @@ function DateInputField({ part, children, id, ref, ...rest }: DateInputFieldProp
   const inputId = id ?? `${ctx.baseId}-${part}`;
   const invalid = ctx.hasError && (ctx.errorParts?.includes(part) ?? true);
   return (
-    <div className="fui-DateInput-part" data-part={part}>
-      <label className="fui-DateInput-label" htmlFor={inputId}>
-        {children ?? PART_LABELS[part]}
-      </label>
+    <div data-part={part}>
+      <label htmlFor={inputId}>{children ?? PART_LABELS[part]}</label>
       <Input
         ref={ref}
         // Day and year are numbers; the month accepts names ("jan",

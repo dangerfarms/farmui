@@ -1,18 +1,18 @@
 .wrap {
-  position: relative;
-  border-radius: var(--fui-radius-md);
-  border: 1px solid var(--fui-border);
   background: var(--fui-bg-subtle);
+  border: 1px solid var(--fui-border);
+  border-radius: var(--fui-radius-md);
   overflow: hidden;
+  position: relative;
 }
 
 .pre {
-  margin: 0;
-  padding: 1rem 1.125rem;
-  overflow-inline: auto;
+  background: transparent;
   font-size: var(--fui-text-sm);
   line-height: 1.6;
-  background: transparent;
+  margin: 0;
+  overflow-inline: auto;
+  padding: 1rem 1.125rem;
 }
 
 .line {
@@ -20,24 +20,25 @@
 }
 
 .copy {
-  position: absolute;
-  inset-block-start: 0.5rem;
-  inset-inline-end: 0.5rem;
-  z-index: 1;
-  padding: 0.25rem 0.6rem;
-  font-size: var(--fui-text-xs);
-  font-weight: 600;
-  color: var(--fui-text-muted);
   background: var(--fui-surface);
   border: 1px solid var(--fui-border);
   border-radius: var(--fui-radius-sm);
+  box-shadow: none;
+  color: var(--fui-text-muted);
   cursor: pointer;
+  font-size: var(--fui-text-xs);
+  font-weight: 600;
+  inset-block-start: 0.5rem;
+  inset-inline-end: 0.5rem;
+  padding: 0.25rem 0.6rem;
+  position: absolute;
   transition:
     color var(--fui-duration-md) var(--fui-ease),
     border-color var(--fui-duration-md) var(--fui-ease);
-}
+  z-index: 1;
 
-.copy:hover {
-  color: var(--fui-text);
-  border-color: var(--fui-border-strong);
+  &:hover {
+    border-color: var(--fui-border-strong);
+    color: var(--fui-text);
+  }
 }

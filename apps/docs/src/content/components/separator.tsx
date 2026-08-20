@@ -9,7 +9,7 @@ const doc: ComponentContent = {
     {
       title: "Basic usage",
       description: "A real <hr>: the platform's separator role, no ARIA required.",
-      code: `<p>Account settings</p>
+      code: `<p style={{ margin: 0 }}>Account settings</p>
 <Separator />
 <p>Danger zone</p>`,
       render: () => (

@@ -25,7 +25,7 @@ export function FieldsetOptionalDemo() {
 
 export function FieldsetRadioDemo() {
   return (
-    <RadioGroup label="Plan" name="fieldset-plan" defaultValue="pro">
+    <RadioGroup label="Plan" name="plan" defaultValue="pro">
       <Radio value="free" label="Free" />
       <Radio value="pro" label="Pro" />
       <Radio value="team" label="Team" />

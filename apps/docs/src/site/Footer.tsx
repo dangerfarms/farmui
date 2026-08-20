@@ -10,7 +10,8 @@ const COLUMNS = [
     links: [
       { label: "Introduction", href: "/docs" },
       { label: "Installation", href: "/docs/installation" },
-      { label: "Theming", href: "/docs/theming" },
+      { label: "Tokens", href: "/docs/tokens" },
+      { label: "Element styles", href: "/docs/element-styles" },
       { label: "Components", href: FIRST_COMPONENT_HREF },
     ],
   },
@@ -42,7 +43,7 @@ export function Footer() {
         <div className={classes.brand}>
           <Logo />
           <p className={classes.tagline}>
-            Accessible, high-performance React components. Open source and MIT-licensed.
+            Modern UI primitives for agent-assisted developers. Open source and MIT-licensed.
           </p>
           <a
             className={classes.gh}

@@ -44,9 +44,9 @@ const doc: ComponentContent = {
       title: "Inherited from a region",
       description:
         "--fui-context inherits, so an alert inside a region that already declares its meaning needs nothing of its own: the nearest ancestor that sets the property wins.",
-      code: `<section style={{ "--fui-context": "warning" }}>
+      code: `<div style={{ "--fui-context": "warning" }}>
   <Alert title="Scheduled maintenance tonight." />
-</section>`,
+</div>`,
       render: () => (
         <div
           style={
@@ -64,7 +64,7 @@ const doc: ComponentContent = {
       title: "With icon",
       description: "Pass any node as the leading icon.",
       code: `<div style={{ "--fui-context": "info" }}>
-  <Alert icon={<span>ℹ</span>} title="Did you know?">
+  <Alert icon={<span aria-hidden>ℹ</span>} title="Did you know?">
     You can theme every alert with a single CSS variable.
   </Alert>
 </div>`,
@@ -112,6 +112,7 @@ const doc: ComponentContent = {
     },
   ],
   accessibility: [
+    "A banner already present at page load announces nothing (role=alert only fires on insertion): for a post-redirect confirmation, either move keyboard focus to the alert on load, or treat it as a landmark instead — a wrapper with role=region and aria-labelledby pointing at the title.",
     'Renders role="alert" (an assertive live region), so an alert inserted in response to an event is announced immediately by screen readers, ahead of whatever else was queued.',
     'For dynamic messages that are not urgent, pass role="status": forwarded props are spread after the default, so your role wins and the announcement becomes polite instead of interrupting.',
     "The status colour is never announced: write the title so the meaning survives in words (“Deploy failed”, not “Error” on a red tint); the border and tint are visual-only.",

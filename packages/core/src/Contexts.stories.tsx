@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { CSSProperties, HTMLAttributes } from "react";
-import { Button, CheckboxControl, Input, Slider, SwitchControl } from "./index";
+import { Button, CheckboxControl, Input, Range, SwitchControl } from "./index";
 
 /**
  * Contextual meaning as a custom property.
@@ -56,7 +56,7 @@ export const DangerContext: Story = {
         <label style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
           <SwitchControl defaultChecked /> Also delete backups
         </label>
-        <Slider defaultValue={70} aria-label="Retention days" />
+        <Range defaultValue={70} aria-label="Retention days" />
         <Input placeholder="Type the workspace name to confirm" />
         <div style={{ display: "flex", gap: "0.75rem" }}>
           <Button>Delete</Button>

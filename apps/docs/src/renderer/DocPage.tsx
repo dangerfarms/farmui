@@ -56,6 +56,27 @@ export function DocPage({ doc }: { doc: ComponentDoc }) {
         <CodeBlock code={doc.importLine} />
       </section>
 
+      <section className={classes.section}>
+        <h2 id="usage" className={classes.h2}>
+          Usage
+        </h2>
+        <p className={classes.usageNote}>
+          Every example has a <strong>CSS</strong> tab — that&rsquo;s the real, complete stylesheet
+          for the component. It&rsquo;s plain, static CSS: nothing runs in the browser.
+        </p>
+        <div className={classes.demos}>
+          {doc.demos.map((demo) => (
+            <div key={demo.title} id={slugify(demo.title)} className={classes.demo}>
+              <h3 className={classes.h3}>{demo.title}</h3>
+              {demo.description && <p className={classes.demoDesc}>{demo.description}</p>}
+              <Preview code={demo.code} css={css}>
+                {demo.render()}
+              </Preview>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {(doc.whenToUse || doc.whenNotToUse || doc.accessibility) && (
         <section className={classes.section}>
           <h2 id="guidance" className={classes.h2}>
@@ -163,27 +184,6 @@ export function DocPage({ doc }: { doc: ComponentDoc }) {
           </div>
         </section>
       )}
-
-      <section className={classes.section}>
-        <h2 id="usage" className={classes.h2}>
-          Usage
-        </h2>
-        <p className={classes.usageNote}>
-          Every example has a <strong>CSS</strong> tab — that&rsquo;s the real, complete stylesheet
-          for the component. It&rsquo;s plain, static CSS: nothing runs in the browser.
-        </p>
-        <div className={classes.demos}>
-          {doc.demos.map((demo) => (
-            <div key={demo.title} id={slugify(demo.title)} className={classes.demo}>
-              <h3 className={classes.h3}>{demo.title}</h3>
-              {demo.description && <p className={classes.demoDesc}>{demo.description}</p>}
-              <Preview code={demo.code} css={css}>
-                {demo.render()}
-              </Preview>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {doc.props && doc.props.length > 0 && (
         <section className={classes.section}>

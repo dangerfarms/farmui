@@ -154,7 +154,7 @@ function PopoverRoot({
 
   return (
     <PopoverContext value={value}>
-      <span className={cx("fui-Popover-root", className)} {...rest}>
+      <span className={cx("fui-Popover", className)} {...rest}>
         {children}
       </span>
     </PopoverContext>
@@ -269,7 +269,7 @@ function PopoverPopup({
   useEffect(() => {
     if (enhanced || !open) return;
     const onPointer = (e: MouseEvent) => {
-      const root = ref.current?.closest(".fui-Popover-root");
+      const root = ref.current?.closest(".fui-Popover");
       if (root && !root.contains(e.target as Node)) setOpen(false);
     };
     const onKey = (e: KeyboardEvent) => {
@@ -313,7 +313,7 @@ function PopoverTitle({ className, children, ...rest }: PopoverTitleProps) {
   const { registerTitle } = ctx;
   useEffect(() => registerTitle(), [registerTitle]);
   return (
-    <h2 className={cx("fui-Popover-title", className)} id={ctx.titleId} {...rest}>
+    <h2 className={cx("title", className)} id={ctx.titleId} {...rest}>
       {children}
     </h2>
   );
@@ -326,7 +326,7 @@ function PopoverDescription({ className, children, ...rest }: PopoverDescription
   const { registerDescription } = ctx;
   useEffect(() => registerDescription(), [registerDescription]);
   return (
-    <p className={cx("fui-Popover-description", className)} id={ctx.descriptionId} {...rest}>
+    <p className={cx("description", className)} id={ctx.descriptionId} {...rest}>
       {children}
     </p>
   );

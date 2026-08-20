@@ -10,21 +10,24 @@ const doc: ComponentContent = {
       title: "After a failed submit",
       description:
         "Submit the empty form: the summary appears, takes keyboard focus so the problem is announced, and its link moves focus into the field.",
-      code: `{errors.length > 0 && (
-  <ErrorSummary.Root>
-    <ErrorSummary.Title />
-    <ErrorSummary.List>
-      <ErrorSummary.Item href="#email">
-        Enter your email address
-      </ErrorSummary.Item>
-    </ErrorSummary.List>
-  </ErrorSummary.Root>
-)}
-<Field.Root id="email">
-  <Field.Label>Email address</Field.Label>
-  <Input />
-  <Field.Error>{emailError}</Field.Error>
-</Field.Root>`,
+      code: `<form onSubmit={onSubmit}>
+  {errors.length > 0 && (
+    <ErrorSummary.Root>
+      <ErrorSummary.Title />
+      <ErrorSummary.List>
+        <ErrorSummary.Item href="#email">
+          Enter your email address
+        </ErrorSummary.Item>
+      </ErrorSummary.List>
+    </ErrorSummary.Root>
+  )}
+  <Field.Root id="email">
+    <Field.Label>Email address</Field.Label>
+    <Field.Error>{emailError}</Field.Error>
+    <Input />
+  </Field.Root>
+  <Button type="submit">Save and continue</Button>
+</form>`,
       render: () => <ErrorSummaryDemo />,
     },
   ],

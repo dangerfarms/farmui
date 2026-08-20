@@ -55,7 +55,7 @@ function SwitchControl({
         id={id ?? field.id}
         type="checkbox"
         role="switch"
-        className={cx("fui-Switch-input", className)}
+        className={className}
         disabled={disabled}
         {...rest}
         aria-invalid={resolvedAriaInvalid}
@@ -69,8 +69,8 @@ function SwitchControl({
           checkOnInvalid(e);
         }}
       />
-      <span className="fui-Switch-track" aria-hidden>
-        <span className="fui-Switch-thumb" />
+      <span className="track" aria-hidden>
+        <span className="thumb" />
       </span>
     </span>
   );
@@ -120,7 +120,7 @@ export function Switch({
         aria-describedby={descId}
         {...control}
       />
-      <span className="fui-Switch-label">{label}</span>
+      <span className="label">{label}</span>
     </label>
   );
 
@@ -130,7 +130,7 @@ export function Switch({
     <div className={cx("fui-Switch-field", wrapperClassName)} data-disabled={disabled || undefined}>
       {labelRow}
       {description && (
-        <span className="fui-Switch-description" id={descId}>
+        <span className="description" id={descId}>
           {description}
         </span>
       )}

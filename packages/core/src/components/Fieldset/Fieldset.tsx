@@ -21,7 +21,7 @@ export interface FieldsetRootProps extends FieldsetHTMLAttributes<HTMLFieldSetEl
 
 function FieldsetRoot({ className, children, ...rest }: FieldsetRootProps) {
   return (
-    <fieldset className={cx("fui-Fieldset-root", className)} {...rest}>
+    <fieldset className={cx("fui-Fieldset", className)} {...rest}>
       {children}
     </fieldset>
   );
@@ -35,9 +35,9 @@ export interface FieldsetLegendProps extends HTMLAttributes<HTMLLegendElement> {
 
 function FieldsetLegend({ optional, className, children, ...rest }: FieldsetLegendProps) {
   return (
-    <legend className={cx("fui-Fieldset-legend", className)} {...rest}>
+    <legend className={className} {...rest}>
       {children}
-      {optional && <span className="fui-Fieldset-optional"> (optional)</span>}
+      {optional && <span className="optional"> (optional)</span>}
     </legend>
   );
 }

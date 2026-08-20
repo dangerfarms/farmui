@@ -4,23 +4,21 @@
  * props. The one instance-level escape hatch is the public
  * --fui-button-color property (registered in reset.css).
  */
-@scope (.fui-Button-root) {
+@scope (.fui-Button) {
   :scope {
     --_color: var(--fui-button-color, var(--fui-text));
 
-    display: inline flow-root;
-    padding-block: var(--fui-space-sm);
-    padding-inline: var(--fui-space-lg);
+    background: light-dark(
+      color-mix(in oklab, var(--_color), var(--fui-bg) 90%),
+      color-mix(in oklab, var(--_color), var(--fui-bg) 75%)
+    );
 
     /* Tints mix in oklab (cartesian), not oklch: hue interpolation against
        the near-achromatic page background rotates the channel's hue;
        cartesian mixing only desaturates, so the hue survives. */
     border: 1px solid color-mix(in oklab, var(--_color), var(--fui-bg) 80%);
     border-radius: var(--fui-button-radius, var(--fui-radius-md));
-    background: light-dark(
-      color-mix(in oklab, var(--_color), var(--fui-bg) 90%),
-      color-mix(in oklab, var(--_color), var(--fui-bg) 75%)
-    );
+    box-shadow: var(--fui-shadow-raised);
 
     /* Text is the channel's hue mixed for AA on the tint, the same
        recipe as Badge and Alert; raw --_color sat below 4.5:1 on its
@@ -29,48 +27,86 @@
       color-mix(in oklab, var(--_color) 70%, oklch(0% 0 0deg)),
       color-mix(in oklab, var(--_color) 55%, oklch(100% 0 0deg))
     );
+    display: inline flow-root;
     font-size: var(--fui-text-sm);
     font-weight: 600;
     line-height: 1.2;
+    padding-block: var(--fui-space-sm);
+    padding-inline: var(--fui-space-lg);
     text-align: center;
     text-decoration: none;
-    white-space: nowrap;
-    user-select: none;
-
-    /* Identity at rest — the pressed shift transitions both ways. */
-    translate: 0 0;
     transition:
       background var(--fui-duration-sm) var(--fui-ease),
       border-color var(--fui-duration-sm) var(--fui-ease),
-      color var(--fui-duration-sm) var(--fui-ease),
-      box-shadow var(--fui-duration-md) var(--fui-ease),
-      translate var(--fui-duration-md) var(--fui-ease);
+      color var(--fui-duration-sm) var(--fui-ease);
+
+    /* Identity at rest — the pressed shift transitions both ways. */
+    translate: 0 0;
+    user-select: none;
+    white-space: nowrap;
+
+    &:active:not(:disabled) {
+      background: light-dark(
+        color-mix(in oklab, var(--_color), var(--fui-bg) 85%),
+        color-mix(in oklab, var(--_color), var(--fui-bg) 70%)
+      );
+      box-shadow: var(--fui-shadow-sm);
+      color: light-dark(
+        oklch(from var(--_color) calc(l - 0.2) c h),
+        oklch(from var(--_color) calc(l + 0.2) c h)
+      );
+      translate: 0 1px;
+    }
+
+    &:disabled {
+      opacity: var(--fui-disabled-opacity);
+    }
+
+    @media (hover: hover) {
+      &:hover:not(:disabled) {
+        background: light-dark(
+          color-mix(in oklab, var(--_color), var(--fui-bg) 85%),
+          color-mix(in oklab, var(--_color), var(--fui-bg) 70%)
+        );
+        color: light-dark(
+          oklch(from var(--_color) calc(l - 0.2) c h),
+          oklch(from var(--_color) calc(l + 0.2) c h)
+        );
+      }
+    }
+
+    /* The pressed shift and shadow drop are motion — opt-in only. */
+    @media (prefers-reduced-motion: no-preference) {
+      transition:
+        background var(--fui-duration-sm) var(--fui-ease),
+        border-color var(--fui-duration-sm) var(--fui-ease),
+        color var(--fui-duration-sm) var(--fui-ease),
+        box-shadow var(--fui-duration-md) var(--fui-ease),
+        translate var(--fui-duration-md) var(--fui-ease);
+    }
   }
 
-  :scope:hover:not(:disabled),
-  :scope:active:not(:disabled) {
-    background: light-dark(
-      color-mix(in oklab, var(--_color), var(--fui-bg) 85%),
-      color-mix(in oklab, var(--_color), var(--fui-bg) 70%)
-    );
-    color: light-dark(
-      oklch(from var(--_color) calc(l - 0.2) c h),
-      oklch(from var(--_color) calc(l + 0.2) c h)
-    );
+  /* A composed Loader is an icon here: the same detection, layout and 1em
+     sizing (answered through the loader's inherited size hook). */
+  :scope:has(svg, .fui-Loader) {
+    --fui-loader-size: 1em;
+
+    align-items: center;
+    display: inline flex;
+    gap: var(--fui-space-sm);
+    justify-content: center;
+
+    svg {
+      block-size: auto;
+      inline-size: 1em;
+    }
   }
 
-  :scope:active:not(:disabled) {
-    box-shadow: var(--fui-shadow-sm);
-    translate: 0 1px;
-  }
-
-  :scope:focus-visible {
-    outline: var(--fui-ring-width) solid var(--fui-ring-color);
-    outline-offset: 2px;
-  }
-
-  :scope:disabled {
-    opacity: var(--fui-disabled-opacity);
+  /* Icon-only is detected from the accessible name, not DOM shape: an
+     icon-only button MUST carry an aria-label, and `svg:only-child` can't
+     tell "icon + bare text" from "icon alone" (text nodes aren't elements). */
+  :scope[aria-label]:has(svg, .fui-Loader) {
+    padding-inline: var(--fui-space-sm);
   }
 
   /* Context: within a primary region — THE action of the area. */
@@ -111,28 +147,5 @@
     :scope {
       inline-size: 100%;
     }
-  }
-
-  /* A composed Loader is an icon here: the same detection, layout and 1em
-     sizing (answered through the loader's inherited size hook). */
-  :scope:has(svg, .fui-Loader-root) {
-    --fui-loader-size: 1em;
-
-    display: inline flex;
-    gap: var(--fui-space-sm);
-    align-items: center;
-    justify-content: center;
-
-    svg {
-      inline-size: 1em;
-      block-size: auto;
-    }
-  }
-
-  /* Icon-only is detected from the accessible name, not DOM shape: an
-     icon-only button MUST carry an aria-label, and `svg:only-child` can't
-     tell "icon + bare text" from "icon alone" (text nodes aren't elements). */
-  :scope[aria-label]:has(svg, .fui-Loader-root) {
-    padding-inline: var(--fui-space-sm);
   }
 }

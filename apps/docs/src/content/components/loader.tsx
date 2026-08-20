@@ -107,6 +107,15 @@ const doc: ComponentContent = {
     },
   ],
   contextual: true,
+  cssProps: [
+    {
+      name: "--fui-loader-size",
+      syntax: "CSS length",
+      default: "1.5rem",
+      description:
+        "Public sizing hook, read with inheritance: a composing component can size a loader from its own context (Button sets it to 1em for composed spinners).",
+    },
+  ],
 };
 
 export default doc;

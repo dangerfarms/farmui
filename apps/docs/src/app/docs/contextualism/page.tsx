@@ -89,7 +89,7 @@ export default function Contextualism() {
           language="css"
           code={`/* the library reads context like this */
 @container (style(--fui-context: danger)) {
-  .fui-Button-root {
+  .fui-Button {
     --_color: var(--fui-danger);
   }
 }`}
@@ -195,7 +195,7 @@ export default function Contextualism() {
       <div className={prose.block}>
         <CodeBlock
           language="css"
-          code={`.fui-Button-root {
+          code={`.fui-Button {
   --_color: var(--fui-button-color, var(--fui-text));
 
   border: 1px solid color-mix(in oklab, var(--_color), var(--fui-bg) 80%);
@@ -305,7 +305,7 @@ export function BrandButton(props: ButtonProps) {
       <div className={prose.block}>
         <CodeBlock
           language="css"
-          code={`.fui-Button-root:has(svg) {
+          code={`.fui-Button:has(svg) {
   display: inline flex;
   gap: var(--fui-space-sm);
 
@@ -323,12 +323,14 @@ export function BrandButton(props: ButtonProps) {
         <CodeBlock
           language="css"
           code={`/* the label tints when an error is present */
-.fui-Field-root:has(.fui-Field-error) .fui-Field-label {
-  color: var(--fui-danger);
+@scope (.fui-Field:has(> p.error)) to ([class*="fui-"]) {
+  label {
+    color: var(--fui-danger);
+  }
 }
 
 /* the box keys off the control's own accessibility state */
-.fui-Input-field:has(.fui-Input-input[aria-invalid="true"]) {
+.fui-Input-field:has(input[aria-invalid="true"]) {
   border-color: var(--fui-danger);
 }`}
         />
@@ -363,13 +365,14 @@ export function BrandButton(props: ButtonProps) {
 
       <h2>Browser support</h2>
       <p>
-        Container style queries ship in Chromium (111+) and Safari (18+); Firefox has not yet
-        shipped them. In older browsers, contexts degrade to the neutral defaults: everything stays
-        functional and accessible; per our{" "}
+        Everything contextualism uses is Baseline. Container style queries — the mechanism behind{" "}
+        <code>--fui-context</code> — became Baseline Newly Available in May 2026, when the last
+        engine shipped them. Container size queries, <code>:has()</code> and{" "}
+        <code>color-mix()</code> are Baseline Widely Available; relative colour syntax has been
+        Newly Available since 2024. In a browser that predates a feature, contexts degrade to the
+        neutral defaults — everything stays functional and accessible — and per our{" "}
         <a href="https://github.com/dangerfarms/farmui/blob/main/CONTRIBUTING.md">browser policy</a>{" "}
-        there are no polyfills. <code>:has()</code>, <code>color-mix()</code> and container size
-        queries are Baseline Widely Available; relative colour is Newly Available (in every engine
-        since mid-2024).
+        there are no polyfills.
       </p>
     </div>
   );

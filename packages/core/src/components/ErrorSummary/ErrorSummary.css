@@ -1,24 +1,28 @@
-@scope (.fui-ErrorSummary-root) {
+@scope (.fui-ErrorSummary) {
   :scope {
-    padding: var(--fui-space-lg);
+    background: var(--fui-danger-soft);
     border: 2px solid var(--fui-danger);
     border-radius: var(--fui-radius-md);
-    background: var(--fui-danger-soft);
+    padding: var(--fui-space-lg);
+
+    &:focus-visible {
+      outline: var(--fui-ring-width) solid var(--fui-danger-ring);
+      outline-offset: 2px;
+    }
   }
 
-  :scope:focus-visible {
-    outline: var(--fui-ring-width) solid var(--fui-danger-ring);
-    outline-offset: 2px;
-  }
-
-  .fui-ErrorSummary-title {
-    margin: 0;
+  h2 {
     font-size: var(--fui-text-md);
     font-weight: 700;
+    margin: 0;
     text-wrap: balance;
   }
 
-  .fui-ErrorSummary-list {
+  li {
+    margin-block: 0;
+  }
+
+  ul {
     display: block flex;
     flex-direction: column;
     gap: var(--fui-space-xs);
@@ -27,7 +31,7 @@
     padding-inline-start: var(--fui-space-lg);
   }
 
-  .fui-ErrorSummary-item a {
+  a {
     color: light-dark(
       color-mix(in oklab, var(--fui-danger) 70%, oklch(0% 0 0deg)),
       color-mix(in oklab, var(--fui-danger) 55%, oklch(100% 0 0deg))

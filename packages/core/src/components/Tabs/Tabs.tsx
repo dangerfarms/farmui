@@ -93,7 +93,7 @@ function TabsBase({
 
   return (
     <TabsContext value={ctx}>
-      <div className={cx("fui-Tabs-root", className)} {...rest}>
+      <div className={cx("fui-Tabs", className)} {...rest}>
         {children}
       </div>
     </TabsContext>
@@ -163,9 +163,10 @@ export function TabsTab({ value, disabled, className, children, onClick, ...rest
       id={`${baseId}-tab-${value}`}
       aria-selected={selected}
       aria-controls={`${baseId}-panel-${value}`}
-      tabIndex={selected ? 0 : -1}
+      // With no selection there is no roving stop — every tab stays tabbable.
+      tabIndex={selected || active == null ? 0 : -1}
       disabled={disabled}
-      className={cx("fui-Tabs-tab", className)}
+      className={cx("tab", className)}
       data-active={selected || undefined}
       onClick={(event) => {
         onClick?.(event);
@@ -210,7 +211,7 @@ export function TabsPanel({ value, className, children, ...rest }: TabsPanelProp
       aria-labelledby={`${baseId}-tab-${value}`}
       hidden={untilFound ? undefined : !selected}
       tabIndex={0}
-      className={cx("fui-Tabs-panel", className)}
+      className={cx("panel", className)}
       {...rest}
     >
       {children}

@@ -1,51 +1,47 @@
 .footer {
-  margin-block-start: 6rem;
-  border-block-start: 1px solid var(--fui-border);
   background: var(--fui-bg-subtle);
+  border-block-start: 1px solid var(--fui-border);
+  margin-block-start: 6rem;
   padding-block: 3.5rem 2rem;
 }
 
 .inner {
   display: block grid;
-  grid-template-columns: 1.4fr 2fr;
   gap: 3rem;
-}
+  grid-template-columns: 1.4fr 2fr;
 
-@media (width <= 52rem) {
-  .inner {
-    grid-template-columns: 1fr;
+  @media (width <= 52rem) {
     gap: 2.5rem;
+    grid-template-columns: 1fr;
   }
 }
 
 .tagline {
-  margin-block: 0.9rem 1.1rem;
-  max-inline-size: 22rem;
   color: var(--fui-text-muted);
   font-size: var(--fui-text-sm);
+  margin-block: 0.9rem 1.1rem;
+  max-inline-size: 22rem;
 }
 
 .gh {
-  display: inline flex;
   align-items: center;
-  gap: 0.45rem;
+  color: var(--fui-text);
+  display: inline flex;
   font-size: var(--fui-text-sm);
   font-weight: 600;
-  color: var(--fui-text);
-}
+  gap: 0.45rem;
 
-.gh:hover {
-  color: var(--fui-primary);
+  &:hover {
+    color: var(--fui-primary);
+  }
 }
 
 .cols {
   display: block grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
-}
+  grid-template-columns: repeat(3, 1fr);
 
-@media (width <= 34rem) {
-  .cols {
+  @media (width <= 34rem) {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -57,32 +53,32 @@
 }
 
 .col ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
   display: block flex;
   flex-direction: column;
   gap: 0.55rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .col a {
-  font-size: var(--fui-text-sm);
   color: var(--fui-text-muted);
+  font-size: var(--fui-text-sm);
   transition: color var(--fui-duration-md) var(--fui-ease);
-}
 
-.col a:hover {
-  color: var(--fui-primary);
+  &:hover {
+    color: var(--fui-primary);
+  }
 }
 
 .bottom {
+  border-block-start: 1px solid var(--fui-border);
+  color: var(--fui-text-dim);
   display: block flex;
-  justify-content: space-between;
-  gap: 1rem;
   flex-wrap: wrap;
+  font-size: var(--fui-text-sm);
+  gap: 1rem;
+  justify-content: space-between;
   margin-block-start: 3rem;
   padding-block-start: 1.5rem;
-  border-block-start: 1px solid var(--fui-border);
-  font-size: var(--fui-text-sm);
-  color: var(--fui-text-dim);
 }

@@ -47,18 +47,18 @@ export function Progress({
       aria-valuenow={rounded}
       aria-valuemin={0}
       aria-valuemax={100}
-      className={cx("fui-Progress-root", className)}
+      className={cx("fui-Progress", className)}
       data-size={size}
       style={style}
       {...rest}
     >
       <div
-        className="fui-Progress-bar"
+        className="bar"
         data-striped={showStripes || undefined}
         data-animated={animated || undefined}
         style={{ inlineSize: `${pct}%` }}
       >
-        {label && rounded >= 8 && <span className="fui-Progress-label">{rounded}%</span>}
+        {label && rounded >= 8 && <span className="label">{rounded}%</span>}
       </div>
     </div>
   );

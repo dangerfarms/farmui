@@ -1,15 +1,14 @@
 /**
  * FarmUI — design tokens (the `farmui.tokens` layer).
  * Components reference tokens, never raw values, so theming is token
- * remapping at any scope. Bands: primitives → semantic colour →
- * interaction & scales.
+ * remapping at any scope. Bands: inputs → neutrals → derived → scales.
+ * There are no raw colour primitives on this surface: the inputs ARE the
+ * palette, and everything else is derived from them.
  */
 
 @layer farmui.tokens {
   :root {
-    color-scheme: light dark;
-
-    /* ── 1. Primitives ─────────────────────────────────────────────── */
+    /* ── 1. Inputs — the decisions a theme makes ───────────────────── */
 
     /* Font stacks */
     --fui-font:
@@ -18,29 +17,69 @@
     --fui-font-mono:
       ui-monospace, "SF Mono", "JetBrains Mono", menlo, consolas, monospace;
 
-    /* Brand scale — green, in OKLCH for perceptual evenness */
-    --fui-green-50: oklch(97% 0.03 152deg);
-    --fui-green-100: oklch(94% 0.06 152deg);
-    --fui-green-200: oklch(89% 0.1 152deg);
-    --fui-green-300: oklch(83% 0.14 151deg);
-    --fui-green-400: oklch(76% 0.16 150deg);
-    --fui-green-500: oklch(68% 0.16 149deg);
-    --fui-green-600: oklch(60% 0.15 148deg);
-    --fui-green-700: oklch(50% 0.12 148deg);
-    --fui-green-800: oklch(42% 0.1 149deg);
-    --fui-green-900: oklch(35% 0.08 150deg);
+    /* The brand — remap this one line to rebrand the whole library; the
+       soft tint, solid fill and focus ring all derive from it. */
+    --fui-primary: oklch(60% 0.15 148deg);
 
-    /* ── 2. Semantic colour — theme-aware via light-dark() ─────────── */
+    /* Status hues. Each derives the same family as primary (soft, strong,
+       ring), so a context region can remap the family wholesale. Success
+       aliases primary. */
+    --fui-danger: light-dark(oklch(58% 0.2 25deg), oklch(66% 0.19 25deg));
+    --fui-warning: light-dark(oklch(72% 0.16 75deg), oklch(79% 0.15 80deg));
+    --fui-info: light-dark(oklch(58% 0.16 245deg), oklch(68% 0.15 245deg));
+    --fui-success: var(--fui-primary);
 
-    /* Primary (brand) — remap these two lines (the colour and its soft
-       tint) to rebrand the whole library; everything else derives. */
-    --fui-primary: var(--fui-green-600);
-    --fui-primary-soft: light-dark(var(--fui-green-50), oklch(30% 0.06 150deg));
+    /* ── 2. Neutrals ───────────────────────────────────────────────── */
+
+    --fui-bg: light-dark(oklch(100% 0 0deg), oklch(17% 0.008 160deg));
+    --fui-bg-subtle: light-dark(
+      oklch(98% 0.004 160deg),
+      oklch(21% 0.008 160deg)
+    );
+    --fui-surface: light-dark(oklch(100% 0 0deg), oklch(23% 0.008 160deg));
+    --fui-text: light-dark(oklch(24% 0.02 160deg), oklch(96% 0.006 160deg));
+    --fui-text-strong: light-dark(oklch(15% 0.02 160deg), oklch(99% 0 0deg));
+    --fui-text-muted: light-dark(
+      oklch(52% 0.02 160deg),
+      oklch(72% 0.015 160deg)
+    );
+    --fui-text-dim: light-dark(
+      oklch(55% 0.015 160deg),
+      oklch(66% 0.012 160deg)
+    );
+    --fui-border: light-dark(oklch(91% 0.006 160deg), oklch(32% 0.01 160deg));
+    --fui-border-strong: light-dark(
+      oklch(62% 0.012 160deg),
+      oklch(60% 0.014 160deg)
+    );
 
     /* The one foreground that reads on every solid status fill: near-white
        in light (where the fills darken), near-black in dark (where the
        fills stay raw) — the only pairing all statuses hold AA with. */
     --fui-on-strong: light-dark(oklch(99% 0 0deg), oklch(17% 0.01 160deg));
+
+    /* ── 3. Derived — recipes, never hand-tuned per status ─────────── */
+
+    /* Soft tints: pinned lightness and chroma, the status's own hue —
+       relative colour keeps every soft on one recipe, so a rebrand or a
+       new status derives its tint for free. */
+    --fui-primary-soft: light-dark(
+      oklch(from var(--fui-primary) 96% 0.035 h),
+      oklch(from var(--fui-primary) 31% 0.075 h)
+    );
+    --fui-danger-soft: light-dark(
+      oklch(from var(--fui-danger) 96% 0.035 h),
+      oklch(from var(--fui-danger) 31% 0.075 h)
+    );
+    --fui-warning-soft: light-dark(
+      oklch(from var(--fui-warning) 96% 0.035 h),
+      oklch(from var(--fui-warning) 31% 0.075 h)
+    );
+    --fui-info-soft: light-dark(
+      oklch(from var(--fui-info) 96% 0.035 h),
+      oklch(from var(--fui-info) 31% 0.075 h)
+    );
+    --fui-success-soft: var(--fui-primary-soft);
 
     /* Solid-fill variants: AA for --fui-on-strong. In light the status
        darkens 22%; in dark the raw status already carries dark text.
@@ -62,65 +101,31 @@
       var(--fui-info)
     );
     --fui-success-strong: var(--fui-primary-strong);
+
+    /* Status focus rings alias the solid fills — one audited family covers
+       both jobs, and an opaque ring holds its contrast on any surface. */
     --fui-primary-ring: var(--fui-primary-strong);
+    --fui-danger-ring: var(--fui-danger-strong);
+    --fui-success-ring: var(--fui-success-strong);
+    --fui-warning-ring: var(--fui-warning-strong);
+    --fui-info-ring: var(--fui-info-strong);
 
-    /* Each status carries the same derived family as primary (base, hover,
-       active, soft, ring) so a context region can remap the family
-       wholesale. Success aliases primary. */
-    --fui-danger: light-dark(oklch(58% 0.2 25deg), oklch(66% 0.19 25deg));
-    --fui-danger-soft: light-dark(oklch(96% 0.03 25deg), oklch(32% 0.09 25deg));
-    --fui-warning: light-dark(oklch(72% 0.16 75deg), oklch(79% 0.15 80deg));
-    --fui-warning-soft: light-dark(
-      oklch(96% 0.05 85deg),
-      oklch(34% 0.07 75deg)
-    );
-    --fui-info: light-dark(oklch(58% 0.16 245deg), oklch(68% 0.15 245deg));
-    --fui-info-soft: light-dark(oklch(96% 0.03 245deg), oklch(32% 0.08 250deg));
-    --fui-success: var(--fui-primary);
-    --fui-success-soft: var(--fui-primary-soft);
-
-    /* Surfaces & text */
-    --fui-bg: light-dark(oklch(100% 0 0deg), oklch(17% 0.008 160deg));
-    --fui-bg-subtle: light-dark(
-      oklch(98% 0.004 160deg),
-      oklch(21% 0.008 160deg)
-    );
-    --fui-surface: light-dark(oklch(100% 0 0deg), oklch(23% 0.008 160deg));
+    /* Hover lift for surfaces: derived, so a re-themed surface keeps its
+       own hover for free. */
     --fui-surface-hover: light-dark(
-      oklch(97% 0.005 160deg),
-      oklch(27% 0.01 160deg)
+      oklch(from var(--fui-surface) 97% c h),
+      oklch(from var(--fui-surface) 27% c h)
     );
-    --fui-text: light-dark(oklch(24% 0.02 160deg), oklch(96% 0.006 160deg));
-    --fui-text-muted: light-dark(
-      oklch(52% 0.02 160deg),
-      oklch(72% 0.015 160deg)
-    );
-    --fui-text-dim: light-dark(
-      oklch(55% 0.015 160deg),
-      oklch(66% 0.012 160deg)
-    );
-    --fui-border: light-dark(oklch(91% 0.006 160deg), oklch(32% 0.01 160deg));
-    --fui-border-strong: light-dark(
-      oklch(62% 0.012 160deg),
-      oklch(60% 0.014 160deg)
-    );
-
-    /* ── 3. Interaction & scales ───────────────────────────────────── */
 
     /* Focus ring — geometry set once; remap --fui-ring-color contextually
        (e.g. fields with a detected error switch it to the danger ring). */
     --fui-ring-width: 3px;
     --fui-ring-color: var(--fui-primary-ring);
 
-    /* Status focus rings alias the solid fills — one audited family covers
-       both jobs, and an opaque ring holds its contrast on any surface. */
-    --fui-danger-ring: var(--fui-danger-strong);
-    --fui-success-ring: var(--fui-success-strong);
-    --fui-warning-ring: var(--fui-warning-strong);
-    --fui-info-ring: var(--fui-info-strong);
-
     /* Disabled controls — components may remap locally. */
     --fui-disabled-opacity: 0.55;
+
+    /* ── 4. Scales ─────────────────────────────────────────────────── */
 
     /* Fluid type scale — cqi falls back to the small viewport where no
        container is declared. Regenerate, don't hand-edit:
@@ -153,6 +158,15 @@
     /* Elevation — softer & tinted in dark */
     --fui-shadow-sm: 0 1px 2px
       light-dark(oklch(20% 0.02 160deg / 8%), oklch(0% 0 0deg / 40%));
+
+    /* Raised affordance for pressable things: an inset top highlight plus
+       soft drops. The drops go transparent in dark, where the highlight
+       alone carries the bevel — pressing reduces to --fui-shadow-sm. */
+    --fui-shadow-raised:
+      inset 0 1px 0 0 oklch(100% 0 0deg / 25%),
+      0 1px 2px light-dark(oklch(20% 0.02 160deg / 10%), oklch(0% 0 0deg / 0%)),
+      0 2px 4px light-dark(oklch(20% 0.02 160deg / 7%), oklch(0% 0 0deg / 0%)),
+      0 4px 8px light-dark(oklch(20% 0.02 160deg / 4%), oklch(0% 0 0deg / 0%));
     --fui-shadow-md:
       0 4px 6px -1px
         light-dark(oklch(20% 0.02 160deg / 10%), oklch(0% 0 0deg / 45%)),
@@ -171,6 +185,8 @@
     --fui-duration-lg: 300ms;
     --fui-ease: cubic-bezier(0.4, 0, 0.2, 1);
     --fui-ease-elastic: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    color-scheme: light dark;
 
     /* No control-sizing tokens: inputs and buttons align by a shared derived
        anatomy (padding-block --fui-space-sm + --fui-text-sm × 1.2 + 1px

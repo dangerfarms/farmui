@@ -1,8 +1,11 @@
 /*
  * Field — parts are targeted from within the @scope; the root keeps a
  * `fui-` class so the scope root is unambiguous and app styles can find it.
+ * The scope stops at any nested fui-classed element: the field hosts
+ * controls it doesn't own (a Checkbox has its own label), and the donut
+ * keeps these type selectors on the field's own parts only.
  */
-@scope (.fui-Field-root) {
+@scope (.fui-Field) to ([class*="fui-"]) {
   :scope {
     display: block flex;
     flex-direction: column;
@@ -10,29 +13,29 @@
     inline-size: 100%;
   }
 
-  .fui-Field-label {
-    display: block flex;
-    gap: var(--fui-space-sm);
+  label {
     align-items: center;
+    display: block flex;
     font-size: var(--fui-text-sm);
     font-weight: 500;
+    gap: var(--fui-space-sm);
   }
 
-  .fui-Field-optional {
+  span.optional {
+    color: var(--fui-text-muted);
     font-weight: 400;
-    color: var(--fui-text-muted);
   }
 
-  .fui-Field-description {
-    margin: 0;
-    font-size: var(--fui-text-sm);
+  p.description {
     color: var(--fui-text-muted);
+    font-size: var(--fui-text-sm);
+    margin: 0;
   }
 
-  .fui-Field-error {
-    margin: 0;
-    font-size: var(--fui-text-sm);
+  p.error {
     color: var(--fui-danger);
+    font-size: var(--fui-text-sm);
+    margin: 0;
   }
 }
 
@@ -41,23 +44,14 @@
    out of context. Self-scoped; shared by every error renderer. */
 @scope (.fui-Error-prefix) {
   :scope {
-    position: absolute;
-    inline-size: 1px;
     block-size: 1px;
-    margin: -1px;
-    padding: 0;
     border: 0;
-    overflow: clip;
     clip-path: inset(50%);
+    inline-size: 1px;
+    margin: -1px;
+    overflow: clip;
+    padding: 0;
+    position: absolute;
     white-space: nowrap;
-  }
-}
-
-/* Error state is detected, not declared: a field is invalid when it
-   contains a rendered error message, or when the platform says so
-   (:user-invalid after user interaction). */
-@scope (.fui-Field-root:has(.fui-Field-error, :user-invalid, [aria-invalid="true"])) {
-  .fui-Field-label {
-    color: var(--fui-danger);
   }
 }

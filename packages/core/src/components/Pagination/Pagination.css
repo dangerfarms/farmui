@@ -1,4 +1,4 @@
-@scope (.fui-Pagination-root) {
+@scope (.fui-Pagination) {
   :scope {
     /* Derived control height (the Button anatomy, incl. 1px borders) —
        keeps square min-width and the dots cell in step with the pages. */
@@ -7,79 +7,99 @@
     );
   }
 
-  .fui-Pagination-list {
-    display: block flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--fui-space-xs);
-    margin: 0;
-    padding: 0;
-    list-style: none;
+  li {
+    margin-block: 0;
   }
 
-  .fui-Pagination-page,
-  .fui-Pagination-control {
-    display: inline flex;
+  ul {
     align-items: center;
-    justify-content: center;
-    min-inline-size: var(--_control-h);
-    padding-block: var(--fui-space-sm);
-    padding-inline: var(--fui-space-sm);
-    border: 1px solid var(--fui-border);
+    display: block flex;
+    flex-wrap: wrap;
+    gap: var(--fui-space-xs);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* The Button base recipe on the neutral text channel — the contrast
+     audit reads these weights and asserts they match Button.css. */
+  button {
+    align-items: center;
+    background: light-dark(
+      color-mix(in oklab, var(--fui-text), var(--fui-bg) 90%),
+      color-mix(in oklab, var(--fui-text), var(--fui-bg) 75%)
+    );
+    border: 1px solid color-mix(in oklab, var(--fui-text), var(--fui-bg) 80%);
     border-radius: var(--fui-radius-md);
-    background: var(--fui-surface);
+    box-shadow: var(--fui-shadow-raised);
+    color: light-dark(
+      color-mix(in oklab, var(--fui-text) 70%, oklch(0% 0 0deg)),
+      color-mix(in oklab, var(--fui-text) 55%, oklch(100% 0 0deg))
+    );
+    display: inline flex;
     font-family: inherit;
     font-size: var(--fui-text-sm);
     font-weight: 600;
+    justify-content: center;
     line-height: 1.2;
+    min-inline-size: var(--_control-h);
+    padding-block: var(--fui-space-sm);
+    padding-inline: var(--fui-space-sm);
     transition:
       background var(--fui-duration-sm) var(--fui-ease),
       border-color var(--fui-duration-sm) var(--fui-ease),
       color var(--fui-duration-sm) var(--fui-ease),
       box-shadow var(--fui-duration-md) var(--fui-ease);
+
+    &:active:not([data-active], [aria-disabled="true"]) {
+      box-shadow: var(--fui-shadow-sm);
+    }
+
+    &[data-active] {
+      background: var(--fui-primary-strong);
+      border-color: var(--fui-primary);
+      color: var(--fui-on-strong);
+      cursor: default;
+    }
+
+    &[aria-disabled="true"] {
+      color: var(--fui-text-dim);
+      opacity: 0.45;
+    }
+
+    :where(svg) {
+      block-size: 1.125em;
+      inline-size: 1.125em;
+    }
+
+    @media (hover: hover) {
+      &:hover:not([data-active], [aria-disabled="true"]) {
+        background: light-dark(
+          color-mix(in oklab, var(--fui-text), var(--fui-bg) 85%),
+          color-mix(in oklab, var(--fui-text), var(--fui-bg) 70%)
+        );
+      }
+    }
   }
 
-  .fui-Pagination-page:hover:not([data-active]),
-  .fui-Pagination-control:hover:not(:disabled) {
-    background: var(--fui-surface-hover);
-    border-color: var(--fui-border-strong);
-  }
-
-  .fui-Pagination-page[data-active] {
-    background: var(--fui-primary-strong);
-    border-color: var(--fui-primary);
-    color: var(--fui-on-strong);
-    cursor: default;
-  }
-
-  .fui-Pagination-control:disabled {
-    opacity: 0.45;
-    color: var(--fui-text-dim);
-  }
-
-  .fui-Pagination-control :where(svg) {
-    inline-size: 1.125em;
-    block-size: 1.125em;
-  }
-
-  .fui-Pagination-dots {
-    display: inline flex;
+  span.dots {
     align-items: center;
-    justify-content: center;
-    min-inline-size: var(--_control-h);
     block-size: var(--_control-h);
     color: var(--fui-text-dim);
+    display: inline flex;
+    justify-content: center;
+    min-inline-size: var(--_control-h);
     user-select: none;
   }
 
   /* Forced colors: the active page's brand fill is stripped, leaving it
      identical to its neighbours. */
   @media (forced-colors: active) {
-    .fui-Pagination-page[data-active] {
-      forced-color-adjust: none;
+    button[data-active] {
       background: Highlight;
       border-color: Highlight;
       color: HighlightText;
+      forced-color-adjust: none;
     }
   }
 }

@@ -1,73 +1,72 @@
-@scope (.fui-Tooltip-root) {
+@scope (.fui-Tooltip) {
   :scope {
-    position: relative;
     display: inline flow-root;
+    position: relative;
   }
 }
 
 /* The bubble escapes into the top layer when enhanced, so it carries its
    own scope. */
-@scope (.fui-Tooltip-popup) {
+@scope (.fui-Tooltip-popup) to ([class*="fui-"]) {
   :scope {
     --_gap: var(--fui-space-xs);
     --_arrow: 0.3125rem;
 
+    background: var(--fui-text);
+    border: 0;
+    border-radius: var(--fui-radius-sm);
+    box-shadow: var(--fui-shadow-md);
+    color: var(--fui-bg);
+    font-size: var(--fui-text-xs);
     inline-size: max-content;
-    max-inline-size: 16rem;
     margin: 0;
+    max-inline-size: 16rem;
 
     /* The UA gives [popover] `overflow: auto`, which would clip the arrow
        poking outside the bubble. Tooltips never scroll. */
     overflow: visible;
     padding-block: var(--fui-space-xs);
     padding-inline: var(--fui-space-sm);
-    border: 0;
-    border-radius: var(--fui-radius-sm);
-    background: var(--fui-text);
-    color: var(--fui-bg);
-    font-size: var(--fui-text-xs);
     text-align: center;
     white-space: normal;
-    box-shadow: var(--fui-shadow-md);
 
     /* Enhanced: top layer + anchor positioning. position-anchor /
        anchor-name are set from inline styles with a per-instance name
        shared by Trigger and Popup. */
     @supports (anchor-name: --fui-probe) {
-      position: fixed;
+      /* stylelint-disable-next-line declaration-property-value-no-unknown --
+         lets the arrow query which position-try fallback applied (Chrome
+         143+; inert elsewhere); stylelint's CSS data doesn't know the
+         value yet. */
+      container-type: anchored;
 
       /* The UA gives [popover] `inset: 0`; clear it so only the insets each
          branch sets take part, otherwise the box is over-constrained. */
       inset: auto;
-
-      /* Lets the arrow query which position-try fallback actually applied
-         (Chrome 143+; the declaration is inert elsewhere). Stylelint's CSS
-         data doesn't know the value yet. */
-      /* stylelint-disable-next-line declaration-property-value-no-unknown */
-      container-type: anchored;
+      position: fixed;
 
       &[data-position="top"] {
-        position-try: flip-block;
         inset-block-end: calc(anchor(start) + var(--_gap));
         justify-self: anchor-center;
+        position-try: flip-block;
       }
 
       &[data-position="bottom"] {
-        position-try: flip-block;
         inset-block-start: calc(anchor(end) + var(--_gap));
         justify-self: anchor-center;
+        position-try: flip-block;
       }
 
       &[data-position="left"] {
-        position-try: flip-inline;
-        inset-inline-end: calc(anchor(start) + var(--_gap));
         align-self: anchor-center;
+        inset-inline-end: calc(anchor(start) + var(--_gap));
+        position-try: flip-inline;
       }
 
       &[data-position="right"] {
-        position-try: flip-inline;
-        inset-inline-start: calc(anchor(end) + var(--_gap));
         align-self: anchor-center;
+        inset-inline-start: calc(anchor(end) + var(--_gap));
+        position-try: flip-inline;
       }
 
       @media (prefers-reduced-motion: no-preference) {
@@ -79,13 +78,13 @@
           display var(--fui-duration-lg) var(--fui-ease) allow-discrete,
           overlay var(--fui-duration-lg) var(--fui-ease) allow-discrete;
 
-        @starting-style {
+        /* Exit: transition back to the closed state (see Modal). */
+        &:not(:popover-open) {
           opacity: 0;
           scale: 0.96;
         }
 
-        /* Exit: transition back to the closed state (see Modal). */
-        &:not(:popover-open) {
+        @starting-style {
           opacity: 0;
           scale: 0.96;
         }
@@ -126,48 +125,48 @@
       }
 
       &[data-position="left"] {
-        inset-inline-end: calc(100% + var(--_gap));
         inset-block-start: 50%;
+        inset-inline-end: calc(100% + var(--_gap));
         translate: 0 -50%;
       }
 
       &[data-position="right"] {
-        inset-inline-start: calc(100% + var(--_gap));
         inset-block-start: 50%;
+        inset-inline-start: calc(100% + var(--_gap));
         translate: 0 -50%;
       }
     }
   }
 
   /* Arrow — points back toward the trigger for the requested side. */
-  .fui-Tooltip-arrow {
-    position: absolute;
-    inline-size: 0;
+  span.arrow {
     block-size: 0;
     border: var(--_arrow) solid transparent;
+    inline-size: 0;
+    position: absolute;
 
     :scope[data-position="top"] & {
+      border-block-start-color: var(--fui-text);
       inset-block-start: 100%;
       inset-inline-start: calc(50% - var(--_arrow));
-      border-block-start-color: var(--fui-text);
     }
 
     :scope[data-position="bottom"] & {
+      border-block-end-color: var(--fui-text);
       inset-block-end: 100%;
       inset-inline-start: calc(50% - var(--_arrow));
-      border-block-end-color: var(--fui-text);
     }
 
     :scope[data-position="left"] & {
-      inset-inline-start: 100%;
-      inset-block-start: calc(50% - var(--_arrow));
       border-inline-start-color: var(--fui-text);
+      inset-block-start: calc(50% - var(--_arrow));
+      inset-inline-start: 100%;
     }
 
     :scope[data-position="right"] & {
-      inset-inline-end: 100%;
-      inset-block-start: calc(50% - var(--_arrow));
       border-inline-end-color: var(--fui-text);
+      inset-block-start: calc(50% - var(--_arrow));
+      inset-inline-end: 100%;
     }
 
     /* When position-try flipped the bubble, the arrow follows: it moves to
@@ -177,29 +176,29 @@
        them keep the requested-side arrow. */
     @container anchored(fallback: flip-block) {
       :scope[data-position="top"] & {
-        inset-block: auto 100%;
-        border-block-start-color: transparent;
         border-block-end-color: var(--fui-text);
+        border-block-start-color: transparent;
+        inset-block: auto 100%;
       }
 
       :scope[data-position="bottom"] & {
-        inset-block: 100% auto;
         border-block-end-color: transparent;
         border-block-start-color: var(--fui-text);
+        inset-block: 100% auto;
       }
     }
 
     @container anchored(fallback: flip-inline) {
       :scope[data-position="left"] & {
-        inset-inline: auto 100%;
-        border-inline-start-color: transparent;
         border-inline-end-color: var(--fui-text);
+        border-inline-start-color: transparent;
+        inset-inline: auto 100%;
       }
 
       :scope[data-position="right"] & {
-        inset-inline: 100% auto;
         border-inline-end-color: transparent;
         border-inline-start-color: var(--fui-text);
+        inset-inline: 100% auto;
       }
     }
   }

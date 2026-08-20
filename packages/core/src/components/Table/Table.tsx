@@ -29,11 +29,12 @@ export function Table({
   ref,
   ...rest
 }: TableProps) {
+  // The wrapper is focusable so keyboard users can scroll a wide table.
   return (
-    <div className="fui-Table-scroll">
+    <div className="fui-Table-scroll" role="region" aria-label="Scrollable table" tabIndex={0}>
       <table
         ref={ref}
-        className={cx("fui-Table-root", className)}
+        className={cx("fui-Table", className)}
         data-striped={striped || undefined}
         data-hover={highlightOnHover || undefined}
         data-col-borders={withColumnBorders || undefined}

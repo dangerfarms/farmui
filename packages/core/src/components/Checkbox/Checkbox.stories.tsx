@@ -40,8 +40,8 @@ export const WithDescription: Story = {
 export const WithError: Story = {
   render: (args) => (
     <Field.Root>
-      <Checkbox {...args} label="I accept the terms and conditions" />
       <Field.Error>You must accept the terms to continue.</Field.Error>
+      <Checkbox {...args} label="I accept the terms and conditions" />
     </Field.Root>
   ),
 };

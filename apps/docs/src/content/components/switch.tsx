@@ -9,14 +9,14 @@ const doc: ComponentContent = {
   demos: [
     {
       title: "Basic usage",
-      code: `<Switch aria-label="Toggle" />`,
-      render: () => <Switch aria-label="Toggle" />,
+      code: `<Switch aria-label="Email notifications" />`,
+      render: () => <Switch aria-label="Email notifications" />,
     },
     {
       title: "Checked",
       description: "The track fills with the primary colour when on.",
-      code: `<Switch defaultChecked aria-label="Toggle on" />`,
-      render: () => <Switch defaultChecked aria-label="Toggle on" />,
+      code: `<Switch defaultChecked aria-label="Autosave" />`,
+      render: () => <Switch defaultChecked aria-label="Autosave" />,
     },
     {
       title: "With label",

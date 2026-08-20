@@ -14,7 +14,7 @@ import dateinput from "@/content/components/date-input";
 import errorsummary from "@/content/components/error-summary";
 import radio from "@/content/components/radio";
 import switchDoc from "@/content/components/switch";
-import slider from "@/content/components/slider";
+import range from "@/content/components/range";
 
 // Data display
 import badge from "@/content/components/badge";
@@ -38,7 +38,9 @@ import menu from "@/content/components/menu";
 
 // Navigation
 import tabs from "@/content/components/tabs";
-import accordion from "@/content/components/accordion";
+import details from "@/content/components/details";
+import signpostLink from "@/content/components/signpost-link";
+import skipLink from "@/content/components/skip-link";
 import breadcrumbs from "@/content/components/breadcrumbs";
 import pagination from "@/content/components/pagination";
 
@@ -58,7 +60,7 @@ const content: ComponentContent[] = [
   errorsummary,
   radio,
   switchDoc,
-  slider,
+  range,
   badge,
   card,
   avatar,
@@ -74,7 +76,9 @@ const content: ComponentContent[] = [
   popover,
   menu,
   tabs,
-  accordion,
+  details,
+  signpostLink,
+  skipLink,
   breadcrumbs,
   pagination,
 ];

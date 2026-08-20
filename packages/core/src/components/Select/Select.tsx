@@ -1,7 +1,6 @@
 "use client";
 
 import type { Ref, SelectHTMLAttributes } from "react";
-import { cx } from "../../utils";
 import { useFieldControlProps } from "../Field/Field";
 import { useUserInvalid } from "../../use-user-invalid";
 
@@ -43,7 +42,7 @@ export function Select({
     <div className="fui-Select-field" data-disabled={disabled || undefined} style={style}>
       <select
         ref={ref}
-        className={cx("fui-Select-select", className)}
+        className={className}
         disabled={disabled}
         value={value}
         defaultValue={resolvedDefault}
@@ -67,14 +66,7 @@ export function Select({
         )}
         {children}
       </select>
-      <svg
-        className="fui-Select-chevron"
-        viewBox="0 0 16 16"
-        width="16"
-        height="16"
-        fill="none"
-        aria-hidden
-      >
+      <svg className="chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden>
         <path
           d="M4 6l4 4 4-4"
           stroke="currentColor"

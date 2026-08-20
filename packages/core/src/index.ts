@@ -15,7 +15,7 @@ export * from "./components/DateInput/index";
 export * from "./components/ErrorSummary/index";
 export * from "./components/Radio/index";
 export * from "./components/Switch/index";
-export * from "./components/Slider/index";
+export * from "./components/Range/index";
 
 // Data display
 export * from "./components/Badge/index";
@@ -40,7 +40,9 @@ export * from "./components/Menu/index";
 
 // Navigation
 export * from "./components/Tabs/index";
-export * from "./components/Accordion/index";
+export * from "./components/Details/index";
+export * from "./components/SignpostLink/index";
+export * from "./components/SkipLink/index";
 export * from "./components/Breadcrumbs/index";
 export * from "./components/Pagination/index";
 

@@ -23,8 +23,8 @@ export function ErrorSummaryDemo() {
       )}
       <Field.Root id="demo-email">
         <Field.Label>Email address</Field.Label>
-        <Input />
         <Field.Error>{submitted ? "Enter your email address" : undefined}</Field.Error>
+        <Input />
       </Field.Root>
       <div>
         <Button type="submit">Save and continue</Button>

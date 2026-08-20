@@ -159,7 +159,7 @@ export interface ModalTriggerRenderProps {
 
 export interface ModalTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * Substitute your own element as the trigger (`render={<a href="…" />}`)
+   * Substitute your own element as the trigger (`render={<MyIconButton />}`) — triggers act, so keep them buttons
    * or pass a function receiving the wiring props. Without it, the Trigger
    * renders a FarmUI Button.
    */
@@ -297,7 +297,7 @@ function ModalTitle({ className, children, ...rest }: ModalTitleProps) {
   const { registerTitle } = ctx;
   useEffect(() => registerTitle(), [registerTitle]);
   return (
-    <h2 className={cx("fui-Modal-title", className)} id={ctx.titleId} {...rest}>
+    <h2 className={cx("title", className)} id={ctx.titleId} {...rest}>
       {children}
     </h2>
   );
@@ -310,7 +310,7 @@ function ModalDescription({ className, children, ...rest }: ModalDescriptionProp
   const { registerDescription } = ctx;
   useEffect(() => registerDescription(), [registerDescription]);
   return (
-    <p className={cx("fui-Modal-description", className)} id={ctx.descriptionId} {...rest}>
+    <p className={cx("description", className)} id={ctx.descriptionId} {...rest}>
       {children}
     </p>
   );

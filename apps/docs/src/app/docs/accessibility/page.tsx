@@ -38,6 +38,14 @@ export default function Accessibility() {
           interrupts. Field errors are <code>role=&quot;alert&quot;</code> and joined to their
           control via composed <code>aria-describedby</code>.
         </li>
+        <li>
+          Every page&apos;s first Tab stop should be a{" "}
+          <a href="/docs/components/skip-link">SkipLink</a> to the main content — keyboard and
+          screen-reader users otherwise re-traverse the whole header on every page. Point it at a
+          focusable landmark (
+          <code>&lt;main id=&quot;content&quot; tabIndex=&#123;-1&#125;&gt;</code>); this site does
+          exactly that.
+        </li>
       </ul>
 
       <h2>Keyboard patterns</h2>

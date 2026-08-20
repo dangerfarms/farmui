@@ -5,14 +5,15 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Header } from "@/site/Header";
 import { Footer } from "@/site/Footer";
+import { SkipLink } from "@farmui/core";
 
 export const metadata: Metadata = {
   title: {
-    default: "FarmUI — Accessible, high-performance React components",
+    default: "FarmUI — Modern UI primitives for agent-assisted developers",
     template: "%s · FarmUI",
   },
   description:
-    "FarmUI is a React component library focused on accessibility and performance. Zero-runtime styling, accessibility-audited components, tiny bundles, native light-dark(), container queries, and CSS-variable theming.",
+    "Contextual tokens, element styles and React components, built on Google's Modern Web Guidelines for quickly building bespoke UIs that are accessible, adaptable and fast.",
 };
 
 // Renders <meta name="color-scheme" content="light dark"> — the UA needs the
@@ -56,9 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
       </head>
       <body>
-        <a href="#content" className="skip-link">
-          Skip to content
-        </a>
+        <SkipLink href="#content">Skip to content</SkipLink>
         <Header />
         <main id="content" tabIndex={-1}>
           {children}

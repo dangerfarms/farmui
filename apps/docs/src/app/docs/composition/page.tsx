@@ -1,4 +1,3 @@
-import { Button } from "@farmui/core";
 import { CodeBlock } from "@/renderer/CodeBlock";
 import prose from "../prose.module.css";
 import { StateAttrDemo } from "./demos.client";
@@ -47,18 +46,18 @@ export default function Composition() {
         Substituting elements with <code>render</code>
       </h2>
       <p>
-        When you need a different element (a link styled as a button, your router&apos;s{" "}
-        <code>Link</code>, a component of your own), pass it via <code>render</code>. The
-        part&apos;s wiring (ids, ARIA, handlers, anchor styles) merges onto the element you provide:
+        When you need a different element (your router&apos;s <code>Link</code>, a component of your
+        own), pass it via <code>render</code>. The part&apos;s wiring (ids, ARIA, handlers, anchor
+        styles) merges onto the element you provide:
       </p>
       <div className={prose.block}>
         <CodeBlock
           language="tsx"
-          code={`// A link that opens the popover
-<Popover.Trigger render={<a href="/pricing">See pricing</a>} />
-
-// Your framework's router link inside breadcrumbs
+          code={`// Your framework's router link inside breadcrumbs
 <Breadcrumbs.Item render={<Link href="/settings" />}>Settings</Breadcrumbs.Item>
+
+// A SignpostLink that navigates client-side
+<SignpostLink render={<Link href="/apply">Start your application</Link>} />
 
 // Full control: a function receives the typed wiring props
 <Popover.Trigger
@@ -139,7 +138,7 @@ export default function Composition() {
       <h2>Form controls and Field</h2>
       <p>
         The text-like controls (<code>Input</code>, <code>Select</code>, <code>Textarea</code>,{" "}
-        <code>Slider</code>) are bare: compose them inside a <code>Field</code> and they self-wire —
+        <code>Range</code>) are bare: compose them inside a <code>Field</code> and they self-wire —
         id, described-by and invalid state all flow from context, with <code>Field.Label</code>,{" "}
         <code>Field.Description</code> and <code>Field.Error</code> as the parts:
       </p>
@@ -149,8 +148,8 @@ export default function Composition() {
           code={`<Field.Root>
   <Field.Label>Email</Field.Label>
   <Field.Description>We'll only use this to reply.</Field.Description>
-  <Input type="email" />
   <Field.Error>{error}</Field.Error>
+  <Input type="email" />
 </Field.Root>`}
         />
       </div>
@@ -171,18 +170,6 @@ export default function Composition() {
   <Field.Description>Sent at most once a day.</Field.Description>
 </Field.Root>`}
         />
-      </div>
-
-      <h2>Buttons anywhere</h2>
-      <p>
-        <code>Button</code> itself takes <code>render</code>, so anything can wear button styling,
-        most usefully links:
-      </p>
-      <div className={prose.block}>
-        <CodeBlock language="tsx" code={`<Button render={<a href="/signup">Get started</a>} />`} />
-      </div>
-      <div className={prose.block}>
-        <Button render={<a href="#composition">A link, dressed as a Button</a>} />
       </div>
     </div>
   );

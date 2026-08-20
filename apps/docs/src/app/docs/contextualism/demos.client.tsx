@@ -8,8 +8,8 @@ export function DetectedErrorDemo() {
     <div style={{ maxInlineSize: "22rem" }}>
       <Field.Root>
         <Field.Label>Workspace name</Field.Label>
-        <Input defaultValue="my workspace!" />
         <Field.Error>Names can only contain letters, numbers and dashes.</Field.Error>
+        <Input defaultValue="my workspace!" />
       </Field.Root>
     </div>
   );

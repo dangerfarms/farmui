@@ -1,33 +1,32 @@
-@scope (.fui-Menu-root) {
+@scope (.fui-Menu) {
   :scope {
-    position: relative;
     display: inline flow-root;
+    position: relative;
   }
 }
 
 /* The popup escapes the wrapper into the top layer when enhanced, so it
    carries its own scope (same engine as Popover). */
-@scope (.fui-Menu-popup) {
+@scope (.fui-Menu-popup) to ([class*="fui-"]) {
   :scope {
-    inline-size: max-content;
-    min-inline-size: 11rem;
-    max-inline-size: min(18rem, 90vi);
-    margin: 0;
-    padding: var(--fui-space-xs);
+    background: var(--fui-surface);
     border: 1px solid var(--fui-border);
     border-radius: var(--fui-radius-md);
-    background: var(--fui-surface);
     box-shadow: var(--fui-shadow-lg);
+    inline-size: max-content;
+    margin: 0;
+    max-inline-size: min(18rem, 90vi);
+    min-inline-size: 11rem;
+    padding: var(--fui-space-xs);
 
     /* Enhanced: top layer + anchor positioning, tethered to the trigger. */
     @supports (anchor-name: --fui-probe) {
-      position: fixed;
-
       /* The UA gives [popover] `inset: 0`; clear it so only the insets each
          branch sets take part, otherwise the box is over-constrained. */
       inset: auto;
-      position-try: flip-block;
       inset-inline-start: anchor(start);
+      position: fixed;
+      position-try: flip-block;
 
       &[data-position="bottom"] {
         inset-block-start: calc(anchor(end) + var(--fui-space-xs));
@@ -41,17 +40,12 @@
         /* -md where Popover uses -lg: intentional — menus should feel
            snappier than panels. */
         opacity: 1;
-        translate: 0 0;
         transition:
           opacity var(--fui-duration-md) var(--fui-ease),
           translate var(--fui-duration-md) var(--fui-ease),
           display var(--fui-duration-md) var(--fui-ease) allow-discrete,
           overlay var(--fui-duration-md) var(--fui-ease) allow-discrete;
-
-        @starting-style {
-          opacity: 0;
-          translate: 0 -0.25rem;
-        }
+        translate: 0 0;
 
         /* Exit: transition back to the closed state (see Modal). */
         &:not(:popover-open) {
@@ -60,13 +54,18 @@
         }
 
         &[data-position="top"] {
-          @starting-style {
-            translate: 0 0.25rem;
-          }
-
           &:not(:popover-open) {
             translate: 0 0.25rem;
           }
+
+          @starting-style {
+            translate: 0 0.25rem;
+          }
+        }
+
+        @starting-style {
+          opacity: 0;
+          translate: 0 -0.25rem;
         }
       }
     }
@@ -74,9 +73,9 @@
     /* Fallback: no anchor positioning (and no top layer) — anchor to the
        wrapper as a normal absolutely-positioned panel. */
     @supports not (anchor-name: --fui-probe) {
+      inset-inline-start: 0;
       position: absolute;
       z-index: 50;
-      inset-inline-start: 0;
 
       &[data-position="bottom"] {
         inset-block-start: calc(100% + var(--fui-space-xs));
@@ -88,29 +87,32 @@
     }
   }
 
-  .fui-Menu-item {
-    display: block flex;
+  .item {
     align-items: center;
-    gap: var(--fui-space-sm);
-    inline-size: 100%;
-    padding-block: var(--fui-space-sm);
-    padding-inline: var(--fui-space-sm);
+    background: none;
     border: 0;
     border-radius: var(--fui-radius-sm);
-    background: none;
+    box-shadow: none;
     color: var(--fui-text);
+    cursor: default;
+    display: block flex;
     font: inherit;
     font-size: var(--fui-text-sm);
-    text-align: start;
-    text-decoration: none;
-    white-space: nowrap;
-    cursor: default;
+    gap: var(--fui-space-sm);
+    inline-size: 100%;
 
     /* Focus IS the highlight in a menu (roving focus, APG pattern); the
        elements-layer ring is for tabbable controls, not menu items. */
     outline: none;
+    padding-block: var(--fui-space-sm);
+    padding-inline: var(--fui-space-sm);
+    text-align: start;
+    text-decoration: none;
+    transition: background var(--fui-duration-sm) var(--fui-ease);
+    user-select: none;
+    white-space: nowrap;
 
-    &:is(:hover, :focus):not([aria-disabled="true"]) {
+    &:focus:not([aria-disabled="true"]) {
       background: var(--fui-primary-soft);
     }
 
@@ -119,39 +121,46 @@
     }
 
     svg {
-      inline-size: 1em;
       block-size: auto;
       flex-shrink: 0;
+      inline-size: 1em;
+    }
+
+    @media (hover: hover) {
+      &:hover:not([aria-disabled="true"]) {
+        background: var(--fui-primary-soft);
+      }
     }
   }
 
-  .fui-Menu-groupLabel {
-    padding-block: var(--fui-space-xs);
-    padding-inline: var(--fui-space-sm);
+  div.group-label {
+    color: var(--fui-text-muted);
     font-size: var(--fui-text-xs);
     font-weight: 600;
     letter-spacing: 0.02em;
+    padding-block: var(--fui-space-xs);
+    padding-inline: var(--fui-space-sm);
     text-transform: uppercase;
-    color: var(--fui-text-muted);
   }
 
-  .fui-Menu-separator {
-    margin-block: var(--fui-space-xs);
-    margin-inline: calc(-1 * var(--fui-space-xs));
+  hr {
     border: 0;
     border-block-start: 1px solid var(--fui-border);
+    margin-block: var(--fui-space-xs);
+    margin-inline: calc(-1 * var(--fui-space-xs));
   }
 
   /* Forced colors: the roving highlight is background-only, and
      aria-disabled (unlike :disabled) gets no automatic GrayText. */
   @media (forced-colors: active) {
-    .fui-Menu-item:is(:hover, :focus):not([aria-disabled="true"]) {
-      forced-color-adjust: none;
+    .item:focus:not([aria-disabled="true"]),
+    .item:hover:not([aria-disabled="true"]) {
       background: Highlight;
       color: HighlightText;
+      forced-color-adjust: none;
     }
 
-    .fui-Menu-item[aria-disabled="true"] {
+    .item[aria-disabled="true"] {
       color: GrayText;
     }
   }

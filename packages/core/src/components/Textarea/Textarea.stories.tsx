@@ -31,7 +31,7 @@ export const WithDescription: Story = {
     <Field.Root>
       <Field.Label>Bio</Field.Label>
       <Field.Description>A short description shown on your public profile.</Field.Description>
-      <Textarea placeholder="Tell us about yourself…" />
+      <Textarea />
     </Field.Root>
   ),
 };
@@ -40,8 +40,8 @@ export const WithError: Story = {
   render: () => (
     <Field.Root>
       <Field.Label>Message</Field.Label>
-      <Textarea placeholder="Write your message…" defaultValue="Too short" />
       <Field.Error>Message must be at least 20 characters.</Field.Error>
+      <Textarea defaultValue="Too short" />
     </Field.Root>
   ),
 };

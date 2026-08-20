@@ -19,9 +19,9 @@ const doc: ComponentContent = {
       code: `<Field.Root>
   <Field.Label>Country</Field.Label>
   <Select>
-    <option>United States</option>
     <option>Canada</option>
     <option>United Kingdom</option>
+    <option>United States</option>
   </Select>
 </Field.Root>`,
       render: () => <SelectBasicDemo />,
@@ -32,9 +32,9 @@ const doc: ComponentContent = {
       code: `<Field.Root>
   <Field.Label>Country</Field.Label>
   <Select placeholder="Pick a country">
-    <option value="us">United States</option>
     <option value="ca">Canada</option>
     <option value="uk">United Kingdom</option>
+    <option value="us">United States</option>
   </Select>
 </Field.Root>`,
       render: () => <SelectPlaceholderDemo />,
@@ -78,12 +78,12 @@ const doc: ComponentContent = {
         "A Field.Error after the control marks the field invalid and is announced: the message's presence is the state.",
       code: `<Field.Root>
   <Field.Label>Country</Field.Label>
+  <Field.Error>Select a country</Field.Error>
   <Select placeholder="Pick a country">
-    <option>United States</option>
     <option>Canada</option>
     <option>United Kingdom</option>
+    <option>United States</option>
   </Select>
-  <Field.Error>Select a country</Field.Error>
 </Field.Root>`,
       render: () => <SelectErrorDemo />,
     },

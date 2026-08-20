@@ -28,7 +28,7 @@ const doc: ComponentContent = {
       code: `<Popover.Root>
   <Popover.Trigger>Add product</Popover.Trigger>
   <Popover.Popup>
-    <form>
+    <form onSubmit={(e) => e.preventDefault()}>
       <Field.Root>
         <Field.Label>Name</Field.Label>
         <Input placeholder="Wireless headphones" />
@@ -48,7 +48,9 @@ const doc: ComponentContent = {
       description:
         "The built-in trigger is a FarmUI Button. To use a different element, pass it via render; the wiring (popovertarget, aria-expanded, anchor name) merges onto it. See the Composition guide for the full contract.",
       code: `<Popover.Root>
-  <Popover.Trigger render={<a href="#popover">A link as the trigger</a>} />
+  <Popover.Trigger
+    render={<button type="button" aria-label="Filters">⚙</button>}
+  />
   <Popover.Popup>…</Popover.Popup>
 </Popover.Root>`,
       render: () => <PopoverLinkTriggerDemo />,
@@ -61,7 +63,7 @@ const doc: ComponentContent = {
   whenNotToUse: [
     "For blocking, must-complete tasks or destructive confirmations, use Modal, which traps focus.",
     "For a short text label describing a control, use Tooltip.",
-    "For disclosure of inline page content, use the native <details> element via Accordion, or plain layout.",
+    "For disclosure of inline page content, use the Details component (a native <details>), or plain layout.",
   ],
   howItWorks: [
     {
@@ -111,7 +113,7 @@ const doc: ComponentContent = {
         {
           name: "render",
           type: "element | (props) => node",
-          description: "Substitute any element (e.g. render={<a href=…>…</a>}).",
+          description: "Substitute your own action element (a button — triggers act, links go).",
         },
       ],
     },

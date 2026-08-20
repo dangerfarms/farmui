@@ -1,23 +1,23 @@
 /* The viewport lives in the top layer (popover="manual"), so it carries its
    own scope; toasts stack from the block-end corner. */
-@scope (.fui-Toast-viewport) {
+@scope (.fui-Toast-viewport) to ([class*="fui-"]) {
   :scope {
-    position: fixed;
+    background: none;
+    border: 0;
+    display: block flex;
+    flex-direction: column;
+    gap: var(--fui-space-sm);
+    inline-size: min(22rem, calc(100vi - 2 * var(--fui-space-lg)));
 
     /* Clear the UA's [popover] inset/size defaults. */
     inset: auto;
     inset-block-end: var(--fui-space-lg);
     inset-inline-end: var(--fui-space-lg);
-    display: block flex;
-    flex-direction: column;
-    gap: var(--fui-space-sm);
-    inline-size: min(22rem, calc(100vi - 2 * var(--fui-space-lg)));
     margin: 0;
-    padding: 0;
-    border: 0;
-    background: none;
-    overflow: visible;
     outline: none;
+    overflow: visible;
+    padding: 0;
+    position: fixed;
   }
 
   /* No toasts: don't intercept clicks in the corner. */
@@ -25,21 +25,15 @@
     pointer-events: none;
   }
 
-  @supports not selector(:popover-open) {
-    :scope {
-      z-index: 100;
-    }
-  }
-
-  .fui-Toast-root {
-    display: block flex;
+  div.toast {
     align-items: flex-start;
-    gap: var(--fui-space-sm);
-    padding: var(--fui-space-md);
+    background: var(--fui-surface);
     border: 1px solid var(--fui-border);
     border-radius: var(--fui-radius-md);
-    background: var(--fui-surface);
     box-shadow: var(--fui-shadow-lg);
+    display: block flex;
+    gap: var(--fui-space-sm);
+    padding: var(--fui-space-md);
 
     @media (prefers-reduced-motion: no-preference) {
       transition:
@@ -54,53 +48,62 @@
   }
 
   /* Exit: the provider marks the toast, plays this, then removes it. */
-  .fui-Toast-root[data-exiting] {
+  div.toast[data-exiting] {
     opacity: 0;
     translate: 0 0.5rem;
   }
 
-  .fui-Toast-content {
+  div.content {
     flex: 1;
     min-inline-size: 0;
   }
 
-  .fui-Toast-title {
+  div.title {
     font-size: var(--fui-text-sm);
     font-weight: 600;
   }
 
-  .fui-Toast-description {
-    font-size: var(--fui-text-sm);
+  div.description {
     color: var(--fui-text-muted);
+    font-size: var(--fui-text-sm);
     overflow-wrap: break-word;
+
+    div.title + & {
+      margin-block-start: var(--fui-space-xs);
+    }
   }
 
-  .fui-Toast-title + .fui-Toast-description {
-    margin-block-start: var(--fui-space-xs);
-  }
-
-  .fui-Toast-close {
-    display: inline grid;
-    place-items: center;
-    flex-shrink: 0;
-    inline-size: 1.5rem;
+  button.close {
+    background: none;
     block-size: 1.5rem;
-    margin: 0;
-    padding: 0;
     border: 0;
     border-radius: var(--fui-radius-sm);
-    background: none;
+    box-shadow: none;
     color: var(--fui-text-muted);
     cursor: pointer;
+    display: inline grid;
+    flex-shrink: 0;
+    inline-size: 1.5rem;
+    margin: 0;
+    padding: 0;
+    place-items: center;
 
     svg {
-      inline-size: 1em;
       block-size: 1em;
+      inline-size: 1em;
     }
 
-    &:hover {
-      background: var(--fui-bg-subtle);
-      color: var(--fui-text);
+    @media (hover: hover) {
+      &:hover {
+        background: var(--fui-bg-subtle);
+        color: var(--fui-text);
+      }
+    }
+  }
+
+  @supports not selector(:popover-open) {
+    :scope {
+      z-index: 100;
     }
   }
 }
