@@ -1,25 +1,33 @@
 # FarmUI
 
-**Beautiful React components, fast & accessible.** A component library rebuilt
-on native modern CSS — zero-runtime styling, accessibility-audited by
-default, and tiny bundles.
+**Modern UI primitives for agent-assisted developers.** Contextual tokens,
+element styles and React components, built on Google's Modern Web Guidelines
+for quickly building bespoke UIs that are accessible, adaptable and fast.
 
 [![npm](https://img.shields.io/npm/v/@farmui/core.svg)](https://www.npmjs.com/package/@farmui/core)
 [![license](https://img.shields.io/npm/l/@farmui/core.svg)](./LICENSE)
 
 ## Why FarmUI?
 
-Most component libraries ship a styling engine to your users' browsers. FarmUI
-doesn't. Every component is styled with plain, static CSS — cascade layers,
-custom properties, `light-dark()`, `color-mix()`, container queries and logical
-properties — so there's nothing to run at runtime and nothing extra to download.
+Agent-assisted developers want solid primitives their agents can build bespoke
+components and interfaces from — not hundreds of pre-made components locked
+into last decade's paradigms. FarmUI offers three primitives, each following
+the Chrome team's guidance for the modern web, steeped in UX best practices
+and inspired by Base UI's component composition architecture — a combination
+no other library offers:
 
-- **Zero runtime** — styles are static CSS, fully React Server Component friendly.
-- **Semantic HTML** — real `<details>`, `<nav><ol>`, `role="tablist"`, and more.
-- **Accessible by default** — WAI-ARIA patterns, focus management, keyboard support.
-- **Themeable with CSS variables** — rebrand by overriding `--fui-*`. No provider.
-- **Native dark mode** — powered by `light-dark()`; one toggle flips everything.
-- **Tiny & tree-shakeable** — no styling engine ships to your users.
+- **Tokens** — a handful of semantic decisions (four hues, eight neutrals,
+  fluid scales); everything else is derived by recipe and audited in CI.
+- **Element styles** — enhanced default styles for native HTML, page-wide:
+  responsive, accessible, and respecting the reader's light or dark
+  preference. Plain markup is presentable before any component appears.
+- **Components** — a small set of carefully chosen, contextually styled
+  components. No size, variant or colour props: a region declares what it
+  means (`--fui-context`) and everything inside adapts.
+
+All of it is plain, static CSS — cascade layers, `@scope`, `light-dark()`,
+container queries, anchor positioning — so nothing runs in the browser and
+nothing extra ships to your users.
 
 ## Installation
 
@@ -39,7 +47,7 @@ export default function App() {
 ```
 
 That's the whole setup — no provider, no config. See the
-[documentation](https://farmui.dev) for every component, live examples and the
+[documentation](https://dangerfarms.github.io/farmui/) for every component, live examples and the
 theming guide.
 
 ## Repository layout

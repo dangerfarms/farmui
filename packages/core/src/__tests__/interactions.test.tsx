@@ -22,6 +22,8 @@ import {
   Tooltip,
   Button,
   SignpostLink,
+  Pagination,
+  DateInput,
 } from "../index";
 import type { ToastOptions } from "../index";
 
@@ -832,5 +834,87 @@ describe("composition contract regressions", () => {
     );
     expect(ref.current).not.toBeNull();
     expect(ref.current?.getAttribute("role")).toBe("dialog");
+  });
+});
+
+describe("Pagination", () => {
+  it("windows pages around the active one with ellipses", () => {
+    render(<Pagination total={10} value={5} onChange={() => {}} />);
+    for (const page of ["1", "4", "5", "6", "10"]) {
+      expect(screen.getByRole("button", { name: `Page ${page}` })).toBeInTheDocument();
+    }
+    expect(screen.queryByRole("button", { name: "Page 2" })).toBeNull();
+    expect(screen.getByRole("button", { name: "Page 5" })).toHaveAttribute("aria-current", "page");
+  });
+
+  it("activating a page and the boundary controls calls onChange correctly", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(<Pagination total={10} value={5} onChange={onChange} />);
+    await user.click(screen.getByRole("button", { name: "Page 6" }));
+    expect(onChange).toHaveBeenCalledWith(6);
+    await user.click(screen.getByRole("button", { name: "Previous page" }));
+    expect(onChange).toHaveBeenCalledWith(4);
+  });
+
+  it("boundary controls stay focusable but inert at the edges", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(<Pagination total={3} value={1} onChange={onChange} />);
+    const prev = screen.getByRole("button", { name: "Previous page" });
+    expect(prev).toHaveAttribute("aria-disabled", "true");
+    prev.focus();
+    expect(prev).toHaveFocus();
+    await user.click(prev);
+    expect(onChange).not.toHaveBeenCalled();
+  });
+});
+
+describe("DateInput", () => {
+  it("renders only the requested parts, each labelled", () => {
+    render(
+      <DateInput.Root name="expiry">
+        <DateInput.Legend>Expiry date</DateInput.Legend>
+        <DateInput.Fields>
+          <DateInput.Field part="month" />
+          <DateInput.Field part="year" />
+        </DateInput.Fields>
+      </DateInput.Root>,
+    );
+    expect(screen.getByLabelText("Month")).toHaveAttribute("name", "expiry-month");
+    expect(screen.getByLabelText("Year")).toHaveAttribute("name", "expiry-year");
+    expect(screen.queryByLabelText("Day")).toBeNull();
+  });
+
+  it("an error narrowed with parts marks only those fields invalid", () => {
+    render(
+      <DateInput.Root name="dob">
+        <DateInput.Legend>Date of birth</DateInput.Legend>
+        <DateInput.Error parts={["year"]}>The year must include four digits</DateInput.Error>
+        <DateInput.Fields>
+          <DateInput.Field part="day" />
+          <DateInput.Field part="month" />
+          <DateInput.Field part="year" />
+        </DateInput.Fields>
+      </DateInput.Root>,
+    );
+    expect(screen.getByLabelText("Year")).toHaveAttribute("aria-invalid", "true");
+    expect(screen.getByLabelText("Day")).not.toHaveAttribute("aria-invalid");
+    expect(screen.getByLabelText("Month")).not.toHaveAttribute("aria-invalid");
+    expect(screen.getByRole("alert")).toHaveTextContent("The year must include four digits");
+  });
+
+  it("bday autofill maps to per-part tokens", () => {
+    render(
+      <DateInput.Root name="dob" autoComplete="bday">
+        <DateInput.Legend>Date of birth</DateInput.Legend>
+        <DateInput.Fields>
+          <DateInput.Field part="day" />
+          <DateInput.Field part="year" />
+        </DateInput.Fields>
+      </DateInput.Root>,
+    );
+    expect(screen.getByLabelText("Day")).toHaveAttribute("autocomplete", "bday-day");
+    expect(screen.getByLabelText("Year")).toHaveAttribute("autocomplete", "bday-year");
   });
 });
